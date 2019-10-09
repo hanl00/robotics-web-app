@@ -50,6 +50,30 @@
 * *1 hour* browsing the ros development guide, ros ides, planning the system architecture
 * *0.5 hour* browsing through Jupyter notebook wiki
 
+### Week 2 
+
+## 3 OCTOBER 2019 
+
+* *0.5 hour* meeting with supervisor 
+
+## 5 OCTOBER 2019
+
+* *1 hour* exploring jupyterlab, looked into developing a extension/widget for ros
+
+### Week 3
+
+## 7 OCTOBER 2019
+
+* *1.5 hour* installed the jupyter-ros extension for jupyterlab, tried to get the extension up and running - unsuccesful
+
+## 9 OCTOBER 2019
+
+* *1 hour* 2nd attempt to get jupyter-ros extension running, look into tutorials on developing an extension for jupyterlab
+* *0.5 hour* consid
+
+
+
+
 
 
 
