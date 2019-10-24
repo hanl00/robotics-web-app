@@ -95,6 +95,13 @@
 
 * *0.5 hour* constructing the ER diagram
 
+## 24 OCTOBER 2019
+
+* *3 hour* started coding, importing django and pillow and setting up the views
+* *0.5 hour* trying to fix the url mapping issue - stuck
+
+
+
 
 
 
