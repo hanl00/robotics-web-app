@@ -69,7 +69,36 @@
 ## 9 OCTOBER 2019
 
 * *1 hour* 2nd attempt to get jupyter-ros extension running, look into tutorials on developing an extension for jupyterlab
-* *0.5 hour* consid
+* *0.5 hour* considered building the 
+
+## 10 OCTOBER 2019
+
+* *0.5 hour* meeting with supervisor
+
+### Week 4
+
+## 13 OCTOBER 2019
+
+* *1 hour* initial design specification, too vague
+
+## 16 OCTOBER 2019
+
+* *3 hour* final design specification
+
+## 17 OCTOBER 2019
+
+* *0.5 hour* meeting with supervisor
+
+### Week 5
+
+## 23 OCTOBER 2019
+
+* *0.5 hour* constructing the ER diagram
+
+
+
+
+
 
 
 
