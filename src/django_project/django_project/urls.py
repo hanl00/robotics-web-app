@@ -13,9 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.conf.urls import url
 
 from rfwa import views
 from django.conf import settings
@@ -24,6 +26,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.index, name='index'),
     path('rfwa/', include('rfwa.urls')),
-    # The above maps any URLs starting with rango/ to be handled by the rango app.
+
+    # above maps any URLs starting
+    # with rango/ to be handled by
+    # the rango application
     path('admin/', admin.site.urls),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -100,6 +100,15 @@
 * *3 hour* started coding, importing django and pillow and setting up the views
 * *0.5 hour* trying to fix the url mapping issue - stuck
 
+## 25 OCTOBER 2019
+
+* *1.5 hour* implemented bootstrap
+
+## 26 OCTOBER 2019
+
+* *1 hour* refreshed the url + views tutorial, change template to fit the wireframes
+
+
 
 
 

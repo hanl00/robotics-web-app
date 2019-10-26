@@ -12,3 +12,5 @@ def index(request):
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.
     return render(request, 'rfwa/index.html', context=context_dict)
+
+#def lectureslides(request):
