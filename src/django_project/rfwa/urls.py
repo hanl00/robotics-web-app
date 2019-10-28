@@ -5,5 +5,5 @@ from rfwa import views
 urlpatterns = [
     path('', views.index, name='index'),
     #url(r'^about/', views.about, name='about'),
-    #url(r'^lectureslides/', views.lectureslides, name='lectureslides'),
+    path('lectureslides/', views.lectureslides, name='lectureslides'),
 ]
