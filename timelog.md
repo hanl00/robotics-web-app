@@ -108,6 +108,16 @@
 
 * *1 hour* refreshed the url + views tutorial, change template to fit the wireframes
 
+### Week 6
+
+## 28 OCOTBER 2019
+
+* *1 hour* basic view and url mapping now working for "lectureslides" section
+
+## 29 OCTOBER 2019
+
+* *1.5 hour* added basic login and logout functionality
+
 
 
 

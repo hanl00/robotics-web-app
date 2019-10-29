@@ -26,9 +26,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.index, name='index'),
     path('rfwa/', include('rfwa.urls')),
-
     # above maps any URLs starting
     # with rango/ to be handled by
     # the rango application
+    path('rfwa/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
