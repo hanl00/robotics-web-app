@@ -118,6 +118,14 @@
 
 * *1.5 hour* added basic login and logout functionality
 
+## 31 OCTOBER 2019
+
+* *0.5 hour* meeting with supervisor
+
+### Week 7
+
+
+
 
 
 

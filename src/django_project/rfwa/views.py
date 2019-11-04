@@ -15,3 +15,6 @@ def index(request):
 
 def lectureslides(request):
     return render(request, 'rfwa/lectureslides.html')
+
+def alllabs(request):
+    return render(request, 'rfwa/alllabs.html')
