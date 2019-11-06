@@ -18,3 +18,6 @@ def lectureslides(request):
 
 def alllabs(request):
     return render(request, 'rfwa/alllabs.html')
+
+def devpage(request):
+    return render(request, 'rfwa/devpage.html')

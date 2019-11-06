@@ -124,6 +124,22 @@
 
 ### Week 7
 
+## 4 OCTOBER 2019
+
+* *1 hour* researching ways to display/structure terminal in the developement page
+
+## 5 OCTOBER 2019
+
+* *1.5 hour* figuring out how to implement a terminal in the dev page, looked into tmate.io, ace editor, tried ssh-ing terminal
+
+## 6 OCTOBER 2019
+
+* *2 hour* more research into theia ide, jupyter notebook implementations, ssh tutorials
+* *1.5 hour* stumbled across web based protocol handling, started implementing it on the devpage, successfully launched the terminal and other applications
+* *0.5 hour* tried to fix commiting into a wrong branch - deleted branch
+
+
+
 
 
 
