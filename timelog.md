@@ -174,6 +174,20 @@
 ### Week 12
 
 ## 8 DECEMBER 2019
+* *5 hours* working on vnc
+
+## 9 DECEMBER 2019
+* *3 hours* working on theia 
+
+## 11 DECEMBER 2019
+* *4 hours* got vnc to work
+
+## 15 DECEMBER 2019
+* *1 hour* reading on jupyter notebook integration
+
+## 17 DECEMBER 2019
+* *2 hour* 2nd attempt on jupyter notebook integration
+
 
 
 
