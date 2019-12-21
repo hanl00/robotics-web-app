@@ -188,6 +188,11 @@
 ## 17 DECEMBER 2019
 * *2 hour* 2nd attempt on jupyter notebook integration
 
+## 
+
+## 21 DECEMBER 2019
+* *1 hour* manual display of rviz works
+
 
 
 
