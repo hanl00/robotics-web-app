@@ -188,10 +188,16 @@
 ## 17 DECEMBER 2019
 * *2 hour* 2nd attempt on jupyter notebook integration
 
-## 
+## Week 13
 
 ## 21 DECEMBER 2019
 * *1 hour* manual display of rviz works
+
+## 8 JANUARY 2020
+* *1 hour* trying to open jupyter notebook on theia open url
+
+## 10 JANUARY 2020
+* *1.5 hour* learning to use iframe to embed theia into the django web app
 
 
 
