@@ -202,6 +202,7 @@
 ## 11 JANUARY 2020
 * *1.5 hour* tried to fix css on the devpage and django settings, external css not being imported
 * *1 hour* work around used internal css, have to fix the height of the embedded theia app
+* *0.5 hour* successfully embedded theia
 
 
 
