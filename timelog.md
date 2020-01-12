@@ -209,6 +209,7 @@
 * *2 hours* minor site css and links, basic admin upload - still in progress
 * *0.5 hour* research on user activity tracking
 * *0.5 hour* login page redirection and imported basic login/register page - have to include view.py
+* *1.5 hour* login page improved, still some css to be fixed for visual purposes
 
 
 

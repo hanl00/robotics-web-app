@@ -8,5 +8,5 @@ urlpatterns = [
     path('lectureslides/', views.lectureslides, name='lectureslides'),
     path('alllabs/', views.alllabs, name='alllabs'),
     path('devpage/', views.devpage, name='devpage'),
-
+    
 ]
