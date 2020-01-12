@@ -27,6 +27,9 @@
 
 <body>
 
+    <!-- if user not logged in, redirect to login/register page-->
+    {% if user.is_authenticated %}
+
     <div class="d-flex" id="wrapper">
 
         <!-- Sidebar -->
@@ -106,6 +109,9 @@
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.4/lib/darkmode-js.min.js"></script>
     <script src="{% static 'javascript/darkmode.js' %}"></script>
 
+    {% else %}
+    <meta http-equiv='refresh' content="0; URL={% url 'login' %}">
+    {% endif %}
 
 </body>
 
