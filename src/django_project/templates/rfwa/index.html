@@ -2,14 +2,10 @@
 {% block body_block %}
 
 <div class="container-fluid">
-  {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <h1 class="mt-4">Welcome to Robotics Foundation Web App, {{ user.username }}</h1>
-  <p> Tutorial will be inserted here <p>
-      {% else %}
-      <p>You are not logged in</p>
-      <a href="{% url 'login' %}">login</a>
-      {% endif %}
+  
+  <h1>Welcome to Robotics Foundation Web App</h1>
+  <p>The following will show the features and how to navigate the web app - something along the lines<p>
+      
 </div>
 
 {% endblock %}

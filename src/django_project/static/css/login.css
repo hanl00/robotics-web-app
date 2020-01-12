@@ -1,5 +1,7 @@
 body {
-    padding-top: 90px;
+	padding-top: 90px;
+	background-image: url(../../static/images/loginpage.jpg);
+	background-size: cover;
 }
 .panel-login {
 	border-color: #ccc;
@@ -96,4 +98,14 @@ body {
 	color: #fff;
 	background-color: #1CA347;
 	border-color: #1CA347;
+}
+
+/* 
+ * dividers between the username and bar to enter username
+ */
+
+.divider{
+	width:5px;
+	height:auto;
+	display:inline-block;
 }

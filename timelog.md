@@ -167,10 +167,6 @@
 
 * *1 hour* tried running vnc commands and x11vnc, not succesful
 
-### Week 10
-
-### Week 11
-
 ### Week 12
 
 ## 8 DECEMBER 2019
@@ -188,11 +184,12 @@
 ## 17 DECEMBER 2019
 * *2 hour* 2nd attempt on jupyter notebook integration
 
-## Week 13
+### Week 13
 
 ## 21 DECEMBER 2019
 * *1 hour* manual display of rviz works
 
+## Week 16
 ## 8 JANUARY 2020
 * *1 hour* trying to open jupyter notebook on theia open url
 
@@ -210,6 +207,8 @@
 * *0.5 hour* research on user activity tracking
 * *0.5 hour* login page redirection and imported basic login/register page - have to include view.py
 * *1.5 hour* login page improved, still some css to be fixed for visual purposes
+* *2 hour* further improved login and other pages by removing unwanted stuff + adding background images, looking into user creation forms (youtube and calum) and also thinking of user creation details issue of other students using other student id - solution only accept @gla.ac.uk domain and use email verification - to be implemented later
+
 
 
 
