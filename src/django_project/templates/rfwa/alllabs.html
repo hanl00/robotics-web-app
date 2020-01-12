@@ -1,9 +1,20 @@
 {% extends "rfwa/base.html" %}
+{% load staticfiles %}
+
+{% block extra_head %}
+<link href="{% static 'css/button.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block body_block %}
 
 <div class="container-fluid">
-  <h1 class="mt-4">You can view all the labs here</h1>
-  <p> Labs will be inserted here <p>
-      
+  <h1 class="mt-4">Select a lab exercise to begin working on!</h1>
+  <button onclick="location.href='/rfwa/lectureslides/'" type="button" class="lab-button">
+    Lab Week 1</button>
+
+  <button onclick="location.href='/rfwa/lectureslides/'" type="button" class="lab-button">
+    Lab Week 1</button>
+
+
 </div>
 {% endblock %}

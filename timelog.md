@@ -205,6 +205,9 @@
 * *0.5 hour* successfully embedded theia
 * *1 hour* added basic dark mode widget
 
+## 12 JANUARY 2020
+* *2 hours* minor site css and links, basic admin upload - still in progress
+
 
 
 

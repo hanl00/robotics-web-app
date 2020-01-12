@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Robotic Foundations Web App</title>
+    <title>Robotics Foundations Web App</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -18,6 +18,8 @@
     <!-- Custom styles for this template -->
     <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet">
 
+    <!-- Overriding bootstrap css -->
+    <link href="{% static 'css/override.css' %}" rel="stylesheet">
     {% block extra_head %}
     {% endblock %}
 
@@ -29,7 +31,7 @@
 
         <!-- Sidebar -->
         <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">Robotic Foundation </div>
+            <div class="sidebar-heading">Robotics Foundations </div>
             <div class="list-group list-group-flush">
                 <a href="/rfwa/devpage/" class="list-group-item list-group-item-action bg-light">Previous session</a>
                 <a href="/rfwa/alllabs/" class="list-group-item list-group-item-action bg-light">All labs</a>
@@ -102,8 +104,8 @@
 
     <!-- Dark theme -->
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.4/lib/darkmode-js.min.js"></script>
-    <script src="{% static 'javascript/darkmode.js' %}"></script>   
-    
+    <script src="{% static 'javascript/darkmode.js' %}"></script>
+
 
 </body>
 
