@@ -209,6 +209,9 @@
 * *1.5 hour* login page improved, still some css to be fixed for visual purposes
 * *2 hour* further improved login and other pages by removing unwanted stuff + adding background images, looking into user creation forms (youtube and calum) and also thinking of user creation details issue of other students using other student id - solution only accept @gla.ac.uk domain and use email verification - to be implemented later
 
+## 13 JANUARY 2020
+* *2 hours* error with registration url redirection, views + urls imported
+
 
 
 
