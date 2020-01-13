@@ -302,7 +302,7 @@
 * *0.5 hour* login page redirection and imported basic login/register page - have to include view.py
 * *1.5 hour* login page improved, still some css to be fixed for visual purposes
 * *2 hour* further improved login and other pages by removing unwanted stuff + adding background images, looking into user creation forms (youtube and calum) and also thinking of user creation details issue of other students using other student id - solution only accept @gla.ac.uk domain and use email verification - to be implemented later
-**Total : 90 hours**
+* **Total : 90 hours**
 
 
 ### Week 17
@@ -311,7 +311,7 @@
 * *2 hour* error with registration url redirection, views + urls imported
 * *2.5 hour* completed: working registration page with new user models --- todo: hide the help texts for password1 and password2, error messages doesnt go away after first error
 * *0.5 hour* tidied up the timelog, added running total time spent
-**Total : 95 hours**
+* **Total : 95 hours**
 
 
 
