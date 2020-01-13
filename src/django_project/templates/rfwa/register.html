@@ -1,0 +1,42 @@
+{% extends 'registration/login.html' %}
+
+{% load staticfiles %}
+
+{% block login_title_block %}
+<div class="col-xs-6">
+    <a href="/rfwa/login/" id="login-form-link">Login</a>
+</div>
+<div class="col-xs-6">
+    <a href="/rfwa/register/" class="active" id="register-form-link">Register now</a>
+</div>
+{% endblock %}
+
+{% block login_body_block %}
+
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group text-center">
+        {{ field.label_tag }}
+        <div class="divider"></div>
+        {{ field }}
+    </div>
+    {% if field.help_text %}
+    <small style="color: grey">{{ field.help_text }}</small>
+    {% endif %}
+    {% for error in field.errors %}
+    <p style="color: red">{{ error }}</p>
+    {% endfor %}
+    </p>
+    {% endfor %}
+    <div class="form-group text-center">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <button type="submit" class="btn btn-success"> Register </button>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

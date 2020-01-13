@@ -24,24 +24,23 @@
                 <div class="panel panel-login">
                     <div class="panel-heading">
                         <div class="row">
+                            {% block login_title_block %}
                             <div class="col-xs-6">
-                                <a href="#" class="active" id="login-form-link">Login</a>
+                                <a href="/rfwa/login/" class="active" id="login-form-link">Login</a>
                             </div>
                             <div class="col-xs-6">
-                                <a href="/register/" id="register-form-link">Register now</a>
+                                <a href="/rfwa/register/" id="register-form-link">Register now</a>
                             </div>
+                            {% endblock %}
                         </div>
                         <hr>
                     </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-
                                 {% block login_body_block %}
-                                
                                 <form id="login-form" method="post" class="from-group">
                                     {% csrf_token %}
-
                                     {% for field in form %}
                                     <div class="form-group text-center">
                                         <label for="{{ field.name}}">{{field.label}}</label>
@@ -49,7 +48,6 @@
                                         {{ field }}
                                     </div>
                                     {% endfor %}
-
                                     <div class="form-group text-center">
                                         <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
                                         <label for="remember"> Remember Me</label>
@@ -72,12 +70,8 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </form>
-
                                 {% endblock %}
-
                             </div>
                         </div>
                     </div>
@@ -86,6 +80,6 @@
         </div>
     </div>
 
-    <!-- <script src="{% static 'javascript/login.js' %}"></script> -->
+    <!-- <script src="{% static 'javascript/login.js' %}"></script>-->
 
 </body>

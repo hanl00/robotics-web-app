@@ -18,6 +18,7 @@
 
 * *0.5 hour* meeting with supervisor
 * *1 hour* researching other learning platforms, setting up slack channel, etc
+* Total : 1.5 hours
 
 ## 24 September 2019
 
@@ -166,20 +167,22 @@
 ## 22 NOVBEMBER 2019
 
 * *1 hour* tried running vnc commands and x11vnc, not succesful
+* *1 hour* played with gitpod
 
 ### Week 12
 
 ## 8 DECEMBER 2019
-* *5 hours* working on vnc
+* *5 hours* working on vnc, trying to get x servers up and running used x11vnc xtightvnc
 
 ## 9 DECEMBER 2019
-* *3 hours* working on theia 
+* *3 hours* attempted to work on theia extensions by browsing the documentation and spectrum chat
 
 ## 11 DECEMBER 2019
-* *4 hours* got vnc to work
+* *4 hours* xtightvnc server finally working 
 
 ## 15 DECEMBER 2019
 * *1 hour* reading on jupyter notebook integration
+* *2 hours* reading forums to develop theia extension for vncs and jupyter notebook support
 
 ## 17 DECEMBER 2019
 * *2 hour* 2nd attempt on jupyter notebook integration
@@ -187,11 +190,13 @@
 ### Week 13
 
 ## 21 DECEMBER 2019
-* *1 hour* manual display of rviz works
+* *1 hour* working on vnc, got tigervnc server (used by calum) up and running
+* *1 hour* manual display of rviz works on the theia browser app
 
 ## Week 16
+
 ## 8 JANUARY 2020
-* *1 hour* trying to open jupyter notebook on theia open url
+* *1 hour* trying to open jupyter notebook on theia open url, not successful
 
 ## 10 JANUARY 2020
 * *1.5 hour* learning to use iframe to embed theia into the django web app
@@ -211,6 +216,7 @@
 
 ## 13 JANUARY 2020
 * *2 hours* error with registration url redirection, views + urls imported
+* *2.5 hours* completed: working registration page with new user models --- todo: hide the help texts for password1 and password2, error messages doesnt go away after first error
 
 
 
