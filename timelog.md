@@ -18,7 +18,7 @@
 
 * *0.5 hour* meeting with supervisor
 * *1 hour* researching other learning platforms, setting up slack channel, etc
-* Total : 1.5 hours
+* **Total : 1.5 hours**
 
 ## 24 September 2019
 
