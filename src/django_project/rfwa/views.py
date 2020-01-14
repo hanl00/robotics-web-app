@@ -4,6 +4,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from rfwa import forms
 from .forms import SignUpForm
+from .tokens import account_activation_token
+from django.utils.encoding import force_text
+from django.utils.http import urlsafe_base64_decode
+
 # Create your views here.
 
 from django.http import HttpResponse
@@ -30,13 +34,40 @@ def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('login')
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            current_site = get_current_site(request)
+            subject = 'Activate Your MySite Account'
+            message = render_to_string('rfwa/account_activation_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
+            })
+            user.email_user(subject, message)
+            return redirect('rfwa/account_activation_sent.html')
     else:
         form = SignUpForm()
     return render(request, 'rfwa/register.html', {'form': form})
+
+def account_activation_sent(request):
+    return render(request, 'rfwa/account_activation_sent.html')
+
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.profile.email_confirmed = True
+        user.save()
+        login(request, user)
+        return redirect('login')
+    else:
+        return render(request, 'rfwa/account_activation_invalid.html')
 
