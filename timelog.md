@@ -313,6 +313,9 @@
 * *0.5 hour* tidied up the timelog, added running total time spent
 * **Total : 95 hours**
 
+## 14 JANUARY 2020
+* *1 hour* tinkering with email verification, unsuccesful --- error lies in the profile model ---created to a new branch
+* *1 hour* implemented admin file upload feature (borrowed code from calum + minor tweaks)
 
 
 

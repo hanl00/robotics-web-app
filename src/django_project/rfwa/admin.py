@@ -5,4 +5,4 @@ from rfwa import models
 
 # admin file upload
 
-admin.site.register(models.Labs)
+admin.site.register(models.Lab)
