@@ -26,6 +26,15 @@ def alllabs(request):
 def devpage(request):
     return render(request, 'rfwa/devpage.html')
 
+def feedback(request):
+    return render(request, 'rfwa/feedback.html')
+
+def sandbox(request):
+    return render(request, 'rfwa/sandbox.html')
+
+def summary(request):
+    return render(request, 'rfwa/summary.html')
+
 def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)

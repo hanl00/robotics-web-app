@@ -9,4 +9,7 @@ urlpatterns = [
     path('alllabs/', views.alllabs, name='alllabs'),
     path('devpage/', views.devpage, name='devpage'),
     path('register/', views.register, name='register'),
+    path('feedback/', views.feedback, name='feedback'),
+    path('sandbox/', views.sandbox, name='sandbox'),
+    path('summary/', views.summary, name='summary'),
 ]

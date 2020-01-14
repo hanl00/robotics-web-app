@@ -316,6 +316,9 @@
 ## 14 JANUARY 2020
 * *1 hour* tinkering with email verification, unsuccesful --- error lies in the profile model ---created to a new branch
 * *1 hour* implemented admin file upload feature (borrowed code from calum + minor tweaks)
+* *1 hour* tried to implement admin upload lecture slides pdf and user can browse them in the lecture slides page, unsuccesful
+* *1 hour* imported rest of the basic pages on the web app, some changes in the wireframes, actual content to be added in
+
 
 
 

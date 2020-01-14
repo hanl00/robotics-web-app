@@ -6,3 +6,4 @@ from rfwa import models
 # admin file upload
 
 admin.site.register(models.Lab)
+admin.site.register(models.Slide)

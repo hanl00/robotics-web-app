@@ -40,9 +40,9 @@
                 <a href="/rfwa/alllabs/" class="list-group-item list-group-item-action bg-light">All labs</a>
                 <a href="/rfwa/lectureslides/" class="list-group-item list-group-item-action bg-light">Lecture
                     slides</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Sandbox</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Summary</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+                <a href="/rfwa/sandbox/" class="list-group-item list-group-item-action bg-light">Sandbox</a>
+                <a href="/rfwa/feedback/" class="list-group-item list-group-item-action bg-light">Feedback</a>
+                <a href="/rfwa/summary/" class="list-group-item list-group-item-action bg-light">Summary</a>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -62,20 +62,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link"> Welcome back, {{ user.username }}! </a>
-                            
+                            <a class="nav-link"> Welcome back, {{ user.first_name }}! </a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                More
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">User Profile</a>
-                                <a class="dropdown-item" href="#">Dark Theme</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                            </div>
+
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -96,12 +87,12 @@
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
     <!-- Menu Toggle Script -->
-    <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-    </script>
+    <!-- <script> -->
+    <!--    $("#menu-toggle").click(function (e) { -->
+    <!--        e.preventDefault(); -->
+    <!--        $("#wrapper").toggleClass("toggled"); -->
+    <!--    }); -->
+    <!-- </script> -->
 
     <!-- Dark theme -->
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.4/lib/darkmode-js.min.js"></script>
