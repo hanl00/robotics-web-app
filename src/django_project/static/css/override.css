@@ -1,5 +1,14 @@
+/*
+* for pages extending the base.html to position the page title in the middle
+*/
+
 .mt-4 {
   text-align: center;
   vertical-align: middle;
   line-height: 90px;
+}
+
+.bg-light {
+  background-color: black;
+  color: white;
 }

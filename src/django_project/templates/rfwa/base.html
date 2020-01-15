@@ -20,6 +20,14 @@
 
     <!-- Overriding bootstrap css -->
     <link href="{% static 'css/override.css' %}" rel="stylesheet">
+
+    <style>
+
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+    </style>
     {% block extra_head %}
     {% endblock %}
 
@@ -43,6 +51,7 @@
                 <a href="/rfwa/sandbox/" class="list-group-item list-group-item-action bg-light">Sandbox</a>
                 <a href="/rfwa/feedback/" class="list-group-item list-group-item-action bg-light">Feedback</a>
                 <a href="/rfwa/summary/" class="list-group-item list-group-item-action bg-light">Summary</a>
+                <button onclick="myFunction()">Toggle dark mode</button>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -52,12 +61,6 @@
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
@@ -87,16 +90,18 @@
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
     <!-- Menu Toggle Script -->
-    <!-- <script> -->
-    <!--    $("#menu-toggle").click(function (e) { -->
-    <!--        e.preventDefault(); -->
-    <!--        $("#wrapper").toggleClass("toggled"); -->
-    <!--    }); -->
-    <!-- </script> -->
+    <script src="{% static 'javascript/menutoggle.js' %}"></script>
 
     <!-- Dark theme -->
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.4/lib/darkmode-js.min.js"></script>
     <script src="{% static 'javascript/darkmode.js' %}"></script>
+
+    <script>
+        function myFunction() {
+            var element = documment.getElementById("this-stuff");
+            element.classList.toggle("change");
+        }
+    </script>
 
     {% else %}
     <meta http-equiv='refresh' content="0; URL={% url 'login' %}">
