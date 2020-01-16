@@ -327,6 +327,9 @@
 * *3.5 hour* trying to fix dark mode feature working incorrectly, --- have to find a way to override the !important in the bootstrap template
 * **Total : 103 hours**
 
+## 16 JANUARY 2020
+* *2 hour* managed to override the !important css tag however had issues somewhere else --not all classes were selected, couple of online solutions didnt work either
+
 
 
 

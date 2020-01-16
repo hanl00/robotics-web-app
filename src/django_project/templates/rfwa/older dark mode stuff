@@ -1,0 +1,30 @@
+<style>
+
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+    </style>
+
+
+
+.bg-light {
+  background-color: black; !important
+  color: white;
+}
+
+<script>
+        function myFunction() {
+            var element = documment.getElementById("this-stuff");
+            element.classList.toggle("change");
+        }
+    </script>
+
+    function myFunction() {
+            var element = document.getElementById("dmode");
+            for (var i = 0; i < element.length; i++) {
+                element[i].setAttribute(('style', 'background-color:#333;'));
+            }
+
+
+        }

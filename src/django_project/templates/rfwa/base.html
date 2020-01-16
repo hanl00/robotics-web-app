@@ -22,12 +22,16 @@
     <link href="{% static 'css/override.css' %}" rel="stylesheet">
 
     <style>
+        .bg-light {
+            color: black;
+        }
 
         .dark-mode {
-            background-color: black;
+            background-color: black !important;
             color: white;
         }
     </style>
+
     {% block extra_head %}
     {% endblock %}
 
@@ -44,14 +48,17 @@
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">Robotics Foundations </div>
             <div class="list-group list-group-flush">
-                <a href="/rfwa/devpage/" class="list-group-item list-group-item-action bg-light">Previous session</a>
-                <a href="/rfwa/alllabs/" class="list-group-item list-group-item-action bg-light">All labs</a>
-                <a href="/rfwa/lectureslides/" class="list-group-item list-group-item-action bg-light">Lecture
+                <a href="/rfwa/devpage/" class="list-group-item list-group-item-action bg-light">Previous
+                    session</a>
+                <a href="/rfwa/alllabs/" id="dmode" class="list-group-item list-group-item-action bg-light">All labs</a>
+                <a href="/rfwa/lectureslides/" id="dmode"
+                    class="list-group-item list-group-item-action bg-light">Lecture
                     slides</a>
-                <a href="/rfwa/sandbox/" class="list-group-item list-group-item-action bg-light">Sandbox</a>
-                <a href="/rfwa/feedback/" class="list-group-item list-group-item-action bg-light">Feedback</a>
-                <a href="/rfwa/summary/" class="list-group-item list-group-item-action bg-light">Summary</a>
-                <button onclick="myFunction()">Toggle dark mode</button>
+                <a href="/rfwa/sandbox/" id="dmode" class="list-group-item list-group-item-action bg-light">Sandbox</a>
+                <a href="/rfwa/feedback/" id="dmode"
+                    class="list-group-item list-group-item-action bg-light">Feedback</a>
+                <a href="/rfwa/summary/" id="dmode" class="list-group-item list-group-item-action bg-light">Summary</a>
+                <button onclick="color()">Toggle dark mode</button>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -97,10 +104,11 @@
     <script src="{% static 'javascript/darkmode.js' %}"></script>
 
     <script>
-        function myFunction() {
-            var element = documment.getElementById("this-stuff");
-            element.classList.toggle("change");
+        function color() {
+            var d = document.getElementsByID("dmode");
+            d.setAttribute("style", "background-color:#333m !important;");
         }
+
     </script>
 
     {% else %}
