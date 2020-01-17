@@ -330,6 +330,9 @@
 ## 16 JANUARY 2020
 * *2 hour* managed to override the !important css tag however had issues somewhere else --not all classes were selected, couple of online solutions didnt work either
 
+## 17 JANUARY 2020
+* *0.5 HOUR* weekly meeting with advisor
+
 
 
 
