@@ -58,7 +58,8 @@
                 <a href="/rfwa/feedback/" id="dmode"
                     class="list-group-item list-group-item-action bg-light">Feedback</a>
                 <a href="/rfwa/summary/" id="dmode" class="list-group-item list-group-item-action bg-light">Summary</a>
-                <button onclick="color()">Toggle dark mode</button>
+                <a href="/rfwa/manage/" id="dmode" class="list-group-item list-group-item-action bg-light">manage</a>
+                <!-- <button onclick="color()">Toggle dark mode</button> TOGGLE TO BE IMPLEMENTED ONCE CORE FEATURES ARE DONE -->
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -100,7 +101,7 @@
     <script src="{% static 'javascript/menutoggle.js' %}"></script>
 
     <!-- Dark theme -->
-    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.4/lib/darkmode-js.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.4/lib/darkmode-js.min.js"></script>
     <script src="{% static 'javascript/darkmode.js' %}"></script>
 
     <script>
@@ -109,7 +110,7 @@
             d.setAttribute("style", "background-color:#333m !important;");
         }
 
-    </script>
+    </script> -->
 
     {% else %}
     <meta http-equiv='refresh' content="0; URL={% url 'login' %}">

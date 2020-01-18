@@ -1,0 +1,54 @@
+{% extends "rfwa/base.html" %}
+{% load static %}
+{% block extra_head %}
+<script src="{% static 'js/manage.js' %}"></script>
+<title>Robotics - Manage</title>
+{% endblock %}
+{% block body_block %}
+{% if user.is_superuser %}
+
+<div class="modal fade" id="showScriptPopup" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="showScriptTitle"></h4>
+			</div>
+			<div class="modal-body text-center">
+				<p id="showScriptBody"></p>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<h1 class="col-12 text-center mt-4">Manage Site</h1>
+	</div>
+	<div class="row d-flex justify-content-around mt-4">
+		<div class="col-lg-4 col-md-10 col-sm-10 card bg-light mb-3">
+			<h2 class="text-center mt-4">Projects</h2>
+			<div class="d-flex justify-content-center">
+				<a href="{% url 'add_project'%}"><button type="button" class="btn btn-danger mt-3">+ Add
+						Project</button></a>
+			</div>
+			{% if labs %}
+			<ul class="mt-3 list-group">
+				{% for lab in labs %}
+				<li class="d-flex justify-content-between mb-3">{{lab.name}}
+					<div>
+						<span class="badge badge-danger badge-pill ml-1"><a class="btn-link text-white"
+								href="/delete_project/{{ project.slug }}"
+								onclick="return confirm('Are you sure you wish to delete {{ project.name }}?')">Delete</a></span>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+			{% else %}
+			<h3 class="text-center mt-3">There are currently no projects.</h3>
+			{% endif %}
+		</div>
+		
+	</div>
+	{% endif %}
+	{% endblock %}

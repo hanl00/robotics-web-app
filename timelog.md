@@ -329,9 +329,22 @@
 
 ## 16 JANUARY 2020
 * *2 hour* managed to override the !important css tag however had issues somewhere else --not all classes were selected, couple of online solutions didnt work either
+* **Total : 105 hours**
+
 
 ## 17 JANUARY 2020
-* *0.5 HOUR* weekly meeting with advisor
+* *1 hour* weekly meeting with supervisor and added meeting minutes to google drive
+* *1 hour* looked into implementing email verification
+* **Total : 107 hours**
+
+
+## 18 JANUARY 2020
+* *2 hour* reading the documentation for django-social-auth, for microsoft backend social authentication
+* *2.5 hour* tried to implement student email verification, no permission to register azure applications for the UoG directory
+* *1 hour* dissertation draft for iteration 1 included currents progression, issues faced, feedback received and future plans
+* *3 hours* implementation of in-web app add file system, further customisation and css touches needed
+
+
 
 
 

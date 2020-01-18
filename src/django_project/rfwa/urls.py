@@ -12,4 +12,6 @@ urlpatterns = [
     path('feedback/', views.feedback, name='feedback'),
     path('sandbox/', views.sandbox, name='sandbox'),
     path('summary/', views.summary, name='summary'),
+    path('manage/', views.manage, name='manage'),
+    path("add_project/", views.add_project, name="add_project"),
 ]

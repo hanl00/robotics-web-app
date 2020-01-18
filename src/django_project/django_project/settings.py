@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rfwa'
+    ## 'django.contrib.sites' # this is for outlook 365
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,6 @@ MEDIA_URL = '/media/'
 #login page redirection upon authentication
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+#outlook login
+#SITE_ID = 1 
