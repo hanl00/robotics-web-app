@@ -6,10 +6,6 @@ from django.urls import reverse
 
 # admin file upload
 
-# unused
-class Labs(models.Model):
-    specifications = models.FileField(upload_to='lab_specifications')
-
 # imported from calum's code
 class Lab(models.Model):
 
@@ -17,7 +13,7 @@ class Lab(models.Model):
     description = models.TextField(max_length = 2048)
     open_Date = models.DateTimeField()
     close_Date = models.DateTimeField()
-    project_Files = models.FileField(upload_to='labs/')
+    lab_Files = models.FileField(upload_to='labs/')
     slug = models.SlugField(primary_key = True, blank = True)
 
     def save(self, *args, **kwargs):
@@ -34,12 +30,13 @@ class Lab(models.Model):
 class Slide(models.Model):
 
     name = models.CharField(max_length = 128)
+    description = models.TextField(default="No description", max_length = 2048)
     lecture_slides = models.FileField(upload_to='slides/')
     slug = models.SlugField(primary_key = True, blank = True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        super(Lab, self).save(*args, **kwargs)
+        super(Slide, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.name

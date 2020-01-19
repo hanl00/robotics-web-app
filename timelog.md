@@ -345,8 +345,12 @@
 * *3 hours* implementation of in-web app add file system, further customisation and css touches needed
 * **Total : 115.5 hours**
 
+
 ## 19 JANUARY 2020
-* *1.5 hour* admin can now upload labs, scripts and slides
+* *2 hour* admin can now upload labs, scripts and slides
+* *1.5 hour* admin can now delete uploaded labs
+* *2 hour* further work on admin upload and display, improved UI on the adding page, error displaying uploaded slides
+* **Total : 121 hours**
 
 
 

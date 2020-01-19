@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, re_path
 from rfwa import views
 
 urlpatterns = [
@@ -13,5 +13,8 @@ urlpatterns = [
     path('sandbox/', views.sandbox, name='sandbox'),
     path('summary/', views.summary, name='summary'),
     path('manage/', views.manage, name='manage'),
-    path("add_project/", views.add_project, name="add_project"),
+    path("add_lab/", views.add_lab, name="add_lab"),
+    re_path("delete_lab/(?P<labName>[\w\-]+)/", views.delete_lab, name='delete_lab'),
+    path("add_slide/", views.add_slide, name="add_slide"),
+    re_path("delete_slide/(?P<slideName>[\w\-]+)/", views.delete_slide, name='delete_slide'),
 ]

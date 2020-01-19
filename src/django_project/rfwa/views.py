@@ -3,8 +3,9 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from rfwa import forms
-from .forms import SignUpForm, LabForm
-from .models import Lab
+from .forms import SignUpForm, LabForm, SlideForm
+from .models import Lab, Slide
+import os
 
 # Create your views here.
 
@@ -37,28 +38,6 @@ def sandbox(request):
 def summary(request):
     return render(request, 'rfwa/summary.html')
 
-def add_project(request):
-    if request.user.is_superuser:
-        if request.method == 'POST':
-            form = LabForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.save()
-                return redirect('manage')
-        else:
-            form = LabForm()
-        return render(request, 'rfwa/add_project.html', {
-            'form': form
-        })
-    else:
-        return redirect("index")
-
-def manage(request):
-    if request.user.is_superuser:
-        labs = Lab.objects.order_by('open_Date')
-        return render(request, "rfwa/manage.html", {'labs':labs})
-    else:
-        return redirect("index")
-
 def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -72,4 +51,69 @@ def register(request):
     else:
         form = SignUpForm()
     return render(request, 'rfwa/register.html', {'form': form})
+
+def manage(request):
+    if request.user.is_superuser:
+        labs = Lab.objects.order_by('open_Date')
+        return render(request, "rfwa/manage.html", {'labs':labs})
+    else:
+        return redirect("index")
+
+def add_lab(request):
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            form = LabForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('manage')
+        else:
+            form = LabForm()
+        return render(request, 'rfwa/add_lab.html', {
+            'form': form
+        })
+    else:
+        return redirect("index")
+
+def delete_lab(request, labName):
+    try:
+        lab = Lab.objects.get(slug=labName)
+    except Lab.DoesNotExist:
+        lab = None
+    except ValueError:
+        lab = None
+
+    #if it exists, delete it
+    if lab:
+        os.remove(lab.lab_Files.url[1:])
+        lab.delete()
+    return redirect("manage")
+
+def add_slide(request):
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            form = SlideForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('manage')
+        else:
+            form = SlideForm()
+        return render(request, 'rfwa/add_slide.html', {
+            'form': form
+        })
+    else:
+        return redirect("index")
+
+def delete_slide(request, slideName):
+    try:
+        slide = Slide.objects.get(slug=slideName)
+    except slide.DoesNotExist:
+        slide = None
+    except ValueError:
+        slide = None
+
+    #if it exists, delete it
+    if slide:
+        os.remove(slide.lecture_slides.url[1:])
+        slide.delete()
+    return redirect("manage")
 

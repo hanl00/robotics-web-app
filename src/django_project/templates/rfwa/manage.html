@@ -36,11 +36,13 @@
 	<div class="row">
 		<h1 class="col-12 text-center mt-4">Manage Site</h1>
 	</div>
+
+	<!-- labs -->
 	<div class="row d-flex justify-content-around mt-4">
 		<div class="col-lg-4 col-md-10 col-sm-10 card bg-light mb-3">
 			<h2 class="text-center mt-4">Labs</h2>
 			<div class="d-flex justify-content-center">
-				<a href="{% url 'add_project'%}"><button type="button" class="btn btn-primary">+ Add
+				<a href="{% url 'add_lab'%}"><button type="button" class="btn btn-primary">+ Add
 						Lab</button></a>
 			</div>
 			{% if labs %}
@@ -49,21 +51,23 @@
 				<li class="d-flex justify-content-between mb-3">{{lab.name}}
 					<div>
 						<span class="badge badge-danger badge-pill ml-1"><a class="btn-link text-white"
-								href="/delete_project/{{ project.slug }}"
-								onclick="return confirm('Are you sure you wish to delete {{ project.name }}?')">Delete</a></span>
+								href="/rfwa/delete_lab/{{ lab.slug }}"
+								onclick="return confirm('Are you sure you wish to delete {{ lab.name }}?')">Delete</a></span>
 					</div>
 				</li>
 				{% endfor %}
 			</ul>
 			{% else %}
-			<h3 class="text-center mt-3">There are currently no projects.</h3>
+			<h3 class="text-center mt-3">There are no projects uploaded.</h3>
 			{% endif %}
 		</div>
+
+		<!-- scripts -->
 
 		<div class="col-lg-4 col-md-10 col-sm-10 card bg-light mb-3">
 			<h2 class="text-center mt-4">Scripts</h2>
 			<div class="d-flex justify-content-center">
-				<a href="{% url 'add_project'%}"><button type="button" class="btn btn-primary">+ Add
+				<a href="{% url 'add_lab'%}"><button type="button" class="btn btn-primary">+ Add
 						Script</button></a>
 			</div>
 			{% if labs %}
@@ -72,38 +76,39 @@
 				<li class="d-flex justify-content-between mb-3">{{lab.name}}
 					<div>
 						<span class="badge badge-danger badge-pill ml-1"><a class="btn-link text-white"
-								href="/delete_project/{{ project.slug }}"
+								href="/rfwa/delete_script/{{ project.slug }}"
 								onclick="return confirm('Are you sure you wish to delete {{ project.name }}?')">Delete</a></span>
 					</div>
 				</li>
 				{% endfor %}
 			</ul>
 			{% else %}
-			<h3 class="text-center mt-3">There are currently no projects.</h3>
+			<h3 class="text-center mt-3">There are no scripts uploaded.</h3>
 			{% endif %}
 		</div>
 
+		<!-- slides -->
 
 		<div class="col-lg-4 col-md-10 col-sm-10 card bg-light mb-3">
 			<h2 class="text-center mt-4">Slides</h2>
 			<div class="d-flex justify-content-center">
-				<a href="{% url 'add_project'%}"><button type="button" class="btn btn-primary">+ Add
+				<a href="{% url 'add_slide'%}"><button type="button" class="btn btn-primary">+ Add
 						Slide</button></a>
 			</div>
-			{% if labs %}
+			{% if slides %}
 			<ul class="list-group">
-				{% for lab in labs %}
-				<li class="d-flex justify-content-between mb-3">{{lab.name}}
+				{% for slide in slides %}
+				<li class="d-flex justify-content-between mb-3">{{slide.name}}
 					<div>
 						<span class="badge badge-danger badge-pill ml-1"><a class="btn-link text-white"
-								href="/delete_project/{{ project.slug }}"
-								onclick="return confirm('Are you sure you wish to delete {{ project.name }}?')">Delete</a></span>
+								href="/rfwa/delete_slide/{{ slide.slug }}"
+								onclick="return confirm('Are you sure you wish to delete {{ slide.name }}?')">Delete</a></span>
 					</div>
 				</li>
 				{% endfor %}
 			</ul>
 			{% else %}
-			<h3 class="text-center mt-3">There are currently no projects.</h3>
+			<h3 class="text-center mt-3">There are no slides uploaded.</h3>
 			{% endif %}
 		</div>
 
