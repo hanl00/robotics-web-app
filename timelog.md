@@ -343,7 +343,7 @@
 * *2.5 hour* tried to implement student email verification, no permission to register azure applications for the UoG directory
 * *1 hour* dissertation draft for iteration 1 included currents progression, issues faced, feedback received and future plans
 * *3 hours* implementation of in-web app add file system, further customisation and css touches needed
-
+* **Total : 115.5 hours**
 
 
 
