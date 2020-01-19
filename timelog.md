@@ -345,7 +345,8 @@
 * *3 hours* implementation of in-web app add file system, further customisation and css touches needed
 * **Total : 115.5 hours**
 
-
+## 19 JANUARY 2020
+* *1.5 hour* admin can now upload labs, scripts and slides
 
 
 
