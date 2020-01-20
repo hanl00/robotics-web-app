@@ -10,7 +10,6 @@
 		background-color: #007bff;
 		border-color: #007bff;
 	}
-
 </style>
 {% endblock %}
 
@@ -67,16 +66,16 @@
 		<div class="col-lg-4 col-md-10 col-sm-10 card bg-light mb-3">
 			<h2 class="text-center mt-4">Scripts</h2>
 			<div class="d-flex justify-content-center">
-				<a href="{% url 'add_lab'%}"><button type="button" class="btn btn-primary">+ Add
+				<a href="{% url 'add_script'%}"><button type="button" class="btn btn-primary">+ Add
 						Script</button></a>
 			</div>
-			{% if labs %}
+			{% if scripts %}
 			<ul class="list-group">
-				{% for lab in labs %}
-				<li class="d-flex justify-content-between mb-3">{{lab.name}}
+				{% for script in scripts %}
+				<li class="d-flex justify-content-between mb-3">{{script.name}}
 					<div>
 						<span class="badge badge-danger badge-pill ml-1"><a class="btn-link text-white"
-								href="/rfwa/delete_script/{{ project.slug }}"
+								href="/rfwa/delete_script/{{ script.slug }}"
 								onclick="return confirm('Are you sure you wish to delete {{ project.name }}?')">Delete</a></span>
 					</div>
 				</li>

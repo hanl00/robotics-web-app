@@ -30,8 +30,7 @@ class Lab(models.Model):
 class Slide(models.Model):
 
     name = models.CharField(max_length = 128)
-    description = models.TextField(default="No description", max_length = 2048)
-    lecture_slides = models.FileField(upload_to='slides/')
+    lecture_Files = models.FileField(upload_to='slides/')
     slug = models.SlugField(primary_key = True, blank = True)
 
     def save(self, *args, **kwargs):
@@ -43,3 +42,13 @@ class Slide(models.Model):
 
     def __str__(self):
         return self.name
+
+class Script(models.Model):
+
+    name = models.CharField(max_length=50)
+    script_Files = models.FileField(upload_to='scripts/')
+    slug = models.SlugField(primary_key = True, blank = True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Script, self).save(*args, **kwargs)

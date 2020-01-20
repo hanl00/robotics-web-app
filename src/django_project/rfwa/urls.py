@@ -17,4 +17,6 @@ urlpatterns = [
     re_path("delete_lab/(?P<labName>[\w\-]+)/", views.delete_lab, name='delete_lab'),
     path("add_slide/", views.add_slide, name="add_slide"),
     re_path("delete_slide/(?P<slideName>[\w\-]+)/", views.delete_slide, name='delete_slide'),
+    path("add_script", views.add_script, name="add_script"),
+    re_path("delete_script/(?P<scriptName>[\w\-]+)/", views.delete_script, name='delete_script'),
 ]

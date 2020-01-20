@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Lab, Slide
+from .models import Lab, Slide, Script
 
 ## custom form
 
@@ -36,9 +36,17 @@ class LabForm(forms.ModelForm):
 class SlideForm(forms.ModelForm):
 
     name = forms.CharField(max_length = 128, label="Slide name")
-    description = forms.CharField(max_length = 2048, widget=forms.Textarea, label="Slide description")
     lecture_Files = forms.FileField(label="Slide Files (.pdf)")
 
     class Meta:
         model = Slide
-        fields = ('name', 'description', 'lecture_Files')
+        fields = ('name', 'lecture_Files')
+
+class ScriptForm(forms.ModelForm):
+
+    name = forms.CharField(max_length = 50, label="Script Name")
+    script_Files = forms.FileField(label="Script File", required=True)
+
+    class Meta:
+        model = Script
+        fields = ('name', 'script_Files' )
