@@ -296,6 +296,8 @@
 * **Total : 83.5 hours**
 
 
+### Week 1
+
 ## 12 JANUARY 2020
 * *2 hour* minor site css and links, basic admin upload - still in progress
 * *0.5 hour* research on user activity tracking
@@ -304,8 +306,6 @@
 * *2 hour* further improved login and other pages by removing unwanted stuff + adding background images, looking into user creation forms (youtube and calum) and also thinking of user creation details issue of other students using other student id - solution only accept @gla.ac.uk domain and use email verification - to be implemented later
 * **Total : 90 hours**
 
-
-### Week 17
 
 ## 13 JANUARY 2020
 * *2 hour* error with registration url redirection, views + urls imported
@@ -327,6 +327,7 @@
 * *3.5 hour* trying to fix dark mode feature working incorrectly, --- have to find a way to override the !important in the bootstrap template
 * **Total : 103 hours**
 
+
 ## 16 JANUARY 2020
 * *2 hour* managed to override the !important css tag however had issues somewhere else --not all classes were selected, couple of online solutions didnt work either
 * **Total : 105 hours**
@@ -346,12 +347,18 @@
 * **Total : 115.5 hours**
 
 
+### Week 2
+
 ## 19 JANUARY 2020
 * *2 hour* admin can now upload labs, scripts and slides
 * *1.5 hour* admin can now delete uploaded labs
 * *2 hour* further work on admin upload and display, improved UI on the adding page, error displaying uploaded slides
 * **Total : 121 hours**
 
+
+## 20 JANUARY 2020
+* *2.5 hour* fully implemented upload and delete (labs, scripts and slides), only superuser have access/can view this page. 
+* **Total : 123.5 hours**
 
 
 
