@@ -361,6 +361,11 @@
 * **Total : 123.5 hours**
 
 
+## 21 JANUARY 2020
+* *2 hour* improve the superuser manage page, gives SU a detailed view of the uploaded files, minor css changes. Also, uploaded labs and slides are displayed in the labs and slides page.
+
+
+
 
 
 
