@@ -363,6 +363,10 @@
 
 ## 21 JANUARY 2020
 * *2 hour* improve the superuser manage page, gives SU a detailed view of the uploaded files, minor css changes. Also, uploaded labs and slides are displayed in the labs and slides page.
+* *2 hour* created a theia extension but broke the original working theia version, also jupyter notebook localhost:8888 not working on theia
+* *1 hour* found jupyter server proxy which might authenticate theia's access to the jupyter notebook
+* *1.5 hour* installed jupyter server proxy and tried to get it working. unsuccessful, awaiting reply from gitter chat
+* **Total : 130 hours**
 
 
 
