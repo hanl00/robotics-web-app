@@ -47,13 +47,16 @@
 			{% if labs %}
 			<ul class="list-group">
 				{% for lab in labs %}
-				<li class="d-flex justify-content-between mb-3">{{lab.name}}
+				<li class="d-flex justify-content-between">{{lab.name}}
 					<div>
 						<span class="badge badge-danger badge-pill ml-1"><a class="btn-link text-white"
 								href="/rfwa/delete_lab/{{ lab.slug }}"
 								onclick="return confirm('Are you sure you wish to delete {{ lab.name }}?')">Delete</a></span>
 					</div>
 				</li>
+				
+				<li style="line-height:200%" class="d-flex justify-content-between">Starts : {{lab.open_Date}} &nbsp; &nbsp; &nbsp; Ends : {{lab.close_Date}}</li>
+				<li style="line-height:200%" class="d-flex justify-content-center">Files : {{lab.lab_Files}}</li>
 				{% endfor %}
 			</ul>
 			{% else %}
@@ -72,7 +75,7 @@
 			{% if scripts %}
 			<ul class="list-group">
 				{% for script in scripts %}
-				<li class="d-flex justify-content-between mb-3">{{script.name}}
+				<li class="d-flex justify-content-between">{{script.name}}
 					<div>
 						<span class="badge badge-danger badge-pill ml-1"><a class="btn-link text-white"
 								href="/rfwa/delete_script/{{ script.slug }}"
@@ -97,7 +100,7 @@
 			{% if slides %}
 			<ul class="list-group">
 				{% for slide in slides %}
-				<li class="d-flex justify-content-between mb-3">{{slide.name}}
+				<li class="d-flex justify-content-between">{{slide.name}}
 					<div>
 						<span class="badge badge-danger badge-pill ml-1"><a class="btn-link text-white"
 								href="/rfwa/delete_slide/{{ slide.slug }}"

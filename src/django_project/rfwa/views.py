@@ -25,7 +25,13 @@ def lectureslides(request):
     return render(request, 'rfwa/lectureslides.html', {'slides':slides})
 
 def alllabs(request):
-    return render(request, 'rfwa/alllabs.html')
+    labs = Lab.objects.order_by('open_Date')
+    # lablist = []
+    # for lab in lablist:
+        # if lab.openDate <= timezone.now():
+            # lablist.append(lab)
+    # context_dict = {'labs':lablist}
+    return render(request, 'rfwa/alllabs.html', {'labs':labs})
 
 def devpage(request):
     return render(request, 'rfwa/devpage.html')
@@ -58,7 +64,8 @@ def manage(request):
         labs = Lab.objects.order_by('open_Date')
         scripts = Script.objects.order_by('name')
         slides = Slide.objects.order_by('name')
-        return render(request, "rfwa/manage.html", {'labs':labs, 'scripts':scripts, 'slides':slides})
+        context_dict = {'labs':labs, 'scripts':scripts, 'slides':slides}
+        return render(request, "rfwa/manage.html", context_dict)
     else:
         return redirect("index")
 
