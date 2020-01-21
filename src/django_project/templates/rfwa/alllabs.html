@@ -11,11 +11,40 @@
 
 <div class="container-fluid">
   <h1 class="mt-4">Select a lab exercise to begin working on!</h1>
-  <button onclick="location.href='/rfwa/lectureslides/'" type="button" class="lab-button">
-    Lab Week 1</button>
 
-  <button onclick="location.href='/rfwa/lectureslides/'" type="button" class="lab-button">
-    Lab Week 1</button>
+  {% if labs %}
+  <div class="container-fluid mt-5">
+    {% for lab in labs %}
+    {% cycle 'row' '' as row silent %}
+    {% if row %}
+    <div class="row justify-content-around">
+      {% endif %}
+      <div class="col-sm-10 col-md-10 col-lg-4 mb-5">
+        <div class="card bg-dark text-white mx-auto">
+          <div class="card-body text-center">
+            <h3 class="card-title">{{lab.name}}</h3>
+            <p class="card-text text-left">{{lab.description}}</p>
+            <p class="card-text text-left">Deadline: {{lab.close_Date}}</p>
+            <div class="row pb-2 justify-content-around mt-4">
+              <button class="btn btn-primary font-weight-bold loadProjectButton" data-toggle="modal"
+                data-target="#loadProjectPopup" id="loadProjectButton" data-prop={{lab.slug}}>Load lab</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if not row %}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <h2 class="text-center mt-5">There are currently no projects to show.</h2>
+    {% endif %}
+  </div>
+
+  <!-- <button onclick="location.href='/rfwa/lectureslides/'" type="button" class="lab-button"> -->
+  <!-- Lab Week 1</button> -->
+
+
 </div>
 
 {% endblock %}

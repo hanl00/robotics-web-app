@@ -9,13 +9,38 @@
 <div class="container-fluid">
   <h1 class="mt-4">Lecture slides</h1>
   {% if slides %}
-  <ul class="list-group">
+  <div class="container-fluid mt-5">
     {% for slide in slides %}
-    <li class="d-flex justify-content-between mb-3">{{slide.name}}</li>
+    {% cycle 'row' '' as row silent %}
+    {% if row %}
+    <div class="row justify-content-around">
+      {% endif %}
+      <div class="col-sm-10 col-md-10 col-lg-4 mb-5">
+        <div class="card bg-dark text-white mx-auto">
+          <div class="card-body text-center">
+            <h3 class="card-title">{{slide.name}}</h3>
+            <div class="row pb-2 justify-content-around mt-4">
+              <!-- <button class="btn btn-primary font-weight-bold loadProjectButton" data-toggle="modal" -->
+              <!-- data-target="#loadProjectPopup" id="loadProjectButton" data-prop={{slide.slug}}>Load lab</button> -->
+              <!-- <a href="https://www.w3schools.com" target="_blank">Visit W3Schools</a> -->
+              <!-- <button onclick="location.href='/rfwa/alllabs/'" -->
+              <!-- class="btn btn-primary font-weight-bold loadProjectButton" type="button" rel="noopener noreferrer" -->
+              <!-- target="_blank"> -->
+              <!-- Slide Week 1</button> -->
+              <button class="btn btn-primary font-weight-bold loadProjectButton" rel="noopener noreferrer"
+                onclick=" window.open('/rfwa/alllabs/','_blank')">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if not row %}
+    </div>
+    {% endif %}
     {% endfor %}
-
-  </ul>
-  {% endif %}
+    {% else %}
+    <h2 class="text-center mt-5">There are currently no projects to show.</h2>
+    {% endif %}
+  </div>
 </div>
 
 {% endblock %}
