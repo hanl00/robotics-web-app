@@ -369,6 +369,10 @@
 * **Total : 130 hours**
 
 
+## 22 JANUARY 2020
+* *1 hour* looked into binder to get jupyter running
+* **Total : 131 hours**
+
 
 
 
