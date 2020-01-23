@@ -374,6 +374,12 @@
 * **Total : 131 hours**
 
 
+## 23 JANUARY 2020
+* *0.5 hour* weekly meeting with supervisor
+* *1.5 hour* looked further into jupyter notebook/theia/browser issue, possible solution install the VS-code-browser-preview plugin on theia and run it. Localhost:8888 + token working on vscode. 
+* **Total : 133 hours**
+
+
 
 
 
