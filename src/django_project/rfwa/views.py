@@ -66,7 +66,7 @@ def manage(request):
         scripts = Script.objects.order_by('name')
         slides = Slide.objects.order_by('name')
         context_dict = {'labs':labs, 'scripts':scripts, 'slides':slides}
-        return render(request, "rfwa/manage.html", context_dict)
+        return render(request, "rfwa/managev2.html", context_dict)
     else:
         return redirect("index")
 

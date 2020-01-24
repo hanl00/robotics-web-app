@@ -1,0 +1,145 @@
+{% extends "rfwa/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+
+<style>
+    .title-group {
+        padding-bottom: 15px;
+    }
+    .table-header {
+        font-size: 1.75rem;
+    }
+
+    .table-header-title {
+        display: inline-block;
+        text-align: left;
+
+    }
+
+    .rightside {
+        float: right;
+    }
+</style>
+
+{% endblock %}
+
+{% block body_block %}
+{% if user.is_superuser %}
+
+<div class="container-fluid">
+
+    <!-- main heading -->
+    <div class="row">
+        <h1 class="col-12 text-center mt-4">Manage Site</h1>
+    </div>
+
+    <!-- Lab -->
+    <div class="table-group">
+        <div class="title-group">
+            <h1 class="col-12 text-left table-header">Labs
+                <a class="rightside" href="{% url 'add_lab'%}"><button type="button" class="btn btn-primary">+ Add
+                        Lab</button></a>
+            </h1>
+        </div>
+
+        <table class="table table-hover">
+            {% if labs %}
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Starts</th>
+                    <th scope="col">Ends</th>
+                    <th scope="col">Files</th>
+                </tr>
+            </thead>
+            {% for lab in labs %}
+            <tbody>
+                <tr>
+                    <td>{{lab.name}}</td>
+                    <td>{{lab.open_Date}}</td>
+                    <td>{{lab.close_Date}}</td>
+                    <td>{{lab.lab_Files}}</td>
+                    <td><a class="btn-link text-white badge badge-danger badge-pill ml-1"
+                        href="/rfwa/delete_lab/{{ lab.slug }}"
+                        onclick="return confirm('Are you sure you wish to delete {{ lab.name }}?')">Delete</a></td>
+                </tr>
+            </tbody>
+            {% endfor %}
+            {% else %}
+            <h3 class="text-center mt-3">There are no scripts uploaded.</h3>
+            {% endif %}
+        </table>
+    </div>
+
+    <!-- Scripts -->
+    <div class="table-group">
+        <div class="title-group">
+            <h1 class="col-12 text-left table-header">Scripts
+                <a class="rightside" href="{% url 'add_script'%}"><button type="button" class="btn btn-primary">+ Add
+                        Scripts</button></a>
+            </h1>
+        </div>
+
+        <table class="table table-hover">
+            {% if scripts %}
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Files</th>
+                </tr>
+            </thead>
+            {% for script in scripts %}
+            <tbody>
+                <tr>
+                    <td>{{script.name}}</td>
+                    <td>{{script.script_Files}}</td>
+                    <td><a class="btn-link text-white badge badge-danger badge-pill ml-1"
+                        href="/rfwa/delete_lab/{{ lab.slug }}"
+                        onclick="return confirm('Are you sure you wish to delete {{ lab.name }}?')">Delete</a></td>
+                </tr>
+            </tbody>
+            {% endfor %}
+            {% else %}
+            <h3 class="text-center mt-3">There are no scripts uploaded.</h3>
+            {% endif %}
+        </table>
+    </div>
+
+    <!-- Slides -->
+    <div class="table-group">
+        <div class="title-group">
+            <h1 class="col-12 text-left table-header">Slides
+                <a class="rightside" href="{% url 'add_slide'%}"><button type="button" class="btn btn-primary">+ Add
+                        Slide</button></a>
+            </h1>
+        </div>
+
+        <table class="table table-hover">
+            {% if slides %}
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Files</th>
+                </tr>
+            </thead>
+            {% for slide in slides %}
+            <tbody>
+                <tr>
+                    <td>{{slide.name}}</td>
+                    <td>{{slide.lecture_Files}}</td>
+                    <td><a class="btn-link text-white badge badge-danger badge-pill ml-1"
+                        href="/rfwa/delete_lab/{{ lab.slug }}"
+                        onclick="return confirm('Are you sure you wish to delete {{ lab.name }}?')">Delete</a></td>
+                </tr>
+            </tbody>
+            {% endfor %}
+            {% else %}
+            <h3 class="text-center mt-3">There are no slides uploaded.</h3>
+            {% endif %}
+        </table>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}

@@ -381,9 +381,11 @@
 
 
 ## 24 JANUARY 2020
-* *3.5 hours* jupyter notebook now working on theia
+* *3.5 hour* jupyter notebook now working on theia
 * *1 hour* users can now view all uploaded labs
-
+* *0.5 hour* tidied up meeting documents
+* *2 hour* redesigned the admin manage site page, improved UI
+* **Total : 140 hours**
 
 
 
