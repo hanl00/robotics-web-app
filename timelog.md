@@ -380,6 +380,13 @@
 * **Total : 133 hours**
 
 
+## 24 JANUARY 2020
+* *3.5 hours* jupyter notebook now working on theia
+* *1 hour* users can now view all uploaded labs
+
+
+
+
 
 
 
