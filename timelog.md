@@ -388,7 +388,8 @@
 * **Total : 140 hours**
 
 
-
+## 25 JANUARY 2020
+* *1.5 hour* fixing the table headings in the manage site page, still have to align the rows of the table together, not sure how
 
 
 
