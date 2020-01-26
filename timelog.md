@@ -389,7 +389,14 @@
 
 
 ## 25 JANUARY 2020
-* *1.5 hour* fixing the table headings in the manage site page, still have to align the rows of the table together, not sure how
+* *2 hour* fixing the table headings in the manage site page, still have to align the rows of the table together, not sure how
+* **Total : 142 hours**
+
+
+## 26 JANUARY 2020
+* *2.5 hour* implemented file unzip feature and looked into the "remember me" feature, i think its implemented in django by default
+* **Total : 144.5 hours**
+
 
 
 
