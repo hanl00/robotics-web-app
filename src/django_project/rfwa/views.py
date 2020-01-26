@@ -6,6 +6,7 @@ from rfwa import forms
 from .forms import SignUpForm, LabForm, SlideForm, ScriptForm
 from .models import Lab, Slide, Script
 import os
+import zipfile
 
 # Create your views here.
 
@@ -27,6 +28,7 @@ def lectureslides(request):
 
 def alllabs(request):
     labs = Lab.objects.order_by('open_Date')
+
     # lablist = []
     # for lab in lablist:
         # if lab.openDate <= timezone.now():
@@ -84,6 +86,21 @@ def add_lab(request):
         })
     else:
         return redirect("index")
+
+def unzip_lab(request, labName):
+    try:
+        lab = Lab.objects.get(slug=labName)
+    except Lab.DoesNotExist:
+        lab = None
+    except ValueError:
+        lab = None
+    
+    #if it exists, delete it
+    if lab:
+        with zipfile.ZipFile(lab.lab_Files.url[1:], 'r') as zip_ref:
+            print(lab.lab_Files.url[1:])
+            zip_ref.extractall()
+    return redirect("manage")
 
 def delete_lab(request, labName):
     try:

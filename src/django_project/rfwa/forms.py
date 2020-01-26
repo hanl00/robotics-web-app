@@ -10,6 +10,7 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text=False)
     last_name = forms.CharField(max_length=30, required=True, help_text=False)
     email = forms.EmailField(max_length=254)
+    
 
     def clean_email(self):
         data = self.cleaned_data['email']
