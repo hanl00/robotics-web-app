@@ -17,7 +17,21 @@
     "@theia/textmate-grammars": "latest",
     "@theia/typescript": "latest",
     "@theia/messages": "latest",
-    "remove-submenu": "0.0.0"
+    "remove-submenu": "0.0.0",
+    "typescript": "latest",
+    "@theia/outline-view": "latest",
+    "@theia/git": "latest",
+    "@theia/file-search": "latest",
+    "@theia/preview": "latest",
+    "@theia/callhierarchy": "latest",
+    "@theia/merge-conflicts": "latest",
+    "@theia/search-in-workspace": "latest",
+    "@theia/json": "latest",
+    "@theia/mini-browser": "latest",
+    "@theia/plugin-ext": "latest",
+    "@theia/plugin-dev": "latest",
+    "@theia/plugin-ext-vscode": "latest",
+    "@theia/plugin-metrics": "latest"
   },
   "devDependencies": {
     "@theia/cli": "latest"
