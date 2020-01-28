@@ -398,10 +398,13 @@
 * **Total : 144.5 hours**
 
 
-## 27 JANUARY 202 
+## 27 JANUARY 2020
 * *4 hour* began working on a theia extension which removes some menu options
 * **Total : 148.5 hours**
 
+
+## 28 JANUARY 2020
+* *3.5 hour* working on removing unwanted theia menu, removed all menus instead
 
 
 

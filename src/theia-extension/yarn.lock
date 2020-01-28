@@ -999,7 +999,7 @@
     ws "^7.1.2"
     yargs "^11.1.0"
 
-"@theia/debug@^0.14.0":
+"@theia/debug@^0.14.0", "@theia/debug@latest":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@theia/debug/-/debug-0.14.0.tgz#5fd2d43f6c03c13af2f382b3ce4a44d779544db2"
   integrity sha512-5/WEfqyrwP3XkkGcIQint+v4NTqkYtbEc83xI6Xf0Ups3U2XsQ9kXzOPoMazn+XS3PBxiA8kp/P8/9eBbtzgPA==
