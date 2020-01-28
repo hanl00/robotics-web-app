@@ -1,5 +1,5 @@
-# remove-submenu
-The example of how to build the Theia-based applications with the remove-submenu.
+# theia-extension-remove-debug
+The example of how to build the Theia-based applications with the theia-extension-remove-debug.
 
 ## Getting started
 
@@ -32,9 +32,9 @@ Open http://localhost:3000 in the browser.
 
 ## Developing with the browser example
 
-Start watching of remove-submenu.
+Start watching of theia-extension-remove-debug.
 
-    cd remove-submenu
+    cd theia-extension-remove-debug
     yarn watch
 
 Start watching of the browser example.
@@ -49,9 +49,9 @@ Open http://localhost:3000 in the browser.
 
 ## Developing with the Electron example
 
-Start watching of remove-submenu.
+Start watching of theia-extension-remove-debug.
 
-    cd remove-submenu
+    cd theia-extension-remove-debug
     yarn watch
 
 Start watching of the electron example.
@@ -62,7 +62,7 @@ Start watching of the electron example.
 
 Launch `Start Electron Backend` configuration from VS code.
 
-## Publishing remove-submenu
+## Publishing theia-extension-remove-debug
 
 Create a npm user and login to the npm registry, [more on npm publishing](https://docs.npmjs.com/getting-started/publishing-npm-packages).
 

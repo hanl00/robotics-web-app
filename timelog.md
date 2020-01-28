@@ -393,6 +393,8 @@
 * **Total : 142 hours**
 
 
+### Week 3
+
 ## 26 JANUARY 2020
 * *2.5 hour* implemented file unzip feature and looked into the "remember me" feature, i think its implemented in django by default
 * **Total : 144.5 hours**
@@ -404,7 +406,8 @@
 
 
 ## 28 JANUARY 2020
-* *3.5 hour* working on removing unwanted theia menu, removed all menus instead
+* *7 hour* working on removing unwanted theia menu, removed all menus instead, 2nd commit revert back to basic hello world extension. Other issues include file manager not showing files
+* **Total : 155.5 hours**
 
 
 

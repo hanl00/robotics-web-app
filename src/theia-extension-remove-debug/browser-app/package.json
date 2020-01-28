@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "electron-app",
+  "name": "browser-app",
   "version": "0.0.0",
   "dependencies": {
     "@theia/core": "latest",
@@ -17,8 +17,7 @@
     "@theia/textmate-grammars": "latest",
     "@theia/typescript": "latest",
     "@theia/messages": "latest",
-    "@theia/electron": "latest",
-    "remove-submenu": "0.0.0"
+    "theia-extension-remove-debug": "0.0.0"
   },
   "devDependencies": {
     "@theia/cli": "latest"
@@ -29,6 +28,6 @@
     "watch": "theia build --watch --mode development"
   },
   "theia": {
-    "target": "electron"
+    "target": "browser"
   }
 }

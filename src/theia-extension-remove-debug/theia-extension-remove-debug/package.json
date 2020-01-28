@@ -1,5 +1,5 @@
 {
-  "name": "remove-submenu",
+  "name": "theia-extension-remove-debug",
   "keywords": [
     "theia-extension"
   ],
@@ -9,8 +9,7 @@
     "src"
   ],
   "dependencies": {
-    "@theia/core": "latest",
-    "@theia/debug" : "latest"
+    "@theia/core": "latest"
   },
   "devDependencies": {
     "rimraf": "latest",
@@ -24,7 +23,7 @@
   },
   "theiaExtensions": [
     {
-      "frontend": "lib/browser/remove-submenu-frontend-module"
+      "frontend": "lib/browser/theia-extension-remove-debug-frontend-module"
     }
   ]
 }

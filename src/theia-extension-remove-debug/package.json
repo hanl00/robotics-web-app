@@ -9,6 +9,6 @@
     "lerna": "2.4.0"
   },
   "workspaces": [
-    "remove-submenu", "browser-app", "electron-app"
+    "theia-extension-remove-debug", "browser-app", "electron-app"
   ]
 }
