@@ -412,6 +412,8 @@
 ## 29 JANUARY 2020
 * *3 hour* updates to the manage site page, cleaner look for the superuser, began working on providing feedback feature
 * *3.5 hour* fully working feedback feature, yet to add css/UI for feedback page. Sandbox feature link removed
+* *1 hour* browsed templates and used 1 to improve ui for displaying feedback
+* **Total : 163 hours**
 
 
 

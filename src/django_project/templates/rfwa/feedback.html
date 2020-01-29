@@ -1,31 +1,73 @@
 {% extends "rfwa/base.html" %}
+{% load static %}
 
 {% block extra_head %}
+
+<style>
+  .title-group {
+    padding-bottom: 15px;
+  }
+
+  .table-header {
+    font-size: 1.75rem;
+  }
+
+  .rightside {
+    float: right;
+  }
+
+  .tr-name-column {
+    width: 600px;
+  }
+
+  .tr-file-column {
+    width: 863px;
+  }
+</style>
 
 {% endblock %}
 
 {% block body_block %}
 
 <div class="container-fluid">
-  <h1 class="mt-4">View Feedbacks</h1>
-  {% if current_user %}
-  <div class="container-fluid mt-5">
-    
-    {% if feedbacks %}
-    <P> here are you feedbacks</P>
-    {% for feedback in feedbacks %}
-    <P> Week : {{feedback.week_number}}</P>
-    <P> Grade : {{feedback.grade}}</P>
-    <P> Feedback : {{feedback.description}}</P>
 
-    {% endfor %}
-    {% else %}
-    <h2 class="text-center mt-5">You have no feedbacks</h2>
-    {% endif %}
-    {% else %}
-    
+  <!-- main heading -->
+  <div class="row">
+    <h1 class="col-12 text-center mt-4">View Feedbacks<a class="rightside" href="/rfwa/managev2/"></a></h1>
+  </div>
+
+  <!-- Feedback -->
+  <div class="table-group">
+    <div class="title-group">
+      <h1 class="col-12 text-left table-header">Feedback
+      </h1>
+    </div>
+
+
+    <table class="table table-hover">
+      {% if feedbacks %}
+      <thead>
+        <tr>
+          <th scope="col">Week</th>
+          <th scope="col">Grade</th>
+          <th scope="col">Comments</th>
+        </tr>
+      </thead>
+      {% for feedback in feedbacks %}
+      <tbody>
+        <tr>
+          <td>{{feedback.week_number}}</td>
+          <td>{{feedback.grade}}</td>
+          <td>{{feedback.description}}</td>
+        </tr>
+      </tbody>
+
+      {% endfor %}
+      {% else %}
+      <h2 class="text-center mt-5">You have no feedbacks</h2>
+    </table>
     {% endif %}
   </div>
 </div>
-
+</div>
 {% endblock %}
