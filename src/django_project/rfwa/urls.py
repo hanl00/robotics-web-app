@@ -23,4 +23,6 @@ urlpatterns = [
     path("manage_labs/", views.manage_labs, name="manage_labs"),
     path("manage_scripts/", views.manage_scripts, name="manage_scripts"),
     path("manage_slides/", views.manage_slides, name="manage_slides"),
+    path("manage_feedback/", views.manage_feedback, name="manage_feedback"),
+    path("add_feedback/", views.add_feedback, name="add_feedback"),
 ]

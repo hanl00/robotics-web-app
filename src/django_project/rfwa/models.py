@@ -52,3 +52,16 @@ class Script(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Script, self).save(*args, **kwargs)
+
+class Feedback(models.Model):
+
+    assignedStudent_username = models.CharField(max_length = 128)
+    week_number = models.CharField(max_length = 128)
+    grade = models.TextField(max_length = 2048)
+    description = models.TextField(max_length = 2048)
+    slug = models.SlugField(primary_key = True, blank = True)
+
+    def save(self, *args, **kwargs):
+        self.slug = '-'.join((slugify(self.assignedStudent_username), slugify(self.week_number)))
+        super(Feedback, self).save(*args, **kwargs)
+

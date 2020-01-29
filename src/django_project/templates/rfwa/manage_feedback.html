@@ -1,0 +1,87 @@
+{% extends "rfwa/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+
+<style>
+    .title-group {
+        padding-bottom: 15px;
+    }
+
+    .table-header {
+        font-size: 1.75rem;
+    }
+
+    .rightside {
+        float: right;
+    }
+
+    .tr-name-column {
+        width: 600px;
+    }
+
+    .tr-file-column {
+        width: 863px;
+    }
+</style>
+
+{% endblock %}
+
+{% block body_block %}
+{% if user.is_superuser %}
+
+<div class="container-fluid">
+
+    <!-- main heading -->
+    <div class="row">
+        <h1 class="col-12 text-center mt-4">Manage Feedback <a class="rightside" href="/rfwa/managev2/"><button
+                    type="button" class="btn btn-primary">Back</button></a></h1>
+    </div>
+
+    <!-- Lab -->
+    <div class="table-group">
+        <div class="title-group">
+            <h1 class="col-12 text-left table-header">Students
+                <a class="rightside" href="{% url 'add_feedback'%}"><button type="button" class="btn btn-primary">+ Add
+                        Feedback</button></a>
+            </h1>
+        </div>
+
+        <table class="table table-hover">
+            {% if users %}
+            <thead>
+                <tr>
+                    <th scope="col">User Name</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Student ID</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            {% for user in users %}
+                <tbody>
+                  <tr>
+                    <td>{{user.username}}</td>
+                    <td>{{user.first_name}}</td>
+                    <td>{{user.last_name}}</td>
+                    <td>{{user.student_id}}</td>
+                    <td><a class="btn-link text-white badge badge-danger badge-pill ml-1"
+                            href="/rfwa/delete_lab/{{ lab.slug }}"
+                            onclick="return confirm('Are you sure you wish to delete {{ lab.name }}?')">Delete</a> <a
+                            class="btn-link text-white badge badge-danger badge-pill ml-1"
+                            href="/rfwa/unzip_lab/{{ lab.slug }}"
+                            onclick="return confirm('Are you sure you wish to unzip {{ lab.name }}?')">unzip</a></td>
+
+                </tr>
+            </tbody>
+
+            {% endfor %}
+            {% else %}
+            <h3 class="text-center mt-3">There are no labs uploaded.</h3>
+            {% endif %}
+        </table>
+    </div>
+
+</div>
+{% endif %}
+{% endblock %}

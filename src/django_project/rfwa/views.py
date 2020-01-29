@@ -3,8 +3,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from rfwa import forms
-from .forms import SignUpForm, LabForm, SlideForm, ScriptForm
-from .models import Lab, Slide, Script
+from .forms import SignUpForm, LabForm, SlideForm, ScriptForm, FeedbackForm
+from .models import Lab, Slide, Script, Feedback
 import os
 import zipfile
 from django.contrib.auth.models import User
@@ -41,7 +41,16 @@ def devpage(request):
     return render(request, 'rfwa/devpage.html')
 
 def feedback(request):
-    return render(request, 'rfwa/feedback.html')
+    user = User.objects.get(username=request.user.username)
+    try:
+        feedbacks = Feedback.objects.filter(assignedStudent_username=user)
+    except Feedback.DoesNotExist:
+        feedback = None
+    except ValueError:
+        feedback = None
+    context_dict = {'current_user': user, 'feedbacks':feedbacks}
+    # feedback = FeedbackForm.ob
+    return render(request, 'rfwa/feedback.html', context_dict)
 
 def sandbox(request):
     return render(request, 'rfwa/sandbox.html')
@@ -64,6 +73,25 @@ def manage_slides(request):
         slides = Slide.objects.order_by('name')
     return render(request, "rfwa/manage_slides.html", {'slides':slides})
 
+def manage_feedback(request):
+    if request.user.is_superuser:
+        users = User.objects.all()
+    return render(request, "rfwa/manage_feedback.html", {'users':users})
+
+def add_feedback(request):
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            form = FeedbackForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('manage')
+        else:
+            form = FeedbackForm()
+        return render(request, 'rfwa/add_feedback.html', {
+            'form': form
+        })
+    else:
+        return redirect("index")
 
 def register(request):
     if request.method == 'POST':
