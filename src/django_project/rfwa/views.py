@@ -7,6 +7,7 @@ from .forms import SignUpForm, LabForm, SlideForm, ScriptForm
 from .models import Lab, Slide, Script
 import os
 import zipfile
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -48,6 +49,22 @@ def sandbox(request):
 def summary(request):
     return render(request, 'rfwa/summary.html')
 
+def manage_labs(request):
+    if request.user.is_superuser:
+        labs = Lab.objects.order_by('open_Date')
+    return render(request, "rfwa/manage_labs.html", {'labs': labs})
+
+def manage_scripts(request):
+    if request.user.is_superuser:
+        scripts = Script.objects.order_by('name')
+    return render(request, "rfwa/manage_scripts.html", {'scripts': scripts})
+
+def manage_slides(request):
+    if request.user.is_superuser:
+        slides = Slide.objects.order_by('name')
+    return render(request, "rfwa/manage_slides.html", {'slides':slides})
+
+
 def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -67,7 +84,8 @@ def manage(request):
         labs = Lab.objects.order_by('open_Date')
         scripts = Script.objects.order_by('name')
         slides = Slide.objects.order_by('name')
-        context_dict = {'labs':labs, 'scripts':scripts, 'slides':slides}
+        users = User.objects.all()
+        context_dict = {'labs':labs, 'scripts':scripts, 'slides':slides, 'users': users}
         return render(request, "rfwa/managev2.html", context_dict)
     else:
         return redirect("index")
@@ -182,3 +200,8 @@ def delete_script(request, scriptName):
         scr.delete()
     return redirect("manage")
 
+def view_users(request):
+    users = User.objects.all()
+    return render(request, 'rfwa/add_slide.html', {
+            'form': form
+        })

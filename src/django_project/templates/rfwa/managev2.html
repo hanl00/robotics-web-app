@@ -23,6 +23,14 @@
     .tr-file-column {
         width: 863px;
     }
+
+    .divSquare {
+        width: 48%;
+        height: 200px;
+        margin-left: 12rem !important;
+        border: 1px solid black;
+        float: left
+    }
 </style>
 
 {% endblock %}
@@ -37,119 +45,55 @@
         <h1 class="col-12 text-center mt-4">Manage Site</h1>
     </div>
 
-    <!-- Lab -->
-    <div class="table-group">
-        <div class="title-group">
-            <h1 class="col-12 text-left table-header">Labs
-                <a class="rightside" href="{% url 'add_lab'%}"><button type="button" class="btn btn-primary">+ Add
-                        Labs</button></a>
-            </h1>
-        </div>
 
-        <table class="table table-hover">
-            {% if labs %}
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Starts</th>
-                    <th scope="col">Ends</th>
-                    <th scope="col">Files</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            {% for lab in labs %}
-            <tbody>
-                <tr>
-                    <td>{{lab.name}}</td>
-                    <td>{{lab.open_Date}}</td>
-                    <td>{{lab.close_Date}}</td>
-                    <td>{{lab.lab_Files}}</td>
-                    <td><a class="btn-link text-white badge badge-danger badge-pill ml-1"
-                            href="/rfwa/delete_lab/{{ lab.slug }}"
-                            onclick="return confirm('Are you sure you wish to delete {{ lab.name }}?')">Delete</a></td>
-                    <td><a class="btn-link text-white badge badge-danger badge-pill ml-1"
-                            href="/rfwa/unzip_lab/{{ lab.slug }}"
-                            onclick="return confirm('Are you sure you wish to unzip {{ lab.name }}?')">unzip</a></td>
-                </tr>
-            </tbody>
-            {% endfor %}
-            {% else %}
-            <h3 class="text-center mt-3">There are no labs uploaded.</h3>
-            {% endif %}
-        </table>
+    <!-- Lab -->
+    <div class="col-sm-10 col-md-10 col-lg-4 mb-5 divSquare card bg-dark text-white mx-auto">
+        <div class="card-body text-center">
+            <h3 class="card-title">Labs</h3>
+            <div class="row pb-2 justify-content-around mt-5">
+                <button class="btn btn-primary font-weight-bold loadProjectButton" data-toggle="modal"
+                    onclick="window.open('/rfwa/manage_labs/','_self')">Manage Labs</button>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->
-    <div class="table-group">
-        <div class="title-group">
-            <h1 class="col-12 text-left table-header">Scripts
-                <a class="rightside" href="{% url 'add_script'%}"><button type="button" class="btn btn-primary">+ Add
-                        Scripts</button></a>
-            </h1>
+    <div class="col-sm-10 col-md-10 col-lg-4 mb-5 divSquare card bg-dark text-white mx-auto">
+
+        <div class="card-body text-center">
+            <h3 class="card-title">Scripts</h3>
+            <div class="row pb-2 justify-content-around mt-5">
+                <button class="btn btn-primary font-weight-bold loadProjectButton" data-toggle="modal"
+                    onclick="window.open('/rfwa/manage_scripts/','_self')">Manage Scripts</button>
+            </div>
         </div>
 
-        <table class="table table-hover">
-            {% if scripts %}
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Files</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            {% for script in scripts %}
-            <tbody>
-                <tr>
-                    <td>{{script.name}}</td>
-                    <td>{{script.script_Files}}</td>
-                    <td><a class="btn-link text-white badge badge-danger badge-pill ml-1"
-                            href="/rfwa/delete_script/{{ script.slug }}"
-                            onclick="return confirm('Are you sure you wish to delete {{ script.name }}?')">Delete</a>
-                    </td>
-                </tr>
-            </tbody>
-            {% endfor %}
-            {% else %}
-            <h3 class="text-center mt-3">There are no scripts uploaded.</h3>
-            {% endif %}
-        </table>
     </div>
 
+    <div style='clear:both'></div>
     <!-- Slides -->
-    <div class="table-group">
-        <div class="title-group">
-            <h1 class="col-12 text-left table-header">Slides
-                <a class="rightside" href="{% url 'add_slide'%}"><button type="button" class="btn btn-primary">+ Add
-                        Slides</button></a>
-            </h1>
+    <div class="col-sm-10 col-md-10 col-lg-4 mb-5 divSquare card bg-dark text-white mx-auto">
+        <div class="card-body text-center">
+            <h3 class="card-title">Slides</h3>
+            <div class="row pb-2 justify-content-around mt-5">
+                <button class="btn btn-primary font-weight-bold loadProjectButton" data-toggle="modal"
+                    onclick="window.open('/rfwa/manage_slides/','_self')">Manage Slides</button>
+            </div>
         </div>
 
-        <table class="table table-hover">
-            {% if slides %}
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Files</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            {% for slide in slides %}
-            <tbody>
-                <tr>
-                    <td>{{slide.name}}</td>
-                    <td>{{slide.lecture_Files}}</td>
-                    <td><a class="btn-link text-white badge badge-danger badge-pill ml-1"
-                            href="/rfwa/delete_slide/{{ slide.slug }}"
-                            onclick="return confirm('Are you sure you wish to delete {{ slide.name }}?')">Delete</a>
-                    </td>
-                </tr>
-            </tbody>
-            {% endfor %}
-            {% else %}
-            <h3 class="text-center mt-3">There are no slides uploaded.</h3>
-            {% endif %}
-        </table>
     </div>
+
+    <!-- show users -->
+    <div class="col-sm-10 col-md-10 col-lg-4 mb-5 divSquare card bg-dark text-white mx-auto">
+        <div class="card-body text-center">
+            <h3 class="card-title">Feedback</h3>
+            <div class="row pb-2 justify-content-around mt-5">
+                <button class="btn btn-primary font-weight-bold loadProjectButton" data-toggle="modal"
+                    onclick="window.open('/rfwa/manage_slides/','_self')">Manage Feedback</button>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {% endif %}

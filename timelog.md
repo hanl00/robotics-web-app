@@ -409,6 +409,10 @@
 * *7 hour* working on removing unwanted theia menu, removed all menus instead, 2nd commit revert back to basic hello world extension. Other issues include file manager not showing files
 * **Total : 155.5 hours**
 
+## 29 JANUARY 2020
+* *3 hour* updates to the manage site page, cleaner look for the superuser, began working on providing feedback feature
+
+
 
 
 
