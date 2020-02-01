@@ -5,13 +5,17 @@ from django.shortcuts import render, redirect
 from rfwa import forms
 from .forms import SignUpForm, LabForm, SlideForm, ScriptForm, FeedbackForm
 from .models import Lab, Slide, Script, Feedback
+import subprocess
 import os
 import zipfile
 from django.contrib.auth.models import User
+import time
 
 # Create your views here.
 
 from django.http import HttpResponse
+
+## GENERAL FEATURES 
 
 def index(request):
     # Construct a dictionary to pass to the template engine as its context.
@@ -21,77 +25,6 @@ def index(request):
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.
     return render(request, 'rfwa/index.html')
-   
-
-def lectureslides(request):
-    slides = Slide.objects.order_by('name')
-    return render(request, 'rfwa/lectureslides.html', {'slides':slides})
-
-def alllabs(request):
-    labs = Lab.objects.order_by('open_Date')
-
-    # lablist = []
-    # for lab in lablist:
-        # if lab.openDate <= timezone.now():
-            # lablist.append(lab)
-    # context_dict = {'labs':lablist}
-    return render(request, 'rfwa/alllabs.html', {'labs':labs})
-
-def devpage(request):
-    return render(request, 'rfwa/devpage.html')
-
-def feedback(request):
-    user = User.objects.get(username=request.user.username)
-    try:
-        feedbacks = Feedback.objects.filter(assignedStudent_username=user)
-    except Feedback.DoesNotExist:
-        feedback = None
-    except ValueError:
-        feedback = None
-    context_dict = {'current_user': user, 'feedbacks':feedbacks}
-    # feedback = FeedbackForm.ob
-    return render(request, 'rfwa/feedback.html', context_dict)
-
-def sandbox(request):
-    return render(request, 'rfwa/sandbox.html')
-
-def summary(request):
-    return render(request, 'rfwa/summary.html')
-
-def manage_labs(request):
-    if request.user.is_superuser:
-        labs = Lab.objects.order_by('open_Date')
-    return render(request, "rfwa/manage_labs.html", {'labs': labs})
-
-def manage_scripts(request):
-    if request.user.is_superuser:
-        scripts = Script.objects.order_by('name')
-    return render(request, "rfwa/manage_scripts.html", {'scripts': scripts})
-
-def manage_slides(request):
-    if request.user.is_superuser:
-        slides = Slide.objects.order_by('name')
-    return render(request, "rfwa/manage_slides.html", {'slides':slides})
-
-def manage_feedback(request):
-    if request.user.is_superuser:
-        users = User.objects.all()
-    return render(request, "rfwa/manage_feedback.html", {'users':users})
-
-def add_feedback(request):
-    if request.user.is_superuser:
-        if request.method == 'POST':
-            form = FeedbackForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.save()
-                return redirect('manage')
-        else:
-            form = FeedbackForm()
-        return render(request, 'rfwa/add_feedback.html', {
-            'form': form
-        })
-    else:
-        return redirect("index")
 
 def register(request):
     if request.method == 'POST':
@@ -106,6 +39,58 @@ def register(request):
     else:
         form = SignUpForm()
     return render(request, 'rfwa/register.html', {'form': form})
+   
+
+def lectureslides(request):
+    slides = Slide.objects.order_by('name')
+    return render(request, 'rfwa/lectureslides.html', {'slides':slides})
+
+def feedback(request):
+    user = User.objects.get(username=request.user.username)
+    try:
+        feedbacks = Feedback.objects.filter(assignedStudent_username=user)
+    except Feedback.DoesNotExist:
+        feedback = None
+    except ValueError:
+        feedback = None
+    context_dict = {'current_user': user, 'feedbacks':feedbacks}
+    # feedback = FeedbackForm.ob
+    return render(request, 'rfwa/feedback.html', context_dict)
+
+
+# labs 
+
+def alllabs(request):
+    labs = Lab.objects.order_by('open_Date')
+
+    # lablist = []
+    # for lab in lablist:
+        # if lab.openDate <= timezone.now():
+            # lablist.append(lab)
+    # context_dict = {'labs':lablist}
+    return render(request, 'rfwa/alllabs.html', {'labs':labs})
+
+def devpage(request):
+    theia_path = '/home/nicholas/Documents/robotics-web-app/src/theia' 
+    current_path = os.getcwd()
+    os.chdir(theia_path)
+    subprocess.call(["pwd"])
+    subprocess.call(["yarn theia start"])
+    # os.chdir(theia_path)
+    # os.system("yarn theia start /home/nicholas/Documents/robotics-web-app/src/django_project/lab1 --plugins=local-dir:/home/nicholas/Documents/robotics-web-app/src/theia/plugins")
+    # print(os.getcwd())
+    time.sleep(5)
+    return render(request, 'rfwa/devpage.html')
+
+def sandbox(request):
+    return render(request, 'rfwa/sandbox.html')
+
+def summary(request):
+    return render(request, 'rfwa/summary.html')
+
+
+
+## ADMIN MANAGE
 
 def manage(request):
     if request.user.is_superuser:
@@ -117,6 +102,13 @@ def manage(request):
         return render(request, "rfwa/managev2.html", context_dict)
     else:
         return redirect("index")
+
+# labs 
+
+def manage_labs(request):
+    if request.user.is_superuser:
+        labs = Lab.objects.order_by('open_Date')
+    return render(request, "rfwa/manage_labs.html", {'labs': labs})
 
 def add_lab(request):
     if request.user.is_superuser:
@@ -132,7 +124,7 @@ def add_lab(request):
         })
     else:
         return redirect("index")
-
+    
 def unzip_lab(request, labName):
     try:
         lab = Lab.objects.get(slug=labName)
@@ -162,34 +154,13 @@ def delete_lab(request, labName):
         lab.delete()
     return redirect("manage")
 
-def add_slide(request):
+
+# scripts
+
+def manage_scripts(request):
     if request.user.is_superuser:
-        if request.method == 'POST':
-            form = SlideForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.save()
-                return redirect('manage')
-        else:
-            form = SlideForm()
-        return render(request, 'rfwa/add_slide.html', {
-            'form': form
-        })
-    else:
-        return redirect("index")
-
-def delete_slide(request, slideName):
-    try:
-        slide = Slide.objects.get(slug=slideName)
-    except slide.DoesNotExist:
-        slide = None
-    except ValueError:
-        slide = None
-
-    #if it exists, delete it
-    if slide:
-        os.remove(slide.lecture_Files.url[1:])
-        slide.delete()
-    return redirect("manage")
+        scripts = Script.objects.order_by('name')
+    return render(request, "rfwa/manage_scripts.html", {'scripts': scripts})
 
 def add_script(request):
     if request.user.is_superuser:
@@ -228,8 +199,61 @@ def delete_script(request, scriptName):
         scr.delete()
     return redirect("manage")
 
-def view_users(request):
-    users = User.objects.all()
-    return render(request, 'rfwa/add_slide.html', {
+
+# feedbacks
+
+def manage_feedback(request):
+    if request.user.is_superuser:
+        users = User.objects.all()
+    return render(request, "rfwa/manage_feedback.html", {'users':users})
+
+def add_feedback(request):
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            form = FeedbackForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('manage')
+        else:
+            form = FeedbackForm()
+        return render(request, 'rfwa/add_feedback.html', {
             'form': form
         })
+    else:
+        return redirect("index")
+
+# slides
+
+def manage_slides(request):
+    if request.user.is_superuser:
+        slides = Slide.objects.order_by('name')
+    return render(request, "rfwa/manage_slides.html", {'slides':slides})
+
+def add_slide(request):
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            form = SlideForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('manage')
+        else:
+            form = SlideForm()
+        return render(request, 'rfwa/add_slide.html', {
+            'form': form
+        })
+    else:
+        return redirect("index")
+
+def delete_slide(request, slideName):
+    try:
+        slide = Slide.objects.get(slug=slideName)
+    except slide.DoesNotExist:
+        slide = None
+    except ValueError:
+        slide = None
+
+    #if it exists, delete it
+    if slide:
+        os.remove(slide.lecture_Files.url[1:])
+        slide.delete()
+    return redirect("manage")

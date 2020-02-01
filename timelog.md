@@ -428,6 +428,10 @@
 * **Total : 170 hours**
 
 
+## 1 FEBRUARY 2020
+* *3 hour* loads up the relevant lab (only lab 1 at the moment -- hardcoded) in the devpage, trying to use subprocess.call instead of os.system to get things running, in progress
+* **Total : 173 hours**
+
 
 
 
