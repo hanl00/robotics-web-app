@@ -37,6 +37,7 @@
   </div>
 
   <!-- Feedback -->
+  {% if feedbacks %}
   <div class="table-group">
     <div class="title-group">
       <h1 class="col-12 text-left table-header">Feedback
@@ -45,7 +46,6 @@
 
 
     <table class="table table-hover">
-      {% if feedbacks %}
       <thead>
         <tr>
           <th scope="col">Week</th>
@@ -66,7 +66,7 @@
       {% else %}
       <h2 class="text-center mt-5">You have no feedbacks</h2>
     </table>
-    {% endif %}
+  {% endif %}
   </div>
 </div>
 </div>

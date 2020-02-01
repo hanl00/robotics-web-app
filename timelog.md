@@ -409,11 +409,24 @@
 * *7 hour* working on removing unwanted theia menu, removed all menus instead, 2nd commit revert back to basic hello world extension. Other issues include file manager not showing files
 * **Total : 155.5 hours**
 
+
 ## 29 JANUARY 2020
 * *3 hour* updates to the manage site page, cleaner look for the superuser, began working on providing feedback feature
 * *3.5 hour* fully working feedback feature, yet to add css/UI for feedback page. Sandbox feature link removed
 * *1 hour* browsed templates and used 1 to improve ui for displaying feedback
 * **Total : 163 hours**
+
+
+## 30 JANUARY 2020
+* *1 hour* look into django user tracking features and user remember me features
+* *1 hour* all labs page now redirects to the dev page upon clicking load labs
+* **Total : 165 hours**
+
+
+## 31 JANUARY 2020
+* *5 hour* working on redirecting workspace commands yarn -(folder/workspace) implementation through python
+* **Total : 170 hours**
+
 
 
 
