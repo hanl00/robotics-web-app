@@ -433,6 +433,11 @@
 * **Total : 173 hours**
 
 
+## 2 FEBRUARY 2020
+* *4.5 hour* learning to implement subprocesses and popen, current child processes seems to be running forever, theia running in background despite all terminals closed, -maybe use popen kill
+* **Total : 177.5 hours**
+
+
 
 
 

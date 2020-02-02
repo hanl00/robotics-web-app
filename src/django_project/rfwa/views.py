@@ -74,13 +74,29 @@ def devpage(request):
     theia_path = '/home/nicholas/Documents/robotics-web-app/src/theia' 
     current_path = os.getcwd()
     os.chdir(theia_path)
-    subprocess.call(["pwd"])
-    subprocess.call(["yarn theia start"])
+    subprocess.run("pwd")
+    yarn_theia_start = "yarn theia start --plugins=local-dir:/home/nicholas/Documents/robotics-web-app/src/theia/plugins"
+    #subprocess.run(yarn_theia_start, shell=True)
+    # subprocess.call(["yarn theia start", shell=True])
     # os.chdir(theia_path)
     # os.system("yarn theia start /home/nicholas/Documents/robotics-web-app/src/django_project/lab1 --plugins=local-dir:/home/nicholas/Documents/robotics-web-app/src/theia/plugins")
     # print(os.getcwd())
-    time.sleep(5)
+    #time.sleep(100)
     return render(request, 'rfwa/devpage.html')
+
+# def delete_lab(request, labName):
+#     try:
+#         lab = Lab.objects.get(slug=labName)
+#     except Lab.DoesNotExist:
+#         lab = None
+#     except ValueError:
+#         lab = None
+
+#     #if it exists, delete it
+#     if lab:
+#         os.remove(lab.lab_Files.url[1:])
+#         lab.delete()
+#     return redirect("manage")
 
 def sandbox(request):
     return render(request, 'rfwa/sandbox.html')
