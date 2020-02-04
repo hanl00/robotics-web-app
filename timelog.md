@@ -433,12 +433,16 @@
 * **Total : 173 hours**
 
 
+### Week 4
+
 ## 2 FEBRUARY 2020
 * *4.5 hour* learning to implement subprocesses and popen, current child processes seems to be running forever, theia running in background despite all terminals closed, -maybe use popen kill
 * **Total : 177.5 hours**
 
 
-
+## 3 FEBRUARY 2020
+* *3.5 hour* familarising with subprocess.popen function, popen is more powerful and handles more cases compared to subprocess.run. gpt popen to work and starts theia but the processes seems to continue under popen, tried using popen kill
+* **Total : 181 hours**
 
 
 

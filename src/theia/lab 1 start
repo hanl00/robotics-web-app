@@ -1,2 +1,12 @@
 To start lab 1
 yarn theia start /home/nicholas/Documents/robotics-web-app/src/django_project/lab1 --plugins=local-dir:/home/nicholas/Documents/robotics-web-app/src/theia/plugins
+
+output:
+yarn run v1.19.1
+$ /home/nicholas/Documents/robotics-web-app/src/theia/node_modules/.bin/theia start /home/nicholas/Documents/robotics-web-app/src/django_project/lab1 --plugins=local-dir:/home/nicholas/Documents/robotics-web-app/src/theia/plugins
+root INFO Configuring to accept webviews on '.+.webview..+' hostname.
+root INFO Theia app listening on http://localhost:3000.
+root INFO unzipping the VS Code extension 'auchenberg.vscode-browser-preview-0.5.9.vsix' to directory: /tmp/vscode-unpacked/auchenberg.vscode-browser-preview-0.5.9.vsix
+root INFO PluginTheiaDirectoryHandler: accepting plugin with path /tmp/vscode-unpacked/auchenberg.vscode-browser-preview-0.5.9.vsix
+root INFO Resolved "auchenberg.vscode-browser-preview-0.5.9.vsix" to a VS Code extension "vscode-browser-preview@0.5.9" with engines: { vscode: '^1.30.0' }
+root INFO Deploying backend plugin "vscode-browser-preview@0.5.9" from "/tmp/vscode-unpacked/auchenberg.vscode-browser-preview-0.5.9.vsix/extension/build/ext-src/extension.js"
