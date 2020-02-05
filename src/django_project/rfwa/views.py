@@ -10,6 +10,7 @@ import os
 import zipfile
 from django.contrib.auth.models import User
 import time
+import signal
 
 # Create your views here.
 
@@ -74,8 +75,12 @@ def devpage(request):
     theia_path = '/home/nicholas/Documents/robotics-web-app/src/theia' 
     current_path = os.getcwd()
     os.chdir(theia_path)
-    subprocess.run("pwd")
     yarn_theia_start = "yarn theia start --plugins=local-dir:/home/nicholas/Documents/robotics-web-app/src/theia/plugins"
+    process1 = subprocess.Popen(["yarn theia start"], shell=True, cwd= "/home/nicholas/Documents/robotics-web-app/src/theia")
+    os.system("pwd")
+    print("Start")
+    os.killpg(os.getpgid(process1.pid), signal.SIGINT)
+    print("END")
     #subprocess.run(yarn_theia_start, shell=True)
     # subprocess.call(["yarn theia start", shell=True])
     # os.chdir(theia_path)

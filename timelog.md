@@ -445,6 +445,9 @@
 * **Total : 181 hours**
 
 
+## 4 FEBRUARY 2020
+* *0.5 hour* meeting with supervisor
+* *8 hour* worked on abit of theia and dissertation, looked into user preference, updates on meeting minutes 
 
 
 
