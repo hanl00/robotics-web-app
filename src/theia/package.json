@@ -18,10 +18,7 @@
     "@theia/json": "latest",
     "@theia/textmate-grammars": "latest",
     "@theia/mini-browser": "latest",
-    "@theia/plugin-ext": "latest",
-    "@theia/plugin-dev": "latest",
-    "@theia/plugin-ext-vscode": "latest",
-    "@theia/plugin-metrics": "latest"
+    "@theia/plugin-ext-vscode": "latest"
   },
   "devDependencies": {
     "@theia/cli": "latest"

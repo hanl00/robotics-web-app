@@ -448,6 +448,20 @@
 ## 4 FEBRUARY 2020
 * *0.5 hour* meeting with supervisor
 * *8 hour* worked on abit of theia and dissertation, looked into user preference, updates on meeting minutes 
+* **Total : 189.5 hours**
+
+
+## 5 FEBRUARY 2020
+* *1 hour* thinking of ways to implement client's product vision, looked into changing user preference on theia's settings. Browser preview homepage automatically loads to user's jupyter notebook server
+* **Total : 190.5 hours**
+
+
+## 6 FEBRUARY 2020
+* *1.5 hour* theia now supports jupyter notebook, browser preview feature no longer needed
+
+
+
+
 
 
 

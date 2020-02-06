@@ -68,9 +68,7 @@ module.exports = Promise.resolve()
     .then(function () { return Promise.resolve(require('@theia/task/lib/browser/task-frontend-module')).then(load) })
     .then(function () { return Promise.resolve(require('@theia/debug/lib/browser/debug-frontend-module')).then(load) })
     .then(function () { return Promise.resolve(require('@theia/plugin-ext/lib/plugin-ext-frontend-module')).then(load) })
-    .then(function () { return Promise.resolve(require('@theia/plugin-dev/lib/browser/plugin-dev-frontend-module')).then(load) })
     .then(function () { return Promise.resolve(require('@theia/plugin-ext-vscode/lib/browser/plugin-vscode-frontend-module')).then(load) })
-    .then(function () { return Promise.resolve(require('@theia/plugin-metrics/lib/browser/plugin-metrics-frontend-module')).then(load) })
     .then(start).catch(reason => {
         console.error('Failed to start the frontend application.');
         if (reason) {
