@@ -458,6 +458,12 @@
 
 ## 6 FEBRUARY 2020
 * *1.5 hour* theia now supports jupyter notebook, browser preview feature no longer needed
+* *2 hour* looking into changing directory at runtime feature
+* **Total : 194 hours**
+
+
+## 7 FEBRUARY 2020
+* *2 hour* going through the ethcis guideline/checkklist and creating intro and debrief scripts
 
 
 
