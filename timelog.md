@@ -464,6 +464,7 @@
 
 ## 7 FEBRUARY 2020
 * *2 hour* going through the ethcis guideline/checkklist and creating intro and debrief scripts
+* *2 hour* tried to install latex live full, failed, ultimately started dissertation on overleaf
 
 
 
