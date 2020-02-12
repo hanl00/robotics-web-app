@@ -465,9 +465,26 @@
 ## 7 FEBRUARY 2020
 * *2 hour* going through the ethcis guideline/checkklist and creating intro and debrief scripts
 * *2 hour* tried to install latex live full, failed, ultimately started dissertation on overleaf
+* **Total : 198 hours**
 
 
+## 8 FEBRUARY 2020
+* *4.5 hour* managed to get plugins working on a basic theia extension, also identified potential issues which might arise - lab file given by supervisor was in python 2 kernel. Will discuss with supervisor
+* *1 hour* researching about the workspace changing feature using workspace.open, other issues such as minimising set up environment
+* *2 hour* continued looking into the fixing debug feature, it was removing the entire menu bar. Files, navigation, terminals, debug all removed
+* **Total : 205.5 hours**
 
+
+## 9 FEBRUARY 2020
+* *1.5 hour* going through theia extension authoring again + spectrum/github chat support for both Workspace.open and remove debug only
+* **Total : 207 hours**
+
+
+## 11 FEBRUARY 2020
+* *0.5 hour* user evaluation draft + dissertation questions with supervisor
+* *1.5 hour* making new user stories, personas, scenarios + functional, non functional requirements for the 2nd iteration. minor updates to the first iteration
+* *2 hour* looking into how django front end can communicate with theia back end to send the workspace.open command
+* **Total : 211 hours**
 
 
 
