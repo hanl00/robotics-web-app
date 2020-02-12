@@ -15,6 +15,7 @@ class Lab(models.Model):
     close_Date = models.DateTimeField()
     lab_Files = models.FileField(upload_to='labs/')
     slug = models.SlugField(primary_key = True, blank = True)
+    unzipped_directory = models.CharField()
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)

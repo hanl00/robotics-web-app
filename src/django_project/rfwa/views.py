@@ -64,6 +64,9 @@ def feedback(request):
 def alllabs(request):
     labs = Lab.objects.order_by('open_Date')
 
+    #match labs upload zip to unzipped version uri
+
+    
     # lablist = []
     # for lab in lablist:
         # if lab.openDate <= timezone.now():
@@ -89,6 +92,9 @@ def devpage(request):
     #time.sleep(100)
     return render(request, 'rfwa/devpage.html')
 
+## testing iframes
+def iframe(request):
+    return render(request, 'rfwa/iframe.html')
 # def delete_lab(request, labName):
 #     try:
 #         lab = Lab.objects.get(slug=labName)
@@ -154,11 +160,10 @@ def unzip_lab(request, labName):
     except ValueError:
         lab = None
     
-    #if it exists, delete it
     if lab:
         with zipfile.ZipFile(lab.lab_Files.url[1:], 'r') as zip_ref:
             print(lab.lab_Files.url[1:])
-            zip_ref.extractall()
+            zip_ref.extractall('../unzipped-labs/')
     return redirect("manage")
 
 def delete_lab(request, labName):

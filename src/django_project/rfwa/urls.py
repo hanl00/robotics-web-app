@@ -26,4 +26,6 @@ urlpatterns = [
     path("manage_feedback/", views.manage_feedback, name="manage_feedback"),
     path("add_feedback/", views.add_feedback, name="add_feedback"),
     re_path("devpage/(?P<labName>[\w\-]+)/", views.devpage, name='devpage'),
+    #iframes postMessage testing
+    path('iframe/', views.iframe, name='iframe'),
 ]

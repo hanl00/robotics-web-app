@@ -487,6 +487,10 @@
 * **Total : 211 hours**
 
 
+## 12 FEBRUARY 2020
+* *4 hour* learnt about postMessage, a way to communicate with iframes, found similar issues. However have to first fix the unzip function of the web app
+* **Total : 215 hours**
+
 
 
 
