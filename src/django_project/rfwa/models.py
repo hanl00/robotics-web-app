@@ -15,17 +15,25 @@ class Lab(models.Model):
     close_Date = models.DateTimeField()
     lab_Files = models.FileField(upload_to='labs/')
     slug = models.SlugField(primary_key = True, blank = True)
-    unzipped_directory = models.CharField()
+    _unzipped_directory = models.CharField(null=True, max_length =128)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Lab, self).save(*args, **kwargs)
+
+    def set_unzipped_directory(self):
+        self._unzipped_directory = "test string" + self._unzipped_directory
+
+    def get_unzipped_directory(self):
+        return self._unzipped_directory
 
     def __unicode__(self):
         return self.name
 
     def __str__(self):
         return self.name
+
+    unzipped_directory = property(get_unzipped_directory, set_unzipped_directory)
 
 # model for lecture slides
 class Slide(models.Model):

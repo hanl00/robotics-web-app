@@ -31,10 +31,10 @@ class LabForm(forms.ModelForm):
     open_Date = forms.DateTimeField(label="Lab Opening Date/Time")
     close_Date = forms.DateTimeField(label="Lab Deadline Date/Time")
     lab_Files = forms.FileField(label="Lab Files (.tar.gz)")
-
+    unzipped_directory = forms.CharField(label="Lab filename")
     class Meta:
         model = Lab
-        fields = ('name', 'description', 'open_Date', 'close_Date', 'lab_Files' )
+        fields = ('name', 'description', 'open_Date', 'close_Date', 'lab_Files', 'unzipped_directory')
 
 class SlideForm(forms.ModelForm):
 

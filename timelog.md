@@ -491,6 +491,11 @@
 * *4 hour* learnt about postMessage, a way to communicate with iframes, found similar issues. However have to first fix the unzip function of the web app
 * **Total : 215 hours**
 
+## 13 FEBRUARY 2020
+* *2 hour* implemented a new model/form field, however it does not override the values + theia switchworkspace issue
+
+
+
 
 
 
