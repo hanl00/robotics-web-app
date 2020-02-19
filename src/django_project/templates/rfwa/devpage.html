@@ -23,7 +23,7 @@
         width: 100%;
         height: 100%;
         flex-direction: column;
-        background-color: blue;
+        /* background-color: blue; */
         overflow: hidden;
     }
 
@@ -40,60 +40,20 @@
 {% block body_block %}
 
 <div class="row-container">
-    <!-- <iframe src="http://localhost:3000/" class="second-row"></iframe> -->
+    <button id="sendButton" onclick="getSessionValues()">Check your session storage values</button>
+    <iframe src="http://localhost:3000/" class="second-row"></iframe>
 
-    <h1>Parent Window</h1>
-    <p>Send Message: <button id="message_button">Hi there iframe</button></p>
-    <p>Got Message:</p>
-    <div id="results"></div>
-    <br />
-
-    <script>
-        // addEventListener support for IE8
-        function bindEvent(element, eventName, eventHandler) {
-            if (element.addEventListener) {
-                element.addEventListener(eventName, eventHandler, false);
-            } else if (element.attachEvent) {
-                element.attachEvent('on' + eventName, eventHandler);
-            }
-        }
-
-        // var iframeSource = 'https://gist.github.com/pbojinov/8965299/raw/fadf2c4058b6481646e7244994c1890f2ad81b60/iframe.html';
-
-        var iframeSource = '../iframe/';
-
-
-        // Create the iframe
-        var iframe = document.createElement('iframe');
-        iframe.setAttribute('src', iframeSource);
-        iframe.setAttribute('id', 'the_iframe');
-        iframe.style.width = 450 + 'px';
-        iframe.style.height = 200 + 'px';
-        document.body.appendChild(iframe);
-
-        // Send a message to the child iframe
-        var iframeEl = document.getElementById('the_iframe'),
-            messageButton = document.getElementById('message_button'),
-            results = document.getElementById('results');
-
-
-        // Send a message to the child iframe
-        var sendMessage = function (msg) {
-            // Make sure you are sending a string, and to stringify JSON
-            iframeEl.contentWindow.postMessage(msg, '*');
-        };
-
-        // // Send random messge data on every button click
-        // bindEvent(messageButton, 'click', function (e) {
-        //     var random = Math.random();
-        //     sendMessage('' + random);
-        // });
-
-        // Listen to message from child window
-        bindEvent(window, 'message', function (e) {
-            results.innerHTML = e.data;
-        });
-    </script>
 </div>
+
+<script>
+    var fileURI = '';
+    function getSessionValues() {
+        // var theia_iframe = document.getElementById('theia').contentWindow;
+        // theia_iframe.postMessage(fileURI, "*")
+        // // alert(fileURI);
+
+        alert("The returned values from sessionStorage is " + sessionStorage.getItem('Workspace'))
+    }
+</script>
 
 {% endblock %}

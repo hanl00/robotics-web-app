@@ -5,6 +5,11 @@
 
 <link href="{% static 'css/button.css' %}" rel="stylesheet">
 
+<style>
+  .fileDirectory {
+    visibility: hidden;
+  }
+</style>
 {% endblock %}
 
 {% block body_block %}
@@ -12,6 +17,9 @@
 <div class="container-fluid">
   <h1 class="mt-4">Select a lab exercise to begin working on!</h1>
 
+  <a href="./theia-iframe.html" id="sw1">Sample Workspace 1</a><br />
+  <a href="./theia-iframe.html.html" id="sw2">Sample Workspace 2</a><br />
+  <a href="#" id="cw">Check workspace by clicking here</a> <br />
   {% if labs %}
   <div class="container-fluid mt-5">
     {% for lab in labs %}
@@ -25,10 +33,13 @@
             <h3 class="card-title">{{lab.name}}</h3>
             <p class="card-text text-left">{{lab.description}}</p>
             <p class="card-text text-left">Deadline: {{lab.close_Date}}</p>
-            <p class="card-text text-left">file uri: {{lab.unzipped_directory}}</p>
+            <!-- invisible -->
+            <p class="card-text text-left fileDirectory">Zipped files name: {{lab.lab_Files.path}}</p>
+            <!-- invisible -->
             <div class="row pb-2 justify-content-around mt-4">
-              <button class="btn btn-primary font-weight-bold loadProjectButton" data-toggle="modal"
-                data-target="#loadProjectPopup" id="loadProjectButton" data-prop={{lab.slug}} onclick=" window.open('/rfwa/devpage', '_self')">Load lab</button>
+              <button class="btn btn-primary font-weight-bold loadProjectButton test"
+                onclick="window.open('/rfwa/devpage', '_self')">Load lab</button>
+              <!-- onclick=" window.open('/rfwa/devpage', '_self')" -->
             </div>
           </div>
         </div>
@@ -47,5 +58,45 @@
 
 
 </div>
+
+<script>
+
+  var fileURI = '';
+  function init() {
+    var sw1_element = document.getElementById('sw1');
+    sw1_element.onclick = function () {
+      fileURI = 'file:///home/nicholas/Documents/theia%20switch%20workspace/sample-workspace-1/';
+      sessionStorage.setItem("Workspace", fileURI)
+
+      return false;
+    }
+
+    var sw2_element = document.getElementById('sw2');
+    sw2_element.onclick = function () {
+      fileURI = 'file:///home/nicholas/Documents/theia%20switch%20workspace/sample-workspace-2/';
+      sessionStorage.setItem("Workspace", fileURI)
+      return false;
+    }
+
+    var cw_element = document.getElementById('cw');
+    cw_element.onclick = function () {
+      alert(fileURI);
+      return false;
+    }
+  }
+
+  window.onload = init;
+
+  function addSessionStorage() {
+    var selected = document.getElementsByClassName('test');
+    selected.onclick = function () {
+      fileURI = document.getElementsByClassName('fileDirectory').innerHTML;;
+      sessionStorage.setItem("Workspace", fileURI)
+      return false;
+    }
+  }
+
+
+</script>
 
 {% endblock %}

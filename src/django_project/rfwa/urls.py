@@ -10,7 +10,6 @@ urlpatterns = [
     path('devpage/', views.devpage, name='devpage'),
     path('register/', views.register, name='register'),
     path('feedback/', views.feedback, name='feedback'),
-    path('sandbox/', views.sandbox, name='sandbox'),
     path('summary/', views.summary, name='summary'),
     path('managev2/', views.manage, name='manage'),
     path("add_lab/", views.add_lab, name="add_lab"),
@@ -26,6 +25,4 @@ urlpatterns = [
     path("manage_feedback/", views.manage_feedback, name="manage_feedback"),
     path("add_feedback/", views.add_feedback, name="add_feedback"),
     re_path("devpage/(?P<labName>[\w\-]+)/", views.devpage, name='devpage'),
-    #iframes postMessage testing
-    path('iframe/', views.iframe, name='iframe'),
 ]

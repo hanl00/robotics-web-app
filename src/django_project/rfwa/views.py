@@ -55,7 +55,6 @@ def feedback(request):
     except ValueError:
         feedback = None
     context_dict = {'current_user': user, 'feedbacks':feedbacks}
-    # feedback = FeedbackForm.ob
     return render(request, 'rfwa/feedback.html', context_dict)
 
 
@@ -75,42 +74,7 @@ def alllabs(request):
     return render(request, 'rfwa/alllabs.html', {'labs':labs})
 
 def devpage(request):
-    # theia_path = '/home/nicholas/Documents/robotics-web-app/src/theia' 
-    # current_path = os.getcwd()
-    # os.chdir(theia_path)
-    # yarn_theia_start = "yarn theia start --plugins=local-dir:/home/nicholas/Documents/robotics-web-app/src/theia/plugins"
-    # process1 = subprocess.Popen(["yarn theia start"], shell=True, cwd= "/home/nicholas/Documents/robotics-web-app/src/theia")
-    # os.system("pwd")
-    # print("Start")
-    # os.killpg(os.getpgid(process1.pid), signal.SIGINT)
-    # print("END")
-    #subprocess.run(yarn_theia_start, shell=True)
-    # subprocess.call(["yarn theia start", shell=True])
-    # os.chdir(theia_path)
-    # os.system("yarn theia start /home/nicholas/Documents/robotics-web-app/src/django_project/lab1 --plugins=local-dir:/home/nicholas/Documents/robotics-web-app/src/theia/plugins")
-    # print(os.getcwd())
-    #time.sleep(100)
     return render(request, 'rfwa/devpage.html')
-
-## testing iframes
-def iframe(request):
-    return render(request, 'rfwa/iframe.html')
-# def delete_lab(request, labName):
-#     try:
-#         lab = Lab.objects.get(slug=labName)
-#     except Lab.DoesNotExist:
-#         lab = None
-#     except ValueError:
-#         lab = None
-
-#     #if it exists, delete it
-#     if lab:
-#         os.remove(lab.lab_Files.url[1:])
-#         lab.delete()
-#     return redirect("manage")
-
-def sandbox(request):
-    return render(request, 'rfwa/sandbox.html')
 
 def summary(request):
     return render(request, 'rfwa/summary.html')
@@ -163,7 +127,7 @@ def unzip_lab(request, labName):
     if lab:
         with zipfile.ZipFile(lab.lab_Files.url[1:], 'r') as zip_ref:
             print(lab.lab_Files.url[1:])
-            zip_ref.extractall('../unzipped-labs/')
+            zip_ref.extractall('../media/labs/')
     return redirect("manage")
 
 def delete_lab(request, labName):
