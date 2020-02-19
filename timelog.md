@@ -491,9 +491,23 @@
 * *4 hour* learnt about postMessage, a way to communicate with iframes, found similar issues. However have to first fix the unzip function of the web app
 * **Total : 215 hours**
 
+
 ## 13 FEBRUARY 2020
 * *2 hour* implemented a new model/form field, however it does not override the values + theia switchworkspace issue
+* *1.5 hour* writing dissertation, began on introduction and background.
+* **Total : 218.5 hours**
 
+
+## 14 FEBRUARY 2020
+* *0.5 hour* meeting with supervisor
+* *2 hour* browsing sample theia extensions which passes a value from an external source
+* **Total : 221 hours**
+
+
+### Week 6
+## 18 FEBRUARY 2020
+* *5 hour* developed a sample theia extension which switches workspace, uploaded to a seperate public repository for comments/feedback from community
+* **Total : 226 hours**
 
 
 

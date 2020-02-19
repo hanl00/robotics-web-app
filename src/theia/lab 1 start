@@ -1,5 +1,5 @@
 To start lab 1
-yarn theia start /home/nicholas/Documents/robotics-web-app/src/django_project/lab1 --plugins=local-dir:/home/nicholas/Documents/robotics-web-app/src/theia/plugins
+yarn theia start /home/nicholas/Documents/robotics-web-app/src/django_project/lab1/ --plugins=local-dir:/home/nicholas/Documents/robotics-web-app/src/theia/plugins
 
 output:
 yarn run v1.19.1
