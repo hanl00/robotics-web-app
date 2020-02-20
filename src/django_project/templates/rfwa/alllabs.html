@@ -17,9 +17,9 @@
 <div class="container-fluid">
   <h1 class="mt-4">Select a lab exercise to begin working on!</h1>
 
-  <a href="./theia-iframe.html" id="sw1">Sample Workspace 1</a><br />
+  <!-- <a href="./theia-iframe.html" id="sw1">Sample Workspace 1</a><br />
   <a href="./theia-iframe.html.html" id="sw2">Sample Workspace 2</a><br />
-  <a href="#" id="cw">Check workspace by clicking here</a> <br />
+  <a href="#" id="cw">Check workspace by clicking here</a> <br /> -->
   {% if labs %}
   <div class="container-fluid mt-5">
     {% for lab in labs %}
@@ -96,15 +96,19 @@
     }
   }
 
-  $(function(){
-    $("button").click(function() {
-        var fired_button = $(this).val();
-        // remove .zip from file uri
-        var newValue =  fired_button.replace('.zip', '');
-        alert(newValue);
+  $(function () {
+    $("button").click(function () {
+      var fired_button = $(this).val();
+      // remove .zip from file uri
+      var newValue = fired_button.replace('.zip', '');
+      sessionStorage.setItem("Workspace", newValue)
+      // alert(newValue);
+      // alert("redirecting to the dev page");
+      window.location.href = '/rfwa/devpage/';
     });
-});
 
+
+  })
 
 </script>
 

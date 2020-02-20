@@ -40,20 +40,20 @@
 {% block body_block %}
 
 <div class="row-container">
-    <button id="sendButton" onclick="getSessionValues()">Check your session storage values</button>
-    <iframe src="http://localhost:3000/" class="second-row"></iframe>
+    <!-- <button id="sendButton" onclick="getSessionValues()">Check your session storage values</button> -->
+    <iframe src="http://localhost:3000/" class="second-row" id="theia"></iframe>
 
 </div>
 
 <script>
-    var fileURI = '';
-    function getSessionValues() {
-        // var theia_iframe = document.getElementById('theia').contentWindow;
-        // theia_iframe.postMessage(fileURI, "*")
-        // // alert(fileURI);
-
-        alert("The returned values from sessionStorage is " + sessionStorage.getItem('Workspace'))
+    function postMessage() {
+        alert("The returned values from sessionStorage is " + sessionStorage.getItem('Workspace'));
+        var fileURI = sessionStorage.getItem('Workspace');
+        var theia_iframe = document.getElementById('theia').contentWindow;
+        theia_iframe.postMessage(fileURI, "*");
     }
+
+    window.onload = postMessage();
 </script>
 
 {% endblock %}

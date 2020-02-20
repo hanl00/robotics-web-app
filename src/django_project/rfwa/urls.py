@@ -24,5 +24,6 @@ urlpatterns = [
     path("manage_slides/", views.manage_slides, name="manage_slides"),
     path("manage_feedback/", views.manage_feedback, name="manage_feedback"),
     path("add_feedback/", views.add_feedback, name="add_feedback"),
-    re_path("devpage/(?P<labName>[\w\-]+)/", views.devpage, name='devpage'),
+    re_path("delete_slide/(?P<slideName>[\w\-]+)/", views.delete_slide, name='delete_slide'),
+    
 ]

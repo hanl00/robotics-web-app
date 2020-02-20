@@ -519,6 +519,8 @@
 
 ## 20 FEBRUARY 2020
 * *1.5 hour* resolved issue #1 by implementing jquery
+* *2 hour* tidied up page, jquery values stored in sessionStorage, passed onto devpage.html + windows.onload() action seems to work
+
 
 
 

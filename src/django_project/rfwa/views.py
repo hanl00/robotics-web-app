@@ -213,6 +213,20 @@ def add_feedback(request):
     else:
         return redirect("index")
 
+# def delete_feedback(request, labName):
+#     try:
+#         lab = Lab.objects.get(slug=labName)
+#     except Lab.DoesNotExist:
+#         lab = None
+#     except ValueError:
+#         lab = None
+
+#     #if it exists, delete it
+#     if lab:
+#         os.remove(lab.lab_Files.url[1:])
+#         lab.delete()
+#     return redirect("manage")
+
 # slides
 
 def manage_slides(request):
