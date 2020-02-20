@@ -6,9 +6,9 @@
 <link href="{% static 'css/button.css' %}" rel="stylesheet">
 
 <style>
-  .fileDirectory {
+  /* .fileDirectory {
     visibility: hidden;
-  }
+  } */
 </style>
 {% endblock %}
 
@@ -34,11 +34,11 @@
             <p class="card-text text-left">{{lab.description}}</p>
             <p class="card-text text-left">Deadline: {{lab.close_Date}}</p>
             <!-- invisible -->
-            <p class="card-text text-left fileDirectory">Zipped files name: {{lab.lab_Files.path}}</p>
+            <!-- <p class="card-text text-left fileDirectory" value = "{{ lab.lab_Files.path }}">Zipped files name: {{lab.lab_Files.path}}</p> -->
             <!-- invisible -->
             <div class="row pb-2 justify-content-around mt-4">
               <button class="btn btn-primary font-weight-bold loadProjectButton test"
-                onclick="window.open('/rfwa/devpage', '_self')">Load lab</button>
+                value="{{ lab.lab_Files.path }}">Load lab</button>
               <!-- onclick=" window.open('/rfwa/devpage', '_self')" -->
             </div>
           </div>
@@ -90,11 +90,20 @@
   function addSessionStorage() {
     var selected = document.getElementsByClassName('test');
     selected.onclick = function () {
-      fileURI = document.getElementsByClassName('fileDirectory').innerHTML;;
+      fileURI = document.getElementsByClassName('fileDirectory').value;;
       sessionStorage.setItem("Workspace", fileURI)
       return false;
     }
   }
+
+  $(function(){
+    $("button").click(function() {
+        var fired_button = $(this).val();
+        // remove .zip from file uri
+        var newValue =  fired_button.replace('.zip', '');
+        alert(newValue);
+    });
+});
 
 
 </script>

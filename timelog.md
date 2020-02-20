@@ -513,8 +513,12 @@
 ## 19 FEBRUARY 2020
 * *3.5 hour* working extension. communication between parent page and child iframe, see https://github.com/nicholasl00/theia-switch-workspace
 * *0.5 hour* session storage working on https://github.com/nicholasl00/theia-switch-workspace
-* *3 hour* zipped files path now showing and sessionstorage is work. But doesnt work for 2nd lab due to both sharing same id/class
+* *3 hour* zipped files path now showing and sessionstorage is work. But doesnt work for 2nd lab due to both sharing same id/class. Issue #1
 * **Total : 235 hours**
+
+
+## 20 FEBRUARY 2020
+* *1.5 hour* resolved issue #1 by implementing jquery
 
 
 
