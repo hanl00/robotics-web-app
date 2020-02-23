@@ -520,6 +520,28 @@
 ## 20 FEBRUARY 2020
 * *1.5 hour* resolved issue #1 by implementing jquery
 * *2 hour* tidied up page, jquery values stored in sessionStorage, passed onto devpage.html + windows.onload() action seems to work
+* *2.5 hour* dissertation draft, fixed issues in managefeedback page + tidying up code
+* **Total : 241 hours**
+
+
+## 21 FEBRUARY 2020
+* *1.5 hour* reverting back and debugging the developed theia extension for demonstration as switching workspace wasn't working on the main repository
+* *1 hour* weekly meeting with supervisor, updated the meeting minutes and trello board
+* *2.5 hour* trying to debug the error caused when adding browser preview vs code extension to theia extension. Issue #2
+* **Total : 246 hours**
+
+
+## 22 FEBRUARY 2020
+* *3 hours* learning about web api, setImmediate, trying to resolve the Issue #2
+* **Total : 249 hours**
+
+
+## 23 FEBRUARY 2020
+* *1 hour* Issue #2 resolved
+
+
+
+
 
 
 
