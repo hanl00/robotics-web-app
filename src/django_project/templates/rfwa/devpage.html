@@ -46,14 +46,14 @@
 </div>
 
 <script>
-    function postMessage() {
+    function postTheMessage() {
         alert("The returned values from sessionStorage is " + sessionStorage.getItem('Workspace'));
         var fileURI = sessionStorage.getItem('Workspace');
         var theia_iframe = document.getElementById('theia').contentWindow;
         theia_iframe.postMessage(fileURI, "*");
     }
 
-    window.onload = postMessage();
+    window.onload = postTheMessage();
 </script>
 
 {% endblock %}
