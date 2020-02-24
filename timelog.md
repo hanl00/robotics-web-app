@@ -538,7 +538,13 @@
 
 ## 23 FEBRUARY 2020
 * *1 hour* Issue #2 resolved
+* **Total : 250 hours**
 
+
+## 24 FEBRUARY 2020
+* *1 hour* updated the introduction and debriefing scripts, replaced older and sample versions of theia with theia switch workspace extension, updated the trello board
+* *0.5 hour* resolved issue being unable to commit, npm uninstall puppeteer and electron/dist/electron
+* **Total : 251.5 hours**
 
 
 

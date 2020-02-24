@@ -1,26 +1,17 @@
 {
   "private": true,
-  "dependencies": {
-    "typescript": "latest",
-    "@theia/typescript": "latest",
-    "@theia/navigator": "latest",
-    "@theia/terminal": "latest",
-    "@theia/outline-view": "latest",
-    "@theia/preferences": "latest",
-    "@theia/messages": "latest",
-    "@theia/git": "latest",
-    "@theia/file-search": "latest",
-    "@theia/markers": "latest",
-    "@theia/preview": "latest",
-    "@theia/callhierarchy": "latest",
-    "@theia/merge-conflicts": "latest",
-    "@theia/search-in-workspace": "latest",
-    "@theia/json": "latest",
-    "@theia/textmate-grammars": "latest",
-    "@theia/mini-browser": "latest",
-    "@theia/plugin-ext-vscode": "latest"
+  "scripts": {
+    "prepare": "lerna run prepare",
+    "rebuild:browser": "theia rebuild:browser",
+    "rebuild:electron": "theia rebuild:electron"
   },
   "devDependencies": {
-    "@theia/cli": "latest"
-  }
+    "lerna": "2.4.0"
+  },
+  "workspaces": [
+    "switch-workspace",
+    "browser-app",
+    "electron-app"
+  ],
+  "dependencies": {}
 }
