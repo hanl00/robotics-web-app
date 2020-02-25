@@ -3,14 +3,15 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from rfwa import forms
-from .forms import SignUpForm, LabForm, SlideForm, ScriptForm, FeedbackForm
-from .models import Lab, Slide, Script, Feedback
+from .forms import SignUpForm, LabForm, SlideForm, FeedbackForm
+from .models import Lab, Slide, Feedback
 import subprocess
 import os
 import zipfile
 from django.contrib.auth.models import User
 import time
 import signal
+import shutil
 
 # Create your views here.
 
@@ -87,10 +88,9 @@ def summary(request):
 def manage(request):
     if request.user.is_superuser:
         labs = Lab.objects.order_by('open_Date')
-        scripts = Script.objects.order_by('name')
         slides = Slide.objects.order_by('name')
         users = User.objects.all()
-        context_dict = {'labs':labs, 'scripts':scripts, 'slides':slides, 'users': users}
+        context_dict = {'labs':labs, 'slides':slides, 'users': users}
         return render(request, "rfwa/managev2.html", context_dict)
     else:
         return redirect("index")
@@ -141,55 +141,11 @@ def delete_lab(request, labName):
 
     #if it exists, delete it
     if lab:
+        unzipped_lab = lab.lab_Files.path
+        shutil.rmtree(unzipped_lab[:-4])
         os.remove(lab.lab_Files.url[1:])
         lab.delete()
     return redirect("manage")
-
-
-# scripts
-
-def manage_scripts(request):
-    if request.user.is_superuser:
-        scripts = Script.objects.order_by('name')
-    return render(request, "rfwa/manage_scripts.html", {'scripts': scripts})
-
-def add_script(request):
-    if request.user.is_superuser:
-        if request.method == 'POST':
-            scriptForm = ScriptForm(request.POST, request.FILES)
-            if scriptForm.is_valid():
-                scriptForm.save()
-                return redirect('manage')
-        else:
-            scriptForm = ScriptForm()
-        return render(request, 'rfwa/add_script.html', {
-            'form': scriptForm
-        })
-    else:
-        return redirect("index")
-
-def execute_script(request):
-    command = ""
-    with open(request.GET.getlist('filePath')[0][1:],'r') as f:
-        scriptCommand = [l.rstrip() for l in f]
-
-    subprocess.call((" && ").join(scriptCommand), shell=True)
-    return JsonResponse({"status": "success"})
-
-def delete_script(request, scriptName):
-    try:
-        scr = Script.objects.get(slug=scriptName)
-    except Script.DoesNotExist:
-        scr = None
-    except ValueError:
-        scr = None
-
-    #if it exists, delete it
-    if scr:
-        os.remove(scr.script_Files.url[1:])
-        scr.delete()
-    return redirect("manage")
-
 
 # feedbacks
 

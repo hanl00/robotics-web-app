@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Lab, Slide, Script, Feedback
+from .models import Lab, Slide, Feedback
 
 ## custom form
 
@@ -44,15 +44,6 @@ class SlideForm(forms.ModelForm):
     class Meta:
         model = Slide
         fields = ('name', 'lecture_Files')
-
-class ScriptForm(forms.ModelForm):
-
-    name = forms.CharField(max_length = 50, label="Script Name")
-    script_Files = forms.FileField(label="Script File", required=True)
-
-    class Meta:
-        model = Script
-        fields = ('name', 'script_Files' )
     
 GRADE_CHOICES = [
     ('A1', 'A1'), ('A2', 'A2'), ('A3', 'A3'), ('A4', 'A4'), ('A5', 'A5'),

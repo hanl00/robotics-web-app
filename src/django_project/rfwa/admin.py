@@ -7,5 +7,4 @@ from rfwa import models
 
 admin.site.register(models.Lab)
 admin.site.register(models.Slide)
-admin.site.register(models.Script)
 admin.site.register(models.Feedback)

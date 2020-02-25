@@ -45,16 +45,6 @@ class Slide(models.Model):
     def __str__(self):
         return self.name
 
-class Script(models.Model):
-
-    name = models.CharField(max_length=50)
-    script_Files = models.FileField(upload_to='scripts/')
-    slug = models.SlugField(primary_key = True, blank = True)
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Script, self).save(*args, **kwargs)
-
 class Feedback(models.Model):
 
     assignedStudent_username = models.CharField(max_length = 128)

@@ -550,6 +550,9 @@
 
 ## 25 FEBRUARY 2020
 * *2.5 hour* updated sample lab 2 and google forms, devpage now automatically postmessage to theia
+* *1.5 hour* setting up and conducting user evaluation
+* *1.5 hour* removed all script related items and delete lab now deletes both unzipped and zipped version
+
 
 
 
