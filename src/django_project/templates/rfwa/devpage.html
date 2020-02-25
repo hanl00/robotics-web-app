@@ -46,14 +46,28 @@
 </div>
 
 <script>
+    // function postTheMessage() {
+    //     alert("The returned values from sessionStorage is " + sessionStorage.getItem('Workspace'));
+    //     var fileURI = sessionStorage.getItem('Workspace');
+    //     var theia_iframe = document.getElementById('theia').contentWindow;
+    //     theia_iframe.postMessage(fileURI, "*");
+    // }
+
+    // window.onload = postTheMessage();
+
     function postTheMessage() {
-        alert("The returned values from sessionStorage is " + sessionStorage.getItem('Workspace'));
         var fileURI = sessionStorage.getItem('Workspace');
         var theia_iframe = document.getElementById('theia').contentWindow;
-        theia_iframe.postMessage(fileURI, "*");
+        theia_iframe.postMessage(fileURI, "*")
+        // alert(fileURI);
     }
 
-    window.onload = postTheMessage();
+    function myFunction() {
+        setTimeout(postTheMessage, 5000);
+    }
+
+    window.onload = myFunction;
+
 </script>
 
 {% endblock %}

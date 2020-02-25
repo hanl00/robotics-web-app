@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-container.js":
-/*!******************************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-container.js ***!
-  \******************************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-container.js":
+/*!****************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-container.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36,12 +36,12 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var file_tree_1 = __webpack_require__(/*! ../file-tree */ "../node_modules/@theia/filesystem/lib/browser/file-tree/index.js");
-var file_dialog_1 = __webpack_require__(/*! ./file-dialog */ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog.js");
-var file_dialog_model_1 = __webpack_require__(/*! ./file-dialog-model */ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-model.js");
-var file_dialog_widget_1 = __webpack_require__(/*! ./file-dialog-widget */ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-widget.js");
-var file_dialog_tree_1 = __webpack_require__(/*! ./file-dialog-tree */ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var file_tree_1 = __webpack_require__(/*! ../file-tree */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/index.js");
+var file_dialog_1 = __webpack_require__(/*! ./file-dialog */ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog.js");
+var file_dialog_model_1 = __webpack_require__(/*! ./file-dialog-model */ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-model.js");
+var file_dialog_widget_1 = __webpack_require__(/*! ./file-dialog-widget */ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-widget.js");
+var file_dialog_tree_1 = __webpack_require__(/*! ./file-dialog-tree */ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree.js");
 function createFileDialogContainer(parent) {
     var child = file_tree_1.createFileTreeContainer(parent);
     child.unbind(file_tree_1.FileTreeModel);
@@ -74,10 +74,10 @@ exports.createSaveFileDialogContainer = createSaveFileDialogContainer;
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-model.js":
-/*!**************************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-model.js ***!
-  \**************************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-model.js":
+/*!************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-model.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -156,10 +156,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var file_tree_1 = __webpack_require__(/*! ../file-tree */ "../node_modules/@theia/filesystem/lib/browser/file-tree/index.js");
-var file_dialog_tree_1 = __webpack_require__(/*! ./file-dialog-tree */ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var file_tree_1 = __webpack_require__(/*! ../file-tree */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/index.js");
+var file_dialog_tree_1 = __webpack_require__(/*! ./file-dialog-tree */ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree.js");
 var FileDialogModel = /** @class */ (function (_super) {
     __extends(FileDialogModel, _super);
     function FileDialogModel() {
@@ -263,10 +263,10 @@ exports.FileDialogModel = FileDialogModel;
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-service.js":
-/*!****************************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-service.js ***!
-  \****************************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-service.js":
+/*!**************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-service.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -332,12 +332,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var common_1 = __webpack_require__(/*! ../../common */ "../node_modules/@theia/filesystem/lib/common/index.js");
-var file_tree_1 = __webpack_require__(/*! ../file-tree */ "../node_modules/@theia/filesystem/lib/browser/file-tree/index.js");
-var file_dialog_1 = __webpack_require__(/*! ./file-dialog */ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var common_1 = __webpack_require__(/*! ../../common */ "../../../../node_modules/@theia/filesystem/lib/common/index.js");
+var file_tree_1 = __webpack_require__(/*! ../file-tree */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/index.js");
+var file_dialog_1 = __webpack_require__(/*! ./file-dialog */ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog.js");
 exports.FileDialogService = Symbol('FileDialogService');
 var DefaultFileDialogService = /** @class */ (function () {
     function DefaultFileDialogService() {
@@ -448,10 +448,10 @@ exports.DefaultFileDialogService = DefaultFileDialogService;
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree-filters-renderer.js":
-/*!******************************************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree-filters-renderer.js ***!
-  \******************************************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree-filters-renderer.js":
+/*!****************************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree-filters-renderer.js ***!
+  \****************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -486,8 +486,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_renderer_1 = __webpack_require__(/*! @theia/core/lib/browser/widgets/react-renderer */ "../node_modules/@theia/core/lib/browser/widgets/react-renderer.js");
-var React = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+var react_renderer_1 = __webpack_require__(/*! @theia/core/lib/browser/widgets/react-renderer */ "../../../../node_modules/@theia/core/lib/browser/widgets/react-renderer.js");
+var React = __webpack_require__(/*! react */ "../../../../node_modules/react/index.js");
 exports.FILE_TREE_FILTERS_LIST_CLASS = 'theia-FileTreeFiltersList';
 /**
  * A set of file filters that are used by the dialog. Each entry is a human readable label,
@@ -557,10 +557,10 @@ exports.FileDialogTreeFiltersRenderer = FileDialogTreeFiltersRenderer;
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree.js":
-/*!*************************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree.js ***!
-  \*************************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree.js":
+/*!***********************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -636,8 +636,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var file_tree_1 = __webpack_require__(/*! ../file-tree */ "../node_modules/@theia/filesystem/lib/browser/file-tree/index.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var file_tree_1 = __webpack_require__(/*! ../file-tree */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/index.js");
 var FileDialogTree = /** @class */ (function (_super) {
     __extends(FileDialogTree, _super);
     function FileDialogTree() {
@@ -701,10 +701,10 @@ exports.FileDialogTree = FileDialogTree;
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-widget.js":
-/*!***************************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-widget.js ***!
-  \***************************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-widget.js":
+/*!*************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-widget.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -751,10 +751,10 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var file_tree_1 = __webpack_require__(/*! ../file-tree */ "../node_modules/@theia/filesystem/lib/browser/file-tree/index.js");
-var file_dialog_model_1 = __webpack_require__(/*! ./file-dialog-model */ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-model.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var file_tree_1 = __webpack_require__(/*! ../file-tree */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/index.js");
+var file_dialog_model_1 = __webpack_require__(/*! ./file-dialog-model */ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-model.js");
 exports.FILE_DIALOG_CLASS = 'theia-FileDialog';
 exports.NOT_SELECTABLE_CLASS = 'theia-mod-not-selectable';
 var FileDialogWidget = /** @class */ (function (_super) {
@@ -818,10 +818,10 @@ exports.FileDialogWidget = FileDialogWidget;
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog.js":
-/*!********************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog.js ***!
-  \********************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog.js":
+/*!******************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -903,14 +903,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var location_1 = __webpack_require__(/*! ../location */ "../node_modules/@theia/filesystem/lib/browser/location/index.js");
-var file_dialog_widget_1 = __webpack_require__(/*! ./file-dialog-widget */ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-widget.js");
-var file_dialog_tree_filters_renderer_1 = __webpack_require__(/*! ./file-dialog-tree-filters-renderer */ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree-filters-renderer.js");
-var widgets_1 = __webpack_require__(/*! @phosphor/widgets */ "../node_modules/@phosphor/widgets/lib/index.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var location_1 = __webpack_require__(/*! ../location */ "../../../../node_modules/@theia/filesystem/lib/browser/location/index.js");
+var file_dialog_widget_1 = __webpack_require__(/*! ./file-dialog-widget */ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-widget.js");
+var file_dialog_tree_filters_renderer_1 = __webpack_require__(/*! ./file-dialog-tree-filters-renderer */ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree-filters-renderer.js");
+var widgets_1 = __webpack_require__(/*! @phosphor/widgets */ "../../../../node_modules/@phosphor/widgets/lib/index.js");
 exports.OpenFileDialogFactory = Symbol('OpenFileDialogFactory');
 exports.SaveFileDialogFactory = Symbol('SaveFileDialogFactory');
 exports.SAVE_DIALOG_CLASS = 'theia-SaveFileDialog';
@@ -1203,10 +1203,10 @@ exports.SaveFileDialog = SaveFileDialog;
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/file-dialog/index.js":
-/*!**************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/file-dialog/index.js ***!
-  \**************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/index.js":
+/*!************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/file-dialog/index.js ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1231,18 +1231,18 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(/*! ./file-dialog */ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog.js"));
-__export(__webpack_require__(/*! ./file-dialog-container */ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-container.js"));
-__export(__webpack_require__(/*! ./file-dialog-tree-filters-renderer */ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree-filters-renderer.js"));
-__export(__webpack_require__(/*! ./file-dialog-service */ "../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-service.js"));
+__export(__webpack_require__(/*! ./file-dialog */ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog.js"));
+__export(__webpack_require__(/*! ./file-dialog-container */ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-container.js"));
+__export(__webpack_require__(/*! ./file-dialog-tree-filters-renderer */ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-tree-filters-renderer.js"));
+__export(__webpack_require__(/*! ./file-dialog-service */ "../../../../node_modules/@theia/filesystem/lib/browser/file-dialog/file-dialog-service.js"));
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-container.js":
-/*!**************************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-container.js ***!
-  \**************************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-container.js":
+/*!************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-container.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1264,10 +1264,10 @@ __export(__webpack_require__(/*! ./file-dialog-service */ "../node_modules/@thei
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 Object.defineProperty(exports, "__esModule", { value: true });
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var file_tree_1 = __webpack_require__(/*! ./file-tree */ "../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree.js");
-var file_tree_model_1 = __webpack_require__(/*! ./file-tree-model */ "../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-model.js");
-var file_tree_widget_1 = __webpack_require__(/*! ./file-tree-widget */ "../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-widget.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var file_tree_1 = __webpack_require__(/*! ./file-tree */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree.js");
+var file_tree_model_1 = __webpack_require__(/*! ./file-tree-model */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-model.js");
+var file_tree_widget_1 = __webpack_require__(/*! ./file-tree-widget */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-widget.js");
 function createFileTreeContainer(parent) {
     var child = browser_1.createTreeContainer(parent);
     child.unbind(browser_1.TreeImpl);
@@ -1285,10 +1285,10 @@ exports.createFileTreeContainer = createFileTreeContainer;
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-model.js":
-/*!**********************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-model.js ***!
-  \**********************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-model.js":
+/*!********************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-model.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1377,13 +1377,13 @@ var __values = (this && this.__values) || function (o) {
     };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var common_1 = __webpack_require__(/*! ../../common */ "../node_modules/@theia/filesystem/lib/common/index.js");
-var filesystem_watcher_1 = __webpack_require__(/*! ../filesystem-watcher */ "../node_modules/@theia/filesystem/lib/browser/filesystem-watcher.js");
-var file_tree_1 = __webpack_require__(/*! ./file-tree */ "../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree.js");
-var label_provider_1 = __webpack_require__(/*! @theia/core/lib/browser/label-provider */ "../node_modules/@theia/core/lib/browser/label-provider.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var common_1 = __webpack_require__(/*! ../../common */ "../../../../node_modules/@theia/filesystem/lib/common/index.js");
+var filesystem_watcher_1 = __webpack_require__(/*! ../filesystem-watcher */ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-watcher.js");
+var file_tree_1 = __webpack_require__(/*! ./file-tree */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree.js");
+var label_provider_1 = __webpack_require__(/*! @theia/core/lib/browser/label-provider */ "../../../../node_modules/@theia/core/lib/browser/label-provider.js");
 var FileTreeModel = /** @class */ (function (_super) {
     __extends(FileTreeModel, _super);
     function FileTreeModel() {
@@ -1650,10 +1650,10 @@ exports.FileTreeModel = FileTreeModel;
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-widget.js":
-/*!***********************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-widget.js ***!
-  \***********************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-widget.js":
+/*!*********************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-widget.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1776,16 +1776,16 @@ var __values = (this && this.__values) || function (o) {
     };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(/*! react */ "../node_modules/react/index.js");
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var selection_1 = __webpack_require__(/*! @theia/core/lib/common/selection */ "../node_modules/@theia/core/lib/common/selection.js");
-var cancellation_1 = __webpack_require__(/*! @theia/core/lib/common/cancellation */ "../node_modules/@theia/core/lib/common/cancellation.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var file_upload_service_1 = __webpack_require__(/*! ../file-upload-service */ "../node_modules/@theia/filesystem/lib/browser/file-upload-service.js");
-var file_tree_1 = __webpack_require__(/*! ./file-tree */ "../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree.js");
-var file_tree_model_1 = __webpack_require__(/*! ./file-tree-model */ "../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-model.js");
-var icon_theme_service_1 = __webpack_require__(/*! @theia/core/lib/browser/icon-theme-service */ "../node_modules/@theia/core/lib/browser/icon-theme-service.js");
+var React = __webpack_require__(/*! react */ "../../../../node_modules/react/index.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var selection_1 = __webpack_require__(/*! @theia/core/lib/common/selection */ "../../../../node_modules/@theia/core/lib/common/selection.js");
+var cancellation_1 = __webpack_require__(/*! @theia/core/lib/common/cancellation */ "../../../../node_modules/@theia/core/lib/common/cancellation.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var file_upload_service_1 = __webpack_require__(/*! ../file-upload-service */ "../../../../node_modules/@theia/filesystem/lib/browser/file-upload-service.js");
+var file_tree_1 = __webpack_require__(/*! ./file-tree */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree.js");
+var file_tree_model_1 = __webpack_require__(/*! ./file-tree-model */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-model.js");
+var icon_theme_service_1 = __webpack_require__(/*! @theia/core/lib/browser/icon-theme-service */ "../../../../node_modules/@theia/core/lib/browser/icon-theme-service.js");
 exports.FILE_TREE_CLASS = 'theia-FileTree';
 exports.FILE_STAT_NODE_CLASS = 'theia-FileStatNode';
 exports.DIR_NODE_CLASS = 'theia-DirNode';
@@ -2029,10 +2029,10 @@ exports.FileTreeWidget = FileTreeWidget;
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/file-tree/index.js":
-/*!************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/file-tree/index.js ***!
-  \************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/index.js":
+/*!**********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/file-tree/index.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2057,18 +2057,18 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(/*! ./file-tree */ "../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree.js"));
-__export(__webpack_require__(/*! ./file-tree-model */ "../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-model.js"));
-__export(__webpack_require__(/*! ./file-tree-widget */ "../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-widget.js"));
-__export(__webpack_require__(/*! ./file-tree-container */ "../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-container.js"));
+__export(__webpack_require__(/*! ./file-tree */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree.js"));
+__export(__webpack_require__(/*! ./file-tree-model */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-model.js"));
+__export(__webpack_require__(/*! ./file-tree-widget */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-widget.js"));
+__export(__webpack_require__(/*! ./file-tree-container */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-container.js"));
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/location/index.js":
-/*!***********************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/location/index.js ***!
-  \***********************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/location/index.js":
+/*!*********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/location/index.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2093,15 +2093,15 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(/*! ./location-renderer */ "../node_modules/@theia/filesystem/lib/browser/location/location-renderer.js"));
+__export(__webpack_require__(/*! ./location-renderer */ "../../../../node_modules/@theia/filesystem/lib/browser/location/location-renderer.js"));
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/location/location-renderer.js":
-/*!***********************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/location/location-renderer.js ***!
-  \***********************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/location/location-renderer.js":
+/*!*********************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/location/location-renderer.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2136,9 +2136,9 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var react_renderer_1 = __webpack_require__(/*! @theia/core/lib/browser/widgets/react-renderer */ "../node_modules/@theia/core/lib/browser/widgets/react-renderer.js");
-var React = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var react_renderer_1 = __webpack_require__(/*! @theia/core/lib/browser/widgets/react-renderer */ "../../../../node_modules/@theia/core/lib/browser/widgets/react-renderer.js");
+var React = __webpack_require__(/*! react */ "../../../../node_modules/react/index.js");
 var LocationListRenderer = /** @class */ (function (_super) {
     __extends(LocationListRenderer, _super);
     function LocationListRenderer(service, host) {

@@ -128,7 +128,7 @@ def unzip_lab(request, labName):
     if lab:
         with zipfile.ZipFile(lab.lab_Files.url[1:], 'r') as zip_ref:
             print(lab.lab_Files.url[1:])
-            zip_ref.extractall('../media/labs/')
+            zip_ref.extractall('../django_project/media/labs/')
     return redirect("manage")
 
 def delete_lab(request, labName):

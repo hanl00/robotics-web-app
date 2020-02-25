@@ -1,414 +1,451 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[15],{
 
-/***/ "../node_modules/ts-md5/dist/md5.js":
-/*!******************************************!*\
-  !*** ../node_modules/ts-md5/dist/md5.js ***!
-  \******************************************/
+/***/ "../../../../node_modules/@theia/userstorage/lib/browser/user-storage-frontend-module.js":
+/*!************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/userstorage/lib/browser/user-storage-frontend-module.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-/*
-
-TypeScript Md5
-==============
-
-Based on work by
-* Joseph Myers: http://www.myersdaily.org/joseph/javascript/md5-text.html
-* André Cruz: https://github.com/satazor/SparkMD5
-* Raymond Hill: https://github.com/gorhill/yamd5.js
-
-Effectively a TypeScrypt re-write of Raymond Hill JS Library
-
-The MIT License (MIT)
-
-Copyright (C) 2014 Raymond Hill
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-
-
-            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-                    Version 2, December 2004
-
- Copyright (C) 2015 André Cruz <amdfcruz@gmail.com>
-
- Everyone is permitted to copy and distribute verbatim or modified
- copies of this license document, and changing it is allowed as long
- as the name is changed.
-
-            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-
-  0. You just DO WHAT THE FUCK YOU WANT TO.
-
-
-*/
+/********************************************************************************
+ * Copyright (C) 2017 Ericsson and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
 Object.defineProperty(exports, "__esModule", { value: true });
-var Md5 = /** @class */ (function () {
-    function Md5() {
-        this._state = new Int32Array(4);
-        this._buffer = new ArrayBuffer(68);
-        this._buffer8 = new Uint8Array(this._buffer, 0, 68);
-        this._buffer32 = new Uint32Array(this._buffer, 0, 17);
-        this.start();
-    }
-    // One time hashing functions
-    Md5.hashStr = function (str, raw) {
-        if (raw === void 0) { raw = false; }
-        return this.onePassHasher
-            .start()
-            .appendStr(str)
-            .end(raw);
-    };
-    Md5.hashAsciiStr = function (str, raw) {
-        if (raw === void 0) { raw = false; }
-        return this.onePassHasher
-            .start()
-            .appendAsciiStr(str)
-            .end(raw);
-    };
-    Md5._hex = function (x) {
-        var hc = Md5.hexChars;
-        var ho = Md5.hexOut;
-        var n;
-        var offset;
-        var j;
-        var i;
-        for (i = 0; i < 4; i += 1) {
-            offset = i * 8;
-            n = x[i];
-            for (j = 0; j < 8; j += 2) {
-                ho[offset + 1 + j] = hc.charAt(n & 0x0F);
-                n >>>= 4;
-                ho[offset + 0 + j] = hc.charAt(n & 0x0F);
-                n >>>= 4;
-            }
-        }
-        return ho.join('');
-    };
-    Md5._md5cycle = function (x, k) {
-        var a = x[0];
-        var b = x[1];
-        var c = x[2];
-        var d = x[3];
-        // ff()
-        a += (b & c | ~b & d) + k[0] - 680876936 | 0;
-        a = (a << 7 | a >>> 25) + b | 0;
-        d += (a & b | ~a & c) + k[1] - 389564586 | 0;
-        d = (d << 12 | d >>> 20) + a | 0;
-        c += (d & a | ~d & b) + k[2] + 606105819 | 0;
-        c = (c << 17 | c >>> 15) + d | 0;
-        b += (c & d | ~c & a) + k[3] - 1044525330 | 0;
-        b = (b << 22 | b >>> 10) + c | 0;
-        a += (b & c | ~b & d) + k[4] - 176418897 | 0;
-        a = (a << 7 | a >>> 25) + b | 0;
-        d += (a & b | ~a & c) + k[5] + 1200080426 | 0;
-        d = (d << 12 | d >>> 20) + a | 0;
-        c += (d & a | ~d & b) + k[6] - 1473231341 | 0;
-        c = (c << 17 | c >>> 15) + d | 0;
-        b += (c & d | ~c & a) + k[7] - 45705983 | 0;
-        b = (b << 22 | b >>> 10) + c | 0;
-        a += (b & c | ~b & d) + k[8] + 1770035416 | 0;
-        a = (a << 7 | a >>> 25) + b | 0;
-        d += (a & b | ~a & c) + k[9] - 1958414417 | 0;
-        d = (d << 12 | d >>> 20) + a | 0;
-        c += (d & a | ~d & b) + k[10] - 42063 | 0;
-        c = (c << 17 | c >>> 15) + d | 0;
-        b += (c & d | ~c & a) + k[11] - 1990404162 | 0;
-        b = (b << 22 | b >>> 10) + c | 0;
-        a += (b & c | ~b & d) + k[12] + 1804603682 | 0;
-        a = (a << 7 | a >>> 25) + b | 0;
-        d += (a & b | ~a & c) + k[13] - 40341101 | 0;
-        d = (d << 12 | d >>> 20) + a | 0;
-        c += (d & a | ~d & b) + k[14] - 1502002290 | 0;
-        c = (c << 17 | c >>> 15) + d | 0;
-        b += (c & d | ~c & a) + k[15] + 1236535329 | 0;
-        b = (b << 22 | b >>> 10) + c | 0;
-        // gg()
-        a += (b & d | c & ~d) + k[1] - 165796510 | 0;
-        a = (a << 5 | a >>> 27) + b | 0;
-        d += (a & c | b & ~c) + k[6] - 1069501632 | 0;
-        d = (d << 9 | d >>> 23) + a | 0;
-        c += (d & b | a & ~b) + k[11] + 643717713 | 0;
-        c = (c << 14 | c >>> 18) + d | 0;
-        b += (c & a | d & ~a) + k[0] - 373897302 | 0;
-        b = (b << 20 | b >>> 12) + c | 0;
-        a += (b & d | c & ~d) + k[5] - 701558691 | 0;
-        a = (a << 5 | a >>> 27) + b | 0;
-        d += (a & c | b & ~c) + k[10] + 38016083 | 0;
-        d = (d << 9 | d >>> 23) + a | 0;
-        c += (d & b | a & ~b) + k[15] - 660478335 | 0;
-        c = (c << 14 | c >>> 18) + d | 0;
-        b += (c & a | d & ~a) + k[4] - 405537848 | 0;
-        b = (b << 20 | b >>> 12) + c | 0;
-        a += (b & d | c & ~d) + k[9] + 568446438 | 0;
-        a = (a << 5 | a >>> 27) + b | 0;
-        d += (a & c | b & ~c) + k[14] - 1019803690 | 0;
-        d = (d << 9 | d >>> 23) + a | 0;
-        c += (d & b | a & ~b) + k[3] - 187363961 | 0;
-        c = (c << 14 | c >>> 18) + d | 0;
-        b += (c & a | d & ~a) + k[8] + 1163531501 | 0;
-        b = (b << 20 | b >>> 12) + c | 0;
-        a += (b & d | c & ~d) + k[13] - 1444681467 | 0;
-        a = (a << 5 | a >>> 27) + b | 0;
-        d += (a & c | b & ~c) + k[2] - 51403784 | 0;
-        d = (d << 9 | d >>> 23) + a | 0;
-        c += (d & b | a & ~b) + k[7] + 1735328473 | 0;
-        c = (c << 14 | c >>> 18) + d | 0;
-        b += (c & a | d & ~a) + k[12] - 1926607734 | 0;
-        b = (b << 20 | b >>> 12) + c | 0;
-        // hh()
-        a += (b ^ c ^ d) + k[5] - 378558 | 0;
-        a = (a << 4 | a >>> 28) + b | 0;
-        d += (a ^ b ^ c) + k[8] - 2022574463 | 0;
-        d = (d << 11 | d >>> 21) + a | 0;
-        c += (d ^ a ^ b) + k[11] + 1839030562 | 0;
-        c = (c << 16 | c >>> 16) + d | 0;
-        b += (c ^ d ^ a) + k[14] - 35309556 | 0;
-        b = (b << 23 | b >>> 9) + c | 0;
-        a += (b ^ c ^ d) + k[1] - 1530992060 | 0;
-        a = (a << 4 | a >>> 28) + b | 0;
-        d += (a ^ b ^ c) + k[4] + 1272893353 | 0;
-        d = (d << 11 | d >>> 21) + a | 0;
-        c += (d ^ a ^ b) + k[7] - 155497632 | 0;
-        c = (c << 16 | c >>> 16) + d | 0;
-        b += (c ^ d ^ a) + k[10] - 1094730640 | 0;
-        b = (b << 23 | b >>> 9) + c | 0;
-        a += (b ^ c ^ d) + k[13] + 681279174 | 0;
-        a = (a << 4 | a >>> 28) + b | 0;
-        d += (a ^ b ^ c) + k[0] - 358537222 | 0;
-        d = (d << 11 | d >>> 21) + a | 0;
-        c += (d ^ a ^ b) + k[3] - 722521979 | 0;
-        c = (c << 16 | c >>> 16) + d | 0;
-        b += (c ^ d ^ a) + k[6] + 76029189 | 0;
-        b = (b << 23 | b >>> 9) + c | 0;
-        a += (b ^ c ^ d) + k[9] - 640364487 | 0;
-        a = (a << 4 | a >>> 28) + b | 0;
-        d += (a ^ b ^ c) + k[12] - 421815835 | 0;
-        d = (d << 11 | d >>> 21) + a | 0;
-        c += (d ^ a ^ b) + k[15] + 530742520 | 0;
-        c = (c << 16 | c >>> 16) + d | 0;
-        b += (c ^ d ^ a) + k[2] - 995338651 | 0;
-        b = (b << 23 | b >>> 9) + c | 0;
-        // ii()
-        a += (c ^ (b | ~d)) + k[0] - 198630844 | 0;
-        a = (a << 6 | a >>> 26) + b | 0;
-        d += (b ^ (a | ~c)) + k[7] + 1126891415 | 0;
-        d = (d << 10 | d >>> 22) + a | 0;
-        c += (a ^ (d | ~b)) + k[14] - 1416354905 | 0;
-        c = (c << 15 | c >>> 17) + d | 0;
-        b += (d ^ (c | ~a)) + k[5] - 57434055 | 0;
-        b = (b << 21 | b >>> 11) + c | 0;
-        a += (c ^ (b | ~d)) + k[12] + 1700485571 | 0;
-        a = (a << 6 | a >>> 26) + b | 0;
-        d += (b ^ (a | ~c)) + k[3] - 1894986606 | 0;
-        d = (d << 10 | d >>> 22) + a | 0;
-        c += (a ^ (d | ~b)) + k[10] - 1051523 | 0;
-        c = (c << 15 | c >>> 17) + d | 0;
-        b += (d ^ (c | ~a)) + k[1] - 2054922799 | 0;
-        b = (b << 21 | b >>> 11) + c | 0;
-        a += (c ^ (b | ~d)) + k[8] + 1873313359 | 0;
-        a = (a << 6 | a >>> 26) + b | 0;
-        d += (b ^ (a | ~c)) + k[15] - 30611744 | 0;
-        d = (d << 10 | d >>> 22) + a | 0;
-        c += (a ^ (d | ~b)) + k[6] - 1560198380 | 0;
-        c = (c << 15 | c >>> 17) + d | 0;
-        b += (d ^ (c | ~a)) + k[13] + 1309151649 | 0;
-        b = (b << 21 | b >>> 11) + c | 0;
-        a += (c ^ (b | ~d)) + k[4] - 145523070 | 0;
-        a = (a << 6 | a >>> 26) + b | 0;
-        d += (b ^ (a | ~c)) + k[11] - 1120210379 | 0;
-        d = (d << 10 | d >>> 22) + a | 0;
-        c += (a ^ (d | ~b)) + k[2] + 718787259 | 0;
-        c = (c << 15 | c >>> 17) + d | 0;
-        b += (d ^ (c | ~a)) + k[9] - 343485551 | 0;
-        b = (b << 21 | b >>> 11) + c | 0;
-        x[0] = a + x[0] | 0;
-        x[1] = b + x[1] | 0;
-        x[2] = c + x[2] | 0;
-        x[3] = d + x[3] | 0;
-    };
-    Md5.prototype.start = function () {
-        this._dataLength = 0;
-        this._bufferLength = 0;
-        this._state.set(Md5.stateIdentity);
-        return this;
-    };
-    // Char to code point to to array conversion:
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt
-    // #Example.3A_Fixing_charCodeAt_to_handle_non-Basic-Multilingual-Plane_characters_if_their_presence_earlier_in_the_string_is_unknown
-    Md5.prototype.appendStr = function (str) {
-        var buf8 = this._buffer8;
-        var buf32 = this._buffer32;
-        var bufLen = this._bufferLength;
-        var code;
-        var i;
-        for (i = 0; i < str.length; i += 1) {
-            code = str.charCodeAt(i);
-            if (code < 128) {
-                buf8[bufLen++] = code;
-            }
-            else if (code < 0x800) {
-                buf8[bufLen++] = (code >>> 6) + 0xC0;
-                buf8[bufLen++] = code & 0x3F | 0x80;
-            }
-            else if (code < 0xD800 || code > 0xDBFF) {
-                buf8[bufLen++] = (code >>> 12) + 0xE0;
-                buf8[bufLen++] = (code >>> 6 & 0x3F) | 0x80;
-                buf8[bufLen++] = (code & 0x3F) | 0x80;
-            }
-            else {
-                code = ((code - 0xD800) * 0x400) + (str.charCodeAt(++i) - 0xDC00) + 0x10000;
-                if (code > 0x10FFFF) {
-                    throw new Error('Unicode standard supports code points up to U+10FFFF');
-                }
-                buf8[bufLen++] = (code >>> 18) + 0xF0;
-                buf8[bufLen++] = (code >>> 12 & 0x3F) | 0x80;
-                buf8[bufLen++] = (code >>> 6 & 0x3F) | 0x80;
-                buf8[bufLen++] = (code & 0x3F) | 0x80;
-            }
-            if (bufLen >= 64) {
-                this._dataLength += 64;
-                Md5._md5cycle(this._state, buf32);
-                bufLen -= 64;
-                buf32[0] = buf32[16];
-            }
-        }
-        this._bufferLength = bufLen;
-        return this;
-    };
-    Md5.prototype.appendAsciiStr = function (str) {
-        var buf8 = this._buffer8;
-        var buf32 = this._buffer32;
-        var bufLen = this._bufferLength;
-        var i;
-        var j = 0;
-        for (;;) {
-            i = Math.min(str.length - j, 64 - bufLen);
-            while (i--) {
-                buf8[bufLen++] = str.charCodeAt(j++);
-            }
-            if (bufLen < 64) {
-                break;
-            }
-            this._dataLength += 64;
-            Md5._md5cycle(this._state, buf32);
-            bufLen = 0;
-        }
-        this._bufferLength = bufLen;
-        return this;
-    };
-    Md5.prototype.appendByteArray = function (input) {
-        var buf8 = this._buffer8;
-        var buf32 = this._buffer32;
-        var bufLen = this._bufferLength;
-        var i;
-        var j = 0;
-        for (;;) {
-            i = Math.min(input.length - j, 64 - bufLen);
-            while (i--) {
-                buf8[bufLen++] = input[j++];
-            }
-            if (bufLen < 64) {
-                break;
-            }
-            this._dataLength += 64;
-            Md5._md5cycle(this._state, buf32);
-            bufLen = 0;
-        }
-        this._bufferLength = bufLen;
-        return this;
-    };
-    Md5.prototype.getState = function () {
-        var self = this;
-        var s = self._state;
-        return {
-            buffer: String.fromCharCode.apply(null, self._buffer8),
-            buflen: self._bufferLength,
-            length: self._dataLength,
-            state: [s[0], s[1], s[2], s[3]]
-        };
-    };
-    Md5.prototype.setState = function (state) {
-        var buf = state.buffer;
-        var x = state.state;
-        var s = this._state;
-        var i;
-        this._dataLength = state.length;
-        this._bufferLength = state.buflen;
-        s[0] = x[0];
-        s[1] = x[1];
-        s[2] = x[2];
-        s[3] = x[3];
-        for (i = 0; i < buf.length; i += 1) {
-            this._buffer8[i] = buf.charCodeAt(i);
-        }
-    };
-    Md5.prototype.end = function (raw) {
-        if (raw === void 0) { raw = false; }
-        var bufLen = this._bufferLength;
-        var buf8 = this._buffer8;
-        var buf32 = this._buffer32;
-        var i = (bufLen >> 2) + 1;
-        var dataBitsLen;
-        this._dataLength += bufLen;
-        buf8[bufLen] = 0x80;
-        buf8[bufLen + 1] = buf8[bufLen + 2] = buf8[bufLen + 3] = 0;
-        buf32.set(Md5.buffer32Identity.subarray(i), i);
-        if (bufLen > 55) {
-            Md5._md5cycle(this._state, buf32);
-            buf32.set(Md5.buffer32Identity);
-        }
-        // Do the final computation based on the tail and length
-        // Beware that the final length may not fit in 32 bits so we take care of that
-        dataBitsLen = this._dataLength * 8;
-        if (dataBitsLen <= 0xFFFFFFFF) {
-            buf32[14] = dataBitsLen;
-        }
-        else {
-            var matches = dataBitsLen.toString(16).match(/(.*?)(.{0,8})$/);
-            if (matches === null) {
-                return;
-            }
-            var lo = parseInt(matches[2], 16);
-            var hi = parseInt(matches[1], 16) || 0;
-            buf32[14] = lo;
-            buf32[15] = hi;
-        }
-        Md5._md5cycle(this._state, buf32);
-        return raw ? this._state : Md5._hex(this._state);
-    };
-    // Private Static Variables
-    Md5.stateIdentity = new Int32Array([1732584193, -271733879, -1732584194, 271733878]);
-    Md5.buffer32Identity = new Int32Array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-    Md5.hexChars = '0123456789abcdef';
-    Md5.hexOut = [];
-    // Permanent instance is to use for one-call hashing
-    Md5.onePassHasher = new Md5();
-    return Md5;
-}());
-exports.Md5 = Md5;
-if (Md5.hashStr('hello') !== '5d41402abc4b2a76b9719d911017c592') {
-    console.error('Md5 self test failed.');
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var user_storage_resource_1 = __webpack_require__(/*! ./user-storage-resource */ "../../../../node_modules/@theia/userstorage/lib/browser/user-storage-resource.js");
+var user_storage_service_filesystem_1 = __webpack_require__(/*! ./user-storage-service-filesystem */ "../../../../node_modules/@theia/userstorage/lib/browser/user-storage-service-filesystem.js");
+var user_storage_service_1 = __webpack_require__(/*! ./user-storage-service */ "../../../../node_modules/@theia/userstorage/lib/browser/user-storage-service.js");
+function bindUserStorage(bind) {
+    bind(common_1.ResourceResolver).to(user_storage_resource_1.UserStorageResolver).inSingletonScope();
+    bind(user_storage_service_1.UserStorageService).to(user_storage_service_filesystem_1.UserStorageServiceFilesystemImpl).inSingletonScope();
 }
+exports.bindUserStorage = bindUserStorage;
+exports.default = new inversify_1.ContainerModule(function (bind) {
+    bindUserStorage(bind);
+});
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/userstorage/lib/browser/user-storage-resource.js":
+/*!*****************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/userstorage/lib/browser/user-storage-resource.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 Ericsson and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var user_storage_service_1 = __webpack_require__(/*! ./user-storage-service */ "../../../../node_modules/@theia/userstorage/lib/browser/user-storage-service.js");
+var user_storage_uri_1 = __webpack_require__(/*! ./user-storage-uri */ "../../../../node_modules/@theia/userstorage/lib/browser/user-storage-uri.js");
+var UserStorageResource = /** @class */ (function () {
+    function UserStorageResource(uri, service) {
+        var _this = this;
+        this.uri = uri;
+        this.service = service;
+        this.onDidChangeContentsEmitter = new common_1.Emitter();
+        this.toDispose = new common_1.DisposableCollection();
+        this.toDispose.push(this.service.onUserStorageChanged(function (e) {
+            var e_1, _a;
+            try {
+                for (var _b = __values(e.uris), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var changedUri = _c.value;
+                    if (changedUri.toString() === _this.uri.toString()) {
+                        _this.onDidChangeContentsEmitter.fire(undefined);
+                    }
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+        }));
+        this.toDispose.push(this.onDidChangeContentsEmitter);
+    }
+    UserStorageResource.prototype.dispose = function () {
+        this.toDispose.dispose();
+    };
+    UserStorageResource.prototype.readContents = function (options) {
+        return this.service.readContents(this.uri);
+    };
+    UserStorageResource.prototype.saveContents = function (content) {
+        return this.service.saveContents(this.uri, content);
+    };
+    Object.defineProperty(UserStorageResource.prototype, "onDidChangeContents", {
+        get: function () {
+            return this.onDidChangeContentsEmitter.event;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return UserStorageResource;
+}());
+exports.UserStorageResource = UserStorageResource;
+var UserStorageResolver = /** @class */ (function () {
+    function UserStorageResolver(service) {
+        this.service = service;
+    }
+    UserStorageResolver.prototype.resolve = function (uri) {
+        if (uri.scheme !== user_storage_uri_1.UserStorageUri.SCHEME) {
+            throw new Error('The given uri is not a user storage uri: ' + uri);
+        }
+        return new UserStorageResource(uri, this.service);
+    };
+    UserStorageResolver = __decorate([
+        inversify_1.injectable(),
+        __param(0, inversify_1.inject(user_storage_service_1.UserStorageService)),
+        __metadata("design:paramtypes", [Object])
+    ], UserStorageResolver);
+    return UserStorageResolver;
+}());
+exports.UserStorageResolver = UserStorageResolver;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/userstorage/lib/browser/user-storage-service-filesystem.js":
+/*!***************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/userstorage/lib/browser/user-storage-service-filesystem.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 Ericsson and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var filesystem_watcher_1 = __webpack_require__(/*! @theia/filesystem/lib/browser/filesystem-watcher */ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-watcher.js");
+var common_2 = __webpack_require__(/*! @theia/filesystem/lib/common */ "../../../../node_modules/@theia/filesystem/lib/common/index.js");
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var user_storage_uri_1 = __webpack_require__(/*! ./user-storage-uri */ "../../../../node_modules/@theia/userstorage/lib/browser/user-storage-uri.js");
+exports.THEIA_USER_STORAGE_FOLDER = '.theia';
+var UserStorageServiceFilesystemImpl = /** @class */ (function () {
+    function UserStorageServiceFilesystemImpl(fileSystem, watcher, logger) {
+        var _this = this;
+        this.fileSystem = fileSystem;
+        this.watcher = watcher;
+        this.logger = logger;
+        this.toDispose = new common_1.DisposableCollection();
+        this.onUserStorageChangedEmitter = new common_1.Emitter();
+        this.userStorageFolder = this.fileSystem.getCurrentUserHome().then(function (home) {
+            if (home) {
+                var userStorageFolderUri = new uri_1.default(home.uri).resolve(exports.THEIA_USER_STORAGE_FOLDER);
+                watcher.watchFileChanges(userStorageFolderUri).then(function (disposable) {
+                    return _this.toDispose.push(disposable);
+                });
+                _this.toDispose.push(_this.watcher.onFilesChanged(function (changes) { return _this.onDidFilesChanged(changes); }));
+                return new uri_1.default(home.uri).resolve(exports.THEIA_USER_STORAGE_FOLDER);
+            }
+        });
+        this.toDispose.push(this.onUserStorageChangedEmitter);
+    }
+    UserStorageServiceFilesystemImpl_1 = UserStorageServiceFilesystemImpl;
+    UserStorageServiceFilesystemImpl.prototype.dispose = function () {
+        this.toDispose.dispose();
+    };
+    UserStorageServiceFilesystemImpl.prototype.onDidFilesChanged = function (event) {
+        var _this = this;
+        var uris = [];
+        this.userStorageFolder.then(function (folder) {
+            var e_1, _a;
+            if (folder) {
+                try {
+                    for (var event_1 = __values(event), event_1_1 = event_1.next(); !event_1_1.done; event_1_1 = event_1.next()) {
+                        var change = event_1_1.value;
+                        if (folder.isEqualOrParent(change.uri)) {
+                            var userStorageUri = UserStorageServiceFilesystemImpl_1.toUserStorageUri(folder, change.uri);
+                            uris.push(userStorageUri);
+                        }
+                    }
+                }
+                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                finally {
+                    try {
+                        if (event_1_1 && !event_1_1.done && (_a = event_1.return)) _a.call(event_1);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                }
+                if (uris.length > 0) {
+                    _this.onUserStorageChangedEmitter.fire({ uris: uris });
+                }
+            }
+        });
+    };
+    UserStorageServiceFilesystemImpl.prototype.readContents = function (uri) {
+        return __awaiter(this, void 0, void 0, function () {
+            var folderUri, filesystemUri, exists;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.userStorageFolder];
+                    case 1:
+                        folderUri = _a.sent();
+                        if (!folderUri) return [3 /*break*/, 3];
+                        filesystemUri = UserStorageServiceFilesystemImpl_1.toFilesystemURI(folderUri, uri);
+                        return [4 /*yield*/, this.fileSystem.exists(filesystemUri.toString())];
+                    case 2:
+                        exists = _a.sent();
+                        if (exists) {
+                            return [2 /*return*/, this.fileSystem.resolveContent(filesystemUri.toString()).then(function (_a) {
+                                    var stat = _a.stat, content = _a.content;
+                                    return content;
+                                })];
+                        }
+                        _a.label = 3;
+                    case 3: return [2 /*return*/, ''];
+                }
+            });
+        });
+    };
+    UserStorageServiceFilesystemImpl.prototype.saveContents = function (uri, content) {
+        return __awaiter(this, void 0, void 0, function () {
+            var folderUri, filesystemUri, fileStat;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.userStorageFolder];
+                    case 1:
+                        folderUri = _a.sent();
+                        if (!folderUri) {
+                            return [2 /*return*/];
+                        }
+                        filesystemUri = UserStorageServiceFilesystemImpl_1.toFilesystemURI(folderUri, uri);
+                        return [4 /*yield*/, this.fileSystem.getFileStat(filesystemUri.toString())];
+                    case 2:
+                        fileStat = _a.sent();
+                        if (fileStat) {
+                            this.fileSystem.setContent(fileStat, content).then(function () { return Promise.resolve(); });
+                        }
+                        else {
+                            this.fileSystem.createFile(filesystemUri.toString(), { content: content });
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Object.defineProperty(UserStorageServiceFilesystemImpl.prototype, "onUserStorageChanged", {
+        get: function () {
+            return this.onUserStorageChangedEmitter.event;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Creates a new user storage URI from the filesystem URI.
+     * @param userStorageFolderUri User storage folder URI
+     * @param fsPath The filesystem URI
+     */
+    UserStorageServiceFilesystemImpl.toUserStorageUri = function (userStorageFolderUri, rawUri) {
+        var userStorageRelativePath = this.getRelativeUserStoragePath(userStorageFolderUri, rawUri);
+        return new uri_1.default('').withScheme(user_storage_uri_1.UserStorageUri.SCHEME).withPath(userStorageRelativePath).withFragment(rawUri.fragment).withQuery(rawUri.query);
+    };
+    /**
+     * Returns the path relative to the user storage filesystem uri i.e if the user storage root is
+     * 'file://home/user/.theia' and the fileUri is 'file://home/user.theia/keymaps.json' it will return 'keymaps.json'
+     * @param userStorageFolderUri User storage folder URI
+     * @param fileUri User storage
+     */
+    UserStorageServiceFilesystemImpl.getRelativeUserStoragePath = function (userStorageFolderUri, fileUri) {
+        /* + 1 so that it removes the beginning slash  i.e return keymaps.json and not /keymaps.json */
+        return fileUri.toString().slice(userStorageFolderUri.toString().length + 1);
+    };
+    /**
+     * Returns the associated filesystem URI relative to the user storage folder passed as argument.
+     * @param userStorageFolderUri User storage folder URI
+     * @param userStorageUri User storage URI to be converted in filesystem URI
+     */
+    UserStorageServiceFilesystemImpl.toFilesystemURI = function (userStorageFolderUri, userStorageUri) {
+        return userStorageFolderUri.withPath(userStorageFolderUri.path.join(userStorageUri.path.toString()));
+    };
+    var UserStorageServiceFilesystemImpl_1;
+    UserStorageServiceFilesystemImpl = UserStorageServiceFilesystemImpl_1 = __decorate([
+        inversify_1.injectable(),
+        __param(0, inversify_1.inject(common_2.FileSystem)),
+        __param(1, inversify_1.inject(filesystem_watcher_1.FileSystemWatcher)),
+        __param(2, inversify_1.inject(common_1.ILogger)),
+        __metadata("design:paramtypes", [Object, filesystem_watcher_1.FileSystemWatcher, Object])
+    ], UserStorageServiceFilesystemImpl);
+    return UserStorageServiceFilesystemImpl;
+}());
+exports.UserStorageServiceFilesystemImpl = UserStorageServiceFilesystemImpl;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/userstorage/lib/browser/user-storage-service.js":
+/*!****************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/userstorage/lib/browser/user-storage-service.js ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserStorageService = Symbol('UserStorageService');
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/userstorage/lib/browser/user-storage-uri.js":
+/*!************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/userstorage/lib/browser/user-storage-uri.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 Ericsson and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+Object.defineProperty(exports, "__esModule", { value: true });
+var UserStorageUri;
+(function (UserStorageUri) {
+    UserStorageUri.SCHEME = 'user_storage';
+})(UserStorageUri = exports.UserStorageUri || (exports.UserStorageUri = {}));
 
 
 /***/ })

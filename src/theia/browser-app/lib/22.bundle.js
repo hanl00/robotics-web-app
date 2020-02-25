@@ -1,16 +1,50 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[22],{
 
-/***/ "../node_modules/@theia/core/lib/common/severity.js":
-/*!**********************************************************!*\
-  !*** ../node_modules/@theia/core/lib/common/severity.js ***!
-  \**********************************************************/
+/***/ "../../../../node_modules/@theia/markers/lib/browser/index.js":
+/*!*********************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/markers/lib/browser/index.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(/*! ./marker-manager */ "../../../../node_modules/@theia/markers/lib/browser/marker-manager.js"));
+__export(__webpack_require__(/*! ./problem/problem-manager */ "../../../../node_modules/@theia/markers/lib/browser/problem/problem-manager.js"));
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-browser-module.js":
+/*!************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-browser-module.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -25,97 +59,2480 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 Object.defineProperty(exports, "__esModule", { value: true });
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-var vscode_languageserver_types_1 = __webpack_require__(/*! vscode-languageserver-types */ "../node_modules/vscode-languageserver-types/lib/esm/main.js");
-var Severity;
-(function (Severity) {
-    Severity[Severity["Ignore"] = 0] = "Ignore";
-    Severity[Severity["Error"] = 1] = "Error";
-    Severity[Severity["Warning"] = 2] = "Warning";
-    Severity[Severity["Info"] = 3] = "Info";
-    Severity[Severity["Log"] = 4] = "Log";
-})(Severity = exports.Severity || (exports.Severity = {}));
-(function (Severity) {
-    var error = 'Errors';
-    var warning = 'Warnings';
-    var info = 'Info';
-    var log = 'Log';
-    var ignore = 'All';
-    function fromValue(value) {
-        value = value && value.toLowerCase();
-        if (!value) {
-            return Severity.Ignore;
-        }
-        if (['error', 'errors'].indexOf(value) !== -1) {
-            return Severity.Error;
-        }
-        if (['warn', 'warning', 'warnings'].indexOf(value) !== -1) {
-            return Severity.Warning;
-        }
-        if (value === 'info') {
-            return Severity.Info;
-        }
-        if (value === 'log') {
-            return Severity.Log;
-        }
-        return Severity.Ignore;
-    }
-    Severity.fromValue = fromValue;
-    function toDiagnosticSeverity(value) {
-        switch (value) {
-            case Severity.Ignore:
-                return vscode_languageserver_types_1.DiagnosticSeverity.Hint;
-            case Severity.Info:
-                return vscode_languageserver_types_1.DiagnosticSeverity.Information;
-            case Severity.Log:
-                return vscode_languageserver_types_1.DiagnosticSeverity.Information;
-            case Severity.Warning:
-                return vscode_languageserver_types_1.DiagnosticSeverity.Warning;
-            case Severity.Error:
-                return vscode_languageserver_types_1.DiagnosticSeverity.Error;
-            default:
-                return vscode_languageserver_types_1.DiagnosticSeverity.Error;
-        }
-    }
-    Severity.toDiagnosticSeverity = toDiagnosticSeverity;
-    function toString(severity) {
-        switch (severity) {
-            case Severity.Error:
-                return error;
-            case Severity.Warning:
-                return warning;
-            case Severity.Info:
-                return info;
-            case Severity.Log:
-                return log;
-            default:
-                return ignore;
-        }
-    }
-    Severity.toString = toString;
-    function toArray() {
-        return [ignore, error, warning, info, log];
-    }
-    Severity.toArray = toArray;
-})(Severity = exports.Severity || (exports.Severity = {}));
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+exports.ContainerModule = inversify_1.ContainerModule;
+var monaco_loader_1 = __webpack_require__(/*! ./monaco-loader */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-loader.js");
+exports.default = monaco_loader_1.loadVsRequire(window)
+    .then(function (vsRequire) { return monaco_loader_1.loadMonaco(vsRequire); })
+    .then(function () {
+    return Promise.resolve().then(function () { return __webpack_require__(/*! ./monaco-frontend-module */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-frontend-module.js"); });
+}).then(function (module) {
+    return module.default;
+});
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/task/lib/browser/provided-task-configurations.js":
-/*!*******************************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/provided-task-configurations.js ***!
-  \*******************************************************************************/
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-bulk-edit-service.js":
+/*!***************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-bulk-edit-service.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
+ * Copyright (C) 2018 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var monaco_workspace_1 = __webpack_require__(/*! ./monaco-workspace */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-workspace.js");
+var MonacoBulkEditService = /** @class */ (function () {
+    function MonacoBulkEditService() {
+    }
+    MonacoBulkEditService.prototype.apply = function (edit) {
+        return this.workspace.applyBulkEdit(edit);
+    };
+    __decorate([
+        inversify_1.inject(monaco_workspace_1.MonacoWorkspace),
+        __metadata("design:type", monaco_workspace_1.MonacoWorkspace)
+    ], MonacoBulkEditService.prototype, "workspace", void 0);
+    MonacoBulkEditService = __decorate([
+        inversify_1.injectable()
+    ], MonacoBulkEditService);
+    return MonacoBulkEditService;
+}());
+exports.MonacoBulkEditService = MonacoBulkEditService;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-color-registry.js":
+/*!************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-color-registry.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2019 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var color_registry_1 = __webpack_require__(/*! @theia/core/lib/browser/color-registry */ "../../../../node_modules/@theia/core/lib/browser/color-registry.js");
+var disposable_1 = __webpack_require__(/*! @theia/core/lib/common/disposable */ "../../../../node_modules/@theia/core/lib/common/disposable.js");
+var MonacoColorRegistry = /** @class */ (function (_super) {
+    __extends(MonacoColorRegistry, _super);
+    function MonacoColorRegistry() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.monacoThemeService = monaco.services.StaticServices.standaloneThemeService.get();
+        _this.monacoColorRegistry = monaco.color.getColorRegistry();
+        return _this;
+    }
+    MonacoColorRegistry.prototype.getColors = function () {
+        var _a, _b, id, e_1_1;
+        var e_1, _c;
+        return __generator(this, function (_d) {
+            switch (_d.label) {
+                case 0:
+                    _d.trys.push([0, 5, 6, 7]);
+                    _a = __values(this.monacoColorRegistry.getColors()), _b = _a.next();
+                    _d.label = 1;
+                case 1:
+                    if (!!_b.done) return [3 /*break*/, 4];
+                    id = _b.value.id;
+                    return [4 /*yield*/, id];
+                case 2:
+                    _d.sent();
+                    _d.label = 3;
+                case 3:
+                    _b = _a.next();
+                    return [3 /*break*/, 1];
+                case 4: return [3 /*break*/, 7];
+                case 5:
+                    e_1_1 = _d.sent();
+                    e_1 = { error: e_1_1 };
+                    return [3 /*break*/, 7];
+                case 6:
+                    try {
+                        if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                    return [7 /*endfinally*/];
+                case 7: return [2 /*return*/];
+            }
+        });
+    };
+    MonacoColorRegistry.prototype.getCurrentColor = function (id) {
+        var color = this.monacoThemeService.getTheme().getColor(id);
+        return color && color.toString();
+    };
+    MonacoColorRegistry.prototype.doRegister = function (definition) {
+        var _this = this;
+        var defaults;
+        if (definition.defaults) {
+            defaults = {};
+            defaults.dark = this.toColor(definition.defaults.dark);
+            defaults.light = this.toColor(definition.defaults.light);
+            defaults.hc = this.toColor(definition.defaults.hc);
+        }
+        var identifier = this.monacoColorRegistry.registerColor(definition.id, defaults, definition.description);
+        return disposable_1.Disposable.create(function () { return _this.monacoColorRegistry.deregisterColor(identifier); });
+    };
+    MonacoColorRegistry.prototype.toColor = function (value) {
+        if (!value || typeof value === 'string') {
+            return value;
+        }
+        if ('kind' in value) {
+            return monaco.color[value.kind](value.v, value.f);
+        }
+        else if ('r' in value) {
+            var r = value.r, g = value.g, b = value.b, a = value.a;
+            return new monaco.color.Color(new monaco.color.RGBA(r, g, b, a));
+        }
+        else {
+            var h = value.h, s = value.s, l = value.l, a = value.a;
+            return new monaco.color.Color(new monaco.color.HSLA(h, s, l, a));
+        }
+    };
+    MonacoColorRegistry = __decorate([
+        inversify_1.injectable()
+    ], MonacoColorRegistry);
+    return MonacoColorRegistry;
+}(color_registry_1.ColorRegistry));
+exports.MonacoColorRegistry = MonacoColorRegistry;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-command-registry.js":
+/*!**************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-command-registry.js ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var core_1 = __webpack_require__(/*! @theia/core */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var browser_1 = __webpack_require__(/*! @theia/editor/lib/browser */ "../../../../node_modules/@theia/editor/lib/browser/index.js");
+var monaco_editor_provider_1 = __webpack_require__(/*! ./monaco-editor-provider */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor-provider.js");
+var MonacoCommandRegistry = /** @class */ (function () {
+    function MonacoCommandRegistry() {
+    }
+    MonacoCommandRegistry.prototype.validate = function (command) {
+        return this.commands.commandIds.indexOf(command) !== -1 ? command : undefined;
+    };
+    MonacoCommandRegistry.prototype.registerCommand = function (command, handler) {
+        this.commands.registerCommand(__assign({}, command, { id: command.id }), this.newHandler(handler));
+    };
+    MonacoCommandRegistry.prototype.registerHandler = function (command, handler) {
+        this.commands.registerHandler(command, this.newHandler(handler));
+    };
+    MonacoCommandRegistry.prototype.newHandler = function (monacoHandler) {
+        var _this = this;
+        return {
+            execute: function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
+                return _this.execute.apply(_this, __spread([monacoHandler], args));
+            },
+            isEnabled: function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
+                return _this.isEnabled.apply(_this, __spread([monacoHandler], args));
+            },
+            isVisible: function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
+                return _this.isVisible.apply(_this, __spread([monacoHandler], args));
+            }
+        };
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    MonacoCommandRegistry.prototype.execute = function (monacoHandler) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        var editor = this.monacoEditors.current;
+        if (editor) {
+            editor.focus();
+            return Promise.resolve(monacoHandler.execute.apply(monacoHandler, __spread([editor], args)));
+        }
+        return Promise.resolve();
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    MonacoCommandRegistry.prototype.isEnabled = function (monacoHandler) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        var editor = this.monacoEditors.current;
+        return !!editor && (!monacoHandler.isEnabled || monacoHandler.isEnabled.apply(monacoHandler, __spread([editor], args)));
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    MonacoCommandRegistry.prototype.isVisible = function (monacoHandler) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        return browser_1.TextEditorSelection.is(this.selectionService.selection);
+    };
+    __decorate([
+        inversify_1.inject(monaco_editor_provider_1.MonacoEditorProvider),
+        __metadata("design:type", monaco_editor_provider_1.MonacoEditorProvider)
+    ], MonacoCommandRegistry.prototype, "monacoEditors", void 0);
+    __decorate([
+        inversify_1.inject(core_1.CommandRegistry),
+        __metadata("design:type", core_1.CommandRegistry)
+    ], MonacoCommandRegistry.prototype, "commands", void 0);
+    __decorate([
+        inversify_1.inject(core_1.SelectionService),
+        __metadata("design:type", core_1.SelectionService)
+    ], MonacoCommandRegistry.prototype, "selectionService", void 0);
+    MonacoCommandRegistry = __decorate([
+        inversify_1.injectable()
+    ], MonacoCommandRegistry);
+    return MonacoCommandRegistry;
+}());
+exports.MonacoCommandRegistry = MonacoCommandRegistry;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-command-service.js":
+/*!*************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-command-service.js ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+exports.MonacoCommandServiceFactory = Symbol('MonacoCommandServiceFactory');
+var MonacoCommandService = /** @class */ (function () {
+    function MonacoCommandService(commandRegistry) {
+        this.commandRegistry = commandRegistry;
+        this._onWillExecuteCommand = new common_1.Emitter();
+        this.delegateListeners = new common_1.DisposableCollection();
+    }
+    Object.defineProperty(MonacoCommandService.prototype, "onWillExecuteCommand", {
+        get: function () {
+            return this._onWillExecuteCommand.event;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MonacoCommandService.prototype.setDelegate = function (delegate) {
+        var _this = this;
+        this.delegateListeners.dispose();
+        this.delegate = delegate;
+        if (this.delegate) {
+            this.delegateListeners.push(this.delegate._onWillExecuteCommand.event(function (event) {
+                return _this._onWillExecuteCommand.fire(event);
+            }));
+        }
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    MonacoCommandService.prototype.executeCommand = function (commandId) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        return __awaiter(this, void 0, void 0, function () {
+            var handler;
+            var _a;
+            return __generator(this, function (_b) {
+                handler = (_a = this.commandRegistry).getActiveHandler.apply(_a, __spread([commandId], args));
+                if (handler) {
+                    this._onWillExecuteCommand.fire({ commandId: commandId });
+                    return [2 /*return*/, handler.execute.apply(handler, __spread(args))];
+                }
+                return [2 /*return*/, this.executeMonacoCommand.apply(this, __spread([commandId], args))];
+            });
+        });
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    MonacoCommandService.prototype.executeMonacoCommand = function (commandId) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        return __awaiter(this, void 0, void 0, function () {
+            var _a;
+            return __generator(this, function (_b) {
+                if (this.delegate) {
+                    return [2 /*return*/, (_a = this.delegate).executeCommand.apply(_a, __spread([commandId], args))];
+                }
+                throw new Error("command '" + commandId + "' not found");
+            });
+        });
+    };
+    MonacoCommandService = __decorate([
+        inversify_1.injectable(),
+        __param(0, inversify_1.inject(common_1.CommandRegistry)),
+        __metadata("design:paramtypes", [common_1.CommandRegistry])
+    ], MonacoCommandService);
+    return MonacoCommandService;
+}());
+exports.MonacoCommandService = MonacoCommandService;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-command.js":
+/*!*****************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-command.js ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var lib_1 = __webpack_require__(/*! monaco-languageclient/lib */ "../../../../node_modules/monaco-languageclient/lib/index.js");
+var core_1 = __webpack_require__(/*! @theia/core */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var quick_open_service_1 = __webpack_require__(/*! @theia/core/lib/browser/quick-open/quick-open-service */ "../../../../node_modules/@theia/core/lib/browser/quick-open/quick-open-service.js");
+var quick_open_model_1 = __webpack_require__(/*! @theia/core/lib/browser/quick-open/quick-open-model */ "../../../../node_modules/@theia/core/lib/browser/quick-open/quick-open-model.js");
+var browser_2 = __webpack_require__(/*! @theia/editor/lib/browser */ "../../../../node_modules/@theia/editor/lib/browser/index.js");
+var monaco_command_registry_1 = __webpack_require__(/*! ./monaco-command-registry */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-command-registry.js");
+var MenuRegistry = monaco.actions.MenuRegistry;
+var MonacoCommands;
+(function (MonacoCommands) {
+    var e_1, _a, e_2, _b, e_3, _c;
+    MonacoCommands.UNDO = 'undo';
+    MonacoCommands.REDO = 'redo';
+    MonacoCommands.COMMON_KEYBOARD_ACTIONS = new Set([MonacoCommands.UNDO, MonacoCommands.REDO]);
+    MonacoCommands.COMMON_ACTIONS = {};
+    MonacoCommands.COMMON_ACTIONS[MonacoCommands.UNDO] = browser_1.CommonCommands.UNDO.id;
+    MonacoCommands.COMMON_ACTIONS[MonacoCommands.REDO] = browser_1.CommonCommands.REDO.id;
+    MonacoCommands.COMMON_ACTIONS['actions.find'] = browser_1.CommonCommands.FIND.id;
+    MonacoCommands.COMMON_ACTIONS['editor.action.startFindReplaceAction'] = browser_1.CommonCommands.REPLACE.id;
+    MonacoCommands.SELECTION_SELECT_ALL = 'editor.action.select.all';
+    MonacoCommands.SELECTION_EXPAND_SELECTION = 'editor.action.smartSelect.grow';
+    MonacoCommands.SELECTION_SHRINK_SELECTION = 'editor.action.smartSelect.shrink';
+    MonacoCommands.SELECTION_COPY_LINE_UP = 'editor.action.copyLinesUpAction';
+    MonacoCommands.SELECTION_COPY_LINE_DOWN = 'editor.action.copyLinesDownAction';
+    MonacoCommands.SELECTION_MOVE_LINE_UP = 'editor.action.moveLinesUpAction';
+    MonacoCommands.SELECTION_MOVE_LINE_DOWN = 'editor.action.moveLinesDownAction';
+    MonacoCommands.SELECTION_ADD_CURSOR_ABOVE = 'editor.action.insertCursorAbove';
+    MonacoCommands.SELECTION_ADD_CURSOR_BELOW = 'editor.action.insertCursorBelow';
+    MonacoCommands.SELECTION_ADD_CURSOR_TO_LINE_END = 'editor.action.insertCursorAtEndOfEachLineSelected';
+    MonacoCommands.SELECTION_ADD_NEXT_OCCURRENCE = 'editor.action.addSelectionToNextFindMatch';
+    MonacoCommands.SELECTION_ADD_PREVIOUS_OCCURRENCE = 'editor.action.addSelectionToPreviousFindMatch';
+    MonacoCommands.SELECTION_SELECT_ALL_OCCURRENCES = 'editor.action.selectHighlights';
+    MonacoCommands.GO_TO_DEFINITION = 'editor.action.revealDefinition';
+    MonacoCommands.ACTIONS = new Map();
+    MonacoCommands.ACTIONS.set(MonacoCommands.SELECTION_SELECT_ALL, { id: MonacoCommands.SELECTION_SELECT_ALL, label: 'Select All', delegate: 'editor.action.selectAll' });
+    MonacoCommands.EXCLUDE_ACTIONS = new Set(__spread(Object.keys(MonacoCommands.COMMON_ACTIONS), [
+        'editor.action.quickCommand',
+        'editor.action.clipboardCutAction',
+        'editor.action.clipboardCopyAction',
+        'editor.action.clipboardPasteAction'
+    ]));
+    var iconClasses = new Map();
+    try {
+        for (var _d = __values(MenuRegistry.getMenuItems(7)), _e = _d.next(); !_e.done; _e = _d.next()) {
+            var menuItem = _e.value;
+            if (menuItem.command.iconClass) {
+                iconClasses.set(menuItem.command.id, menuItem.command.iconClass);
+            }
+        }
+    }
+    catch (e_1_1) { e_1 = { error: e_1_1 }; }
+    finally {
+        try {
+            if (_e && !_e.done && (_a = _d.return)) _a.call(_d);
+        }
+        finally { if (e_1) throw e_1.error; }
+    }
+    try {
+        for (var _f = __values(monaco.editorExtensions.EditorExtensionsRegistry.getEditorActions()), _g = _f.next(); !_g.done; _g = _f.next()) {
+            var command = _g.value;
+            var id = command.id;
+            if (!MonacoCommands.EXCLUDE_ACTIONS.has(id)) {
+                var label = command.label;
+                var iconClass = iconClasses.get(id);
+                MonacoCommands.ACTIONS.set(id, { id: id, label: label, iconClass: iconClass });
+            }
+        }
+    }
+    catch (e_2_1) { e_2 = { error: e_2_1 }; }
+    finally {
+        try {
+            if (_g && !_g.done && (_b = _f.return)) _b.call(_f);
+        }
+        finally { if (e_2) throw e_2.error; }
+    }
+    try {
+        for (var _h = __values(monaco.keybindings.KeybindingsRegistry.getDefaultKeybindings()), _j = _h.next(); !_j.done; _j = _h.next()) {
+            var keybinding = _j.value;
+            var id = keybinding.command;
+            if (!MonacoCommands.ACTIONS.has(id) && !MonacoCommands.EXCLUDE_ACTIONS.has(id)) {
+                MonacoCommands.ACTIONS.set(id, { id: id, delegate: id });
+            }
+        }
+    }
+    catch (e_3_1) { e_3 = { error: e_3_1 }; }
+    finally {
+        try {
+            if (_j && !_j.done && (_c = _h.return)) _c.call(_h);
+        }
+        finally { if (e_3) throw e_3.error; }
+    }
+})(MonacoCommands = exports.MonacoCommands || (exports.MonacoCommands = {}));
+var MonacoEditorCommandHandlers = /** @class */ (function () {
+    function MonacoEditorCommandHandlers() {
+    }
+    MonacoEditorCommandHandlers.prototype.registerCommands = function () {
+        this.registerCommonCommandHandlers();
+        this.registerEditorCommandHandlers();
+        this.registerMonacoActionCommands();
+        this.registerInternalLanguageServiceCommands();
+    };
+    MonacoEditorCommandHandlers.prototype.registerInternalLanguageServiceCommands = function () {
+        var e_4, _a;
+        var instantiationService = monaco.services.StaticServices.instantiationService.get();
+        var monacoCommands = monaco.commands.CommandsRegistry.getCommands();
+        var _loop_1 = function (command) {
+            if (command.startsWith('_execute')) {
+                this_1.commandRegistry.registerCommand({
+                    id: command
+                }, {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    execute: function () {
+                        var args = [];
+                        for (var _i = 0; _i < arguments.length; _i++) {
+                            args[_i] = arguments[_i];
+                        }
+                        return instantiationService.invokeFunction.apply(instantiationService, __spread([monacoCommands.get(command).handler], args));
+                    }
+                });
+            }
+        };
+        var this_1 = this;
+        try {
+            for (var _b = __values(monacoCommands.keys()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var command = _c.value;
+                _loop_1(command);
+            }
+        }
+        catch (e_4_1) { e_4 = { error: e_4_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_4) throw e_4.error; }
+        }
+    };
+    MonacoEditorCommandHandlers.prototype.registerCommonCommandHandlers = function () {
+        // eslint-disable-next-line guard-for-in
+        for (var action in MonacoCommands.COMMON_ACTIONS) {
+            var command = MonacoCommands.COMMON_ACTIONS[action];
+            var handler = this.newCommonActionHandler(action);
+            this.monacoCommandRegistry.registerHandler(command, handler);
+        }
+    };
+    MonacoEditorCommandHandlers.prototype.newCommonActionHandler = function (action) {
+        return this.isCommonKeyboardAction(action) ? this.newKeyboardHandler(action) : this.newActionHandler(action);
+    };
+    MonacoEditorCommandHandlers.prototype.isCommonKeyboardAction = function (action) {
+        return MonacoCommands.COMMON_KEYBOARD_ACTIONS.has(action);
+    };
+    MonacoEditorCommandHandlers.prototype.registerEditorCommandHandlers = function () {
+        this.monacoCommandRegistry.registerHandler(browser_2.EditorCommands.SHOW_REFERENCES.id, this.newShowReferenceHandler());
+        this.monacoCommandRegistry.registerHandler(browser_2.EditorCommands.CONFIG_INDENTATION.id, this.newConfigIndentationHandler());
+        this.monacoCommandRegistry.registerHandler(browser_2.EditorCommands.CONFIG_EOL.id, this.newConfigEolHandler());
+        this.monacoCommandRegistry.registerHandler(browser_2.EditorCommands.INDENT_USING_SPACES.id, this.newConfigTabSizeHandler(true));
+        this.monacoCommandRegistry.registerHandler(browser_2.EditorCommands.INDENT_USING_TABS.id, this.newConfigTabSizeHandler(false));
+    };
+    MonacoEditorCommandHandlers.prototype.newShowReferenceHandler = function () {
+        var _this = this;
+        return {
+            execute: function (editor, uri, position, locations) {
+                editor.commandService.executeCommand('editor.action.showReferences', monaco.Uri.parse(uri), _this.p2m.asPosition(position), locations.map(function (l) { return _this.p2m.asLocation(l); }));
+            }
+        };
+    };
+    MonacoEditorCommandHandlers.prototype.newConfigIndentationHandler = function () {
+        var _this = this;
+        return {
+            execute: function (editor) { return _this.configureIndentation(editor); }
+        };
+    };
+    MonacoEditorCommandHandlers.prototype.configureIndentation = function (editor) {
+        var _this = this;
+        var options = [true, false].map(function (useSpaces) {
+            return new quick_open_model_1.QuickOpenItem({
+                label: "Indent Using " + (useSpaces ? 'Spaces' : 'Tabs'),
+                run: function (mode) {
+                    if (mode === quick_open_model_1.QuickOpenMode.OPEN) {
+                        _this.configureTabSize(editor, useSpaces);
+                    }
+                    return false;
+                }
+            });
+        });
+        this.quickOpenService.open({ onType: function (_, acceptor) { return acceptor(options); } }, {
+            placeholder: 'Select Action',
+            fuzzyMatchLabel: true
+        });
+    };
+    MonacoEditorCommandHandlers.prototype.newConfigEolHandler = function () {
+        var _this = this;
+        return {
+            execute: function (editor) { return _this.configureEol(editor); }
+        };
+    };
+    MonacoEditorCommandHandlers.prototype.configureEol = function (editor) {
+        var _this = this;
+        var options = ['LF', 'CRLF'].map(function (lineEnding) {
+            return new quick_open_model_1.QuickOpenItem({
+                label: lineEnding,
+                run: function (mode) {
+                    if (mode === quick_open_model_1.QuickOpenMode.OPEN) {
+                        _this.setEol(editor, lineEnding);
+                        return true;
+                    }
+                    return false;
+                }
+            });
+        });
+        this.quickOpenService.open({ onType: function (_, acceptor) { return acceptor(options); } }, {
+            placeholder: 'Select End of Line Sequence',
+            fuzzyMatchLabel: true
+        });
+    };
+    MonacoEditorCommandHandlers.prototype.setEol = function (editor, lineEnding) {
+        var model = editor.document && editor.document.textEditorModel;
+        if (model) {
+            if (lineEnding === 'CRLF' || lineEnding === '\r\n') {
+                model.pushEOL(monaco.editor.EndOfLineSequence.CRLF);
+            }
+            else {
+                model.pushEOL(monaco.editor.EndOfLineSequence.LF);
+            }
+        }
+    };
+    MonacoEditorCommandHandlers.prototype.newConfigTabSizeHandler = function (useSpaces) {
+        var _this = this;
+        return {
+            execute: function (editor) { return _this.configureTabSize(editor, useSpaces); }
+        };
+    };
+    MonacoEditorCommandHandlers.prototype.configureTabSize = function (editor, useSpaces) {
+        var model = editor.document && editor.document.textEditorModel;
+        if (model) {
+            var tabSize_1 = model.getOptions().tabSize;
+            var sizes = Array.from(Array(8), function (_, x) { return x + 1; });
+            var tabSizeOptions_1 = sizes.map(function (size) {
+                return new quick_open_model_1.QuickOpenItem({
+                    label: size === tabSize_1 ? size + "   Configured Tab Size" : size.toString(),
+                    run: function (mode) {
+                        if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
+                            return false;
+                        }
+                        model.updateOptions({
+                            tabSize: size || tabSize_1,
+                            insertSpaces: useSpaces
+                        });
+                        return true;
+                    }
+                });
+            });
+            this.quickOpenService.open({ onType: function (_, acceptor) { return acceptor(tabSizeOptions_1); } }, {
+                placeholder: 'Select Tab Size for Current File',
+                fuzzyMatchLabel: true,
+                selectIndex: function (lookFor) {
+                    if (!lookFor || lookFor === '') {
+                        return tabSize_1 - 1;
+                    }
+                    return 0;
+                }
+            });
+        }
+    };
+    MonacoEditorCommandHandlers.prototype.registerMonacoActionCommands = function () {
+        var e_5, _a;
+        try {
+            for (var _b = __values(MonacoCommands.ACTIONS.values()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var action = _c.value;
+                var handler = this.newMonacoActionHandler(action);
+                this.monacoCommandRegistry.registerCommand(action, handler);
+            }
+        }
+        catch (e_5_1) { e_5 = { error: e_5_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_5) throw e_5.error; }
+        }
+    };
+    MonacoEditorCommandHandlers.prototype.newMonacoActionHandler = function (action) {
+        var delegate = action.delegate;
+        return delegate ? this.newDelegateHandler(delegate) : this.newActionHandler(action.id);
+    };
+    MonacoEditorCommandHandlers.prototype.newKeyboardHandler = function (action) {
+        return {
+            execute: function (editor) {
+                var args = [];
+                for (var _i = 1; _i < arguments.length; _i++) {
+                    args[_i - 1] = arguments[_i];
+                }
+                return editor.getControl()._modelData.cursor.trigger('keyboard', action, args);
+            }
+        };
+    };
+    MonacoEditorCommandHandlers.prototype.newCommandHandler = function (action) {
+        return {
+            execute: function (editor) {
+                var _a;
+                var args = [];
+                for (var _i = 1; _i < arguments.length; _i++) {
+                    args[_i - 1] = arguments[_i];
+                }
+                return (_a = editor.commandService).executeCommand.apply(_a, __spread([action], args));
+            }
+        };
+    };
+    MonacoEditorCommandHandlers.prototype.newActionHandler = function (action) {
+        return {
+            execute: function (editor) { return editor.runAction(action); },
+            isEnabled: function (editor) { return editor.isActionSupported(action); }
+        };
+    };
+    MonacoEditorCommandHandlers.prototype.newDelegateHandler = function (action) {
+        return {
+            execute: function (editor) {
+                var _a;
+                var args = [];
+                for (var _i = 1; _i < arguments.length; _i++) {
+                    args[_i - 1] = arguments[_i];
+                }
+                return (_a = editor.commandService).executeMonacoCommand.apply(_a, __spread([action], args));
+            }
+        };
+    };
+    __decorate([
+        inversify_1.inject(monaco_command_registry_1.MonacoCommandRegistry),
+        __metadata("design:type", monaco_command_registry_1.MonacoCommandRegistry)
+    ], MonacoEditorCommandHandlers.prototype, "monacoCommandRegistry", void 0);
+    __decorate([
+        inversify_1.inject(core_1.CommandRegistry),
+        __metadata("design:type", core_1.CommandRegistry)
+    ], MonacoEditorCommandHandlers.prototype, "commandRegistry", void 0);
+    __decorate([
+        inversify_1.inject(lib_1.ProtocolToMonacoConverter),
+        __metadata("design:type", lib_1.ProtocolToMonacoConverter)
+    ], MonacoEditorCommandHandlers.prototype, "p2m", void 0);
+    __decorate([
+        inversify_1.inject(quick_open_service_1.QuickOpenService),
+        __metadata("design:type", quick_open_service_1.QuickOpenService)
+    ], MonacoEditorCommandHandlers.prototype, "quickOpenService", void 0);
+    MonacoEditorCommandHandlers = __decorate([
+        inversify_1.injectable()
+    ], MonacoEditorCommandHandlers);
+    return MonacoEditorCommandHandlers;
+}());
+exports.MonacoEditorCommandHandlers = MonacoEditorCommandHandlers;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-configurations.js":
+/*!************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-configurations.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2018 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+/* eslint-disable @typescript-eslint/no-explicit-any */
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var MonacoConfigurations = /** @class */ (function () {
+    function MonacoConfigurations() {
+        this.onDidChangeConfigurationEmitter = new common_1.Emitter();
+        this.onDidChangeConfiguration = this.onDidChangeConfigurationEmitter.event;
+    }
+    MonacoConfigurations_1 = MonacoConfigurations;
+    MonacoConfigurations.prototype.init = function () {
+        var _this = this;
+        this.reconcileData();
+        this.preferences.onPreferencesChanged(function (changes) { return _this.reconcileData(changes); });
+    };
+    MonacoConfigurations.prototype.reconcileData = function (changes) {
+        var _this = this;
+        this.onDidChangeConfigurationEmitter.fire({
+            affectedSections: MonacoConfigurations_1.parseSections(changes),
+            affectsConfiguration: function (section) { return _this.affectsConfiguration(section, changes); }
+        });
+    };
+    MonacoConfigurations.prototype.affectsConfiguration = function (section, changes) {
+        if (!changes) {
+            return true;
+        }
+        for (var preferenceName in changes) {
+            if (section.startsWith(preferenceName) || preferenceName.startsWith(section)) {
+                return true;
+            }
+        }
+        return false;
+    };
+    MonacoConfigurations.prototype.getConfiguration = function (section, resource) {
+        return new MonacoWorkspaceConfiguration(this.preferences, this.preferenceSchemaProvider, section, resource);
+    };
+    var MonacoConfigurations_1;
+    __decorate([
+        inversify_1.inject(browser_1.PreferenceService),
+        __metadata("design:type", Object)
+    ], MonacoConfigurations.prototype, "preferences", void 0);
+    __decorate([
+        inversify_1.inject(browser_1.PreferenceSchemaProvider),
+        __metadata("design:type", browser_1.PreferenceSchemaProvider)
+    ], MonacoConfigurations.prototype, "preferenceSchemaProvider", void 0);
+    __decorate([
+        inversify_1.postConstruct(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], MonacoConfigurations.prototype, "init", null);
+    MonacoConfigurations = MonacoConfigurations_1 = __decorate([
+        inversify_1.injectable()
+    ], MonacoConfigurations);
+    return MonacoConfigurations;
+}());
+exports.MonacoConfigurations = MonacoConfigurations;
+(function (MonacoConfigurations) {
+    function parseSections(changes) {
+        var e_1, _a;
+        if (!changes) {
+            return undefined;
+        }
+        var sections = [];
+        try {
+            for (var _b = __values(Object.keys(changes)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var key = _c.value;
+                var hasOverride = key.startsWith('[');
+                while (key) {
+                    sections.push(key);
+                    if (hasOverride && key.indexOf('.') !== -1) {
+                        sections.push(key.substr(key.indexOf('.')));
+                    }
+                    var index = key.lastIndexOf('.');
+                    key = key.substring(0, index);
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        return sections;
+    }
+    MonacoConfigurations.parseSections = parseSections;
+})(MonacoConfigurations = exports.MonacoConfigurations || (exports.MonacoConfigurations = {}));
+exports.MonacoConfigurations = MonacoConfigurations;
+var MonacoWorkspaceConfiguration = /** @class */ (function () {
+    function MonacoWorkspaceConfiguration(preferences, preferenceSchemaProvider, section, resource) {
+        this.preferences = preferences;
+        this.preferenceSchemaProvider = preferenceSchemaProvider;
+        this.section = section;
+        this.resource = resource;
+    }
+    MonacoWorkspaceConfiguration.prototype.getSection = function (section) {
+        if (this.section) {
+            return this.section + '.' + section;
+        }
+        return section;
+    };
+    MonacoWorkspaceConfiguration.prototype.has = function (section) {
+        return this.preferences.inspect(this.getSection(section), this.resource) !== undefined;
+    };
+    MonacoWorkspaceConfiguration.prototype.get = function (section, defaultValue) {
+        return this.preferences.get(this.getSection(section), defaultValue, this.resource);
+    };
+    MonacoWorkspaceConfiguration.prototype.toJSON = function () {
+        var proxy = browser_1.createPreferenceProxy(this.preferences, this.preferenceSchemaProvider.getCombinedSchema(), {
+            resourceUri: this.resource,
+            style: 'deep'
+        });
+        if (this.section) {
+            return proxy[this.section];
+        }
+        return proxy;
+    };
+    return MonacoWorkspaceConfiguration;
+}());
+exports.MonacoWorkspaceConfiguration = MonacoWorkspaceConfiguration;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-context-key-service.js":
+/*!*****************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-context-key-service.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2019 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var context_key_service_1 = __webpack_require__(/*! @theia/core/lib/browser/context-key-service */ "../../../../node_modules/@theia/core/lib/browser/context-key-service.js");
+var MonacoContextKeyService = /** @class */ (function (_super) {
+    __extends(MonacoContextKeyService, _super);
+    function MonacoContextKeyService() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.expressions = new Map();
+        return _this;
+    }
+    MonacoContextKeyService.prototype.init = function () {
+        var _this = this;
+        this.contextKeyService.onDidChangeContext(function (e) {
+            return _this.fireDidChange({
+                affects: function (keys) { return e.affectsSome(keys); }
+            });
+        });
+    };
+    MonacoContextKeyService.prototype.createKey = function (key, defaultValue) {
+        return this.contextKeyService.createKey(key, defaultValue);
+    };
+    MonacoContextKeyService.prototype.match = function (expression, context) {
+        var ctx = context || this.activeContext || (window.document.activeElement instanceof HTMLElement ? window.document.activeElement : undefined);
+        var parsed = this.parse(expression);
+        if (!ctx) {
+            return this.contextKeyService.contextMatchesRules(parsed);
+        }
+        var keyContext = this.contextKeyService.getContext(ctx);
+        return monaco.keybindings.KeybindingResolver.contextMatchesRules(keyContext, parsed);
+    };
+    MonacoContextKeyService.prototype.parse = function (when) {
+        var expression = this.expressions.get(when);
+        if (!expression) {
+            expression = monaco.contextkey.ContextKeyExpr.deserialize(when);
+            this.expressions.set(when, expression);
+        }
+        return expression;
+    };
+    MonacoContextKeyService.prototype.parseKeys = function (expression) {
+        return new Set(monaco.contextkey.ContextKeyExpr.deserialize(expression).keys());
+    };
+    __decorate([
+        inversify_1.inject(monaco.contextKeyService.ContextKeyService),
+        __metadata("design:type", monaco.contextKeyService.ContextKeyService)
+    ], MonacoContextKeyService.prototype, "contextKeyService", void 0);
+    __decorate([
+        inversify_1.postConstruct(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], MonacoContextKeyService.prototype, "init", null);
+    MonacoContextKeyService = __decorate([
+        inversify_1.injectable()
+    ], MonacoContextKeyService);
+    return MonacoContextKeyService;
+}(context_key_service_1.ContextKeyService));
+exports.MonacoContextKeyService = MonacoContextKeyService;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-context-menu.js":
+/*!**********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-context-menu.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var browser_1 = __webpack_require__(/*! @theia/editor/lib/browser */ "../../../../node_modules/@theia/editor/lib/browser/index.js");
+var browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var widgets_1 = __webpack_require__(/*! @phosphor/widgets */ "../../../../node_modules/@phosphor/widgets/lib/index.js");
+var commands_1 = __webpack_require__(/*! @phosphor/commands */ "../../../../node_modules/@phosphor/commands/lib/index.js");
+var MonacoContextMenuService = /** @class */ (function () {
+    function MonacoContextMenuService(contextMenuRenderer) {
+        this.contextMenuRenderer = contextMenuRenderer;
+    }
+    MonacoContextMenuService.prototype.showContextMenu = function (delegate) {
+        var e_1, _a;
+        var anchor = browser_2.toAnchor(delegate.getAnchor());
+        // If it is the general context menu, we want to delegate to our menu registry entirely and ignore the actually passed actions.
+        // Unfortunately checking the existence of certain properties seems to be the best way to tell, what kind of context menu is requested.
+        if (delegate.hasOwnProperty('getKeyBinding')) {
+            this.contextMenuRenderer.render(browser_1.EDITOR_CONTEXT_MENU, anchor, function () { return delegate.onHide(false); });
+        }
+        else {
+            var actions = delegate.getActions();
+            var commands = new commands_1.CommandRegistry();
+            var menu = new widgets_1.Menu({
+                commands: commands
+            });
+            var _loop_1 = function (action) {
+                var commandId = 'quickfix_' + actions.indexOf(action);
+                commands.addCommand(commandId, {
+                    label: action.label,
+                    className: action.class,
+                    isToggled: function () { return action.checked; },
+                    isEnabled: function () { return action.enabled; },
+                    execute: function () { return action.run(); }
+                });
+                menu.addItem({
+                    type: 'command',
+                    command: commandId
+                });
+            };
+            try {
+                for (var actions_1 = __values(actions), actions_1_1 = actions_1.next(); !actions_1_1.done; actions_1_1 = actions_1.next()) {
+                    var action = actions_1_1.value;
+                    _loop_1(action);
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (actions_1_1 && !actions_1_1.done && (_a = actions_1.return)) _a.call(actions_1);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+            menu.aboutToClose.connect(function () { return delegate.onHide(false); });
+            menu.open(anchor.x, anchor.y);
+        }
+    };
+    MonacoContextMenuService = __decorate([
+        inversify_1.injectable(),
+        __param(0, inversify_1.inject(browser_2.ContextMenuRenderer)),
+        __metadata("design:paramtypes", [Object])
+    ], MonacoContextMenuService);
+    return MonacoContextMenuService;
+}());
+exports.MonacoContextMenuService = MonacoContextMenuService;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-diff-editor.js":
+/*!*********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-diff-editor.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2018 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
+var diff_uris_1 = __webpack_require__(/*! @theia/core/lib/browser/diff-uris */ "../../../../node_modules/@theia/core/lib/browser/diff-uris.js");
+var MonacoDiffEditor = /** @class */ (function (_super) {
+    __extends(MonacoDiffEditor, _super);
+    function MonacoDiffEditor(uri, node, originalModel, modifiedModel, services, diffNavigatorFactory, options, override) {
+        var _this = _super.call(this, uri, modifiedModel, node, services, options, override) || this;
+        _this.uri = uri;
+        _this.node = node;
+        _this.originalModel = originalModel;
+        _this.modifiedModel = modifiedModel;
+        _this.diffNavigatorFactory = diffNavigatorFactory;
+        _this.documents.add(originalModel);
+        var original = originalModel.textEditorModel;
+        var modified = modifiedModel.textEditorModel;
+        _this._diffNavigator = diffNavigatorFactory.createdDiffNavigator(_this._diffEditor, options);
+        _this._diffEditor.setModel({ original: original, modified: modified });
+        return _this;
+    }
+    Object.defineProperty(MonacoDiffEditor.prototype, "diffEditor", {
+        get: function () {
+            return this._diffEditor;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MonacoDiffEditor.prototype, "diffNavigator", {
+        get: function () {
+            return this._diffNavigator;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MonacoDiffEditor.prototype.create = function (options, override) {
+        this._diffEditor = monaco.editor.createDiffEditor(this.node, __assign({}, options, { fixedOverflowWidgets: true }), override);
+        this.editor = this._diffEditor.getModifiedEditor();
+        return this._diffEditor;
+    };
+    MonacoDiffEditor.prototype.resize = function (dimension) {
+        if (this.node) {
+            var layoutSize = this.computeLayoutSize(this.node, dimension);
+            this._diffEditor.layout(layoutSize);
+        }
+    };
+    MonacoDiffEditor.prototype.isActionSupported = function (id) {
+        var action = this._diffEditor.getSupportedActions().find(function (a) { return a.id === id; });
+        return !!action && action.isSupported() && _super.prototype.isActionSupported.call(this, id);
+    };
+    MonacoDiffEditor.prototype.deltaDecorations = function (params) {
+        console.warn('`deltaDecorations` should be called on either the original, or the modified editor.');
+        return [];
+    };
+    MonacoDiffEditor.prototype.getResourceUri = function () {
+        return new uri_1.default(this.originalModel.uri);
+    };
+    MonacoDiffEditor.prototype.createMoveToUri = function (resourceUri) {
+        var _a = __read(diff_uris_1.DiffUris.decode(this.uri), 2), left = _a[0], right = _a[1];
+        return diff_uris_1.DiffUris.encode(left.withPath(resourceUri.path), right.withPath(resourceUri.path));
+    };
+    return MonacoDiffEditor;
+}(monaco_editor_1.MonacoEditor));
+exports.MonacoDiffEditor = MonacoDiffEditor;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-diff-navigator-factory.js":
+/*!********************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-diff-navigator-factory.js ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2018 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var MonacoDiffNavigatorFactory = /** @class */ (function () {
+    function MonacoDiffNavigatorFactory() {
+    }
+    MonacoDiffNavigatorFactory.prototype.createdDiffNavigator = function (editor, options) {
+        var navigator = monaco.editor.createDiffNavigator(editor, options);
+        var ensureInitialized = function (fwd) {
+            if (navigator.nextIdx < -1) {
+                navigator._initIdx(fwd);
+            }
+        };
+        return {
+            canNavigate: function () { return navigator.canNavigate(); },
+            hasNext: function () {
+                ensureInitialized(true);
+                return navigator.nextIdx + 1 < navigator.ranges.length;
+            },
+            hasPrevious: function () {
+                ensureInitialized(false);
+                return navigator.nextIdx > 0;
+            },
+            next: function () { return navigator.next(); },
+            previous: function () { return navigator.previous(); },
+            revealFirst: navigator.revealFirst,
+        };
+    };
+    MonacoDiffNavigatorFactory.nullNavigator = {
+        canNavigate: function () { return false; },
+        hasNext: function () { return false; },
+        hasPrevious: function () { return false; },
+        next: function () { },
+        previous: function () { },
+        revealFirst: false,
+    };
+    MonacoDiffNavigatorFactory = __decorate([
+        inversify_1.injectable()
+    ], MonacoDiffNavigatorFactory);
+    return MonacoDiffNavigatorFactory;
+}());
+exports.MonacoDiffNavigatorFactory = MonacoDiffNavigatorFactory;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor-provider.js":
+/*!*************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-editor-provider.js ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2018 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var browser_1 = __webpack_require__(/*! @theia/editor/lib/browser */ "../../../../node_modules/@theia/editor/lib/browser/index.js");
+var diff_uris_1 = __webpack_require__(/*! @theia/core/lib/browser/diff-uris */ "../../../../node_modules/@theia/core/lib/browser/diff-uris.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var monaco_languageclient_1 = __webpack_require__(/*! monaco-languageclient */ "../../../../node_modules/monaco-languageclient/lib/index.js");
+var monaco_command_service_1 = __webpack_require__(/*! ./monaco-command-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-command-service.js");
+var monaco_context_menu_1 = __webpack_require__(/*! ./monaco-context-menu */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-context-menu.js");
+var monaco_diff_editor_1 = __webpack_require__(/*! ./monaco-diff-editor */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-diff-editor.js");
+var monaco_diff_navigator_factory_1 = __webpack_require__(/*! ./monaco-diff-navigator-factory */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-diff-navigator-factory.js");
+var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
+var monaco_editor_model_1 = __webpack_require__(/*! ./monaco-editor-model */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor-model.js");
+var monaco_editor_service_1 = __webpack_require__(/*! ./monaco-editor-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor-service.js");
+var monaco_quick_open_service_1 = __webpack_require__(/*! ./monaco-quick-open-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-quick-open-service.js");
+var monaco_text_model_service_1 = __webpack_require__(/*! ./monaco-text-model-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-text-model-service.js");
+var monaco_workspace_1 = __webpack_require__(/*! ./monaco-workspace */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-workspace.js");
+var monaco_bulk_edit_service_1 = __webpack_require__(/*! ./monaco-bulk-edit-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-bulk-edit-service.js");
+var application_protocol_1 = __webpack_require__(/*! @theia/core/lib/common/application-protocol */ "../../../../node_modules/@theia/core/lib/common/application-protocol.js");
+var core_1 = __webpack_require__(/*! @theia/core */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var monaco_resolved_keybinding_1 = __webpack_require__(/*! ./monaco-resolved-keybinding */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-resolved-keybinding.js");
+var MonacoEditorProvider = /** @class */ (function () {
+    function MonacoEditorProvider(codeEditorService, textModelService, contextMenuService, m2p, p2m, workspace, commandServiceFactory, editorPreferences, quickOpenService, diffNavigatorFactory, applicationServer, contextKeyService) {
+        var _this = this;
+        this.codeEditorService = codeEditorService;
+        this.textModelService = textModelService;
+        this.contextMenuService = contextMenuService;
+        this.m2p = m2p;
+        this.p2m = p2m;
+        this.workspace = workspace;
+        this.commandServiceFactory = commandServiceFactory;
+        this.editorPreferences = editorPreferences;
+        this.quickOpenService = quickOpenService;
+        this.diffNavigatorFactory = diffNavigatorFactory;
+        this.applicationServer = applicationServer;
+        this.contextKeyService = contextKeyService;
+        this.isWindowsBackend = false;
+        var staticServices = monaco.services.StaticServices;
+        var init = staticServices.init.bind(monaco.services.StaticServices);
+        this.applicationServer.getBackendOS().then(function (os) {
+            _this.isWindowsBackend = os === core_1.OS.Type.Windows;
+        });
+        if (staticServices.resourcePropertiesService) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            var original = staticServices.resourcePropertiesService.get();
+            original.getEOL = function () {
+                var eol = _this.editorPreferences['files.eol'];
+                if (eol) {
+                    if (eol !== 'auto') {
+                        return eol;
+                    }
+                }
+                return _this.isWindowsBackend ? '\r\n' : '\n';
+            };
+        }
+        monaco.services.StaticServices.init = function (o) {
+            var result = init(o);
+            result[0].set(monaco.services.ICodeEditorService, codeEditorService);
+            return result;
+        };
+    }
+    MonacoEditorProvider_1 = MonacoEditorProvider;
+    Object.defineProperty(MonacoEditorProvider.prototype, "current", {
+        /**
+         * Returns the last focused MonacoEditor.
+         * It takes into account inline editors as well.
+         * If you are interested only in standalone editors then use `MonacoEditor.getCurrent(EditorManager)`
+         */
+        get: function () {
+            return this._current;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MonacoEditorProvider.prototype.getModel = function (uri, toDispose) {
+        return __awaiter(this, void 0, void 0, function () {
+            var reference;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.textModelService.createModelReference(uri)];
+                    case 1:
+                        reference = _a.sent();
+                        toDispose.push(reference);
+                        return [2 /*return*/, reference.object];
+                }
+            });
+        });
+    };
+    MonacoEditorProvider.prototype.get = function (uri) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.editorPreferences.ready];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/, this.doCreateEditor(function (override, toDispose) { return _this.createEditor(uri, override, toDispose); })];
+                }
+            });
+        });
+    };
+    MonacoEditorProvider.prototype.doCreateEditor = function (factory) {
+        return __awaiter(this, void 0, void 0, function () {
+            var commandService, contextKeyService, _a, codeEditorService, textModelService, contextMenuService, IWorkspaceEditService, toDispose, editor, standaloneCommandService;
+            var _this = this;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        commandService = this.commandServiceFactory();
+                        contextKeyService = this.contextKeyService.createScoped();
+                        _a = this, codeEditorService = _a.codeEditorService, textModelService = _a.textModelService, contextMenuService = _a.contextMenuService;
+                        IWorkspaceEditService = this.bulkEditService;
+                        toDispose = new common_1.DisposableCollection();
+                        return [4 /*yield*/, factory({
+                                codeEditorService: codeEditorService,
+                                textModelService: textModelService,
+                                contextMenuService: contextMenuService,
+                                commandService: commandService,
+                                IWorkspaceEditService: IWorkspaceEditService,
+                                contextKeyService: contextKeyService
+                            }, toDispose)];
+                    case 1:
+                        editor = _b.sent();
+                        editor.onDispose(function () { return toDispose.dispose(); });
+                        this.suppressMonacoKeybindingListener(editor);
+                        this.injectKeybindingResolver(editor);
+                        standaloneCommandService = new monaco.services.StandaloneCommandService(editor.instantiationService);
+                        commandService.setDelegate(standaloneCommandService);
+                        this.installQuickOpenService(editor);
+                        this.installReferencesController(editor);
+                        toDispose.push(editor.onFocusChanged(function (focused) {
+                            if (focused) {
+                                _this._current = editor;
+                            }
+                        }));
+                        toDispose.push(common_1.Disposable.create(function () {
+                            if (_this._current === editor) {
+                                _this._current = undefined;
+                            }
+                        }));
+                        return [2 /*return*/, editor];
+                }
+            });
+        });
+    };
+    /**
+     * Suppresses Monaco keydown listener to avoid triggering default Monaco keybindings
+     * if they are overriden by a user. Monaco keybindings should be registered as Theia keybindings
+     * to allow a user to customize them.
+     */
+    MonacoEditorProvider.prototype.suppressMonacoKeybindingListener = function (editor) {
+        var e_1, _a;
+        var keydownListener;
+        try {
+            for (var _b = __values(editor.getControl()._standaloneKeybindingService._store._toDispose), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var listener = _c.value;
+                if ('_type' in listener && listener['_type'] === 'keydown') {
+                    keydownListener = listener;
+                    break;
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        if (keydownListener) {
+            keydownListener.dispose();
+        }
+    };
+    MonacoEditorProvider.prototype.injectKeybindingResolver = function (editor) {
+        var _this = this;
+        var keybindingService = editor.getControl()._standaloneKeybindingService;
+        keybindingService.resolveKeybinding = function (keybinding) { return [new monaco_resolved_keybinding_1.MonacoResolvedKeybinding(monaco_resolved_keybinding_1.MonacoResolvedKeybinding.keySequence(keybinding), _this.keybindingRegistry)]; };
+        keybindingService.resolveKeyboardEvent = function (keyboardEvent) {
+            var keybinding = new monaco.keybindings.SimpleKeybinding(keyboardEvent.ctrlKey, keyboardEvent.shiftKey, keyboardEvent.altKey, keyboardEvent.metaKey, keyboardEvent.keyCode).toChord();
+            return new monaco_resolved_keybinding_1.MonacoResolvedKeybinding(monaco_resolved_keybinding_1.MonacoResolvedKeybinding.keySequence(keybinding), _this.keybindingRegistry);
+        };
+    };
+    MonacoEditorProvider.prototype.createEditor = function (uri, override, toDispose) {
+        if (diff_uris_1.DiffUris.isDiffUri(uri)) {
+            return this.createMonacoDiffEditor(uri, override, toDispose);
+        }
+        return this.createMonacoEditor(uri, override, toDispose);
+    };
+    Object.defineProperty(MonacoEditorProvider.prototype, "preferencePrefixes", {
+        get: function () {
+            return ['editor.'];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MonacoEditorProvider.prototype.createMonacoEditor = function (uri, override, toDispose) {
+        return __awaiter(this, void 0, void 0, function () {
+            var model, options, editor;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getModel(uri, toDispose)];
+                    case 1:
+                        model = _a.sent();
+                        options = this.createMonacoEditorOptions(model);
+                        editor = new monaco_editor_1.MonacoEditor(uri, model, document.createElement('div'), this.services, options, override);
+                        toDispose.push(this.editorPreferences.onPreferenceChanged(function (event) {
+                            if (event.affects(uri.toString(), model.languageId)) {
+                                _this.updateMonacoEditorOptions(editor, event);
+                            }
+                        }));
+                        toDispose.push(editor.onLanguageChanged(function () { return _this.updateMonacoEditorOptions(editor); }));
+                        editor.document.onWillSaveModel(function (event) { return event.waitUntil(_this.formatOnSave(editor, event)); });
+                        return [2 /*return*/, editor];
+                }
+            });
+        });
+    };
+    MonacoEditorProvider.prototype.createMonacoEditorOptions = function (model) {
+        var options = this.createOptions(this.preferencePrefixes, model.uri, model.languageId);
+        options.model = model.textEditorModel;
+        options.readOnly = model.readOnly;
+        return options;
+    };
+    MonacoEditorProvider.prototype.updateMonacoEditorOptions = function (editor, event) {
+        if (event) {
+            var preferenceName = event.preferenceName;
+            var overrideIdentifier = editor.document.languageId;
+            var newValue = this.editorPreferences.get({ preferenceName: preferenceName, overrideIdentifier: overrideIdentifier }, undefined, editor.uri.toString());
+            editor.getControl().updateOptions(this.setOption(preferenceName, newValue, this.preferencePrefixes));
+        }
+        else {
+            var options = this.createMonacoEditorOptions(editor.document);
+            delete options.model;
+            editor.getControl().updateOptions(options);
+        }
+    };
+    MonacoEditorProvider.prototype.formatOnSave = function (editor, event) {
+        return __awaiter(this, void 0, void 0, function () {
+            var overrideIdentifier, uri, formatOnSave, formatOnSaveTimeout, _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        if (event.reason !== monaco_languageclient_1.TextDocumentSaveReason.Manual) {
+                            return [2 /*return*/, []];
+                        }
+                        overrideIdentifier = editor.document.languageId;
+                        uri = editor.uri.toString();
+                        formatOnSave = this.editorPreferences.get({ preferenceName: 'editor.formatOnSave', overrideIdentifier: overrideIdentifier }, undefined, uri);
+                        if (!formatOnSave) {
+                            return [2 /*return*/, []];
+                        }
+                        formatOnSaveTimeout = this.editorPreferences.get({ preferenceName: 'editor.formatOnSaveTimeout', overrideIdentifier: overrideIdentifier }, undefined, uri);
+                        _b = (_a = Promise).race;
+                        _c = [new Promise(function (reject) { return setTimeout(function () { return reject(new Error("Aborted format on save after " + formatOnSaveTimeout + "ms")); }, formatOnSaveTimeout); })];
+                        return [4 /*yield*/, editor.commandService.executeCommand('editor.action.formatDocument')];
+                    case 1: return [4 /*yield*/, _b.apply(_a, [_c.concat([
+                                _d.sent()
+                            ])])];
+                    case 2:
+                        _d.sent();
+                        return [2 /*return*/, []];
+                }
+            });
+        });
+    };
+    Object.defineProperty(MonacoEditorProvider.prototype, "diffPreferencePrefixes", {
+        get: function () {
+            return __spread(this.preferencePrefixes, ['diffEditor.']);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MonacoEditorProvider.prototype.createMonacoDiffEditor = function (uri, override, toDispose) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, original, modified, _b, originalModel, modifiedModel, options, editor;
+            var _this = this;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _a = __read(diff_uris_1.DiffUris.decode(uri), 2), original = _a[0], modified = _a[1];
+                        return [4 /*yield*/, Promise.all([this.getModel(original, toDispose), this.getModel(modified, toDispose)])];
+                    case 1:
+                        _b = __read.apply(void 0, [_c.sent(), 2]), originalModel = _b[0], modifiedModel = _b[1];
+                        options = this.createMonacoDiffEditorOptions(originalModel, modifiedModel);
+                        editor = new monaco_diff_editor_1.MonacoDiffEditor(uri, document.createElement('div'), originalModel, modifiedModel, this.services, this.diffNavigatorFactory, options, override);
+                        toDispose.push(this.editorPreferences.onPreferenceChanged(function (event) {
+                            var originalFileUri = original.withoutQuery().withScheme('file').toString();
+                            if (event.affects(originalFileUri, editor.document.languageId)) {
+                                _this.updateMonacoDiffEditorOptions(editor, event, originalFileUri);
+                            }
+                        }));
+                        toDispose.push(editor.onLanguageChanged(function () { return _this.updateMonacoDiffEditorOptions(editor); }));
+                        return [2 /*return*/, editor];
+                }
+            });
+        });
+    };
+    MonacoEditorProvider.prototype.createMonacoDiffEditorOptions = function (original, modified) {
+        var options = this.createOptions(this.diffPreferencePrefixes, modified.uri, modified.languageId);
+        options.originalEditable = !original.readOnly;
+        options.readOnly = modified.readOnly;
+        return options;
+    };
+    MonacoEditorProvider.prototype.updateMonacoDiffEditorOptions = function (editor, event, resourceUri) {
+        if (event) {
+            var preferenceName = event.preferenceName;
+            var overrideIdentifier = editor.document.languageId;
+            var newValue = this.editorPreferences.get({ preferenceName: preferenceName, overrideIdentifier: overrideIdentifier }, undefined, resourceUri);
+            editor.diffEditor.updateOptions(this.setOption(preferenceName, newValue, this.diffPreferencePrefixes));
+        }
+        else {
+            var options = this.createMonacoDiffEditorOptions(editor.originalModel, editor.modifiedModel);
+            editor.diffEditor.updateOptions(options);
+        }
+    };
+    MonacoEditorProvider.prototype.createOptions = function (prefixes, uri, overrideIdentifier) {
+        var _this = this;
+        return Object.keys(this.editorPreferences).reduce(function (options, preferenceName) {
+            var value = _this.editorPreferences.get({ preferenceName: preferenceName, overrideIdentifier: overrideIdentifier }, undefined, uri);
+            return _this.setOption(preferenceName, common_1.deepClone(value), prefixes, options);
+        }, {});
+    };
+    MonacoEditorProvider.prototype.setOption = function (preferenceName, value, prefixes, options) {
+        if (options === void 0) { options = {}; }
+        var optionName = this.toOptionName(preferenceName, prefixes);
+        this.doSetOption(options, value, optionName.split('.'));
+        return options;
+    };
+    MonacoEditorProvider.prototype.toOptionName = function (preferenceName, prefixes) {
+        var e_2, _a;
+        try {
+            for (var prefixes_1 = __values(prefixes), prefixes_1_1 = prefixes_1.next(); !prefixes_1_1.done; prefixes_1_1 = prefixes_1.next()) {
+                var prefix = prefixes_1_1.value;
+                if (preferenceName.startsWith(prefix)) {
+                    return preferenceName.substr(prefix.length);
+                }
+            }
+        }
+        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        finally {
+            try {
+                if (prefixes_1_1 && !prefixes_1_1.done && (_a = prefixes_1.return)) _a.call(prefixes_1);
+            }
+            finally { if (e_2) throw e_2.error; }
+        }
+        return preferenceName;
+    };
+    MonacoEditorProvider.prototype.doSetOption = function (obj, value, names, idx) {
+        if (idx === void 0) { idx = 0; }
+        var name = names[idx];
+        if (!obj[name]) {
+            if (names.length > (idx + 1)) {
+                obj[name] = {};
+                this.doSetOption(obj[name], value, names, (idx + 1));
+            }
+            else {
+                obj[name] = value;
+            }
+        }
+    };
+    MonacoEditorProvider.prototype.installQuickOpenService = function (editor) {
+        var _this = this;
+        var control = editor.getControl();
+        var quickOpenController = control._contributions['editor.controller.quickOpenController'];
+        quickOpenController.run = function (options) {
+            var selection = control.getSelection();
+            _this.quickOpenService.internalOpen(__assign({}, options, { onClose: function (canceled) {
+                    quickOpenController.clearDecorations();
+                    if (canceled && selection) {
+                        control.setSelection(selection);
+                        control.revealRangeInCenterIfOutsideViewport(selection);
+                    }
+                    editor.focus();
+                } }));
+        };
+    };
+    MonacoEditorProvider.prototype.installReferencesController = function (editor) {
+        var control = editor.getControl();
+        var referencesController = control._contributions['editor.contrib.referencesController'];
+        referencesController._gotoReference = function (ref) {
+            referencesController._widget.hide();
+            referencesController._ignoreModelChangeEvent = true;
+            var range = monaco.Range.lift(ref.range).collapseToStart();
+            // prerse the model that it does not get disposed if an editor preview replaces an editor
+            var model = referencesController._model;
+            referencesController._model = undefined;
+            referencesController._editorService.openCodeEditor({
+                resource: ref.uri,
+                options: { selection: range }
+            }, control).then(function (openedEditor) {
+                referencesController._model = model;
+                referencesController._ignoreModelChangeEvent = false;
+                if (!openedEditor) {
+                    referencesController.closeWidget();
+                    return;
+                }
+                if (openedEditor !== control) {
+                    // preserve the model that it does not get disposed in `referencesController.closeWidget`
+                    referencesController._model = undefined;
+                    // to preserve the active editor
+                    var focus_1 = control.focus;
+                    control.focus = function () { };
+                    referencesController.closeWidget();
+                    control.focus = focus_1;
+                    var modelPromise = Promise.resolve(model);
+                    modelPromise.cancel = function () { };
+                    openedEditor._contributions['editor.contrib.referencesController'].toggleWidget(range, modelPromise, {
+                        getMetaTitle: function (m) { return m.references.length > 1 ? " \u2013 " + m.references.length + " references" : ''; }
+                    });
+                    return;
+                }
+                if (referencesController._widget) {
+                    referencesController._widget.show(range);
+                    referencesController._widget.focus();
+                }
+            }, function (e) {
+                referencesController._ignoreModelChangeEvent = false;
+                monaco.error.onUnexpectedError(e);
+            });
+        };
+    };
+    MonacoEditorProvider.prototype.getDiffNavigator = function (editor) {
+        if (editor instanceof monaco_diff_editor_1.MonacoDiffEditor) {
+            return editor.diffNavigator;
+        }
+        return monaco_diff_navigator_factory_1.MonacoDiffNavigatorFactory.nullNavigator;
+    };
+    MonacoEditorProvider.prototype.createInline = function (uri, node, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.doCreateEditor(function (override, toDispose) { return __awaiter(_this, void 0, void 0, function () {
+                        var document, model;
+                        var _this = this;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    override.contextMenuService = {
+                                        showContextMenu: function () { }
+                                    };
+                                    document = new monaco_editor_model_1.MonacoEditorModel({
+                                        uri: uri,
+                                        readContents: function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                                            return [2 /*return*/, ''];
+                                        }); }); },
+                                        dispose: function () { }
+                                    }, this.m2p, this.p2m);
+                                    toDispose.push(document);
+                                    return [4 /*yield*/, document.load()];
+                                case 1:
+                                    model = (_a.sent()).textEditorModel;
+                                    return [2 /*return*/, new monaco_editor_1.MonacoEditor(uri, document, node, this.services, Object.assign({
+                                            model: model,
+                                            isSimpleWidget: true,
+                                            autoSizing: false,
+                                            minHeight: 1,
+                                            maxHeight: 1
+                                        }, MonacoEditorProvider_1.inlineOptions, options), override)];
+                            }
+                        });
+                    }); })];
+            });
+        });
+    };
+    var MonacoEditorProvider_1;
+    MonacoEditorProvider.inlineOptions = {
+        wordWrap: 'on',
+        overviewRulerLanes: 0,
+        glyphMargin: false,
+        lineNumbers: 'off',
+        folding: false,
+        selectOnLineNumbers: false,
+        hideCursorInOverviewRuler: true,
+        selectionHighlight: false,
+        scrollbar: {
+            horizontal: 'hidden'
+        },
+        lineDecorationsWidth: 0,
+        overviewRulerBorder: false,
+        scrollBeyondLastLine: false,
+        renderLineHighlight: 'none',
+        fixedOverflowWidgets: true,
+        acceptSuggestionOnEnter: 'smart',
+        minimap: {
+            enabled: false
+        }
+    };
+    __decorate([
+        inversify_1.inject(monaco_bulk_edit_service_1.MonacoBulkEditService),
+        __metadata("design:type", monaco_bulk_edit_service_1.MonacoBulkEditService)
+    ], MonacoEditorProvider.prototype, "bulkEditService", void 0);
+    __decorate([
+        inversify_1.inject(monaco_editor_1.MonacoEditorServices),
+        __metadata("design:type", monaco_editor_1.MonacoEditorServices)
+    ], MonacoEditorProvider.prototype, "services", void 0);
+    __decorate([
+        inversify_1.inject(browser_2.KeybindingRegistry),
+        __metadata("design:type", browser_2.KeybindingRegistry)
+    ], MonacoEditorProvider.prototype, "keybindingRegistry", void 0);
+    MonacoEditorProvider = MonacoEditorProvider_1 = __decorate([
+        inversify_1.injectable(),
+        __param(0, inversify_1.inject(monaco_editor_service_1.MonacoEditorService)),
+        __param(1, inversify_1.inject(monaco_text_model_service_1.MonacoTextModelService)),
+        __param(2, inversify_1.inject(monaco_context_menu_1.MonacoContextMenuService)),
+        __param(3, inversify_1.inject(monaco_languageclient_1.MonacoToProtocolConverter)),
+        __param(4, inversify_1.inject(monaco_languageclient_1.ProtocolToMonacoConverter)),
+        __param(5, inversify_1.inject(monaco_workspace_1.MonacoWorkspace)),
+        __param(6, inversify_1.inject(monaco_command_service_1.MonacoCommandServiceFactory)),
+        __param(7, inversify_1.inject(browser_1.EditorPreferences)),
+        __param(8, inversify_1.inject(monaco_quick_open_service_1.MonacoQuickOpenService)),
+        __param(9, inversify_1.inject(monaco_diff_navigator_factory_1.MonacoDiffNavigatorFactory)),
+        __param(10, inversify_1.inject(application_protocol_1.ApplicationServer)),
+        __param(11, inversify_1.inject(monaco.contextKeyService.ContextKeyService)),
+        __metadata("design:paramtypes", [monaco_editor_service_1.MonacoEditorService,
+            monaco_text_model_service_1.MonacoTextModelService,
+            monaco_context_menu_1.MonacoContextMenuService,
+            monaco_languageclient_1.MonacoToProtocolConverter,
+            monaco_languageclient_1.ProtocolToMonacoConverter,
+            monaco_workspace_1.MonacoWorkspace, Function, Object, monaco_quick_open_service_1.MonacoQuickOpenService,
+            monaco_diff_navigator_factory_1.MonacoDiffNavigatorFactory, Object, monaco.contextKeyService.ContextKeyService])
+    ], MonacoEditorProvider);
+    return MonacoEditorProvider;
+}());
+exports.MonacoEditorProvider = MonacoEditorProvider;
+//# sourceMappingURL=monaco-editor-provider.js.map
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor-service.js":
+/*!************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-editor-service.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var monaco_languageclient_1 = __webpack_require__(/*! monaco-languageclient */ "../../../../node_modules/monaco-languageclient/lib/index.js");
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var browser_2 = __webpack_require__(/*! @theia/editor/lib/browser */ "../../../../node_modules/@theia/editor/lib/browser/index.js");
+var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
+inversify_1.decorate(inversify_1.injectable(), monaco.services.CodeEditorServiceImpl);
+var MonacoEditorService = /** @class */ (function (_super) {
+    __extends(MonacoEditorService, _super);
+    function MonacoEditorService() {
+        return _super.call(this, monaco.services.StaticServices.standaloneThemeService.get()) || this;
+    }
+    MonacoEditorService_1 = MonacoEditorService;
+    MonacoEditorService.prototype.getActiveCodeEditor = function () {
+        var editor = monaco_editor_1.MonacoEditor.getActive(this.editors);
+        return editor && editor.getControl();
+    };
+    MonacoEditorService.prototype.openCodeEditor = function (input, source, sideBySide) {
+        return __awaiter(this, void 0, void 0, function () {
+            var uri, openerOptions, widget, editorWidget;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = new uri_1.default(input.resource.toString());
+                        openerOptions = this.createEditorOpenerOptions(input, source, sideBySide);
+                        return [4 /*yield*/, browser_1.open(this.openerService, uri, openerOptions)];
+                    case 1:
+                        widget = _a.sent();
+                        return [4 /*yield*/, this.findEditorWidgetByUri(widget, uri.toString())];
+                    case 2:
+                        editorWidget = _a.sent();
+                        if (editorWidget && editorWidget.editor instanceof monaco_editor_1.MonacoEditor) {
+                            return [2 /*return*/, editorWidget.editor.getControl()];
+                        }
+                        return [2 /*return*/, undefined];
+                }
+            });
+        });
+    };
+    MonacoEditorService.prototype.findEditorWidgetByUri = function (widget, uriAsString) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, _b, childWidget, editorWidget, e_1_1;
+            var e_1, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        if (widget instanceof browser_2.EditorWidget) {
+                            if (widget.editor.uri.toString() === uriAsString) {
+                                return [2 /*return*/, widget];
+                            }
+                            return [2 /*return*/, undefined];
+                        }
+                        if (!browser_1.ApplicationShell.TrackableWidgetProvider.is(widget)) return [3 /*break*/, 9];
+                        _d.label = 1;
+                    case 1:
+                        _d.trys.push([1, 7, 8, 9]);
+                        return [4 /*yield*/, widget.getTrackableWidgets()];
+                    case 2:
+                        _a = __values.apply(void 0, [_d.sent()]), _b = _a.next();
+                        _d.label = 3;
+                    case 3:
+                        if (!!_b.done) return [3 /*break*/, 6];
+                        childWidget = _b.value;
+                        return [4 /*yield*/, this.findEditorWidgetByUri(childWidget, uriAsString)];
+                    case 4:
+                        editorWidget = _d.sent();
+                        if (editorWidget) {
+                            return [2 /*return*/, editorWidget];
+                        }
+                        _d.label = 5;
+                    case 5:
+                        _b = _a.next();
+                        return [3 /*break*/, 3];
+                    case 6: return [3 /*break*/, 9];
+                    case 7:
+                        e_1_1 = _d.sent();
+                        e_1 = { error: e_1_1 };
+                        return [3 /*break*/, 9];
+                    case 8:
+                        try {
+                            if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
+                        }
+                        finally { if (e_1) throw e_1.error; }
+                        return [7 /*endfinally*/];
+                    case 9: return [2 /*return*/, undefined];
+                }
+            });
+        });
+    };
+    MonacoEditorService.prototype.createEditorOpenerOptions = function (input, source, sideBySide) {
+        var mode = this.getEditorOpenMode(input);
+        var selection = input.options && this.m2p.asRange(input.options.selection);
+        var widgetOptions = this.getWidgetOptions(source, sideBySide);
+        var preview = !!this.preferencesService.get(MonacoEditorService_1.ENABLE_PREVIEW_PREFERENCE, false);
+        return { mode: mode, selection: selection, widgetOptions: widgetOptions, preview: preview };
+    };
+    MonacoEditorService.prototype.getEditorOpenMode = function (input) {
+        var options = __assign({ preserveFocus: false, revealIfVisible: true }, input.options);
+        if (options.preserveFocus) {
+            return 'reveal';
+        }
+        return options.revealIfVisible ? 'activate' : 'open';
+    };
+    MonacoEditorService.prototype.getWidgetOptions = function (source, sideBySide) {
+        var ref = monaco_editor_1.MonacoEditor.getWidgetFor(this.editors, source);
+        if (!ref) {
+            return undefined;
+        }
+        var area = (ref && this.shell.getAreaFor(ref)) || 'main';
+        var mode = ref && sideBySide ? 'split-right' : undefined;
+        return { area: area, mode: mode, ref: ref };
+    };
+    var MonacoEditorService_1;
+    MonacoEditorService.ENABLE_PREVIEW_PREFERENCE = 'editor.enablePreview';
+    __decorate([
+        inversify_1.inject(browser_1.OpenerService),
+        __metadata("design:type", Object)
+    ], MonacoEditorService.prototype, "openerService", void 0);
+    __decorate([
+        inversify_1.inject(monaco_languageclient_1.MonacoToProtocolConverter),
+        __metadata("design:type", monaco_languageclient_1.MonacoToProtocolConverter)
+    ], MonacoEditorService.prototype, "m2p", void 0);
+    __decorate([
+        inversify_1.inject(browser_1.ApplicationShell),
+        __metadata("design:type", browser_1.ApplicationShell)
+    ], MonacoEditorService.prototype, "shell", void 0);
+    __decorate([
+        inversify_1.inject(browser_2.EditorManager),
+        __metadata("design:type", browser_2.EditorManager)
+    ], MonacoEditorService.prototype, "editors", void 0);
+    __decorate([
+        inversify_1.inject(browser_1.PreferenceService),
+        __metadata("design:type", Object)
+    ], MonacoEditorService.prototype, "preferencesService", void 0);
+    MonacoEditorService = MonacoEditorService_1 = __decorate([
+        inversify_1.injectable(),
+        __metadata("design:paramtypes", [])
+    ], MonacoEditorService);
+    return MonacoEditorService;
+}(monaco.services.CodeEditorServiceImpl));
+exports.MonacoEditorService = MonacoEditorService;
+//# sourceMappingURL=monaco-editor-service.js.map
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-frontend-application-contribution.js":
+/*!*******************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-frontend-application-contribution.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2018 Ericsson and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -184,193 +2601,2310 @@ var __values = (this && this.__values) || function (o) {
     };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var task_contribution_1 = __webpack_require__(/*! ./task-contribution */ "../node_modules/@theia/task/lib/browser/task-contribution.js");
-var task_definition_registry_1 = __webpack_require__(/*! ./task-definition-registry */ "../node_modules/@theia/task/lib/browser/task-definition-registry.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var ProvidedTaskConfigurations = /** @class */ (function () {
-    function ProvidedTaskConfigurations() {
-        /**
-         * Map of source (name of extension, or path of root folder that the task config comes from) and `task config map`.
-         * For the second level of inner map, the key is task label.
-         * For the third level of inner map, the key is the task scope and value TaskConfiguration.
-         */
-        this.tasksMap = new Map();
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var monaco_snippet_suggest_provider_1 = __webpack_require__(/*! ./monaco-snippet-suggest-provider */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-snippet-suggest-provider.js");
+var MonacoFrontendApplicationContribution = /** @class */ (function () {
+    function MonacoFrontendApplicationContribution() {
     }
-    /** returns a list of provided tasks */
-    ProvidedTaskConfigurations.prototype.getTasks = function () {
+    MonacoFrontendApplicationContribution.prototype.initialize = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var providers, providedTasks;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.taskProviderRegistry.getProviders()];
-                    case 1:
-                        providers = _a.sent();
-                        return [4 /*yield*/, Promise.all(providers.map(function (p) { return p.provideTasks(); }))];
-                    case 2:
-                        providedTasks = (_a.sent())
-                            .reduce(function (acc, taskArray) { return acc.concat(taskArray); }, []);
-                        this.cacheTasks(providedTasks);
-                        return [2 /*return*/, providedTasks];
-                }
-            });
-        });
-    };
-    /** returns the task configuration for a given source and label or undefined if none */
-    ProvidedTaskConfigurations.prototype.getTask = function (source, taskLabel, scope) {
-        return __awaiter(this, void 0, void 0, function () {
-            var task;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        task = this.getCachedTask(source, taskLabel, scope);
-                        if (!task) return [3 /*break*/, 1];
-                        return [2 /*return*/, task];
-                    case 1: return [4 /*yield*/, this.getTasks()];
-                    case 2:
-                        _a.sent();
-                        return [2 /*return*/, this.getCachedTask(source, taskLabel, scope)];
-                }
-            });
-        });
-    };
-    /**
-     * Finds the detected task for the given task customization.
-     * The detected task is considered as a "match" to the task customization if it has all the `required` properties.
-     * In case that more than one customization is found, return the one that has the biggest number of matched properties.
-     *
-     * @param customization the task customization
-     * @return the detected task for the given task customization. If the task customization is not found, `undefined` is returned.
-     */
-    ProvidedTaskConfigurations.prototype.getTaskToCustomize = function (customization, rootFolderPath) {
-        return __awaiter(this, void 0, void 0, function () {
-            var definition, matchedTasks, highest, tasks, _loop_1, tasks_1, tasks_1_1, task, rootFolderUri, matchedTask;
-            var e_1, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        definition = this.taskDefinitionRegistry.getDefinition(customization);
-                        if (!definition) {
-                            return [2 /*return*/, undefined];
-                        }
-                        matchedTasks = [];
-                        highest = -1;
-                        return [4 /*yield*/, this.getTasks()];
-                    case 1:
-                        tasks = _b.sent();
-                        _loop_1 = function (task) {
-                            var score = 0;
-                            if (!definition.properties.required.every(function (requiredProp) { return customization[requiredProp] !== undefined; })) {
-                                return "continue";
-                            }
-                            score += definition.properties.required.length; // number of required properties
-                            var requiredProps = new Set(definition.properties.required);
-                            // number of optional properties
-                            score += definition.properties.all.filter(function (p) { return !requiredProps.has(p) && customization[p] !== undefined; }).length;
-                            if (score >= highest) {
-                                if (score > highest) {
-                                    highest = score;
-                                    matchedTasks.length = 0;
-                                }
-                                matchedTasks.push(task);
-                            }
-                        };
-                        try {
-                            for (tasks_1 = __values(tasks), tasks_1_1 = tasks_1.next(); !tasks_1_1.done; tasks_1_1 = tasks_1.next()) {
-                                task = tasks_1_1.value;
-                                _loop_1(task);
-                            }
-                        }
-                        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                        finally {
-                            try {
-                                if (tasks_1_1 && !tasks_1_1.done && (_a = tasks_1.return)) _a.call(tasks_1);
-                            }
-                            finally { if (e_1) throw e_1.error; }
-                        }
-                        rootFolderUri = new uri_1.default(rootFolderPath).toString();
-                        matchedTask = matchedTasks.filter(function (t) {
-                            return rootFolderUri === t._scope && definition.properties.all.every(function (p) { return t[p] === customization[p]; });
-                        })[0];
-                        return [2 /*return*/, matchedTask];
-                }
-            });
-        });
-    };
-    ProvidedTaskConfigurations.prototype.getCachedTask = function (source, taskLabel, scope) {
-        var labelConfigMap = this.tasksMap.get(source);
-        if (labelConfigMap) {
-            var scopeConfigMap = labelConfigMap.get(taskLabel);
-            if (scopeConfigMap) {
-                return scopeConfigMap.get(scope);
-            }
-        }
-    };
-    ProvidedTaskConfigurations.prototype.cacheTasks = function (tasks) {
-        var e_2, _a;
-        try {
-            for (var tasks_2 = __values(tasks), tasks_2_1 = tasks_2.next(); !tasks_2_1.done; tasks_2_1 = tasks_2.next()) {
-                var task = tasks_2_1.value;
-                var label = task.label;
-                var source = task._source;
-                var scope = task._scope;
-                if (this.tasksMap.has(source)) {
-                    var labelConfigMap = this.tasksMap.get(source);
-                    if (labelConfigMap.has(label)) {
-                        labelConfigMap.get(label).set(scope, task);
-                    }
-                    else {
-                        var newScopeConfigMap = new Map();
-                        newScopeConfigMap.set(scope, task);
-                        labelConfigMap.set(label, newScopeConfigMap);
+            var _a, _b, language, registerLanguage;
+            var e_1, _c;
+            var _this = this;
+            return __generator(this, function (_d) {
+                monaco.suggest.setSnippetSuggestSupport(this.snippetSuggestProvider);
+                try {
+                    for (_a = __values(monaco.languages.getLanguages()), _b = _a.next(); !_b.done; _b = _a.next()) {
+                        language = _b.value;
+                        this.preferenceSchema.registerOverrideIdentifier(language.id);
                     }
                 }
-                else {
-                    var newLabelConfigMap = new Map();
-                    var newScopeConfigMap = new Map();
-                    newScopeConfigMap.set(scope, task);
-                    newLabelConfigMap.set(label, newScopeConfigMap);
-                    this.tasksMap.set(source, newLabelConfigMap);
+                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                finally {
+                    try {
+                        if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
+                    }
+                    finally { if (e_1) throw e_1.error; }
                 }
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (tasks_2_1 && !tasks_2_1.done && (_a = tasks_2.return)) _a.call(tasks_2);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
+                registerLanguage = monaco.languages.register.bind(monaco.languages);
+                monaco.languages.register = function (language) {
+                    // first register override identifier, because monaco will immediately update already opened documents and then initialize with bad preferences.
+                    _this.preferenceSchema.registerOverrideIdentifier(language.id);
+                    registerLanguage(language);
+                };
+                return [2 /*return*/];
+            });
+        });
     };
     __decorate([
-        inversify_1.inject(task_contribution_1.TaskProviderRegistry),
-        __metadata("design:type", task_contribution_1.TaskProviderRegistry)
-    ], ProvidedTaskConfigurations.prototype, "taskProviderRegistry", void 0);
+        inversify_1.inject(monaco_snippet_suggest_provider_1.MonacoSnippetSuggestProvider),
+        __metadata("design:type", monaco_snippet_suggest_provider_1.MonacoSnippetSuggestProvider)
+    ], MonacoFrontendApplicationContribution.prototype, "snippetSuggestProvider", void 0);
     __decorate([
-        inversify_1.inject(task_definition_registry_1.TaskDefinitionRegistry),
-        __metadata("design:type", task_definition_registry_1.TaskDefinitionRegistry)
-    ], ProvidedTaskConfigurations.prototype, "taskDefinitionRegistry", void 0);
-    ProvidedTaskConfigurations = __decorate([
+        inversify_1.inject(browser_1.PreferenceSchemaProvider),
+        __metadata("design:type", browser_1.PreferenceSchemaProvider)
+    ], MonacoFrontendApplicationContribution.prototype, "preferenceSchema", void 0);
+    MonacoFrontendApplicationContribution = __decorate([
         inversify_1.injectable()
-    ], ProvidedTaskConfigurations);
-    return ProvidedTaskConfigurations;
+    ], MonacoFrontendApplicationContribution);
+    return MonacoFrontendApplicationContribution;
 }());
-exports.ProvidedTaskConfigurations = ProvidedTaskConfigurations;
+exports.MonacoFrontendApplicationContribution = MonacoFrontendApplicationContribution;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/task/lib/browser/quick-open-task.js":
-/*!******************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/quick-open-task.js ***!
-  \******************************************************************/
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-frontend-module.js":
+/*!*************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-frontend-module.js ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /********************************************************************************
- * Copyright (C) 2017 Ericsson and others.
+ * Copyright (C) 2018 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(/*! ../../src/browser/style/index.css */ "../../../../node_modules/@theia/monaco/src/browser/style/index.css");
+__webpack_require__(/*! ../../src/browser/style/symbol-sprite.svg */ "../../../../node_modules/@theia/monaco/src/browser/style/symbol-sprite.svg");
+__webpack_require__(/*! ../../src/browser/style/symbol-icons.css */ "../../../../node_modules/@theia/monaco/src/browser/style/symbol-icons.css");
+var debounce = __webpack_require__(/*! lodash.debounce */ "../../../../node_modules/lodash.debounce/index.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var preference_scope_1 = __webpack_require__(/*! @theia/core/lib/common/preferences/preference-scope */ "../../../../node_modules/@theia/core/lib/common/preferences/preference-scope.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var browser_2 = __webpack_require__(/*! @theia/languages/lib/browser */ "../../../../node_modules/@theia/languages/lib/browser/index.js");
+var browser_3 = __webpack_require__(/*! @theia/editor/lib/browser */ "../../../../node_modules/@theia/editor/lib/browser/index.js");
+var editor_keybinding_contexts_1 = __webpack_require__(/*! @theia/editor/lib/browser/editor-keybinding-contexts */ "../../../../node_modules/@theia/editor/lib/browser/editor-keybinding-contexts.js");
+var monaco_languageclient_1 = __webpack_require__(/*! monaco-languageclient */ "../../../../node_modules/monaco-languageclient/lib/index.js");
+var monaco_editor_provider_1 = __webpack_require__(/*! ./monaco-editor-provider */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor-provider.js");
+var monaco_menu_1 = __webpack_require__(/*! ./monaco-menu */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-menu.js");
+var monaco_command_1 = __webpack_require__(/*! ./monaco-command */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-command.js");
+var monaco_keybinding_1 = __webpack_require__(/*! ./monaco-keybinding */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-keybinding.js");
+var monaco_languages_1 = __webpack_require__(/*! ./monaco-languages */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-languages.js");
+var monaco_workspace_1 = __webpack_require__(/*! ./monaco-workspace */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-workspace.js");
+var monaco_configurations_1 = __webpack_require__(/*! ./monaco-configurations */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-configurations.js");
+var monaco_editor_service_1 = __webpack_require__(/*! ./monaco-editor-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor-service.js");
+var monaco_text_model_service_1 = __webpack_require__(/*! ./monaco-text-model-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-text-model-service.js");
+var monaco_context_menu_1 = __webpack_require__(/*! ./monaco-context-menu */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-context-menu.js");
+var monaco_outline_contribution_1 = __webpack_require__(/*! ./monaco-outline-contribution */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-outline-contribution.js");
+var monaco_status_bar_contribution_1 = __webpack_require__(/*! ./monaco-status-bar-contribution */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-status-bar-contribution.js");
+var monaco_command_service_1 = __webpack_require__(/*! ./monaco-command-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-command-service.js");
+var monaco_command_registry_1 = __webpack_require__(/*! ./monaco-command-registry */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-command-registry.js");
+var monaco_quick_open_service_1 = __webpack_require__(/*! ./monaco-quick-open-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-quick-open-service.js");
+var monaco_diff_navigator_factory_1 = __webpack_require__(/*! ./monaco-diff-navigator-factory */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-diff-navigator-factory.js");
+var monaco_keybinding_contexts_1 = __webpack_require__(/*! ./monaco-keybinding-contexts */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-keybinding-contexts.js");
+var monaco_frontend_application_contribution_1 = __webpack_require__(/*! ./monaco-frontend-application-contribution */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-frontend-application-contribution.js");
+var monaco_textmate_frontend_bindings_1 = __webpack_require__(/*! ./textmate/monaco-textmate-frontend-bindings */ "../../../../node_modules/@theia/monaco/lib/browser/textmate/monaco-textmate-frontend-bindings.js");
+var monaco_semantic_highlighting_service_1 = __webpack_require__(/*! ./monaco-semantic-highlighting-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-semantic-highlighting-service.js");
+var semantic_highlighting_service_1 = __webpack_require__(/*! @theia/editor/lib/browser/semantic-highlight/semantic-highlighting-service */ "../../../../node_modules/@theia/editor/lib/browser/semantic-highlight/semantic-highlighting-service.js");
+var monaco_bulk_edit_service_1 = __webpack_require__(/*! ./monaco-bulk-edit-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-bulk-edit-service.js");
+var monaco_outline_decorator_1 = __webpack_require__(/*! ./monaco-outline-decorator */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-outline-decorator.js");
+var outline_decorator_service_1 = __webpack_require__(/*! @theia/outline-view/lib/browser/outline-decorator-service */ "../../../../node_modules/@theia/outline-view/lib/browser/outline-decorator-service.js");
+var monaco_snippet_suggest_provider_1 = __webpack_require__(/*! ./monaco-snippet-suggest-provider */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-snippet-suggest-provider.js");
+var context_key_service_1 = __webpack_require__(/*! @theia/core/lib/browser/context-key-service */ "../../../../node_modules/@theia/core/lib/browser/context-key-service.js");
+var monaco_context_key_service_1 = __webpack_require__(/*! ./monaco-context-key-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-context-key-service.js");
+var monaco_mime_service_1 = __webpack_require__(/*! ./monaco-mime-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-mime-service.js");
+var mime_service_1 = __webpack_require__(/*! @theia/core/lib/browser/mime-service */ "../../../../node_modules/@theia/core/lib/browser/mime-service.js");
+var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
+var monaco_color_registry_1 = __webpack_require__(/*! ./monaco-color-registry */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-color-registry.js");
+var color_registry_1 = __webpack_require__(/*! @theia/core/lib/browser/color-registry */ "../../../../node_modules/@theia/core/lib/browser/color-registry.js");
+var monaco_theming_service_1 = __webpack_require__(/*! ./monaco-theming-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-theming-service.js");
+inversify_1.decorate(inversify_1.injectable(), monaco_languageclient_1.MonacoToProtocolConverter);
+inversify_1.decorate(inversify_1.injectable(), monaco_languageclient_1.ProtocolToMonacoConverter);
+inversify_1.decorate(inversify_1.injectable(), monaco.contextKeyService.ContextKeyService);
+monaco_theming_service_1.MonacoThemingService.init();
+exports.default = new inversify_1.ContainerModule(function (bind, unbind, isBound, rebind) {
+    bind(monaco_theming_service_1.MonacoThemingService).toSelf().inSingletonScope();
+    bind(monaco_context_key_service_1.MonacoContextKeyService).toSelf().inSingletonScope();
+    rebind(context_key_service_1.ContextKeyService).toService(monaco_context_key_service_1.MonacoContextKeyService);
+    bind(monaco_snippet_suggest_provider_1.MonacoSnippetSuggestProvider).toSelf().inSingletonScope();
+    bind(browser_1.FrontendApplicationContribution).to(monaco_frontend_application_contribution_1.MonacoFrontendApplicationContribution).inSingletonScope();
+    bind(monaco_languageclient_1.MonacoToProtocolConverter).toSelf().inSingletonScope();
+    bind(monaco_languageclient_1.ProtocolToMonacoConverter).toSelf().inSingletonScope();
+    bind(monaco_languages_1.MonacoLanguages).toSelf().inSingletonScope();
+    bind(browser_2.Languages).toService(monaco_languages_1.MonacoLanguages);
+    bind(monaco_configurations_1.MonacoConfigurations).toSelf().inSingletonScope();
+    bind(monaco_workspace_1.MonacoWorkspace).toSelf().inSingletonScope();
+    bind(browser_2.Workspace).toService(monaco_workspace_1.MonacoWorkspace);
+    bind(exports.MonacoConfigurationService).toDynamicValue(function (_a) {
+        var container = _a.container;
+        return createMonacoConfigurationService(container);
+    }).inSingletonScope();
+    bind(monaco.contextKeyService.ContextKeyService).toDynamicValue(function (_a) {
+        var container = _a.container;
+        return new monaco.contextKeyService.ContextKeyService(container.get(exports.MonacoConfigurationService));
+    }).inSingletonScope();
+    bind(monaco_bulk_edit_service_1.MonacoBulkEditService).toSelf().inSingletonScope();
+    bind(monaco_editor_service_1.MonacoEditorService).toSelf().inSingletonScope();
+    bind(monaco_text_model_service_1.MonacoTextModelService).toSelf().inSingletonScope();
+    bind(monaco_context_menu_1.MonacoContextMenuService).toSelf().inSingletonScope();
+    bind(monaco_editor_1.MonacoEditorServices).toSelf().inSingletonScope();
+    bind(monaco_editor_provider_1.MonacoEditorProvider).toSelf().inSingletonScope();
+    bind(monaco_command_service_1.MonacoCommandService).toSelf().inTransientScope();
+    bind(monaco_command_service_1.MonacoCommandServiceFactory).toAutoFactory(monaco_command_service_1.MonacoCommandService);
+    bind(browser_3.TextEditorProvider).toProvider(function (context) {
+        return function (uri) { return context.container.get(monaco_editor_provider_1.MonacoEditorProvider).get(uri); };
+    });
+    bind(monaco_diff_navigator_factory_1.MonacoDiffNavigatorFactory).toSelf().inSingletonScope();
+    bind(browser_3.DiffNavigatorProvider).toFactory(function (context) {
+        return function (editor) { return context.container.get(monaco_editor_provider_1.MonacoEditorProvider).getDiffNavigator(editor); };
+    });
+    bind(monaco_outline_contribution_1.MonacoOutlineContribution).toSelf().inSingletonScope();
+    bind(browser_1.FrontendApplicationContribution).toService(monaco_outline_contribution_1.MonacoOutlineContribution);
+    bind(monaco_status_bar_contribution_1.MonacoStatusBarContribution).toSelf().inSingletonScope();
+    bind(browser_1.FrontendApplicationContribution).toService(monaco_status_bar_contribution_1.MonacoStatusBarContribution);
+    bind(monaco_command_registry_1.MonacoCommandRegistry).toSelf().inSingletonScope();
+    bind(common_1.CommandContribution).to(monaco_command_1.MonacoEditorCommandHandlers).inSingletonScope();
+    bind(common_1.MenuContribution).to(monaco_menu_1.MonacoEditorMenuContribution).inSingletonScope();
+    bind(browser_1.KeybindingContribution).to(monaco_keybinding_1.MonacoKeybindingContribution).inSingletonScope();
+    rebind(editor_keybinding_contexts_1.StrictEditorTextFocusContext).to(monaco_keybinding_contexts_1.MonacoStrictEditorTextFocusContext).inSingletonScope();
+    bind(monaco_quick_open_service_1.MonacoQuickOpenService).toSelf().inSingletonScope();
+    rebind(browser_1.QuickOpenService).toService(monaco_quick_open_service_1.MonacoQuickOpenService);
+    monaco_textmate_frontend_bindings_1.default(bind, unbind, isBound, rebind);
+    bind(monaco_semantic_highlighting_service_1.MonacoSemanticHighlightingService).toSelf().inSingletonScope();
+    rebind(semantic_highlighting_service_1.SemanticHighlightingService).to(monaco_semantic_highlighting_service_1.MonacoSemanticHighlightingService).inSingletonScope();
+    bind(monaco_outline_decorator_1.MonacoOutlineDecorator).toSelf().inSingletonScope();
+    bind(outline_decorator_service_1.OutlineTreeDecorator).toService(monaco_outline_decorator_1.MonacoOutlineDecorator);
+    bind(monaco_mime_service_1.MonacoMimeService).toSelf().inSingletonScope();
+    rebind(mime_service_1.MimeService).toService(monaco_mime_service_1.MonacoMimeService);
+    bind(monaco_color_registry_1.MonacoColorRegistry).toSelf().inSingletonScope();
+    rebind(color_registry_1.ColorRegistry).toService(monaco_color_registry_1.MonacoColorRegistry);
+});
+exports.MonacoConfigurationService = Symbol('MonacoConfigurationService');
+function createMonacoConfigurationService(container) {
+    var configurations = container.get(monaco_configurations_1.MonacoConfigurations);
+    var preferences = container.get(browser_1.PreferenceService);
+    var preferenceSchemaProvider = container.get(browser_1.PreferenceSchemaProvider);
+    var service = monaco.services.StaticServices.configurationService.get();
+    var _configuration = service._configuration;
+    _configuration.getValue = function (section, overrides, workspace) {
+        var overrideIdentifier = overrides && 'overrideIdentifier' in overrides && overrides['overrideIdentifier'] || undefined;
+        var resourceUri = overrides && 'resource' in overrides && overrides['resource'].toString();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        var proxy = browser_1.createPreferenceProxy(preferences, preferenceSchemaProvider.getCombinedSchema(), {
+            resourceUri: resourceUri, overrideIdentifier: overrideIdentifier, style: 'both'
+        });
+        if (section) {
+            return proxy[section];
+        }
+        return proxy;
+    };
+    var initFromConfiguration = debounce(function () {
+        var event = new monaco.services.ConfigurationChangeEvent();
+        event._source = 6 /* DEFAULT */;
+        service._onDidChangeConfiguration.fire(event);
+    });
+    preferences.onPreferenceChanged(function (e) {
+        if (e.scope === preference_scope_1.PreferenceScope.Default) {
+            initFromConfiguration();
+        }
+    });
+    configurations.onDidChangeConfiguration(function (e) {
+        if (e.affectedSections) {
+            var event_1 = new monaco.services.ConfigurationChangeEvent();
+            event_1.change(e.affectedSections);
+            service._onDidChangeConfiguration.fire(event_1);
+        }
+    });
+    return service;
+}
+exports.createMonacoConfigurationService = createMonacoConfigurationService;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-indexed-db.js":
+/*!********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-indexed-db.js ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2020 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var idb = __webpack_require__(/*! idb */ "../../../../node_modules/idb/build/esm/index.js");
+var disposable_1 = __webpack_require__(/*! @theia/core/lib/common/disposable */ "../../../../node_modules/@theia/core/lib/common/disposable.js");
+var _monacoDB;
+if ('indexedDB' in window) {
+    _monacoDB = idb.openDB('theia-monaco', 1, {
+        upgrade: function (db) {
+            if (!db.objectStoreNames.contains('themes')) {
+                db.createObjectStore('themes', { keyPath: 'id' });
+            }
+        }
+    });
+}
+exports.monacoDB = _monacoDB;
+var MonacoThemeState;
+(function (MonacoThemeState) {
+    function is(state) {
+        return !!state && typeof state === 'object' && 'id' in state && 'label' in state && 'uiTheme' in state && 'data' in state;
+    }
+    MonacoThemeState.is = is;
+})(MonacoThemeState = exports.MonacoThemeState || (exports.MonacoThemeState = {}));
+function getThemes() {
+    return __awaiter(this, void 0, void 0, function () {
+        var db, result;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (!exports.monacoDB) {
+                        return [2 /*return*/, []];
+                    }
+                    return [4 /*yield*/, exports.monacoDB];
+                case 1:
+                    db = _a.sent();
+                    return [4 /*yield*/, db.transaction('themes', 'readonly').objectStore('themes').getAll()];
+                case 2:
+                    result = _a.sent();
+                    return [2 /*return*/, result.filter(MonacoThemeState.is)];
+            }
+        });
+    });
+}
+exports.getThemes = getThemes;
+function putTheme(state) {
+    var toDispose = new disposable_1.DisposableCollection(disposable_1.Disposable.create(function () { }));
+    doPutTheme(state, toDispose);
+    return toDispose;
+}
+exports.putTheme = putTheme;
+function doPutTheme(state, toDispose) {
+    return __awaiter(this, void 0, void 0, function () {
+        var db, id;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (!exports.monacoDB) {
+                        return [2 /*return*/];
+                    }
+                    return [4 /*yield*/, exports.monacoDB];
+                case 1:
+                    db = _a.sent();
+                    if (toDispose.disposed) {
+                        return [2 /*return*/];
+                    }
+                    id = state.id;
+                    return [4 /*yield*/, db.transaction('themes', 'readwrite').objectStore('themes').put(state)];
+                case 2:
+                    _a.sent();
+                    if (!toDispose.disposed) return [3 /*break*/, 4];
+                    return [4 /*yield*/, deleteTheme(id)];
+                case 3:
+                    _a.sent();
+                    return [2 /*return*/];
+                case 4:
+                    toDispose.push(disposable_1.Disposable.create(function () { return deleteTheme(id); }));
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function deleteTheme(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        var db;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (!exports.monacoDB) {
+                        return [2 /*return*/];
+                    }
+                    return [4 /*yield*/, exports.monacoDB];
+                case 1:
+                    db = _a.sent();
+                    return [4 /*yield*/, db.transaction('themes', 'readwrite').objectStore('themes').delete(id)];
+                case 2:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.deleteTheme = deleteTheme;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-keybinding-contexts.js":
+/*!*****************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-keybinding-contexts.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2018 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var editor_keybinding_contexts_1 = __webpack_require__(/*! @theia/editor/lib/browser/editor-keybinding-contexts */ "../../../../node_modules/@theia/editor/lib/browser/editor-keybinding-contexts.js");
+var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
+/**
+ * Besides checking whether this editor is the currently active one and has the focus, it also checks the followings:
+ *  - the suggest widget is visible
+ *  - the find (and replace) widget is visible.
+ *  - the rename input widget (which we use for refactoring and not find and replace) is visible.
+ *
+ * If any of the above-mentioned additional checks evaluates to `true` the `canHandle` will evaluate to `false`.
+ *
+ * See: https://github.com/eamodio/vscode-gitlens/blob/57226d54d1e929be04b02ee31ca294c50305481b/package.json#L2857
+ */
+var MonacoStrictEditorTextFocusContext = /** @class */ (function (_super) {
+    __extends(MonacoStrictEditorTextFocusContext, _super);
+    function MonacoStrictEditorTextFocusContext() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    MonacoStrictEditorTextFocusContext.prototype.canHandle = function (widget) {
+        var editor = widget.editor;
+        if (editor instanceof monaco_editor_1.MonacoEditor) {
+            return editor.isFocused({ strict: true });
+        }
+        return _super.prototype.canHandle.call(this, widget);
+    };
+    MonacoStrictEditorTextFocusContext = __decorate([
+        inversify_1.injectable()
+    ], MonacoStrictEditorTextFocusContext);
+    return MonacoStrictEditorTextFocusContext;
+}(editor_keybinding_contexts_1.StrictEditorTextFocusContext));
+exports.MonacoStrictEditorTextFocusContext = MonacoStrictEditorTextFocusContext;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-keybinding.js":
+/*!********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-keybinding.js ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var browser_1 = __webpack_require__(/*! @theia/editor/lib/browser */ "../../../../node_modules/@theia/editor/lib/browser/index.js");
+var monaco_command_1 = __webpack_require__(/*! ./monaco-command */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-command.js");
+var monaco_command_registry_1 = __webpack_require__(/*! ./monaco-command-registry */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-command-registry.js");
+var core_1 = __webpack_require__(/*! @theia/core */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var monaco_resolved_keybinding_1 = __webpack_require__(/*! ./monaco-resolved-keybinding */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-resolved-keybinding.js");
+var MonacoKeybindingContribution = /** @class */ (function () {
+    function MonacoKeybindingContribution() {
+    }
+    MonacoKeybindingContribution.prototype.registerKeybindings = function (registry) {
+        var defaultKeybindings = monaco.keybindings.KeybindingsRegistry.getDefaultKeybindings();
+        // register in reverse order to align with Monaco dispatch logic:
+        // https://github.com/TypeFox/vscode/blob/70b8db24a37fafc77247de7f7cb5bb0195120ed0/src/vs/platform/keybinding/common/keybindingResolver.ts#L302
+        for (var i = defaultKeybindings.length - 1; i >= 0; i--) {
+            var item = defaultKeybindings[i];
+            var command = this.commands.validate(item.command);
+            if (command) {
+                var when = item.when && item.when.serialize();
+                var keybinding = void 0;
+                if (item.command === monaco_command_1.MonacoCommands.GO_TO_DEFINITION && !core_1.environment.electron.is()) {
+                    keybinding = 'ctrlcmd+f11';
+                }
+                else {
+                    keybinding = monaco_resolved_keybinding_1.MonacoResolvedKeybinding.toKeybinding(item.keybinding);
+                }
+                registry.registerKeybinding({ command: command, keybinding: keybinding, when: when });
+            }
+        }
+        // `Select All` is not an editor action just like everything else.
+        var selectAllCommand = this.commands.validate(monaco_command_1.MonacoCommands.SELECTION_SELECT_ALL);
+        if (selectAllCommand) {
+            registry.registerKeybinding({
+                command: selectAllCommand,
+                keybinding: 'ctrlcmd+a',
+                context: browser_1.EditorKeybindingContexts.editorTextFocus
+            });
+        }
+    };
+    __decorate([
+        inversify_1.inject(monaco_command_registry_1.MonacoCommandRegistry),
+        __metadata("design:type", monaco_command_registry_1.MonacoCommandRegistry)
+    ], MonacoKeybindingContribution.prototype, "commands", void 0);
+    MonacoKeybindingContribution = __decorate([
+        inversify_1.injectable()
+    ], MonacoKeybindingContribution);
+    return MonacoKeybindingContribution;
+}());
+exports.MonacoKeybindingContribution = MonacoKeybindingContribution;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-keycode-map.js":
+/*!*********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-keycode-map.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+Object.defineProperty(exports, "__esModule", { value: true });
+var browser = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var KeyCode = monaco.KeyCode;
+exports.KEY_CODE_MAP = [];
+(function () {
+    exports.KEY_CODE_MAP[3] = KeyCode.PauseBreak; // VK_CANCEL 0x03 Control-break processing
+    exports.KEY_CODE_MAP[8] = KeyCode.Backspace;
+    exports.KEY_CODE_MAP[9] = KeyCode.Tab;
+    exports.KEY_CODE_MAP[13] = KeyCode.Enter;
+    exports.KEY_CODE_MAP[16] = KeyCode.Shift;
+    exports.KEY_CODE_MAP[17] = KeyCode.Ctrl;
+    exports.KEY_CODE_MAP[18] = KeyCode.Alt;
+    exports.KEY_CODE_MAP[19] = KeyCode.PauseBreak;
+    exports.KEY_CODE_MAP[20] = KeyCode.CapsLock;
+    exports.KEY_CODE_MAP[27] = KeyCode.Escape;
+    exports.KEY_CODE_MAP[32] = KeyCode.Space;
+    exports.KEY_CODE_MAP[33] = KeyCode.PageUp;
+    exports.KEY_CODE_MAP[34] = KeyCode.PageDown;
+    exports.KEY_CODE_MAP[35] = KeyCode.End;
+    exports.KEY_CODE_MAP[36] = KeyCode.Home;
+    exports.KEY_CODE_MAP[37] = KeyCode.LeftArrow;
+    exports.KEY_CODE_MAP[38] = KeyCode.UpArrow;
+    exports.KEY_CODE_MAP[39] = KeyCode.RightArrow;
+    exports.KEY_CODE_MAP[40] = KeyCode.DownArrow;
+    exports.KEY_CODE_MAP[45] = KeyCode.Insert;
+    exports.KEY_CODE_MAP[46] = KeyCode.Delete;
+    exports.KEY_CODE_MAP[48] = KeyCode.KEY_0;
+    exports.KEY_CODE_MAP[49] = KeyCode.KEY_1;
+    exports.KEY_CODE_MAP[50] = KeyCode.KEY_2;
+    exports.KEY_CODE_MAP[51] = KeyCode.KEY_3;
+    exports.KEY_CODE_MAP[52] = KeyCode.KEY_4;
+    exports.KEY_CODE_MAP[53] = KeyCode.KEY_5;
+    exports.KEY_CODE_MAP[54] = KeyCode.KEY_6;
+    exports.KEY_CODE_MAP[55] = KeyCode.KEY_7;
+    exports.KEY_CODE_MAP[56] = KeyCode.KEY_8;
+    exports.KEY_CODE_MAP[57] = KeyCode.KEY_9;
+    exports.KEY_CODE_MAP[65] = KeyCode.KEY_A;
+    exports.KEY_CODE_MAP[66] = KeyCode.KEY_B;
+    exports.KEY_CODE_MAP[67] = KeyCode.KEY_C;
+    exports.KEY_CODE_MAP[68] = KeyCode.KEY_D;
+    exports.KEY_CODE_MAP[69] = KeyCode.KEY_E;
+    exports.KEY_CODE_MAP[70] = KeyCode.KEY_F;
+    exports.KEY_CODE_MAP[71] = KeyCode.KEY_G;
+    exports.KEY_CODE_MAP[72] = KeyCode.KEY_H;
+    exports.KEY_CODE_MAP[73] = KeyCode.KEY_I;
+    exports.KEY_CODE_MAP[74] = KeyCode.KEY_J;
+    exports.KEY_CODE_MAP[75] = KeyCode.KEY_K;
+    exports.KEY_CODE_MAP[76] = KeyCode.KEY_L;
+    exports.KEY_CODE_MAP[77] = KeyCode.KEY_M;
+    exports.KEY_CODE_MAP[78] = KeyCode.KEY_N;
+    exports.KEY_CODE_MAP[79] = KeyCode.KEY_O;
+    exports.KEY_CODE_MAP[80] = KeyCode.KEY_P;
+    exports.KEY_CODE_MAP[81] = KeyCode.KEY_Q;
+    exports.KEY_CODE_MAP[82] = KeyCode.KEY_R;
+    exports.KEY_CODE_MAP[83] = KeyCode.KEY_S;
+    exports.KEY_CODE_MAP[84] = KeyCode.KEY_T;
+    exports.KEY_CODE_MAP[85] = KeyCode.KEY_U;
+    exports.KEY_CODE_MAP[86] = KeyCode.KEY_V;
+    exports.KEY_CODE_MAP[87] = KeyCode.KEY_W;
+    exports.KEY_CODE_MAP[88] = KeyCode.KEY_X;
+    exports.KEY_CODE_MAP[89] = KeyCode.KEY_Y;
+    exports.KEY_CODE_MAP[90] = KeyCode.KEY_Z;
+    exports.KEY_CODE_MAP[93] = KeyCode.ContextMenu;
+    exports.KEY_CODE_MAP[96] = KeyCode.NUMPAD_0;
+    exports.KEY_CODE_MAP[97] = KeyCode.NUMPAD_1;
+    exports.KEY_CODE_MAP[98] = KeyCode.NUMPAD_2;
+    exports.KEY_CODE_MAP[99] = KeyCode.NUMPAD_3;
+    exports.KEY_CODE_MAP[100] = KeyCode.NUMPAD_4;
+    exports.KEY_CODE_MAP[101] = KeyCode.NUMPAD_5;
+    exports.KEY_CODE_MAP[102] = KeyCode.NUMPAD_6;
+    exports.KEY_CODE_MAP[103] = KeyCode.NUMPAD_7;
+    exports.KEY_CODE_MAP[104] = KeyCode.NUMPAD_8;
+    exports.KEY_CODE_MAP[105] = KeyCode.NUMPAD_9;
+    exports.KEY_CODE_MAP[106] = KeyCode.NUMPAD_MULTIPLY;
+    exports.KEY_CODE_MAP[107] = KeyCode.NUMPAD_ADD;
+    exports.KEY_CODE_MAP[108] = KeyCode.NUMPAD_SEPARATOR;
+    exports.KEY_CODE_MAP[109] = KeyCode.NUMPAD_SUBTRACT;
+    exports.KEY_CODE_MAP[110] = KeyCode.NUMPAD_DECIMAL;
+    exports.KEY_CODE_MAP[111] = KeyCode.NUMPAD_DIVIDE;
+    exports.KEY_CODE_MAP[112] = KeyCode.F1;
+    exports.KEY_CODE_MAP[113] = KeyCode.F2;
+    exports.KEY_CODE_MAP[114] = KeyCode.F3;
+    exports.KEY_CODE_MAP[115] = KeyCode.F4;
+    exports.KEY_CODE_MAP[116] = KeyCode.F5;
+    exports.KEY_CODE_MAP[117] = KeyCode.F6;
+    exports.KEY_CODE_MAP[118] = KeyCode.F7;
+    exports.KEY_CODE_MAP[119] = KeyCode.F8;
+    exports.KEY_CODE_MAP[120] = KeyCode.F9;
+    exports.KEY_CODE_MAP[121] = KeyCode.F10;
+    exports.KEY_CODE_MAP[122] = KeyCode.F11;
+    exports.KEY_CODE_MAP[123] = KeyCode.F12;
+    exports.KEY_CODE_MAP[124] = KeyCode.F13;
+    exports.KEY_CODE_MAP[125] = KeyCode.F14;
+    exports.KEY_CODE_MAP[126] = KeyCode.F15;
+    exports.KEY_CODE_MAP[127] = KeyCode.F16;
+    exports.KEY_CODE_MAP[128] = KeyCode.F17;
+    exports.KEY_CODE_MAP[129] = KeyCode.F18;
+    exports.KEY_CODE_MAP[130] = KeyCode.F19;
+    exports.KEY_CODE_MAP[144] = KeyCode.NumLock;
+    exports.KEY_CODE_MAP[145] = KeyCode.ScrollLock;
+    exports.KEY_CODE_MAP[186] = KeyCode.US_SEMICOLON;
+    exports.KEY_CODE_MAP[187] = KeyCode.US_EQUAL;
+    exports.KEY_CODE_MAP[188] = KeyCode.US_COMMA;
+    exports.KEY_CODE_MAP[189] = KeyCode.US_MINUS;
+    exports.KEY_CODE_MAP[190] = KeyCode.US_DOT;
+    exports.KEY_CODE_MAP[191] = KeyCode.US_SLASH;
+    exports.KEY_CODE_MAP[192] = KeyCode.US_BACKTICK;
+    exports.KEY_CODE_MAP[193] = KeyCode.ABNT_C1;
+    exports.KEY_CODE_MAP[194] = KeyCode.ABNT_C2;
+    exports.KEY_CODE_MAP[219] = KeyCode.US_OPEN_SQUARE_BRACKET;
+    exports.KEY_CODE_MAP[220] = KeyCode.US_BACKSLASH;
+    exports.KEY_CODE_MAP[221] = KeyCode.US_CLOSE_SQUARE_BRACKET;
+    exports.KEY_CODE_MAP[222] = KeyCode.US_QUOTE;
+    exports.KEY_CODE_MAP[223] = KeyCode.OEM_8;
+    exports.KEY_CODE_MAP[226] = KeyCode.OEM_102;
+    /**
+     * https://lists.w3.org/Archives/Public/www-dom/2010JulSep/att-0182/keyCode-spec.html
+     * If an Input Method Editor is processing key input and the event is keydown, return 229.
+     */
+    exports.KEY_CODE_MAP[229] = KeyCode.KEY_IN_COMPOSITION;
+    if (browser.isIE) {
+        exports.KEY_CODE_MAP[91] = KeyCode.Meta;
+    }
+    else if (browser.isFirefox) {
+        exports.KEY_CODE_MAP[59] = KeyCode.US_SEMICOLON;
+        exports.KEY_CODE_MAP[107] = KeyCode.US_EQUAL;
+        exports.KEY_CODE_MAP[109] = KeyCode.US_MINUS;
+        if (monaco.platform.OS === 2 /* Macintosh */) {
+            exports.KEY_CODE_MAP[224] = KeyCode.Meta;
+        }
+    }
+    else if (browser.isWebKit) {
+        exports.KEY_CODE_MAP[91] = KeyCode.Meta;
+        if (monaco.platform.OS === 2 /* Macintosh */) {
+            // the two meta keys in the Mac have different key codes (91 and 93)
+            exports.KEY_CODE_MAP[93] = KeyCode.Meta;
+        }
+        else {
+            exports.KEY_CODE_MAP[92] = KeyCode.Meta;
+        }
+    }
+})();
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-languages.js":
+/*!*******************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-languages.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var monaco_languageclient_1 = __webpack_require__(/*! monaco-languageclient */ "../../../../node_modules/monaco-languageclient/lib/index.js");
+var problem_manager_1 = __webpack_require__(/*! @theia/markers/lib/browser/problem/problem-manager */ "../../../../node_modules/@theia/markers/lib/browser/problem/problem-manager.js");
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var disposable_1 = __webpack_require__(/*! @theia/core/lib/common/disposable */ "../../../../node_modules/@theia/core/lib/common/disposable.js");
+var monaco_diagnostic_collection_1 = __webpack_require__(/*! monaco-languageclient/lib/monaco-diagnostic-collection */ "../../../../node_modules/monaco-languageclient/lib/monaco-diagnostic-collection.js");
+inversify_1.decorate(inversify_1.injectable(), monaco_languageclient_1.MonacoLanguages);
+inversify_1.decorate(inversify_1.inject(monaco_languageclient_1.ProtocolToMonacoConverter), monaco_languageclient_1.MonacoLanguages, 0);
+inversify_1.decorate(inversify_1.inject(monaco_languageclient_1.MonacoToProtocolConverter), monaco_languageclient_1.MonacoLanguages, 1);
+var MonacoLanguages = /** @class */ (function (_super) {
+    __extends(MonacoLanguages, _super);
+    function MonacoLanguages(// eslint-disable-next-line @typescript-eslint/indent
+    p2m, m2p, problemManager) {
+        var e_1, _a;
+        var _this = _super.call(this, p2m, m2p) || this;
+        _this.problemManager = problemManager;
+        _this.workspaceSymbolProviders = [];
+        _this.makers = new Map();
+        try {
+            for (var _b = __values(_this.problemManager.getUris()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var uri = _c.value;
+                _this.updateMarkers(new uri_1.default(uri));
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        _this.problemManager.onDidChangeMarkers(function (uri) { return _this.updateMarkers(uri); });
+        return _this;
+    }
+    MonacoLanguages.prototype.updateMarkers = function (uri) {
+        var e_2, _a, e_3, _b, e_4, _c;
+        var uriString = uri.toString();
+        var owners = new Map();
+        try {
+            for (var _d = __values(this.problemManager.findMarkers({ uri: uri })), _e = _d.next(); !_e.done; _e = _d.next()) {
+                var marker = _e.value;
+                var diagnostics = owners.get(marker.owner) || [];
+                diagnostics.push(marker.data);
+                owners.set(marker.owner, diagnostics);
+            }
+        }
+        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        finally {
+            try {
+                if (_e && !_e.done && (_a = _d.return)) _a.call(_d);
+            }
+            finally { if (e_2) throw e_2.error; }
+        }
+        var toClean = new Set(this.makers.keys());
+        try {
+            for (var owners_1 = __values(owners), owners_1_1 = owners_1.next(); !owners_1_1.done; owners_1_1 = owners_1.next()) {
+                var _f = __read(owners_1_1.value, 2), owner = _f[0], diagnostics = _f[1];
+                toClean.delete(owner);
+                var collection = this.makers.get(owner) || new monaco_diagnostic_collection_1.MonacoDiagnosticCollection(owner, this.p2m);
+                collection.set(uriString, diagnostics);
+                this.makers.set(owner, collection);
+            }
+        }
+        catch (e_3_1) { e_3 = { error: e_3_1 }; }
+        finally {
+            try {
+                if (owners_1_1 && !owners_1_1.done && (_b = owners_1.return)) _b.call(owners_1);
+            }
+            finally { if (e_3) throw e_3.error; }
+        }
+        try {
+            for (var toClean_1 = __values(toClean), toClean_1_1 = toClean_1.next(); !toClean_1_1.done; toClean_1_1 = toClean_1.next()) {
+                var owner = toClean_1_1.value;
+                var collection = this.makers.get(owner);
+                if (collection) {
+                    collection.set(uriString, []);
+                }
+            }
+        }
+        catch (e_4_1) { e_4 = { error: e_4_1 }; }
+        finally {
+            try {
+                if (toClean_1_1 && !toClean_1_1.done && (_c = toClean_1.return)) _c.call(toClean_1);
+            }
+            finally { if (e_4) throw e_4.error; }
+        }
+    };
+    MonacoLanguages.prototype.createDiagnosticCollection = function (name) {
+        var _this = this;
+        var owner = name || 'default';
+        var uris = [];
+        return {
+            set: function (uri, diagnostics) {
+                _this.problemManager.setMarkers(new uri_1.default(uri), owner, diagnostics);
+                uris.push(uri);
+            },
+            dispose: function () {
+                var e_5, _a;
+                try {
+                    for (var uris_1 = __values(uris), uris_1_1 = uris_1.next(); !uris_1_1.done; uris_1_1 = uris_1.next()) {
+                        var uri = uris_1_1.value;
+                        _this.problemManager.setMarkers(new uri_1.default(uri), owner, []);
+                    }
+                }
+                catch (e_5_1) { e_5 = { error: e_5_1 }; }
+                finally {
+                    try {
+                        if (uris_1_1 && !uris_1_1.done && (_a = uris_1.return)) _a.call(uris_1);
+                    }
+                    finally { if (e_5) throw e_5.error; }
+                }
+            }
+        };
+    };
+    MonacoLanguages.prototype.registerWorkspaceSymbolProvider = function (provider) {
+        var _this = this;
+        this.workspaceSymbolProviders.push(provider);
+        return disposable_1.Disposable.create(function () {
+            var index = _this.workspaceSymbolProviders.indexOf(provider);
+            if (index !== -1) {
+                _this.workspaceSymbolProviders.splice(index, 1);
+            }
+        });
+    };
+    Object.defineProperty(MonacoLanguages.prototype, "languages", {
+        get: function () {
+            return __spread(this.mergeLanguages(monaco.languages.getLanguages()).values());
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MonacoLanguages.prototype.getLanguage = function (languageId) {
+        return this.mergeLanguages(monaco.languages.getLanguages().filter(function (language) { return language.id === languageId; })).get(languageId);
+    };
+    MonacoLanguages.prototype.mergeLanguages = function (registered) {
+        var e_6, _a, e_7, _b, e_8, _c, e_9, _d;
+        var languages = new Map();
+        try {
+            for (var registered_1 = __values(registered), registered_1_1 = registered_1.next(); !registered_1_1.done; registered_1_1 = registered_1.next()) {
+                var _e = registered_1_1.value, id = _e.id, aliases = _e.aliases, extensions = _e.extensions, filenames = _e.filenames;
+                var merged = languages.get(id) || {
+                    id: id,
+                    name: '',
+                    extensions: new Set(),
+                    filenames: new Set()
+                };
+                if (!merged.name && aliases && aliases.length) {
+                    merged.name = aliases[0];
+                }
+                if (extensions && extensions.length) {
+                    try {
+                        for (var extensions_1 = (e_7 = void 0, __values(extensions)), extensions_1_1 = extensions_1.next(); !extensions_1_1.done; extensions_1_1 = extensions_1.next()) {
+                            var extension = extensions_1_1.value;
+                            merged.extensions.add(extension);
+                        }
+                    }
+                    catch (e_7_1) { e_7 = { error: e_7_1 }; }
+                    finally {
+                        try {
+                            if (extensions_1_1 && !extensions_1_1.done && (_b = extensions_1.return)) _b.call(extensions_1);
+                        }
+                        finally { if (e_7) throw e_7.error; }
+                    }
+                }
+                if (filenames && filenames.length) {
+                    try {
+                        for (var filenames_1 = (e_8 = void 0, __values(filenames)), filenames_1_1 = filenames_1.next(); !filenames_1_1.done; filenames_1_1 = filenames_1.next()) {
+                            var filename = filenames_1_1.value;
+                            merged.filenames.add(filename);
+                        }
+                    }
+                    catch (e_8_1) { e_8 = { error: e_8_1 }; }
+                    finally {
+                        try {
+                            if (filenames_1_1 && !filenames_1_1.done && (_c = filenames_1.return)) _c.call(filenames_1);
+                        }
+                        finally { if (e_8) throw e_8.error; }
+                    }
+                }
+                languages.set(id, merged);
+            }
+        }
+        catch (e_6_1) { e_6 = { error: e_6_1 }; }
+        finally {
+            try {
+                if (registered_1_1 && !registered_1_1.done && (_a = registered_1.return)) _a.call(registered_1);
+            }
+            finally { if (e_6) throw e_6.error; }
+        }
+        try {
+            for (var languages_1 = __values(languages), languages_1_1 = languages_1.next(); !languages_1_1.done; languages_1_1 = languages_1.next()) {
+                var _f = __read(languages_1_1.value, 2), id = _f[0], language = _f[1];
+                if (!language.name) {
+                    language.name = id;
+                }
+            }
+        }
+        catch (e_9_1) { e_9 = { error: e_9_1 }; }
+        finally {
+            try {
+                if (languages_1_1 && !languages_1_1.done && (_d = languages_1.return)) _d.call(languages_1);
+            }
+            finally { if (e_9) throw e_9.error; }
+        }
+        return languages;
+    };
+    MonacoLanguages.prototype.createSignatureHelpProvider = function (selector, provider) {
+        var _this = this;
+        var triggerCharacters = [];
+        for (var _i = 2; _i < arguments.length; _i++) {
+            triggerCharacters[_i - 2] = arguments[_i];
+        }
+        var signatureHelpTriggerCharacters = __spread((provider.triggerCharacters || triggerCharacters || []));
+        var signatureHelpRetriggerCharacters = __spread((provider.retriggerCharacters || []));
+        return {
+            signatureHelpTriggerCharacters: signatureHelpTriggerCharacters,
+            signatureHelpRetriggerCharacters: signatureHelpRetriggerCharacters,
+            provideSignatureHelp: function (model, position, token) { return __awaiter(_this, void 0, void 0, function () {
+                var params, help;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (!this.matchModel(selector, monaco_languageclient_1.MonacoModelIdentifier.fromModel(model))) {
+                                return [2 /*return*/, undefined];
+                            }
+                            params = this.m2p.asTextDocumentPositionParams(model, position);
+                            return [4 /*yield*/, provider.provideSignatureHelp(params, token, undefined /* not used by LC */)];
+                        case 1:
+                            help = _a.sent();
+                            if (!help) {
+                                return [2 /*return*/, undefined];
+                            }
+                            return [2 /*return*/, {
+                                    value: this.p2m.asSignatureHelp(help),
+                                    dispose: function () { }
+                                }];
+                    }
+                });
+            }); }
+        };
+    };
+    MonacoLanguages.prototype.createCodeActionProvider = function (selector, provider) {
+        var _this = this;
+        return {
+            provideCodeActions: function (model, range, context, token) { return __awaiter(_this, void 0, void 0, function () {
+                var params, actions;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (!this.matchModel(selector, monaco_languageclient_1.MonacoModelIdentifier.fromModel(model))) {
+                                return [2 /*return*/, undefined];
+                            }
+                            params = this.m2p.asCodeActionParams(model, range, context);
+                            return [4 /*yield*/, provider.provideCodeActions(params, token)];
+                        case 1:
+                            actions = _a.sent();
+                            if (!actions) {
+                                return [2 /*return*/, undefined];
+                            }
+                            return [2 /*return*/, {
+                                    actions: this.p2m.asCodeActions(actions),
+                                    dispose: function () { }
+                                }];
+                    }
+                });
+            }); }
+        };
+    };
+    MonacoLanguages.prototype.createCodeLensProvider = function (selector, provider) {
+        var _this = this;
+        return {
+            provideCodeLenses: function (model, token) { return __awaiter(_this, void 0, void 0, function () {
+                var params, lenses;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (!this.matchModel(selector, monaco_languageclient_1.MonacoModelIdentifier.fromModel(model))) {
+                                return [2 /*return*/, undefined];
+                            }
+                            params = this.m2p.asCodeLensParams(model);
+                            return [4 /*yield*/, provider.provideCodeLenses(params, token)];
+                        case 1:
+                            lenses = _a.sent();
+                            if (!lenses) {
+                                return [2 /*return*/, undefined];
+                            }
+                            return [2 /*return*/, {
+                                    lenses: this.p2m.asCodeLenses(lenses),
+                                    dispose: function () { }
+                                }];
+                    }
+                });
+            }); },
+            resolveCodeLens: provider.resolveCodeLens ? function (model, codeLens, token) { return __awaiter(_this, void 0, void 0, function () {
+                var protocolCodeLens, result, resolvedCodeLens;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (!this.matchModel(selector, monaco_languageclient_1.MonacoModelIdentifier.fromModel(model))) {
+                                return [2 /*return*/, codeLens];
+                            }
+                            protocolCodeLens = this.m2p.asCodeLens(codeLens);
+                            return [4 /*yield*/, provider.resolveCodeLens(protocolCodeLens, token)];
+                        case 1:
+                            result = _a.sent();
+                            if (result) {
+                                resolvedCodeLens = this.p2m.asCodeLens(result);
+                                Object.assign(codeLens, resolvedCodeLens);
+                            }
+                            return [2 /*return*/, codeLens];
+                    }
+                });
+            }); } : (function (_, codeLens, __) { return codeLens; })
+        };
+    };
+    MonacoLanguages = __decorate([
+        inversify_1.injectable(),
+        __param(0, inversify_1.inject(monaco_languageclient_1.ProtocolToMonacoConverter)),
+        __param(1, inversify_1.inject(monaco_languageclient_1.MonacoToProtocolConverter)),
+        __param(2, inversify_1.inject(problem_manager_1.ProblemManager)),
+        __metadata("design:paramtypes", [monaco_languageclient_1.ProtocolToMonacoConverter,
+            monaco_languageclient_1.MonacoToProtocolConverter,
+            problem_manager_1.ProblemManager])
+    ], MonacoLanguages);
+    return MonacoLanguages;
+}(monaco_languageclient_1.MonacoLanguages));
+exports.MonacoLanguages = MonacoLanguages;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-loader.js":
+/*!****************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-loader.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+Object.defineProperty(exports, "__esModule", { value: true });
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function loadVsRequire(context) {
+    // Monaco uses a custom amd loader that over-rides node's require.
+    // Keep a reference to an original require so we can restore it after executing the amd loader file.
+    var originalRequire = context.require;
+    return new Promise(function (resolve) {
+        return window.addEventListener('load', function () {
+            var vsLoader = document.createElement('script');
+            vsLoader.type = 'text/javascript';
+            vsLoader.src = './vs/loader.js';
+            vsLoader.charset = 'utf-8';
+            vsLoader.addEventListener('load', function () {
+                // Save Monaco's amd require and restore the original require
+                var amdRequire = context.require;
+                if (originalRequire) {
+                    context.require = originalRequire;
+                }
+                resolve(amdRequire);
+            });
+            document.body.appendChild(vsLoader);
+        }, { once: true });
+    });
+}
+exports.loadVsRequire = loadVsRequire;
+function loadMonaco(vsRequire) {
+    return new Promise(function (resolve) {
+        vsRequire(['vs/editor/editor.main'], function () {
+            vsRequire([
+                'vs/language/css/monaco.contribution',
+                'vs/language/html/monaco.contribution',
+                'vs/platform/commands/common/commands',
+                'vs/platform/actions/common/actions',
+                'vs/platform/keybinding/common/keybindingsRegistry',
+                'vs/platform/keybinding/common/keybindingResolver',
+                'vs/platform/keybinding/common/usLayoutResolvedKeybinding',
+                'vs/base/common/keybindingLabels',
+                'vs/base/common/keyCodes',
+                'vs/base/common/mime',
+                'vs/editor/browser/editorExtensions',
+                'vs/editor/standalone/browser/simpleServices',
+                'vs/editor/standalone/browser/standaloneServices',
+                'vs/editor/standalone/browser/standaloneLanguages',
+                'vs/base/parts/quickopen/browser/quickOpenWidget',
+                'vs/base/parts/quickopen/browser/quickOpenModel',
+                'vs/base/common/filters',
+                'vs/platform/theme/common/styler',
+                'vs/platform/theme/common/colorRegistry',
+                'vs/base/common/color',
+                'vs/base/common/platform',
+                'vs/editor/common/modes',
+                'vs/editor/contrib/suggest/suggest',
+                'vs/editor/contrib/snippet/snippetParser',
+                'vs/platform/configuration/common/configuration',
+                'vs/platform/configuration/common/configurationModels',
+                'vs/editor/browser/services/codeEditorService',
+                'vs/editor/browser/services/codeEditorServiceImpl',
+                'vs/platform/markers/common/markerService',
+                'vs/platform/contextkey/common/contextkey',
+                'vs/platform/contextkey/browser/contextKeyService',
+                'vs/base/common/errors'
+            ], function (css, html, commands, actions, keybindingsRegistry, keybindingResolver, resolvedKeybinding, keybindingLabels, keyCodes, mime, editorExtensions, simpleServices, standaloneServices, standaloneLanguages, quickOpenWidget, quickOpenModel, filters, styler, colorRegistry, color, platform, modes, suggest, snippetParser, configuration, configurationModels, codeEditorService, codeEditorServiceImpl, markerService, contextKey, contextKeyService, error) {
+                var global = self;
+                global.monaco.commands = commands;
+                global.monaco.actions = actions;
+                global.monaco.keybindings = Object.assign({}, keybindingsRegistry, keybindingResolver, resolvedKeybinding, keybindingLabels, keyCodes);
+                global.monaco.services = Object.assign({}, simpleServices, standaloneServices, standaloneLanguages, configuration, configurationModels, codeEditorService, codeEditorServiceImpl, markerService);
+                global.monaco.quickOpen = Object.assign({}, quickOpenWidget, quickOpenModel);
+                global.monaco.filters = filters;
+                global.monaco.theme = styler;
+                global.monaco.color = Object.assign({}, colorRegistry, color);
+                global.monaco.platform = platform;
+                global.monaco.editorExtensions = editorExtensions;
+                global.monaco.modes = modes;
+                global.monaco.suggest = suggest;
+                global.monaco.snippetParser = snippetParser;
+                global.monaco.contextkey = contextKey;
+                global.monaco.contextKeyService = contextKeyService;
+                global.monaco.mime = mime;
+                global.monaco.error = error;
+                resolve();
+            });
+        });
+    });
+}
+exports.loadMonaco = loadMonaco;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-menu.js":
+/*!**************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-menu.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var browser_1 = __webpack_require__(/*! @theia/editor/lib/browser */ "../../../../node_modules/@theia/editor/lib/browser/index.js");
+var monaco_command_1 = __webpack_require__(/*! ./monaco-command */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-command.js");
+var monaco_command_registry_1 = __webpack_require__(/*! ./monaco-command-registry */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-command-registry.js");
+var MenuRegistry = monaco.actions.MenuRegistry;
+var MonacoMenus;
+(function (MonacoMenus) {
+    MonacoMenus.SELECTION = __spread(common_1.MAIN_MENU_BAR, ['3_selection']);
+    MonacoMenus.SELECTION_GROUP = {
+        id: '1_selection_group',
+        actions: [
+            monaco_command_1.MonacoCommands.SELECTION_SELECT_ALL,
+            monaco_command_1.MonacoCommands.SELECTION_EXPAND_SELECTION,
+            monaco_command_1.MonacoCommands.SELECTION_SHRINK_SELECTION
+        ]
+    };
+    MonacoMenus.SELECTION_MOVE_GROUP = {
+        id: '2_copy_move_group',
+        actions: [
+            monaco_command_1.MonacoCommands.SELECTION_COPY_LINE_UP,
+            monaco_command_1.MonacoCommands.SELECTION_COPY_LINE_DOWN,
+            monaco_command_1.MonacoCommands.SELECTION_MOVE_LINE_UP,
+            monaco_command_1.MonacoCommands.SELECTION_MOVE_LINE_DOWN
+        ]
+    };
+    MonacoMenus.SELECTION_CURSOR_GROUP = {
+        id: '3_cursor_group',
+        actions: [
+            monaco_command_1.MonacoCommands.SELECTION_ADD_CURSOR_ABOVE,
+            monaco_command_1.MonacoCommands.SELECTION_ADD_CURSOR_BELOW,
+            monaco_command_1.MonacoCommands.SELECTION_ADD_CURSOR_TO_LINE_END,
+            monaco_command_1.MonacoCommands.SELECTION_ADD_NEXT_OCCURRENCE,
+            monaco_command_1.MonacoCommands.SELECTION_ADD_PREVIOUS_OCCURRENCE,
+            monaco_command_1.MonacoCommands.SELECTION_SELECT_ALL_OCCURRENCES
+        ]
+    };
+    MonacoMenus.SELECTION_GROUPS = [
+        MonacoMenus.SELECTION_GROUP,
+        MonacoMenus.SELECTION_MOVE_GROUP,
+        MonacoMenus.SELECTION_CURSOR_GROUP
+    ];
+})(MonacoMenus = exports.MonacoMenus || (exports.MonacoMenus = {}));
+var MonacoEditorMenuContribution = /** @class */ (function () {
+    function MonacoEditorMenuContribution(commands) {
+        this.commands = commands;
+    }
+    MonacoEditorMenuContribution.prototype.registerMenus = function (registry) {
+        var e_1, _a, e_2, _b;
+        var _this = this;
+        try {
+            for (var _c = __values(MenuRegistry.getMenuItems(7)), _d = _c.next(); !_d.done; _d = _c.next()) {
+                var item = _d.value;
+                var commandId = this.commands.validate(item.command.id);
+                if (commandId) {
+                    var menuPath = __spread(browser_1.EDITOR_CONTEXT_MENU, [(item.group || '')]);
+                    registry.registerMenuAction(menuPath, { commandId: commandId });
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        registry.registerSubmenu(MonacoMenus.SELECTION, 'Selection');
+        var _loop_1 = function (group) {
+            group.actions.forEach(function (action, index) {
+                var commandId = _this.commands.validate(action);
+                if (commandId) {
+                    var path = __spread(MonacoMenus.SELECTION, [group.id]);
+                    var order = index.toString();
+                    registry.registerMenuAction(path, { commandId: commandId, order: order });
+                }
+            });
+        };
+        try {
+            for (var _e = __values(MonacoMenus.SELECTION_GROUPS), _f = _e.next(); !_f.done; _f = _e.next()) {
+                var group = _f.value;
+                _loop_1(group);
+            }
+        }
+        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        finally {
+            try {
+                if (_f && !_f.done && (_b = _e.return)) _b.call(_e);
+            }
+            finally { if (e_2) throw e_2.error; }
+        }
+    };
+    MonacoEditorMenuContribution = __decorate([
+        inversify_1.injectable(),
+        __param(0, inversify_1.inject(monaco_command_registry_1.MonacoCommandRegistry)),
+        __metadata("design:paramtypes", [monaco_command_registry_1.MonacoCommandRegistry])
+    ], MonacoEditorMenuContribution);
+    return MonacoEditorMenuContribution;
+}());
+exports.MonacoEditorMenuContribution = MonacoEditorMenuContribution;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-mime-service.js":
+/*!**********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-mime-service.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2019 Red Hat, Inc. and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var mime_service_1 = __webpack_require__(/*! @theia/core/lib/browser/mime-service */ "../../../../node_modules/@theia/core/lib/browser/mime-service.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var MonacoMimeService = /** @class */ (function (_super) {
+    __extends(MonacoMimeService, _super);
+    function MonacoMimeService() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    MonacoMimeService.prototype.setAssociations = function (associations) {
+        var e_1, _a;
+        monaco.mime.clearTextMimes(true);
+        try {
+            for (var associations_1 = __values(associations), associations_1_1 = associations_1.next(); !associations_1_1.done; associations_1_1 = associations_1.next()) {
+                var association = associations_1_1.value;
+                var mimetype = this.getMimeForMode(association.id) || "text/x-" + association.id;
+                monaco.mime.registerTextMime({ id: association.id, mime: mimetype, filepattern: association.filepattern, userConfigured: true }, false);
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (associations_1_1 && !associations_1_1.done && (_a = associations_1.return)) _a.call(associations_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+    };
+    MonacoMimeService.prototype.getMimeForMode = function (langId) {
+        var e_2, _a;
+        try {
+            for (var _b = __values(monaco.languages.getLanguages()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var language = _c.value;
+                if (language.id === langId && language.mimetypes) {
+                    return language.mimetypes[0];
+                }
+            }
+        }
+        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_2) throw e_2.error; }
+        }
+        return undefined;
+    };
+    MonacoMimeService = __decorate([
+        inversify_1.injectable()
+    ], MonacoMimeService);
+    return MonacoMimeService;
+}(mime_service_1.MimeService));
+exports.MonacoMimeService = MonacoMimeService;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-outline-contribution.js":
+/*!******************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-outline-contribution.js ***!
+  \******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var SymbolKind = monaco.languages.SymbolKind;
+var browser_1 = __webpack_require__(/*! @theia/editor/lib/browser */ "../../../../node_modules/@theia/editor/lib/browser/index.js");
+var DocumentSymbolProviderRegistry = monaco.modes.DocumentSymbolProviderRegistry;
+var CancellationTokenSource = monaco.CancellationTokenSource;
+var core_1 = __webpack_require__(/*! @theia/core */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var outline_view_service_1 = __webpack_require__(/*! @theia/outline-view/lib/browser/outline-view-service */ "../../../../node_modules/@theia/outline-view/lib/browser/outline-view-service.js");
+var outline_view_widget_1 = __webpack_require__(/*! @theia/outline-view/lib/browser/outline-view-widget */ "../../../../node_modules/@theia/outline-view/lib/browser/outline-view-widget.js");
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
+var debounce = __webpack_require__(/*! lodash.debounce */ "../../../../node_modules/lodash.debounce/index.js");
+var MonacoOutlineContribution = /** @class */ (function () {
+    function MonacoOutlineContribution() {
+        this.toDisposeOnClose = new core_1.DisposableCollection();
+        this.toDisposeOnEditor = new core_1.DisposableCollection();
+        this.canUpdateOutline = true;
+        this.tokenSource = new CancellationTokenSource();
+    }
+    MonacoOutlineContribution.prototype.onStart = function (app) {
+        var _this = this;
+        this.outlineViewService.onDidChangeOpenState(function (open) { return __awaiter(_this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                if (open) {
+                    this.toDisposeOnClose.push(this.toDisposeOnEditor);
+                    this.toDisposeOnClose.push(DocumentSymbolProviderRegistry.onDidChange(debounce(function () { return _this.updateOutline(); })));
+                    this.toDisposeOnClose.push(this.editorManager.onCurrentEditorChanged(debounce(function () { return _this.handleCurrentEditorChanged(); }, 50)));
+                    this.handleCurrentEditorChanged();
+                }
+                else {
+                    this.toDisposeOnClose.dispose();
+                }
+                return [2 /*return*/];
+            });
+        }); });
+        this.outlineViewService.onDidSelect(function (node) { return __awaiter(_this, void 0, void 0, function () {
+            var options;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(MonacoOutlineSymbolInformationNode.is(node) && node.parent)) return [3 /*break*/, 2];
+                        options = {
+                            mode: 'reveal',
+                            selection: node.range
+                        };
+                        return [4 /*yield*/, this.selectInEditor(node, options)];
+                    case 1:
+                        _a.sent();
+                        _a.label = 2;
+                    case 2: return [2 /*return*/];
+                }
+            });
+        }); });
+        this.outlineViewService.onDidOpen(function (node) { return __awaiter(_this, void 0, void 0, function () {
+            var options;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!MonacoOutlineSymbolInformationNode.is(node)) return [3 /*break*/, 2];
+                        options = {
+                            selection: {
+                                start: node.range.start
+                            }
+                        };
+                        return [4 /*yield*/, this.selectInEditor(node, options)];
+                    case 1:
+                        _a.sent();
+                        _a.label = 2;
+                    case 2: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    MonacoOutlineContribution.prototype.selectInEditor = function (node, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        // Avoid cyclic updates: Outline -> Editor -> Outline.
+                        this.canUpdateOutline = false;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, , 3, 4]);
+                        return [4 /*yield*/, this.editorManager.open(node.uri, options)];
+                    case 2:
+                        _a.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        this.canUpdateOutline = true;
+                        return [7 /*endfinally*/];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MonacoOutlineContribution.prototype.handleCurrentEditorChanged = function () {
+        var _this = this;
+        this.toDisposeOnEditor.dispose();
+        if (this.toDisposeOnClose.disposed) {
+            return;
+        }
+        this.toDisposeOnClose.push(this.toDisposeOnEditor);
+        this.toDisposeOnEditor.push(core_1.Disposable.create(function () { return _this.roots = undefined; }));
+        var editor = this.editorManager.currentEditor;
+        if (editor) {
+            var model = monaco_editor_1.MonacoEditor.get(editor).getControl().getModel();
+            if (model) {
+                this.toDisposeOnEditor.push(model.onDidChangeContent(function () {
+                    _this.roots = undefined; // Invalidate the previously resolved roots.
+                    _this.updateOutline();
+                }));
+            }
+            this.toDisposeOnEditor.push(editor.editor.onSelectionChanged(function (selection) { return _this.updateOutline(selection); }));
+        }
+        this.updateOutline();
+    };
+    MonacoOutlineContribution.prototype.updateOutline = function (editorSelection) {
+        return __awaiter(this, void 0, void 0, function () {
+            var token, editor, model, roots, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (!this.canUpdateOutline) {
+                            return [2 /*return*/];
+                        }
+                        this.tokenSource.cancel();
+                        this.tokenSource = new CancellationTokenSource();
+                        token = this.tokenSource.token;
+                        editor = monaco_editor_1.MonacoEditor.get(this.editorManager.currentEditor);
+                        model = editor && editor.getControl().getModel();
+                        _a = model;
+                        if (!_a) return [3 /*break*/, 2];
+                        return [4 /*yield*/, this.createRoots(model, token, editorSelection)];
+                    case 1:
+                        _a = (_b.sent());
+                        _b.label = 2;
+                    case 2:
+                        roots = _a;
+                        if (token.isCancellationRequested) {
+                            return [2 /*return*/];
+                        }
+                        this.outlineViewService.publish(roots || []);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MonacoOutlineContribution.prototype.createRoots = function (model, token, editorSelection) {
+        return __awaiter(this, void 0, void 0, function () {
+            var resetSelection_1, providers, uri, providers_1, providers_1_1, provider, symbols, nodes, _a, e_1_1;
+            var e_1, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        if (!(this.roots && this.roots.length > 0)) return [3 /*break*/, 1];
+                        resetSelection_1 = function (node) {
+                            node.selected = false;
+                            node.children.forEach(resetSelection_1);
+                        };
+                        this.roots.forEach(resetSelection_1);
+                        return [3 /*break*/, 12];
+                    case 1:
+                        this.roots = [];
+                        return [4 /*yield*/, DocumentSymbolProviderRegistry.all(model)];
+                    case 2:
+                        providers = _d.sent();
+                        if (token.isCancellationRequested) {
+                            return [2 /*return*/, []];
+                        }
+                        uri = new uri_1.default(model.uri.toString());
+                        _d.label = 3;
+                    case 3:
+                        _d.trys.push([3, 10, 11, 12]);
+                        providers_1 = __values(providers), providers_1_1 = providers_1.next();
+                        _d.label = 4;
+                    case 4:
+                        if (!!providers_1_1.done) return [3 /*break*/, 9];
+                        provider = providers_1_1.value;
+                        _d.label = 5;
+                    case 5:
+                        _d.trys.push([5, 7, , 8]);
+                        return [4 /*yield*/, provider.provideDocumentSymbols(model, token)];
+                    case 6:
+                        symbols = _d.sent();
+                        if (token.isCancellationRequested) {
+                            return [2 /*return*/, []];
+                        }
+                        nodes = this.createNodes(uri, symbols || []);
+                        (_c = this.roots).push.apply(_c, __spread(nodes));
+                        return [3 /*break*/, 8];
+                    case 7:
+                        _a = _d.sent();
+                        return [3 /*break*/, 8];
+                    case 8:
+                        providers_1_1 = providers_1.next();
+                        return [3 /*break*/, 4];
+                    case 9: return [3 /*break*/, 12];
+                    case 10:
+                        e_1_1 = _d.sent();
+                        e_1 = { error: e_1_1 };
+                        return [3 /*break*/, 12];
+                    case 11:
+                        try {
+                            if (providers_1_1 && !providers_1_1.done && (_b = providers_1.return)) _b.call(providers_1);
+                        }
+                        finally { if (e_1) throw e_1.error; }
+                        return [7 /*endfinally*/];
+                    case 12:
+                        this.applySelection(this.roots, editorSelection);
+                        return [2 /*return*/, this.roots];
+                }
+            });
+        });
+    };
+    MonacoOutlineContribution.prototype.createNodes = function (uri, symbols) {
+        var e_2, _a, e_3, _b;
+        var _this = this;
+        var rangeBased = false;
+        var ids = new Map();
+        var roots = [];
+        var nodesByName = symbols.sort(this.orderByPosition).reduce(function (result, symbol) {
+            var node = _this.createNode(uri, symbol, ids);
+            if (symbol.children) {
+                MonacoOutlineSymbolInformationNode.insert(roots, node);
+            }
+            else {
+                rangeBased = rangeBased || symbol.range.startLineNumber !== symbol.range.endLineNumber;
+                var values = result.get(symbol.name) || [];
+                values.push({ symbol: symbol, node: node });
+                result.set(symbol.name, values);
+            }
+            return result;
+        }, new Map());
+        try {
+            for (var _c = __values(nodesByName.values()), _d = _c.next(); !_d.done; _d = _c.next()) {
+                var nodes = _d.value;
+                var _loop_1 = function (node, symbol) {
+                    if (!symbol.containerName) {
+                        MonacoOutlineSymbolInformationNode.insert(roots, node);
+                    }
+                    else {
+                        var possibleParents = nodesByName.get(symbol.containerName);
+                        if (possibleParents) {
+                            var parent_1 = possibleParents.find(function (possibleParent) { return _this.parentContains(symbol, possibleParent.symbol, rangeBased); });
+                            if (parent_1) {
+                                node.parent = parent_1.node;
+                                MonacoOutlineSymbolInformationNode.insert(parent_1.node.children, node);
+                            }
+                        }
+                    }
+                };
+                try {
+                    for (var nodes_1 = (e_3 = void 0, __values(nodes)), nodes_1_1 = nodes_1.next(); !nodes_1_1.done; nodes_1_1 = nodes_1.next()) {
+                        var _e = nodes_1_1.value, node = _e.node, symbol = _e.symbol;
+                        _loop_1(node, symbol);
+                    }
+                }
+                catch (e_3_1) { e_3 = { error: e_3_1 }; }
+                finally {
+                    try {
+                        if (nodes_1_1 && !nodes_1_1.done && (_b = nodes_1.return)) _b.call(nodes_1);
+                    }
+                    finally { if (e_3) throw e_3.error; }
+                }
+            }
+        }
+        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        finally {
+            try {
+                if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
+            }
+            finally { if (e_2) throw e_2.error; }
+        }
+        if (!roots.length) {
+            var nodes = nodesByName.values().next().value;
+            if (nodes && !nodes[0].node.parent) {
+                return [nodes[0].node];
+            }
+            return [];
+        }
+        return roots;
+    };
+    /**
+     * Sets the selection on the sub-trees based on the optional editor selection.
+     * Select the narrowest node that is strictly contains the editor selection.
+     */
+    MonacoOutlineContribution.prototype.applySelection = function (roots, editorSelection) {
+        var e_4, _a;
+        if (editorSelection) {
+            try {
+                for (var roots_1 = __values(roots), roots_1_1 = roots_1.next(); !roots_1_1.done; roots_1_1 = roots_1.next()) {
+                    var root = roots_1_1.value;
+                    if (this.parentContains(editorSelection, root.fullRange, true)) {
+                        var children = root.children;
+                        root.selected = !root.expanded || !this.applySelection(children, editorSelection);
+                        return true;
+                    }
+                }
+            }
+            catch (e_4_1) { e_4 = { error: e_4_1 }; }
+            finally {
+                try {
+                    if (roots_1_1 && !roots_1_1.done && (_a = roots_1.return)) _a.call(roots_1);
+                }
+                finally { if (e_4) throw e_4.error; }
+            }
+        }
+        return false;
+    };
+    /**
+     * Returns `true` if `candidate` is strictly contained inside `parent`
+     *
+     * If the argument is a `DocumentSymbol`, then `getFullRange` will be used to retrieve the range of the underlying symbol.
+     */
+    MonacoOutlineContribution.prototype.parentContains = function (candidate, parent, rangeBased) {
+        // TODO: move this code to the `monaco-languageclient`: https://github.com/eclipse-theia/theia/pull/2885#discussion_r217800446
+        var candidateRange = browser_1.Range.is(candidate) ? candidate : this.getFullRange(candidate);
+        var parentRange = browser_1.Range.is(parent) ? parent : this.getFullRange(parent);
+        var sameStartLine = candidateRange.start.line === parentRange.start.line;
+        var startColGreaterOrEqual = candidateRange.start.character >= parentRange.start.character;
+        var startLineGreater = candidateRange.start.line > parentRange.start.line;
+        var sameEndLine = candidateRange.end.line === parentRange.end.line;
+        var endColSmallerOrEqual = candidateRange.end.character <= parentRange.end.character;
+        var endLineSmaller = candidateRange.end.line < parentRange.end.line;
+        return (((sameStartLine && startColGreaterOrEqual || startLineGreater) &&
+            (sameEndLine && endColSmallerOrEqual || endLineSmaller)) || !rangeBased);
+    };
+    /**
+     * `monaco` to LSP `Range` converter. Converts the `1-based` location indices into `0-based` ones.
+     */
+    MonacoOutlineContribution.prototype.asRange = function (range) {
+        var startLineNumber = range.startLineNumber, startColumn = range.startColumn, endLineNumber = range.endLineNumber, endColumn = range.endColumn;
+        return {
+            start: {
+                line: startLineNumber - 1,
+                character: startColumn - 1
+            },
+            end: {
+                line: endLineNumber - 1,
+                character: endColumn - 1
+            }
+        };
+    };
+    /**
+     * Returns with a range enclosing this symbol not including leading/trailing whitespace but everything else like comments.
+     * This information is typically used to determine if the clients cursor is inside the symbol to reveal in the symbol in the UI.
+     * This allows to obtain the range including the associated comments.
+     *
+     * See: [`DocumentSymbol#range`](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentSymbol) for more details.
+     */
+    MonacoOutlineContribution.prototype.getFullRange = function (documentSymbol) {
+        return this.asRange(documentSymbol.range);
+    };
+    /**
+     * The range that should be selected and revealed when this symbol is being picked, e.g the name of a function. Must be contained by the `getSelectionRange`.
+     *
+     * See: [`DocumentSymbol#selectionRange`](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentSymbol) for more details.
+     */
+    MonacoOutlineContribution.prototype.getNameRange = function (documentSymbol) {
+        return this.asRange(documentSymbol.selectionRange);
+    };
+    MonacoOutlineContribution.prototype.createNode = function (uri, symbol, ids, parent) {
+        var e_5, _a;
+        var id = this.createId(symbol.name, ids);
+        var children = [];
+        var node = {
+            children: children,
+            id: id,
+            iconClass: SymbolKind[symbol.kind].toString().toLowerCase(),
+            name: this.getName(symbol),
+            detail: this.getDetail(symbol),
+            parent: parent,
+            uri: uri,
+            range: this.getNameRange(symbol),
+            fullRange: this.getFullRange(symbol),
+            selected: false,
+            expanded: this.shouldExpand(symbol)
+        };
+        if (symbol.children) {
+            try {
+                for (var _b = __values(symbol.children), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var child = _c.value;
+                    MonacoOutlineSymbolInformationNode.insert(children, this.createNode(uri, child, ids, node));
+                }
+            }
+            catch (e_5_1) { e_5 = { error: e_5_1 }; }
+            finally {
+                try {
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                }
+                finally { if (e_5) throw e_5.error; }
+            }
+        }
+        return node;
+    };
+    MonacoOutlineContribution.prototype.getName = function (symbol) {
+        return symbol.name;
+    };
+    MonacoOutlineContribution.prototype.getDetail = function (symbol) {
+        return symbol.detail;
+    };
+    MonacoOutlineContribution.prototype.createId = function (name, ids) {
+        var counter = ids.get(name);
+        var index = typeof counter === 'number' ? counter + 1 : 0;
+        ids.set(name, index);
+        return name + '_' + index;
+    };
+    MonacoOutlineContribution.prototype.shouldExpand = function (symbol) {
+        return [
+            SymbolKind.Class,
+            SymbolKind.Enum, SymbolKind.File,
+            SymbolKind.Interface, SymbolKind.Module,
+            SymbolKind.Namespace, SymbolKind.Object,
+            SymbolKind.Package, SymbolKind.Struct
+        ].indexOf(symbol.kind) !== -1;
+    };
+    MonacoOutlineContribution.prototype.orderByPosition = function (symbol, symbol2) {
+        var startLineComparison = symbol.range.startLineNumber - symbol2.range.startLineNumber;
+        if (startLineComparison !== 0) {
+            return startLineComparison;
+        }
+        var startOffsetComparison = symbol.range.startColumn - symbol2.range.startColumn;
+        if (startOffsetComparison !== 0) {
+            return startOffsetComparison;
+        }
+        var endLineComparison = symbol.range.endLineNumber - symbol2.range.endLineNumber;
+        if (endLineComparison !== 0) {
+            return endLineComparison;
+        }
+        return symbol.range.endColumn - symbol2.range.endColumn;
+    };
+    __decorate([
+        inversify_1.inject(outline_view_service_1.OutlineViewService),
+        __metadata("design:type", outline_view_service_1.OutlineViewService)
+    ], MonacoOutlineContribution.prototype, "outlineViewService", void 0);
+    __decorate([
+        inversify_1.inject(browser_1.EditorManager),
+        __metadata("design:type", browser_1.EditorManager)
+    ], MonacoOutlineContribution.prototype, "editorManager", void 0);
+    MonacoOutlineContribution = __decorate([
+        inversify_1.injectable()
+    ], MonacoOutlineContribution);
+    return MonacoOutlineContribution;
+}());
+exports.MonacoOutlineContribution = MonacoOutlineContribution;
+var MonacoOutlineSymbolInformationNode;
+(function (MonacoOutlineSymbolInformationNode) {
+    function is(node) {
+        return outline_view_widget_1.OutlineSymbolInformationNode.is(node) && 'uri' in node && 'range' in node;
+    }
+    MonacoOutlineSymbolInformationNode.is = is;
+    function insert(nodes, node) {
+        var index = nodes.findIndex(function (current) { return compare(node, current) < 0; });
+        if (index === -1) {
+            nodes.push(node);
+        }
+        else {
+            nodes.splice(index, 0, node);
+        }
+    }
+    MonacoOutlineSymbolInformationNode.insert = insert;
+    function compare(node, node2) {
+        var startLineComparison = node.range.start.line - node2.range.start.line;
+        if (startLineComparison !== 0) {
+            return startLineComparison;
+        }
+        var startColumnComparison = node.range.start.character - node2.range.start.character;
+        if (startColumnComparison !== 0) {
+            return startColumnComparison;
+        }
+        var endLineComparison = node2.range.end.line - node.range.end.line;
+        if (endLineComparison !== 0) {
+            return endLineComparison;
+        }
+        return node2.range.end.character - node.range.end.character;
+    }
+    MonacoOutlineSymbolInformationNode.compare = compare;
+})(MonacoOutlineSymbolInformationNode = exports.MonacoOutlineSymbolInformationNode || (exports.MonacoOutlineSymbolInformationNode = {}));
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-outline-decorator.js":
+/*!***************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-outline-decorator.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2018 RedHat and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var event_1 = __webpack_require__(/*! @theia/core/lib/common/event */ "../../../../node_modules/@theia/core/lib/common/event.js");
+var tree_iterator_1 = __webpack_require__(/*! @theia/core/lib/browser/tree/tree-iterator */ "../../../../node_modules/@theia/core/lib/browser/tree/tree-iterator.js");
+var monaco_outline_contribution_1 = __webpack_require__(/*! ./monaco-outline-contribution */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-outline-contribution.js");
+var MonacoOutlineDecorator = /** @class */ (function () {
+    function MonacoOutlineDecorator() {
+        this.id = 'theia-monaco-outline-decorator';
+        this.emitter = new event_1.Emitter();
+    }
+    MonacoOutlineDecorator.prototype.decorations = function (tree) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.collectDecorations(tree)];
+            });
+        });
+    };
+    Object.defineProperty(MonacoOutlineDecorator.prototype, "onDidChangeDecorations", {
+        get: function () {
+            return this.emitter.event;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MonacoOutlineDecorator.prototype.collectDecorations = function (tree) {
+        var e_1, _a;
+        var result = new Map();
+        if (tree.root === undefined) {
+            return result;
+        }
+        try {
+            for (var _b = __values(new tree_iterator_1.DepthFirstTreeIterator(tree.root)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var treeNode = _c.value;
+                if (monaco_outline_contribution_1.MonacoOutlineSymbolInformationNode.is(treeNode) && treeNode.detail) {
+                    result.set(treeNode.id, this.toDecoration(treeNode));
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        return result;
+    };
+    MonacoOutlineDecorator.prototype.toDecoration = function (node) {
+        var captionSuffixes = [{
+                data: (node.detail || ''),
+                fontData: {
+                    color: 'var(--theia-descriptionForeground)',
+                }
+            }];
+        return {
+            captionSuffixes: captionSuffixes
+        };
+    };
+    MonacoOutlineDecorator = __decorate([
+        inversify_1.injectable()
+    ], MonacoOutlineDecorator);
+    return MonacoOutlineDecorator;
+}());
+exports.MonacoOutlineDecorator = MonacoOutlineDecorator;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-quick-open-service.js":
+/*!****************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-quick-open-service.js ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -441,26 +4975,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
 var __values = (this && this.__values) || function (o) {
     var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
     if (m) return m.call(o);
@@ -472,5969 +4986,1103 @@ var __values = (this && this.__values) || function (o) {
     };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var task_service_1 = __webpack_require__(/*! ./task-service */ "../node_modules/@theia/task/lib/browser/task-service.js");
-var task_protocol_1 = __webpack_require__(/*! ../common/task-protocol */ "../node_modules/@theia/task/lib/common/task-protocol.js");
-var task_definition_registry_1 = __webpack_require__(/*! ./task-definition-registry */ "../node_modules/@theia/task/lib/browser/task-definition-registry.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var browser_2 = __webpack_require__(/*! @theia/workspace/lib/browser */ "../node_modules/@theia/workspace/lib/browser/index.js");
-var terminal_service_1 = __webpack_require__(/*! @theia/terminal/lib/browser/base/terminal-service */ "../node_modules/@theia/terminal/lib/browser/base/terminal-service.js");
-var common_1 = __webpack_require__(/*! @theia/filesystem/lib/common */ "../node_modules/@theia/filesystem/lib/common/index.js");
-var quick_open_model_1 = __webpack_require__(/*! @theia/core/lib/common/quick-open-model */ "../node_modules/@theia/core/lib/common/quick-open-model.js");
-var browser_3 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var task_name_resolver_1 = __webpack_require__(/*! ./task-name-resolver */ "../node_modules/@theia/task/lib/browser/task-name-resolver.js");
-var task_source_resolver_1 = __webpack_require__(/*! ./task-source-resolver */ "../node_modules/@theia/task/lib/browser/task-source-resolver.js");
-var task_configuration_manager_1 = __webpack_require__(/*! ./task-configuration-manager */ "../node_modules/@theia/task/lib/browser/task-configuration-manager.js");
-var theming_1 = __webpack_require__(/*! @theia/core/lib/browser/theming */ "../node_modules/@theia/core/lib/browser/theming.js");
-var ConfigureTaskAction = /** @class */ (function (_super) {
-    __extends(ConfigureTaskAction, _super);
-    function ConfigureTaskAction() {
-        var _this = _super.call(this, { id: 'configure:task' }) || this;
-        _this.updateTheme();
-        theming_1.ThemeService.get().onThemeChange(function () { return _this.updateTheme(); });
-        return _this;
-    }
-    ConfigureTaskAction.prototype.run = function (item) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                if (item instanceof TaskRunQuickOpenItem) {
-                    this.taskService.configure(item.getTask());
-                }
-                return [2 /*return*/];
-            });
-        });
-    };
-    ConfigureTaskAction.prototype.updateTheme = function () {
-        var theme = theming_1.ThemeService.get().getCurrentTheme().id;
-        if (theme === 'dark') {
-            this.class = 'quick-open-task-configure-dark';
-        }
-        else if (theme === 'light') {
-            this.class = 'quick-open-task-configure-bright';
-        }
-    };
-    __decorate([
-        inversify_1.inject(task_service_1.TaskService),
-        __metadata("design:type", task_service_1.TaskService)
-    ], ConfigureTaskAction.prototype, "taskService", void 0);
-    ConfigureTaskAction = __decorate([
-        inversify_1.injectable(),
-        __metadata("design:paramtypes", [])
-    ], ConfigureTaskAction);
-    return ConfigureTaskAction;
-}(browser_1.QuickOpenBaseAction));
-exports.ConfigureTaskAction = ConfigureTaskAction;
-var TaskActionProvider = /** @class */ (function () {
-    function TaskActionProvider() {
-    }
-    TaskActionProvider.prototype.hasActions = function () {
-        return true;
-    };
-    TaskActionProvider.prototype.getActions = function () {
-        return [this.configureTaskAction];
-    };
-    __decorate([
-        inversify_1.inject(ConfigureTaskAction),
-        __metadata("design:type", ConfigureTaskAction)
-    ], TaskActionProvider.prototype, "configureTaskAction", void 0);
-    TaskActionProvider = __decorate([
-        inversify_1.injectable()
-    ], TaskActionProvider);
-    return TaskActionProvider;
-}());
-exports.TaskActionProvider = TaskActionProvider;
-var QuickOpenTask = /** @class */ (function () {
-    function QuickOpenTask() {
-        this.prefix = 'task ';
-        this.description = 'Run Task';
-    }
-    /** Initialize this quick open model with the tasks. */
-    QuickOpenTask.prototype.init = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var recentTasks, configuredTasks, providedTasks, _a, filteredRecentTasks, filteredConfiguredTasks, filteredProvidedTasks, isMulti;
-            var _b;
-            var _this = this;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        recentTasks = this.taskService.recentTasks;
-                        return [4 /*yield*/, this.taskService.getConfiguredTasks()];
-                    case 1:
-                        configuredTasks = _c.sent();
-                        return [4 /*yield*/, this.taskService.getProvidedTasks()];
-                    case 2:
-                        providedTasks = _c.sent();
-                        _a = this.getFilteredTasks(recentTasks, configuredTasks, providedTasks), filteredRecentTasks = _a.filteredRecentTasks, filteredConfiguredTasks = _a.filteredConfiguredTasks, filteredProvidedTasks = _a.filteredProvidedTasks;
-                        isMulti = this.workspaceService.isMultiRootWorkspaceOpened;
-                        this.items = [];
-                        (_b = this.items).push.apply(_b, __spread(filteredRecentTasks.map(function (task, index) {
-                            var item = new TaskRunQuickOpenItem(task, _this.taskService, isMulti, {
-                                groupLabel: index === 0 ? 'recently used tasks' : undefined,
-                                showBorder: false
-                            }, _this.taskDefinitionRegistry, _this.taskNameResolver, _this.taskSourceResolver);
-                            return item;
-                        }), filteredConfiguredTasks.map(function (task, index) {
-                            var item = new TaskRunQuickOpenItem(task, _this.taskService, isMulti, {
-                                groupLabel: index === 0 ? 'configured tasks' : undefined,
-                                showBorder: (filteredRecentTasks.length <= 0
-                                    ? false
-                                    : index === 0 ? true : false)
-                            }, _this.taskDefinitionRegistry, _this.taskNameResolver, _this.taskSourceResolver);
-                            return item;
-                        }), filteredProvidedTasks.map(function (task, index) {
-                            var item = new TaskRunQuickOpenItem(task, _this.taskService, isMulti, {
-                                groupLabel: index === 0 ? 'detected tasks' : undefined,
-                                showBorder: (filteredRecentTasks.length <= 0 && filteredConfiguredTasks.length <= 0
-                                    ? false
-                                    : index === 0 ? true : false)
-                            }, _this.taskDefinitionRegistry, _this.taskNameResolver, _this.taskSourceResolver);
-                            return item;
-                        })));
-                        this.actionProvider = this.items.length ? this.taskActionProvider : undefined;
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    QuickOpenTask.prototype.open = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.init()];
-                    case 1:
-                        _a.sent();
-                        if (!this.items.length) {
-                            this.items.push(new quick_open_model_1.QuickOpenItem({
-                                label: 'No task to run found. Configure Tasks...',
-                                run: function (mode) {
-                                    if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
-                                        return false;
-                                    }
-                                    _this.configure();
-                                    return true;
-                                }
-                            }));
-                        }
-                        this.quickOpenService.open(this, {
-                            placeholder: 'Select the task to run',
-                            fuzzyMatchLabel: true,
-                            fuzzySort: false
-                        });
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    QuickOpenTask.prototype.getModel = function () {
-        return this;
-    };
-    QuickOpenTask.prototype.getOptions = function () {
-        return {
-            fuzzyMatchLabel: true,
-            fuzzySort: false
-        };
-    };
-    QuickOpenTask.prototype.attach = function () {
-        var _this = this;
-        this.items = [];
-        this.actionProvider = undefined;
-        this.taskService.getRunningTasks().then(function (tasks) {
-            var e_1, _a;
-            if (!tasks.length) {
-                _this.items.push(new quick_open_model_1.QuickOpenItem({
-                    label: 'No tasks found',
-                    run: function (_mode) { return false; }
-                }));
-            }
-            try {
-                for (var tasks_1 = __values(tasks), tasks_1_1 = tasks_1.next(); !tasks_1_1.done; tasks_1_1 = tasks_1.next()) {
-                    var task = tasks_1_1.value;
-                    // can only attach to terminal processes, so only list those
-                    if (task.terminalId) {
-                        _this.items.push(new TaskAttachQuickOpenItem(task, _this.getRunningTaskLabel(task), _this.taskService));
-                    }
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (tasks_1_1 && !tasks_1_1.done && (_a = tasks_1.return)) _a.call(tasks_1);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-            _this.quickOpenService.open(_this, {
-                placeholder: 'Choose task to open',
-                fuzzyMatchLabel: true,
-                fuzzySort: true
-            });
-        });
-    };
-    QuickOpenTask.prototype.configure = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var isMulti, configuredTasks, providedTasks, isFirstGroup, _a, filteredConfiguredTasks, filteredProvidedTasks, groupedTasks, configs, rootUris, _loop_1, this_1, rootUris_1, rootUris_1_1, rootFolder;
-            var _b, e_2, _c;
-            var _this = this;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
-                    case 0:
-                        this.items = [];
-                        this.actionProvider = undefined;
-                        isMulti = this.workspaceService.isMultiRootWorkspaceOpened;
-                        return [4 /*yield*/, this.taskService.getConfiguredTasks()];
-                    case 1:
-                        configuredTasks = _d.sent();
-                        return [4 /*yield*/, this.taskService.getProvidedTasks()];
-                    case 2:
-                        providedTasks = _d.sent();
-                        isFirstGroup = true;
-                        _a = this.getFilteredTasks([], configuredTasks, providedTasks), filteredConfiguredTasks = _a.filteredConfiguredTasks, filteredProvidedTasks = _a.filteredProvidedTasks;
-                        groupedTasks = this.getGroupedTasksByWorkspaceFolder(__spread(filteredConfiguredTasks, filteredProvidedTasks));
-                        if (groupedTasks.has(undefined)) {
-                            configs = groupedTasks.get(undefined);
-                            (_b = this.items).push.apply(_b, __spread(configs.map(function (taskConfig) {
-                                var item = new TaskConfigureQuickOpenItem(taskConfig, _this.taskService, _this.taskNameResolver, _this.workspaceService, isMulti, { showBorder: false });
-                                item['taskDefinitionRegistry'] = _this.taskDefinitionRegistry;
-                                return item;
-                            })));
-                            isFirstGroup = false;
-                        }
-                        return [4 /*yield*/, this.workspaceService.roots];
-                    case 3:
-                        rootUris = (_d.sent()).map(function (rootStat) { return rootStat.uri; });
-                        _loop_1 = function (rootFolder) {
-                            var _a;
-                            var uri = new uri_1.default(rootFolder).withScheme('file');
-                            var folderName = uri.displayName;
-                            if (groupedTasks.has(uri.toString())) {
-                                var configs = groupedTasks.get(uri.toString());
-                                (_a = this_1.items).push.apply(_a, __spread(configs.map(function (taskConfig, index) {
-                                    var item = new TaskConfigureQuickOpenItem(taskConfig, _this.taskService, _this.taskNameResolver, _this.workspaceService, isMulti, {
-                                        groupLabel: index === 0 && isMulti ? folderName : '',
-                                        showBorder: !isFirstGroup && index === 0
-                                    });
-                                    item['taskDefinitionRegistry'] = _this.taskDefinitionRegistry;
-                                    return item;
-                                })));
-                            }
-                            else {
-                                var configUri = this_1.preferences.resolve('tasks', [], uri.toString()).configUri;
-                                var existTaskConfigFile = !!configUri;
-                                this_1.items.push(new quick_open_model_1.QuickOpenGroupItem({
-                                    label: existTaskConfigFile ? 'Open tasks.json file' : 'Create tasks.json file from template',
-                                    run: function (mode) {
-                                        if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
-                                            return false;
-                                        }
-                                        setTimeout(function () { return _this.taskConfigurationManager.openConfiguration(uri.toString()); });
-                                        return true;
-                                    },
-                                    showBorder: !isFirstGroup,
-                                    groupLabel: isMulti ? folderName : ''
-                                }));
-                            }
-                            isFirstGroup = false;
-                        };
-                        this_1 = this;
-                        try {
-                            for (rootUris_1 = __values(rootUris), rootUris_1_1 = rootUris_1.next(); !rootUris_1_1.done; rootUris_1_1 = rootUris_1.next()) {
-                                rootFolder = rootUris_1_1.value;
-                                _loop_1(rootFolder);
-                            }
-                        }
-                        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-                        finally {
-                            try {
-                                if (rootUris_1_1 && !rootUris_1_1.done && (_c = rootUris_1.return)) _c.call(rootUris_1);
-                            }
-                            finally { if (e_2) throw e_2.error; }
-                        }
-                        if (this.items.length === 0) {
-                            this.items.push(new quick_open_model_1.QuickOpenItem({
-                                label: 'No tasks found',
-                                run: function (_mode) { return false; }
-                            }));
-                        }
-                        this.quickOpenService.open(this, {
-                            placeholder: 'Select a task to configure',
-                            fuzzyMatchLabel: true,
-                            fuzzySort: false
-                        });
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    QuickOpenTask.prototype.runBuildOrTestTask = function (buildOrTestType) {
-        return __awaiter(this, void 0, void 0, function () {
-            var shouldRunBuildTask, buildOrTestTasks, defaultBuildOrTestTasks, defaultBuildOrTestTask, taskToRun, scope;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        shouldRunBuildTask = buildOrTestType === 'build';
-                        return [4 /*yield*/, this.init()];
-                    case 1:
-                        _a.sent();
-                        if (this.items.length > 1 ||
-                            this.items.length === 1 && this.items[0].getTask !== undefined) { // the item in `this.items` is not 'No tasks found'
-                            buildOrTestTasks = this.items.filter(function (t) {
-                                return shouldRunBuildTask ? task_protocol_1.TaskCustomization.isBuildTask(t.getTask()) : task_protocol_1.TaskCustomization.isTestTask(t.getTask());
-                            });
-                            this.actionProvider = undefined;
-                            if (buildOrTestTasks.length > 0) { // build / test tasks are defined in the workspace
-                                defaultBuildOrTestTasks = buildOrTestTasks.filter(function (t) {
-                                    return shouldRunBuildTask ? task_protocol_1.TaskCustomization.isDefaultBuildTask(t.getTask()) : task_protocol_1.TaskCustomization.isDefaultTestTask(t.getTask());
-                                });
-                                if (defaultBuildOrTestTasks.length === 1) { // run the default build / test task
-                                    defaultBuildOrTestTask = defaultBuildOrTestTasks[0];
-                                    taskToRun = defaultBuildOrTestTask.getTask();
-                                    scope = this.taskSourceResolver.resolve(taskToRun);
-                                    if (this.taskDefinitionRegistry && !!this.taskDefinitionRegistry.getDefinition(taskToRun)) {
-                                        this.taskService.run(taskToRun.source, taskToRun.label, scope);
-                                    }
-                                    else {
-                                        this.taskService.run(taskToRun._source, taskToRun.label, scope);
-                                    }
-                                    return [2 /*return*/];
-                                }
-                                // if default build / test task is not found, or there are more than one default,
-                                // display the list of build /test tasks to let the user decide which to run
-                                this.items = buildOrTestTasks;
-                            }
-                            else { // no build / test tasks, display an action item to configure the build / test task
-                                this.items = [new quick_open_model_1.QuickOpenItem({
-                                        label: "No " + buildOrTestType + " task to run found. Configure " + (buildOrTestType.charAt(0).toUpperCase() + buildOrTestType.slice(1)) + " Task...",
-                                        run: function (mode) {
-                                            if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
-                                                return false;
-                                            }
-                                            _this.init().then(function () {
-                                                // update the `tasks.json` file, instead of running the task itself
-                                                _this.items = _this.items.map(function (item) {
-                                                    var newItem = new ConfigureBuildOrTestTaskQuickOpenItem(item.getTask(), _this.taskService, _this.workspaceService.isMultiRootWorkspaceOpened, item.options, _this.taskNameResolver, shouldRunBuildTask, _this.taskConfigurationManager, _this.taskDefinitionRegistry, _this.taskSourceResolver);
-                                                    return newItem;
-                                                });
-                                                _this.quickOpenService.open(_this, {
-                                                    placeholder: "Select the task to be used as the default " + buildOrTestType + " task",
-                                                    fuzzyMatchLabel: true,
-                                                    fuzzySort: false
-                                                });
-                                            });
-                                            return true;
-                                        }
-                                    })];
-                            }
-                        }
-                        else { // no tasks are currently present, prompt users if they'd like to configure a task.
-                            this.items = [
-                                new quick_open_model_1.QuickOpenItem({
-                                    label: "No " + buildOrTestType + " task to run found. Configure " + (buildOrTestType.charAt(0).toUpperCase() + buildOrTestType.slice(1)) + " Task...",
-                                    run: function (mode) {
-                                        if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
-                                            return false;
-                                        }
-                                        _this.configure();
-                                        return true;
-                                    }
-                                })
-                            ];
-                        }
-                        this.quickOpenService.open(this, {
-                            placeholder: "Select the " + buildOrTestType + " task to run",
-                            fuzzyMatchLabel: true,
-                            fuzzySort: false
-                        });
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    QuickOpenTask.prototype.onType = function (lookFor, acceptor) {
-        acceptor(this.items, this.actionProvider);
-    };
-    QuickOpenTask.prototype.getRunningTaskLabel = function (task) {
-        return "Task id: " + task.taskId + ", label: " + task.config.label;
-    };
-    QuickOpenTask.prototype.getFilteredTasks = function (recentTasks, configuredTasks, providedTasks) {
-        var _this = this;
-        var filteredRecentTasks = [];
-        recentTasks.forEach(function (recent) {
-            var originalTaskConfig = __spread(configuredTasks, providedTasks).find(function (t) { return _this.taskDefinitionRegistry.compareTasks(recent, t); });
-            if (originalTaskConfig) {
-                filteredRecentTasks.push(originalTaskConfig);
-            }
-        });
-        var filteredProvidedTasks = [];
-        providedTasks.forEach(function (provided) {
-            var exist = __spread(filteredRecentTasks, configuredTasks).some(function (t) { return _this.taskDefinitionRegistry.compareTasks(provided, t); });
-            if (!exist) {
-                filteredProvidedTasks.push(provided);
-            }
-        });
-        var filteredConfiguredTasks = [];
-        configuredTasks.forEach(function (configured) {
-            var exist = filteredRecentTasks.some(function (t) { return _this.taskDefinitionRegistry.compareTasks(configured, t); });
-            if (!exist) {
-                filteredConfiguredTasks.push(configured);
-            }
-        });
-        return {
-            filteredRecentTasks: filteredRecentTasks, filteredConfiguredTasks: filteredConfiguredTasks, filteredProvidedTasks: filteredProvidedTasks
-        };
-    };
-    QuickOpenTask.prototype.getGroupedTasksByWorkspaceFolder = function (tasks) {
-        var e_3, _a, e_4, _b;
-        var grouped = new Map();
-        try {
-            for (var tasks_2 = __values(tasks), tasks_2_1 = tasks_2.next(); !tasks_2_1.done; tasks_2_1 = tasks_2.next()) {
-                var task = tasks_2_1.value;
-                var folder = task._scope;
-                if (grouped.has(folder)) {
-                    grouped.get(folder).push(task);
-                }
-                else {
-                    grouped.set(folder, [task]);
-                }
-            }
-        }
-        catch (e_3_1) { e_3 = { error: e_3_1 }; }
-        finally {
-            try {
-                if (tasks_2_1 && !tasks_2_1.done && (_a = tasks_2.return)) _a.call(tasks_2);
-            }
-            finally { if (e_3) throw e_3.error; }
-        }
-        try {
-            for (var _c = __values(grouped.values()), _d = _c.next(); !_d.done; _d = _c.next()) {
-                var taskConfigs = _d.value;
-                taskConfigs.sort(function (t1, t2) { return t1.label.localeCompare(t2.label); });
-            }
-        }
-        catch (e_4_1) { e_4 = { error: e_4_1 }; }
-        finally {
-            try {
-                if (_d && !_d.done && (_b = _c.return)) _b.call(_c);
-            }
-            finally { if (e_4) throw e_4.error; }
-        }
-        return grouped;
-    };
-    __decorate([
-        inversify_1.inject(task_service_1.TaskService),
-        __metadata("design:type", task_service_1.TaskService)
-    ], QuickOpenTask.prototype, "taskService", void 0);
-    __decorate([
-        inversify_1.inject(browser_1.QuickOpenService),
-        __metadata("design:type", browser_1.QuickOpenService)
-    ], QuickOpenTask.prototype, "quickOpenService", void 0);
-    __decorate([
-        inversify_1.inject(TaskActionProvider),
-        __metadata("design:type", TaskActionProvider)
-    ], QuickOpenTask.prototype, "taskActionProvider", void 0);
-    __decorate([
-        inversify_1.inject(browser_2.WorkspaceService),
-        __metadata("design:type", browser_2.WorkspaceService)
-    ], QuickOpenTask.prototype, "workspaceService", void 0);
-    __decorate([
-        inversify_1.inject(task_definition_registry_1.TaskDefinitionRegistry),
-        __metadata("design:type", task_definition_registry_1.TaskDefinitionRegistry)
-    ], QuickOpenTask.prototype, "taskDefinitionRegistry", void 0);
-    __decorate([
-        inversify_1.inject(task_name_resolver_1.TaskNameResolver),
-        __metadata("design:type", task_name_resolver_1.TaskNameResolver)
-    ], QuickOpenTask.prototype, "taskNameResolver", void 0);
-    __decorate([
-        inversify_1.inject(task_source_resolver_1.TaskSourceResolver),
-        __metadata("design:type", task_source_resolver_1.TaskSourceResolver)
-    ], QuickOpenTask.prototype, "taskSourceResolver", void 0);
-    __decorate([
-        inversify_1.inject(common_1.FileSystem),
-        __metadata("design:type", Object)
-    ], QuickOpenTask.prototype, "fileSystem", void 0);
-    __decorate([
-        inversify_1.inject(task_configuration_manager_1.TaskConfigurationManager),
-        __metadata("design:type", task_configuration_manager_1.TaskConfigurationManager)
-    ], QuickOpenTask.prototype, "taskConfigurationManager", void 0);
-    __decorate([
-        inversify_1.inject(browser_3.PreferenceService),
-        __metadata("design:type", Object)
-    ], QuickOpenTask.prototype, "preferences", void 0);
-    QuickOpenTask = __decorate([
-        inversify_1.injectable()
-    ], QuickOpenTask);
-    return QuickOpenTask;
-}());
-exports.QuickOpenTask = QuickOpenTask;
-var TaskRunQuickOpenItem = /** @class */ (function (_super) {
-    __extends(TaskRunQuickOpenItem, _super);
-    function TaskRunQuickOpenItem(task, taskService, isMulti, options, taskDefinitionRegistry, taskNameResolver, taskSourceResolver) {
-        var _this = _super.call(this, options) || this;
-        _this.task = task;
-        _this.taskService = taskService;
-        _this.isMulti = isMulti;
-        _this.options = options;
-        _this.taskDefinitionRegistry = taskDefinitionRegistry;
-        _this.taskNameResolver = taskNameResolver;
-        _this.taskSourceResolver = taskSourceResolver;
-        return _this;
-    }
-    TaskRunQuickOpenItem.prototype.getTask = function () {
-        return this.task;
-    };
-    TaskRunQuickOpenItem.prototype.getLabel = function () {
-        return this.taskNameResolver.resolve(this.task);
-    };
-    TaskRunQuickOpenItem.prototype.getGroupLabel = function () {
-        return this.options.groupLabel || '';
-    };
-    TaskRunQuickOpenItem.prototype.getDescription = function () {
-        if (!this.isMulti) {
-            return '';
-        }
-        if (this.taskDefinitionRegistry && !!this.taskDefinitionRegistry.getDefinition(this.task)) {
-            if (this.task._scope) {
-                return new uri_1.default(this.task._scope).displayName;
-            }
-            return this.task._source;
-        }
-        else {
-            return new uri_1.default(this.task._source).displayName;
-        }
-    };
-    TaskRunQuickOpenItem.prototype.run = function (mode) {
-        if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
-            return false;
-        }
-        var scope = this.taskSourceResolver.resolve(this.task);
-        if (this.taskDefinitionRegistry && !!this.taskDefinitionRegistry.getDefinition(this.task)) {
-            this.taskService.run(this.task.source || this.task._source, this.task.label, scope);
-        }
-        else {
-            this.taskService.run(this.task._source, this.task.label, scope);
-        }
-        return true;
-    };
-    return TaskRunQuickOpenItem;
-}(quick_open_model_1.QuickOpenGroupItem));
-exports.TaskRunQuickOpenItem = TaskRunQuickOpenItem;
-var ConfigureBuildOrTestTaskQuickOpenItem = /** @class */ (function (_super) {
-    __extends(ConfigureBuildOrTestTaskQuickOpenItem, _super);
-    function ConfigureBuildOrTestTaskQuickOpenItem(task, taskService, isMulti, options, taskNameResolver, isBuildTask, taskConfigurationManager, taskDefinitionRegistry, taskSourceResolver) {
-        var _this = _super.call(this, task, taskService, isMulti, options, taskDefinitionRegistry, taskNameResolver, taskSourceResolver) || this;
-        _this.task = task;
-        _this.taskService = taskService;
-        _this.isMulti = isMulti;
-        _this.options = options;
-        _this.taskNameResolver = taskNameResolver;
-        _this.isBuildTask = isBuildTask;
-        _this.taskConfigurationManager = taskConfigurationManager;
-        _this.taskDefinitionRegistry = taskDefinitionRegistry;
-        _this.taskSourceResolver = taskSourceResolver;
-        return _this;
-    }
-    ConfigureBuildOrTestTaskQuickOpenItem.prototype.run = function (mode) {
-        var _this = this;
-        if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
-            return false;
-        }
-        this.taskService.updateTaskConfiguration(this.task, { group: { kind: this.isBuildTask ? 'build' : 'test', isDefault: true } })
-            .then(function () {
-            if (_this.task._scope) {
-                _this.taskConfigurationManager.openConfiguration(_this.task._scope);
-            }
-        });
-        return true;
-    };
-    return ConfigureBuildOrTestTaskQuickOpenItem;
-}(TaskRunQuickOpenItem));
-exports.ConfigureBuildOrTestTaskQuickOpenItem = ConfigureBuildOrTestTaskQuickOpenItem;
-var TaskAttachQuickOpenItem = /** @class */ (function (_super) {
-    __extends(TaskAttachQuickOpenItem, _super);
-    function TaskAttachQuickOpenItem(task, taskLabel, taskService) {
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var message_service_protocol_1 = __webpack_require__(/*! @theia/core/lib/common/message-service-protocol */ "../../../../node_modules/@theia/core/lib/common/message-service-protocol.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var monaco_context_key_service_1 = __webpack_require__(/*! ./monaco-context-key-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-context-key-service.js");
+var quick_open_service_1 = __webpack_require__(/*! @theia/core/lib/common/quick-open-service */ "../../../../node_modules/@theia/core/lib/common/quick-open-service.js");
+var monaco_resolved_keybinding_1 = __webpack_require__(/*! ./monaco-resolved-keybinding */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-resolved-keybinding.js");
+var MonacoQuickOpenService = /** @class */ (function (_super) {
+    __extends(MonacoQuickOpenService, _super);
+    function MonacoQuickOpenService() {
         var _this = _super.call(this) || this;
-        _this.task = task;
-        _this.taskLabel = taskLabel;
-        _this.taskService = taskService;
+        var overlayWidgets = document.createElement('div');
+        overlayWidgets.classList.add('quick-open-overlay');
+        document.body.appendChild(overlayWidgets);
+        var container = _this.container = document.createElement('quick-open-container');
+        container.style.position = 'absolute';
+        container.style.top = '0px';
+        container.style.right = '50%';
+        container.style.zIndex = '1000000';
+        overlayWidgets.appendChild(container);
         return _this;
     }
-    TaskAttachQuickOpenItem.prototype.getLabel = function () {
-        return this.taskLabel;
+    MonacoQuickOpenService.prototype.init = function () {
+        this.inQuickOpenKey = this.contextKeyService.createKey('inQuickOpen', false);
     };
-    TaskAttachQuickOpenItem.prototype.run = function (mode) {
-        if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
-            return false;
-        }
-        if (this.task.terminalId) {
-            this.taskService.attach(this.task.terminalId, this.task.taskId);
-        }
-        return true;
+    MonacoQuickOpenService.prototype.open = function (model, options) {
+        this.internalOpen(new MonacoQuickOpenControllerOptsImpl(model, this.keybindingRegistry, options));
     };
-    return TaskAttachQuickOpenItem;
-}(quick_open_model_1.QuickOpenItem));
-exports.TaskAttachQuickOpenItem = TaskAttachQuickOpenItem;
-var TaskConfigureQuickOpenItem = /** @class */ (function (_super) {
-    __extends(TaskConfigureQuickOpenItem, _super);
-    function TaskConfigureQuickOpenItem(task, taskService, taskNameResolver, workspaceService, isMulti, options) {
-        var _this = _super.call(this, options) || this;
-        _this.task = task;
-        _this.taskService = taskService;
-        _this.taskNameResolver = taskNameResolver;
-        _this.workspaceService = workspaceService;
-        _this.isMulti = isMulti;
-        _this.options = options;
-        var stat = _this.workspaceService.workspace;
-        _this.isMulti = stat ? !stat.isDirectory : false;
-        return _this;
-    }
-    TaskConfigureQuickOpenItem.prototype.getLabel = function () {
-        return this.taskNameResolver.resolve(this.task);
-    };
-    TaskConfigureQuickOpenItem.prototype.getGroupLabel = function () {
-        return this.options.groupLabel || '';
-    };
-    TaskConfigureQuickOpenItem.prototype.getDescription = function () {
-        if (!this.isMulti) {
-            return '';
+    MonacoQuickOpenService.prototype.hide = function (reason) {
+        var hideReason;
+        switch (reason) {
+            case quick_open_service_1.QuickOpenHideReason.ELEMENT_SELECTED:
+                hideReason = monaco.quickOpen.HideReason.ELEMENT_SELECTED;
+                break;
+            case quick_open_service_1.QuickOpenHideReason.FOCUS_LOST:
+                hideReason = monaco.quickOpen.HideReason.FOCUS_LOST;
+                break;
+            case quick_open_service_1.QuickOpenHideReason.CANCELED:
+                hideReason = monaco.quickOpen.HideReason.CANCELED;
+                break;
         }
-        if (this.taskDefinitionRegistry && !!this.taskDefinitionRegistry.getDefinition(this.task)) {
-            if (this.task._scope) {
-                return new uri_1.default(this.task._scope).displayName;
-            }
-            return this.task._source;
+        this.widget.hide(hideReason);
+    };
+    MonacoQuickOpenService.prototype.showDecoration = function (type) {
+        var decoration = monaco.MarkerSeverity.Info;
+        if (type === message_service_protocol_1.MessageType.Warning) {
+            decoration = monaco.MarkerSeverity.Warning;
         }
-        else {
-            return new uri_1.default(this.task._source).displayName;
+        else if (type === message_service_protocol_1.MessageType.Error) {
+            decoration = monaco.MarkerSeverity.Error;
+        }
+        this.showInputDecoration(decoration);
+    };
+    MonacoQuickOpenService.prototype.hideDecoration = function () {
+        this.clearInputDecoration();
+    };
+    MonacoQuickOpenService.prototype.refresh = function () {
+        var inputBox = this.widget.inputBox;
+        if (inputBox) {
+            this.onType(inputBox.inputElement.value);
         }
     };
-    TaskConfigureQuickOpenItem.prototype.run = function (mode) {
-        if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
-            return false;
+    MonacoQuickOpenService.prototype.internalOpen = function (opts) {
+        // eslint-disable-next-line no-null/no-null
+        if (this.widgetNode && this.widgetNode.offsetParent !== null) {
+            this.hide();
         }
-        this.taskService.configure(this.task);
-        return true;
-    };
-    return TaskConfigureQuickOpenItem;
-}(quick_open_model_1.QuickOpenGroupItem));
-exports.TaskConfigureQuickOpenItem = TaskConfigureQuickOpenItem;
-var TaskTerminateQuickOpen = /** @class */ (function () {
-    function TaskTerminateQuickOpen() {
-    }
-    TaskTerminateQuickOpen.prototype.onType = function (_lookFor, acceptor) {
-        return __awaiter(this, void 0, void 0, function () {
-            var items, runningTasks;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        items = [];
-                        return [4 /*yield*/, this.taskService.getRunningTasks()];
-                    case 1:
-                        runningTasks = _a.sent();
-                        if (runningTasks.length <= 0) {
-                            items.push(new quick_open_model_1.QuickOpenItem({
-                                label: 'No task is currently running',
-                                run: function () { return false; },
-                            }));
-                        }
-                        else {
-                            runningTasks.forEach(function (task) {
-                                items.push(new quick_open_model_1.QuickOpenItem({
-                                    label: task.config.label,
-                                    run: function (mode) {
-                                        if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
-                                            return false;
-                                        }
-                                        _this.taskService.kill(task.taskId);
-                                        return true;
-                                    }
-                                }));
-                            });
-                            if (runningTasks.length > 1) {
-                                items.push(new quick_open_model_1.QuickOpenItem({
-                                    label: 'All running tasks',
-                                    run: function (mode) {
-                                        if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
-                                            return false;
-                                        }
-                                        runningTasks.forEach(function (t) {
-                                            _this.taskService.kill(t.taskId);
-                                        });
-                                        return true;
-                                    }
-                                }));
-                            }
-                        }
-                        acceptor(items);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TaskTerminateQuickOpen.prototype.open = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                this.quickOpenService.open(this, {
-                    placeholder: 'Select task to terminate',
-                    fuzzyMatchLabel: true,
-                    fuzzyMatchDescription: true,
-                });
-                return [2 /*return*/];
-            });
-        });
-    };
-    __decorate([
-        inversify_1.inject(browser_1.QuickOpenService),
-        __metadata("design:type", browser_1.QuickOpenService)
-    ], TaskTerminateQuickOpen.prototype, "quickOpenService", void 0);
-    __decorate([
-        inversify_1.inject(task_service_1.TaskService),
-        __metadata("design:type", task_service_1.TaskService)
-    ], TaskTerminateQuickOpen.prototype, "taskService", void 0);
-    TaskTerminateQuickOpen = __decorate([
-        inversify_1.injectable()
-    ], TaskTerminateQuickOpen);
-    return TaskTerminateQuickOpen;
-}());
-exports.TaskTerminateQuickOpen = TaskTerminateQuickOpen;
-var TaskRunningQuickOpen = /** @class */ (function () {
-    function TaskRunningQuickOpen() {
-    }
-    TaskRunningQuickOpen.prototype.onType = function (_lookFor, acceptor) {
-        return __awaiter(this, void 0, void 0, function () {
-            var items, runningTasks;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        items = [];
-                        return [4 /*yield*/, this.taskService.getRunningTasks()];
-                    case 1:
-                        runningTasks = _a.sent();
-                        if (runningTasks.length <= 0) {
-                            items.push(new quick_open_model_1.QuickOpenItem({
-                                label: 'No task is currently running',
-                                run: function () { return false; },
-                            }));
-                        }
-                        else {
-                            runningTasks.forEach(function (task) {
-                                items.push(new quick_open_model_1.QuickOpenItem({
-                                    label: task.config.label,
-                                    run: function (mode) {
-                                        if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
-                                            return false;
-                                        }
-                                        if (task.terminalId) {
-                                            var terminal = _this.terminalService.getById('terminal-' + task.terminalId);
-                                            if (terminal) {
-                                                _this.terminalService.open(terminal);
-                                            }
-                                        }
-                                        return true;
-                                    }
-                                }));
-                            });
-                        }
-                        acceptor(items);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TaskRunningQuickOpen.prototype.open = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                this.quickOpenService.open(this, {
-                    placeholder: 'Select the task to show its output',
-                    fuzzyMatchLabel: true,
-                    fuzzyMatchDescription: true,
-                });
-                return [2 /*return*/];
-            });
-        });
-    };
-    __decorate([
-        inversify_1.inject(browser_1.QuickOpenService),
-        __metadata("design:type", browser_1.QuickOpenService)
-    ], TaskRunningQuickOpen.prototype, "quickOpenService", void 0);
-    __decorate([
-        inversify_1.inject(task_service_1.TaskService),
-        __metadata("design:type", task_service_1.TaskService)
-    ], TaskRunningQuickOpen.prototype, "taskService", void 0);
-    __decorate([
-        inversify_1.inject(terminal_service_1.TerminalService),
-        __metadata("design:type", Object)
-    ], TaskRunningQuickOpen.prototype, "terminalService", void 0);
-    TaskRunningQuickOpen = __decorate([
-        inversify_1.injectable()
-    ], TaskRunningQuickOpen);
-    return TaskRunningQuickOpen;
-}());
-exports.TaskRunningQuickOpen = TaskRunningQuickOpen;
-var TaskRestartRunningQuickOpenItem = /** @class */ (function (_super) {
-    __extends(TaskRestartRunningQuickOpenItem, _super);
-    function TaskRestartRunningQuickOpenItem(taskInfo, taskService, taskNameResolver, taskSourceResolver, taskDefinitionRegistry, labelProvider, isMulti, options) {
-        var _this = _super.call(this, options) || this;
-        _this.taskInfo = taskInfo;
-        _this.taskService = taskService;
-        _this.taskNameResolver = taskNameResolver;
-        _this.taskSourceResolver = taskSourceResolver;
-        _this.taskDefinitionRegistry = taskDefinitionRegistry;
-        _this.labelProvider = labelProvider;
-        _this.isMulti = isMulti;
-        _this.options = options;
-        return _this;
-    }
-    TaskRestartRunningQuickOpenItem.prototype.getLabel = function () {
-        return this.taskNameResolver.resolve(this.taskInfo.config);
-    };
-    TaskRestartRunningQuickOpenItem.prototype.getDescription = function () {
-        if (!this.isMulti) {
-            return '';
+        this.opts = opts;
+        var activeContext = window.document.activeElement || undefined;
+        if (!activeContext || !this.container.contains(activeContext)) {
+            this.previousActiveElement = activeContext;
+            this.contextKeyService.activeContext = activeContext instanceof HTMLElement ? activeContext : undefined;
         }
-        var source = this.taskSourceResolver.resolve(this.taskInfo.config);
-        return source ? this.labelProvider.getName(new uri_1.default(source)) : '';
-    };
-    TaskRestartRunningQuickOpenItem.prototype.run = function (mode) {
-        if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
-            return false;
-        }
-        this.taskService.restartTask(this.taskInfo);
-        return true;
-    };
-    return TaskRestartRunningQuickOpenItem;
-}(quick_open_model_1.QuickOpenItem));
-exports.TaskRestartRunningQuickOpenItem = TaskRestartRunningQuickOpenItem;
-var TaskRestartRunningQuickOpen = /** @class */ (function () {
-    function TaskRestartRunningQuickOpen() {
-    }
-    TaskRestartRunningQuickOpen.prototype.onType = function (_lookFor, acceptor) {
-        return __awaiter(this, void 0, void 0, function () {
-            var items, runningTasks, isMulti;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        items = [];
-                        return [4 /*yield*/, this.taskService.getRunningTasks()];
-                    case 1:
-                        runningTasks = _a.sent();
-                        isMulti = this.workspaceService.isMultiRootWorkspaceOpened;
-                        if (runningTasks.length <= 0) {
-                            items.push(new quick_open_model_1.QuickOpenItem({
-                                label: 'No task to restart',
-                                run: function () { return false; },
-                            }));
-                        }
-                        else {
-                            runningTasks.forEach(function (task) {
-                                items.push(new TaskRestartRunningQuickOpenItem(task, _this.taskService, _this.taskNameResolver, _this.taskSourceResolver, _this.taskDefinitionRegistry, _this.labelProvider, isMulti, {}));
-                            });
-                        }
-                        acceptor(items);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TaskRestartRunningQuickOpen.prototype.open = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                this.quickOpenService.open(this, {
-                    placeholder: 'Select task to restart',
-                    fuzzyMatchLabel: true,
-                    fuzzyMatchDescription: true,
-                });
-                return [2 /*return*/];
-            });
-        });
-    };
-    __decorate([
-        inversify_1.inject(browser_1.LabelProvider),
-        __metadata("design:type", browser_1.LabelProvider)
-    ], TaskRestartRunningQuickOpen.prototype, "labelProvider", void 0);
-    __decorate([
-        inversify_1.inject(browser_1.QuickOpenService),
-        __metadata("design:type", browser_1.QuickOpenService)
-    ], TaskRestartRunningQuickOpen.prototype, "quickOpenService", void 0);
-    __decorate([
-        inversify_1.inject(task_definition_registry_1.TaskDefinitionRegistry),
-        __metadata("design:type", task_definition_registry_1.TaskDefinitionRegistry)
-    ], TaskRestartRunningQuickOpen.prototype, "taskDefinitionRegistry", void 0);
-    __decorate([
-        inversify_1.inject(task_name_resolver_1.TaskNameResolver),
-        __metadata("design:type", task_name_resolver_1.TaskNameResolver)
-    ], TaskRestartRunningQuickOpen.prototype, "taskNameResolver", void 0);
-    __decorate([
-        inversify_1.inject(task_source_resolver_1.TaskSourceResolver),
-        __metadata("design:type", task_source_resolver_1.TaskSourceResolver)
-    ], TaskRestartRunningQuickOpen.prototype, "taskSourceResolver", void 0);
-    __decorate([
-        inversify_1.inject(task_service_1.TaskService),
-        __metadata("design:type", task_service_1.TaskService)
-    ], TaskRestartRunningQuickOpen.prototype, "taskService", void 0);
-    __decorate([
-        inversify_1.inject(browser_2.WorkspaceService),
-        __metadata("design:type", browser_2.WorkspaceService)
-    ], TaskRestartRunningQuickOpen.prototype, "workspaceService", void 0);
-    TaskRestartRunningQuickOpen = __decorate([
-        inversify_1.injectable()
-    ], TaskRestartRunningQuickOpen);
-    return TaskRestartRunningQuickOpen;
-}());
-exports.TaskRestartRunningQuickOpen = TaskRestartRunningQuickOpen;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/browser/task-configuration-manager.js":
-/*!*****************************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/task-configuration-manager.js ***!
-  \*****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var debounce = __webpack_require__(/*! p-debounce */ "../node_modules/p-debounce/index.js");
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var event_1 = __webpack_require__(/*! @theia/core/lib/common/event */ "../node_modules/@theia/core/lib/common/event.js");
-var browser_1 = __webpack_require__(/*! @theia/editor/lib/browser */ "../node_modules/@theia/editor/lib/browser/index.js");
-var browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var quick_pick_service_1 = __webpack_require__(/*! @theia/core/lib/common/quick-pick-service */ "../node_modules/@theia/core/lib/common/quick-pick-service.js");
-var workspace_service_1 = __webpack_require__(/*! @theia/workspace/lib/browser/workspace-service */ "../node_modules/@theia/workspace/lib/browser/workspace-service.js");
-var task_configuration_model_1 = __webpack_require__(/*! ./task-configuration-model */ "../node_modules/@theia/task/lib/browser/task-configuration-model.js");
-var task_templates_1 = __webpack_require__(/*! ./task-templates */ "../node_modules/@theia/task/lib/browser/task-templates.js");
-var workspace_variable_contribution_1 = __webpack_require__(/*! @theia/workspace/lib/browser/workspace-variable-contribution */ "../node_modules/@theia/workspace/lib/browser/workspace-variable-contribution.js");
-var common_1 = __webpack_require__(/*! @theia/filesystem/lib/common */ "../node_modules/@theia/filesystem/lib/common/index.js");
-var filesystem_watcher_protocol_1 = __webpack_require__(/*! @theia/filesystem/lib/common/filesystem-watcher-protocol */ "../node_modules/@theia/filesystem/lib/common/filesystem-watcher-protocol.js");
-var preference_configurations_1 = __webpack_require__(/*! @theia/core/lib/browser/preferences/preference-configurations */ "../node_modules/@theia/core/lib/browser/preferences/preference-configurations.js");
-var TaskConfigurationManager = /** @class */ (function () {
-    function TaskConfigurationManager() {
-        var _this = this;
-        this.onDidChangeTaskConfigEmitter = new event_1.Emitter();
-        this.onDidChangeTaskConfig = this.onDidChangeTaskConfigEmitter.event;
-        this.models = new Map();
-        this.updateModels = debounce(function () { return __awaiter(_this, void 0, void 0, function () {
-            var roots, toDelete, _loop_1, this_1, roots_1, roots_1_1, rootStat, toDelete_1, toDelete_1_1, uri, model;
-            var e_1, _a, e_2, _b;
-            var _this = this;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0: return [4 /*yield*/, this.workspaceService.roots];
-                    case 1:
-                        roots = _c.sent();
-                        toDelete = new Set(this.models.keys());
-                        _loop_1 = function (rootStat) {
-                            var key = rootStat.uri;
-                            toDelete.delete(key);
-                            if (!this_1.models.has(key)) {
-                                var model = new task_configuration_model_1.TaskConfigurationModel(key, this_1.preferences);
-                                model.onDidChange(function () { return _this.onDidChangeTaskConfigEmitter.fire({ uri: key, type: filesystem_watcher_protocol_1.FileChangeType.UPDATED }); });
-                                model.onDispose(function () { return _this.models.delete(key); });
-                                this_1.models.set(key, model);
-                                this_1.onDidChangeTaskConfigEmitter.fire({ uri: key, type: filesystem_watcher_protocol_1.FileChangeType.UPDATED });
-                            }
-                        };
-                        this_1 = this;
-                        try {
-                            for (roots_1 = __values(roots), roots_1_1 = roots_1.next(); !roots_1_1.done; roots_1_1 = roots_1.next()) {
-                                rootStat = roots_1_1.value;
-                                _loop_1(rootStat);
-                            }
-                        }
-                        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                        finally {
-                            try {
-                                if (roots_1_1 && !roots_1_1.done && (_a = roots_1.return)) _a.call(roots_1);
-                            }
-                            finally { if (e_1) throw e_1.error; }
-                        }
-                        try {
-                            for (toDelete_1 = __values(toDelete), toDelete_1_1 = toDelete_1.next(); !toDelete_1_1.done; toDelete_1_1 = toDelete_1.next()) {
-                                uri = toDelete_1_1.value;
-                                model = this.models.get(uri);
-                                if (model) {
-                                    model.dispose();
-                                }
-                                this.onDidChangeTaskConfigEmitter.fire({ uri: uri, type: filesystem_watcher_protocol_1.FileChangeType.DELETED });
-                            }
-                        }
-                        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-                        finally {
-                            try {
-                                if (toDelete_1_1 && !toDelete_1_1.done && (_b = toDelete_1.return)) _b.call(toDelete_1);
-                            }
-                            finally { if (e_2) throw e_2.error; }
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        }); }, 500);
-    }
-    TaskConfigurationManager.prototype.init = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                this.updateModels();
-                this.preferences.onPreferenceChanged(function (e) {
-                    if (e.preferenceName === 'tasks') {
-                        _this.updateModels();
-                    }
-                });
-                this.workspaceService.onWorkspaceChanged(function () {
-                    _this.updateModels();
-                });
-                return [2 /*return*/];
-            });
-        });
-    };
-    TaskConfigurationManager.prototype.getTasks = function (sourceFolderUri) {
-        if (this.models.has(sourceFolderUri)) {
-            var taskPrefModel = this.models.get(sourceFolderUri);
-            return taskPrefModel.configurations;
-        }
-        return [];
-    };
-    TaskConfigurationManager.prototype.getTask = function (name, sourceFolderUri) {
-        var e_3, _a;
-        var taskPrefModel = this.getModel(sourceFolderUri);
-        if (taskPrefModel) {
-            try {
-                for (var _b = __values(taskPrefModel.configurations), _c = _b.next(); !_c.done; _c = _b.next()) {
-                    var configuration = _c.value;
-                    if (configuration.name === name) {
-                        return configuration;
-                    }
-                }
-            }
-            catch (e_3_1) { e_3 = { error: e_3_1 }; }
-            finally {
-                try {
-                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                }
-                finally { if (e_3) throw e_3.error; }
+        this.hideDecoration();
+        this.widget.show(this.opts.prefix || '');
+        this.setPlaceHolder(opts.inputAriaLabel);
+        this.setPassword(opts.password ? true : false);
+        this.setEnabled(opts.enabled);
+        this.setValueSelected(opts.inputAriaLabel, opts.valueSelection);
+        this.inQuickOpenKey.set(true);
+        var widget = this.widget;
+        if (widget.inputBox) {
+            widget.inputBox.inputElement.tabIndex = 1;
+            // Position the cursor at the end of the input unless a user has made a selection.
+            if (widget.inputBox.inputElement.selectionStart === widget.inputBox.inputElement.selectionEnd) {
+                widget.inputBox.inputElement.selectionStart = widget.inputBox.inputElement.value.length;
             }
         }
     };
-    TaskConfigurationManager.prototype.openConfiguration = function (sourceFolderUri) {
-        return __awaiter(this, void 0, void 0, function () {
-            var taskPrefModel;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        taskPrefModel = this.getModel(sourceFolderUri);
-                        if (!taskPrefModel) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.doOpen(taskPrefModel)];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TaskConfigurationManager.prototype.addTaskConfiguration = function (sourceFolderUri, taskConfig) {
-        return __awaiter(this, void 0, void 0, function () {
-            var taskPrefModel, configurations;
-            return __generator(this, function (_a) {
-                taskPrefModel = this.getModel(sourceFolderUri);
-                if (taskPrefModel) {
-                    configurations = taskPrefModel.configurations;
-                    return [2 /*return*/, this.setTaskConfigurations(sourceFolderUri, __spread(configurations, [taskConfig]))];
-                }
-                return [2 /*return*/];
-            });
-        });
-    };
-    TaskConfigurationManager.prototype.setTaskConfigurations = function (sourceFolderUri, taskConfigs) {
-        return __awaiter(this, void 0, void 0, function () {
-            var taskPrefModel;
-            return __generator(this, function (_a) {
-                taskPrefModel = this.getModel(sourceFolderUri);
-                if (taskPrefModel) {
-                    return [2 /*return*/, taskPrefModel.setConfigurations(taskConfigs)];
-                }
-                return [2 /*return*/];
-            });
-        });
-    };
-    TaskConfigurationManager.prototype.getModel = function (sourceFolderUri) {
-        var e_4, _a;
-        if (!sourceFolderUri) {
-            return undefined;
-        }
-        try {
-            for (var _b = __values(this.models.values()), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var model = _c.value;
-                if (model.workspaceFolderUri === sourceFolderUri) {
-                    return model;
-                }
-            }
-        }
-        catch (e_4_1) { e_4 = { error: e_4_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_4) throw e_4.error; }
-        }
-    };
-    TaskConfigurationManager.prototype.doOpen = function (model) {
-        return __awaiter(this, void 0, void 0, function () {
-            var uri;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        uri = model.uri;
-                        if (!!uri) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.doCreate(model)];
-                    case 1:
-                        uri = _a.sent();
-                        _a.label = 2;
-                    case 2:
-                        if (uri) {
-                            return [2 /*return*/, this.editorManager.open(uri, {
-                                    mode: 'activate'
-                                })];
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TaskConfigurationManager.prototype.doCreate = function (model) {
-        return __awaiter(this, void 0, void 0, function () {
-            var content, configUri, uri, fileStat;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getInitialConfigurationContent()];
-                    case 1:
-                        content = _a.sent();
-                        if (!content) return [3 /*break*/, 4];
-                        return [4 /*yield*/, this.preferences.set('tasks', {}, browser_2.PreferenceScope.Folder, model.workspaceFolderUri)];
-                    case 2:
-                        _a.sent(); // create dummy tasks.json in the correct place
-                        configUri = this.preferences.resolve('tasks', [], model.workspaceFolderUri).configUri;
-                        uri = void 0;
-                        if (configUri && configUri.path.base === 'tasks.json') {
-                            uri = configUri;
-                        }
-                        else { // fallback
-                            uri = new uri_1.default(model.workspaceFolderUri).resolve(this.preferenceConfigurations.getPaths()[0] + "/tasks.json");
-                        }
-                        return [4 /*yield*/, this.filesystem.getFileStat(uri.toString())];
-                    case 3:
-                        fileStat = _a.sent();
-                        if (!fileStat) {
-                            throw new Error("file not found: " + uri.toString());
-                        }
-                        try {
-                            this.filesystem.setContent(fileStat, content);
-                        }
-                        catch (e) {
-                            if (!common_1.FileSystemError.FileExists.is(e)) {
-                                throw e;
-                            }
-                        }
-                        return [2 /*return*/, uri];
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TaskConfigurationManager.prototype.getInitialConfigurationContent = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var selected;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.quickPick.show(this.taskTemplateSelector.selectTemplates(), {
-                            placeholder: 'Select a Task Template'
-                        })];
-                    case 1:
-                        selected = _a.sent();
-                        if (selected) {
-                            return [2 /*return*/, selected.content];
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    __decorate([
-        inversify_1.inject(workspace_service_1.WorkspaceService),
-        __metadata("design:type", workspace_service_1.WorkspaceService)
-    ], TaskConfigurationManager.prototype, "workspaceService", void 0);
-    __decorate([
-        inversify_1.inject(browser_1.EditorManager),
-        __metadata("design:type", browser_1.EditorManager)
-    ], TaskConfigurationManager.prototype, "editorManager", void 0);
-    __decorate([
-        inversify_1.inject(quick_pick_service_1.QuickPickService),
-        __metadata("design:type", Object)
-    ], TaskConfigurationManager.prototype, "quickPick", void 0);
-    __decorate([
-        inversify_1.inject(common_1.FileSystem),
-        __metadata("design:type", Object)
-    ], TaskConfigurationManager.prototype, "filesystem", void 0);
-    __decorate([
-        inversify_1.inject(browser_2.PreferenceService),
-        __metadata("design:type", Object)
-    ], TaskConfigurationManager.prototype, "preferences", void 0);
-    __decorate([
-        inversify_1.inject(preference_configurations_1.PreferenceConfigurations),
-        __metadata("design:type", preference_configurations_1.PreferenceConfigurations)
-    ], TaskConfigurationManager.prototype, "preferenceConfigurations", void 0);
-    __decorate([
-        inversify_1.inject(workspace_variable_contribution_1.WorkspaceVariableContribution),
-        __metadata("design:type", workspace_variable_contribution_1.WorkspaceVariableContribution)
-    ], TaskConfigurationManager.prototype, "workspaceVariables", void 0);
-    __decorate([
-        inversify_1.inject(task_templates_1.TaskTemplateSelector),
-        __metadata("design:type", task_templates_1.TaskTemplateSelector)
-    ], TaskConfigurationManager.prototype, "taskTemplateSelector", void 0);
-    __decorate([
-        inversify_1.postConstruct(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", Promise)
-    ], TaskConfigurationManager.prototype, "init", null);
-    TaskConfigurationManager = __decorate([
-        inversify_1.injectable()
-    ], TaskConfigurationManager);
-    return TaskConfigurationManager;
-}());
-exports.TaskConfigurationManager = TaskConfigurationManager;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/browser/task-configuration-model.js":
-/*!***************************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/task-configuration-model.js ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var event_1 = __webpack_require__(/*! @theia/core/lib/common/event */ "../node_modules/@theia/core/lib/common/event.js");
-var disposable_1 = __webpack_require__(/*! @theia/core/lib/common/disposable */ "../node_modules/@theia/core/lib/common/disposable.js");
-var preference_service_1 = __webpack_require__(/*! @theia/core/lib/browser/preferences/preference-service */ "../node_modules/@theia/core/lib/browser/preferences/preference-service.js");
-var TaskConfigurationModel = /** @class */ (function () {
-    function TaskConfigurationModel(workspaceFolderUri, preferences) {
-        var _this = this;
-        this.workspaceFolderUri = workspaceFolderUri;
-        this.preferences = preferences;
-        this.onDidChangeEmitter = new event_1.Emitter();
-        this.onDidChange = this.onDidChangeEmitter.event;
-        this.toDispose = new disposable_1.DisposableCollection(this.onDidChangeEmitter);
-        this.reconcile();
-        this.toDispose.push(this.preferences.onPreferenceChanged(function (e) {
-            if (e.preferenceName === 'tasks' && e.affects(workspaceFolderUri)) {
-                _this.reconcile();
-            }
-        }));
-    }
-    Object.defineProperty(TaskConfigurationModel.prototype, "uri", {
-        get: function () {
-            return this.json.uri;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    TaskConfigurationModel.prototype.dispose = function () {
-        this.toDispose.dispose();
-    };
-    Object.defineProperty(TaskConfigurationModel.prototype, "onDispose", {
-        get: function () {
-            return this.toDispose.onDispose;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TaskConfigurationModel.prototype, "configurations", {
-        get: function () {
-            return this.json.configurations;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    TaskConfigurationModel.prototype.reconcile = function () {
-        this.json = this.parseConfigurations();
-        this.onDidChangeEmitter.fire(undefined);
-    };
-    TaskConfigurationModel.prototype.setConfigurations = function (value) {
-        return this.preferences.set('tasks.tasks', value, preference_service_1.PreferenceScope.Folder, this.workspaceFolderUri);
-    };
-    TaskConfigurationModel.prototype.parseConfigurations = function () {
-        var e_1, _a;
-        var configurations = [];
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        var _b = this.preferences.resolve('tasks', undefined, this.workspaceFolderUri), configUri = _b.configUri, value = _b.value;
-        if (value && typeof value === 'object' && 'tasks' in value) {
-            if (Array.isArray(value.tasks)) {
-                try {
-                    for (var _c = __values(value.tasks), _d = _c.next(); !_d.done; _d = _c.next()) {
-                        var taskConfig = _d.value;
-                        configurations.push(taskConfig);
-                    }
-                }
-                catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                finally {
-                    try {
-                        if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
-                    }
-                    finally { if (e_1) throw e_1.error; }
-                }
-            }
-        }
-        return {
-            uri: configUri,
-            configurations: configurations
-        };
-    };
-    return TaskConfigurationModel;
-}());
-exports.TaskConfigurationModel = TaskConfigurationModel;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/browser/task-configurations.js":
-/*!**********************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/task-configurations.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017-2018 Ericsson and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var Ajv = __webpack_require__(/*! ajv */ "../node_modules/ajv/lib/ajv.js");
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! ../common */ "../node_modules/@theia/task/lib/common/index.js");
-var task_definition_registry_1 = __webpack_require__(/*! ./task-definition-registry */ "../node_modules/@theia/task/lib/browser/task-definition-registry.js");
-var provided_task_configurations_1 = __webpack_require__(/*! ./provided-task-configurations */ "../node_modules/@theia/task/lib/browser/provided-task-configurations.js");
-var task_configuration_manager_1 = __webpack_require__(/*! ./task-configuration-manager */ "../node_modules/@theia/task/lib/browser/task-configuration-manager.js");
-var task_schema_updater_1 = __webpack_require__(/*! ./task-schema-updater */ "../node_modules/@theia/task/lib/browser/task-schema-updater.js");
-var task_source_resolver_1 = __webpack_require__(/*! ./task-source-resolver */ "../node_modules/@theia/task/lib/browser/task-source-resolver.js");
-var common_2 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var filesystem_watcher_protocol_1 = __webpack_require__(/*! @theia/filesystem/lib/common/filesystem-watcher-protocol */ "../node_modules/@theia/filesystem/lib/common/filesystem-watcher-protocol.js");
-var browser_1 = __webpack_require__(/*! @theia/workspace/lib/browser */ "../node_modules/@theia/workspace/lib/browser/index.js");
-var browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-/**
- * Watches a tasks.json configuration file and provides a parsed version of the contained task configurations
- */
-var TaskConfigurations = /** @class */ (function () {
-    function TaskConfigurations() {
-        var _this = this;
-        this.toDispose = new common_2.DisposableCollection();
-        /**
-         * Map of source (path of root folder that the task configs come from) and task config map.
-         * For the inner map (i.e., task config map), the key is task label and value TaskConfiguration
-         */
-        this.tasksMap = new Map();
-        /**
-         * Map of source (path of root folder that the task configs come from) and task customizations map.
-         */
-        this.taskCustomizationMap = new Map();
-        /** last directory element under which we look for task config */
-        this.TASKFILEPATH = '.theia';
-        /** task configuration file name */
-        this.TASKFILE = 'tasks.json';
-        this.client = undefined;
-        /**
-         * Map of source (path of root folder that the task configs come from) and raw task configurations / customizations.
-         * This map is used to store the data from `tasks.json` files in workspace.
-         */
-        this.rawTaskConfigurations = new Map();
-        this.toDispose.push(common_2.Disposable.create(function () {
-            _this.tasksMap.clear();
-            _this.taskCustomizationMap.clear();
-            _this.rawTaskConfigurations.clear();
-            _this.client = undefined;
-        }));
-    }
-    TaskConfigurations.prototype.init = function () {
-        var _this = this;
-        this.toDispose.push(this.taskConfigurationManager.onDidChangeTaskConfig(function (change) { return __awaiter(_this, void 0, void 0, function () {
-            var err_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.onDidTaskFileChange([change])];
-                    case 1:
-                        _a.sent();
-                        if (this.client) {
-                            this.client.taskConfigurationChanged(this.getTaskLabels());
-                        }
-                        return [3 /*break*/, 3];
-                    case 2:
-                        err_1 = _a.sent();
-                        console.error(err_1);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        }); }));
-        this.reorganizeTasks();
-        this.toDispose.push(this.taskSchemaUpdater.onDidChangeTaskSchema(function () { return _this.reorganizeTasks(); }));
-    };
-    TaskConfigurations.prototype.setClient = function (client) {
-        this.client = client;
-    };
-    TaskConfigurations.prototype.dispose = function () {
-        this.toDispose.dispose();
-    };
-    /** returns the list of known task labels */
-    TaskConfigurations.prototype.getTaskLabels = function () {
-        return Array.from(this.tasksMap.values()).reduce(function (acc, labelConfigMap) { return acc.concat(Array.from(labelConfigMap.keys())); }, []);
-    };
-    /**
-     * returns a collection of known tasks, which includes:
-     * - all the configured tasks in `tasks.json`, and
-     * - the customized detected tasks.
-     *
-     * The invalid task configs are not returned.
-     */
-    TaskConfigurations.prototype.getTasks = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var configuredTasks, detectedTasksAsConfigured, _a, _b, _c, rootFolder, customizations, customizations_1, customizations_1_1, cus, detected, e_1_1, e_2_1;
-            var e_2, _d, e_1, _e;
-            return __generator(this, function (_f) {
-                switch (_f.label) {
-                    case 0:
-                        configuredTasks = Array.from(this.tasksMap.values()).reduce(function (acc, labelConfigMap) { return acc.concat(Array.from(labelConfigMap.values())); }, []);
-                        detectedTasksAsConfigured = [];
-                        _f.label = 1;
-                    case 1:
-                        _f.trys.push([1, 12, 13, 14]);
-                        _a = __values(Array.from(this.taskCustomizationMap.entries())), _b = _a.next();
-                        _f.label = 2;
-                    case 2:
-                        if (!!_b.done) return [3 /*break*/, 11];
-                        _c = __read(_b.value, 2), rootFolder = _c[0], customizations = _c[1];
-                        _f.label = 3;
-                    case 3:
-                        _f.trys.push([3, 8, 9, 10]);
-                        customizations_1 = (e_1 = void 0, __values(customizations)), customizations_1_1 = customizations_1.next();
-                        _f.label = 4;
-                    case 4:
-                        if (!!customizations_1_1.done) return [3 /*break*/, 7];
-                        cus = customizations_1_1.value;
-                        return [4 /*yield*/, this.providedTaskConfigurations.getTaskToCustomize(cus, rootFolder)];
-                    case 5:
-                        detected = _f.sent();
-                        if (detected) {
-                            detectedTasksAsConfigured.push(__assign({}, detected, cus));
-                        }
-                        _f.label = 6;
-                    case 6:
-                        customizations_1_1 = customizations_1.next();
-                        return [3 /*break*/, 4];
-                    case 7: return [3 /*break*/, 10];
-                    case 8:
-                        e_1_1 = _f.sent();
-                        e_1 = { error: e_1_1 };
-                        return [3 /*break*/, 10];
-                    case 9:
-                        try {
-                            if (customizations_1_1 && !customizations_1_1.done && (_e = customizations_1.return)) _e.call(customizations_1);
-                        }
-                        finally { if (e_1) throw e_1.error; }
-                        return [7 /*endfinally*/];
-                    case 10:
-                        _b = _a.next();
-                        return [3 /*break*/, 2];
-                    case 11: return [3 /*break*/, 14];
-                    case 12:
-                        e_2_1 = _f.sent();
-                        e_2 = { error: e_2_1 };
-                        return [3 /*break*/, 14];
-                    case 13:
-                        try {
-                            if (_b && !_b.done && (_d = _a.return)) _d.call(_a);
-                        }
-                        finally { if (e_2) throw e_2.error; }
-                        return [7 /*endfinally*/];
-                    case 14: return [2 /*return*/, __spread(configuredTasks, detectedTasksAsConfigured)];
-                }
-            });
-        });
-    };
-    /**
-     * returns a collection of invalid task configs as per the task schema defined in Theia.
-     */
-    TaskConfigurations.prototype.getInvalidTaskConfigurations = function () {
-        var e_3, _a, e_4, _b;
-        var invalidTaskConfigs = [];
-        try {
-            for (var _c = __values(this.rawTaskConfigurations.values()), _d = _c.next(); !_d.done; _d = _c.next()) {
-                var taskConfigs = _d.value;
-                try {
-                    for (var taskConfigs_1 = (e_4 = void 0, __values(taskConfigs)), taskConfigs_1_1 = taskConfigs_1.next(); !taskConfigs_1_1.done; taskConfigs_1_1 = taskConfigs_1.next()) {
-                        var taskConfig = taskConfigs_1_1.value;
-                        var isValid = this.isTaskConfigValid(taskConfig);
-                        if (!isValid) {
-                            invalidTaskConfigs.push(taskConfig);
-                        }
-                    }
-                }
-                catch (e_4_1) { e_4 = { error: e_4_1 }; }
-                finally {
-                    try {
-                        if (taskConfigs_1_1 && !taskConfigs_1_1.done && (_b = taskConfigs_1.return)) _b.call(taskConfigs_1);
-                    }
-                    finally { if (e_4) throw e_4.error; }
-                }
-            }
-        }
-        catch (e_3_1) { e_3 = { error: e_3_1 }; }
-        finally {
-            try {
-                if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
-            }
-            finally { if (e_3) throw e_3.error; }
-        }
-        return invalidTaskConfigs;
-    };
-    /** returns the task configuration for a given label or undefined if none */
-    TaskConfigurations.prototype.getTask = function (rootFolderPath, taskLabel) {
-        var labelConfigMap = this.tasksMap.get(rootFolderPath);
-        if (labelConfigMap) {
-            return labelConfigMap.get(taskLabel);
-        }
-    };
-    /** removes tasks configured in the given task config file */
-    TaskConfigurations.prototype.removeTasks = function (configFileUri) {
-        var source = this.getSourceFolderFromConfigUri(configFileUri);
-        this.tasksMap.delete(source);
-        this.taskCustomizationMap.delete(source);
-    };
-    /**
-     * Removes task customization objects found in the given task config file from the memory.
-     * Please note: this function does not modify the task config file.
-     */
-    TaskConfigurations.prototype.removeTaskCustomizations = function (configFileUri) {
-        var source = this.getSourceFolderFromConfigUri(configFileUri);
-        this.taskCustomizationMap.delete(source);
-    };
-    /**
-     * Returns the task customizations by type from a given root folder in the workspace.
-     * @param type the type of task customizations
-     * @param rootFolder the root folder to find task customizations from. If `undefined`, this function returns an empty array.
-     */
-    TaskConfigurations.prototype.getTaskCustomizations = function (type, rootFolder) {
-        if (!rootFolder) {
-            return [];
-        }
-        var customizationInRootFolder = this.taskCustomizationMap.get(new uri_1.default(rootFolder).toString());
-        if (customizationInRootFolder) {
-            return customizationInRootFolder.filter(function (c) { return c.type === type; });
-        }
-        return [];
-    };
-    /**
-     * Returns the customization object in `tasks.json` for the given task. Please note, this function
-     * returns `undefined` if the given task is not a detected task, because configured tasks don't need
-     * customization objects - users can modify its config directly in `tasks.json`.
-     * @param taskConfig The task config, which could either be a configured task or a detected task.
-     */
-    TaskConfigurations.prototype.getCustomizationForTask = function (taskConfig) {
-        if (!this.isDetectedTask(taskConfig)) {
-            return undefined;
-        }
-        var customizationByType = this.getTaskCustomizations(taskConfig.taskType || taskConfig.type, taskConfig._scope) || [];
-        var hasCustomization = customizationByType.length > 0;
-        if (hasCustomization) {
-            var taskDefinition_1 = this.taskDefinitionRegistry.getDefinition(taskConfig);
-            if (taskDefinition_1) {
-                var cus = customizationByType.filter(function (customization) {
-                    return taskDefinition_1.properties.required.every(function (rp) { return customization[rp] === taskConfig[rp]; });
-                })[0]; // Only support having one customization per task
-                return cus;
-            }
-        }
-        return undefined;
-    };
-    /** returns the string uri of where the config file would be, if it existed under a given root directory */
-    TaskConfigurations.prototype.getConfigFileUri = function (rootDir) {
-        return new uri_1.default(rootDir).resolve(this.TASKFILEPATH).resolve(this.TASKFILE).toString();
-    };
-    /**
-     * Called when a change, to a config file we watch, is detected.
-     */
-    TaskConfigurations.prototype.onDidTaskFileChange = function (fileChanges) {
-        return __awaiter(this, void 0, void 0, function () {
-            var fileChanges_1, fileChanges_1_1, change, e_5_1;
-            var e_5, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _b.trys.push([0, 6, 7, 8]);
-                        fileChanges_1 = __values(fileChanges), fileChanges_1_1 = fileChanges_1.next();
-                        _b.label = 1;
-                    case 1:
-                        if (!!fileChanges_1_1.done) return [3 /*break*/, 5];
-                        change = fileChanges_1_1.value;
-                        if (!(change.type === filesystem_watcher_protocol_1.FileChangeType.DELETED)) return [3 /*break*/, 2];
-                        this.removeTasks(change.uri);
-                        return [3 /*break*/, 4];
-                    case 2: 
-                    // re-parse the config file
-                    return [4 /*yield*/, this.refreshTasks(change.uri)];
-                    case 3:
-                        // re-parse the config file
-                        _b.sent();
-                        _b.label = 4;
-                    case 4:
-                        fileChanges_1_1 = fileChanges_1.next();
-                        return [3 /*break*/, 1];
-                    case 5: return [3 /*break*/, 8];
-                    case 6:
-                        e_5_1 = _b.sent();
-                        e_5 = { error: e_5_1 };
-                        return [3 /*break*/, 8];
-                    case 7:
-                        try {
-                            if (fileChanges_1_1 && !fileChanges_1_1.done && (_a = fileChanges_1.return)) _a.call(fileChanges_1);
-                        }
-                        finally { if (e_5) throw e_5.error; }
-                        return [7 /*endfinally*/];
-                    case 8: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    /**
-     * Read the task configs from the task configuration manager, and updates the list of available tasks.
-     */
-    TaskConfigurations.prototype.refreshTasks = function (rootFolderUri) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.readTasks(rootFolderUri)];
-                    case 1:
-                        _a.sent();
-                        this.removeTasks(rootFolderUri);
-                        this.removeTaskCustomizations(rootFolderUri);
-                        this.reorganizeTasks();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    /** parses a config file and extracts the tasks launch configurations */
-    TaskConfigurations.prototype.readTasks = function (rootFolderUri) {
-        return __awaiter(this, void 0, void 0, function () {
-            var rawConfigArray;
-            return __generator(this, function (_a) {
-                rawConfigArray = this.taskConfigurationManager.getTasks(rootFolderUri);
-                if (this.rawTaskConfigurations.has(rootFolderUri)) {
-                    this.rawTaskConfigurations.delete(rootFolderUri);
-                }
-                this.rawTaskConfigurations.set(rootFolderUri, rawConfigArray);
-                return [2 /*return*/, rawConfigArray];
-            });
-        });
-    };
-    /** Adds given task to a config file and opens the file to provide ability to edit task configuration. */
-    TaskConfigurations.prototype.configure = function (task) {
-        return __awaiter(this, void 0, void 0, function () {
-            var workspace, sourceFolderUri, configuredAndCustomizedTasks, e_6;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        workspace = this.workspaceService.workspace;
-                        if (!workspace) {
-                            return [2 /*return*/];
-                        }
-                        sourceFolderUri = this.taskSourceResolver.resolve(task);
-                        if (!sourceFolderUri) {
-                            console.error('Global task cannot be customized');
-                            return [2 /*return*/];
-                        }
-                        return [4 /*yield*/, this.getTasks()];
-                    case 1:
-                        configuredAndCustomizedTasks = _a.sent();
-                        if (!!configuredAndCustomizedTasks.some(function (t) { return _this.taskDefinitionRegistry.compareTasks(t, task); })) return [3 /*break*/, 3];
-                        return [4 /*yield*/, this.saveTask(sourceFolderUri, __assign({}, task, { problemMatcher: [] }))];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3:
-                        _a.trys.push([3, 5, , 6]);
-                        return [4 /*yield*/, this.taskConfigurationManager.openConfiguration(sourceFolderUri)];
-                    case 4:
-                        _a.sent();
-                        return [3 /*break*/, 6];
-                    case 5:
-                        e_6 = _a.sent();
-                        console.error("Error occurred while opening: " + this.TASKFILE + ".", e_6);
-                        return [3 /*break*/, 6];
-                    case 6: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TaskConfigurations.prototype.getTaskCustomizationTemplate = function (task) {
-        var definition = this.getTaskDefinition(task);
-        if (!definition) {
-            console.error('Detected / Contributed tasks should have a task definition.');
+    MonacoQuickOpenService.prototype.setValueSelected = function (value, selectLocation) {
+        if (!value) {
             return;
         }
-        var customization = { type: task.taskType || task.type };
-        definition.properties.all.forEach(function (p) {
-            if (task[p] !== undefined) {
-                customization[p] = task[p];
+        var widget = this.widget;
+        if (widget.inputBox) {
+            if (!selectLocation) {
+                widget.inputBox.inputElement.setSelectionRange(0, value.length);
+                return;
             }
-        });
-        if ('problemMatcher' in task) {
-            var problemMatcher = [];
-            if (Array.isArray(task.problemMatcher)) {
-                problemMatcher.push.apply(problemMatcher, __spread(task.problemMatcher.map(function (t) {
-                    if (typeof t === 'string') {
-                        return t;
+            if (selectLocation[0] === selectLocation[1]) {
+                widget.inputBox.inputElement.setSelectionRange(selectLocation[0], selectLocation[0]);
+                return;
+            }
+            widget.inputBox.inputElement.setSelectionRange(selectLocation[0], selectLocation[1]);
+        }
+    };
+    MonacoQuickOpenService.prototype.setEnabled = function (isEnabled) {
+        var widget = this.widget;
+        if (widget.inputBox) {
+            widget.inputBox.inputElement.readOnly = (isEnabled !== undefined) ? !isEnabled : false;
+        }
+    };
+    MonacoQuickOpenService.prototype.setValue = function (value) {
+        if (this.widget && this.widget.inputBox) {
+            this.widget.inputBox.inputElement.value = (value !== undefined) ? value : '';
+        }
+    };
+    MonacoQuickOpenService.prototype.setPlaceHolder = function (placeHolder) {
+        var widget = this.widget;
+        if (widget.inputBox) {
+            widget.inputBox.setPlaceHolder(placeHolder);
+        }
+    };
+    MonacoQuickOpenService.prototype.setPassword = function (isPassword) {
+        var widget = this.widget;
+        if (widget.inputBox) {
+            widget.inputBox.inputElement.type = isPassword ? 'password' : 'text';
+        }
+    };
+    MonacoQuickOpenService.prototype.showInputDecoration = function (decoration) {
+        var widget = this.widget;
+        if (widget.inputBox) {
+            var type = decoration === monaco.MarkerSeverity.Info ? 1 :
+                decoration === monaco.MarkerSeverity.Warning ? 2 : 3;
+            widget.inputBox.showMessage({ type: type, content: '' });
+        }
+    };
+    MonacoQuickOpenService.prototype.clearInputDecoration = function () {
+        var widget = this.widget;
+        if (widget.inputBox) {
+            widget.inputBox.hideMessage();
+        }
+    };
+    Object.defineProperty(MonacoQuickOpenService.prototype, "widget", {
+        get: function () {
+            var _this = this;
+            if (this._widget) {
+                return this._widget;
+            }
+            this._widget = new monaco.quickOpen.QuickOpenWidget(this.container, {
+                onOk: function () {
+                    _this.previousActiveElement = undefined;
+                    _this.contextKeyService.activeContext = undefined;
+                    _this.onClose(false);
+                },
+                onCancel: function () {
+                    if (_this.previousActiveElement instanceof HTMLElement) {
+                        _this.previousActiveElement.focus({ preventScroll: true });
+                    }
+                    _this.previousActiveElement = undefined;
+                    _this.contextKeyService.activeContext = undefined;
+                    _this.onClose(true);
+                },
+                onType: function (lookFor) { return _this.onType(lookFor || ''); },
+                onFocusLost: function () {
+                    if (_this.opts && _this.opts.ignoreFocusOut !== undefined) {
+                        if (_this.opts.ignoreFocusOut === false) {
+                            _this.onClose(true);
+                        }
+                        return _this.opts.ignoreFocusOut;
                     }
                     else {
-                        return t.name;
-                    }
-                })));
-            }
-            else if (typeof task.problemMatcher === 'string') {
-                problemMatcher.push(task.problemMatcher);
-            }
-            else if (task.problemMatcher) {
-                problemMatcher.push(task.problemMatcher.name);
-            }
-            customization.problemMatcher = problemMatcher.map(function (name) { return name.startsWith('$') ? name : "$" + name; });
-        }
-        if (task.group) {
-            customization.group = task.group;
-        }
-        return __assign({}, customization);
-    };
-    /** Writes the task to a config file. Creates a config file if this one does not exist */
-    TaskConfigurations.prototype.saveTask = function (sourceFolderUri, task) {
-        var _source = task._source, $ident = task.$ident, preparedTask = __rest(task, ["_source", "$ident"]);
-        var customizedTaskTemplate = this.getTaskCustomizationTemplate(task) || preparedTask;
-        return this.taskConfigurationManager.addTaskConfiguration(sourceFolderUri, customizedTaskTemplate);
-    };
-    /**
-     * This function is called after a change in TaskDefinitionRegistry happens.
-     * It checks all tasks that have been loaded, and re-organized them in `tasksMap` and `taskCustomizationMap`.
-     */
-    TaskConfigurations.prototype.reorganizeTasks = function () {
-        var e_7, _a, e_8, _b;
-        var newTaskMap = new Map();
-        var newTaskCustomizationMap = new Map();
-        var addCustomization = function (rootFolder, customization) {
-            if (newTaskCustomizationMap.has(rootFolder)) {
-                newTaskCustomizationMap.get(rootFolder).push(customization);
-            }
-            else {
-                newTaskCustomizationMap.set(rootFolder, [customization]);
-            }
-        };
-        var addConfiguredTask = function (rootFolder, label, configuredTask) {
-            if (newTaskMap.has(rootFolder)) {
-                newTaskMap.get(rootFolder).set(label, configuredTask);
-            }
-            else {
-                var newConfigMap = new Map();
-                newConfigMap.set(label, configuredTask);
-                newTaskMap.set(rootFolder, newConfigMap);
-            }
-        };
-        try {
-            for (var _c = __values(this.rawTaskConfigurations.entries()), _d = _c.next(); !_d.done; _d = _c.next()) {
-                var _e = __read(_d.value, 2), rootFolder = _e[0], taskConfigs = _e[1];
-                try {
-                    for (var taskConfigs_2 = (e_8 = void 0, __values(taskConfigs)), taskConfigs_2_1 = taskConfigs_2.next(); !taskConfigs_2_1.done; taskConfigs_2_1 = taskConfigs_2.next()) {
-                        var taskConfig = taskConfigs_2_1.value;
-                        var isValid = this.isTaskConfigValid(taskConfig);
-                        if (!isValid) {
-                            continue;
-                        }
-                        var transformedTask = this.getTransformedRawTask(taskConfig, rootFolder);
-                        if (this.isDetectedTask(transformedTask)) {
-                            addCustomization(rootFolder, transformedTask);
-                        }
-                        else {
-                            addConfiguredTask(rootFolder, transformedTask['label'], transformedTask);
-                        }
+                        return false;
                     }
                 }
-                catch (e_8_1) { e_8 = { error: e_8_1 }; }
-                finally {
-                    try {
-                        if (taskConfigs_2_1 && !taskConfigs_2_1.done && (_b = taskConfigs_2.return)) _b.call(taskConfigs_2);
-                    }
-                    finally { if (e_8) throw e_8.error; }
-                }
-            }
+            }, {});
+            this.attachQuickOpenStyler();
+            var newWidget = this._widget.create();
+            this._widgetNode = newWidget;
+            return this._widget;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MonacoQuickOpenService.prototype, "widgetNode", {
+        get: function () {
+            return this._widgetNode;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MonacoQuickOpenService.prototype.attachQuickOpenStyler = function () {
+        var _this = this;
+        if (!this._widget) {
+            return;
         }
-        catch (e_7_1) { e_7 = { error: e_7_1 }; }
-        finally {
-            try {
-                if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
-            }
-            finally { if (e_7) throw e_7.error; }
-        }
-        this.taskCustomizationMap = newTaskCustomizationMap;
-        this.tasksMap = newTaskMap;
+        var themeService = monaco.services.StaticServices.standaloneThemeService.get();
+        var detach = monaco.theme.attachQuickOpenStyler(this._widget, themeService);
+        var dispose = themeService.onThemeChange(function () {
+            detach.dispose();
+            _this.attachQuickOpenStyler();
+            dispose.dispose();
+        });
     };
-    TaskConfigurations.prototype.getTransformedRawTask = function (rawTask, rootFolderUri) {
-        var taskConfig;
-        if (this.isDetectedTask(rawTask)) {
-            var def = this.getTaskDefinition(rawTask);
-            taskConfig = __assign({}, rawTask, { _source: def.source, _scope: rootFolderUri });
+    MonacoQuickOpenService.prototype.onClose = function (cancelled) {
+        if (this.opts && this.opts.onClose) {
+            this.opts.onClose(cancelled);
         }
-        else {
-            taskConfig = __assign({}, rawTask, { _source: rootFolderUri, _scope: rootFolderUri });
-        }
-        return __assign({}, taskConfig, { presentation: common_1.TaskOutputPresentation.fromJson(rawTask) });
+        this.inQuickOpenKey.set(false);
     };
-    /**
-     * Returns `true` if the given task configuration is valid as per the task schema defined in Theia
-     * or contributed by Theia extensions and plugins, `false` otherwise.
-     */
-    TaskConfigurations.prototype.isTaskConfigValid = function (task) {
-        var schema = this.taskSchemaUpdater.getTaskSchema();
-        var ajv = new Ajv();
-        var validateSchema = ajv.compile(schema);
-        return !!validateSchema({ tasks: [task] });
-    };
-    /**
-     * Updates the task config in the `tasks.json`.
-     * The task config, together with updates, will be written into the `tasks.json` if it is not found in the file.
-     *
-     * @param task task that the updates will be applied to
-     * @param update the updates to be applied
-     */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    TaskConfigurations.prototype.updateTaskConfig = function (task, update) {
+    MonacoQuickOpenService.prototype.onType = function (lookFor) {
         return __awaiter(this, void 0, void 0, function () {
-            var sourceFolderUri, configuredAndCustomizedTasks, jsonTasks, ind;
+            var opts, m;
             var _this = this;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        sourceFolderUri = this.taskSourceResolver.resolve(task);
-                        if (!sourceFolderUri) {
-                            console.error('Global task cannot be customized');
-                            return [2 /*return*/];
-                        }
-                        return [4 /*yield*/, this.getTasks()];
-                    case 1:
-                        configuredAndCustomizedTasks = _a.sent();
-                        if (configuredAndCustomizedTasks.some(function (t) { return _this.taskDefinitionRegistry.compareTasks(t, task); })) { // task is already in `tasks.json`
-                            jsonTasks = this.taskConfigurationManager.getTasks(sourceFolderUri);
-                            if (jsonTasks) {
-                                ind = jsonTasks.findIndex(function (t) {
-                                    if (t.type !== (task.taskType || task.type)) {
-                                        return false;
-                                    }
-                                    var def = _this.taskDefinitionRegistry.getDefinition(t);
-                                    if (def) {
-                                        return def.properties.all.every(function (p) { return t[p] === task[p]; });
-                                    }
-                                    return t.label === task.label;
-                                });
-                                jsonTasks[ind] = __assign({}, jsonTasks[ind], update);
-                            }
-                            this.taskConfigurationManager.setTaskConfigurations(sourceFolderUri, jsonTasks);
-                        }
-                        else { // task is not in `tasks.json`
-                            Object.keys(update).forEach(function (taskProperty) {
-                                task[taskProperty] = update[taskProperty];
-                            });
-                            this.saveTask(sourceFolderUri, task);
-                        }
-                        return [2 /*return*/];
+                opts = this.opts;
+                if (this.widget && opts) {
+                    if (opts.onType) {
+                        opts.onType(lookFor, function (model) {
+                            return _this.widget.setInput(model, opts.getAutoFocus(lookFor), opts.inputAriaLabel);
+                        });
+                    }
+                    else {
+                        m = opts.getModel(lookFor);
+                        this.widget.setInput(m, opts.getAutoFocus(lookFor), opts.inputAriaLabel);
+                    }
                 }
+                return [2 /*return*/];
             });
         });
     };
-    TaskConfigurations.prototype.getSourceFolderFromConfigUri = function (configFileUri) {
-        return new uri_1.default(configFileUri).parent.parent.path.toString();
-    };
-    /** checks if the config is a detected / contributed task */
-    TaskConfigurations.prototype.isDetectedTask = function (task) {
-        var taskDefinition = this.getTaskDefinition(task);
-        // it is considered as a customization if the task definition registry finds a def for the task configuration
-        return !!taskDefinition;
-    };
-    TaskConfigurations.prototype.getTaskDefinition = function (task) {
-        return this.taskDefinitionRegistry.getDefinition(__assign({}, task, { type: task.taskType || task.type }));
-    };
     __decorate([
-        inversify_1.inject(browser_1.WorkspaceService),
-        __metadata("design:type", browser_1.WorkspaceService)
-    ], TaskConfigurations.prototype, "workspaceService", void 0);
+        inversify_1.inject(monaco_context_key_service_1.MonacoContextKeyService),
+        __metadata("design:type", monaco_context_key_service_1.MonacoContextKeyService)
+    ], MonacoQuickOpenService.prototype, "contextKeyService", void 0);
     __decorate([
-        inversify_1.inject(common_2.ResourceProvider),
-        __metadata("design:type", Function)
-    ], TaskConfigurations.prototype, "resourceProvider", void 0);
-    __decorate([
-        inversify_1.inject(browser_2.OpenerService),
-        __metadata("design:type", Object)
-    ], TaskConfigurations.prototype, "openerService", void 0);
-    __decorate([
-        inversify_1.inject(task_definition_registry_1.TaskDefinitionRegistry),
-        __metadata("design:type", task_definition_registry_1.TaskDefinitionRegistry)
-    ], TaskConfigurations.prototype, "taskDefinitionRegistry", void 0);
-    __decorate([
-        inversify_1.inject(provided_task_configurations_1.ProvidedTaskConfigurations),
-        __metadata("design:type", provided_task_configurations_1.ProvidedTaskConfigurations)
-    ], TaskConfigurations.prototype, "providedTaskConfigurations", void 0);
-    __decorate([
-        inversify_1.inject(task_configuration_manager_1.TaskConfigurationManager),
-        __metadata("design:type", task_configuration_manager_1.TaskConfigurationManager)
-    ], TaskConfigurations.prototype, "taskConfigurationManager", void 0);
-    __decorate([
-        inversify_1.inject(task_schema_updater_1.TaskSchemaUpdater),
-        __metadata("design:type", task_schema_updater_1.TaskSchemaUpdater)
-    ], TaskConfigurations.prototype, "taskSchemaUpdater", void 0);
-    __decorate([
-        inversify_1.inject(task_source_resolver_1.TaskSourceResolver),
-        __metadata("design:type", task_source_resolver_1.TaskSourceResolver)
-    ], TaskConfigurations.prototype, "taskSourceResolver", void 0);
+        inversify_1.inject(browser_1.KeybindingRegistry),
+        __metadata("design:type", browser_1.KeybindingRegistry)
+    ], MonacoQuickOpenService.prototype, "keybindingRegistry", void 0);
     __decorate([
         inversify_1.postConstruct(),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", void 0)
-    ], TaskConfigurations.prototype, "init", null);
-    TaskConfigurations = __decorate([
+    ], MonacoQuickOpenService.prototype, "init", null);
+    MonacoQuickOpenService = __decorate([
         inversify_1.injectable(),
         __metadata("design:paramtypes", [])
-    ], TaskConfigurations);
-    return TaskConfigurations;
-}());
-exports.TaskConfigurations = TaskConfigurations;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/browser/task-contribution.js":
-/*!********************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/task-contribution.js ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2018 Red Hat, Inc. and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    ], MonacoQuickOpenService);
+    return MonacoQuickOpenService;
+}(browser_1.QuickOpenService));
+exports.MonacoQuickOpenService = MonacoQuickOpenService;
+var MonacoQuickOpenControllerOptsImpl = /** @class */ (function () {
+    function MonacoQuickOpenControllerOptsImpl(model, keybindingService, options) {
+        this.model = model;
+        this.keybindingService = keybindingService;
+        this.model = model;
+        this.options = browser_1.QuickOpenOptions.resolve(options);
+        this.password = this.options.password;
     }
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var event_1 = __webpack_require__(/*! @theia/core/lib/common/event */ "../node_modules/@theia/core/lib/common/event.js");
-exports.TaskContribution = Symbol('TaskContribution');
-var TaskResolverRegistry = /** @class */ (function () {
-    function TaskResolverRegistry() {
-        this.onWillProvideTaskResolverEmitter = new event_1.Emitter();
-        this.onWillProvideTaskResolver = this.onWillProvideTaskResolverEmitter.event;
-    }
-    TaskResolverRegistry.prototype.init = function () {
-        this.resolvers = new Map();
-    };
-    /** Registers the given Task Resolver to resolve the Task Configurations of the specified type. */
-    TaskResolverRegistry.prototype.register = function (type, resolver) {
-        var _this = this;
-        this.resolvers.set(type, resolver);
-        return {
-            dispose: function () { return _this.resolvers.delete(type); }
-        };
-    };
-    TaskResolverRegistry.prototype.getResolver = function (type) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, event_1.WaitUntilEvent.fire(this.onWillProvideTaskResolverEmitter, {})];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/, this.resolvers.get(type)];
-                }
-            });
-        });
-    };
-    __decorate([
-        inversify_1.postConstruct(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], TaskResolverRegistry.prototype, "init", null);
-    TaskResolverRegistry = __decorate([
-        inversify_1.injectable()
-    ], TaskResolverRegistry);
-    return TaskResolverRegistry;
-}());
-exports.TaskResolverRegistry = TaskResolverRegistry;
-var TaskProviderRegistry = /** @class */ (function () {
-    function TaskProviderRegistry() {
-        this.onWillProvideTaskProviderEmitter = new event_1.Emitter();
-        this.onWillProvideTaskProvider = this.onWillProvideTaskProviderEmitter.event;
-    }
-    TaskProviderRegistry.prototype.init = function () {
-        this.providers = new Map();
-    };
-    /** Registers the given Task Provider to return Task Configurations of the specified type. */
-    TaskProviderRegistry.prototype.register = function (type, provider, handle) {
-        var _this = this;
-        var key = handle === undefined ? type : type + "::" + handle;
-        this.providers.set(key, provider);
-        return {
-            dispose: function () { return _this.providers.delete(key); }
-        };
-    };
-    TaskProviderRegistry.prototype.getProvider = function (type) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, event_1.WaitUntilEvent.fire(this.onWillProvideTaskProviderEmitter, {})];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/, this.providers.get(type)];
-                }
-            });
-        });
-    };
-    /** Returns all registered Task Providers. */
-    TaskProviderRegistry.prototype.getProviders = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, event_1.WaitUntilEvent.fire(this.onWillProvideTaskProviderEmitter, {})];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/, __spread(this.providers.values())];
-                }
-            });
-        });
-    };
-    __decorate([
-        inversify_1.postConstruct(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], TaskProviderRegistry.prototype, "init", null);
-    TaskProviderRegistry = __decorate([
-        inversify_1.injectable()
-    ], TaskProviderRegistry);
-    return TaskProviderRegistry;
-}());
-exports.TaskProviderRegistry = TaskProviderRegistry;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/browser/task-definition-registry.js":
-/*!***************************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/task-definition-registry.js ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var disposable_1 = __webpack_require__(/*! @theia/core/lib/common/disposable */ "../node_modules/@theia/core/lib/common/disposable.js");
-var TaskDefinitionRegistry = /** @class */ (function () {
-    function TaskDefinitionRegistry() {
-        // task type - array of task definitions
-        this.definitions = new Map();
-        this.onDidRegisterTaskDefinitionEmitter = new common_1.Emitter();
-        this.onDidUnregisterTaskDefinitionEmitter = new common_1.Emitter();
-    }
-    Object.defineProperty(TaskDefinitionRegistry.prototype, "onDidRegisterTaskDefinition", {
+    Object.defineProperty(MonacoQuickOpenControllerOptsImpl.prototype, "enabled", {
         get: function () {
-            return this.onDidRegisterTaskDefinitionEmitter.event;
+            return this.options.enabled;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TaskDefinitionRegistry.prototype, "onDidUnregisterTaskDefinition", {
+    Object.defineProperty(MonacoQuickOpenControllerOptsImpl.prototype, "prefix", {
         get: function () {
-            return this.onDidUnregisterTaskDefinitionEmitter.event;
+            return this.options.prefix;
         },
         enumerable: true,
         configurable: true
     });
-    /**
-     * Returns all task definitions that are registered
-     * @return the task definitions that are registered
-     */
-    TaskDefinitionRegistry.prototype.getAll = function () {
+    Object.defineProperty(MonacoQuickOpenControllerOptsImpl.prototype, "ignoreFocusOut", {
+        get: function () {
+            return this.options.ignoreFocusOut;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MonacoQuickOpenControllerOptsImpl.prototype, "inputAriaLabel", {
+        get: function () {
+            return this.options.placeholder || '';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MonacoQuickOpenControllerOptsImpl.prototype, "valueSelection", {
+        get: function () {
+            return this.options.valueSelection || [-1, -1];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MonacoQuickOpenControllerOptsImpl.prototype.onClose = function (cancelled) {
+        this.options.onClose(cancelled);
+    };
+    MonacoQuickOpenControllerOptsImpl.prototype.toOpenModel = function (lookFor, items, actionProvider) {
         var e_1, _a;
-        var all = [];
+        var entries = [];
         try {
-            for (var _b = __values(this.definitions.values()), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var definitions = _c.value;
-                all.push.apply(all, __spread(definitions));
+            for (var items_1 = __values(items), items_1_1 = items_1.next(); !items_1_1.done; items_1_1 = items_1.next()) {
+                var item = items_1_1.value;
+                var entry = this.createEntry(item, lookFor);
+                if (entry) {
+                    entries.push(entry);
+                }
             }
         }
         catch (e_1_1) { e_1 = { error: e_1_1 }; }
         finally {
             try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                if (items_1_1 && !items_1_1.done && (_a = items_1.return)) _a.call(items_1);
             }
             finally { if (e_1) throw e_1.error; }
         }
-        return all;
+        if (this.options.fuzzySort) {
+            entries.sort(function (a, b) { return monaco.quickOpen.compareEntries(a, b, lookFor); });
+        }
+        return new monaco.quickOpen.QuickOpenModel(entries, actionProvider ? new MonacoQuickOpenActionProvider(actionProvider) : undefined);
     };
-    /**
-     * Finds the task definition(s) from the registry with the given `taskType`.
-     *
-     * @param taskType the type of the task
-     * @return an array of the task definitions. If no task definitions are found, an empty array is returned.
-     */
-    TaskDefinitionRegistry.prototype.getDefinitions = function (taskType) {
-        return this.definitions.get(taskType) || [];
+    MonacoQuickOpenControllerOptsImpl.prototype.getModel = function (lookFor) {
+        throw new Error('getModel not supported!');
     };
-    /**
-     * Finds the task definition from the registry for the task configuration.
-     * The task configuration is considered as a "match" to the task definition if it has all the `required` properties.
-     * In case that more than one task definition is found, return the one that has the biggest number of matched properties.
-     *
-     * @param taskConfiguration the task configuration
-     * @return the task definition for the task configuration. If the task definition is not found, `undefined` is returned.
-     */
-    TaskDefinitionRegistry.prototype.getDefinition = function (taskConfiguration) {
-        var e_2, _a;
-        var definitions = this.getDefinitions(taskConfiguration.taskType || taskConfiguration.type);
-        var matchedDefinition;
-        var highest = -1;
-        var _loop_1 = function (def) {
-            var score = 0;
-            if (!def.properties.required.every(function (requiredProp) { return taskConfiguration[requiredProp] !== undefined; })) {
-                return "continue";
+    MonacoQuickOpenControllerOptsImpl.prototype.onType = function (lookFor, acceptor) {
+        var _this = this;
+        this.model.onType(lookFor, function (items, actionProvider) {
+            var result = _this.toOpenModel(lookFor, items, actionProvider);
+            acceptor(result);
+        });
+    };
+    MonacoQuickOpenControllerOptsImpl.prototype.createEntry = function (item, lookFor) {
+        if (this.options.skipPrefix) {
+            lookFor = lookFor.substr(this.options.skipPrefix);
+        }
+        if (this.options.trimInput) {
+            lookFor = lookFor.trim();
+        }
+        var _a = this.options, fuzzyMatchLabel = _a.fuzzyMatchLabel, fuzzyMatchDescription = _a.fuzzyMatchDescription, fuzzyMatchDetail = _a.fuzzyMatchDetail;
+        var labelHighlights = fuzzyMatchLabel ? this.matchesFuzzy(lookFor, item.getLabel(), fuzzyMatchLabel) : item.getLabelHighlights();
+        var descriptionHighlights = fuzzyMatchDescription ? this.matchesFuzzy(lookFor, item.getDescription(), fuzzyMatchDescription) : item.getDescriptionHighlights();
+        var detailHighlights = fuzzyMatchDetail ? this.matchesFuzzy(lookFor, item.getDetail(), fuzzyMatchDetail) : item.getDetailHighlights();
+        if ((lookFor && !labelHighlights && !descriptionHighlights && !detailHighlights)
+            && !this.options.showItemsWithoutHighlight) {
+            return undefined;
+        }
+        var entry = item instanceof browser_1.QuickOpenGroupItem
+            ? new QuickOpenEntryGroup(item, this.keybindingService)
+            : new QuickOpenEntry(item, this.keybindingService);
+        entry.setHighlights(labelHighlights || [], descriptionHighlights, detailHighlights);
+        return entry;
+    };
+    MonacoQuickOpenControllerOptsImpl.prototype.matchesFuzzy = function (lookFor, value, options) {
+        if (!lookFor || !value) {
+            return undefined;
+        }
+        var enableSeparateSubstringMatching = typeof options === 'object' && options.enableSeparateSubstringMatching;
+        return monaco.filters.matchesFuzzy(lookFor, value, enableSeparateSubstringMatching);
+    };
+    MonacoQuickOpenControllerOptsImpl.prototype.getAutoFocus = function (lookFor) {
+        if (this.options.selectIndex) {
+            var idx = this.options.selectIndex(lookFor);
+            if (idx >= 0) {
+                return {
+                    autoFocusIndex: idx
+                };
             }
-            score += def.properties.required.length; // number of required properties
-            var requiredProps = new Set(def.properties.required);
-            // number of optional properties
-            score += def.properties.all.filter(function (p) { return !requiredProps.has(p) && taskConfiguration[p] !== undefined; }).length;
-            if (score > highest) {
-                highest = score;
-                matchedDefinition = def;
-            }
+        }
+        return {
+            autoFocusFirstEntry: true,
+            autoFocusPrefixMatch: lookFor
         };
+    };
+    return MonacoQuickOpenControllerOptsImpl;
+}());
+exports.MonacoQuickOpenControllerOptsImpl = MonacoQuickOpenControllerOptsImpl;
+var QuickOpenEntry = /** @class */ (function (_super) {
+    __extends(QuickOpenEntry, _super);
+    function QuickOpenEntry(item, keybindingService) {
+        var _this = _super.call(this) || this;
+        _this.item = item;
+        _this.keybindingService = keybindingService;
+        return _this;
+    }
+    QuickOpenEntry.prototype.getLabel = function () {
+        return this.item.getLabel();
+    };
+    QuickOpenEntry.prototype.getAriaLabel = function () {
+        return this.item.getTooltip();
+    };
+    QuickOpenEntry.prototype.getDetail = function () {
+        return this.item.getDetail();
+    };
+    QuickOpenEntry.prototype.getDescription = function () {
+        return this.item.getDescription();
+    };
+    QuickOpenEntry.prototype.isHidden = function () {
+        return _super.prototype.isHidden.call(this) || this.item.isHidden();
+    };
+    QuickOpenEntry.prototype.getResource = function () {
+        var uri = this.item.getUri();
+        return uri ? monaco.Uri.parse(uri.toString()) : undefined;
+    };
+    QuickOpenEntry.prototype.getIcon = function () {
+        return this.item.getIconClass();
+    };
+    QuickOpenEntry.prototype.getKeybinding = function () {
+        var keybinding = this.item.getKeybinding();
+        if (!keybinding) {
+            return undefined;
+        }
+        var keySequence;
         try {
-            for (var definitions_1 = __values(definitions), definitions_1_1 = definitions_1.next(); !definitions_1_1.done; definitions_1_1 = definitions_1.next()) {
-                var def = definitions_1_1.value;
-                _loop_1(def);
+            keySequence = this.keybindingService.resolveKeybinding(keybinding);
+        }
+        catch (error) {
+            return undefined;
+        }
+        return new monaco_resolved_keybinding_1.MonacoResolvedKeybinding(keySequence, this.keybindingService);
+    };
+    QuickOpenEntry.prototype.run = function (mode) {
+        if (mode === 1) {
+            return this.item.run(browser_1.QuickOpenMode.OPEN);
+        }
+        if (mode === 2) {
+            return this.item.run(browser_1.QuickOpenMode.OPEN_IN_BACKGROUND);
+        }
+        if (mode === 0) {
+            return this.item.run(browser_1.QuickOpenMode.PREVIEW);
+        }
+        return false;
+    };
+    return QuickOpenEntry;
+}(monaco.quickOpen.QuickOpenEntry));
+exports.QuickOpenEntry = QuickOpenEntry;
+var QuickOpenEntryGroup = /** @class */ (function (_super) {
+    __extends(QuickOpenEntryGroup, _super);
+    function QuickOpenEntryGroup(item, keybindingService) {
+        var _this = _super.call(this, new QuickOpenEntry(item, keybindingService)) || this;
+        _this.item = item;
+        _this.keybindingService = keybindingService;
+        return _this;
+    }
+    QuickOpenEntryGroup.prototype.getGroupLabel = function () {
+        return this.item.getGroupLabel() || '';
+    };
+    QuickOpenEntryGroup.prototype.showBorder = function () {
+        return this.item.showBorder();
+    };
+    QuickOpenEntryGroup.prototype.getKeybinding = function () {
+        var entry = this.getEntry();
+        return entry ? entry.getKeybinding() : _super.prototype.getKeybinding.call(this);
+    };
+    return QuickOpenEntryGroup;
+}(monaco.quickOpen.QuickOpenEntryGroup));
+exports.QuickOpenEntryGroup = QuickOpenEntryGroup;
+var MonacoQuickOpenAction = /** @class */ (function () {
+    function MonacoQuickOpenAction(action) {
+        this.action = action;
+    }
+    Object.defineProperty(MonacoQuickOpenAction.prototype, "id", {
+        get: function () {
+            return this.action.id;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MonacoQuickOpenAction.prototype, "label", {
+        get: function () {
+            return this.action.label || '';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MonacoQuickOpenAction.prototype, "tooltip", {
+        get: function () {
+            return this.action.tooltip || '';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MonacoQuickOpenAction.prototype, "class", {
+        get: function () {
+            return this.action.class;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MonacoQuickOpenAction.prototype, "enabled", {
+        get: function () {
+            return this.action.enabled || true;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MonacoQuickOpenAction.prototype, "checked", {
+        get: function () {
+            return this.action.checked || false;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MonacoQuickOpenAction.prototype, "radio", {
+        get: function () {
+            return this.action.radio || false;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    MonacoQuickOpenAction.prototype.run = function (entry) {
+        return this.action.run(entry.item);
+    };
+    MonacoQuickOpenAction.prototype.dispose = function () {
+        this.action.dispose();
+    };
+    return MonacoQuickOpenAction;
+}());
+exports.MonacoQuickOpenAction = MonacoQuickOpenAction;
+var MonacoQuickOpenActionProvider = /** @class */ (function () {
+    function MonacoQuickOpenActionProvider(provider) {
+        this.provider = provider;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    MonacoQuickOpenActionProvider.prototype.hasActions = function (element, entry) {
+        return this.provider.hasActions(entry.item);
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    MonacoQuickOpenActionProvider.prototype.getActions = function (element, entry) {
+        var actions = this.provider.getActions(entry.item);
+        return actions.map(function (action) { return new MonacoQuickOpenAction(action); });
+    };
+    return MonacoQuickOpenActionProvider;
+}());
+exports.MonacoQuickOpenActionProvider = MonacoQuickOpenActionProvider;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-resolved-keybinding.js":
+/*!*****************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-resolved-keybinding.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var keys_1 = __webpack_require__(/*! @theia/core/lib/browser/keys */ "../../../../node_modules/@theia/core/lib/browser/keys.js");
+var os_1 = __webpack_require__(/*! @theia/core/lib/common/os */ "../../../../node_modules/@theia/core/lib/common/os.js");
+var monaco_keycode_map_1 = __webpack_require__(/*! ./monaco-keycode-map */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-keycode-map.js");
+var MonacoResolvedKeybinding = /** @class */ (function (_super) {
+    __extends(MonacoResolvedKeybinding, _super);
+    function MonacoResolvedKeybinding(keySequence, keybindingService) {
+        var _this = _super.call(this) || this;
+        _this.keySequence = keySequence;
+        _this.parts = keySequence.map(function (keyCode) {
+            // eslint-disable-next-line no-null/no-null
+            var keyLabel = keyCode.key ? keybindingService.acceleratorForKey(keyCode.key) : null;
+            var keyAriaLabel = keyLabel;
+            return new monaco.keybindings.ResolvedKeybindingPart(keyCode.ctrl, keyCode.shift, keyCode.alt, keyCode.meta, keyLabel, keyAriaLabel);
+        });
+        return _this;
+    }
+    MonacoResolvedKeybinding.prototype.getLabel = function () {
+        return monaco.keybindings.UILabelProvider.toLabel(monaco.platform.OS, this.parts, function (p) { return p.keyLabel; });
+    };
+    MonacoResolvedKeybinding.prototype.getAriaLabel = function () {
+        return monaco.keybindings.UILabelProvider.toLabel(monaco.platform.OS, this.parts, function (p) { return p.keyAriaLabel; });
+    };
+    MonacoResolvedKeybinding.prototype.getElectronAccelerator = function () {
+        if (this.isChord) {
+            // Electron cannot handle chords
+            // eslint-disable-next-line no-null/no-null
+            return null;
+        }
+        return monaco.keybindings.ElectronAcceleratorLabelProvider.toLabel(monaco.platform.OS, this.parts, function (p) { return p.keyLabel; });
+    };
+    MonacoResolvedKeybinding.prototype.getUserSettingsLabel = function () {
+        return monaco.keybindings.UserSettingsLabelProvider.toLabel(monaco.platform.OS, this.parts, function (p) { return p.keyLabel; });
+    };
+    MonacoResolvedKeybinding.prototype.isWYSIWYG = function () {
+        return true;
+    };
+    MonacoResolvedKeybinding.prototype.isChord = function () {
+        return this.parts.length > 1;
+    };
+    MonacoResolvedKeybinding.prototype.getDispatchParts = function () {
+        var _this = this;
+        return this.keySequence.map(function (keyCode) { return monaco.keybindings.USLayoutResolvedKeybinding.getDispatchStr(_this.toKeybinding(keyCode)); });
+    };
+    MonacoResolvedKeybinding.prototype.toKeybinding = function (keyCode) {
+        return new monaco.keybindings.SimpleKeybinding(keyCode.ctrl, keyCode.shift, keyCode.alt, keyCode.meta, monaco_keycode_map_1.KEY_CODE_MAP[keyCode.key.keyCode]);
+    };
+    MonacoResolvedKeybinding.prototype.getParts = function () {
+        return this.parts;
+    };
+    MonacoResolvedKeybinding.toKeybinding = function (keybinding) {
+        return keybinding instanceof monaco.keybindings.SimpleKeybinding
+            ? this.keyCode(keybinding).toString()
+            : this.keySequence(keybinding).join(' ');
+    };
+    MonacoResolvedKeybinding.keyCode = function (keybinding) {
+        var keyCode = keybinding.keyCode;
+        var sequence = {
+            first: keys_1.Key.getKey(this.monaco2BrowserKeyCode(keyCode & 0xff)),
+            modifiers: []
+        };
+        if (keybinding.ctrlKey) {
+            if (os_1.isOSX) {
+                sequence.modifiers.push(keys_1.KeyModifier.MacCtrl);
+            }
+            else {
+                sequence.modifiers.push(keys_1.KeyModifier.CtrlCmd);
+            }
+        }
+        if (keybinding.shiftKey) {
+            sequence.modifiers.push(keys_1.KeyModifier.Shift);
+        }
+        if (keybinding.altKey) {
+            sequence.modifiers.push(keys_1.KeyModifier.Alt);
+        }
+        if (keybinding.metaKey && sequence.modifiers.indexOf(keys_1.KeyModifier.CtrlCmd) === -1) {
+            sequence.modifiers.push(keys_1.KeyModifier.CtrlCmd);
+        }
+        return keys_1.KeyCode.createKeyCode(sequence);
+    };
+    MonacoResolvedKeybinding.keySequence = function (keybinding) {
+        var _this = this;
+        return keybinding.parts.map(function (part) { return _this.keyCode(part); });
+    };
+    MonacoResolvedKeybinding.monaco2BrowserKeyCode = function (keyCode) {
+        for (var i = 0; i < monaco_keycode_map_1.KEY_CODE_MAP.length; i++) {
+            if (monaco_keycode_map_1.KEY_CODE_MAP[i] === keyCode) {
+                return i;
+            }
+        }
+        return -1;
+    };
+    return MonacoResolvedKeybinding;
+}(monaco.keybindings.ResolvedKeybinding));
+exports.MonacoResolvedKeybinding = MonacoResolvedKeybinding;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-semantic-highlighting-service.js":
+/*!***************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-semantic-highlighting-service.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2018 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var logger_1 = __webpack_require__(/*! @theia/core/lib/common/logger */ "../../../../node_modules/@theia/core/lib/common/logger.js");
+var editor_manager_1 = __webpack_require__(/*! @theia/editor/lib/browser/editor-manager */ "../../../../node_modules/@theia/editor/lib/browser/editor-manager.js");
+var disposable_1 = __webpack_require__(/*! @theia/core/lib/common/disposable */ "../../../../node_modules/@theia/core/lib/common/disposable.js");
+var semantic_highlighting_service_1 = __webpack_require__(/*! @theia/editor/lib/browser/semantic-highlight/semantic-highlighting-service */ "../../../../node_modules/@theia/editor/lib/browser/semantic-highlight/semantic-highlighting-service.js");
+var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
+var monaco_editor_service_1 = __webpack_require__(/*! ./monaco-editor-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor-service.js");
+/**
+ * A helper class for grouping information about a decoration type that has
+ * been registered with the editor service.
+ */
+var DecorationTypeInfo = /** @class */ (function () {
+    function DecorationTypeInfo() {
+    }
+    return DecorationTypeInfo;
+}());
+var MonacoSemanticHighlightingService = /** @class */ (function (_super) {
+    __extends(MonacoSemanticHighlightingService, _super);
+    function MonacoSemanticHighlightingService() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.decorations = new Map();
+        _this.toDisposeOnEditorClose = new Map();
+        _this.toDisposeOnUnregister = new Map();
+        // laguage id -> (scope index -> decoration type)
+        _this.decorationTypes = new Map();
+        _this.lastDecorationTypeId = 0;
+        return _this;
+    }
+    MonacoSemanticHighlightingService.prototype.nextDecorationTypeKey = function () {
+        return 'MonacoSemanticHighlighting' + (++this.lastDecorationTypeId);
+    };
+    MonacoSemanticHighlightingService.prototype.registerDecorationTypesForLanguage = function (languageId) {
+        var scopes = this.scopes.get(languageId);
+        if (scopes) {
+            var decorationTypes = new Map();
+            for (var index = 0; index < scopes.length; index++) {
+                var modelDecoration = this.toDecorationType(scopes[index]);
+                if (modelDecoration) {
+                    decorationTypes.set(index, modelDecoration);
+                }
+            }
+            this.decorationTypes.set(languageId, decorationTypes);
+        }
+    };
+    MonacoSemanticHighlightingService.prototype.removeDecorationTypesForLanguage = function (languageId) {
+        var e_1, _a;
+        var decorationTypes = this.decorationTypes.get(languageId);
+        if (!decorationTypes) {
+            this.logger.warn("No decoration types are registered for language: " + languageId);
+            return;
+        }
+        try {
+            for (var decorationTypes_1 = __values(decorationTypes), decorationTypes_1_1 = decorationTypes_1.next(); !decorationTypes_1_1.done; decorationTypes_1_1 = decorationTypes_1.next()) {
+                var _b = __read(decorationTypes_1_1.value, 2), decorationType = _b[1];
+                this.monacoEditorService.removeDecorationType(decorationType.key);
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (decorationTypes_1_1 && !decorationTypes_1_1.done && (_a = decorationTypes_1.return)) _a.call(decorationTypes_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+    };
+    MonacoSemanticHighlightingService.prototype.refreshDecorationTypesForLanguage = function (languageId) {
+        var e_2, _a;
+        var decorationTypes = this.decorationTypes.get(languageId);
+        var scopes = this.scopes.get(languageId);
+        if (!decorationTypes || !scopes) {
+            this.logger.warn("No decoration types are registered for language: " + languageId);
+            return;
+        }
+        try {
+            for (var decorationTypes_2 = __values(decorationTypes), decorationTypes_2_1 = decorationTypes_2.next(); !decorationTypes_2_1.done; decorationTypes_2_1 = decorationTypes_2.next()) {
+                var _b = __read(decorationTypes_2_1.value, 2), scope = _b[0], decorationType = _b[1];
+                // Pass in the existing key to associate the new color with the same
+                // decoration type, thereby reusing it.
+                var newDecorationType = this.toDecorationType(scopes[scope], decorationType.key);
+                if (newDecorationType) {
+                    decorationType.options = newDecorationType.options;
+                }
             }
         }
         catch (e_2_1) { e_2 = { error: e_2_1 }; }
         finally {
             try {
-                if (definitions_1_1 && !definitions_1_1.done && (_a = definitions_1.return)) _a.call(definitions_1);
+                if (decorationTypes_2_1 && !decorationTypes_2_1.done && (_a = decorationTypes_2.return)) _a.call(decorationTypes_2);
             }
             finally { if (e_2) throw e_2.error; }
         }
-        return matchedDefinition;
     };
-    /**
-     * Add a task definition to the registry.
-     *
-     * @param definition the task definition to be added.
-     */
-    TaskDefinitionRegistry.prototype.register = function (definition) {
+    MonacoSemanticHighlightingService.prototype.register = function (languageId, scopes) {
         var _this = this;
-        var taskType = definition.taskType;
-        var definitions = this.definitions.get(taskType) || [];
-        definitions.push(definition);
-        this.definitions.set(taskType, definitions);
-        this.onDidRegisterTaskDefinitionEmitter.fire(undefined);
-        return disposable_1.Disposable.create(function () {
-            var index = definitions.indexOf(definition);
-            if (index !== -1) {
-                definitions.splice(index, 1);
-            }
-            _this.onDidUnregisterTaskDefinitionEmitter.fire(undefined);
+        var result = _super.prototype.register.call(this, languageId, scopes);
+        this.registerDecorationTypesForLanguage(languageId);
+        var disposable = this.themeService().onThemeChange(function () {
+            // When the theme changes, refresh the decoration types to reflect
+            // the colors for the old theme.
+            // Note that we do not remove the old decoration types and add new ones.
+            // The new ones would have different class names, and we'd have to
+            // update all open editors to use the new class names.
+            _this.refreshDecorationTypesForLanguage(languageId);
         });
+        this.toDisposeOnUnregister.set(languageId, disposable);
+        return result;
     };
-    TaskDefinitionRegistry.prototype.compareTasks = function (one, other) {
-        var oneType = one.taskType || one.type;
-        var otherType = other.taskType || other.type;
-        if (oneType !== otherType) {
-            return false;
+    MonacoSemanticHighlightingService.prototype.unregister = function (languageId) {
+        _super.prototype.unregister.call(this, languageId);
+        this.removeDecorationTypesForLanguage(languageId);
+        var disposable = this.toDisposeOnUnregister.get(languageId);
+        if (disposable) {
+            disposable.dispose();
         }
-        var def = this.getDefinition(one);
-        if (def) {
-            var oneScope = new uri_1.default(one._scope).path.toString();
-            var otherScope = new uri_1.default(other._scope).path.toString();
-            return def.properties.all.every(function (p) { return p === 'type' || one[p] === other[p]; }) && oneScope === otherScope;
-        }
-        return one.label === other.label && one._source === other._source;
+        this.decorationTypes.delete(languageId);
+        this.toDisposeOnUnregister.delete(languageId);
     };
-    TaskDefinitionRegistry = __decorate([
-        inversify_1.injectable()
-    ], TaskDefinitionRegistry);
-    return TaskDefinitionRegistry;
-}());
-exports.TaskDefinitionRegistry = TaskDefinitionRegistry;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/browser/task-name-resolver.js":
-/*!*********************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/task-name-resolver.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2019 Red Hat, Inc. and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var task_definition_registry_1 = __webpack_require__(/*! ./task-definition-registry */ "../node_modules/@theia/task/lib/browser/task-definition-registry.js");
-var TaskNameResolver = /** @class */ (function () {
-    function TaskNameResolver() {
-    }
-    /**
-     * Returns task name to display.
-     * It is aligned with VS Code.
-     */
-    TaskNameResolver.prototype.resolve = function (task) {
-        if (this.isDetectedTask(task)) {
-            return (task.source || task._source) + ": " + task.label;
-        }
-        // it is a hack, when task is customized but extension is absent
-        return task.label || task.type + ": " + task.task;
-    };
-    TaskNameResolver.prototype.isDetectedTask = function (task) {
-        return !!this.taskDefinitionRegistry.getDefinition(task);
-    };
-    __decorate([
-        inversify_1.inject(task_definition_registry_1.TaskDefinitionRegistry),
-        __metadata("design:type", task_definition_registry_1.TaskDefinitionRegistry)
-    ], TaskNameResolver.prototype, "taskDefinitionRegistry", void 0);
-    TaskNameResolver = __decorate([
-        inversify_1.injectable()
-    ], TaskNameResolver);
-    return TaskNameResolver;
-}());
-exports.TaskNameResolver = TaskNameResolver;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/browser/task-node.js":
-/*!************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/task-node.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var TaskNode = /** @class */ (function () {
-    function TaskNode(taskId, childTasks, parentsID) {
-        this.taskId = taskId;
-        this.childTasks = childTasks;
-        this.parentsID = parentsID;
-    }
-    TaskNode.prototype.addChildDependency = function (node) {
-        this.childTasks.push(node);
-    };
-    TaskNode.prototype.addParentDependency = function (parentId) {
-        this.parentsID.push(parentId);
-    };
-    return TaskNode;
-}());
-exports.TaskNode = TaskNode;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/browser/task-problem-matcher-registry.js":
-/*!********************************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/task-problem-matcher-registry.js ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
+    MonacoSemanticHighlightingService.prototype.toDecorationType = function (scopes, reuseKey) {
+        var e_3, _a;
+        var key = reuseKey || this.nextDecorationTypeKey();
         try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var disposable_1 = __webpack_require__(/*! @theia/core/lib/common/disposable */ "../node_modules/@theia/core/lib/common/disposable.js");
-var common_2 = __webpack_require__(/*! ../common */ "../node_modules/@theia/task/lib/common/index.js");
-var task_problem_pattern_registry_1 = __webpack_require__(/*! ./task-problem-pattern-registry */ "../node_modules/@theia/task/lib/browser/task-problem-pattern-registry.js");
-var severity_1 = __webpack_require__(/*! @theia/core/lib/common/severity */ "../node_modules/@theia/core/lib/common/severity.js");
-var ProblemMatcherRegistry = /** @class */ (function () {
-    function ProblemMatcherRegistry() {
-        this.matchers = new Map();
-        this.onDidChangeProblemMatcherEmitter = new common_1.Emitter();
-    }
-    Object.defineProperty(ProblemMatcherRegistry.prototype, "onDidChangeProblemMatcher", {
-        get: function () {
-            return this.onDidChangeProblemMatcherEmitter.event;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ProblemMatcherRegistry.prototype.init = function () {
-        var _this = this;
-        this.problemPatternRegistry.onReady().then(function () {
-            _this.fillDefaults();
-            _this.readyPromise = new Promise(function (res, rej) { return res(undefined); });
-            _this.onDidChangeProblemMatcherEmitter.fire(undefined);
-        });
-    };
-    ProblemMatcherRegistry.prototype.onReady = function () {
-        return this.readyPromise;
-    };
-    /**
-     * Add a problem matcher to the registry.
-     *
-     * @param definition the problem matcher to be added.
-     */
-    ProblemMatcherRegistry.prototype.register = function (matcher) {
-        var _this = this;
-        if (!matcher.name) {
-            console.error('Only named Problem Matchers can be registered.');
-            return disposable_1.Disposable.NULL;
-        }
-        var toDispose = new disposable_1.DisposableCollection(disposable_1.Disposable.create(function () {
-            /* mark as not disposed */
-            _this.onDidChangeProblemMatcherEmitter.fire(undefined);
-        }));
-        this.doRegister(matcher, toDispose).then(function () { return _this.onDidChangeProblemMatcherEmitter.fire(undefined); });
-        return toDispose;
-    };
-    ProblemMatcherRegistry.prototype.doRegister = function (matcher, toDispose) {
-        return __awaiter(this, void 0, void 0, function () {
-            var problemMatcher;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getProblemMatcherFromContribution(matcher)];
-                    case 1:
-                        problemMatcher = _a.sent();
-                        if (toDispose.disposed) {
-                            return [2 /*return*/];
-                        }
-                        toDispose.push(this.add(problemMatcher));
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    /**
-     * Finds the problem matcher from the registry by its name.
-     *
-     * @param name the name of the problem matcher
-     * @return the problem matcher. If the task definition is not found, `undefined` is returned.
-     */
-    ProblemMatcherRegistry.prototype.get = function (name) {
-        if (name.startsWith('$')) {
-            return this.matchers.get(name.slice(1));
-        }
-        return this.matchers.get(name);
-    };
-    /**
-     * Returns all registered problem matchers in the registry.
-     */
-    ProblemMatcherRegistry.prototype.getAll = function () {
-        var e_1, _a;
-        var all = [];
-        try {
-            for (var _b = __values(this.matchers.keys()), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var matcherName = _c.value;
-                all.push(this.get(matcherName));
+            // TODO: why for-of? How to pick the right scope? Is it fine to get the first element (with the narrowest scope)?
+            for (var scopes_1 = __values(scopes), scopes_1_1 = scopes_1.next(); !scopes_1_1.done; scopes_1_1 = scopes_1.next()) {
+                var scope = scopes_1_1.value;
+                var tokenTheme = this.tokenTheme();
+                var metadata = tokenTheme.match(undefined, scope);
+                // Don't use the inlineClassName from the TokenMetadata, because this
+                // will conflict with styles used for TM scopes
+                // (https://github.com/Microsoft/monaco-editor/issues/1070).
+                // Instead, get the token color, use registerDecorationType() to cause
+                // monaco to allocate a new inlineClassName for that color, and use
+                // resolveDecorationOptions() to get an IModelDecorationOptions
+                // containing that inlineClassName.
+                var colorIndex = monaco.modes.TokenMetadata.getForeground(metadata);
+                var color = tokenTheme.getColorMap()[colorIndex];
+                // If we wanted to support other decoration options such as font style,
+                // we could include them here.
+                var options = {
+                    color: color.toString(),
+                };
+                this.monacoEditorService.registerDecorationType(key, options);
+                return {
+                    key: key,
+                    options: this.monacoEditorService.resolveDecorationOptions(key, false)
+                };
             }
         }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        catch (e_3_1) { e_3 = { error: e_3_1 }; }
         finally {
             try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                if (scopes_1_1 && !scopes_1_1.done && (_a = scopes_1.return)) _a.call(scopes_1);
             }
-            finally { if (e_1) throw e_1.error; }
-        }
-        all.sort(function (one, other) { return one.name.localeCompare(other.name); });
-        return all;
-    };
-    /**
-     * Transforms the `ProblemMatcherContribution` to a `ProblemMatcher`
-     *
-     * @return the problem matcher
-     */
-    ProblemMatcherRegistry.prototype.getProblemMatcherFromContribution = function (matcher) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a, fileLocation, filePrefix, patterns, registeredPattern, problemMatcher;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _a = this.getFileLocationKindAndPrefix(matcher), fileLocation = _a.fileLocation, filePrefix = _a.filePrefix;
-                        patterns = [];
-                        if (!matcher.pattern) return [3 /*break*/, 3];
-                        if (!(typeof matcher.pattern === 'string')) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.problemPatternRegistry.onReady()];
-                    case 1:
-                        _b.sent();
-                        registeredPattern = this.problemPatternRegistry.get(matcher.pattern);
-                        if (Array.isArray(registeredPattern)) {
-                            patterns.push.apply(patterns, __spread(registeredPattern));
-                        }
-                        else if (!!registeredPattern) {
-                            patterns.push(registeredPattern);
-                        }
-                        return [3 /*break*/, 3];
-                    case 2:
-                        if (Array.isArray(matcher.pattern)) {
-                            patterns.push.apply(patterns, __spread(matcher.pattern.map(function (p) { return common_2.ProblemPattern.fromProblemPatternContribution(p); })));
-                        }
-                        else {
-                            patterns.push(common_2.ProblemPattern.fromProblemPatternContribution(matcher.pattern));
-                        }
-                        _b.label = 3;
-                    case 3:
-                        problemMatcher = {
-                            name: matcher.name,
-                            label: matcher.label,
-                            deprecated: matcher.deprecated,
-                            owner: matcher.owner,
-                            source: matcher.source,
-                            applyTo: common_2.ApplyToKind.fromString(matcher.applyTo) || common_2.ApplyToKind.allDocuments,
-                            fileLocation: fileLocation,
-                            filePrefix: filePrefix,
-                            pattern: patterns,
-                            severity: severity_1.Severity.fromValue(matcher.severity),
-                            watching: common_2.WatchingMatcher.fromWatchingMatcherContribution(matcher.background || matcher.watching)
-                        };
-                        return [2 /*return*/, problemMatcher];
-                }
-            });
-        });
-    };
-    ProblemMatcherRegistry.prototype.add = function (matcher) {
-        var _this = this;
-        this.matchers.set(matcher.name, matcher);
-        return disposable_1.Disposable.create(function () { return _this.matchers.delete(matcher.name); });
-    };
-    ProblemMatcherRegistry.prototype.getFileLocationKindAndPrefix = function (matcher) {
-        var fileLocation = common_2.FileLocationKind.Relative;
-        var filePrefix = '${workspaceFolder}';
-        if (matcher.fileLocation !== undefined) {
-            if (Array.isArray(matcher.fileLocation)) {
-                if (matcher.fileLocation.length > 0) {
-                    var locationKind = common_2.FileLocationKind.fromString(matcher.fileLocation[0]);
-                    if (matcher.fileLocation.length === 1 && locationKind === common_2.FileLocationKind.Absolute) {
-                        fileLocation = locationKind;
-                    }
-                    else if (matcher.fileLocation.length === 2 && locationKind === common_2.FileLocationKind.Relative && matcher.fileLocation[1]) {
-                        fileLocation = locationKind;
-                        filePrefix = matcher.fileLocation[1];
-                    }
-                }
-            }
-            else {
-                var locationKind = common_2.FileLocationKind.fromString(matcher.fileLocation);
-                if (locationKind) {
-                    fileLocation = locationKind;
-                    if (locationKind === common_2.FileLocationKind.Relative) {
-                        filePrefix = '${workspaceFolder}';
-                    }
-                }
-            }
-        }
-        return { fileLocation: fileLocation, filePrefix: filePrefix };
-    };
-    // copied from https://github.com/Microsoft/vscode/blob/1.33.1/src/vs/workbench/contrib/tasks/common/problemMatcher.ts
-    ProblemMatcherRegistry.prototype.fillDefaults = function () {
-        this.add({
-            name: 'msCompile',
-            label: 'Microsoft compiler problems',
-            owner: 'msCompile',
-            applyTo: common_2.ApplyToKind.allDocuments,
-            fileLocation: common_2.FileLocationKind.Absolute,
-            pattern: (this.problemPatternRegistry.get('msCompile'))
-        });
-        this.add({
-            name: 'lessCompile',
-            label: 'Less problems',
-            deprecated: true,
-            owner: 'lessCompile',
-            source: 'less',
-            applyTo: common_2.ApplyToKind.allDocuments,
-            fileLocation: common_2.FileLocationKind.Absolute,
-            pattern: (this.problemPatternRegistry.get('lessCompile')),
-            severity: severity_1.Severity.Error
-        });
-        this.add({
-            name: 'gulp-tsc',
-            label: 'Gulp TSC Problems',
-            owner: 'typescript',
-            source: 'ts',
-            applyTo: common_2.ApplyToKind.closedDocuments,
-            fileLocation: common_2.FileLocationKind.Relative,
-            filePrefix: '${workspaceFolder}',
-            pattern: (this.problemPatternRegistry.get('gulp-tsc'))
-        });
-        this.add({
-            name: 'jshint',
-            label: 'JSHint problems',
-            owner: 'jshint',
-            source: 'jshint',
-            applyTo: common_2.ApplyToKind.allDocuments,
-            fileLocation: common_2.FileLocationKind.Absolute,
-            pattern: (this.problemPatternRegistry.get('jshint'))
-        });
-        this.add({
-            name: 'jshint-stylish',
-            label: 'JSHint stylish problems',
-            owner: 'jshint',
-            source: 'jshint',
-            applyTo: common_2.ApplyToKind.allDocuments,
-            fileLocation: common_2.FileLocationKind.Absolute,
-            pattern: (this.problemPatternRegistry.get('jshint-stylish'))
-        });
-        this.add({
-            name: 'eslint-compact',
-            label: 'ESLint compact problems',
-            owner: 'eslint',
-            source: 'eslint',
-            applyTo: common_2.ApplyToKind.allDocuments,
-            fileLocation: common_2.FileLocationKind.Absolute,
-            filePrefix: '${workspaceFolder}',
-            pattern: (this.problemPatternRegistry.get('eslint-compact'))
-        });
-        this.add({
-            name: 'eslint-stylish',
-            label: 'ESLint stylish problems',
-            owner: 'eslint',
-            source: 'eslint',
-            applyTo: common_2.ApplyToKind.allDocuments,
-            fileLocation: common_2.FileLocationKind.Absolute,
-            pattern: (this.problemPatternRegistry.get('eslint-stylish'))
-        });
-        this.add({
-            name: 'go',
-            label: 'Go problems',
-            owner: 'go',
-            source: 'go',
-            applyTo: common_2.ApplyToKind.allDocuments,
-            fileLocation: common_2.FileLocationKind.Relative,
-            filePrefix: '${workspaceFolder}',
-            pattern: (this.problemPatternRegistry.get('go'))
-        });
-    };
-    __decorate([
-        inversify_1.inject(task_problem_pattern_registry_1.ProblemPatternRegistry),
-        __metadata("design:type", task_problem_pattern_registry_1.ProblemPatternRegistry)
-    ], ProblemMatcherRegistry.prototype, "problemPatternRegistry", void 0);
-    __decorate([
-        inversify_1.postConstruct(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], ProblemMatcherRegistry.prototype, "init", null);
-    ProblemMatcherRegistry = __decorate([
-        inversify_1.injectable()
-    ], ProblemMatcherRegistry);
-    return ProblemMatcherRegistry;
-}());
-exports.ProblemMatcherRegistry = ProblemMatcherRegistry;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/browser/task-problem-pattern-registry.js":
-/*!********************************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/task-problem-pattern-registry.js ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! ../common */ "../node_modules/@theia/task/lib/common/index.js");
-var disposable_1 = __webpack_require__(/*! @theia/core/lib/common/disposable */ "../node_modules/@theia/core/lib/common/disposable.js");
-var ProblemPatternRegistry = /** @class */ (function () {
-    function ProblemPatternRegistry() {
-        this.patterns = new Map();
-    }
-    ProblemPatternRegistry.prototype.init = function () {
-        this.fillDefaults();
-        this.readyPromise = new Promise(function (res, rej) { return res(undefined); });
-    };
-    ProblemPatternRegistry.prototype.onReady = function () {
-        return this.readyPromise;
-    };
-    /**
-     * Add a problem pattern to the registry.
-     *
-     * @param definition the problem pattern to be added.
-     */
-    ProblemPatternRegistry.prototype.register = function (value) {
-        var _this = this;
-        if (Array.isArray(value)) {
-            var toDispose_1 = new disposable_1.DisposableCollection();
-            value.forEach(function (problemPatternContribution) { return toDispose_1.push(_this.register(problemPatternContribution)); });
-            return toDispose_1;
-        }
-        if (!value.name) {
-            console.error('Only named Problem Patterns can be registered.');
-            return disposable_1.Disposable.NULL;
-        }
-        var problemPattern = common_1.ProblemPattern.fromProblemPatternContribution(value);
-        return this.add(problemPattern.name, problemPattern);
-    };
-    /**
-     * Finds the problem pattern(s) from the registry with the given name.
-     *
-     * @param key the name of the problem patterns
-     * @return a problem pattern or an array of the problem patterns associated with the name. If no problem patterns are found, `undefined` is returned.
-     */
-    ProblemPatternRegistry.prototype.get = function (key) {
-        return this.patterns.get(key);
-    };
-    ProblemPatternRegistry.prototype.add = function (key, value) {
-        var _this = this;
-        var toAdd;
-        if (Array.isArray(value)) {
-            toAdd = value.map(function (v) { return Object.assign(v, { name: key }); });
-        }
-        else {
-            toAdd = Object.assign(value, { name: key });
-        }
-        this.patterns.set(key, toAdd);
-        return disposable_1.Disposable.create(function () { return _this.patterns.delete(key); });
-    };
-    // copied from https://github.com/Microsoft/vscode/blob/1.33.1/src/vs/workbench/contrib/tasks/common/problemMatcher.ts
-    ProblemPatternRegistry.prototype.fillDefaults = function () {
-        this.add('msCompile', {
-            regexp: /^(?:\s+\d+\>)?([^\s].*)\((\d+|\d+,\d+|\d+,\d+,\d+,\d+)\)\s*:\s+(error|warning|info)\s+(\w{1,2}\d+)\s*:\s*(.*)$/.source,
-            kind: common_1.ProblemLocationKind.Location,
-            file: 1,
-            location: 2,
-            severity: 3,
-            code: 4,
-            message: 5
-        });
-        this.add('gulp-tsc', {
-            regexp: /^([^\s].*)\((\d+|\d+,\d+|\d+,\d+,\d+,\d+)\):\s+(\d+)\s+(.*)$/.source,
-            kind: common_1.ProblemLocationKind.Location,
-            file: 1,
-            location: 2,
-            code: 3,
-            message: 4
-        });
-        this.add('cpp', {
-            regexp: /^([^\s].*)\((\d+|\d+,\d+|\d+,\d+,\d+,\d+)\):\s+(error|warning|info)\s+(C\d+)\s*:\s*(.*)$/.source,
-            kind: common_1.ProblemLocationKind.Location,
-            file: 1,
-            location: 2,
-            severity: 3,
-            code: 4,
-            message: 5
-        });
-        this.add('csc', {
-            regexp: /^([^\s].*)\((\d+|\d+,\d+|\d+,\d+,\d+,\d+)\):\s+(error|warning|info)\s+(CS\d+)\s*:\s*(.*)$/.source,
-            kind: common_1.ProblemLocationKind.Location,
-            file: 1,
-            location: 2,
-            severity: 3,
-            code: 4,
-            message: 5
-        });
-        this.add('vb', {
-            regexp: /^([^\s].*)\((\d+|\d+,\d+|\d+,\d+,\d+,\d+)\):\s+(error|warning|info)\s+(BC\d+)\s*:\s*(.*)$/.source,
-            kind: common_1.ProblemLocationKind.Location,
-            file: 1,
-            location: 2,
-            severity: 3,
-            code: 4,
-            message: 5
-        });
-        this.add('lessCompile', {
-            regexp: /^\s*(.*) in file (.*) line no. (\d+)$/.source,
-            kind: common_1.ProblemLocationKind.Location,
-            message: 1,
-            file: 2,
-            line: 3
-        });
-        this.add('jshint', {
-            regexp: /^(.*):\s+line\s+(\d+),\s+col\s+(\d+),\s(.+?)(?:\s+\((\w)(\d+)\))?$/.source,
-            kind: common_1.ProblemLocationKind.Location,
-            file: 1,
-            line: 2,
-            character: 3,
-            message: 4,
-            severity: 5,
-            code: 6
-        });
-        this.add('jshint-stylish', [
-            {
-                regexp: /^(.+)$/.source,
-                kind: common_1.ProblemLocationKind.Location,
-                file: 1
-            },
-            {
-                regexp: /^\s+line\s+(\d+)\s+col\s+(\d+)\s+(.+?)(?:\s+\((\w)(\d+)\))?$/.source,
-                line: 1,
-                character: 2,
-                message: 3,
-                severity: 4,
-                code: 5,
-                loop: true
-            }
-        ]);
-        this.add('eslint-compact', {
-            regexp: /^(.+):\sline\s(\d+),\scol\s(\d+),\s(Error|Warning|Info)\s-\s(.+)\s\((.+)\)$/.source,
-            file: 1,
-            kind: common_1.ProblemLocationKind.Location,
-            line: 2,
-            character: 3,
-            severity: 4,
-            message: 5,
-            code: 6
-        });
-        this.add('eslint-stylish', [
-            {
-                regexp: /^([^\s].*)$/.source,
-                kind: common_1.ProblemLocationKind.Location,
-                file: 1
-            },
-            {
-                regexp: /^\s+(\d+):(\d+)\s+(error|warning|info)\s+(.+?)(?:\s\s+(.*))?$/.source,
-                line: 1,
-                character: 2,
-                severity: 3,
-                message: 4,
-                code: 5,
-                loop: true
-            }
-        ]);
-        this.add('go', {
-            regexp: /^([^:]*: )?((.:)?[^:]*):(\d+)(:(\d+))?: (.*)$/.source,
-            kind: common_1.ProblemLocationKind.Location,
-            file: 2,
-            line: 4,
-            character: 6,
-            message: 7
-        });
-    };
-    __decorate([
-        inversify_1.postConstruct(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], ProblemPatternRegistry.prototype, "init", null);
-    ProblemPatternRegistry = __decorate([
-        inversify_1.injectable()
-    ], ProblemPatternRegistry);
-    return ProblemPatternRegistry;
-}());
-exports.ProblemPatternRegistry = ProblemPatternRegistry;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/browser/task-schema-updater.js":
-/*!**********************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/task-schema-updater.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2019 Red Hat, Inc. and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-// This file is inspired by VSCode and partially copied from https://github.com/Microsoft/vscode/blob/1.33.1/src/vs/workbench/contrib/tasks/common/problemMatcher.ts
-// 'problemMatcher.ts' copyright:
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var json_schema_store_1 = __webpack_require__(/*! @theia/core/lib/browser/json-schema-store */ "../node_modules/@theia/core/lib/browser/json-schema-store.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var variable_input_schema_1 = __webpack_require__(/*! @theia/variable-resolver/lib/browser/variable-input-schema */ "../node_modules/@theia/variable-resolver/lib/browser/variable-input-schema.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var task_problem_matcher_registry_1 = __webpack_require__(/*! ./task-problem-matcher-registry */ "../node_modules/@theia/task/lib/browser/task-problem-matcher-registry.js");
-var task_definition_registry_1 = __webpack_require__(/*! ./task-definition-registry */ "../node_modules/@theia/task/lib/browser/task-definition-registry.js");
-var common_2 = __webpack_require__(/*! ../common */ "../node_modules/@theia/task/lib/common/index.js");
-exports.taskSchemaId = 'vscode://schemas/tasks';
-var TaskSchemaUpdater = /** @class */ (function () {
-    function TaskSchemaUpdater() {
-        this.onDidChangeTaskSchemaEmitter = new common_1.Emitter();
-        this.onDidChangeTaskSchema = this.onDidChangeTaskSchemaEmitter.event;
-    }
-    TaskSchemaUpdater.prototype.init = function () {
-        var _this = this;
-        var taskSchemaUri = new uri_1.default(exports.taskSchemaId);
-        this.jsonSchemaStore.onDidChangeSchema(function (uri) {
-            if (uri.toString() === taskSchemaUri.toString()) {
-                _this.onDidChangeTaskSchemaEmitter.fire(undefined);
-            }
-        });
-        this.updateProblemMatcherNames();
-        this.updateSupportedTaskTypes();
-        // update problem matcher names in the task schema every time a problem matcher is added or disposed
-        this.problemMatcherRegistry.onDidChangeProblemMatcher(function () { return _this.updateProblemMatcherNames(); });
-        // update supported task types in the task schema every time a task definition is registered or removed
-        this.taskDefinitionRegistry.onDidRegisterTaskDefinition(function () { return _this.updateSupportedTaskTypes(); });
-        this.taskDefinitionRegistry.onDidUnregisterTaskDefinition(function () { return _this.updateSupportedTaskTypes(); });
-    };
-    TaskSchemaUpdater.prototype.update = function () {
-        var taskSchemaUri = new uri_1.default(exports.taskSchemaId);
-        taskConfigurationSchema.anyOf = __spread([processTaskConfigurationSchema], customizedDetectedTasks, customSchemas);
-        var schemaContent = this.getStringifiedTaskSchema();
-        try {
-            this.inmemoryResources.update(taskSchemaUri, schemaContent);
-        }
-        catch (e) {
-            this.inmemoryResources.add(taskSchemaUri, schemaContent);
-            this.jsonSchemaStore.registerSchema({
-                fileMatch: ['tasks.json'],
-                url: taskSchemaUri.toString()
-            });
-        }
-    };
-    /**
-     * Adds given task schema to `taskConfigurationSchema` as `oneOf` subschema.
-     * Replaces existed subschema by given schema if the corresponding `$id` properties are equal.
-     *
-     * Note: please provide `$id` property for subschema to have ability remove/replace it.
-     * @param schema subschema for adding to `taskConfigurationSchema`
-     */
-    TaskSchemaUpdater.prototype.addSubschema = function (schema) {
-        var schemaId = schema.$id;
-        if (schemaId) {
-            this.doRemoveSubschema(schemaId);
-        }
-        customSchemas.push(schema);
-        this.update();
-    };
-    /**
-     * Removes task subschema from `taskConfigurationSchema`.
-     *
-     * @param arg `$id` property of subschema
-     */
-    TaskSchemaUpdater.prototype.removeSubschema = function (arg) {
-        var isRemoved = this.doRemoveSubschema(arg);
-        if (isRemoved) {
-            this.update();
-        }
-    };
-    /**
-     * Removes task subschema from `customSchemas`, use `update()` to apply the changes for `taskConfigurationSchema`.
-     *
-     * @param arg `$id` property of subschema
-     * @returns `true` if subschema was removed, `false` otherwise
-     */
-    TaskSchemaUpdater.prototype.doRemoveSubschema = function (arg) {
-        var index = customSchemas.findIndex(function (existed) { return !!existed.$id && existed.$id === arg; });
-        if (index > -1) {
-            customSchemas.splice(index, 1);
-            return true;
-        }
-        return false;
-    };
-    /** Returns an array of task types that are registered, including the default types */
-    TaskSchemaUpdater.prototype.getRegisteredTaskTypes = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var serverSupportedTypes, browserSupportedTypes, allTypes;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.taskServer.getRegisteredTaskTypes()];
-                    case 1:
-                        serverSupportedTypes = _a.sent();
-                        browserSupportedTypes = this.taskDefinitionRegistry.getAll().map(function (def) { return def.taskType; });
-                        allTypes = new Set(__spread(serverSupportedTypes, browserSupportedTypes));
-                        return [2 /*return*/, Array.from(allTypes.values()).sort()];
-                }
-            });
-        });
-    };
-    TaskSchemaUpdater.prototype.updateSchemasForRegisteredTasks = function () {
-        customizedDetectedTasks.length = 0;
-        var definitions = this.taskDefinitionRegistry.getAll();
-        definitions.forEach(function (def) {
-            var customizedDetectedTask = {
-                type: 'object',
-                required: ['type'],
-                properties: {}
-            };
-            var taskType = __assign({}, defaultTaskType, { enum: [def.taskType], default: def.taskType, description: 'The task type to customize' });
-            customizedDetectedTask.properties.type = taskType;
-            def.properties.all.forEach(function (taskProp) {
-                if (!!def.properties.required.find(function (requiredProp) { return requiredProp === taskProp; })) { // property is mandatory
-                    customizedDetectedTask.required.push(taskProp);
-                }
-                customizedDetectedTask.properties[taskProp] = __assign({}, def.properties.schema.properties[taskProp]);
-            });
-            customizedDetectedTask.properties.problemMatcher = problemMatcher;
-            customizedDetectedTask.properties.options = commandOptionsSchema;
-            customizedDetectedTask.properties.group = group;
-            customizedDetectedTask.additionalProperties = true;
-            customizedDetectedTasks.push(customizedDetectedTask);
-        });
-    };
-    /** Returns the task's JSON schema */
-    TaskSchemaUpdater.prototype.getTaskSchema = function () {
-        return {
-            type: 'object',
-            properties: {
-                version: {
-                    type: 'string'
-                },
-                tasks: {
-                    type: 'array',
-                    items: __assign({}, common_1.deepClone(taskConfigurationSchema))
-                },
-                inputs: variable_input_schema_1.inputsSchema.definitions.inputs
-            },
-            additionalProperties: false
-        };
-    };
-    /** Returns the task's JSON schema as a string */
-    TaskSchemaUpdater.prototype.getStringifiedTaskSchema = function () {
-        return JSON.stringify(this.getTaskSchema());
-    };
-    /** Gets the most up-to-date names of problem matchers from the registry and update the task schema */
-    TaskSchemaUpdater.prototype.updateProblemMatcherNames = function () {
-        var matcherNames = this.problemMatcherRegistry.getAll().map(function (m) { return m.name.startsWith('$') ? m.name : "$" + m.name; });
-        problemMatcherNames.length = 0;
-        problemMatcherNames.push.apply(problemMatcherNames, __spread(matcherNames));
-        this.update();
-    };
-    TaskSchemaUpdater.prototype.updateSupportedTaskTypes = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                this.updateSchemasForRegisteredTasks();
-                this.update();
-                return [2 /*return*/];
-            });
-        });
-    };
-    __decorate([
-        inversify_1.inject(json_schema_store_1.JsonSchemaStore),
-        __metadata("design:type", json_schema_store_1.JsonSchemaStore)
-    ], TaskSchemaUpdater.prototype, "jsonSchemaStore", void 0);
-    __decorate([
-        inversify_1.inject(common_1.InMemoryResources),
-        __metadata("design:type", common_1.InMemoryResources)
-    ], TaskSchemaUpdater.prototype, "inmemoryResources", void 0);
-    __decorate([
-        inversify_1.inject(task_problem_matcher_registry_1.ProblemMatcherRegistry),
-        __metadata("design:type", task_problem_matcher_registry_1.ProblemMatcherRegistry)
-    ], TaskSchemaUpdater.prototype, "problemMatcherRegistry", void 0);
-    __decorate([
-        inversify_1.inject(task_definition_registry_1.TaskDefinitionRegistry),
-        __metadata("design:type", task_definition_registry_1.TaskDefinitionRegistry)
-    ], TaskSchemaUpdater.prototype, "taskDefinitionRegistry", void 0);
-    __decorate([
-        inversify_1.inject(common_2.TaskServer),
-        __metadata("design:type", Object)
-    ], TaskSchemaUpdater.prototype, "taskServer", void 0);
-    __decorate([
-        inversify_1.postConstruct(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], TaskSchemaUpdater.prototype, "init", null);
-    TaskSchemaUpdater = __decorate([
-        inversify_1.injectable()
-    ], TaskSchemaUpdater);
-    return TaskSchemaUpdater;
-}());
-exports.TaskSchemaUpdater = TaskSchemaUpdater;
-var commandSchema = {
-    type: 'string',
-    description: 'The actual command or script to execute'
-};
-var commandArgSchema = {
-    type: 'array',
-    description: 'A list of strings, each one being one argument to pass to the command',
-    items: {
-        type: 'string'
-    }
-};
-var commandOptionsSchema = {
-    type: 'object',
-    description: 'The command options used when the command is executed',
-    properties: {
-        cwd: {
-            type: 'string',
-            description: 'The directory in which the command will be executed',
-            default: '${workspaceFolder}'
-        },
-        env: {
-            type: 'object',
-            description: 'The environment of the executed program or shell. If omitted the parent process\' environment is used'
-        },
-        shell: {
-            type: 'object',
-            description: 'Configuration of the shell when task type is `shell`',
-            properties: {
-                executable: {
-                    type: 'string',
-                    description: 'The shell to use'
-                },
-                args: {
-                    type: 'array',
-                    description: "The arguments to be passed to the shell executable to run in command mode\n                        (e.g ['-c'] for bash or ['/S', '/C'] for cmd.exe)",
-                    items: {
-                        type: 'string'
-                    }
-                }
-            }
-        }
-    }
-};
-var problemMatcherNames = [];
-var defaultTaskTypes = ['shell', 'process'];
-var supportedTaskTypes = __spread(defaultTaskTypes);
-var taskLabel = {
-    type: 'string',
-    description: 'A unique string that identifies the task that is also used as task\'s user interface label'
-};
-var defaultTaskType = {
-    type: 'string',
-    enum: supportedTaskTypes,
-    default: defaultTaskTypes[0],
-    description: 'Determines what type of process will be used to execute the task. Only shell types will have output shown on the user interface'
-};
-var commandAndArgs = {
-    command: commandSchema,
-    args: commandArgSchema,
-    options: commandOptionsSchema
-};
-var group = {
-    oneOf: [
-        {
-            type: 'string'
-        },
-        {
-            type: 'object',
-            properties: {
-                kind: {
-                    type: 'string',
-                    default: 'none',
-                    description: 'The task\'s execution group.'
-                },
-                isDefault: {
-                    type: 'boolean',
-                    default: false,
-                    description: 'Defines if this task is the default task in the group.'
-                }
-            }
-        }
-    ],
-    enum: [
-        { kind: 'build', isDefault: true },
-        { kind: 'test', isDefault: true },
-        'build',
-        'test',
-        'none'
-    ],
-    enumDescriptions: [
-        'Marks the task as the default build task.',
-        'Marks the task as the default test task.',
-        'Marks the task as a build task accessible through the \'Run Build Task\' command.',
-        'Marks the task as a test task accessible through the \'Run Test Task\' command.',
-        'Assigns the task to no group'
-    ],
-    // eslint-disable-next-line max-len
-    description: 'Defines to which execution group this task belongs to. It supports "build" to add it to the build group and "test" to add it to the test group.'
-};
-var problemPattern = {
-    default: {
-        regexp: '^([^\\\\s].*)\\\\((\\\\d+,\\\\d+)\\\\):\\\\s*(.*)$',
-        file: 1,
-        location: 2,
-        message: 3
-    },
-    type: 'object',
-    properties: {
-        regexp: {
-            type: 'string',
-            description: 'The regular expression to find an error, warning or info in the output.'
-        },
-        kind: {
-            type: 'string',
-            description: 'whether the pattern matches a location (file and line) or only a file.'
-        },
-        file: {
-            type: 'integer',
-            description: 'The match group index of the filename. If omitted 1 is used.'
-        },
-        location: {
-            type: 'integer',
-            // eslint-disable-next-line max-len
-            description: 'The match group index of the problem\'s location. Valid location patterns are: (line), (line,column) and (startLine,startColumn,endLine,endColumn). If omitted (line,column) is assumed.'
-        },
-        line: {
-            type: 'integer',
-            description: 'The match group index of the problem\'s line. Defaults to 2'
-        },
-        column: {
-            type: 'integer',
-            description: 'The match group index of the problem\'s line character. Defaults to 3'
-        },
-        endLine: {
-            type: 'integer',
-            description: 'The match group index of the problem\'s end line. Defaults to undefined'
-        },
-        endColumn: {
-            type: 'integer',
-            description: 'The match group index of the problem\'s end line character. Defaults to undefined'
-        },
-        severity: {
-            type: 'integer',
-            description: 'The match group index of the problem\'s severity. Defaults to undefined'
-        },
-        code: {
-            type: 'integer',
-            description: 'The match group index of the problem\'s code. Defaults to undefined'
-        },
-        message: {
-            type: 'integer',
-            description: 'The match group index of the message. If omitted it defaults to 4 if location is specified. Otherwise it defaults to 5.'
-        },
-        loop: {
-            type: 'boolean',
-            // eslint-disable-next-line max-len
-            description: 'In a multi line matcher loop indicated whether this pattern is executed in a loop as long as it matches. Can only specified on a last pattern in a multi line pattern.'
-        }
-    }
-};
-var multiLineProblemPattern = {
-    type: 'array',
-    items: problemPattern
-};
-var watchingPattern = {
-    type: 'object',
-    additionalProperties: false,
-    properties: {
-        regexp: {
-            type: 'string',
-            description: 'The regular expression to detect the begin or end of a background task.'
-        },
-        file: {
-            type: 'integer',
-            description: 'The match group index of the filename. Can be omitted.'
-        },
-    }
-};
-var patternType = {
-    anyOf: [
-        {
-            type: 'string',
-            description: 'The name of a contributed or predefined pattern'
-        },
-        problemPattern,
-        multiLineProblemPattern
-    ],
-    description: 'A problem pattern or the name of a contributed or predefined problem pattern. Can be omitted if base is specified.'
-};
-var problemMatcherObject = {
-    type: 'object',
-    properties: {
-        base: {
-            type: 'string',
-            description: 'The name of a base problem matcher to use.'
-        },
-        owner: {
-            type: 'string',
-            description: 'The owner of the problem inside Code. Can be omitted if base is specified. Defaults to \'external\' if omitted and base is not specified.'
-        },
-        source: {
-            type: 'string',
-            description: 'A human-readable string describing the source of this diagnostic, e.g. \'typescript\' or \'super lint\'.'
-        },
-        severity: {
-            type: 'string',
-            enum: ['error', 'warning', 'info'],
-            description: 'The default severity for captures problems. Is used if the pattern doesn\'t define a match group for severity.'
-        },
-        applyTo: {
-            type: 'string',
-            enum: ['allDocuments', 'openDocuments', 'closedDocuments'],
-            description: 'Controls if a problem reported on a text document is applied only to open, closed or all documents.'
-        },
-        pattern: patternType,
-        fileLocation: {
-            oneOf: [
-                {
-                    type: 'string',
-                    enum: ['absolute', 'relative', 'autoDetect']
-                },
-                {
-                    type: 'array',
-                    items: {
-                        type: 'string'
-                    }
-                }
-            ],
-            description: 'Defines how file names reported in a problem pattern should be interpreted.'
-        },
-        background: {
-            type: 'object',
-            additionalProperties: false,
-            description: 'Patterns to track the begin and end of a matcher active on a background task.',
-            properties: {
-                activeOnStart: {
-                    type: 'boolean',
-                    description: 'If set to true the background monitor is in active mode when the task starts. This is equals of issuing a line that matches the beginsPattern'
-                },
-                beginsPattern: {
-                    oneOf: [
-                        {
-                            type: 'string'
-                        },
-                        watchingPattern
-                    ],
-                    description: 'If matched in the output the start of a background task is signaled.'
-                },
-                endsPattern: {
-                    oneOf: [
-                        {
-                            type: 'string'
-                        },
-                        watchingPattern
-                    ],
-                    description: 'If matched in the output the end of a background task is signaled.'
-                }
-            }
-        },
-        watching: {
-            type: 'object',
-            additionalProperties: false,
-            deprecationMessage: 'The watching property is deprecated. Use background instead.',
-            description: 'Patterns to track the begin and end of a watching matcher.',
-            properties: {
-                activeOnStart: {
-                    type: 'boolean',
-                    description: 'If set to true the watcher is in active mode when the task starts. This is equals of issuing a line that matches the beginPattern'
-                },
-                beginsPattern: {
-                    oneOf: [
-                        {
-                            type: 'string'
-                        },
-                        watchingPattern
-                    ],
-                    description: 'If matched in the output the start of a watching task is signaled.'
-                },
-                endsPattern: {
-                    oneOf: [
-                        {
-                            type: 'string'
-                        },
-                        watchingPattern
-                    ],
-                    description: 'If matched in the output the end of a watching task is signaled.'
-                }
-            }
-        }
-    }
-};
-var problemMatcher = {
-    anyOf: [
-        {
-            type: 'string',
-            description: 'Name of the problem matcher to parse the output of the task',
-            enum: problemMatcherNames
-        },
-        {
-            type: 'array',
-            description: 'Name(s) of the problem matcher(s) to parse the output of the task',
-            items: {
-                type: 'string',
-                enum: problemMatcherNames
-            }
-        },
-        problemMatcherObject,
-        {
-            type: 'array',
-            description: 'User defined problem matcher(s) to parse the output of the task',
-            items: problemMatcherObject
-        }
-    ]
-};
-var presentation = {
-    type: 'object',
-    default: {
-        reveal: 'always',
-        focus: false
-    },
-    description: 'Configures the panel that is used to present the task\'s output and reads its input.',
-    additionalProperties: true,
-    properties: {
-        focus: {
-            type: 'boolean',
-            default: false,
-            description: 'Controls whether the panel takes focus. Default is false. If set to true the panel is revealed as well.'
-        },
-        reveal: {
-            type: 'string',
-            enum: ['always', 'silent', 'never'],
-            enumDescriptions: [
-                'Always reveals the terminal when this task is executed.',
-                'Only reveals the terminal if the task exits with an error or the problem matcher finds an error.',
-                'Never reveals the terminal when this task is executed.'
-            ],
-            default: 'always',
-            description: 'Controls whether the terminal running the task is revealed or not. May be overridden by option \"revealProblems\". Default is \"always\".'
-        }
-    }
-};
-var taskIdentifier = {
-    type: 'object',
-    additionalProperties: true,
-    properties: {
-        type: {
-            type: 'string',
-            description: 'The task identifier.'
-        }
-    }
-};
-var processTaskConfigurationSchema = {
-    type: 'object',
-    required: ['type', 'label', 'command'],
-    properties: __assign({ label: taskLabel, type: defaultTaskType }, commandAndArgs, { isBackground: {
-            type: 'boolean',
-            default: false,
-            description: 'Whether the executed task is kept alive and is running in the background.'
-        }, dependsOn: {
-            anyOf: [
-                {
-                    type: 'string',
-                    description: 'Another task this task depends on.'
-                },
-                taskIdentifier,
-                {
-                    type: 'array',
-                    description: 'The other tasks this task depends on.',
-                    items: {
-                        anyOf: [
-                            {
-                                type: 'string'
-                            },
-                            taskIdentifier
-                        ]
-                    }
-                }
-            ],
-            description: 'Either a string representing another task or an array of other tasks that this task depends on.'
-        }, dependsOrder: {
-            type: 'string',
-            enum: ['parallel', 'sequence'],
-            enumDescriptions: [
-                'Run all dependsOn tasks in parallel.',
-                'Run all dependsOn tasks in sequence.'
-            ],
-            default: 'parallel',
-            description: 'Determines the order of the dependsOn tasks for this task. Note that this property is not recursive.'
-        }, windows: {
-            type: 'object',
-            description: 'Windows specific command configuration that overrides the command, args, and options',
-            properties: commandAndArgs
-        }, osx: {
-            type: 'object',
-            description: 'MacOS specific command configuration that overrides the command, args, and options',
-            properties: commandAndArgs
-        }, linux: {
-            type: 'object',
-            description: 'Linux specific command configuration that overrides the default command, args, and options',
-            properties: commandAndArgs
-        }, group: group,
-        problemMatcher: problemMatcher,
-        presentation: presentation }),
-    additionalProperties: true
-};
-var customizedDetectedTasks = [];
-var customSchemas = [];
-var taskConfigurationSchema = {
-    $id: exports.taskSchemaId,
-    anyOf: __spread([processTaskConfigurationSchema], customizedDetectedTasks, customSchemas)
-};
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/browser/task-service.js":
-/*!***************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/task-service.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 Ericsson and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var opener_service_1 = __webpack_require__(/*! @theia/core/lib/browser/opener-service */ "../node_modules/@theia/core/lib/browser/opener-service.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var message_service_1 = __webpack_require__(/*! @theia/core/lib/common/message-service */ "../node_modules/@theia/core/lib/common/message-service.js");
-var promise_util_1 = __webpack_require__(/*! @theia/core/lib/common/promise-util */ "../node_modules/@theia/core/lib/common/promise-util.js");
-var quick_pick_service_1 = __webpack_require__(/*! @theia/core/lib/common/quick-pick-service */ "../node_modules/@theia/core/lib/common/quick-pick-service.js");
-var label_provider_1 = __webpack_require__(/*! @theia/core/lib/browser/label-provider */ "../node_modules/@theia/core/lib/browser/label-provider.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var browser_2 = __webpack_require__(/*! @theia/editor/lib/browser */ "../node_modules/@theia/editor/lib/browser/index.js");
-var problem_manager_1 = __webpack_require__(/*! @theia/markers/lib/browser/problem/problem-manager */ "../node_modules/@theia/markers/lib/browser/problem/problem-manager.js");
-var terminal_service_1 = __webpack_require__(/*! @theia/terminal/lib/browser/base/terminal-service */ "../node_modules/@theia/terminal/lib/browser/base/terminal-service.js");
-var terminal_widget_impl_1 = __webpack_require__(/*! @theia/terminal/lib/browser/terminal-widget-impl */ "../node_modules/@theia/terminal/lib/browser/terminal-widget-impl.js");
-var browser_3 = __webpack_require__(/*! @theia/variable-resolver/lib/browser */ "../node_modules/@theia/variable-resolver/lib/browser/index.js");
-var workspace_service_1 = __webpack_require__(/*! @theia/workspace/lib/browser/workspace-service */ "../node_modules/@theia/workspace/lib/browser/workspace-service.js");
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var vscode_languageserver_types_1 = __webpack_require__(/*! vscode-languageserver-types */ "../node_modules/vscode-languageserver-types/lib/esm/main.js");
-var common_2 = __webpack_require__(/*! ../common */ "../node_modules/@theia/task/lib/common/index.js");
-var task_watcher_1 = __webpack_require__(/*! ../common/task-watcher */ "../node_modules/@theia/task/lib/common/task-watcher.js");
-var provided_task_configurations_1 = __webpack_require__(/*! ./provided-task-configurations */ "../node_modules/@theia/task/lib/browser/provided-task-configurations.js");
-var task_configurations_1 = __webpack_require__(/*! ./task-configurations */ "../node_modules/@theia/task/lib/browser/task-configurations.js");
-var task_contribution_1 = __webpack_require__(/*! ./task-contribution */ "../node_modules/@theia/task/lib/browser/task-contribution.js");
-var task_definition_registry_1 = __webpack_require__(/*! ./task-definition-registry */ "../node_modules/@theia/task/lib/browser/task-definition-registry.js");
-var task_name_resolver_1 = __webpack_require__(/*! ./task-name-resolver */ "../node_modules/@theia/task/lib/browser/task-name-resolver.js");
-var task_source_resolver_1 = __webpack_require__(/*! ./task-source-resolver */ "../node_modules/@theia/task/lib/browser/task-source-resolver.js");
-var task_problem_matcher_registry_1 = __webpack_require__(/*! ./task-problem-matcher-registry */ "../node_modules/@theia/task/lib/browser/task-problem-matcher-registry.js");
-var task_schema_updater_1 = __webpack_require__(/*! ./task-schema-updater */ "../node_modules/@theia/task/lib/browser/task-schema-updater.js");
-var task_configuration_manager_1 = __webpack_require__(/*! ./task-configuration-manager */ "../node_modules/@theia/task/lib/browser/task-configuration-manager.js");
-var problem_widget_1 = __webpack_require__(/*! @theia/markers/lib/browser/problem/problem-widget */ "../node_modules/@theia/markers/lib/browser/problem/problem-widget.js");
-var task_node_1 = __webpack_require__(/*! ./task-node */ "../node_modules/@theia/task/lib/browser/task-node.js");
-var TaskEndedTypes;
-(function (TaskEndedTypes) {
-    TaskEndedTypes[TaskEndedTypes["TaskExited"] = 0] = "TaskExited";
-    TaskEndedTypes[TaskEndedTypes["BackgroundTaskEnded"] = 1] = "BackgroundTaskEnded";
-})(TaskEndedTypes = exports.TaskEndedTypes || (exports.TaskEndedTypes = {}));
-var TaskService = /** @class */ (function () {
-    function TaskService() {
-        /**
-         * The last executed task.
-         */
-        this.lastTask = undefined;
-        this.cachedRecentTasks = [];
-        this.runningTasks = new Map();
-    }
-    TaskService.prototype.init = function () {
-        var _this = this;
-        this.getRunningTasks().then(function (tasks) {
-            return tasks.forEach(function (task) {
-                if (!_this.runningTasks.has(task.taskId)) {
-                    _this.runningTasks.set(task.taskId, {
-                        exitCode: new promise_util_1.Deferred(), terminateSignal: new promise_util_1.Deferred(),
-                        isBackgroundTaskEnded: new promise_util_1.Deferred()
-                    });
-                }
-            });
-        });
-        // notify user that task has started
-        this.taskWatcher.onTaskCreated(function (event) {
-            if (!_this.isEventForThisClient(event.ctx)) {
-                return;
-            }
-            _this.runningTasks.set(event.taskId, {
-                exitCode: new promise_util_1.Deferred(),
-                terminateSignal: new promise_util_1.Deferred(),
-                isBackgroundTaskEnded: new promise_util_1.Deferred()
-            });
-            var taskConfig = event.config;
-            var taskIdentifier = taskConfig ? _this.getTaskIdentifier(taskConfig) : event.taskId.toString();
-            _this.messageService.info("Task '" + taskIdentifier + "' has been started.");
-        });
-        this.taskWatcher.onOutputProcessed(function (event) { return __awaiter(_this, void 0, void 0, function () {
-            var runningTasksInfo, matchedRunningTaskInfo_1, isTaskActiveAndOutputSilent_1;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!this.isEventForThisClient(event.ctx)) {
-                            return [2 /*return*/];
-                        }
-                        if (!event.problems) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.getRunningTasks()];
-                    case 1:
-                        runningTasksInfo = _a.sent();
-                        matchedRunningTaskInfo_1 = runningTasksInfo.find(function (taskInfo) {
-                            var taskConfig = taskInfo.config;
-                            return _this.taskDefinitionRegistry.compareTasks(taskConfig, event.config);
-                        });
-                        isTaskActiveAndOutputSilent_1 = matchedRunningTaskInfo_1 &&
-                            matchedRunningTaskInfo_1.config.presentation && matchedRunningTaskInfo_1.config.presentation.reveal === common_2.RevealKind.Silent;
-                        event.problems.forEach(function (problem) {
-                            var existingMarkers = _this.problemManager.findMarkers({ owner: problem.description.owner });
-                            var uris = new Set();
-                            existingMarkers.forEach(function (marker) { return uris.add(marker.uri); });
-                            if (common_2.ProblemMatchData.is(problem) && problem.resource) {
-                                // When task.presentation.reveal === RevealKind.Silent, put focus on the terminal only if it is an error
-                                if (isTaskActiveAndOutputSilent_1 && problem.marker.severity === vscode_languageserver_types_1.DiagnosticSeverity.Error) {
-                                    var terminalId = matchedRunningTaskInfo_1.terminalId;
-                                    if (terminalId) {
-                                        var terminal = _this.terminalService.getById(_this.getTerminalWidgetId(terminalId));
-                                        if (terminal) {
-                                            var focus_1 = !!matchedRunningTaskInfo_1.config.presentation.focus;
-                                            if (focus_1) { // assign focus to the terminal if presentation.focus is true
-                                                _this.shell.activateWidget(terminal.id);
-                                            }
-                                            else { // show the terminal but not assign focus
-                                                _this.shell.revealWidget(terminal.id);
-                                            }
-                                        }
-                                    }
-                                }
-                                var uri_2 = new uri_1.default(problem.resource.path).withScheme(problem.resource.scheme);
-                                if (uris.has(uri_2.toString())) {
-                                    var newData = __spread(existingMarkers
-                                        .filter(function (marker) { return marker.uri === uri_2.toString(); })
-                                        .map(function (markerData) { return markerData.data; }), [
-                                        problem.marker
-                                    ]);
-                                    _this.problemManager.setMarkers(uri_2, problem.description.owner, newData);
-                                }
-                                else {
-                                    _this.problemManager.setMarkers(uri_2, problem.description.owner, [problem.marker]);
-                                }
-                            }
-                            else { // should have received an event for finding the "background task begins" pattern
-                                uris.forEach(function (uriString) { return _this.problemManager.setMarkers(new uri_1.default(uriString), problem.description.owner, []); });
-                            }
-                        });
-                        _a.label = 2;
-                    case 2: return [2 /*return*/];
-                }
-            });
-        }); });
-        this.taskWatcher.onBackgroundTaskEnded(function (event) {
-            if (!_this.isEventForThisClient(event.ctx)) {
-                return;
-            }
-            if (!_this.runningTasks.has(event.taskId)) {
-                _this.runningTasks.set(event.taskId, {
-                    exitCode: new promise_util_1.Deferred(),
-                    terminateSignal: new promise_util_1.Deferred(),
-                    isBackgroundTaskEnded: new promise_util_1.Deferred()
-                });
-            }
-            _this.runningTasks.get(event.taskId).isBackgroundTaskEnded.resolve(true);
-        });
-        // notify user that task has finished
-        this.taskWatcher.onTaskExit(function (event) {
-            if (!_this.isEventForThisClient(event.ctx)) {
-                return;
-            }
-            if (!_this.runningTasks.has(event.taskId)) {
-                _this.runningTasks.set(event.taskId, {
-                    exitCode: new promise_util_1.Deferred(),
-                    terminateSignal: new promise_util_1.Deferred(),
-                    isBackgroundTaskEnded: new promise_util_1.Deferred()
-                });
-            }
-            _this.runningTasks.get(event.taskId).exitCode.resolve(event.code);
-            _this.runningTasks.get(event.taskId).terminateSignal.resolve(event.signal);
-            setTimeout(function () { return _this.runningTasks.delete(event.taskId); }, 60 * 1000);
-            var taskConfig = event.config;
-            var taskIdentifier = taskConfig ? _this.getTaskIdentifier(taskConfig) : event.taskId.toString();
-            if (event.code !== undefined) {
-                var message = "Task '" + taskIdentifier + "' has exited with code " + event.code + ".";
-                if (event.code === 0) {
-                    _this.messageService.info(message);
-                }
-                else {
-                    var eventTaskConfig = event.config;
-                    if (eventTaskConfig && eventTaskConfig.presentation && eventTaskConfig.presentation.reveal === common_2.RevealKind.Silent && event.terminalId) {
-                        var terminal = _this.terminalService.getById(_this.getTerminalWidgetId(event.terminalId));
-                        var focus_2 = !!eventTaskConfig.presentation.focus;
-                        if (terminal) {
-                            if (focus_2) { // assign focus to the terminal if presentation.focus is true
-                                _this.shell.activateWidget(terminal.id);
-                            }
-                            else { // show the terminal but not assign focus
-                                _this.shell.revealWidget(terminal.id);
-                            }
-                        }
-                    }
-                    _this.messageService.error(message);
-                }
-            }
-            else if (event.signal !== undefined) {
-                _this.messageService.info("Task '" + taskIdentifier + "' was terminated by signal " + event.signal + ".");
-            }
-            else {
-                console.error('Invalid TaskExitedEvent received, neither code nor signal is set.');
-            }
-        });
-    };
-    TaskService.prototype.getTaskIdentifier = function (taskConfig) {
-        var taskName = this.taskNameResolver.resolve(taskConfig);
-        var sourceStrUri = this.taskSourceResolver.resolve(taskConfig);
-        return taskName + " (" + this.labelProvider.getName(new uri_1.default(sourceStrUri)) + ")";
-    };
-    /** Returns an array of the task configurations configured in tasks.json and provided by the extensions. */
-    TaskService.prototype.getTasks = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var configuredTasks, providedTasks, notCustomizedProvidedTasks;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getConfiguredTasks()];
-                    case 1:
-                        configuredTasks = _a.sent();
-                        return [4 /*yield*/, this.getProvidedTasks()];
-                    case 2:
-                        providedTasks = _a.sent();
-                        notCustomizedProvidedTasks = providedTasks.filter(function (provided) {
-                            return !configuredTasks.some(function (configured) { return _this.taskDefinitionRegistry.compareTasks(configured, provided); });
-                        });
-                        return [2 /*return*/, __spread(configuredTasks, notCustomizedProvidedTasks)];
-                }
-            });
-        });
-    };
-    /** Returns an array of the valid task configurations which are configured in tasks.json files */
-    TaskService.prototype.getConfiguredTasks = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var invalidTaskConfig, widget, isProblemsWidgetVisible_1, currentEditorUri, isInvalidTaskConfigFileOpen, folderUri, warningMessage, validTaskConfigs;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        invalidTaskConfig = this.taskConfigurations.getInvalidTaskConfigurations()[0];
-                        if (!invalidTaskConfig) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.widgetManager.getOrCreateWidget(problem_widget_1.PROBLEMS_WIDGET_ID)];
-                    case 1:
-                        widget = _a.sent();
-                        isProblemsWidgetVisible_1 = widget && widget.isVisible;
-                        currentEditorUri = this.editorManager.currentEditor && this.editorManager.currentEditor.editor.getResourceUri();
-                        isInvalidTaskConfigFileOpen = false;
-                        if (currentEditorUri) {
-                            folderUri = this.workspaceService.getWorkspaceRootUri(currentEditorUri);
-                            if (folderUri && folderUri.toString() === invalidTaskConfig._scope) {
-                                isInvalidTaskConfigFileOpen = true;
-                            }
-                        }
-                        warningMessage = 'Invalid task configurations are found. Open tasks.json and find details in the Problems view.';
-                        if (!isProblemsWidgetVisible_1 || !isInvalidTaskConfigFileOpen) {
-                            this.messageService.warn(warningMessage, 'Open').then(function (actionOpen) {
-                                if (actionOpen) {
-                                    if (invalidTaskConfig && invalidTaskConfig._scope) {
-                                        _this.taskConfigurationManager.openConfiguration(invalidTaskConfig._scope);
-                                    }
-                                    if (!isProblemsWidgetVisible_1) {
-                                        _this.commands.executeCommand('problemsView:toggle');
-                                    }
-                                }
-                            });
-                        }
-                        else {
-                            this.messageService.warn(warningMessage);
-                        }
-                        _a.label = 2;
-                    case 2: return [4 /*yield*/, this.taskConfigurations.getTasks()];
-                    case 3:
-                        validTaskConfigs = _a.sent();
-                        return [2 /*return*/, validTaskConfigs];
-                }
-            });
-        });
-    };
-    /** Returns an array of the task configurations which are provided by the extensions. */
-    TaskService.prototype.getProvidedTasks = function () {
-        return this.providedTaskConfigurations.getTasks();
-    };
-    TaskService.prototype.addRecentTasks = function (tasks) {
-        var _this = this;
-        if (Array.isArray(tasks)) {
-            tasks.forEach(function (task) { return _this.addRecentTasks(task); });
-        }
-        else {
-            var ind = this.cachedRecentTasks.findIndex(function (recent) { return _this.taskDefinitionRegistry.compareTasks(recent, tasks); });
-            if (ind >= 0) {
-                this.cachedRecentTasks.splice(ind, 1);
-            }
-            this.cachedRecentTasks.unshift(tasks);
-        }
-    };
-    Object.defineProperty(TaskService.prototype, "recentTasks", {
-        get: function () {
-            return this.cachedRecentTasks;
-        },
-        set: function (recent) {
-            this.cachedRecentTasks = recent;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * Clears the list of recently used tasks.
-     */
-    TaskService.prototype.clearRecentTasks = function () {
-        this.cachedRecentTasks = [];
-    };
-    /**
-     * Returns a task configuration provided by an extension by task source and label.
-     * If there are no task configuration, returns undefined.
-     */
-    TaskService.prototype.getProvidedTask = function (source, label, scope) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.providedTaskConfigurations.getTask(source, label, scope)];
-            });
-        });
-    };
-    /** Returns an array of running tasks 'TaskInfo' objects */
-    TaskService.prototype.getRunningTasks = function () {
-        return this.taskServer.getTasks(this.getContext());
-    };
-    /** Returns an array of task types that are registered, including the default types */
-    TaskService.prototype.getRegisteredTaskTypes = function () {
-        return this.taskSchemaUpdater.getRegisteredTaskTypes();
-    };
-    /**
-     * Get the last executed task.
-     *
-     * @returns the last executed task or `undefined`.
-     */
-    TaskService.prototype.getLastTask = function () {
-        return this.lastTask;
-    };
-    /**
-     * Runs a task, by task configuration label.
-     * Note, it looks for a task configured in tasks.json only.
-     */
-    TaskService.prototype.runConfiguredTask = function (source, taskLabel) {
-        return __awaiter(this, void 0, void 0, function () {
-            var task;
-            return __generator(this, function (_a) {
-                task = this.taskConfigurations.getTask(source, taskLabel);
-                if (!task) {
-                    this.logger.error("Can't get task launch configuration for label: " + taskLabel);
-                    return [2 /*return*/];
-                }
-                this.run(source, taskLabel);
-                return [2 /*return*/];
-            });
-        });
-    };
-    /**
-     * Run the last executed task.
-     */
-    TaskService.prototype.runLastTask = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a, source, taskLabel;
-            return __generator(this, function (_b) {
-                if (!this.lastTask) {
-                    return [2 /*return*/];
-                }
-                _a = this.lastTask, source = _a.source, taskLabel = _a.taskLabel;
-                return [2 /*return*/, this.run(source, taskLabel)];
-            });
-        });
-    };
-    /**
-     * Runs a task, by the source and label of the task configuration.
-     * It looks for configured and detected tasks.
-     */
-    TaskService.prototype.run = function (source, taskLabel, scope) {
-        return __awaiter(this, void 0, void 0, function () {
-            var task, customizationObject, items, selected, matcherNames, tasks, resolvedMatchers, rootNode;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getProvidedTask(source, taskLabel, scope)];
-                    case 1:
-                        task = _a.sent();
-                        if (!task) { // if a detected task cannot be found, search from tasks.json
-                            task = this.taskConfigurations.getTask(source, taskLabel);
-                            if (!task) {
-                                this.logger.error("Can't get task launch configuration for label: " + taskLabel);
-                                return [2 /*return*/];
-                            }
-                        }
-                        return [4 /*yield*/, this.getTaskCustomization(task)];
-                    case 2:
-                        customizationObject = _a.sent();
-                        if (!!customizationObject.problemMatcher) return [3 /*break*/, 4];
-                        items = this.getCustomizeProblemMatcherItems();
-                        return [4 /*yield*/, this.quickPick.show(items, {
-                                placeholder: 'Select for which kind of errors and warnings to scan the task output'
-                            })];
-                    case 3:
-                        selected = _a.sent();
-                        if (selected) {
-                            if (selected.problemMatchers) {
-                                matcherNames = [];
-                                if (selected.problemMatchers && selected.problemMatchers.length === 0) { // never parse output for this task
-                                    matcherNames = [];
-                                }
-                                else if (selected.problemMatchers && selected.problemMatchers.length > 0) { // continue with user-selected parser
-                                    matcherNames = selected.problemMatchers.map(function (matcher) { return matcher.name; });
-                                }
-                                customizationObject.problemMatcher = matcherNames;
-                                // write the selected matcher (or the decision of "never parse") into the `tasks.json`
-                                this.updateTaskConfiguration(task, { problemMatcher: matcherNames });
-                            }
-                            else if (selected.learnMore) { // user wants to learn more about parsing task output
-                                opener_service_1.open(this.openerService, new uri_1.default('https://code.visualstudio.com/docs/editor/tasks#_processing-task-output-with-problem-matchers'));
-                            }
-                            // else, continue the task with no parser
-                        }
-                        else { // do not start the task in case that the user did not select any item from the list
-                            return [2 /*return*/];
-                        }
-                        _a.label = 4;
-                    case 4: return [4 /*yield*/, this.getWorkspaceTasks(task._scope)];
-                    case 5:
-                        tasks = _a.sent();
-                        return [4 /*yield*/, this.resolveProblemMatchers(task, customizationObject)];
-                    case 6:
-                        resolvedMatchers = _a.sent();
-                        try {
-                            rootNode = new task_node_1.TaskNode(task, [], []);
-                            this.detectDirectedAcyclicGraph(task, rootNode, tasks);
-                        }
-                        catch (error) {
-                            this.logger.error(error.message);
-                            this.messageService.error(error.message);
-                            return [2 /*return*/, undefined];
-                        }
-                        return [2 /*return*/, this.runTasksGraph(task, tasks, {
-                                customization: __assign({}, customizationObject, { problemMatcher: resolvedMatchers })
-                            }).catch(function (error) {
-                                console.log(error.message);
-                                return undefined;
-                            })];
-                }
-            });
-        });
-    };
-    /**
-     * A recursive function that runs a task and all its sub tasks that it depends on.
-     * A task can be executed only when all of its dependencies have been executed, or when it doesn’t have any dependencies at all.
-     */
-    TaskService.prototype.runTasksGraph = function (task, tasks, option) {
-        return __awaiter(this, void 0, void 0, function () {
-            var dependentTasks, i, taskIdentifier, dependentTask, taskCustomization, resolvedMatchers, promises, taskIdentifier, dependentTask, taskCustomization, resolvedMatchers, taskInfo, getExitCodePromise, isBackgroundTaskEndedPromise, taskEndedInfo;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!(task && task.dependsOn)) return [3 /*break*/, 13];
-                        if (!(Array.isArray(task.dependsOn) && task.dependsOn.length > 0)) return [3 /*break*/, 9];
-                        dependentTasks = [];
-                        i = 0;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i < task.dependsOn.length)) return [3 /*break*/, 6];
-                        taskIdentifier = task.dependsOn[i];
-                        dependentTask = this.getDependentTask(taskIdentifier, tasks);
-                        return [4 /*yield*/, this.getTaskCustomization(dependentTask)];
-                    case 2:
-                        taskCustomization = _a.sent();
-                        return [4 /*yield*/, this.resolveProblemMatchers(dependentTask, taskCustomization)];
-                    case 3:
-                        resolvedMatchers = _a.sent();
-                        dependentTasks.push({ 'task': dependentTask, 'taskCustomization': taskCustomization, 'resolvedMatchers': resolvedMatchers });
-                        if (!(task.dependsOrder && task.dependsOrder === common_2.DependsOrder.Sequence)) return [3 /*break*/, 5];
-                        return [4 /*yield*/, this.runTasksGraph(dependentTask, tasks, {
-                                customization: __assign({}, taskCustomization, { problemMatcher: resolvedMatchers })
-                            })];
-                    case 4:
-                        _a.sent();
-                        _a.label = 5;
-                    case 5:
-                        i++;
-                        return [3 /*break*/, 1];
-                    case 6:
-                        if (!((!task.dependsOrder) || (task.dependsOrder && task.dependsOrder === common_2.DependsOrder.Parallel))) return [3 /*break*/, 8];
-                        promises = dependentTasks.map(function (item) {
-                            return _this.runTasksGraph(item.task, tasks, {
-                                customization: __assign({}, item.taskCustomization, { problemMatcher: item.resolvedMatchers })
-                            });
-                        });
-                        return [4 /*yield*/, Promise.all(promises)];
-                    case 7:
-                        _a.sent();
-                        _a.label = 8;
-                    case 8: return [3 /*break*/, 13];
-                    case 9:
-                        if (!!Array.isArray(task.dependsOn)) return [3 /*break*/, 13];
-                        taskIdentifier = task.dependsOn;
-                        dependentTask = this.getDependentTask(taskIdentifier, tasks);
-                        return [4 /*yield*/, this.getTaskCustomization(dependentTask)];
-                    case 10:
-                        taskCustomization = _a.sent();
-                        return [4 /*yield*/, this.resolveProblemMatchers(dependentTask, taskCustomization)];
-                    case 11:
-                        resolvedMatchers = _a.sent();
-                        return [4 /*yield*/, this.runTasksGraph(dependentTask, tasks, {
-                                customization: __assign({}, taskCustomization, { problemMatcher: resolvedMatchers })
-                            })];
-                    case 12:
-                        _a.sent();
-                        _a.label = 13;
-                    case 13: return [4 /*yield*/, this.runTask(task, option)];
-                    case 14:
-                        taskInfo = _a.sent();
-                        if (!taskInfo) return [3 /*break*/, 16];
-                        getExitCodePromise = this.getExitCode(taskInfo.taskId).then(function (result) { return ({ taskEndedType: TaskEndedTypes.TaskExited, value: result }); });
-                        isBackgroundTaskEndedPromise = this.isBackgroundTaskEnded(taskInfo.taskId).then(function (result) {
-                            return ({ taskEndedType: TaskEndedTypes.BackgroundTaskEnded, value: result });
-                        });
-                        return [4 /*yield*/, Promise.race([getExitCodePromise, isBackgroundTaskEndedPromise])];
-                    case 15:
-                        taskEndedInfo = _a.sent();
-                        if ((taskEndedInfo.taskEndedType === TaskEndedTypes.TaskExited && taskEndedInfo.value !== 0) ||
-                            (taskEndedInfo.taskEndedType === TaskEndedTypes.BackgroundTaskEnded && !taskEndedInfo.value)) {
-                            throw new Error('The task: ' + task.label + ' terminated with exit code ' + taskEndedInfo.value + '.');
-                        }
-                        _a.label = 16;
-                    case 16: return [2 /*return*/, taskInfo];
-                }
-            });
-        });
-    };
-    /**
-     * Creates a graph of dependencies tasks from the root task and verify there is no DAG (Directed Acyclic Graph).
-     * In case of detection of a circular dependency, an error is thrown with a message which describes the detected circular reference.
-     */
-    TaskService.prototype.detectDirectedAcyclicGraph = function (task, taskNode, tasks) {
-        if (task && task.dependsOn) {
-            // In case the 'dependsOn' is an array
-            if (Array.isArray(task.dependsOn) && task.dependsOn.length > 0) {
-                for (var i = 0; i < task.dependsOn.length; i++) {
-                    var childNode = this.createChildTaskNode(task, taskNode, task.dependsOn[i], tasks);
-                    this.detectDirectedAcyclicGraph(childNode.taskConfiguration, childNode.node, tasks);
-                }
-            }
-            else if (!Array.isArray(task.dependsOn)) {
-                var childNode = this.createChildTaskNode(task, taskNode, task.dependsOn, tasks);
-                this.detectDirectedAcyclicGraph(childNode.taskConfiguration, childNode.node, tasks);
-            }
-        }
-    };
-    // 'childTaskIdentifier' may be a string (a task label) or a JSON object which represents a TaskIdentifier (e.g. {"type":"npm", "script":"script1"})
-    TaskService.prototype.createChildTaskNode = function (task, taskNode, childTaskIdentifier, tasks) {
-        var _this = this;
-        var childTaskConfiguration = this.getDependentTask(childTaskIdentifier, tasks);
-        // If current task and child task are identical or if
-        // one of the child tasks is identical to one of the current task ancestors, then raise an error
-        if (this.taskDefinitionRegistry.compareTasks(task, childTaskConfiguration) ||
-            taskNode.parentsID.filter(function (t) { return _this.taskDefinitionRegistry.compareTasks(childTaskConfiguration, t); }).length > 0) {
-            var fromNode = task.label;
-            var toNode = childTaskConfiguration.label;
-            throw new Error('Circular reference detected: ' + fromNode + ' -->  ' + toNode);
-        }
-        var childNode = new task_node_1.TaskNode(childTaskConfiguration, [], Object.assign([], taskNode.parentsID));
-        childNode.addParentDependency(taskNode.taskId);
-        taskNode.addChildDependency(childNode);
-        return { 'taskConfiguration': childTaskConfiguration, 'node': childNode };
-    };
-    /**
-     * Gets task configuration by task label or by a JSON object which represents a task identifier
-     *
-     * @param taskIdentifier The task label (string) or a JSON object which represents a TaskIdentifier (e.g. {"type":"npm", "script":"script1"})
-     * @param tasks an array of the task configurations
-     * @returns the correct TaskConfiguration object which matches the taskIdentifier
-     */
-    TaskService.prototype.getDependentTask = function (taskIdentifier, tasks) {
-        var _this = this;
-        var notEnoughDataError = 'The information provided in the "dependsOn" is not enough for matching the correct task !';
-        var currentTaskChildConfiguration;
-        if (typeof (taskIdentifier) !== 'string') {
-            // TaskIdentifier object does not support tasks of type 'shell' (The same behavior as in VS Code).
-            // So if we want the 'dependsOn' property to include tasks of type 'shell',
-            // then we must mention their labels (in the 'dependsOn' property) and not to create a task identifier object for them.
-            var taskDefinition = this.taskDefinitionRegistry.getDefinition(taskIdentifier);
-            if (taskDefinition) {
-                currentTaskChildConfiguration = this.getTaskByTaskIdentifierAndTaskDefinition(taskDefinition, taskIdentifier, tasks);
-                if (!currentTaskChildConfiguration.type) {
-                    this.messageService.error(notEnoughDataError);
-                    throw new Error(notEnoughDataError);
-                }
-                return currentTaskChildConfiguration;
-            }
-            else {
-                this.messageService.error(notEnoughDataError);
-                throw new Error(notEnoughDataError);
-            }
-        }
-        else {
-            currentTaskChildConfiguration = tasks.filter(function (t) { return taskIdentifier === _this.taskNameResolver.resolve(t); })[0];
-            return currentTaskChildConfiguration;
-        }
-    };
-    /**
-     * Gets the matched task from an array of task configurations by TaskDefinition and TaskIdentifier.
-     * In case that more than one task configuration matches, we returns the first one.
-     *
-     * @param taskDefinition The task definition for the task configuration.
-     * @param taskIdentifier The task label (string) or a JSON object which represents a TaskIdentifier (e.g. {"type":"npm", "script":"script1"})
-     * @param tasks An array of task configurations.
-     * @returns The correct TaskConfiguration object which matches the taskDefinition and taskIdentifier.
-     */
-    TaskService.prototype.getTaskByTaskIdentifierAndTaskDefinition = function (taskDefinition, taskIdentifier, tasks) {
-        var identifierProperties = [];
-        var relevantTasks = tasks.filter(function (t) {
-            return taskDefinition && t.hasOwnProperty('taskType') &&
-                taskDefinition['taskType'] === t['taskType'] &&
-                t.hasOwnProperty('source') &&
-                taskDefinition['source'] === t['source'];
-        });
-        Object.keys(taskIdentifier).forEach(function (key) {
-            identifierProperties.push(key);
-        });
-        identifierProperties.forEach(function (key) {
-            if (key === 'type' || key === 'taskType') {
-                relevantTasks = relevantTasks.filter(function (t) { return (t.hasOwnProperty('type') || t.hasOwnProperty('taskType')) &&
-                    ((taskIdentifier[key] === t['type']) || (taskIdentifier[key] === t['taskType'])); });
-            }
-            else {
-                relevantTasks = relevantTasks.filter(function (t) { return t.hasOwnProperty(key) && taskIdentifier[key] === t[key]; });
-            }
-        });
-        if (relevantTasks.length > 0) {
-            return relevantTasks[0];
-        }
-        else {
-            // return empty TaskConfiguration
-            return { 'label': '', '_scope': '', 'type': '' };
-        }
-    };
-    TaskService.prototype.runTask = function (task, option) {
-        return __awaiter(this, void 0, void 0, function () {
-            var runningTasksInfo, matchedRunningTaskInfo, taskName, terminalId, terminal, selectedAction;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getRunningTasks()];
-                    case 1:
-                        runningTasksInfo = _a.sent();
-                        matchedRunningTaskInfo = runningTasksInfo.find(function (taskInfo) {
-                            var taskConfig = taskInfo.config;
-                            return _this.taskDefinitionRegistry.compareTasks(taskConfig, task);
-                        });
-                        if (!matchedRunningTaskInfo) return [3 /*break*/, 6];
-                        taskName = this.taskNameResolver.resolve(task);
-                        terminalId = matchedRunningTaskInfo.terminalId;
-                        if (terminalId) {
-                            terminal = this.terminalService.getById(this.getTerminalWidgetId(terminalId));
-                            if (terminal && task.presentation) {
-                                if (task.presentation.focus) { // assign focus to the terminal if presentation.focus is true
-                                    this.shell.activateWidget(terminal.id);
-                                }
-                                else if (task.presentation.reveal === common_2.RevealKind.Always) { // show the terminal but not assign focus
-                                    this.shell.revealWidget(terminal.id);
-                                }
-                            }
-                        }
-                        return [4 /*yield*/, this.messageService.info("The task '" + taskName + "' is already active", 'Terminate Task', 'Restart Task')];
-                    case 2:
-                        selectedAction = _a.sent();
-                        if (!(selectedAction === 'Terminate Task')) return [3 /*break*/, 4];
-                        return [4 /*yield*/, this.terminateTask(matchedRunningTaskInfo)];
-                    case 3:
-                        _a.sent();
-                        return [3 /*break*/, 5];
-                    case 4:
-                        if (selectedAction === 'Restart Task') {
-                            return [2 /*return*/, this.restartTask(matchedRunningTaskInfo, option)];
-                        }
-                        _a.label = 5;
-                    case 5: return [3 /*break*/, 7];
-                    case 6: // run task as the task is not active
-                    return [2 /*return*/, this.doRunTask(task, option)];
-                    case 7: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    /**
-     * Terminates a task that is actively running.
-     * @param activeTaskInfo the TaskInfo of the task that is actively running
-     */
-    TaskService.prototype.terminateTask = function (activeTaskInfo) {
-        return __awaiter(this, void 0, void 0, function () {
-            var taskId;
-            return __generator(this, function (_a) {
-                taskId = activeTaskInfo.taskId;
-                return [2 /*return*/, this.kill(taskId)];
-            });
-        });
-    };
-    /**
-     * Terminates a task that is actively running, and restarts it.
-     * @param activeTaskInfo the TaskInfo of the task that is actively running
-     */
-    TaskService.prototype.restartTask = function (activeTaskInfo, option) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.terminateTask(activeTaskInfo)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/, this.doRunTask(activeTaskInfo.config, option)];
-                }
-            });
-        });
-    };
-    TaskService.prototype.doRunTask = function (task, option) {
-        return __awaiter(this, void 0, void 0, function () {
-            var taskDefinition_1, resolvedTask;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (option && option.customization) {
-                            taskDefinition_1 = this.taskDefinitionRegistry.getDefinition(task);
-                            if (taskDefinition_1) { // use the customization object to override the task config
-                                Object.keys(option.customization).forEach(function (customizedProperty) {
-                                    // properties used to define the task cannot be customized
-                                    if (customizedProperty !== 'type' && !taskDefinition_1.properties.all.some(function (pDefinition) { return pDefinition === customizedProperty; })) {
-                                        task[customizedProperty] = option.customization[customizedProperty];
-                                    }
-                                });
-                            }
-                        }
-                        return [4 /*yield*/, this.getResolvedTask(task)];
-                    case 1:
-                        resolvedTask = _a.sent();
-                        if (!resolvedTask) return [3 /*break*/, 3];
-                        // remove problem markers from the same source before running the task
-                        return [4 /*yield*/, this.removeProblemMarks(option)];
-                    case 2:
-                        // remove problem markers from the same source before running the task
-                        _a.sent();
-                        return [2 /*return*/, this.runResolvedTask(resolvedTask, option)];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TaskService.prototype.runTaskByLabel = function (taskLabel) {
-        return __awaiter(this, void 0, void 0, function () {
-            var tasks, tasks_1, tasks_1_1, task;
-            var e_1, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0: return [4 /*yield*/, this.getTasks()];
-                    case 1:
-                        tasks = _b.sent();
-                        try {
-                            for (tasks_1 = __values(tasks), tasks_1_1 = tasks_1.next(); !tasks_1_1.done; tasks_1_1 = tasks_1.next()) {
-                                task = tasks_1_1.value;
-                                if (task.label === taskLabel) {
-                                    return [2 /*return*/, this.runTask(task)];
-                                }
-                            }
-                        }
-                        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                        finally {
-                            try {
-                                if (tasks_1_1 && !tasks_1_1.done && (_a = tasks_1.return)) _a.call(tasks_1);
-                            }
-                            finally { if (e_1) throw e_1.error; }
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TaskService.prototype.runWorkspaceTask = function (workspaceFolderUri, taskIdentifier) {
-        return __awaiter(this, void 0, void 0, function () {
-            var tasks, task, taskCustomization, resolvedMatchers, rootNode;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getWorkspaceTasks(workspaceFolderUri)];
-                    case 1:
-                        tasks = _a.sent();
-                        task = this.getDependentTask(taskIdentifier, tasks);
-                        if (!task) {
-                            return [2 /*return*/, undefined];
-                        }
-                        return [4 /*yield*/, this.getTaskCustomization(task)];
-                    case 2:
-                        taskCustomization = _a.sent();
-                        return [4 /*yield*/, this.resolveProblemMatchers(task, taskCustomization)];
-                    case 3:
-                        resolvedMatchers = _a.sent();
-                        try {
-                            rootNode = new task_node_1.TaskNode(task, [], []);
-                            this.detectDirectedAcyclicGraph(task, rootNode, tasks);
-                        }
-                        catch (error) {
-                            this.logger.error(error.message);
-                            this.messageService.error(error.message);
-                            return [2 /*return*/, undefined];
-                        }
-                        return [2 /*return*/, this.runTasksGraph(task, tasks, {
-                                customization: __assign({}, taskCustomization, { problemMatcher: resolvedMatchers })
-                            }).catch(function (error) {
-                                console.log(error.message);
-                                return undefined;
-                            })];
-                }
-            });
-        });
-    };
-    /**
-     * Updates the task configuration in the `tasks.json`.
-     * The task config, together with updates, will be written into the `tasks.json` if it is not found in the file.
-     *
-     * @param task task that the updates will be applied to
-     * @param update the updates to be applied
-     */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    TaskService.prototype.updateTaskConfiguration = function (task, update) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                if (update.problemMatcher) {
-                    if (Array.isArray(update.problemMatcher)) {
-                        update.problemMatcher.forEach(function (name, index) {
-                            if (!name.startsWith('$')) {
-                                update.problemMatcher[index] = "$" + update.problemMatcher[index];
-                            }
-                        });
-                    }
-                    else if (!update.problemMatcher.startsWith('$')) {
-                        update.problemMatcher = "$" + update.problemMatcher;
-                    }
-                }
-                this.taskConfigurations.updateTaskConfig(task, update);
-                return [2 /*return*/];
-            });
-        });
-    };
-    TaskService.prototype.getWorkspaceTasks = function (workspaceFolderUri) {
-        return __awaiter(this, void 0, void 0, function () {
-            var tasks;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getTasks()];
-                    case 1:
-                        tasks = _a.sent();
-                        return [2 /*return*/, tasks.filter(function (t) { return t._scope === workspaceFolderUri || t._scope === undefined; })];
-                }
-            });
-        });
-    };
-    TaskService.prototype.resolveProblemMatchers = function (task, customizationObject) {
-        return __awaiter(this, void 0, void 0, function () {
-            var notResolvedMatchers, resolvedMatchers, notResolvedMatchers_1, notResolvedMatchers_1_1, matcher, resolvedMatcher, scope, options, resolvedPrefix, e_2_1;
-            var e_2, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        notResolvedMatchers = customizationObject.problemMatcher ?
-                            (Array.isArray(customizationObject.problemMatcher) ? customizationObject.problemMatcher : [customizationObject.problemMatcher]) : undefined;
-                        resolvedMatchers = [];
-                        if (!notResolvedMatchers) return [3 /*break*/, 14];
-                        _b.label = 1;
-                    case 1:
-                        _b.trys.push([1, 11, 12, 13]);
-                        notResolvedMatchers_1 = __values(notResolvedMatchers), notResolvedMatchers_1_1 = notResolvedMatchers_1.next();
-                        _b.label = 2;
-                    case 2:
-                        if (!!notResolvedMatchers_1_1.done) return [3 /*break*/, 10];
-                        matcher = notResolvedMatchers_1_1.value;
-                        resolvedMatcher = void 0;
-                        return [4 /*yield*/, this.problemMatcherRegistry.onReady()];
-                    case 3:
-                        _b.sent();
-                        if (!(typeof matcher === 'string')) return [3 /*break*/, 4];
-                        resolvedMatcher = this.problemMatcherRegistry.get(matcher);
-                        return [3 /*break*/, 6];
-                    case 4: return [4 /*yield*/, this.problemMatcherRegistry.getProblemMatcherFromContribution(matcher)];
-                    case 5:
-                        resolvedMatcher = _b.sent();
-                        _b.label = 6;
-                    case 6:
-                        if (!resolvedMatcher) return [3 /*break*/, 9];
-                        scope = task._scope || task._source;
-                        if (!(resolvedMatcher.filePrefix && scope)) return [3 /*break*/, 8];
-                        options = {
-                            context: new uri_1.default(scope).withScheme('file'),
-                            configurationSection: 'tasks'
-                        };
-                        return [4 /*yield*/, this.variableResolverService.resolve(resolvedMatcher.filePrefix, options)];
-                    case 7:
-                        resolvedPrefix = _b.sent();
-                        Object.assign(resolvedMatcher, { filePrefix: resolvedPrefix });
-                        _b.label = 8;
-                    case 8:
-                        resolvedMatchers.push(resolvedMatcher);
-                        _b.label = 9;
-                    case 9:
-                        notResolvedMatchers_1_1 = notResolvedMatchers_1.next();
-                        return [3 /*break*/, 2];
-                    case 10: return [3 /*break*/, 13];
-                    case 11:
-                        e_2_1 = _b.sent();
-                        e_2 = { error: e_2_1 };
-                        return [3 /*break*/, 13];
-                    case 12:
-                        try {
-                            if (notResolvedMatchers_1_1 && !notResolvedMatchers_1_1.done && (_a = notResolvedMatchers_1.return)) _a.call(notResolvedMatchers_1);
-                        }
-                        finally { if (e_2) throw e_2.error; }
-                        return [7 /*endfinally*/];
-                    case 13: return [3 /*break*/, 15];
-                    case 14:
-                        resolvedMatchers = undefined;
-                        _b.label = 15;
-                    case 15: return [2 /*return*/, resolvedMatchers];
-                }
-            });
-        });
-    };
-    TaskService.prototype.getTaskCustomization = function (task) {
-        return __awaiter(this, void 0, void 0, function () {
-            var customizationObject, customizationFound;
-            return __generator(this, function (_a) {
-                customizationObject = { type: '' };
-                customizationFound = this.taskConfigurations.getCustomizationForTask(task);
-                if (customizationFound) {
-                    Object.assign(customizationObject, customizationFound);
-                }
-                else {
-                    Object.assign(customizationObject, {
-                        type: task.type,
-                        problemMatcher: task.problemMatcher
-                    });
-                }
-                return [2 /*return*/, customizationObject];
-            });
-        });
-    };
-    TaskService.prototype.removeProblemMarks = function (option) {
-        return __awaiter(this, void 0, void 0, function () {
-            var matchersFromOption, _loop_1, this_1, matchersFromOption_1, matchersFromOption_1_1, matcher;
-            var e_3, _a;
-            var _this = this;
-            return __generator(this, function (_b) {
-                if (option && option.customization) {
-                    matchersFromOption = option.customization.problemMatcher || [];
-                    _loop_1 = function (matcher) {
-                        if (matcher && matcher.owner) {
-                            var existingMarkers = this_1.problemManager.findMarkers({ owner: matcher.owner });
-                            var uris_1 = new Set();
-                            existingMarkers.forEach(function (marker) { return uris_1.add(marker.uri); });
-                            uris_1.forEach(function (uriString) { return _this.problemManager.setMarkers(new uri_1.default(uriString), matcher.owner, []); });
-                        }
-                    };
-                    this_1 = this;
-                    try {
-                        for (matchersFromOption_1 = __values(matchersFromOption), matchersFromOption_1_1 = matchersFromOption_1.next(); !matchersFromOption_1_1.done; matchersFromOption_1_1 = matchersFromOption_1.next()) {
-                            matcher = matchersFromOption_1_1.value;
-                            _loop_1(matcher);
-                        }
-                    }
-                    catch (e_3_1) { e_3 = { error: e_3_1 }; }
-                    finally {
-                        try {
-                            if (matchersFromOption_1_1 && !matchersFromOption_1_1.done && (_a = matchersFromOption_1.return)) _a.call(matchersFromOption_1);
-                        }
-                        finally { if (e_3) throw e_3.error; }
-                    }
-                }
-                return [2 /*return*/];
-            });
-        });
-    };
-    TaskService.prototype.getResolvedTask = function (task) {
-        return __awaiter(this, void 0, void 0, function () {
-            var resolver, resolvedTask, _a, error_1, errMessage;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        resolver = undefined;
-                        _b.label = 1;
-                    case 1:
-                        _b.trys.push([1, 6, , 7]);
-                        return [4 /*yield*/, this.taskResolverRegistry.getResolver(task.type)];
-                    case 2:
-                        resolver = _b.sent();
-                        if (!resolver) return [3 /*break*/, 4];
-                        return [4 /*yield*/, resolver.resolveTask(task)];
-                    case 3:
-                        _a = _b.sent();
-                        return [3 /*break*/, 5];
-                    case 4:
-                        _a = task;
-                        _b.label = 5;
-                    case 5:
-                        resolvedTask = _a;
-                        return [3 /*break*/, 7];
-                    case 6:
-                        error_1 = _b.sent();
-                        errMessage = "Error resolving task '" + task.label + "': " + error_1;
-                        this.logger.error(errMessage);
-                        resolvedTask = task;
-                        return [3 /*break*/, 7];
-                    case 7:
-                        this.addRecentTasks(task);
-                        return [2 /*return*/, resolvedTask];
-                }
-            });
-        });
-    };
-    /**
-     * Runs the resolved task and opens terminal widget if the task is based on a terminal process
-     * @param resolvedTask the resolved task
-     * @param option options to run the resolved task
-     */
-    TaskService.prototype.runResolvedTask = function (resolvedTask, option) {
-        return __awaiter(this, void 0, void 0, function () {
-            var source, taskLabel, taskInfo, error_2, errorStr;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        source = resolvedTask._source;
-                        taskLabel = resolvedTask.label;
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.taskServer.run(resolvedTask, this.getContext(), option)];
-                    case 2:
-                        taskInfo = _a.sent();
-                        this.lastTask = { source: source, taskLabel: taskLabel };
-                        this.logger.debug("Task created. Task id: " + taskInfo.taskId);
-                        /**
-                         * open terminal widget if the task is based on a terminal process (type: 'shell' or 'process')
-                         *
-                         * @todo Use a different mechanism to determine if the task should be attached?
-                         *       Reason: Maybe a new task type wants to also be displayed in a terminal.
-                         */
-                        if (typeof taskInfo.terminalId === 'number') {
-                            this.attach(taskInfo.terminalId, taskInfo.taskId);
-                        }
-                        return [2 /*return*/, taskInfo];
-                    case 3:
-                        error_2 = _a.sent();
-                        errorStr = "Error launching task '" + taskLabel + "': " + error_2.message;
-                        this.logger.error(errorStr);
-                        this.messageService.error(errorStr);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TaskService.prototype.getCustomizeProblemMatcherItems = function () {
-        var items = [];
-        items.push({
-            label: 'Continue without scanning the task output',
-            value: { problemMatchers: undefined }
-        });
-        items.push({
-            label: 'Never scan the task output',
-            value: { problemMatchers: [] }
-        });
-        items.push({
-            label: 'Learn more about scanning the task output',
-            value: { problemMatchers: undefined, learnMore: true }
-        });
-        items.push({ type: 'separator', label: 'registered parsers' });
-        var registeredProblemMatchers = this.problemMatcherRegistry.getAll();
-        items.push.apply(items, __spread(registeredProblemMatchers.map(function (matcher) {
-            return ({
-                label: matcher.label,
-                value: { problemMatchers: [matcher] },
-                description: matcher.name.startsWith('$') ? matcher.name : "$" + matcher.name
-            });
-        })));
-        return items;
-    };
-    /**
-     * Run selected text in the last active terminal.
-     */
-    TaskService.prototype.runSelectedText = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var startLine, startCharacter, endLine, endCharacter, selectedRange, selectedText, terminal;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!this.editorManager.currentEditor) {
-                            return [2 /*return*/];
-                        }
-                        startLine = this.editorManager.currentEditor.editor.selection.start.line;
-                        startCharacter = this.editorManager.currentEditor.editor.selection.start.character;
-                        endLine = this.editorManager.currentEditor.editor.selection.end.line;
-                        endCharacter = this.editorManager.currentEditor.editor.selection.end.character;
-                        selectedRange = vscode_languageserver_types_1.Range.create(startLine, startCharacter, endLine, endCharacter);
-                        // if no text is selected, default to selecting entire line
-                        if (startLine === endLine && startCharacter === endCharacter) {
-                            selectedRange = vscode_languageserver_types_1.Range.create(startLine, 0, endLine + 1, 0);
-                        }
-                        selectedText = this.editorManager.currentEditor.editor.document.getText(selectedRange).trimRight() + '\n';
-                        terminal = this.terminalService.currentTerminal;
-                        if (!!terminal) return [3 /*break*/, 3];
-                        return [4 /*yield*/, this.terminalService.newTerminal({ created: new Date().toString() })];
-                    case 1:
-                        terminal = (_a.sent());
-                        return [4 /*yield*/, terminal.start()];
-                    case 2:
-                        _a.sent();
-                        this.terminalService.activateTerminal(terminal);
-                        _a.label = 3;
-                    case 3:
-                        terminal.sendText(selectedText);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TaskService.prototype.attach = function (processId, taskId) {
-        return __awaiter(this, void 0, void 0, function () {
-            var runningTasks, taskInfo, widget;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getRunningTasks()];
-                    case 1:
-                        runningTasks = _a.sent();
-                        taskInfo = runningTasks.find(function (t) { return t.taskId === taskId; });
-                        return [4 /*yield*/, this.widgetManager.getOrCreateWidget(terminal_widget_impl_1.TERMINAL_WIDGET_FACTORY_ID, {
-                                created: new Date().toString(),
-                                id: this.getTerminalWidgetId(processId),
-                                title: taskInfo
-                                    ? "Task: " + taskInfo.config.label
-                                    : "Task: #" + taskId,
-                                destroyTermOnClose: true
-                            })];
-                    case 2:
-                        widget = _a.sent();
-                        this.shell.addWidget(widget, { area: 'bottom' });
-                        if (taskInfo && taskInfo.config.presentation && taskInfo.config.presentation.reveal === common_2.RevealKind.Always) {
-                            if (taskInfo.config.presentation.focus) { // assign focus to the terminal if presentation.focus is true
-                                this.shell.activateWidget(widget.id);
-                            }
-                            else { // show the terminal but not assign focus
-                                this.shell.revealWidget(widget.id);
-                            }
-                        }
-                        widget.start(processId);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TaskService.prototype.getTerminalWidgetId = function (terminalId) {
-        return terminal_widget_impl_1.TERMINAL_WIDGET_FACTORY_ID + "-" + terminalId;
-    };
-    TaskService.prototype.configure = function (task) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.taskConfigurations.configure(task)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TaskService.prototype.isEventForThisClient = function (context) {
-        if (context === this.getContext()) {
-            return true;
-        }
-        return false;
-    };
-    TaskService.prototype.taskConfigurationChanged = function (event) {
-        // do nothing for now
-    };
-    TaskService.prototype.getContext = function () {
-        return this.workspaceService.workspace && this.workspaceService.workspace.uri;
-    };
-    /** Kill task for a given id if task is found */
-    TaskService.prototype.kill = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            var error_3;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.taskServer.kill(id)];
-                    case 1:
-                        _a.sent();
-                        return [3 /*break*/, 3];
-                    case 2:
-                        error_3 = _a.sent();
-                        this.logger.error("Error killing task '" + id + "': " + error_3);
-                        this.messageService.error("Error killing task '" + id + "': " + error_3);
-                        return [2 /*return*/];
-                    case 3:
-                        this.logger.debug("Task killed. Task id: " + id);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TaskService.prototype.isBackgroundTaskEnded = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            var completedTask;
-            return __generator(this, function (_a) {
-                completedTask = this.runningTasks.get(id);
-                return [2 /*return*/, completedTask && completedTask.isBackgroundTaskEnded.promise];
-            });
-        });
-    };
-    TaskService.prototype.getExitCode = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            var completedTask;
-            return __generator(this, function (_a) {
-                completedTask = this.runningTasks.get(id);
-                return [2 /*return*/, completedTask && completedTask.exitCode.promise];
-            });
-        });
-    };
-    TaskService.prototype.getTerminateSignal = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            var completedTask;
-            return __generator(this, function (_a) {
-                completedTask = this.runningTasks.get(id);
-                return [2 /*return*/, completedTask && completedTask.terminateSignal.promise];
-            });
-        });
-    };
-    __decorate([
-        inversify_1.inject(browser_1.FrontendApplication),
-        __metadata("design:type", browser_1.FrontendApplication)
-    ], TaskService.prototype, "app", void 0);
-    __decorate([
-        inversify_1.inject(browser_1.ApplicationShell),
-        __metadata("design:type", browser_1.ApplicationShell)
-    ], TaskService.prototype, "shell", void 0);
-    __decorate([
-        inversify_1.inject(common_2.TaskServer),
-        __metadata("design:type", Object)
-    ], TaskService.prototype, "taskServer", void 0);
-    __decorate([
-        inversify_1.inject(common_1.ILogger), inversify_1.named('task'),
-        __metadata("design:type", Object)
-    ], TaskService.prototype, "logger", void 0);
-    __decorate([
-        inversify_1.inject(browser_1.WidgetManager),
-        __metadata("design:type", browser_1.WidgetManager)
-    ], TaskService.prototype, "widgetManager", void 0);
-    __decorate([
-        inversify_1.inject(task_watcher_1.TaskWatcher),
-        __metadata("design:type", task_watcher_1.TaskWatcher)
-    ], TaskService.prototype, "taskWatcher", void 0);
-    __decorate([
-        inversify_1.inject(message_service_1.MessageService),
-        __metadata("design:type", message_service_1.MessageService)
-    ], TaskService.prototype, "messageService", void 0);
-    __decorate([
-        inversify_1.inject(workspace_service_1.WorkspaceService),
-        __metadata("design:type", workspace_service_1.WorkspaceService)
-    ], TaskService.prototype, "workspaceService", void 0);
-    __decorate([
-        inversify_1.inject(task_configurations_1.TaskConfigurations),
-        __metadata("design:type", task_configurations_1.TaskConfigurations)
-    ], TaskService.prototype, "taskConfigurations", void 0);
-    __decorate([
-        inversify_1.inject(provided_task_configurations_1.ProvidedTaskConfigurations),
-        __metadata("design:type", provided_task_configurations_1.ProvidedTaskConfigurations)
-    ], TaskService.prototype, "providedTaskConfigurations", void 0);
-    __decorate([
-        inversify_1.inject(browser_3.VariableResolverService),
-        __metadata("design:type", browser_3.VariableResolverService)
-    ], TaskService.prototype, "variableResolverService", void 0);
-    __decorate([
-        inversify_1.inject(task_contribution_1.TaskResolverRegistry),
-        __metadata("design:type", task_contribution_1.TaskResolverRegistry)
-    ], TaskService.prototype, "taskResolverRegistry", void 0);
-    __decorate([
-        inversify_1.inject(terminal_service_1.TerminalService),
-        __metadata("design:type", Object)
-    ], TaskService.prototype, "terminalService", void 0);
-    __decorate([
-        inversify_1.inject(browser_2.EditorManager),
-        __metadata("design:type", browser_2.EditorManager)
-    ], TaskService.prototype, "editorManager", void 0);
-    __decorate([
-        inversify_1.inject(problem_manager_1.ProblemManager),
-        __metadata("design:type", problem_manager_1.ProblemManager)
-    ], TaskService.prototype, "problemManager", void 0);
-    __decorate([
-        inversify_1.inject(task_definition_registry_1.TaskDefinitionRegistry),
-        __metadata("design:type", task_definition_registry_1.TaskDefinitionRegistry)
-    ], TaskService.prototype, "taskDefinitionRegistry", void 0);
-    __decorate([
-        inversify_1.inject(task_problem_matcher_registry_1.ProblemMatcherRegistry),
-        __metadata("design:type", task_problem_matcher_registry_1.ProblemMatcherRegistry)
-    ], TaskService.prototype, "problemMatcherRegistry", void 0);
-    __decorate([
-        inversify_1.inject(quick_pick_service_1.QuickPickService),
-        __metadata("design:type", Object)
-    ], TaskService.prototype, "quickPick", void 0);
-    __decorate([
-        inversify_1.inject(opener_service_1.OpenerService),
-        __metadata("design:type", Object)
-    ], TaskService.prototype, "openerService", void 0);
-    __decorate([
-        inversify_1.inject(task_name_resolver_1.TaskNameResolver),
-        __metadata("design:type", task_name_resolver_1.TaskNameResolver)
-    ], TaskService.prototype, "taskNameResolver", void 0);
-    __decorate([
-        inversify_1.inject(task_source_resolver_1.TaskSourceResolver),
-        __metadata("design:type", task_source_resolver_1.TaskSourceResolver)
-    ], TaskService.prototype, "taskSourceResolver", void 0);
-    __decorate([
-        inversify_1.inject(task_schema_updater_1.TaskSchemaUpdater),
-        __metadata("design:type", task_schema_updater_1.TaskSchemaUpdater)
-    ], TaskService.prototype, "taskSchemaUpdater", void 0);
-    __decorate([
-        inversify_1.inject(task_configuration_manager_1.TaskConfigurationManager),
-        __metadata("design:type", task_configuration_manager_1.TaskConfigurationManager)
-    ], TaskService.prototype, "taskConfigurationManager", void 0);
-    __decorate([
-        inversify_1.inject(common_1.CommandService),
-        __metadata("design:type", Object)
-    ], TaskService.prototype, "commands", void 0);
-    __decorate([
-        inversify_1.inject(label_provider_1.LabelProvider),
-        __metadata("design:type", label_provider_1.LabelProvider)
-    ], TaskService.prototype, "labelProvider", void 0);
-    __decorate([
-        inversify_1.inject(task_contribution_1.TaskProviderRegistry),
-        __metadata("design:type", task_contribution_1.TaskProviderRegistry)
-    ], TaskService.prototype, "taskProviderRegistry", void 0);
-    __decorate([
-        inversify_1.postConstruct(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], TaskService.prototype, "init", null);
-    TaskService = __decorate([
-        inversify_1.injectable()
-    ], TaskService);
-    return TaskService;
-}());
-exports.TaskService = TaskService;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/browser/task-source-resolver.js":
-/*!***********************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/task-source-resolver.js ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var task_definition_registry_1 = __webpack_require__(/*! ./task-definition-registry */ "../node_modules/@theia/task/lib/browser/task-definition-registry.js");
-var TaskSourceResolver = /** @class */ (function () {
-    function TaskSourceResolver() {
-    }
-    /**
-     * Returns task source to display.
-     */
-    TaskSourceResolver.prototype.resolve = function (task) {
-        var isDetectedTask = this.isDetectedTask(task);
-        var sourceFolderUri;
-        if (isDetectedTask) {
-            sourceFolderUri = task._scope;
-        }
-        else {
-            sourceFolderUri = task._source;
-        }
-        return sourceFolderUri;
-    };
-    TaskSourceResolver.prototype.isDetectedTask = function (task) {
-        return !!this.taskDefinitionRegistry.getDefinition(task);
-    };
-    __decorate([
-        inversify_1.inject(task_definition_registry_1.TaskDefinitionRegistry),
-        __metadata("design:type", task_definition_registry_1.TaskDefinitionRegistry)
-    ], TaskSourceResolver.prototype, "taskDefinitionRegistry", void 0);
-    TaskSourceResolver = __decorate([
-        inversify_1.injectable()
-    ], TaskSourceResolver);
-    return TaskSourceResolver;
-}());
-exports.TaskSourceResolver = TaskSourceResolver;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/browser/task-templates.js":
-/*!*****************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/browser/task-templates.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var dotnetBuild = {
-    id: 'dotnetCore',
-    label: '.NET Core',
-    sort: 'NET Core',
-    autoDetect: false,
-    description: 'Executes .NET Core build command',
-    content: [
-        '{',
-        '\t// See https://go.microsoft.com/fwlink/?LinkId=733558',
-        '\t// for the documentation about the tasks.json format',
-        '\t"version": "2.0.0",',
-        '\t"tasks": [',
-        '\t\t{',
-        '\t\t\t"label": "build",',
-        '\t\t\t"command": "dotnet",',
-        '\t\t\t"type": "shell",',
-        '\t\t\t"args": [',
-        '\t\t\t\t"build",',
-        '\t\t\t\t// Ask dotnet build to generate full paths for file names.',
-        '\t\t\t\t"/property:GenerateFullPaths=true",',
-        '\t\t\t\t// Do not generate summary otherwise it leads to duplicate errors in Problems panel',
-        '\t\t\t\t"/consoleloggerparameters:NoSummary"',
-        '\t\t\t],',
-        '\t\t\t"group": "build",',
-        '\t\t\t"presentation": {',
-        '\t\t\t\t"reveal": "silent"',
-        '\t\t\t},',
-        '\t\t\t"problemMatcher": "$msCompile"',
-        '\t\t}',
-        '\t]',
-        '}'
-    ].join('\n')
-};
-var msbuild = {
-    id: 'msbuild',
-    label: 'MSBuild',
-    autoDetect: false,
-    description: 'Executes the build target',
-    content: [
-        '{',
-        '\t// See https://go.microsoft.com/fwlink/?LinkId=733558',
-        '\t// for the documentation about the tasks.json format',
-        '\t"version": "2.0.0",',
-        '\t"tasks": [',
-        '\t\t{',
-        '\t\t\t"label": "build",',
-        '\t\t\t"type": "shell",',
-        '\t\t\t"command": "msbuild",',
-        '\t\t\t"args": [',
-        '\t\t\t\t// Ask msbuild to generate full paths for file names.',
-        '\t\t\t\t"/property:GenerateFullPaths=true",',
-        '\t\t\t\t"/t:build",',
-        '\t\t\t\t// Do not generate summary otherwise it leads to duplicate errors in Problems panel',
-        '\t\t\t\t"/consoleloggerparameters:NoSummary"',
-        '\t\t\t],',
-        '\t\t\t"group": "build",',
-        '\t\t\t"presentation": {',
-        '\t\t\t\t// Reveal the output only if unrecognized errors occur.',
-        '\t\t\t\t"reveal": "silent"',
-        '\t\t\t},',
-        '\t\t\t// Use the standard MS compiler pattern to detect errors, warnings and infos',
-        '\t\t\t"problemMatcher": "$msCompile"',
-        '\t\t}',
-        '\t]',
-        '}'
-    ].join('\n')
-};
-var maven = {
-    id: 'maven',
-    label: 'maven',
-    sort: 'MVN',
-    autoDetect: false,
-    description: 'Executes common maven commands',
-    content: [
-        '{',
-        '\t// See https://go.microsoft.com/fwlink/?LinkId=733558',
-        '\t// for the documentation about the tasks.json format',
-        '\t"version": "2.0.0",',
-        '\t"tasks": [',
-        '\t\t{',
-        '\t\t\t"label": "verify",',
-        '\t\t\t"type": "shell",',
-        '\t\t\t"command": "mvn -B verify",',
-        '\t\t\t"group": "build"',
-        '\t\t},',
-        '\t\t{',
-        '\t\t\t"label": "test",',
-        '\t\t\t"type": "shell",',
-        '\t\t\t"command": "mvn -B test",',
-        '\t\t\t"group": "test"',
-        '\t\t}',
-        '\t]',
-        '}'
-    ].join('\n')
-};
-var command = {
-    id: 'externalCommand',
-    label: 'Others',
-    autoDetect: false,
-    description: 'Example to run an arbitrary external command',
-    content: [
-        '{',
-        '\t// See https://go.microsoft.com/fwlink/?LinkId=733558',
-        '\t// for the documentation about the tasks.json format',
-        '\t"version": "2.0.0",',
-        '\t"tasks": [',
-        '\t\t{',
-        '\t\t\t"label": "echo",',
-        '\t\t\t"type": "shell",',
-        '\t\t\t"command": "echo Hello"',
-        '\t\t}',
-        '\t]',
-        '}'
-    ].join('\n')
-};
-var TaskTemplateSelector = /** @class */ (function () {
-    function TaskTemplateSelector() {
-    }
-    TaskTemplateSelector.prototype.selectTemplates = function () {
-        var templates = [
-            dotnetBuild, msbuild, maven
-        ].sort(function (a, b) {
-            return (a.sort || a.label).localeCompare(b.sort || b.label);
-        });
-        templates.push(command);
-        return templates.map(function (t) { return ({
-            label: t.label,
-            description: t.description,
-            value: t
-        }); });
-    };
-    TaskTemplateSelector = __decorate([
-        inversify_1.injectable()
-    ], TaskTemplateSelector);
-    return TaskTemplateSelector;
-}());
-exports.TaskTemplateSelector = TaskTemplateSelector;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/common/index.js":
-/*!*******************************************************!*\
-  !*** ../node_modules/@theia/task/lib/common/index.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2018 Red Hat, Inc. and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(/*! ./task-protocol */ "../node_modules/@theia/task/lib/common/task-protocol.js"));
-__export(__webpack_require__(/*! ./task-watcher */ "../node_modules/@theia/task/lib/common/task-watcher.js"));
-__export(__webpack_require__(/*! ./problem-matcher-protocol */ "../node_modules/@theia/task/lib/common/problem-matcher-protocol.js"));
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/common/problem-matcher-protocol.js":
-/*!**************************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/common/problem-matcher-protocol.js ***!
-  \**************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2019 Ericsson and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-Object.defineProperty(exports, "__esModule", { value: true });
-var ApplyToKind;
-(function (ApplyToKind) {
-    ApplyToKind[ApplyToKind["allDocuments"] = 0] = "allDocuments";
-    ApplyToKind[ApplyToKind["openDocuments"] = 1] = "openDocuments";
-    ApplyToKind[ApplyToKind["closedDocuments"] = 2] = "closedDocuments";
-})(ApplyToKind = exports.ApplyToKind || (exports.ApplyToKind = {}));
-(function (ApplyToKind) {
-    function fromString(value) {
-        if (value) {
-            value = value.toLowerCase();
-            if (value === 'alldocuments') {
-                return ApplyToKind.allDocuments;
-            }
-            else if (value === 'opendocuments') {
-                return ApplyToKind.openDocuments;
-            }
-            else if (value === 'closeddocuments') {
-                return ApplyToKind.closedDocuments;
-            }
+            finally { if (e_3) throw e_3.error; }
         }
         return undefined;
-    }
-    ApplyToKind.fromString = fromString;
-})(ApplyToKind = exports.ApplyToKind || (exports.ApplyToKind = {}));
-var FileLocationKind;
-(function (FileLocationKind) {
-    FileLocationKind[FileLocationKind["Auto"] = 0] = "Auto";
-    FileLocationKind[FileLocationKind["Relative"] = 1] = "Relative";
-    FileLocationKind[FileLocationKind["Absolute"] = 2] = "Absolute";
-})(FileLocationKind = exports.FileLocationKind || (exports.FileLocationKind = {}));
-(function (FileLocationKind) {
-    function fromString(value) {
-        value = value.toLowerCase();
-        if (value === 'absolute') {
-            return FileLocationKind.Absolute;
+    };
+    MonacoSemanticHighlightingService.prototype.decorate = function (languageId, uri, ranges) {
+        return __awaiter(this, void 0, void 0, function () {
+            var editor, key, newDecorations, oldDecorations, newState, decorationIds;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.editor(uri)];
+                    case 1:
+                        editor = _a.sent();
+                        if (!editor) {
+                            return [2 /*return*/];
+                        }
+                        key = uri.toString();
+                        if (!this.toDisposeOnEditorClose.has(key)) {
+                            this.toDisposeOnEditorClose.set(key, new disposable_1.DisposableCollection(editor.onDispose(function () { return _this.deleteDecorations(key, editor); })));
+                        }
+                        newDecorations = ranges.map(function (range) { return _this.toDecoration(languageId, range); });
+                        oldDecorations = this.oldDecorations(key, editor, ranges);
+                        newState = editor.deltaDecorations({
+                            newDecorations: newDecorations,
+                            oldDecorations: oldDecorations
+                        });
+                        decorationIds = this.decorationIds(key);
+                        newState.forEach(function (id) { return decorationIds.add(id); });
+                        this.decorations.set(key, decorationIds);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MonacoSemanticHighlightingService.prototype.dispose = function () {
+        Array.from(this.toDisposeOnEditorClose.values()).forEach(function (disposable) { return disposable.dispose(); });
+    };
+    MonacoSemanticHighlightingService.prototype.decorationIds = function (uri) {
+        return this.decorations.get(typeof uri === 'string' ? uri : uri.toString()) || new Set();
+    };
+    MonacoSemanticHighlightingService.prototype.editor = function (uri) {
+        return __awaiter(this, void 0, void 0, function () {
+            var editorWidget;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.editorManager.getByUri(typeof uri === 'string' ? new uri_1.default(uri) : uri)];
+                    case 1:
+                        editorWidget = _a.sent();
+                        if (!!editorWidget && editorWidget.editor instanceof monaco_editor_1.MonacoEditor) {
+                            return [2 /*return*/, editorWidget.editor];
+                        }
+                        return [2 /*return*/, undefined];
+                }
+            });
+        });
+    };
+    MonacoSemanticHighlightingService.prototype.model = function (uri) {
+        return __awaiter(this, void 0, void 0, function () {
+            var editor;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.editor(uri)];
+                    case 1:
+                        editor = _a.sent();
+                        if (editor) {
+                            return [2 /*return*/, editor.getControl().getModel() || undefined];
+                        }
+                        return [2 /*return*/, undefined];
+                }
+            });
+        });
+    };
+    /**
+     * Returns all the semantic highlighting decoration IDs that are affected by any of the range arguments.
+     */
+    MonacoSemanticHighlightingService.prototype.oldDecorations = function (uri, editor, ranges) {
+        var ids = this.decorationIds(uri);
+        var affectedLines = Array.from(new Set(ranges.map(function (r) { return [r.start.line, r.end.line]; }).reduce(function (prev, curr) { return prev.concat(curr); }, [])));
+        return affectedLines
+            .map(function (line) { return editor.getLinesDecorations(line, line); })
+            .reduce(function (prev, curr) { return prev.concat(curr); }, [])
+            .map(function (decoration) { return decoration.id; })
+            .filter(function (id) { return ids.has(id); });
+    };
+    MonacoSemanticHighlightingService.prototype.deleteDecorations = function (uri, editor) {
+        var ids = this.decorations.get(uri);
+        if (ids) {
+            var oldDecorations = Array.from(ids);
+            editor.deltaDecorations({
+                newDecorations: [],
+                oldDecorations: oldDecorations
+            });
+            this.decorations.delete(uri);
         }
-        else if (value === 'relative') {
-            return FileLocationKind.Relative;
+        var disposable = this.toDisposeOnEditorClose.get(uri);
+        if (disposable) {
+            disposable.dispose();
         }
-        else {
-            return undefined;
-        }
-    }
-    FileLocationKind.fromString = fromString;
-})(FileLocationKind = exports.FileLocationKind || (exports.FileLocationKind = {}));
-var WatchingMatcher;
-(function (WatchingMatcher) {
-    function fromWatchingMatcherContribution(value) {
-        if (!value) {
-            return undefined;
-        }
+        this.toDisposeOnEditorClose.delete(uri);
+    };
+    MonacoSemanticHighlightingService.prototype.toDecoration = function (languageId, range) {
+        var start = range.start, end = range.end;
+        var options = this.toOptions(languageId, range.scope);
         return {
-            activeOnStart: !!value.activeOnStart,
-            beginsPattern: typeof value.beginsPattern === 'string' ? { regexp: value.beginsPattern } : value.beginsPattern,
-            endsPattern: typeof value.endsPattern === 'string' ? { regexp: value.endsPattern } : value.endsPattern
+            range: semantic_highlighting_service_1.Range.create(start, end),
+            options: options
         };
-    }
-    WatchingMatcher.fromWatchingMatcherContribution = fromWatchingMatcherContribution;
-})(WatchingMatcher = exports.WatchingMatcher || (exports.WatchingMatcher = {}));
-var ProblemLocationKind;
-(function (ProblemLocationKind) {
-    ProblemLocationKind[ProblemLocationKind["File"] = 0] = "File";
-    ProblemLocationKind[ProblemLocationKind["Location"] = 1] = "Location";
-})(ProblemLocationKind = exports.ProblemLocationKind || (exports.ProblemLocationKind = {}));
-(function (ProblemLocationKind) {
-    function fromString(value) {
-        value = value.toLowerCase();
-        if (value === 'file') {
-            return ProblemLocationKind.File;
+    };
+    MonacoSemanticHighlightingService.prototype.toOptions = function (languageId, scope) {
+        if (scope !== undefined) {
+            var decorationTypes = this.decorationTypes.get(languageId);
+            if (decorationTypes) {
+                var decoration = decorationTypes.get(scope);
+                if (decoration) {
+                    return {
+                        inlineClassName: decoration.options.inlineClassName || undefined
+                    };
+                }
+            }
         }
-        else if (value === 'location') {
-            return ProblemLocationKind.Location;
-        }
-        else {
-            return undefined;
-        }
-    }
-    ProblemLocationKind.fromString = fromString;
-})(ProblemLocationKind = exports.ProblemLocationKind || (exports.ProblemLocationKind = {}));
-var ProblemMatcher;
-(function (ProblemMatcher) {
-    function isWatchModeWatcher(matcher) {
-        return !!matcher.watching;
-    }
-    ProblemMatcher.isWatchModeWatcher = isWatchModeWatcher;
-})(ProblemMatcher = exports.ProblemMatcher || (exports.ProblemMatcher = {}));
-var ProblemPattern;
-(function (ProblemPattern) {
-    function fromProblemPatternContribution(value) {
-        return {
-            name: value.name,
-            regexp: value.regexp,
-            kind: value.kind ? ProblemLocationKind.fromString(value.kind) : undefined,
-            file: value.file,
-            message: value.message,
-            location: value.location,
-            line: value.line,
-            character: value.column || value.character,
-            endLine: value.endLine,
-            endCharacter: value.endColumn || value.endCharacter,
-            code: value.code,
-            severity: value.severity,
-            loop: value.loop
-        };
-    }
-    ProblemPattern.fromProblemPatternContribution = fromProblemPatternContribution;
-})(ProblemPattern = exports.ProblemPattern || (exports.ProblemPattern = {}));
-var ProblemMatchData;
-(function (ProblemMatchData) {
-    function is(data) {
-        return 'marker' in data;
-    }
-    ProblemMatchData.is = is;
-})(ProblemMatchData = exports.ProblemMatchData || (exports.ProblemMatchData = {}));
+        return {};
+    };
+    MonacoSemanticHighlightingService.prototype.themeService = function () {
+        return monaco.services.StaticServices.standaloneThemeService.get();
+    };
+    MonacoSemanticHighlightingService.prototype.tokenTheme = function () {
+        return this.themeService().getTheme().tokenTheme;
+    };
+    __decorate([
+        inversify_1.inject(logger_1.ILogger),
+        __metadata("design:type", Object)
+    ], MonacoSemanticHighlightingService.prototype, "logger", void 0);
+    __decorate([
+        inversify_1.inject(editor_manager_1.EditorManager),
+        __metadata("design:type", editor_manager_1.EditorManager)
+    ], MonacoSemanticHighlightingService.prototype, "editorManager", void 0);
+    __decorate([
+        inversify_1.inject(monaco_editor_service_1.MonacoEditorService),
+        __metadata("design:type", monaco_editor_service_1.MonacoEditorService)
+    ], MonacoSemanticHighlightingService.prototype, "monacoEditorService", void 0);
+    MonacoSemanticHighlightingService = __decorate([
+        inversify_1.injectable()
+    ], MonacoSemanticHighlightingService);
+    return MonacoSemanticHighlightingService;
+}(semantic_highlighting_service_1.SemanticHighlightingService));
+exports.MonacoSemanticHighlightingService = MonacoSemanticHighlightingService;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/task/lib/common/task-protocol.js":
-/*!***************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/common/task-protocol.js ***!
-  \***************************************************************/
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-status-bar-contribution.js":
+/*!*********************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-status-bar-contribution.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /********************************************************************************
- * Copyright (C) 2017 Ericsson and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.taskPath = '/services/task';
-exports.TaskServer = Symbol('TaskServer');
-exports.TaskClient = Symbol('TaskClient');
-var DependsOrder;
-(function (DependsOrder) {
-    DependsOrder["Sequence"] = "sequence";
-    DependsOrder["Parallel"] = "parallel";
-})(DependsOrder = exports.DependsOrder || (exports.DependsOrder = {}));
-var RevealKind;
-(function (RevealKind) {
-    RevealKind[RevealKind["Always"] = 0] = "Always";
-    RevealKind[RevealKind["Silent"] = 1] = "Silent";
-    RevealKind[RevealKind["Never"] = 2] = "Never";
-})(RevealKind = exports.RevealKind || (exports.RevealKind = {}));
-var TaskOutputPresentation;
-(function (TaskOutputPresentation) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    function fromJson(task) {
-        if (task && task.presentation) {
-            var reveal = RevealKind.Always;
-            if (task.presentation.reveal === 'silent') {
-                reveal = RevealKind.Silent;
-            }
-            else if (task.presentation.reveal === 'never') {
-                reveal = RevealKind.Never;
-            }
-            return {
-                reveal: reveal,
-                focus: !!task.presentation.focus
-            };
-        }
-        return {
-            reveal: RevealKind.Always,
-            focus: false
-        };
-    }
-    TaskOutputPresentation.fromJson = fromJson;
-})(TaskOutputPresentation = exports.TaskOutputPresentation || (exports.TaskOutputPresentation = {}));
-var TaskCustomization;
-(function (TaskCustomization) {
-    function isBuildTask(task) {
-        return task.group === 'build' || !!task.group && typeof task.group === 'object' && task.group.kind === 'build';
-    }
-    TaskCustomization.isBuildTask = isBuildTask;
-    function isDefaultBuildTask(task) {
-        return !!task.group && typeof task.group === 'object' && task.group.kind === 'build' && task.group.isDefault;
-    }
-    TaskCustomization.isDefaultBuildTask = isDefaultBuildTask;
-    function isTestTask(task) {
-        return task.group === 'test' || !!task.group && typeof task.group === 'object' && task.group.kind === 'test';
-    }
-    TaskCustomization.isTestTask = isTestTask;
-    function isDefaultTestTask(task) {
-        return !!task.group && typeof task.group === 'object' && task.group.kind === 'test' && task.group.isDefault;
-    }
-    TaskCustomization.isDefaultTestTask = isDefaultTestTask;
-})(TaskCustomization = exports.TaskCustomization || (exports.TaskCustomization = {}));
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/task/lib/common/task-watcher.js":
-/*!**************************************************************!*\
-  !*** ../node_modules/@theia/task/lib/common/task-watcher.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 Ericsson and others.
+ * Copyright (C) 2018 Ericsson
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -6454,102 +6102,112 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var event_1 = __webpack_require__(/*! @theia/core/lib/common/event */ "../node_modules/@theia/core/lib/common/event.js");
-var TaskWatcher = /** @class */ (function () {
-    function TaskWatcher() {
-        this.onTaskCreatedEmitter = new event_1.Emitter();
-        this.onTaskExitEmitter = new event_1.Emitter();
-        this.onDidStartTaskProcessEmitter = new event_1.Emitter();
-        this.onDidEndTaskProcessEmitter = new event_1.Emitter();
-        this.onOutputProcessedEmitter = new event_1.Emitter();
-        this.onBackgroundTaskEndedEmitter = new event_1.Emitter();
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var core_1 = __webpack_require__(/*! @theia/core */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var browser_2 = __webpack_require__(/*! @theia/editor/lib/browser */ "../../../../node_modules/@theia/editor/lib/browser/index.js");
+var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
+var MonacoStatusBarContribution = /** @class */ (function () {
+    function MonacoStatusBarContribution(editorManager, statusBar) {
+        this.editorManager = editorManager;
+        this.statusBar = statusBar;
+        this.toDispose = new core_1.DisposableCollection();
     }
-    TaskWatcher.prototype.getTaskClient = function () {
-        var newTaskEmitter = this.onTaskCreatedEmitter;
-        var exitEmitter = this.onTaskExitEmitter;
-        var taskProcessStartedEmitter = this.onDidStartTaskProcessEmitter;
-        var taskProcessEndedEmitter = this.onDidEndTaskProcessEmitter;
-        var outputProcessedEmitter = this.onOutputProcessedEmitter;
-        var backgroundTaskEndedEmitter = this.onBackgroundTaskEndedEmitter;
-        return {
-            onTaskCreated: function (event) {
-                newTaskEmitter.fire(event);
-            },
-            onTaskExit: function (event) {
-                exitEmitter.fire(event);
-            },
-            onDidStartTaskProcess: function (event) {
-                taskProcessStartedEmitter.fire(event);
-            },
-            onDidEndTaskProcess: function (event) {
-                taskProcessEndedEmitter.fire(event);
-            },
-            onDidProcessTaskOutput: function (event) {
-                outputProcessedEmitter.fire(event);
-            },
-            onBackgroundTaskEnded: function (event) {
-                backgroundTaskEndedEmitter.fire(event);
-            }
-        };
+    MonacoStatusBarContribution.prototype.onStart = function (app) {
+        var _this = this;
+        this.updateStatusBar();
+        this.editorManager.onCurrentEditorChanged(function () { return _this.updateStatusBar(); });
     };
-    Object.defineProperty(TaskWatcher.prototype, "onTaskCreated", {
-        get: function () {
-            return this.onTaskCreatedEmitter.event;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TaskWatcher.prototype, "onTaskExit", {
-        get: function () {
-            return this.onTaskExitEmitter.event;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TaskWatcher.prototype, "onDidStartTaskProcess", {
-        get: function () {
-            return this.onDidStartTaskProcessEmitter.event;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TaskWatcher.prototype, "onDidEndTaskProcess", {
-        get: function () {
-            return this.onDidEndTaskProcessEmitter.event;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TaskWatcher.prototype, "onOutputProcessed", {
-        get: function () {
-            return this.onOutputProcessedEmitter.event;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TaskWatcher.prototype, "onBackgroundTaskEnded", {
-        get: function () {
-            return this.onBackgroundTaskEndedEmitter.event;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    TaskWatcher = __decorate([
-        inversify_1.injectable()
-    ], TaskWatcher);
-    return TaskWatcher;
+    MonacoStatusBarContribution.prototype.updateStatusBar = function () {
+        var _this = this;
+        var editor = this.editorManager.currentEditor;
+        var editorModel = this.getModel(editor);
+        if (editor && editorModel) {
+            this.setConfigTabSizeWidget();
+            this.setLineEndingWidget();
+            this.toDispose.dispose();
+            this.toDispose.push(editorModel.onDidChangeOptions(function () {
+                _this.setConfigTabSizeWidget();
+                _this.setLineEndingWidget();
+            }));
+            var previous_1 = editorModel.getEOL();
+            this.toDispose.push(editorModel.onDidChangeContent(function (e) {
+                if (previous_1 !== e.eol) {
+                    previous_1 = e.eol;
+                    _this.setLineEndingWidget();
+                }
+            }));
+        }
+        else {
+            this.removeConfigTabSizeWidget();
+            this.removeLineEndingWidget();
+        }
+    };
+    MonacoStatusBarContribution.prototype.setConfigTabSizeWidget = function () {
+        var editor = this.editorManager.currentEditor;
+        var editorModel = this.getModel(editor);
+        if (editor && editorModel) {
+            var modelOptions = editorModel.getOptions();
+            var tabSize = modelOptions.tabSize;
+            var useSpaceOrTab = modelOptions.insertSpaces ? 'Spaces' : 'Tab Size';
+            this.statusBar.setElement('editor-status-tabbing-config', {
+                text: useSpaceOrTab + ": " + tabSize,
+                alignment: browser_1.StatusBarAlignment.RIGHT,
+                priority: 10,
+                command: browser_2.EditorCommands.CONFIG_INDENTATION.id,
+                tooltip: 'Select Indentation'
+            });
+        }
+    };
+    MonacoStatusBarContribution.prototype.removeConfigTabSizeWidget = function () {
+        this.statusBar.removeElement('editor-status-tabbing-config');
+    };
+    MonacoStatusBarContribution.prototype.setLineEndingWidget = function () {
+        var editor = this.editorManager.currentEditor;
+        var editorModel = this.getModel(editor);
+        if (editor && editorModel) {
+            var eol = editorModel.getEOL();
+            var text = eol === '\n' ? 'LF' : 'CRLF';
+            this.statusBar.setElement('editor-status-eol', {
+                text: "" + text,
+                alignment: browser_1.StatusBarAlignment.RIGHT,
+                priority: 11,
+                command: browser_2.EditorCommands.CONFIG_EOL.id,
+                tooltip: 'Select End Of Line Sequence'
+            });
+        }
+    };
+    MonacoStatusBarContribution.prototype.removeLineEndingWidget = function () {
+        this.statusBar.removeElement('editor-status-eol');
+    };
+    MonacoStatusBarContribution.prototype.getModel = function (editor) {
+        var monacoEditor = monaco_editor_1.MonacoEditor.get(editor);
+        return monacoEditor && monacoEditor.getControl().getModel() || undefined;
+    };
+    MonacoStatusBarContribution = __decorate([
+        inversify_1.injectable(),
+        __param(0, inversify_1.inject(browser_2.EditorManager)),
+        __param(1, inversify_1.inject(browser_1.StatusBar)),
+        __metadata("design:paramtypes", [browser_2.EditorManager, Object])
+    ], MonacoStatusBarContribution);
+    return MonacoStatusBarContribution;
 }());
-exports.TaskWatcher = TaskWatcher;
+exports.MonacoStatusBarContribution = MonacoStatusBarContribution;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/variable-resolver/lib/browser/variable-input-schema.js":
-/*!*************************************************************************************!*\
-  !*** ../node_modules/@theia/variable-resolver/lib/browser/variable-input-schema.js ***!
-  \*************************************************************************************/
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-theming-service.js":
+/*!*************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-theming-service.js ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6570,173 +6228,1910 @@ exports.TaskWatcher = TaskWatcher;
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-/*
- * copied from
- * https://github.com/microsoft/vscode/blob/0a34756cae4fc67739e60c708b04637089f8bb0d/src/vs/workbench/services/configurationResolver/common/configurationResolverSchema.ts#L23
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var idDescription = "The input's id is used to associate an input with a variable of the form ${input:id}.";
-var typeDescription = 'The type of user input prompt to use.';
-var descriptionDescription = 'The description is shown when the user is prompted for input.';
-var defaultDescription = 'The default value for the input.';
-exports.inputsSchema = {
-    definitions: {
-        inputs: {
-            type: 'array',
-            description: 'User inputs. Used for defining user input prompts, such as free string input or a choice from several options.',
-            items: {
-                oneOf: [
-                    {
-                        type: 'object',
-                        required: ['id', 'type', 'description'],
-                        additionalProperties: false,
-                        properties: {
-                            id: {
-                                type: 'string',
-                                description: idDescription
-                            },
-                            type: {
-                                type: 'string',
-                                description: typeDescription,
-                                enum: ['promptString'],
-                                enumDescriptions: [
-                                    "The 'promptString' type opens an input box to ask the user for input."
-                                ]
-                            },
-                            description: {
-                                type: 'string',
-                                description: descriptionDescription
-                            },
-                            default: {
-                                type: 'string',
-                                description: defaultDescription
-                            },
-                        }
-                    },
-                    {
-                        type: 'object',
-                        required: ['id', 'type', 'description', 'options'],
-                        additionalProperties: false,
-                        properties: {
-                            id: {
-                                type: 'string',
-                                description: idDescription
-                            },
-                            type: {
-                                type: 'string',
-                                description: typeDescription,
-                                enum: ['pickString'],
-                                enumDescriptions: [
-                                    "The 'pickString' type shows a selection list.",
-                                ]
-                            },
-                            description: {
-                                type: 'string',
-                                description: descriptionDescription
-                            },
-                            default: {
-                                type: 'string',
-                                description: defaultDescription
-                            },
-                            options: {
-                                type: 'array',
-                                description: 'An array of strings that defines the options for a quick pick.',
-                                items: {
-                                    type: 'string'
-                                }
-                            }
-                        }
-                    },
-                    {
-                        type: 'object',
-                        required: ['id', 'type', 'command'],
-                        additionalProperties: false,
-                        properties: {
-                            id: {
-                                type: 'string',
-                                description: idDescription
-                            },
-                            type: {
-                                type: 'string',
-                                description: typeDescription,
-                                enum: ['command'],
-                                enumDescriptions: [
-                                    "The 'command' type executes a command.",
-                                ]
-                            },
-                            command: {
-                                type: 'string',
-                                description: 'The command to execute for this input variable.'
-                            },
-                            args: {
-                                type: 'object',
-                                description: 'Optional arguments passed to the command.'
-                            }
-                        }
-                    }
-                ]
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
             }
-        }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+/* eslint-disable @typescript-eslint/no-explicit-any */
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var jsoncparser = __webpack_require__(/*! jsonc-parser */ "../../../../node_modules/jsonc-parser/lib/esm/main.js");
+var plistparser = __webpack_require__(/*! fast-plist */ "../../../../node_modules/fast-plist/release/src/main.js");
+var theming_1 = __webpack_require__(/*! @theia/core/lib/browser/theming */ "../../../../node_modules/@theia/core/lib/browser/theming.js");
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var disposable_1 = __webpack_require__(/*! @theia/core/lib/common/disposable */ "../../../../node_modules/@theia/core/lib/common/disposable.js");
+var filesystem_1 = __webpack_require__(/*! @theia/filesystem/lib/common/filesystem */ "../../../../node_modules/@theia/filesystem/lib/common/filesystem.js");
+var monaco_theme_registry_1 = __webpack_require__(/*! ./textmate/monaco-theme-registry */ "../../../../node_modules/@theia/monaco/lib/browser/textmate/monaco-theme-registry.js");
+var monaco_indexed_db_1 = __webpack_require__(/*! ./monaco-indexed-db */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-indexed-db.js");
+var MonacoThemingService = /** @class */ (function () {
+    function MonacoThemingService() {
+    }
+    MonacoThemingService_1 = MonacoThemingService;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    MonacoThemingService.prototype.register = function (theme, pending) {
+        if (pending === void 0) { pending = {}; }
+        var toDispose = new disposable_1.DisposableCollection(disposable_1.Disposable.create(function () { }));
+        this.doRegister(theme, pending, toDispose);
+        return toDispose;
+    };
+    MonacoThemingService.prototype.doRegister = function (theme, pending, toDispose) {
+        return __awaiter(this, void 0, void 0, function () {
+            var includes, json, label, id, description, uiTheme, e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        includes = {};
+                        return [4 /*yield*/, this.loadTheme(theme.uri, includes, pending, toDispose)];
+                    case 1:
+                        json = _a.sent();
+                        if (toDispose.disposed) {
+                            return [2 /*return*/];
+                        }
+                        label = theme.label || new uri_1.default(theme.uri).path.base;
+                        id = theme.id, description = theme.description, uiTheme = theme.uiTheme;
+                        toDispose.push(MonacoThemingService_1.register({ id: id, label: label, description: description, uiTheme: uiTheme, json: json, includes: includes }));
+                        return [3 /*break*/, 3];
+                    case 2:
+                        e_1 = _a.sent();
+                        console.error('Failed to load theme from ' + theme.uri, e_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MonacoThemingService.prototype.loadTheme = function (uri, includes, pending, toDispose) {
+        return __awaiter(this, void 0, void 0, function () {
+            var content, themeUri, value, json, value, _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0: return [4 /*yield*/, this.fileSystem.resolveContent(uri)];
+                    case 1:
+                        content = (_c.sent()).content;
+                        if (toDispose.disposed) {
+                            return [2 /*return*/];
+                        }
+                        themeUri = new uri_1.default(uri);
+                        if (themeUri.path.ext !== '.json') {
+                            value = plistparser.parse(content);
+                            if (value && 'settings' in value && Array.isArray(value.settings)) {
+                                return [2 /*return*/, { tokenColors: value.settings }];
+                            }
+                            throw new Error("Problem parsing tmTheme file: " + uri + ". 'settings' is not array.");
+                        }
+                        json = jsoncparser.parse(content, undefined, { disallowComments: false });
+                        if (!('tokenColors' in json && typeof json.tokenColors === 'string')) return [3 /*break*/, 3];
+                        return [4 /*yield*/, this.doLoadTheme(themeUri, json.tokenColors, includes, pending, toDispose)];
+                    case 2:
+                        value = _c.sent();
+                        if (toDispose.disposed) {
+                            return [2 /*return*/];
+                        }
+                        json.tokenColors = value.tokenColors;
+                        _c.label = 3;
+                    case 3:
+                        if (!json.include) return [3 /*break*/, 5];
+                        _a = includes;
+                        _b = json.include;
+                        return [4 /*yield*/, this.doLoadTheme(themeUri, json.include, includes, pending, toDispose)];
+                    case 4:
+                        _a[_b] = _c.sent();
+                        if (toDispose.disposed) {
+                            return [2 /*return*/];
+                        }
+                        _c.label = 5;
+                    case 5: return [2 /*return*/, json];
+                }
+            });
+        });
+    };
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    MonacoThemingService.prototype.doLoadTheme = function (themeUri, referencedPath, includes, pending, toDispose) {
+        var referencedUri = themeUri.parent.resolve(referencedPath).toString();
+        if (!pending[referencedUri]) {
+            pending[referencedUri] = this.loadTheme(referencedUri, includes, pending, toDispose);
+        }
+        return pending[referencedUri];
+    };
+    /* eslint-enable @typescript-eslint/no-explicit-any */
+    MonacoThemingService.init = function () {
+        var _this = this;
+        this.updateBodyUiTheme();
+        theming_1.ThemeService.get().onThemeChange(function () { return _this.updateBodyUiTheme(); });
+        this.restore();
+    };
+    MonacoThemingService.register = function (theme) {
+        var uiTheme = theme.uiTheme || 'vs-dark';
+        var label = theme.label, description = theme.description, json = theme.json, includes = theme.includes;
+        var id = theme.id || label;
+        var cssSelector = MonacoThemingService_1.toCssSelector(id);
+        var data = monaco_theme_registry_1.MonacoThemeRegistry.SINGLETON.register(json, includes, cssSelector, uiTheme);
+        return MonacoThemingService_1.doRegister({ id: id, label: label, description: description, uiTheme: uiTheme, data: data });
+    };
+    MonacoThemingService.updateBodyUiTheme = function () {
+        this.toUpdateUiTheme.dispose();
+        var type = theming_1.ThemeService.get().getCurrentTheme().type;
+        var uiTheme = type === 'hc' ? 'hc-black' : type === 'light' ? 'vs' : 'vs-dark';
+        document.body.classList.add(uiTheme);
+        this.toUpdateUiTheme.push(disposable_1.Disposable.create(function () { return document.body.classList.remove(uiTheme); }));
+    };
+    MonacoThemingService.doRegister = function (state) {
+        var id = state.id, label = state.label, description = state.description, uiTheme = state.uiTheme, data = state.data;
+        var type = uiTheme === 'vs' ? 'light' : uiTheme === 'vs-dark' ? 'dark' : 'hc';
+        var builtInTheme = uiTheme === 'vs' ? theming_1.BuiltinThemeProvider.lightCss : theming_1.BuiltinThemeProvider.darkCss;
+        return new disposable_1.DisposableCollection(theming_1.ThemeService.get().register({
+            type: type,
+            id: id,
+            label: label,
+            description: description,
+            editorTheme: data.name,
+            activate: function () {
+                builtInTheme.use();
+            },
+            deactivate: function () {
+                builtInTheme.unuse();
+            }
+        }), monaco_indexed_db_1.putTheme(state));
+    };
+    MonacoThemingService.restore = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var themes, themes_1, themes_1_1, state, e_2;
+            var e_3, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, monaco_indexed_db_1.getThemes()];
+                    case 1:
+                        themes = _b.sent();
+                        try {
+                            for (themes_1 = __values(themes), themes_1_1 = themes_1.next(); !themes_1_1.done; themes_1_1 = themes_1.next()) {
+                                state = themes_1_1.value;
+                                monaco_theme_registry_1.MonacoThemeRegistry.SINGLETON.setTheme(state.data.name, state.data);
+                                MonacoThemingService_1.doRegister(state);
+                            }
+                        }
+                        catch (e_3_1) { e_3 = { error: e_3_1 }; }
+                        finally {
+                            try {
+                                if (themes_1_1 && !themes_1_1.done && (_a = themes_1.return)) _a.call(themes_1);
+                            }
+                            finally { if (e_3) throw e_3.error; }
+                        }
+                        return [3 /*break*/, 3];
+                    case 2:
+                        e_2 = _b.sent();
+                        console.error('Failed to restore monaco themes', e_2);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /* remove all characters that are not allowed in css */
+    MonacoThemingService.toCssSelector = function (str) {
+        str = str.replace(/[^\-a-zA-Z0-9]/g, '-');
+        if (str.charAt(0).match(/[0-9\-]/)) {
+            str = '-' + str;
+        }
+        return str;
+    };
+    var MonacoThemingService_1;
+    MonacoThemingService.toUpdateUiTheme = new disposable_1.DisposableCollection();
+    __decorate([
+        inversify_1.inject(filesystem_1.FileSystem),
+        __metadata("design:type", Object)
+    ], MonacoThemingService.prototype, "fileSystem", void 0);
+    MonacoThemingService = MonacoThemingService_1 = __decorate([
+        inversify_1.injectable()
+    ], MonacoThemingService);
+    return MonacoThemingService;
+}());
+exports.MonacoThemingService = MonacoThemingService;
 
 
 /***/ }),
 
-/***/ "../node_modules/p-debounce/index.js":
-/*!*******************************************!*\
-  !*** ../node_modules/p-debounce/index.js ***!
-  \*******************************************/
+/***/ "../../../../node_modules/@theia/monaco/lib/browser/monaco-workspace.js":
+/*!*******************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/lib/browser/monaco-workspace.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-
-const pDebounce = (fn, wait, options = {}) => {
-	if (!Number.isFinite(wait)) {
-		throw new TypeError('Expected `wait` to be a finite number');
-	}
-
-	let leadingValue;
-	let timer;
-	let resolveList = [];
-
-	return function (...arguments_) {
-		return new Promise(resolve => {
-			const runImmediately = options.leading && !timer;
-
-			clearTimeout(timer);
-
-			timer = setTimeout(() => {
-				timer = null;
-
-				const result = options.leading ? leadingValue : fn.apply(this, arguments_);
-
-				for (resolve of resolveList) {
-					resolve(result);
-				}
-
-				resolveList = [];
-			}, wait);
-
-			if (runImmediately) {
-				leadingValue = fn.apply(this, arguments_);
-				resolve(leadingValue);
-			} else {
-				resolveList.push(resolve);
-			}
-		});
-	};
+/********************************************************************************
+ * Copyright (C) 2018 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
 };
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var monaco_languageclient_1 = __webpack_require__(/*! monaco-languageclient */ "../../../../node_modules/monaco-languageclient/lib/index.js");
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var common_2 = __webpack_require__(/*! @theia/filesystem/lib/common */ "../../../../node_modules/@theia/filesystem/lib/common/index.js");
+var browser_1 = __webpack_require__(/*! @theia/filesystem/lib/browser */ "../../../../node_modules/@theia/filesystem/lib/browser/index.js");
+var browser_2 = __webpack_require__(/*! @theia/workspace/lib/browser */ "../../../../node_modules/@theia/workspace/lib/browser/index.js");
+var browser_3 = __webpack_require__(/*! @theia/editor/lib/browser */ "../../../../node_modules/@theia/editor/lib/browser/index.js");
+var lang = __webpack_require__(/*! @theia/languages/lib/browser */ "../../../../node_modules/@theia/languages/lib/browser/index.js");
+var browser_4 = __webpack_require__(/*! @theia/languages/lib/browser */ "../../../../node_modules/@theia/languages/lib/browser/index.js");
+var monaco_text_model_service_1 = __webpack_require__(/*! ./monaco-text-model-service */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-text-model-service.js");
+var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
+var monaco_configurations_1 = __webpack_require__(/*! ./monaco-configurations */ "../../../../node_modules/@theia/monaco/lib/browser/monaco-configurations.js");
+var browser_5 = __webpack_require__(/*! @theia/markers/lib/browser */ "../../../../node_modules/@theia/markers/lib/browser/index.js");
+var CreateResourceEdit;
+(function (CreateResourceEdit) {
+    function is(arg) {
+        return 'newUri' in arg
+            && typeof arg.newUri === 'string' // eslint-disable-line @typescript-eslint/no-explicit-any
+            && (!('oldUri' in arg) || typeof arg.oldUri === 'undefined'); // eslint-disable-line @typescript-eslint/no-explicit-any
+    }
+    CreateResourceEdit.is = is;
+})(CreateResourceEdit = exports.CreateResourceEdit || (exports.CreateResourceEdit = {}));
+var DeleteResourceEdit;
+(function (DeleteResourceEdit) {
+    function is(arg) {
+        return 'oldUri' in arg
+            && typeof arg.oldUri === 'string' // eslint-disable-line @typescript-eslint/no-explicit-any
+            && (!('newUri' in arg) || typeof arg.newUri === 'undefined'); // eslint-disable-line @typescript-eslint/no-explicit-any
+    }
+    DeleteResourceEdit.is = is;
+})(DeleteResourceEdit = exports.DeleteResourceEdit || (exports.DeleteResourceEdit = {}));
+var RenameResourceEdit;
+(function (RenameResourceEdit) {
+    function is(arg) {
+        return 'oldUri' in arg
+            && typeof arg.oldUri === 'string' // eslint-disable-line @typescript-eslint/no-explicit-any
+            && 'newUri' in arg
+            && typeof arg.newUri === 'string'; // eslint-disable-line @typescript-eslint/no-explicit-any
+    }
+    RenameResourceEdit.is = is;
+})(RenameResourceEdit = exports.RenameResourceEdit || (exports.RenameResourceEdit = {}));
+var TextEdits;
+(function (TextEdits) {
+    function is(arg) {
+        return 'uri' in arg
+            && typeof arg.uri === 'string'; // eslint-disable-line @typescript-eslint/no-explicit-any
+    }
+    TextEdits.is = is;
+    function isVersioned(arg) {
+        return is(arg) && arg.version !== undefined;
+    }
+    TextEdits.isVersioned = isVersioned;
+})(TextEdits = exports.TextEdits || (exports.TextEdits = {}));
+var EditsByEditor;
+(function (EditsByEditor) {
+    function is(arg) {
+        return TextEdits.is(arg)
+            && 'editor' in arg
+            && arg.editor instanceof monaco_editor_1.MonacoEditor; // eslint-disable-line @typescript-eslint/no-explicit-any
+    }
+    EditsByEditor.is = is;
+})(EditsByEditor = exports.EditsByEditor || (exports.EditsByEditor = {}));
+var MonacoWorkspace = /** @class */ (function () {
+    function MonacoWorkspace() {
+        var _this = this;
+        this.capabilities = {
+            applyEdit: true,
+            workspaceEdit: {
+                documentChanges: true
+            }
+        };
+        this.ready = new Promise(function (resolve) {
+            _this.resolveReady = resolve;
+        });
+        this.onDidOpenTextDocumentEmitter = new browser_4.Emitter();
+        this.onDidOpenTextDocument = this.onDidOpenTextDocumentEmitter.event;
+        this.onDidCloseTextDocumentEmitter = new browser_4.Emitter();
+        this.onDidCloseTextDocument = this.onDidCloseTextDocumentEmitter.event;
+        this.onDidChangeTextDocumentEmitter = new browser_4.Emitter();
+        this.onDidChangeTextDocument = this.onDidChangeTextDocumentEmitter.event;
+        this.onWillSaveTextDocumentEmitter = new browser_4.Emitter();
+        this.onWillSaveTextDocument = this.onWillSaveTextDocumentEmitter.event;
+        this.onDidSaveTextDocumentEmitter = new browser_4.Emitter();
+        this.onDidSaveTextDocument = this.onDidSaveTextDocumentEmitter.event;
+        this._rootUri = null;
+    }
+    MonacoWorkspace.prototype.init = function () {
+        var e_1, _a;
+        var _this = this;
+        this.workspaceService.roots.then(function (roots) {
+            var rootStat = roots[0];
+            if (rootStat) {
+                _this._rootUri = rootStat.uri;
+                _this.resolveReady();
+            }
+        });
+        try {
+            for (var _b = __values(this.textModelService.models), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var model = _c.value;
+                this.fireDidOpen(model);
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        this.textModelService.onDidCreate(function (model) { return _this.fireDidOpen(model); });
+    };
+    Object.defineProperty(MonacoWorkspace.prototype, "rootUri", {
+        get: function () {
+            return this._rootUri;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MonacoWorkspace.prototype, "rootPath", {
+        get: function () {
+            return this._rootUri && new uri_1.default(this._rootUri).path.toString();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MonacoWorkspace.prototype, "textDocuments", {
+        get: function () {
+            return this.textModelService.models;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MonacoWorkspace.prototype.getTextDocument = function (uri) {
+        return this.textModelService.get(uri);
+    };
+    MonacoWorkspace.prototype.fireDidOpen = function (model) {
+        var _this = this;
+        this.doFireDidOpen(model);
+        model.textEditorModel.onDidChangeLanguage(function (e) {
+            _this.problems.cleanAllMarkers(new uri_1.default(model.uri));
+            model.setLanguageId(e.oldLanguage);
+            try {
+                _this.fireDidClose(model);
+            }
+            finally {
+                model.setLanguageId(undefined);
+            }
+            _this.doFireDidOpen(model);
+        });
+        model.onDidChangeContent(function (event) { return _this.fireDidChangeContent(event); });
+        model.onDidSaveModel(function () { return _this.fireDidSave(model); });
+        model.onWillSaveModel(function (event) { return _this.fireWillSave(event); });
+        model.onDirtyChanged(function () { return _this.openEditorIfDirty(model); });
+        model.onDispose(function () { return _this.fireDidClose(model); });
+    };
+    MonacoWorkspace.prototype.doFireDidOpen = function (model) {
+        this.onDidOpenTextDocumentEmitter.fire(model);
+    };
+    MonacoWorkspace.prototype.fireDidClose = function (model) {
+        this.onDidCloseTextDocumentEmitter.fire(model);
+    };
+    MonacoWorkspace.prototype.fireDidChangeContent = function (event) {
+        var model = event.model, contentChanges = event.contentChanges;
+        this.onDidChangeTextDocumentEmitter.fire({
+            textDocument: model,
+            contentChanges: contentChanges
+        });
+    };
+    MonacoWorkspace.prototype.fireWillSave = function (event) {
+        var _this = this;
+        var reason = event.reason;
+        var timeout = new Promise(function (resolve) {
+            return setTimeout(function () { return resolve([]); }, 1000);
+        });
+        var resolveEdits = new Promise(function (resolve) { return __awaiter(_this, void 0, void 0, function () {
+            var thenables, allEdits, _a, _b, listenerEdits, e_2_1;
+            var e_2, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        thenables = [];
+                        allEdits = [];
+                        this.onWillSaveTextDocumentEmitter.fire({
+                            textDocument: event.model,
+                            reason: reason,
+                            waitUntil: function (thenable) {
+                                thenables.push(thenable);
+                            }
+                        });
+                        _d.label = 1;
+                    case 1:
+                        _d.trys.push([1, 6, 7, 8]);
+                        return [4 /*yield*/, Promise.all(thenables)];
+                    case 2:
+                        _a = __values.apply(void 0, [_d.sent()]), _b = _a.next();
+                        _d.label = 3;
+                    case 3:
+                        if (!!_b.done) return [3 /*break*/, 5];
+                        listenerEdits = _b.value;
+                        allEdits.push.apply(allEdits, __spread(listenerEdits));
+                        _d.label = 4;
+                    case 4:
+                        _b = _a.next();
+                        return [3 /*break*/, 3];
+                    case 5: return [3 /*break*/, 8];
+                    case 6:
+                        e_2_1 = _d.sent();
+                        e_2 = { error: e_2_1 };
+                        return [3 /*break*/, 8];
+                    case 7:
+                        try {
+                            if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
+                        }
+                        finally { if (e_2) throw e_2.error; }
+                        return [7 /*endfinally*/];
+                    case 8:
+                        resolve(allEdits);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        event.waitUntil(Promise.race([resolveEdits, timeout]).then(function (edits) {
+            return _this.p2m.asTextEdits(edits).map(function (edit) { return edit; });
+        }));
+    };
+    MonacoWorkspace.prototype.fireDidSave = function (model) {
+        this.onDidSaveTextDocumentEmitter.fire(model);
+    };
+    MonacoWorkspace.prototype.openEditorIfDirty = function (model) {
+        var _this = this;
+        if (model.dirty && monaco_editor_1.MonacoEditor.findByDocument(this.editorManager, model).length === 0) {
+            // create a new reference to make sure the model is not disposed before it is
+            // acquired by the editor, thus losing the changes that made it dirty.
+            this.textModelService.createModelReference(model.textEditorModel.uri).then(function (ref) {
+                _this.editorManager.open(new uri_1.default(model.uri), {
+                    mode: 'open',
+                }).then(function (editor) { return ref.dispose(); });
+            });
+        }
+    };
+    MonacoWorkspace.prototype.createFileSystemWatcher = function (globPattern, ignoreCreateEvents, ignoreChangeEvents, ignoreDeleteEvents) {
+        var disposables = new common_1.DisposableCollection();
+        var onDidCreateEmitter = new lang.Emitter();
+        disposables.push(onDidCreateEmitter);
+        var onDidChangeEmitter = new lang.Emitter();
+        disposables.push(onDidChangeEmitter);
+        var onDidDeleteEmitter = new lang.Emitter();
+        disposables.push(onDidDeleteEmitter);
+        disposables.push(this.fileSystemWatcher.onFilesChanged(function (changes) {
+            var e_3, _a;
+            try {
+                for (var changes_1 = __values(changes), changes_1_1 = changes_1.next(); !changes_1_1.done; changes_1_1 = changes_1.next()) {
+                    var change = changes_1_1.value;
+                    var fileChangeType = change.type;
+                    if (ignoreCreateEvents === true && fileChangeType === browser_1.FileChangeType.ADDED) {
+                        continue;
+                    }
+                    if (ignoreChangeEvents === true && fileChangeType === browser_1.FileChangeType.UPDATED) {
+                        continue;
+                    }
+                    if (ignoreDeleteEvents === true && fileChangeType === browser_1.FileChangeType.DELETED) {
+                        continue;
+                    }
+                    var uri = change.uri.toString();
+                    var codeUri = change.uri['codeUri'];
+                    if (monaco_languageclient_1.testGlob(globPattern, uri)) {
+                        if (fileChangeType === browser_1.FileChangeType.ADDED) {
+                            onDidCreateEmitter.fire(codeUri);
+                        }
+                        else if (fileChangeType === browser_1.FileChangeType.UPDATED) {
+                            onDidChangeEmitter.fire(codeUri);
+                        }
+                        else if (fileChangeType === browser_1.FileChangeType.DELETED) {
+                            onDidDeleteEmitter.fire(codeUri);
+                        }
+                        else {
+                            throw new Error("Unexpected file change type: " + fileChangeType + ".");
+                        }
+                    }
+                }
+            }
+            catch (e_3_1) { e_3 = { error: e_3_1 }; }
+            finally {
+                try {
+                    if (changes_1_1 && !changes_1_1.done && (_a = changes_1.return)) _a.call(changes_1);
+                }
+                finally { if (e_3) throw e_3.error; }
+            }
+        }));
+        return {
+            onDidCreate: onDidCreateEmitter.event,
+            onDidChange: onDidChangeEmitter.event,
+            onDidDelete: onDidDeleteEmitter.event,
+            dispose: function () { return disposables.dispose(); }
+        };
+    };
+    MonacoWorkspace.prototype.applyEdit = function (changes, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var workspaceEdit;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        workspaceEdit = this.p2m.asWorkspaceEdit(changes);
+                        return [4 /*yield*/, this.applyBulkEdit(workspaceEdit, options)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/, true];
+                }
+            });
+        });
+    };
+    MonacoWorkspace.prototype.applyBulkEdit = function (workspaceEdit, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var unresolvedEdits, edits, totalEdits, totalFiles, _loop_1, this_1, edits_1, edits_1_1, edit, e_4_1, ariaSummary, e_5, ariaSummary;
+            var e_4, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 10, , 11]);
+                        unresolvedEdits = this.groupEdits(workspaceEdit);
+                        return [4 /*yield*/, this.openEditors(unresolvedEdits, options)];
+                    case 1:
+                        edits = _b.sent();
+                        this.checkVersions(edits);
+                        totalEdits = 0;
+                        totalFiles = 0;
+                        _loop_1 = function (edit) {
+                            var editor, model, currentSelections_1, editOperations;
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        if (!TextEdits.is(edit)) return [3 /*break*/, 2];
+                                        return [4 /*yield*/, this_1.toTextEditWithEditor(edit)];
+                                    case 1:
+                                        editor = (_a.sent()).editor;
+                                        model = editor.document.textEditorModel;
+                                        currentSelections_1 = editor.getControl().getSelections() || [];
+                                        editOperations = edit.textEdits.map(function (e) { return ({
+                                            identifier: undefined,
+                                            forceMoveMarkers: false,
+                                            range: new monaco.Range(e.range.startLineNumber, e.range.startColumn, e.range.endLineNumber, e.range.endColumn),
+                                            text: e.text
+                                        }); });
+                                        // start a fresh operation
+                                        model.pushStackElement();
+                                        model.pushEditOperations(currentSelections_1, editOperations, function (_) { return currentSelections_1; });
+                                        // push again to make this change an undoable operation
+                                        model.pushStackElement();
+                                        totalFiles += 1;
+                                        totalEdits += editOperations.length;
+                                        return [3 /*break*/, 5];
+                                    case 2:
+                                        if (!(CreateResourceEdit.is(edit) || DeleteResourceEdit.is(edit) || RenameResourceEdit.is(edit))) return [3 /*break*/, 4];
+                                        return [4 /*yield*/, this_1.performResourceEdit(edit)];
+                                    case 3:
+                                        _a.sent();
+                                        return [3 /*break*/, 5];
+                                    case 4: throw new Error("Unexpected edit type: " + JSON.stringify(edit));
+                                    case 5: return [2 /*return*/];
+                                }
+                            });
+                        };
+                        this_1 = this;
+                        _b.label = 2;
+                    case 2:
+                        _b.trys.push([2, 7, 8, 9]);
+                        edits_1 = __values(edits), edits_1_1 = edits_1.next();
+                        _b.label = 3;
+                    case 3:
+                        if (!!edits_1_1.done) return [3 /*break*/, 6];
+                        edit = edits_1_1.value;
+                        return [5 /*yield**/, _loop_1(edit)];
+                    case 4:
+                        _b.sent();
+                        _b.label = 5;
+                    case 5:
+                        edits_1_1 = edits_1.next();
+                        return [3 /*break*/, 3];
+                    case 6: return [3 /*break*/, 9];
+                    case 7:
+                        e_4_1 = _b.sent();
+                        e_4 = { error: e_4_1 };
+                        return [3 /*break*/, 9];
+                    case 8:
+                        try {
+                            if (edits_1_1 && !edits_1_1.done && (_a = edits_1.return)) _a.call(edits_1);
+                        }
+                        finally { if (e_4) throw e_4.error; }
+                        return [7 /*endfinally*/];
+                    case 9:
+                        ariaSummary = this.getAriaSummary(totalEdits, totalFiles);
+                        return [2 /*return*/, { ariaSummary: ariaSummary }];
+                    case 10:
+                        e_5 = _b.sent();
+                        ariaSummary = "Error applying workspace edits: " + e_5.toString();
+                        console.error(ariaSummary);
+                        return [2 /*return*/, { ariaSummary: ariaSummary }];
+                    case 11: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MonacoWorkspace.prototype.openEditors = function (edits, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, edits_2, edits_2_1, edit, _a, _b, e_6_1;
+            var e_6, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        result = [];
+                        _d.label = 1;
+                    case 1:
+                        _d.trys.push([1, 7, 8, 9]);
+                        edits_2 = __values(edits), edits_2_1 = edits_2.next();
+                        _d.label = 2;
+                    case 2:
+                        if (!!edits_2_1.done) return [3 /*break*/, 6];
+                        edit = edits_2_1.value;
+                        if (!(TextEdits.is(edit) && TextEdits.isVersioned(edit) && !EditsByEditor.is(edit))) return [3 /*break*/, 4];
+                        _b = (_a = result).push;
+                        return [4 /*yield*/, this.toTextEditWithEditor(edit, options)];
+                    case 3:
+                        _b.apply(_a, [_d.sent()]);
+                        return [3 /*break*/, 5];
+                    case 4:
+                        result.push(edit);
+                        _d.label = 5;
+                    case 5:
+                        edits_2_1 = edits_2.next();
+                        return [3 /*break*/, 2];
+                    case 6: return [3 /*break*/, 9];
+                    case 7:
+                        e_6_1 = _d.sent();
+                        e_6 = { error: e_6_1 };
+                        return [3 /*break*/, 9];
+                    case 8:
+                        try {
+                            if (edits_2_1 && !edits_2_1.done && (_c = edits_2.return)) _c.call(edits_2);
+                        }
+                        finally { if (e_6) throw e_6.error; }
+                        return [7 /*endfinally*/];
+                    case 9: return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    MonacoWorkspace.prototype.toTextEditWithEditor = function (textEdit, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var editorWidget, editor, textEditWithEditor;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (EditsByEditor.is(textEdit)) {
+                            return [2 /*return*/, textEdit];
+                        }
+                        return [4 /*yield*/, this.editorManager.open(new uri_1.default(textEdit.uri), options)];
+                    case 1:
+                        editorWidget = _a.sent();
+                        editor = monaco_editor_1.MonacoEditor.get(editorWidget);
+                        if (!editor) {
+                            throw Error("Could not open editor. URI: " + textEdit.uri);
+                        }
+                        textEditWithEditor = __assign({}, textEdit, { editor: editor });
+                        return [2 /*return*/, textEditWithEditor];
+                }
+            });
+        });
+    };
+    MonacoWorkspace.prototype.checkVersions = function (edits) {
+        var e_7, _a;
+        try {
+            for (var _b = __values(edits.filter(TextEdits.is).filter(TextEdits.isVersioned)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var textEdit = _c.value;
+                if (!EditsByEditor.is(textEdit)) {
+                    throw Error("Could not open editor for URI: " + textEdit.uri + ".");
+                }
+                var model = textEdit.editor.document.textEditorModel;
+                if (textEdit.version !== undefined && model.getVersionId() !== textEdit.version) {
+                    throw Error("Version conflict in editor. URI: " + textEdit.uri);
+                }
+            }
+        }
+        catch (e_7_1) { e_7 = { error: e_7_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_7) throw e_7.error; }
+        }
+    };
+    MonacoWorkspace.prototype.getAriaSummary = function (totalEdits, totalFiles) {
+        if (totalEdits === 0) {
+            return 'Made no edits';
+        }
+        if (totalEdits > 1 && totalFiles > 1) {
+            return "Made " + totalEdits + " text edits in " + totalFiles + " files";
+        }
+        return "Made " + totalEdits + " text edits in one file";
+    };
+    MonacoWorkspace.prototype.groupEdits = function (workspaceEdit) {
+        var e_8, _a, _b;
+        var map = new Map();
+        var result = [];
+        try {
+            for (var _c = __values(workspaceEdit.edits), _d = _c.next(); !_d.done; _d = _c.next()) {
+                var edit = _d.value;
+                if (this.isResourceFileEdit(edit)) {
+                    var resourceTextEdit = edit;
+                    var uri = resourceTextEdit.resource.toString();
+                    var version = resourceTextEdit.modelVersionId;
+                    var editorEdit = map.get(uri);
+                    if (!editorEdit) {
+                        editorEdit = {
+                            uri: uri,
+                            version: version,
+                            textEdits: []
+                        };
+                        map.set(uri, editorEdit);
+                        result.push(editorEdit);
+                    }
+                    else {
+                        if (editorEdit.version !== version) {
+                            throw Error("Multiple versions for the same URI '" + uri + "' within the same workspace edit.");
+                        }
+                    }
+                    (_b = editorEdit.textEdits).push.apply(_b, __spread(resourceTextEdit.edits));
+                }
+                else {
+                    var options = edit.options;
+                    var oldUri = !!edit.oldUri ? edit.oldUri.toString() : undefined;
+                    var newUri = !!edit.newUri ? edit.newUri.toString() : undefined;
+                    result.push({
+                        oldUri: oldUri,
+                        newUri: newUri,
+                        options: options
+                    });
+                }
+            }
+        }
+        catch (e_8_1) { e_8 = { error: e_8_1 }; }
+        finally {
+            try {
+                if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
+            }
+            finally { if (e_8) throw e_8.error; }
+        }
+        return result;
+    };
+    MonacoWorkspace.prototype.performResourceEdit = function (edit) {
+        return __awaiter(this, void 0, void 0, function () {
+            var options, _a, _b, exists, stat;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        options = edit.options || {};
+                        if (!RenameResourceEdit.is(edit)) return [3 /*break*/, 4];
+                        _a = options.overwrite === undefined && options.ignoreIfExists;
+                        if (!_a) return [3 /*break*/, 2];
+                        return [4 /*yield*/, this.fileSystem.exists(edit.newUri)];
+                    case 1:
+                        _a = (_c.sent());
+                        _c.label = 2;
+                    case 2:
+                        // rename
+                        if (_a) {
+                            return [2 /*return*/]; // not overwriting, but ignoring, and the target file exists
+                        }
+                        return [4 /*yield*/, this.fileSystem.move(edit.oldUri, edit.newUri, { overwrite: options.overwrite })];
+                    case 3:
+                        _c.sent();
+                        return [3 /*break*/, 15];
+                    case 4:
+                        if (!DeleteResourceEdit.is(edit)) return [3 /*break*/, 9];
+                        _b = !options.ignoreIfNotExists;
+                        if (_b) return [3 /*break*/, 6];
+                        return [4 /*yield*/, this.fileSystem.exists(edit.oldUri)];
+                    case 5:
+                        _b = (_c.sent());
+                        _c.label = 6;
+                    case 6:
+                        if (!_b) return [3 /*break*/, 8];
+                        if (options.recursive === false) {
+                            console.warn("Ignored 'recursive': 'false' option. Deleting recursively.");
+                        }
+                        return [4 /*yield*/, this.fileSystem.delete(edit.oldUri)];
+                    case 7:
+                        _c.sent();
+                        _c.label = 8;
+                    case 8: return [3 /*break*/, 15];
+                    case 9:
+                        if (!CreateResourceEdit.is(edit)) return [3 /*break*/, 15];
+                        return [4 /*yield*/, this.fileSystem.exists(edit.newUri)];
+                    case 10:
+                        exists = _c.sent();
+                        // create file
+                        if (options.overwrite === undefined && options.ignoreIfExists && exists) {
+                            return [2 /*return*/]; // not overwriting, but ignoring, and the target file exists
+                        }
+                        if (!(exists && options.overwrite)) return [3 /*break*/, 13];
+                        return [4 /*yield*/, this.fileSystem.getFileStat(edit.newUri)];
+                    case 11:
+                        stat = _c.sent();
+                        if (!stat) {
+                            throw new Error("Cannot get file stat for the resource: " + edit.newUri + ".");
+                        }
+                        return [4 /*yield*/, this.fileSystem.setContent(stat, '')];
+                    case 12:
+                        _c.sent();
+                        return [3 /*break*/, 15];
+                    case 13: return [4 /*yield*/, this.fileSystem.createFile(edit.newUri)];
+                    case 14:
+                        _c.sent();
+                        _c.label = 15;
+                    case 15: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MonacoWorkspace.prototype.isResourceFileEdit = function (edit) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return 'resource' in edit && edit.resource instanceof monaco.Uri;
+    };
+    __decorate([
+        inversify_1.inject(common_2.FileSystem),
+        __metadata("design:type", Object)
+    ], MonacoWorkspace.prototype, "fileSystem", void 0);
+    __decorate([
+        inversify_1.inject(browser_2.WorkspaceService),
+        __metadata("design:type", browser_2.WorkspaceService)
+    ], MonacoWorkspace.prototype, "workspaceService", void 0);
+    __decorate([
+        inversify_1.inject(browser_1.FileSystemWatcher),
+        __metadata("design:type", browser_1.FileSystemWatcher)
+    ], MonacoWorkspace.prototype, "fileSystemWatcher", void 0);
+    __decorate([
+        inversify_1.inject(monaco_text_model_service_1.MonacoTextModelService),
+        __metadata("design:type", monaco_text_model_service_1.MonacoTextModelService)
+    ], MonacoWorkspace.prototype, "textModelService", void 0);
+    __decorate([
+        inversify_1.inject(monaco_languageclient_1.MonacoToProtocolConverter),
+        __metadata("design:type", monaco_languageclient_1.MonacoToProtocolConverter)
+    ], MonacoWorkspace.prototype, "m2p", void 0);
+    __decorate([
+        inversify_1.inject(monaco_languageclient_1.ProtocolToMonacoConverter),
+        __metadata("design:type", monaco_languageclient_1.ProtocolToMonacoConverter)
+    ], MonacoWorkspace.prototype, "p2m", void 0);
+    __decorate([
+        inversify_1.inject(browser_3.EditorManager),
+        __metadata("design:type", browser_3.EditorManager)
+    ], MonacoWorkspace.prototype, "editorManager", void 0);
+    __decorate([
+        inversify_1.inject(monaco_configurations_1.MonacoConfigurations),
+        __metadata("design:type", monaco_configurations_1.MonacoConfigurations)
+    ], MonacoWorkspace.prototype, "configurations", void 0);
+    __decorate([
+        inversify_1.inject(browser_5.ProblemManager),
+        __metadata("design:type", browser_5.ProblemManager)
+    ], MonacoWorkspace.prototype, "problems", void 0);
+    __decorate([
+        inversify_1.postConstruct(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], MonacoWorkspace.prototype, "init", null);
+    MonacoWorkspace = __decorate([
+        inversify_1.injectable()
+    ], MonacoWorkspace);
+    return MonacoWorkspace;
+}());
+exports.MonacoWorkspace = MonacoWorkspace;
 
-module.exports = pDebounce;
-// TODO: Remove this for the next major release
-module.exports.default = pDebounce;
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/src/browser/style/index.css":
+/*!***************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/src/browser/style/index.css ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../css-loader!./index.css */ "../../../../node_modules/css-loader/index.js!../../../../node_modules/@theia/monaco/src/browser/style/index.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../style-loader/lib/addStyles.js */ "../../../../node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/src/browser/style/symbol-icons.css":
+/*!**********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/src/browser/style/symbol-icons.css ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../css-loader!./symbol-icons.css */ "../../../../node_modules/css-loader/index.js!../../../../node_modules/@theia/monaco/src/browser/style/symbol-icons.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../style-loader/lib/addStyles.js */ "../../../../node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/monaco/src/browser/style/symbol-sprite.svg":
+/*!***********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/monaco/src/browser/style/symbol-sprite.svg ***!
+  \***********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "cf2aabacdc2b3a5768b03545cb1d8330.svg";
+
+/***/ }),
+
+/***/ "../../../../node_modules/css-loader/index.js!../../../../node_modules/@theia/monaco/src/browser/style/index.css":
+/*!****************************************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/css-loader!/home/nicholas/Documents/node_modules/@theia/monaco/src/browser/style/index.css ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../css-loader/lib/css-base.js */ "../../../../node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".monaco-editor {\n    padding-bottom: 5.6px;\n    font-family: var(--theia-ui-font-family);\n    font-size: inherit !important;\n}\n\n/*\n * set z-index to 0, so tabs are not above overlay widgets\n */\n.p-TabBar.theia-app-centers {\n    z-index: 0;\n    display: flex;\n}\n\n/*\n * we need to disable the background image when using font awesome icons and file-icons\n */\n.monaco-quick-open-widget .quick-open-tree .quick-open-entry .quick-open-entry-icon.fa,\n.monaco-quick-open-widget .quick-open-tree .quick-open-entry .quick-open-entry-icon.file-icon {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    background-image: none;\n    margin-right: 0px;\n}\n\n.monaco-quick-open-widget {\n    background-color: var(--theia-quickInput-background) !important;\n    color: var(--theia-quickInput-foreground) !important;\n}\n\n.quick-open-entry .quick-open-row .monaco-icon-label .monaco-icon-label-description-container .label-description {\n    font-size: calc(var(--theia-ui-font-size0) * 0.95);\n}\n\n.monaco-editor .zone-widget {\n\tposition: absolute;\n\tz-index: 10;\n}\n\n.monaco-editor .zone-widget .zone-widget-container {\n\tborder-top-style: solid;\n\tborder-bottom-style: solid;\n\tborder-top-width: 0;\n\tborder-bottom-width: 0;\n    border-top-color: var(--theia-peekView-border);\n    border-bottom-color: var(--theia-peekView-border);\n\tposition: relative;\n}\n\n.monaco-editor .parameter-hints-widget > .wrapper {\n    overflow: hidden;\n}\n\n/* List highlight, see https://github.com/microsoft/vscode/blob/ff5f581425da6230b6f9216ecf19abf6c9d285a6/src/vs/workbench/browser/style.ts#L50 */\n.monaco-tree .monaco-tree-row .monaco-highlighted-label .highlight,\n.monaco-list .monaco-list-row .monaco-highlighted-label .highlight {\n\tcolor: var(--theia-list-highlightForeground) !important; \n}\n\n/* Scrollbars, see https://github.com/microsoft/vscode/blob/ff5f581425da6230b6f9216ecf19abf6c9d285a6/src/vs/workbench/browser/style.ts#L65 */\n.monaco-scrollable-element > .shadow.top {\n    box-shadow: var(--theia-scrollbar-shadow) 0 6px 6px -6px inset !important;\n}\n\n.monaco-scrollable-element > .shadow.left {\n    box-shadow: var(--theia-scrollbar-shadow) 6px 0 6px -6px inset !important;\n}\n\n.monaco-scrollable-element > .shadow.top.left {\n    box-shadow: var(--theia-scrollbar-shadow) 6px 6px 6px -6px inset !important;\n}\n\n.monaco-scrollable-element > .scrollbar > .slider {\n    background: var(--theia-scrollbarSlider-background) !important;\n}\n\n.monaco-scrollable-element > .scrollbar > .slider:hover {\n    background: var(--theia-scrollbarSlider-hoverBackground) !important;\n}\n\n.monaco-scrollable-element > .scrollbar > .slider.active {\n    background: var(--theia-scrollbarSlider-activeBackground) !important;\n}\n\n.monaco-scrollable-element > .scrollbar.vertical > .slider {\n    width: var(--theia-scrollbar-width) !important;\n}\n\n.monaco-scrollable-element > .scrollbar.horizontal > .slider {\n    height: var(--theia-scrollbar-width) !important;\n}\n\n.monaco-editor .reference-zone-widget .ref-tree .referenceMatch .highlight {\n    color: unset !important;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/css-loader/index.js!../../../../node_modules/@theia/monaco/src/browser/style/symbol-icons.css":
+/*!***********************************************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/css-loader!/home/nicholas/Documents/node_modules/@theia/monaco/src/browser/style/symbol-icons.css ***!
+  \***********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var escape = __webpack_require__(/*! ../../../../../css-loader/lib/url/escape.js */ "../../../../node_modules/css-loader/lib/url/escape.js");
+exports = module.exports = __webpack_require__(/*! ../../../../../css-loader/lib/css-base.js */ "../../../../node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".symbol-icon {\n    background-image: url(" + escape(__webpack_require__(/*! ./symbol-sprite.svg */ "../../../../node_modules/@theia/monaco/src/browser/style/symbol-sprite.svg")) + ");\n    background-repeat: no-repeat;\n    overflow: hidden;\n    min-width: var(--theia-icon-size);\n    height: var(--theia-icon-size);\n    margin-right: 4px;\n}\n\n.symbol-icon-center {\n    align-self: center;\n}\n\n.symbol-icon.method {\n    background-position: 0 calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.constant,\n.symbol-icon.variable {\n    background-position: -22px calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.class {\n    background-position: -42px calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.interface {\n    background-position: -62px calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.module {\n    background-position: -82px calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.property {\n    background-position: -102px calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.enum {\n    background-position: -122px calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.rule {\n    background-position: -242px calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.file {\n    background-position: -262px calc(var(--theia-sprite-y-offset));\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/fast-plist/release/src/main.js":
+/*!****************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/fast-plist/release/src/main.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*---------------------------------------------------------
+ * Copyright (C) Microsoft Corporation. All rights reserved.
+ *--------------------------------------------------------*/
+
+function parseWithLocation(content, filename, locationKeyName) {
+    return _parse(content, filename, locationKeyName);
+}
+exports.parseWithLocation = parseWithLocation;
+/**
+ * A very fast plist parser
+ */
+function parse(content) {
+    return _parse(content, null, null);
+}
+exports.parse = parse;
+function _parse(content, filename, locationKeyName) {
+    var len = content.length;
+    var pos = 0;
+    var line = 1;
+    var char = 0;
+    // Skip UTF8 BOM
+    if (len > 0 && content.charCodeAt(0) === 65279 /* BOM */) {
+        pos = 1;
+    }
+    function advancePosBy(by) {
+        if (locationKeyName === null) {
+            pos = pos + by;
+        }
+        else {
+            while (by > 0) {
+                var chCode = content.charCodeAt(pos);
+                if (chCode === 10 /* LINE_FEED */) {
+                    pos++;
+                    line++;
+                    char = 0;
+                }
+                else {
+                    pos++;
+                    char++;
+                }
+                by--;
+            }
+        }
+    }
+    function advancePosTo(to) {
+        if (locationKeyName === null) {
+            pos = to;
+        }
+        else {
+            advancePosBy(to - pos);
+        }
+    }
+    function skipWhitespace() {
+        while (pos < len) {
+            var chCode = content.charCodeAt(pos);
+            if (chCode !== 32 /* SPACE */ && chCode !== 9 /* TAB */ && chCode !== 13 /* CARRIAGE_RETURN */ && chCode !== 10 /* LINE_FEED */) {
+                break;
+            }
+            advancePosBy(1);
+        }
+    }
+    function advanceIfStartsWith(str) {
+        if (content.substr(pos, str.length) === str) {
+            advancePosBy(str.length);
+            return true;
+        }
+        return false;
+    }
+    function advanceUntil(str) {
+        var nextOccurence = content.indexOf(str, pos);
+        if (nextOccurence !== -1) {
+            advancePosTo(nextOccurence + str.length);
+        }
+        else {
+            // EOF
+            advancePosTo(len);
+        }
+    }
+    function captureUntil(str) {
+        var nextOccurence = content.indexOf(str, pos);
+        if (nextOccurence !== -1) {
+            var r = content.substring(pos, nextOccurence);
+            advancePosTo(nextOccurence + str.length);
+            return r;
+        }
+        else {
+            // EOF
+            var r = content.substr(pos);
+            advancePosTo(len);
+            return r;
+        }
+    }
+    var state = 0 /* ROOT_STATE */;
+    var cur = null;
+    var stateStack = [];
+    var objStack = [];
+    var curKey = null;
+    function pushState(newState, newCur) {
+        stateStack.push(state);
+        objStack.push(cur);
+        state = newState;
+        cur = newCur;
+    }
+    function popState() {
+        state = stateStack.pop();
+        cur = objStack.pop();
+    }
+    function fail(msg) {
+        throw new Error('Near offset ' + pos + ': ' + msg + ' ~~~' + content.substr(pos, 50) + '~~~');
+    }
+    var dictState = {
+        enterDict: function () {
+            if (curKey === null) {
+                fail('missing <key>');
+            }
+            var newDict = {};
+            if (locationKeyName !== null) {
+                newDict[locationKeyName] = {
+                    filename: filename,
+                    line: line,
+                    char: char
+                };
+            }
+            cur[curKey] = newDict;
+            curKey = null;
+            pushState(1 /* DICT_STATE */, newDict);
+        },
+        enterArray: function () {
+            if (curKey === null) {
+                fail('missing <key>');
+            }
+            var newArr = [];
+            cur[curKey] = newArr;
+            curKey = null;
+            pushState(2 /* ARR_STATE */, newArr);
+        }
+    };
+    var arrState = {
+        enterDict: function () {
+            var newDict = {};
+            if (locationKeyName !== null) {
+                newDict[locationKeyName] = {
+                    filename: filename,
+                    line: line,
+                    char: char
+                };
+            }
+            cur.push(newDict);
+            pushState(1 /* DICT_STATE */, newDict);
+        },
+        enterArray: function () {
+            var newArr = [];
+            cur.push(newArr);
+            pushState(2 /* ARR_STATE */, newArr);
+        }
+    };
+    function enterDict() {
+        if (state === 1 /* DICT_STATE */) {
+            dictState.enterDict();
+        }
+        else if (state === 2 /* ARR_STATE */) {
+            arrState.enterDict();
+        }
+        else {
+            cur = {};
+            if (locationKeyName !== null) {
+                cur[locationKeyName] = {
+                    filename: filename,
+                    line: line,
+                    char: char
+                };
+            }
+            pushState(1 /* DICT_STATE */, cur);
+        }
+    }
+    function leaveDict() {
+        if (state === 1 /* DICT_STATE */) {
+            popState();
+        }
+        else if (state === 2 /* ARR_STATE */) {
+            fail('unexpected </dict>');
+        }
+        else {
+            fail('unexpected </dict>');
+        }
+    }
+    function enterArray() {
+        if (state === 1 /* DICT_STATE */) {
+            dictState.enterArray();
+        }
+        else if (state === 2 /* ARR_STATE */) {
+            arrState.enterArray();
+        }
+        else {
+            cur = [];
+            pushState(2 /* ARR_STATE */, cur);
+        }
+    }
+    function leaveArray() {
+        if (state === 1 /* DICT_STATE */) {
+            fail('unexpected </array>');
+        }
+        else if (state === 2 /* ARR_STATE */) {
+            popState();
+        }
+        else {
+            fail('unexpected </array>');
+        }
+    }
+    function acceptKey(val) {
+        if (state === 1 /* DICT_STATE */) {
+            if (curKey !== null) {
+                fail('too many <key>');
+            }
+            curKey = val;
+        }
+        else if (state === 2 /* ARR_STATE */) {
+            fail('unexpected <key>');
+        }
+        else {
+            fail('unexpected <key>');
+        }
+    }
+    function acceptString(val) {
+        if (state === 1 /* DICT_STATE */) {
+            if (curKey === null) {
+                fail('missing <key>');
+            }
+            cur[curKey] = val;
+            curKey = null;
+        }
+        else if (state === 2 /* ARR_STATE */) {
+            cur.push(val);
+        }
+        else {
+            cur = val;
+        }
+    }
+    function acceptReal(val) {
+        if (isNaN(val)) {
+            fail('cannot parse float');
+        }
+        if (state === 1 /* DICT_STATE */) {
+            if (curKey === null) {
+                fail('missing <key>');
+            }
+            cur[curKey] = val;
+            curKey = null;
+        }
+        else if (state === 2 /* ARR_STATE */) {
+            cur.push(val);
+        }
+        else {
+            cur = val;
+        }
+    }
+    function acceptInteger(val) {
+        if (isNaN(val)) {
+            fail('cannot parse integer');
+        }
+        if (state === 1 /* DICT_STATE */) {
+            if (curKey === null) {
+                fail('missing <key>');
+            }
+            cur[curKey] = val;
+            curKey = null;
+        }
+        else if (state === 2 /* ARR_STATE */) {
+            cur.push(val);
+        }
+        else {
+            cur = val;
+        }
+    }
+    function acceptDate(val) {
+        if (state === 1 /* DICT_STATE */) {
+            if (curKey === null) {
+                fail('missing <key>');
+            }
+            cur[curKey] = val;
+            curKey = null;
+        }
+        else if (state === 2 /* ARR_STATE */) {
+            cur.push(val);
+        }
+        else {
+            cur = val;
+        }
+    }
+    function acceptData(val) {
+        if (state === 1 /* DICT_STATE */) {
+            if (curKey === null) {
+                fail('missing <key>');
+            }
+            cur[curKey] = val;
+            curKey = null;
+        }
+        else if (state === 2 /* ARR_STATE */) {
+            cur.push(val);
+        }
+        else {
+            cur = val;
+        }
+    }
+    function acceptBool(val) {
+        if (state === 1 /* DICT_STATE */) {
+            if (curKey === null) {
+                fail('missing <key>');
+            }
+            cur[curKey] = val;
+            curKey = null;
+        }
+        else if (state === 2 /* ARR_STATE */) {
+            cur.push(val);
+        }
+        else {
+            cur = val;
+        }
+    }
+    function escapeVal(str) {
+        return str.replace(/&#([0-9]+);/g, function (_, m0) {
+            return String.fromCodePoint(parseInt(m0, 10));
+        }).replace(/&#x([0-9a-f]+);/g, function (_, m0) {
+            return String.fromCodePoint(parseInt(m0, 16));
+        }).replace(/&amp;|&lt;|&gt;|&quot;|&apos;/g, function (_) {
+            switch (_) {
+                case '&amp;': return '&';
+                case '&lt;': return '<';
+                case '&gt;': return '>';
+                case '&quot;': return '"';
+                case '&apos;': return '\'';
+            }
+            return _;
+        });
+    }
+    function parseOpenTag() {
+        var r = captureUntil('>');
+        var isClosed = false;
+        if (r.charCodeAt(r.length - 1) === 47 /* SLASH */) {
+            isClosed = true;
+            r = r.substring(0, r.length - 1);
+        }
+        return {
+            name: r.trim(),
+            isClosed: isClosed
+        };
+    }
+    function parseTagValue(tag) {
+        if (tag.isClosed) {
+            return '';
+        }
+        var val = captureUntil('</');
+        advanceUntil('>');
+        return escapeVal(val);
+    }
+    while (pos < len) {
+        skipWhitespace();
+        if (pos >= len) {
+            break;
+        }
+        var chCode = content.charCodeAt(pos);
+        advancePosBy(1);
+        if (chCode !== 60 /* LESS_THAN */) {
+            fail('expected <');
+        }
+        if (pos >= len) {
+            fail('unexpected end of input');
+        }
+        var peekChCode = content.charCodeAt(pos);
+        if (peekChCode === 63 /* QUESTION_MARK */) {
+            advancePosBy(1);
+            advanceUntil('?>');
+            continue;
+        }
+        if (peekChCode === 33 /* EXCLAMATION_MARK */) {
+            advancePosBy(1);
+            if (advanceIfStartsWith('--')) {
+                advanceUntil('-->');
+                continue;
+            }
+            advanceUntil('>');
+            continue;
+        }
+        if (peekChCode === 47 /* SLASH */) {
+            advancePosBy(1);
+            skipWhitespace();
+            if (advanceIfStartsWith('plist')) {
+                advanceUntil('>');
+                continue;
+            }
+            if (advanceIfStartsWith('dict')) {
+                advanceUntil('>');
+                leaveDict();
+                continue;
+            }
+            if (advanceIfStartsWith('array')) {
+                advanceUntil('>');
+                leaveArray();
+                continue;
+            }
+            fail('unexpected closed tag');
+        }
+        var tag = parseOpenTag();
+        switch (tag.name) {
+            case 'dict':
+                enterDict();
+                if (tag.isClosed) {
+                    leaveDict();
+                }
+                continue;
+            case 'array':
+                enterArray();
+                if (tag.isClosed) {
+                    leaveArray();
+                }
+                continue;
+            case 'key':
+                acceptKey(parseTagValue(tag));
+                continue;
+            case 'string':
+                acceptString(parseTagValue(tag));
+                continue;
+            case 'real':
+                acceptReal(parseFloat(parseTagValue(tag)));
+                continue;
+            case 'integer':
+                acceptInteger(parseInt(parseTagValue(tag), 10));
+                continue;
+            case 'date':
+                acceptDate(new Date(parseTagValue(tag)));
+                continue;
+            case 'data':
+                acceptData(parseTagValue(tag));
+                continue;
+            case 'true':
+                parseTagValue(tag);
+                acceptBool(true);
+                continue;
+            case 'false':
+                parseTagValue(tag);
+                acceptBool(false);
+                continue;
+        }
+        if (/^plist/.test(tag.name)) {
+            continue;
+        }
+        fail('unexpected opened tag ' + tag.name);
+    }
+    return cur;
+}
+//# sourceMappingURL=main.js.map
+
+/***/ }),
+
+/***/ "../../../../node_modules/idb/build/esm/chunk.js":
+/*!********************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/idb/build/esm/chunk.js ***!
+  \********************************************************************/
+/*! exports provided: a, b, c, d, e */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return wrap; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return addTraps; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return instanceOfAny; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return reverseTransformCache; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return unwrap; });
+const instanceOfAny = (object, constructors) => constructors.some(c => object instanceof c);
+
+let idbProxyableTypes;
+let cursorAdvanceMethods;
+// This is a function to prevent it throwing up in node environments.
+function getIdbProxyableTypes() {
+    return (idbProxyableTypes ||
+        (idbProxyableTypes = [
+            IDBDatabase,
+            IDBObjectStore,
+            IDBIndex,
+            IDBCursor,
+            IDBTransaction,
+        ]));
+}
+// This is a function to prevent it throwing up in node environments.
+function getCursorAdvanceMethods() {
+    return (cursorAdvanceMethods ||
+        (cursorAdvanceMethods = [
+            IDBCursor.prototype.advance,
+            IDBCursor.prototype.continue,
+            IDBCursor.prototype.continuePrimaryKey,
+        ]));
+}
+const cursorRequestMap = new WeakMap();
+const transactionDoneMap = new WeakMap();
+const transactionStoreNamesMap = new WeakMap();
+const transformCache = new WeakMap();
+const reverseTransformCache = new WeakMap();
+function promisifyRequest(request) {
+    const promise = new Promise((resolve, reject) => {
+        const unlisten = () => {
+            request.removeEventListener('success', success);
+            request.removeEventListener('error', error);
+        };
+        const success = () => {
+            resolve(wrap(request.result));
+            unlisten();
+        };
+        const error = () => {
+            reject(request.error);
+            unlisten();
+        };
+        request.addEventListener('success', success);
+        request.addEventListener('error', error);
+    });
+    promise
+        .then(value => {
+        // Since cursoring reuses the IDBRequest (*sigh*), we cache it for later retrieval
+        // (see wrapFunction).
+        if (value instanceof IDBCursor) {
+            cursorRequestMap.set(value, request);
+        }
+        // Catching to avoid "Uncaught Promise exceptions"
+    })
+        .catch(() => { });
+    // This mapping exists in reverseTransformCache but doesn't doesn't exist in transformCache. This
+    // is because we create many promises from a single IDBRequest.
+    reverseTransformCache.set(promise, request);
+    return promise;
+}
+function cacheDonePromiseForTransaction(tx) {
+    // Early bail if we've already created a done promise for this transaction.
+    if (transactionDoneMap.has(tx))
+        return;
+    const done = new Promise((resolve, reject) => {
+        const unlisten = () => {
+            tx.removeEventListener('complete', complete);
+            tx.removeEventListener('error', error);
+            tx.removeEventListener('abort', error);
+        };
+        const complete = () => {
+            resolve();
+            unlisten();
+        };
+        const error = () => {
+            reject(tx.error);
+            unlisten();
+        };
+        tx.addEventListener('complete', complete);
+        tx.addEventListener('error', error);
+        tx.addEventListener('abort', error);
+    });
+    // Cache it for later retrieval.
+    transactionDoneMap.set(tx, done);
+}
+let idbProxyTraps = {
+    get(target, prop, receiver) {
+        if (target instanceof IDBTransaction) {
+            // Special handling for transaction.done.
+            if (prop === 'done')
+                return transactionDoneMap.get(target);
+            // Polyfill for objectStoreNames because of Edge.
+            if (prop === 'objectStoreNames') {
+                return target.objectStoreNames || transactionStoreNamesMap.get(target);
+            }
+            // Make tx.store return the only store in the transaction, or undefined if there are many.
+            if (prop === 'store') {
+                return receiver.objectStoreNames[1]
+                    ? undefined
+                    : receiver.objectStore(receiver.objectStoreNames[0]);
+            }
+        }
+        // Else transform whatever we get back.
+        return wrap(target[prop]);
+    },
+    has(target, prop) {
+        if (target instanceof IDBTransaction &&
+            (prop === 'done' || prop === 'store')) {
+            return true;
+        }
+        return prop in target;
+    },
+};
+function addTraps(callback) {
+    idbProxyTraps = callback(idbProxyTraps);
+}
+function wrapFunction(func) {
+    // Due to expected object equality (which is enforced by the caching in `wrap`), we
+    // only create one new func per func.
+    // Edge doesn't support objectStoreNames (booo), so we polyfill it here.
+    if (func === IDBDatabase.prototype.transaction &&
+        !('objectStoreNames' in IDBTransaction.prototype)) {
+        return function (storeNames, ...args) {
+            const tx = func.call(unwrap(this), storeNames, ...args);
+            transactionStoreNamesMap.set(tx, storeNames.sort ? storeNames.sort() : [storeNames]);
+            return wrap(tx);
+        };
+    }
+    // Cursor methods are special, as the behaviour is a little more different to standard IDB. In
+    // IDB, you advance the cursor and wait for a new 'success' on the IDBRequest that gave you the
+    // cursor. It's kinda like a promise that can resolve with many values. That doesn't make sense
+    // with real promises, so each advance methods returns a new promise for the cursor object, or
+    // undefined if the end of the cursor has been reached.
+    if (getCursorAdvanceMethods().includes(func)) {
+        return function (...args) {
+            // Calling the original function with the proxy as 'this' causes ILLEGAL INVOCATION, so we use
+            // the original object.
+            func.apply(unwrap(this), args);
+            return wrap(cursorRequestMap.get(this));
+        };
+    }
+    return function (...args) {
+        // Calling the original function with the proxy as 'this' causes ILLEGAL INVOCATION, so we use
+        // the original object.
+        return wrap(func.apply(unwrap(this), args));
+    };
+}
+function transformCachableValue(value) {
+    if (typeof value === 'function')
+        return wrapFunction(value);
+    // This doesn't return, it just creates a 'done' promise for the transaction,
+    // which is later returned for transaction.done (see idbObjectHandler).
+    if (value instanceof IDBTransaction)
+        cacheDonePromiseForTransaction(value);
+    if (instanceOfAny(value, getIdbProxyableTypes()))
+        return new Proxy(value, idbProxyTraps);
+    // Return the same value back if we're not going to transform it.
+    return value;
+}
+function wrap(value) {
+    // We sometimes generate multiple promises from a single IDBRequest (eg when cursoring), because
+    // IDB is weird and a single IDBRequest can yield many responses, so these can't be cached.
+    if (value instanceof IDBRequest)
+        return promisifyRequest(value);
+    // If we've already transformed this value before, reuse the transformed value.
+    // This is faster, but it also provides object equality.
+    if (transformCache.has(value))
+        return transformCache.get(value);
+    const newValue = transformCachableValue(value);
+    // Not all types are transformed.
+    // These may be primitive types, so they can't be WeakMap keys.
+    if (newValue !== value) {
+        transformCache.set(value, newValue);
+        reverseTransformCache.set(newValue, value);
+    }
+    return newValue;
+}
+const unwrap = (value) => reverseTransformCache.get(value);
+
+
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/idb/build/esm/index.js":
+/*!********************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/idb/build/esm/index.js ***!
+  \********************************************************************/
+/*! exports provided: unwrap, wrap, openDB, deleteDB */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openDB", function() { return openDB; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteDB", function() { return deleteDB; });
+/* harmony import */ var _chunk_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk.js */ "../../../../node_modules/idb/build/esm/chunk.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unwrap", function() { return _chunk_js__WEBPACK_IMPORTED_MODULE_0__["e"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "wrap", function() { return _chunk_js__WEBPACK_IMPORTED_MODULE_0__["a"]; });
+
+
+
+
+/**
+ * Open a database.
+ *
+ * @param name Name of the database.
+ * @param version Schema version.
+ * @param callbacks Additional callbacks.
+ */
+function openDB(name, version, { blocked, upgrade, blocking } = {}) {
+    const request = indexedDB.open(name, version);
+    const openPromise = Object(_chunk_js__WEBPACK_IMPORTED_MODULE_0__["a"])(request);
+    if (upgrade) {
+        request.addEventListener('upgradeneeded', event => {
+            upgrade(Object(_chunk_js__WEBPACK_IMPORTED_MODULE_0__["a"])(request.result), event.oldVersion, event.newVersion, Object(_chunk_js__WEBPACK_IMPORTED_MODULE_0__["a"])(request.transaction));
+        });
+    }
+    if (blocked)
+        request.addEventListener('blocked', () => blocked());
+    if (blocking) {
+        openPromise.then(db => db.addEventListener('versionchange', blocking)).catch(() => { });
+    }
+    return openPromise;
+}
+/**
+ * Delete a database.
+ *
+ * @param name Name of the database.
+ */
+function deleteDB(name, { blocked } = {}) {
+    const request = indexedDB.deleteDatabase(name);
+    if (blocked)
+        request.addEventListener('blocked', () => blocked());
+    return Object(_chunk_js__WEBPACK_IMPORTED_MODULE_0__["a"])(request).then(() => undefined);
+}
+
+const readMethods = ['get', 'getKey', 'getAll', 'getAllKeys', 'count'];
+const writeMethods = ['put', 'add', 'delete', 'clear'];
+const cachedMethods = new Map();
+function getMethod(target, prop) {
+    if (!(target instanceof IDBDatabase &&
+        !(prop in target) &&
+        typeof prop === 'string')) {
+        return;
+    }
+    if (cachedMethods.get(prop))
+        return cachedMethods.get(prop);
+    const targetFuncName = prop.replace(/FromIndex$/, '');
+    const useIndex = prop !== targetFuncName;
+    const isWrite = writeMethods.includes(targetFuncName);
+    if (
+    // Bail if the target doesn't exist on the target. Eg, getAll isn't in Edge.
+    !(targetFuncName in (useIndex ? IDBIndex : IDBObjectStore).prototype) ||
+        !(isWrite || readMethods.includes(targetFuncName))) {
+        return;
+    }
+    const method = async function (storeName, ...args) {
+        // isWrite ? 'readwrite' : undefined gzipps better, but fails in Edge :(
+        const tx = this.transaction(storeName, isWrite ? 'readwrite' : 'readonly');
+        let target = tx.store;
+        if (useIndex)
+            target = target.index(args.shift());
+        const returnVal = target[targetFuncName](...args);
+        if (isWrite)
+            await tx.done;
+        return returnVal;
+    };
+    cachedMethods.set(prop, method);
+    return method;
+}
+Object(_chunk_js__WEBPACK_IMPORTED_MODULE_0__["b"])(oldTraps => ({
+    get: (target, prop, receiver) => getMethod(target, prop) || oldTraps.get(target, prop, receiver),
+    has: (target, prop) => !!getMethod(target, prop) || oldTraps.has(target, prop),
+}));
+
+
 
 
 /***/ })

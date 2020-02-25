@@ -1,574 +1,307 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[33],{
 
-/***/ "../node_modules/@theia/console/lib/browser/console-content-widget.js":
-/*!****************************************************************************!*\
-  !*** ../node_modules/@theia/console/lib/browser/console-content-widget.js ***!
-  \****************************************************************************/
+/***/ "../../../../node_modules/moment/locale sync recursive ^\\.\\/.*$":
+/*!*************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/moment/locale sync ^\.\/.*$ ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2018 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
+var map = {
+	"./af": "../../../../node_modules/moment/locale/af.js",
+	"./af.js": "../../../../node_modules/moment/locale/af.js",
+	"./ar": "../../../../node_modules/moment/locale/ar.js",
+	"./ar-dz": "../../../../node_modules/moment/locale/ar-dz.js",
+	"./ar-dz.js": "../../../../node_modules/moment/locale/ar-dz.js",
+	"./ar-kw": "../../../../node_modules/moment/locale/ar-kw.js",
+	"./ar-kw.js": "../../../../node_modules/moment/locale/ar-kw.js",
+	"./ar-ly": "../../../../node_modules/moment/locale/ar-ly.js",
+	"./ar-ly.js": "../../../../node_modules/moment/locale/ar-ly.js",
+	"./ar-ma": "../../../../node_modules/moment/locale/ar-ma.js",
+	"./ar-ma.js": "../../../../node_modules/moment/locale/ar-ma.js",
+	"./ar-sa": "../../../../node_modules/moment/locale/ar-sa.js",
+	"./ar-sa.js": "../../../../node_modules/moment/locale/ar-sa.js",
+	"./ar-tn": "../../../../node_modules/moment/locale/ar-tn.js",
+	"./ar-tn.js": "../../../../node_modules/moment/locale/ar-tn.js",
+	"./ar.js": "../../../../node_modules/moment/locale/ar.js",
+	"./az": "../../../../node_modules/moment/locale/az.js",
+	"./az.js": "../../../../node_modules/moment/locale/az.js",
+	"./be": "../../../../node_modules/moment/locale/be.js",
+	"./be.js": "../../../../node_modules/moment/locale/be.js",
+	"./bg": "../../../../node_modules/moment/locale/bg.js",
+	"./bg.js": "../../../../node_modules/moment/locale/bg.js",
+	"./bm": "../../../../node_modules/moment/locale/bm.js",
+	"./bm.js": "../../../../node_modules/moment/locale/bm.js",
+	"./bn": "../../../../node_modules/moment/locale/bn.js",
+	"./bn.js": "../../../../node_modules/moment/locale/bn.js",
+	"./bo": "../../../../node_modules/moment/locale/bo.js",
+	"./bo.js": "../../../../node_modules/moment/locale/bo.js",
+	"./br": "../../../../node_modules/moment/locale/br.js",
+	"./br.js": "../../../../node_modules/moment/locale/br.js",
+	"./bs": "../../../../node_modules/moment/locale/bs.js",
+	"./bs.js": "../../../../node_modules/moment/locale/bs.js",
+	"./ca": "../../../../node_modules/moment/locale/ca.js",
+	"./ca.js": "../../../../node_modules/moment/locale/ca.js",
+	"./cs": "../../../../node_modules/moment/locale/cs.js",
+	"./cs.js": "../../../../node_modules/moment/locale/cs.js",
+	"./cv": "../../../../node_modules/moment/locale/cv.js",
+	"./cv.js": "../../../../node_modules/moment/locale/cv.js",
+	"./cy": "../../../../node_modules/moment/locale/cy.js",
+	"./cy.js": "../../../../node_modules/moment/locale/cy.js",
+	"./da": "../../../../node_modules/moment/locale/da.js",
+	"./da.js": "../../../../node_modules/moment/locale/da.js",
+	"./de": "../../../../node_modules/moment/locale/de.js",
+	"./de-at": "../../../../node_modules/moment/locale/de-at.js",
+	"./de-at.js": "../../../../node_modules/moment/locale/de-at.js",
+	"./de-ch": "../../../../node_modules/moment/locale/de-ch.js",
+	"./de-ch.js": "../../../../node_modules/moment/locale/de-ch.js",
+	"./de.js": "../../../../node_modules/moment/locale/de.js",
+	"./dv": "../../../../node_modules/moment/locale/dv.js",
+	"./dv.js": "../../../../node_modules/moment/locale/dv.js",
+	"./el": "../../../../node_modules/moment/locale/el.js",
+	"./el.js": "../../../../node_modules/moment/locale/el.js",
+	"./en-SG": "../../../../node_modules/moment/locale/en-SG.js",
+	"./en-SG.js": "../../../../node_modules/moment/locale/en-SG.js",
+	"./en-au": "../../../../node_modules/moment/locale/en-au.js",
+	"./en-au.js": "../../../../node_modules/moment/locale/en-au.js",
+	"./en-ca": "../../../../node_modules/moment/locale/en-ca.js",
+	"./en-ca.js": "../../../../node_modules/moment/locale/en-ca.js",
+	"./en-gb": "../../../../node_modules/moment/locale/en-gb.js",
+	"./en-gb.js": "../../../../node_modules/moment/locale/en-gb.js",
+	"./en-ie": "../../../../node_modules/moment/locale/en-ie.js",
+	"./en-ie.js": "../../../../node_modules/moment/locale/en-ie.js",
+	"./en-il": "../../../../node_modules/moment/locale/en-il.js",
+	"./en-il.js": "../../../../node_modules/moment/locale/en-il.js",
+	"./en-nz": "../../../../node_modules/moment/locale/en-nz.js",
+	"./en-nz.js": "../../../../node_modules/moment/locale/en-nz.js",
+	"./eo": "../../../../node_modules/moment/locale/eo.js",
+	"./eo.js": "../../../../node_modules/moment/locale/eo.js",
+	"./es": "../../../../node_modules/moment/locale/es.js",
+	"./es-do": "../../../../node_modules/moment/locale/es-do.js",
+	"./es-do.js": "../../../../node_modules/moment/locale/es-do.js",
+	"./es-us": "../../../../node_modules/moment/locale/es-us.js",
+	"./es-us.js": "../../../../node_modules/moment/locale/es-us.js",
+	"./es.js": "../../../../node_modules/moment/locale/es.js",
+	"./et": "../../../../node_modules/moment/locale/et.js",
+	"./et.js": "../../../../node_modules/moment/locale/et.js",
+	"./eu": "../../../../node_modules/moment/locale/eu.js",
+	"./eu.js": "../../../../node_modules/moment/locale/eu.js",
+	"./fa": "../../../../node_modules/moment/locale/fa.js",
+	"./fa.js": "../../../../node_modules/moment/locale/fa.js",
+	"./fi": "../../../../node_modules/moment/locale/fi.js",
+	"./fi.js": "../../../../node_modules/moment/locale/fi.js",
+	"./fo": "../../../../node_modules/moment/locale/fo.js",
+	"./fo.js": "../../../../node_modules/moment/locale/fo.js",
+	"./fr": "../../../../node_modules/moment/locale/fr.js",
+	"./fr-ca": "../../../../node_modules/moment/locale/fr-ca.js",
+	"./fr-ca.js": "../../../../node_modules/moment/locale/fr-ca.js",
+	"./fr-ch": "../../../../node_modules/moment/locale/fr-ch.js",
+	"./fr-ch.js": "../../../../node_modules/moment/locale/fr-ch.js",
+	"./fr.js": "../../../../node_modules/moment/locale/fr.js",
+	"./fy": "../../../../node_modules/moment/locale/fy.js",
+	"./fy.js": "../../../../node_modules/moment/locale/fy.js",
+	"./ga": "../../../../node_modules/moment/locale/ga.js",
+	"./ga.js": "../../../../node_modules/moment/locale/ga.js",
+	"./gd": "../../../../node_modules/moment/locale/gd.js",
+	"./gd.js": "../../../../node_modules/moment/locale/gd.js",
+	"./gl": "../../../../node_modules/moment/locale/gl.js",
+	"./gl.js": "../../../../node_modules/moment/locale/gl.js",
+	"./gom-latn": "../../../../node_modules/moment/locale/gom-latn.js",
+	"./gom-latn.js": "../../../../node_modules/moment/locale/gom-latn.js",
+	"./gu": "../../../../node_modules/moment/locale/gu.js",
+	"./gu.js": "../../../../node_modules/moment/locale/gu.js",
+	"./he": "../../../../node_modules/moment/locale/he.js",
+	"./he.js": "../../../../node_modules/moment/locale/he.js",
+	"./hi": "../../../../node_modules/moment/locale/hi.js",
+	"./hi.js": "../../../../node_modules/moment/locale/hi.js",
+	"./hr": "../../../../node_modules/moment/locale/hr.js",
+	"./hr.js": "../../../../node_modules/moment/locale/hr.js",
+	"./hu": "../../../../node_modules/moment/locale/hu.js",
+	"./hu.js": "../../../../node_modules/moment/locale/hu.js",
+	"./hy-am": "../../../../node_modules/moment/locale/hy-am.js",
+	"./hy-am.js": "../../../../node_modules/moment/locale/hy-am.js",
+	"./id": "../../../../node_modules/moment/locale/id.js",
+	"./id.js": "../../../../node_modules/moment/locale/id.js",
+	"./is": "../../../../node_modules/moment/locale/is.js",
+	"./is.js": "../../../../node_modules/moment/locale/is.js",
+	"./it": "../../../../node_modules/moment/locale/it.js",
+	"./it-ch": "../../../../node_modules/moment/locale/it-ch.js",
+	"./it-ch.js": "../../../../node_modules/moment/locale/it-ch.js",
+	"./it.js": "../../../../node_modules/moment/locale/it.js",
+	"./ja": "../../../../node_modules/moment/locale/ja.js",
+	"./ja.js": "../../../../node_modules/moment/locale/ja.js",
+	"./jv": "../../../../node_modules/moment/locale/jv.js",
+	"./jv.js": "../../../../node_modules/moment/locale/jv.js",
+	"./ka": "../../../../node_modules/moment/locale/ka.js",
+	"./ka.js": "../../../../node_modules/moment/locale/ka.js",
+	"./kk": "../../../../node_modules/moment/locale/kk.js",
+	"./kk.js": "../../../../node_modules/moment/locale/kk.js",
+	"./km": "../../../../node_modules/moment/locale/km.js",
+	"./km.js": "../../../../node_modules/moment/locale/km.js",
+	"./kn": "../../../../node_modules/moment/locale/kn.js",
+	"./kn.js": "../../../../node_modules/moment/locale/kn.js",
+	"./ko": "../../../../node_modules/moment/locale/ko.js",
+	"./ko.js": "../../../../node_modules/moment/locale/ko.js",
+	"./ku": "../../../../node_modules/moment/locale/ku.js",
+	"./ku.js": "../../../../node_modules/moment/locale/ku.js",
+	"./ky": "../../../../node_modules/moment/locale/ky.js",
+	"./ky.js": "../../../../node_modules/moment/locale/ky.js",
+	"./lb": "../../../../node_modules/moment/locale/lb.js",
+	"./lb.js": "../../../../node_modules/moment/locale/lb.js",
+	"./lo": "../../../../node_modules/moment/locale/lo.js",
+	"./lo.js": "../../../../node_modules/moment/locale/lo.js",
+	"./lt": "../../../../node_modules/moment/locale/lt.js",
+	"./lt.js": "../../../../node_modules/moment/locale/lt.js",
+	"./lv": "../../../../node_modules/moment/locale/lv.js",
+	"./lv.js": "../../../../node_modules/moment/locale/lv.js",
+	"./me": "../../../../node_modules/moment/locale/me.js",
+	"./me.js": "../../../../node_modules/moment/locale/me.js",
+	"./mi": "../../../../node_modules/moment/locale/mi.js",
+	"./mi.js": "../../../../node_modules/moment/locale/mi.js",
+	"./mk": "../../../../node_modules/moment/locale/mk.js",
+	"./mk.js": "../../../../node_modules/moment/locale/mk.js",
+	"./ml": "../../../../node_modules/moment/locale/ml.js",
+	"./ml.js": "../../../../node_modules/moment/locale/ml.js",
+	"./mn": "../../../../node_modules/moment/locale/mn.js",
+	"./mn.js": "../../../../node_modules/moment/locale/mn.js",
+	"./mr": "../../../../node_modules/moment/locale/mr.js",
+	"./mr.js": "../../../../node_modules/moment/locale/mr.js",
+	"./ms": "../../../../node_modules/moment/locale/ms.js",
+	"./ms-my": "../../../../node_modules/moment/locale/ms-my.js",
+	"./ms-my.js": "../../../../node_modules/moment/locale/ms-my.js",
+	"./ms.js": "../../../../node_modules/moment/locale/ms.js",
+	"./mt": "../../../../node_modules/moment/locale/mt.js",
+	"./mt.js": "../../../../node_modules/moment/locale/mt.js",
+	"./my": "../../../../node_modules/moment/locale/my.js",
+	"./my.js": "../../../../node_modules/moment/locale/my.js",
+	"./nb": "../../../../node_modules/moment/locale/nb.js",
+	"./nb.js": "../../../../node_modules/moment/locale/nb.js",
+	"./ne": "../../../../node_modules/moment/locale/ne.js",
+	"./ne.js": "../../../../node_modules/moment/locale/ne.js",
+	"./nl": "../../../../node_modules/moment/locale/nl.js",
+	"./nl-be": "../../../../node_modules/moment/locale/nl-be.js",
+	"./nl-be.js": "../../../../node_modules/moment/locale/nl-be.js",
+	"./nl.js": "../../../../node_modules/moment/locale/nl.js",
+	"./nn": "../../../../node_modules/moment/locale/nn.js",
+	"./nn.js": "../../../../node_modules/moment/locale/nn.js",
+	"./pa-in": "../../../../node_modules/moment/locale/pa-in.js",
+	"./pa-in.js": "../../../../node_modules/moment/locale/pa-in.js",
+	"./pl": "../../../../node_modules/moment/locale/pl.js",
+	"./pl.js": "../../../../node_modules/moment/locale/pl.js",
+	"./pt": "../../../../node_modules/moment/locale/pt.js",
+	"./pt-br": "../../../../node_modules/moment/locale/pt-br.js",
+	"./pt-br.js": "../../../../node_modules/moment/locale/pt-br.js",
+	"./pt.js": "../../../../node_modules/moment/locale/pt.js",
+	"./ro": "../../../../node_modules/moment/locale/ro.js",
+	"./ro.js": "../../../../node_modules/moment/locale/ro.js",
+	"./ru": "../../../../node_modules/moment/locale/ru.js",
+	"./ru.js": "../../../../node_modules/moment/locale/ru.js",
+	"./sd": "../../../../node_modules/moment/locale/sd.js",
+	"./sd.js": "../../../../node_modules/moment/locale/sd.js",
+	"./se": "../../../../node_modules/moment/locale/se.js",
+	"./se.js": "../../../../node_modules/moment/locale/se.js",
+	"./si": "../../../../node_modules/moment/locale/si.js",
+	"./si.js": "../../../../node_modules/moment/locale/si.js",
+	"./sk": "../../../../node_modules/moment/locale/sk.js",
+	"./sk.js": "../../../../node_modules/moment/locale/sk.js",
+	"./sl": "../../../../node_modules/moment/locale/sl.js",
+	"./sl.js": "../../../../node_modules/moment/locale/sl.js",
+	"./sq": "../../../../node_modules/moment/locale/sq.js",
+	"./sq.js": "../../../../node_modules/moment/locale/sq.js",
+	"./sr": "../../../../node_modules/moment/locale/sr.js",
+	"./sr-cyrl": "../../../../node_modules/moment/locale/sr-cyrl.js",
+	"./sr-cyrl.js": "../../../../node_modules/moment/locale/sr-cyrl.js",
+	"./sr.js": "../../../../node_modules/moment/locale/sr.js",
+	"./ss": "../../../../node_modules/moment/locale/ss.js",
+	"./ss.js": "../../../../node_modules/moment/locale/ss.js",
+	"./sv": "../../../../node_modules/moment/locale/sv.js",
+	"./sv.js": "../../../../node_modules/moment/locale/sv.js",
+	"./sw": "../../../../node_modules/moment/locale/sw.js",
+	"./sw.js": "../../../../node_modules/moment/locale/sw.js",
+	"./ta": "../../../../node_modules/moment/locale/ta.js",
+	"./ta.js": "../../../../node_modules/moment/locale/ta.js",
+	"./te": "../../../../node_modules/moment/locale/te.js",
+	"./te.js": "../../../../node_modules/moment/locale/te.js",
+	"./tet": "../../../../node_modules/moment/locale/tet.js",
+	"./tet.js": "../../../../node_modules/moment/locale/tet.js",
+	"./tg": "../../../../node_modules/moment/locale/tg.js",
+	"./tg.js": "../../../../node_modules/moment/locale/tg.js",
+	"./th": "../../../../node_modules/moment/locale/th.js",
+	"./th.js": "../../../../node_modules/moment/locale/th.js",
+	"./tl-ph": "../../../../node_modules/moment/locale/tl-ph.js",
+	"./tl-ph.js": "../../../../node_modules/moment/locale/tl-ph.js",
+	"./tlh": "../../../../node_modules/moment/locale/tlh.js",
+	"./tlh.js": "../../../../node_modules/moment/locale/tlh.js",
+	"./tr": "../../../../node_modules/moment/locale/tr.js",
+	"./tr.js": "../../../../node_modules/moment/locale/tr.js",
+	"./tzl": "../../../../node_modules/moment/locale/tzl.js",
+	"./tzl.js": "../../../../node_modules/moment/locale/tzl.js",
+	"./tzm": "../../../../node_modules/moment/locale/tzm.js",
+	"./tzm-latn": "../../../../node_modules/moment/locale/tzm-latn.js",
+	"./tzm-latn.js": "../../../../node_modules/moment/locale/tzm-latn.js",
+	"./tzm.js": "../../../../node_modules/moment/locale/tzm.js",
+	"./ug-cn": "../../../../node_modules/moment/locale/ug-cn.js",
+	"./ug-cn.js": "../../../../node_modules/moment/locale/ug-cn.js",
+	"./uk": "../../../../node_modules/moment/locale/uk.js",
+	"./uk.js": "../../../../node_modules/moment/locale/uk.js",
+	"./ur": "../../../../node_modules/moment/locale/ur.js",
+	"./ur.js": "../../../../node_modules/moment/locale/ur.js",
+	"./uz": "../../../../node_modules/moment/locale/uz.js",
+	"./uz-latn": "../../../../node_modules/moment/locale/uz-latn.js",
+	"./uz-latn.js": "../../../../node_modules/moment/locale/uz-latn.js",
+	"./uz.js": "../../../../node_modules/moment/locale/uz.js",
+	"./vi": "../../../../node_modules/moment/locale/vi.js",
+	"./vi.js": "../../../../node_modules/moment/locale/vi.js",
+	"./x-pseudo": "../../../../node_modules/moment/locale/x-pseudo.js",
+	"./x-pseudo.js": "../../../../node_modules/moment/locale/x-pseudo.js",
+	"./yo": "../../../../node_modules/moment/locale/yo.js",
+	"./yo.js": "../../../../node_modules/moment/locale/yo.js",
+	"./zh-cn": "../../../../node_modules/moment/locale/zh-cn.js",
+	"./zh-cn.js": "../../../../node_modules/moment/locale/zh-cn.js",
+	"./zh-hk": "../../../../node_modules/moment/locale/zh-hk.js",
+	"./zh-hk.js": "../../../../node_modules/moment/locale/zh-hk.js",
+	"./zh-tw": "../../../../node_modules/moment/locale/zh-tw.js",
+	"./zh-tw.js": "../../../../node_modules/moment/locale/zh-tw.js"
 };
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var source_tree_1 = __webpack_require__(/*! @theia/core/lib/browser/source-tree */ "../node_modules/@theia/core/lib/browser/source-tree/index.js");
-var source_tree_2 = __webpack_require__(/*! @theia/core/lib/browser/source-tree */ "../node_modules/@theia/core/lib/browser/source-tree/index.js");
-var console_session_1 = __webpack_require__(/*! ./console-session */ "../node_modules/@theia/console/lib/browser/console-session.js");
-var severity_1 = __webpack_require__(/*! @theia/core/lib/common/severity */ "../node_modules/@theia/core/lib/common/severity.js");
-var ConsoleContentWidget = /** @class */ (function (_super) {
-    __extends(ConsoleContentWidget, _super);
-    function ConsoleContentWidget() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this._shouldScrollToEnd = true;
-        return _this;
-    }
-    ConsoleContentWidget_1 = ConsoleContentWidget;
-    Object.defineProperty(ConsoleContentWidget.prototype, "shouldScrollToEnd", {
-        get: function () {
-            return this._shouldScrollToEnd;
-        },
-        set: function (shouldScrollToEnd) {
-            this._shouldScrollToEnd = shouldScrollToEnd;
-            this.shouldScrollToRow = this._shouldScrollToEnd;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ConsoleContentWidget.createContainer = function (parent, props) {
-        var child = source_tree_2.SourceTreeWidget.createContainer(parent, __assign({ contextMenuPath: ConsoleContentWidget_1.CONTEXT_MENU }, props));
-        child.unbind(source_tree_2.SourceTreeWidget);
-        child.bind(ConsoleContentWidget_1).toSelf();
-        return child;
-    };
-    ConsoleContentWidget.prototype.onAfterAttach = function (msg) {
-        var _this = this;
-        _super.prototype.onAfterAttach.call(this, msg);
-        this.toDisposeOnDetach.push(this.onScrollUp(function () { return _this.shouldScrollToEnd = false; }));
-        this.toDisposeOnDetach.push(this.onScrollYReachEnd(function () { return _this.shouldScrollToEnd = true; }));
-        this.toDisposeOnDetach.push(this.model.onChanged(function () { return _this.revealLastOutputIfNeeded(); }));
-    };
-    ConsoleContentWidget.prototype.revealLastOutputIfNeeded = function () {
-        var root = this.model.root;
-        if (this.shouldScrollToEnd && source_tree_1.TreeSourceNode.is(root)) {
-            this.model.selectNode(root.children[root.children.length - 1]);
-        }
-    };
-    ConsoleContentWidget.prototype.createTreeElementNodeClassNames = function (node) {
-        var classNames = _super.prototype.createTreeElementNodeClassNames.call(this, node);
-        if (node.element) {
-            var className = this.toClassName(node.element);
-            if (className) {
-                classNames.push(className);
-            }
-        }
-        return classNames;
-    };
-    ConsoleContentWidget.prototype.toClassName = function (item) {
-        if (item.severity === severity_1.Severity.Error) {
-            return console_session_1.ConsoleItem.errorClassName;
-        }
-        if (item.severity === severity_1.Severity.Warning) {
-            return console_session_1.ConsoleItem.warningClassName;
-        }
-        if (item.severity === severity_1.Severity.Info) {
-            return console_session_1.ConsoleItem.infoClassName;
-        }
-        if (item.severity === severity_1.Severity.Log) {
-            return console_session_1.ConsoleItem.logClassName;
-        }
-        return undefined;
-    };
-    var ConsoleContentWidget_1;
-    ConsoleContentWidget.CONTEXT_MENU = ['console-context-menu'];
-    ConsoleContentWidget = ConsoleContentWidget_1 = __decorate([
-        inversify_1.injectable()
-    ], ConsoleContentWidget);
-    return ConsoleContentWidget;
-}(source_tree_2.SourceTreeWidget));
-exports.ConsoleContentWidget = ConsoleContentWidget;
 
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "../../../../node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 /***/ }),
 
-/***/ "../node_modules/@theia/console/lib/browser/console-history.js":
-/*!*********************************************************************!*\
-  !*** ../node_modules/@theia/console/lib/browser/console-history.js ***!
-  \*********************************************************************/
+/***/ "../../../../node_modules/vscode-textmate/release sync recursive":
+/*!**************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/vscode-textmate/release sync ***!
+  \**************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2018 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var ConsoleHistory = /** @class */ (function () {
-    function ConsoleHistory() {
-        this.values = [];
-        this.index = -1;
-    }
-    ConsoleHistory_1 = ConsoleHistory;
-    ConsoleHistory.prototype.push = function (value) {
-        this.delete(value);
-        this.values.push(value);
-        this.trim();
-        this.index = this.values.length;
-    };
-    ConsoleHistory.prototype.delete = function (value) {
-        var index = this.values.indexOf(value);
-        if (index !== -1) {
-            this.values.splice(index, 1);
-        }
-    };
-    ConsoleHistory.prototype.trim = function () {
-        var index = this.values.length - ConsoleHistory_1.limit;
-        if (index > 0) {
-            this.values.slice(index);
-        }
-    };
-    Object.defineProperty(ConsoleHistory.prototype, "current", {
-        get: function () {
-            return this.values[this.index];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ConsoleHistory.prototype, "previous", {
-        get: function () {
-            this.index = Math.max(this.index - 1, -1);
-            return this.current;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ConsoleHistory.prototype, "next", {
-        get: function () {
-            this.index = Math.min(this.index + 1, this.values.length);
-            return this.current;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ConsoleHistory.prototype.store = function () {
-        var _a = this, values = _a.values, index = _a.index;
-        return { values: values, index: index };
-    };
-    ConsoleHistory.prototype.restore = function (object) {
-        this.values = object.values;
-        this.index = object.index;
-    };
-    var ConsoleHistory_1;
-    ConsoleHistory.limit = 50;
-    ConsoleHistory = ConsoleHistory_1 = __decorate([
-        inversify_1.injectable()
-    ], ConsoleHistory);
-    return ConsoleHistory;
-}());
-exports.ConsoleHistory = ConsoleHistory;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/console/lib/browser/console-widget.js":
-/*!********************************************************************!*\
-  !*** ../node_modules/@theia/console/lib/browser/console-widget.js ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2018 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var domutils_1 = __webpack_require__(/*! @phosphor/domutils */ "../node_modules/@phosphor/domutils/lib/index.js");
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var source_tree_1 = __webpack_require__(/*! @theia/core/lib/browser/source-tree */ "../node_modules/@theia/core/lib/browser/source-tree/index.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var monaco_editor_provider_1 = __webpack_require__(/*! @theia/monaco/lib/browser/monaco-editor-provider */ "../node_modules/@theia/monaco/lib/browser/monaco-editor-provider.js");
-var lib_1 = __webpack_require__(/*! monaco-languageclient/lib */ "../node_modules/monaco-languageclient/lib/index.js");
-var console_history_1 = __webpack_require__(/*! ./console-history */ "../node_modules/@theia/console/lib/browser/console-history.js");
-var console_content_widget_1 = __webpack_require__(/*! ./console-content-widget */ "../node_modules/@theia/console/lib/browser/console-content-widget.js");
-exports.ConsoleOptions = Symbol('ConsoleWidgetOptions');
-var ConsoleWidget = /** @class */ (function (_super) {
-    __extends(ConsoleWidget, _super);
-    function ConsoleWidget() {
-        var _this = _super.call(this) || this;
-        _this.totalHeight = -1;
-        _this.totalWidth = -1;
-        _this.node.classList.add(ConsoleWidget_1.styles.node);
-        return _this;
-    }
-    ConsoleWidget_1 = ConsoleWidget;
-    ConsoleWidget.createContainer = function (parent, options) {
-        var child = console_content_widget_1.ConsoleContentWidget.createContainer(parent);
-        child.bind(console_history_1.ConsoleHistory).toSelf();
-        child.bind(exports.ConsoleOptions).toConstantValue(options);
-        child.bind(ConsoleWidget_1).toSelf();
-        return child;
-    };
-    ConsoleWidget.prototype.init = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a, id, title, inputFocusContextKey, _b, label, iconClass, caption, layout, inputWidget, input, _c;
-            var _this = this;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
-                    case 0:
-                        _a = this.options, id = _a.id, title = _a.title, inputFocusContextKey = _a.inputFocusContextKey;
-                        _b = Object.assign({}, title), label = _b.label, iconClass = _b.iconClass, caption = _b.caption;
-                        this.id = id;
-                        this.title.closable = true;
-                        this.title.label = label || id;
-                        if (iconClass) {
-                            this.title.iconClass = iconClass;
-                        }
-                        this.title.caption = caption || label || id;
-                        layout = this.layout = new browser_1.PanelLayout();
-                        this.content.node.classList.add(ConsoleWidget_1.styles.content);
-                        this.toDispose.push(this.content);
-                        layout.addWidget(this.content);
-                        inputWidget = new browser_1.Widget();
-                        inputWidget.node.classList.add(ConsoleWidget_1.styles.input);
-                        layout.addWidget(inputWidget);
-                        _c = this;
-                        return [4 /*yield*/, this.createInput(inputWidget.node)];
-                    case 1:
-                        input = _c._input = _d.sent();
-                        this.toDispose.push(input);
-                        this.toDispose.push(input.getControl().onDidLayoutChange(function () { return _this.resizeContent(); }));
-                        this.toDispose.push(input.getControl().onDidChangeConfiguration(function (_a) {
-                            var fontInfo = _a.fontInfo;
-                            return fontInfo && _this.updateFont();
-                        }));
-                        this.updateFont();
-                        if (inputFocusContextKey) {
-                            this.toDispose.push(input.onFocusChanged(function () { return inputFocusContextKey.set(_this.hasInputFocus()); }));
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    ConsoleWidget.prototype.createInput = function (node) {
-        return this.editorProvider.createInline(this.options.input.uri, node, this.options.input.options);
-    };
-    ConsoleWidget.prototype.updateFont = function () {
-        var _a = this._input.getControl().getConfiguration().fontInfo, fontFamily = _a.fontFamily, fontSize = _a.fontSize, lineHeight = _a.lineHeight;
-        this.content.node.style.fontFamily = fontFamily;
-        this.content.node.style.fontSize = fontSize + 'px';
-        this.content.node.style.lineHeight = lineHeight + 'px';
-    };
-    Object.defineProperty(ConsoleWidget.prototype, "session", {
-        get: function () {
-            return this._session;
-        },
-        set: function (session) {
-            if (this._session === session) {
-                return;
-            }
-            this._session = session;
-            this.content.source = session;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ConsoleWidget.prototype, "input", {
-        get: function () {
-            return this._input;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ConsoleWidget.prototype.selectAll = function () {
-        var selection = document.getSelection();
-        if (selection) {
-            selection.selectAllChildren(this.content.node);
-        }
-    };
-    ConsoleWidget.prototype.collapseAll = function () {
-        var root = this.content.model.root;
-        if (browser_1.CompositeTreeNode.is(root)) {
-            this.content.model.collapseAll(root);
-        }
-    };
-    ConsoleWidget.prototype.clear = function () {
-        if (this.session) {
-            this.session.clear();
-        }
-    };
-    ConsoleWidget.prototype.execute = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var value, listener_1;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        value = this._input.getControl().getValue();
-                        this._input.getControl().setValue('');
-                        this.history.push(value);
-                        if (!this.session) return [3 /*break*/, 2];
-                        listener_1 = this.content.model.onNodeRefreshed(function () {
-                            listener_1.dispose();
-                            _this.revealLastOutput();
-                        });
-                        return [4 /*yield*/, this.session.execute(value)];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    ConsoleWidget.prototype.navigateBack = function () {
-        var value = this.history.previous;
-        if (value === undefined) {
-            return;
-        }
-        var editor = this.input.getControl();
-        editor.setValue(value);
-        editor.setPosition({
-            lineNumber: 1,
-            column: 1
-        });
-    };
-    ConsoleWidget.prototype.navigateForward = function () {
-        var value = this.history.next || '';
-        var editor = this.input.getControl();
-        editor.setValue(value);
-        var lineNumber = editor.getModel().getLineCount();
-        var column = editor.getModel().getLineMaxColumn(lineNumber);
-        editor.setPosition({ lineNumber: lineNumber, column: column });
-    };
-    ConsoleWidget.prototype.revealLastOutput = function () {
-        var root = this.content.model.root;
-        if (source_tree_1.TreeSourceNode.is(root)) {
-            this.content.model.selectNode(root.children[root.children.length - 1]);
-        }
-    };
-    ConsoleWidget.prototype.onActivateRequest = function (msg) {
-        _super.prototype.onActivateRequest.call(this, msg);
-        this._input.focus();
-    };
-    ConsoleWidget.prototype.onResize = function (msg) {
-        _super.prototype.onResize.call(this, msg);
-        this.totalWidth = msg.width;
-        this.totalHeight = msg.height;
-        this._input.resizeToFit();
-        this.resizeContent();
-    };
-    ConsoleWidget.prototype.resizeContent = function () {
-        this.totalHeight = this.totalHeight < 0 ? this.computeHeight() : this.totalHeight;
-        var inputHeight = this._input.getControl().getLayoutInfo().height;
-        var contentHeight = this.totalHeight - inputHeight;
-        this.content.node.style.height = contentHeight + "px";
-        browser_1.MessageLoop.sendMessage(this.content, new browser_1.Widget.ResizeMessage(this.totalWidth, contentHeight));
-    };
-    ConsoleWidget.prototype.computeHeight = function () {
-        var verticalSum = domutils_1.ElementExt.boxSizing(this.node).verticalSum;
-        return this.node.offsetHeight - verticalSum;
-    };
-    ConsoleWidget.prototype.storeState = function () {
-        var history = this.history.store();
-        var input = this.input.storeViewState();
-        return {
-            history: history,
-            input: input
-        };
-    };
-    ConsoleWidget.prototype.restoreState = function (oldState) {
-        if ('history' in oldState) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            this.history.restore(oldState['history']);
-        }
-        this.input.getControl().setValue(this.history.current || '');
-        if ('input' in oldState) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            this.input.restoreViewState(oldState['input']);
-        }
-    };
-    ConsoleWidget.prototype.hasInputFocus = function () {
-        return this._input && this._input.isFocused({ strict: true });
-    };
-    var ConsoleWidget_1;
-    ConsoleWidget.styles = {
-        node: 'theia-console-widget',
-        content: 'theia-console-content',
-        input: 'theia-console-input',
-    };
-    __decorate([
-        inversify_1.inject(exports.ConsoleOptions),
-        __metadata("design:type", Object)
-    ], ConsoleWidget.prototype, "options", void 0);
-    __decorate([
-        inversify_1.inject(lib_1.MonacoToProtocolConverter),
-        __metadata("design:type", lib_1.MonacoToProtocolConverter)
-    ], ConsoleWidget.prototype, "m2p", void 0);
-    __decorate([
-        inversify_1.inject(lib_1.ProtocolToMonacoConverter),
-        __metadata("design:type", lib_1.ProtocolToMonacoConverter)
-    ], ConsoleWidget.prototype, "p2m", void 0);
-    __decorate([
-        inversify_1.inject(console_content_widget_1.ConsoleContentWidget),
-        __metadata("design:type", console_content_widget_1.ConsoleContentWidget)
-    ], ConsoleWidget.prototype, "content", void 0);
-    __decorate([
-        inversify_1.inject(console_history_1.ConsoleHistory),
-        __metadata("design:type", console_history_1.ConsoleHistory)
-    ], ConsoleWidget.prototype, "history", void 0);
-    __decorate([
-        inversify_1.inject(monaco_editor_provider_1.MonacoEditorProvider),
-        __metadata("design:type", monaco_editor_provider_1.MonacoEditorProvider)
-    ], ConsoleWidget.prototype, "editorProvider", void 0);
-    __decorate([
-        inversify_1.postConstruct(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", Promise)
-    ], ConsoleWidget.prototype, "init", null);
-    ConsoleWidget = ConsoleWidget_1 = __decorate([
-        inversify_1.injectable(),
-        __metadata("design:paramtypes", [])
-    ], ConsoleWidget);
-    return ConsoleWidget;
-}(browser_1.BaseWidget));
-exports.ConsoleWidget = ConsoleWidget;
-
+function webpackEmptyContext(req) {
+	var e = new Error("Cannot find module '" + req + "'");
+	e.code = 'MODULE_NOT_FOUND';
+	throw e;
+}
+webpackEmptyContext.keys = function() { return []; };
+webpackEmptyContext.resolve = webpackEmptyContext;
+module.exports = webpackEmptyContext;
+webpackEmptyContext.id = "../../../../node_modules/vscode-textmate/release sync recursive";
 
 /***/ })
 

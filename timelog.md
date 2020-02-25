@@ -543,11 +543,13 @@
 
 ## 24 FEBRUARY 2020
 * *1 hour* updated the introduction and debriefing scripts, replaced older and sample versions of theia with theia switch workspace extension, updated the trello board
-* *0.5 hour* resolved issue being unable to commit, npm uninstall puppeteer and electron/dist/electron
+* *1 hour* resolved issue being unable to commit, npm uninstall puppeteer and electron/dist/electron. Update: resulted in cli issue instead
+* *1 hour* made sample lab1 for user evaluation
 * **Total : 251.5 hours**
 
 
-
+## 25 FEBRUARY 2020
+* *2.5 hour* updated sample lab 2 and google forms, devpage now automatically postmessage to theia
 
 
 

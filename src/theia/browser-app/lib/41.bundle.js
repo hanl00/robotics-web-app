@@ -1,634 +1,288 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[41],{
 
-/***/ "../node_modules/@theia/terminal/lib/browser/terminal-frontend-contribution.js":
-/*!*************************************************************************************!*\
-  !*** ../node_modules/@theia/terminal/lib/browser/terminal-frontend-contribution.js ***!
-  \*************************************************************************************/
+/***/ "../../../../node_modules/moment/locale sync recursive ^\\.\\/.*$":
+/*!*************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/moment/locale sync ^\.\/.*$ ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
+var map = {
+	"./af": "../../../../node_modules/moment/locale/af.js",
+	"./af.js": "../../../../node_modules/moment/locale/af.js",
+	"./ar": "../../../../node_modules/moment/locale/ar.js",
+	"./ar-dz": "../../../../node_modules/moment/locale/ar-dz.js",
+	"./ar-dz.js": "../../../../node_modules/moment/locale/ar-dz.js",
+	"./ar-kw": "../../../../node_modules/moment/locale/ar-kw.js",
+	"./ar-kw.js": "../../../../node_modules/moment/locale/ar-kw.js",
+	"./ar-ly": "../../../../node_modules/moment/locale/ar-ly.js",
+	"./ar-ly.js": "../../../../node_modules/moment/locale/ar-ly.js",
+	"./ar-ma": "../../../../node_modules/moment/locale/ar-ma.js",
+	"./ar-ma.js": "../../../../node_modules/moment/locale/ar-ma.js",
+	"./ar-sa": "../../../../node_modules/moment/locale/ar-sa.js",
+	"./ar-sa.js": "../../../../node_modules/moment/locale/ar-sa.js",
+	"./ar-tn": "../../../../node_modules/moment/locale/ar-tn.js",
+	"./ar-tn.js": "../../../../node_modules/moment/locale/ar-tn.js",
+	"./ar.js": "../../../../node_modules/moment/locale/ar.js",
+	"./az": "../../../../node_modules/moment/locale/az.js",
+	"./az.js": "../../../../node_modules/moment/locale/az.js",
+	"./be": "../../../../node_modules/moment/locale/be.js",
+	"./be.js": "../../../../node_modules/moment/locale/be.js",
+	"./bg": "../../../../node_modules/moment/locale/bg.js",
+	"./bg.js": "../../../../node_modules/moment/locale/bg.js",
+	"./bm": "../../../../node_modules/moment/locale/bm.js",
+	"./bm.js": "../../../../node_modules/moment/locale/bm.js",
+	"./bn": "../../../../node_modules/moment/locale/bn.js",
+	"./bn.js": "../../../../node_modules/moment/locale/bn.js",
+	"./bo": "../../../../node_modules/moment/locale/bo.js",
+	"./bo.js": "../../../../node_modules/moment/locale/bo.js",
+	"./br": "../../../../node_modules/moment/locale/br.js",
+	"./br.js": "../../../../node_modules/moment/locale/br.js",
+	"./bs": "../../../../node_modules/moment/locale/bs.js",
+	"./bs.js": "../../../../node_modules/moment/locale/bs.js",
+	"./ca": "../../../../node_modules/moment/locale/ca.js",
+	"./ca.js": "../../../../node_modules/moment/locale/ca.js",
+	"./cs": "../../../../node_modules/moment/locale/cs.js",
+	"./cs.js": "../../../../node_modules/moment/locale/cs.js",
+	"./cv": "../../../../node_modules/moment/locale/cv.js",
+	"./cv.js": "../../../../node_modules/moment/locale/cv.js",
+	"./cy": "../../../../node_modules/moment/locale/cy.js",
+	"./cy.js": "../../../../node_modules/moment/locale/cy.js",
+	"./da": "../../../../node_modules/moment/locale/da.js",
+	"./da.js": "../../../../node_modules/moment/locale/da.js",
+	"./de": "../../../../node_modules/moment/locale/de.js",
+	"./de-at": "../../../../node_modules/moment/locale/de-at.js",
+	"./de-at.js": "../../../../node_modules/moment/locale/de-at.js",
+	"./de-ch": "../../../../node_modules/moment/locale/de-ch.js",
+	"./de-ch.js": "../../../../node_modules/moment/locale/de-ch.js",
+	"./de.js": "../../../../node_modules/moment/locale/de.js",
+	"./dv": "../../../../node_modules/moment/locale/dv.js",
+	"./dv.js": "../../../../node_modules/moment/locale/dv.js",
+	"./el": "../../../../node_modules/moment/locale/el.js",
+	"./el.js": "../../../../node_modules/moment/locale/el.js",
+	"./en-SG": "../../../../node_modules/moment/locale/en-SG.js",
+	"./en-SG.js": "../../../../node_modules/moment/locale/en-SG.js",
+	"./en-au": "../../../../node_modules/moment/locale/en-au.js",
+	"./en-au.js": "../../../../node_modules/moment/locale/en-au.js",
+	"./en-ca": "../../../../node_modules/moment/locale/en-ca.js",
+	"./en-ca.js": "../../../../node_modules/moment/locale/en-ca.js",
+	"./en-gb": "../../../../node_modules/moment/locale/en-gb.js",
+	"./en-gb.js": "../../../../node_modules/moment/locale/en-gb.js",
+	"./en-ie": "../../../../node_modules/moment/locale/en-ie.js",
+	"./en-ie.js": "../../../../node_modules/moment/locale/en-ie.js",
+	"./en-il": "../../../../node_modules/moment/locale/en-il.js",
+	"./en-il.js": "../../../../node_modules/moment/locale/en-il.js",
+	"./en-nz": "../../../../node_modules/moment/locale/en-nz.js",
+	"./en-nz.js": "../../../../node_modules/moment/locale/en-nz.js",
+	"./eo": "../../../../node_modules/moment/locale/eo.js",
+	"./eo.js": "../../../../node_modules/moment/locale/eo.js",
+	"./es": "../../../../node_modules/moment/locale/es.js",
+	"./es-do": "../../../../node_modules/moment/locale/es-do.js",
+	"./es-do.js": "../../../../node_modules/moment/locale/es-do.js",
+	"./es-us": "../../../../node_modules/moment/locale/es-us.js",
+	"./es-us.js": "../../../../node_modules/moment/locale/es-us.js",
+	"./es.js": "../../../../node_modules/moment/locale/es.js",
+	"./et": "../../../../node_modules/moment/locale/et.js",
+	"./et.js": "../../../../node_modules/moment/locale/et.js",
+	"./eu": "../../../../node_modules/moment/locale/eu.js",
+	"./eu.js": "../../../../node_modules/moment/locale/eu.js",
+	"./fa": "../../../../node_modules/moment/locale/fa.js",
+	"./fa.js": "../../../../node_modules/moment/locale/fa.js",
+	"./fi": "../../../../node_modules/moment/locale/fi.js",
+	"./fi.js": "../../../../node_modules/moment/locale/fi.js",
+	"./fo": "../../../../node_modules/moment/locale/fo.js",
+	"./fo.js": "../../../../node_modules/moment/locale/fo.js",
+	"./fr": "../../../../node_modules/moment/locale/fr.js",
+	"./fr-ca": "../../../../node_modules/moment/locale/fr-ca.js",
+	"./fr-ca.js": "../../../../node_modules/moment/locale/fr-ca.js",
+	"./fr-ch": "../../../../node_modules/moment/locale/fr-ch.js",
+	"./fr-ch.js": "../../../../node_modules/moment/locale/fr-ch.js",
+	"./fr.js": "../../../../node_modules/moment/locale/fr.js",
+	"./fy": "../../../../node_modules/moment/locale/fy.js",
+	"./fy.js": "../../../../node_modules/moment/locale/fy.js",
+	"./ga": "../../../../node_modules/moment/locale/ga.js",
+	"./ga.js": "../../../../node_modules/moment/locale/ga.js",
+	"./gd": "../../../../node_modules/moment/locale/gd.js",
+	"./gd.js": "../../../../node_modules/moment/locale/gd.js",
+	"./gl": "../../../../node_modules/moment/locale/gl.js",
+	"./gl.js": "../../../../node_modules/moment/locale/gl.js",
+	"./gom-latn": "../../../../node_modules/moment/locale/gom-latn.js",
+	"./gom-latn.js": "../../../../node_modules/moment/locale/gom-latn.js",
+	"./gu": "../../../../node_modules/moment/locale/gu.js",
+	"./gu.js": "../../../../node_modules/moment/locale/gu.js",
+	"./he": "../../../../node_modules/moment/locale/he.js",
+	"./he.js": "../../../../node_modules/moment/locale/he.js",
+	"./hi": "../../../../node_modules/moment/locale/hi.js",
+	"./hi.js": "../../../../node_modules/moment/locale/hi.js",
+	"./hr": "../../../../node_modules/moment/locale/hr.js",
+	"./hr.js": "../../../../node_modules/moment/locale/hr.js",
+	"./hu": "../../../../node_modules/moment/locale/hu.js",
+	"./hu.js": "../../../../node_modules/moment/locale/hu.js",
+	"./hy-am": "../../../../node_modules/moment/locale/hy-am.js",
+	"./hy-am.js": "../../../../node_modules/moment/locale/hy-am.js",
+	"./id": "../../../../node_modules/moment/locale/id.js",
+	"./id.js": "../../../../node_modules/moment/locale/id.js",
+	"./is": "../../../../node_modules/moment/locale/is.js",
+	"./is.js": "../../../../node_modules/moment/locale/is.js",
+	"./it": "../../../../node_modules/moment/locale/it.js",
+	"./it-ch": "../../../../node_modules/moment/locale/it-ch.js",
+	"./it-ch.js": "../../../../node_modules/moment/locale/it-ch.js",
+	"./it.js": "../../../../node_modules/moment/locale/it.js",
+	"./ja": "../../../../node_modules/moment/locale/ja.js",
+	"./ja.js": "../../../../node_modules/moment/locale/ja.js",
+	"./jv": "../../../../node_modules/moment/locale/jv.js",
+	"./jv.js": "../../../../node_modules/moment/locale/jv.js",
+	"./ka": "../../../../node_modules/moment/locale/ka.js",
+	"./ka.js": "../../../../node_modules/moment/locale/ka.js",
+	"./kk": "../../../../node_modules/moment/locale/kk.js",
+	"./kk.js": "../../../../node_modules/moment/locale/kk.js",
+	"./km": "../../../../node_modules/moment/locale/km.js",
+	"./km.js": "../../../../node_modules/moment/locale/km.js",
+	"./kn": "../../../../node_modules/moment/locale/kn.js",
+	"./kn.js": "../../../../node_modules/moment/locale/kn.js",
+	"./ko": "../../../../node_modules/moment/locale/ko.js",
+	"./ko.js": "../../../../node_modules/moment/locale/ko.js",
+	"./ku": "../../../../node_modules/moment/locale/ku.js",
+	"./ku.js": "../../../../node_modules/moment/locale/ku.js",
+	"./ky": "../../../../node_modules/moment/locale/ky.js",
+	"./ky.js": "../../../../node_modules/moment/locale/ky.js",
+	"./lb": "../../../../node_modules/moment/locale/lb.js",
+	"./lb.js": "../../../../node_modules/moment/locale/lb.js",
+	"./lo": "../../../../node_modules/moment/locale/lo.js",
+	"./lo.js": "../../../../node_modules/moment/locale/lo.js",
+	"./lt": "../../../../node_modules/moment/locale/lt.js",
+	"./lt.js": "../../../../node_modules/moment/locale/lt.js",
+	"./lv": "../../../../node_modules/moment/locale/lv.js",
+	"./lv.js": "../../../../node_modules/moment/locale/lv.js",
+	"./me": "../../../../node_modules/moment/locale/me.js",
+	"./me.js": "../../../../node_modules/moment/locale/me.js",
+	"./mi": "../../../../node_modules/moment/locale/mi.js",
+	"./mi.js": "../../../../node_modules/moment/locale/mi.js",
+	"./mk": "../../../../node_modules/moment/locale/mk.js",
+	"./mk.js": "../../../../node_modules/moment/locale/mk.js",
+	"./ml": "../../../../node_modules/moment/locale/ml.js",
+	"./ml.js": "../../../../node_modules/moment/locale/ml.js",
+	"./mn": "../../../../node_modules/moment/locale/mn.js",
+	"./mn.js": "../../../../node_modules/moment/locale/mn.js",
+	"./mr": "../../../../node_modules/moment/locale/mr.js",
+	"./mr.js": "../../../../node_modules/moment/locale/mr.js",
+	"./ms": "../../../../node_modules/moment/locale/ms.js",
+	"./ms-my": "../../../../node_modules/moment/locale/ms-my.js",
+	"./ms-my.js": "../../../../node_modules/moment/locale/ms-my.js",
+	"./ms.js": "../../../../node_modules/moment/locale/ms.js",
+	"./mt": "../../../../node_modules/moment/locale/mt.js",
+	"./mt.js": "../../../../node_modules/moment/locale/mt.js",
+	"./my": "../../../../node_modules/moment/locale/my.js",
+	"./my.js": "../../../../node_modules/moment/locale/my.js",
+	"./nb": "../../../../node_modules/moment/locale/nb.js",
+	"./nb.js": "../../../../node_modules/moment/locale/nb.js",
+	"./ne": "../../../../node_modules/moment/locale/ne.js",
+	"./ne.js": "../../../../node_modules/moment/locale/ne.js",
+	"./nl": "../../../../node_modules/moment/locale/nl.js",
+	"./nl-be": "../../../../node_modules/moment/locale/nl-be.js",
+	"./nl-be.js": "../../../../node_modules/moment/locale/nl-be.js",
+	"./nl.js": "../../../../node_modules/moment/locale/nl.js",
+	"./nn": "../../../../node_modules/moment/locale/nn.js",
+	"./nn.js": "../../../../node_modules/moment/locale/nn.js",
+	"./pa-in": "../../../../node_modules/moment/locale/pa-in.js",
+	"./pa-in.js": "../../../../node_modules/moment/locale/pa-in.js",
+	"./pl": "../../../../node_modules/moment/locale/pl.js",
+	"./pl.js": "../../../../node_modules/moment/locale/pl.js",
+	"./pt": "../../../../node_modules/moment/locale/pt.js",
+	"./pt-br": "../../../../node_modules/moment/locale/pt-br.js",
+	"./pt-br.js": "../../../../node_modules/moment/locale/pt-br.js",
+	"./pt.js": "../../../../node_modules/moment/locale/pt.js",
+	"./ro": "../../../../node_modules/moment/locale/ro.js",
+	"./ro.js": "../../../../node_modules/moment/locale/ro.js",
+	"./ru": "../../../../node_modules/moment/locale/ru.js",
+	"./ru.js": "../../../../node_modules/moment/locale/ru.js",
+	"./sd": "../../../../node_modules/moment/locale/sd.js",
+	"./sd.js": "../../../../node_modules/moment/locale/sd.js",
+	"./se": "../../../../node_modules/moment/locale/se.js",
+	"./se.js": "../../../../node_modules/moment/locale/se.js",
+	"./si": "../../../../node_modules/moment/locale/si.js",
+	"./si.js": "../../../../node_modules/moment/locale/si.js",
+	"./sk": "../../../../node_modules/moment/locale/sk.js",
+	"./sk.js": "../../../../node_modules/moment/locale/sk.js",
+	"./sl": "../../../../node_modules/moment/locale/sl.js",
+	"./sl.js": "../../../../node_modules/moment/locale/sl.js",
+	"./sq": "../../../../node_modules/moment/locale/sq.js",
+	"./sq.js": "../../../../node_modules/moment/locale/sq.js",
+	"./sr": "../../../../node_modules/moment/locale/sr.js",
+	"./sr-cyrl": "../../../../node_modules/moment/locale/sr-cyrl.js",
+	"./sr-cyrl.js": "../../../../node_modules/moment/locale/sr-cyrl.js",
+	"./sr.js": "../../../../node_modules/moment/locale/sr.js",
+	"./ss": "../../../../node_modules/moment/locale/ss.js",
+	"./ss.js": "../../../../node_modules/moment/locale/ss.js",
+	"./sv": "../../../../node_modules/moment/locale/sv.js",
+	"./sv.js": "../../../../node_modules/moment/locale/sv.js",
+	"./sw": "../../../../node_modules/moment/locale/sw.js",
+	"./sw.js": "../../../../node_modules/moment/locale/sw.js",
+	"./ta": "../../../../node_modules/moment/locale/ta.js",
+	"./ta.js": "../../../../node_modules/moment/locale/ta.js",
+	"./te": "../../../../node_modules/moment/locale/te.js",
+	"./te.js": "../../../../node_modules/moment/locale/te.js",
+	"./tet": "../../../../node_modules/moment/locale/tet.js",
+	"./tet.js": "../../../../node_modules/moment/locale/tet.js",
+	"./tg": "../../../../node_modules/moment/locale/tg.js",
+	"./tg.js": "../../../../node_modules/moment/locale/tg.js",
+	"./th": "../../../../node_modules/moment/locale/th.js",
+	"./th.js": "../../../../node_modules/moment/locale/th.js",
+	"./tl-ph": "../../../../node_modules/moment/locale/tl-ph.js",
+	"./tl-ph.js": "../../../../node_modules/moment/locale/tl-ph.js",
+	"./tlh": "../../../../node_modules/moment/locale/tlh.js",
+	"./tlh.js": "../../../../node_modules/moment/locale/tlh.js",
+	"./tr": "../../../../node_modules/moment/locale/tr.js",
+	"./tr.js": "../../../../node_modules/moment/locale/tr.js",
+	"./tzl": "../../../../node_modules/moment/locale/tzl.js",
+	"./tzl.js": "../../../../node_modules/moment/locale/tzl.js",
+	"./tzm": "../../../../node_modules/moment/locale/tzm.js",
+	"./tzm-latn": "../../../../node_modules/moment/locale/tzm-latn.js",
+	"./tzm-latn.js": "../../../../node_modules/moment/locale/tzm-latn.js",
+	"./tzm.js": "../../../../node_modules/moment/locale/tzm.js",
+	"./ug-cn": "../../../../node_modules/moment/locale/ug-cn.js",
+	"./ug-cn.js": "../../../../node_modules/moment/locale/ug-cn.js",
+	"./uk": "../../../../node_modules/moment/locale/uk.js",
+	"./uk.js": "../../../../node_modules/moment/locale/uk.js",
+	"./ur": "../../../../node_modules/moment/locale/ur.js",
+	"./ur.js": "../../../../node_modules/moment/locale/ur.js",
+	"./uz": "../../../../node_modules/moment/locale/uz.js",
+	"./uz-latn": "../../../../node_modules/moment/locale/uz-latn.js",
+	"./uz-latn.js": "../../../../node_modules/moment/locale/uz-latn.js",
+	"./uz.js": "../../../../node_modules/moment/locale/uz.js",
+	"./vi": "../../../../node_modules/moment/locale/vi.js",
+	"./vi.js": "../../../../node_modules/moment/locale/vi.js",
+	"./x-pseudo": "../../../../node_modules/moment/locale/x-pseudo.js",
+	"./x-pseudo.js": "../../../../node_modules/moment/locale/x-pseudo.js",
+	"./yo": "../../../../node_modules/moment/locale/yo.js",
+	"./yo.js": "../../../../node_modules/moment/locale/yo.js",
+	"./zh-cn": "../../../../node_modules/moment/locale/zh-cn.js",
+	"./zh-cn.js": "../../../../node_modules/moment/locale/zh-cn.js",
+	"./zh-hk": "../../../../node_modules/moment/locale/zh-hk.js",
+	"./zh-hk.js": "../../../../node_modules/moment/locale/zh-hk.js",
+	"./zh-tw": "../../../../node_modules/moment/locale/zh-tw.js",
+	"./zh-tw.js": "../../../../node_modules/moment/locale/zh-tw.js"
 };
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var quick_pick_service_1 = __webpack_require__(/*! @theia/core/lib/common/quick-pick-service */ "../node_modules/@theia/core/lib/common/quick-pick-service.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var terminal_widget_impl_1 = __webpack_require__(/*! ./terminal-widget-impl */ "../node_modules/@theia/terminal/lib/browser/terminal-widget-impl.js");
-var terminal_keybinding_contexts_1 = __webpack_require__(/*! ./terminal-keybinding-contexts */ "../node_modules/@theia/terminal/lib/browser/terminal-keybinding-contexts.js");
-var terminal_widget_1 = __webpack_require__(/*! ./base/terminal-widget */ "../node_modules/@theia/terminal/lib/browser/base/terminal-widget.js");
-var uri_command_handler_1 = __webpack_require__(/*! @theia/core/lib/common/uri-command-handler */ "../node_modules/@theia/core/lib/common/uri-command-handler.js");
-var common_2 = __webpack_require__(/*! @theia/filesystem/lib/common */ "../node_modules/@theia/filesystem/lib/common/index.js");
-var shell_terminal_protocol_1 = __webpack_require__(/*! ../common/shell-terminal-protocol */ "../node_modules/@theia/terminal/lib/common/shell-terminal-protocol.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var core_1 = __webpack_require__(/*! @theia/core */ "../node_modules/@theia/core/lib/common/index.js");
-var browser_3 = __webpack_require__(/*! @theia/workspace/lib/browser */ "../node_modules/@theia/workspace/lib/browser/index.js");
-var context_key_service_1 = __webpack_require__(/*! @theia/core/lib/browser/context-key-service */ "../node_modules/@theia/core/lib/browser/context-key-service.js");
-var terminal_theme_service_1 = __webpack_require__(/*! ./terminal-theme-service */ "../node_modules/@theia/terminal/lib/browser/terminal-theme-service.js");
-var TerminalMenus;
-(function (TerminalMenus) {
-    TerminalMenus.TERMINAL = __spread(core_1.MAIN_MENU_BAR, ['7_terminal']);
-    TerminalMenus.TERMINAL_NEW = __spread(TerminalMenus.TERMINAL, ['1_terminal']);
-    TerminalMenus.TERMINAL_TASKS = __spread(TerminalMenus.TERMINAL, ['2_terminal']);
-    TerminalMenus.TERMINAL_TASKS_INFO = __spread(TerminalMenus.TERMINAL_TASKS, ['3_terminal']);
-    TerminalMenus.TERMINAL_TASKS_CONFIG = __spread(TerminalMenus.TERMINAL_TASKS, ['4_terminal']);
-    TerminalMenus.TERMINAL_NAVIGATOR_CONTEXT_MENU = ['navigator-context-menu', 'navigation'];
-})(TerminalMenus = exports.TerminalMenus || (exports.TerminalMenus = {}));
-var TerminalCommands;
-(function (TerminalCommands) {
-    var TERMINAL_CATEGORY = 'Terminal';
-    TerminalCommands.NEW = {
-        id: 'terminal:new',
-        category: TERMINAL_CATEGORY,
-        label: 'Open New Terminal'
-    };
-    TerminalCommands.NEW_ACTIVE_WORKSPACE = {
-        id: 'terminal:new:active:workspace',
-        category: TERMINAL_CATEGORY,
-        label: 'Open New Terminal (In Active Workspace)'
-    };
-    TerminalCommands.TERMINAL_CLEAR = {
-        id: 'terminal:clear',
-        category: TERMINAL_CATEGORY,
-        label: 'Clear Terminal'
-    };
-    TerminalCommands.TERMINAL_CONTEXT = {
-        id: 'terminal:context',
-        category: TERMINAL_CATEGORY,
-        label: 'Open in Terminal'
-    };
-    TerminalCommands.SPLIT = {
-        id: 'terminal:split',
-        category: TERMINAL_CATEGORY,
-        label: 'Split Terminal'
-    };
-    /**
-     * Command that displays all terminals that are currently opened
-     */
-    TerminalCommands.SHOW_ALL_OPENED_TERMINALS = {
-        id: 'workbench.action.showAllTerminals',
-        category: 'View',
-        label: 'Show All Opened Terminals'
-    };
-})(TerminalCommands = exports.TerminalCommands || (exports.TerminalCommands = {}));
-var TerminalFrontendContribution = /** @class */ (function () {
-    function TerminalFrontendContribution(shell, shellTerminalServer, widgetManager, fileSystem, selectionService) {
-        this.shell = shell;
-        this.shellTerminalServer = shellTerminalServer;
-        this.widgetManager = widgetManager;
-        this.fileSystem = fileSystem;
-        this.selectionService = selectionService;
-        this.onDidCreateTerminalEmitter = new common_1.Emitter();
-        this.onDidCreateTerminal = this.onDidCreateTerminalEmitter.event;
-        this.onDidChangeCurrentTerminalEmitter = new common_1.Emitter();
-        this.onDidChangeCurrentTerminal = this.onDidChangeCurrentTerminalEmitter.event;
-    }
-    TerminalFrontendContribution.prototype.init = function () {
-        var _this = this;
-        this.shell.currentChanged.connect(function () { return _this.updateCurrentTerminal(); });
-        this.widgetManager.onDidCreateWidget(function (_a) {
-            var widget = _a.widget;
-            if (widget instanceof terminal_widget_1.TerminalWidget) {
-                _this.updateCurrentTerminal();
-                _this.onDidCreateTerminalEmitter.fire(widget);
-            }
-        });
-        var terminalFocusKey = this.contextKeyService.createKey('terminalFocus', false);
-        var updateFocusKey = function () { return terminalFocusKey.set(_this.shell.activeWidget instanceof terminal_widget_1.TerminalWidget); };
-        updateFocusKey();
-        this.shell.activeChanged.connect(updateFocusKey);
-    };
-    Object.defineProperty(TerminalFrontendContribution.prototype, "currentTerminal", {
-        get: function () {
-            return this._currentTerminal;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    TerminalFrontendContribution.prototype.setCurrentTerminal = function (current) {
-        if (this._currentTerminal !== current) {
-            this._currentTerminal = current;
-            this.onDidChangeCurrentTerminalEmitter.fire(this._currentTerminal);
-        }
-    };
-    TerminalFrontendContribution.prototype.updateCurrentTerminal = function () {
-        var widget = this.shell.currentWidget;
-        if (widget instanceof terminal_widget_1.TerminalWidget) {
-            this.setCurrentTerminal(widget);
-        }
-        else if (!this._currentTerminal || !this._currentTerminal.isVisible) {
-            this.setCurrentTerminal(undefined);
-        }
-    };
-    Object.defineProperty(TerminalFrontendContribution.prototype, "all", {
-        get: function () {
-            return this.widgetManager.getWidgets(terminal_widget_impl_1.TERMINAL_WIDGET_FACTORY_ID);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    TerminalFrontendContribution.prototype.getById = function (id) {
-        return this.all.find(function (terminal) { return terminal.id === id; });
-    };
-    TerminalFrontendContribution.prototype.getDefaultShell = function () {
-        return this.shellTerminalServer.getDefaultShell();
-    };
-    TerminalFrontendContribution.prototype.registerCommands = function (commands) {
-        var _this = this;
-        commands.registerCommand(TerminalCommands.NEW, {
-            execute: function () { return _this.openTerminal(); }
-        });
-        commands.registerCommand(TerminalCommands.NEW_ACTIVE_WORKSPACE, {
-            execute: function () { return _this.openActiveWorkspaceTerminal(); }
-        });
-        commands.registerCommand(TerminalCommands.SPLIT, {
-            execute: function (widget) { return _this.splitTerminal(widget); },
-            isEnabled: function (widget) { return !!_this.getTerminalRef(widget); },
-            isVisible: function (widget) { return !!_this.getTerminalRef(widget); }
-        });
-        commands.registerCommand(TerminalCommands.TERMINAL_CLEAR);
-        commands.registerHandler(TerminalCommands.TERMINAL_CLEAR.id, {
-            isEnabled: function () { return _this.shell.activeWidget instanceof terminal_widget_1.TerminalWidget; },
-            execute: function () { return _this.shell.activeWidget.clearOutput(); }
-        });
-        commands.registerCommand(TerminalCommands.TERMINAL_CONTEXT, new uri_command_handler_1.UriAwareCommandHandler(this.selectionService, {
-            execute: function (uri) { return __awaiter(_this, void 0, void 0, function () {
-                var stat, cwd, termWidget;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.fileSystem.getFileStat(uri.toString())];
-                        case 1:
-                            stat = _a.sent();
-                            if (!stat) {
-                                return [2 /*return*/];
-                            }
-                            cwd = (stat.isDirectory) ? uri.toString() : uri.parent.toString();
-                            return [4 /*yield*/, this.newTerminal({ cwd: cwd })];
-                        case 2:
-                            termWidget = _a.sent();
-                            termWidget.start();
-                            this.activateTerminal(termWidget);
-                            return [2 /*return*/];
-                    }
-                });
-            }); }
-        }));
-    };
-    TerminalFrontendContribution.prototype.registerMenus = function (menus) {
-        menus.registerSubmenu(TerminalMenus.TERMINAL, 'Terminal');
-        menus.registerMenuAction(TerminalMenus.TERMINAL_NEW, {
-            commandId: TerminalCommands.NEW.id,
-            label: 'New Terminal',
-            order: '0'
-        });
-        menus.registerMenuAction(TerminalMenus.TERMINAL_NEW, {
-            commandId: TerminalCommands.SPLIT.id,
-            order: '1'
-        });
-        menus.registerMenuAction(TerminalMenus.TERMINAL_NAVIGATOR_CONTEXT_MENU, {
-            commandId: TerminalCommands.TERMINAL_CONTEXT.id,
-            order: 'z'
-        });
-    };
-    TerminalFrontendContribution.prototype.registerToolbarItems = function (toolbar) {
-        toolbar.registerItem({
-            id: TerminalCommands.SPLIT.id,
-            command: TerminalCommands.SPLIT.id,
-            text: '$(columns)',
-            tooltip: TerminalCommands.SPLIT.label
-        });
-    };
-    TerminalFrontendContribution.prototype.registerKeybindings = function (keybindings) {
-        keybindings.registerKeybinding({
-            command: TerminalCommands.NEW.id,
-            keybinding: 'ctrl+shift+`'
-        });
-        keybindings.registerKeybinding({
-            command: TerminalCommands.NEW_ACTIVE_WORKSPACE.id,
-            keybinding: 'ctrl+`'
-        });
-        keybindings.registerKeybinding({
-            command: TerminalCommands.TERMINAL_CLEAR.id,
-            keybinding: 'ctrlcmd+k',
-            context: terminal_keybinding_contexts_1.TerminalKeybindingContexts.terminalActive
-        });
-        /* Register passthrough keybindings for combinations recognized by
-           xterm.js and converted to control characters.
-
-             See: https://github.com/xtermjs/xterm.js/blob/v3/src/Terminal.ts#L1684 */
-        /* Register ctrl + k (the passed Key) as a passthrough command in the
-           context of the terminal.  */
-        var regCtrl = function (k) {
-            keybindings.registerKeybinding({
-                command: browser_1.KeybindingRegistry.PASSTHROUGH_PSEUDO_COMMAND,
-                keybinding: browser_1.KeyCode.createKeyCode({ key: k, ctrl: true }).toString(),
-                context: terminal_keybinding_contexts_1.TerminalKeybindingContexts.terminalActive,
-            });
-        };
-        /* Register alt + k (the passed Key) as a passthrough command in the
-           context of the terminal.  */
-        var regAlt = function (k) {
-            keybindings.registerKeybinding({
-                command: browser_1.KeybindingRegistry.PASSTHROUGH_PSEUDO_COMMAND,
-                keybinding: browser_1.KeyCode.createKeyCode({ key: k, alt: true }).toString(),
-                context: terminal_keybinding_contexts_1.TerminalKeybindingContexts.terminalActive
-            });
-        };
-        /* ctrl-space (000 - NUL).  */
-        regCtrl(browser_1.Key.SPACE);
-        /* ctrl-A (001/1/0x1) through ctrl-Z (032/26/0x1A).  */
-        for (var i = 0; i < 26; i++) {
-            regCtrl({
-                keyCode: browser_1.Key.KEY_A.keyCode + i,
-                code: 'Key' + String.fromCharCode('A'.charCodeAt(0) + i)
-            });
-        }
-        /* ctrl-[ or ctrl-3 (033/27/0x1B - ESC).  */
-        regCtrl(browser_1.Key.BRACKET_LEFT);
-        regCtrl(browser_1.Key.DIGIT3);
-        /* ctrl-\ or ctrl-4 (034/28/0x1C - FS).  */
-        regCtrl(browser_1.Key.BACKSLASH);
-        regCtrl(browser_1.Key.DIGIT4);
-        /* ctrl-] or ctrl-5 (035/29/0x1D - GS).  */
-        regCtrl(browser_1.Key.BRACKET_RIGHT);
-        regCtrl(browser_1.Key.DIGIT5);
-        /* ctrl-6 (036/30/0x1E - RS).  */
-        regCtrl(browser_1.Key.DIGIT6);
-        /* ctrl-7 (037/31/0x1F - US).  */
-        regCtrl(browser_1.Key.DIGIT7);
-        /* ctrl-8 (177/127/0x7F - DEL).  */
-        regCtrl(browser_1.Key.DIGIT8);
-        /* alt-A (0x1B 0x62) through alt-Z (0x1B 0x7A).  */
-        for (var i = 0; i < 26; i++) {
-            regAlt({
-                keyCode: browser_1.Key.KEY_A.keyCode + i,
-                code: 'Key' + String.fromCharCode('A'.charCodeAt(0) + i)
-            });
-        }
-        /* alt-` (0x1B 0x60).  */
-        regAlt(browser_1.Key.BACKQUOTE);
-        /* alt-0 (0x1B 0x30) through alt-9 (0x1B 0x39).  */
-        for (var i = 0; i < 10; i++) {
-            regAlt({
-                keyCode: browser_1.Key.DIGIT0.keyCode + i,
-                code: 'Digit' + String.fromCharCode('0'.charCodeAt(0) + i)
-            });
-        }
-        if (common_1.isOSX) {
-            // selectAll on OSX
-            keybindings.registerKeybinding({
-                command: browser_1.KeybindingRegistry.PASSTHROUGH_PSEUDO_COMMAND,
-                keybinding: 'ctrlcmd+a',
-                context: terminal_keybinding_contexts_1.TerminalKeybindingContexts.terminalActive
-            });
-        }
-    };
-    TerminalFrontendContribution.prototype.newTerminal = function (options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var widget;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.widgetManager.getOrCreateWidget(terminal_widget_impl_1.TERMINAL_WIDGET_FACTORY_ID, __assign({ created: new Date().toString() }, options))];
-                    case 1:
-                        widget = _a.sent();
-                        return [2 /*return*/, widget];
-                }
-            });
-        });
-    };
-    TerminalFrontendContribution.prototype.activateTerminal = function (widget, widgetOptions) {
-        this.open(widget, { widgetOptions: widgetOptions });
-    };
-    // TODO: reuse WidgetOpenHandler.open
-    TerminalFrontendContribution.prototype.open = function (widget, options) {
-        var op = __assign({ mode: 'activate' }, options, { widgetOptions: __assign({ area: 'bottom' }, (options && options.widgetOptions)) });
-        if (!widget.isAttached) {
-            this.shell.addWidget(widget, op.widgetOptions);
-        }
-        if (op.mode === 'activate') {
-            this.shell.activateWidget(widget.id);
-        }
-        else if (op.mode === 'reveal') {
-            this.shell.revealWidget(widget.id);
-        }
-    };
-    TerminalFrontendContribution.prototype.selectTerminalCwd = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var roots;
-            var _this = this;
-            return __generator(this, function (_a) {
-                roots = this.workspaceService.tryGetRoots();
-                return [2 /*return*/, this.quickPick.show(roots.map(function (_a) {
-                        var uri = _a.uri;
-                        return ({ label: _this.labelProvider.getName(new uri_1.default(uri)), description: _this.labelProvider.getLongName(new uri_1.default(uri)), value: uri });
-                    }), { placeholder: 'Select current working directory for new terminal' })];
-            });
-        });
-    };
-    TerminalFrontendContribution.prototype.splitTerminal = function (widget) {
-        return __awaiter(this, void 0, void 0, function () {
-            var ref;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        ref = this.getTerminalRef(widget);
-                        if (!ref) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.openTerminal({ ref: ref, mode: 'split-right' })];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TerminalFrontendContribution.prototype.getTerminalRef = function (widget) {
-        var ref = widget ? widget : this.shell.currentWidget;
-        return ref instanceof terminal_widget_1.TerminalWidget ? ref : undefined;
-    };
-    TerminalFrontendContribution.prototype.openTerminal = function (options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var cwd, termWidget;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.selectTerminalCwd()];
-                    case 1:
-                        cwd = _a.sent();
-                        return [4 /*yield*/, this.newTerminal({ cwd: cwd })];
-                    case 2:
-                        termWidget = _a.sent();
-                        termWidget.start();
-                        this.open(termWidget, { widgetOptions: options });
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TerminalFrontendContribution.prototype.openActiveWorkspaceTerminal = function (options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var termWidget;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.newTerminal({})];
-                    case 1:
-                        termWidget = _a.sent();
-                        termWidget.start();
-                        this.open(termWidget, { widgetOptions: options });
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    /**
-     * It should be aligned with https://code.visualstudio.com/api/references/theme-color#integrated-terminal-colors
-     */
-    TerminalFrontendContribution.prototype.registerColors = function (colors) {
-        colors.register({
-            id: 'terminal.background',
-            defaults: {
-                dark: 'panel.background',
-                light: 'panel.background',
-                hc: 'panel.background'
-            },
-            description: 'The background color of the terminal, this allows coloring the terminal differently to the panel.'
-        });
-        colors.register({
-            id: 'terminal.foreground',
-            defaults: {
-                light: '#333333',
-                dark: '#CCCCCC',
-                hc: '#FFFFFF'
-            },
-            description: 'The foreground color of the terminal.'
-        });
-        colors.register({
-            id: 'terminalCursor.foreground',
-            description: 'The foreground color of the terminal cursor.'
-        });
-        colors.register({
-            id: 'terminalCursor.background',
-            description: 'The background color of the terminal cursor. Allows customizing the color of a character overlapped by a block cursor.'
-        });
-        colors.register({
-            id: 'terminal.selectionBackground',
-            defaults: {
-                light: '#00000040',
-                dark: '#FFFFFF40',
-                hc: '#FFFFFF80'
-            },
-            description: 'The selection background color of the terminal.'
-        });
-        colors.register({
-            id: 'terminal.border',
-            defaults: {
-                light: 'panel.border',
-                dark: 'panel.border',
-                hc: 'panel.border'
-            },
-            description: 'The color of the border that separates split panes within the terminal. This defaults to panel.border.'
-        });
-        // eslint-disable-next-line guard-for-in
-        for (var id in terminal_theme_service_1.terminalAnsiColorMap) {
-            var entry = terminal_theme_service_1.terminalAnsiColorMap[id];
-            var colorName = id.substring(13);
-            colors.register({
-                id: id,
-                defaults: entry.defaults,
-                description: "'" + colorName + "'  ANSI color in the terminal."
-            });
-        }
-    };
-    __decorate([
-        inversify_1.inject(browser_1.LabelProvider),
-        __metadata("design:type", browser_1.LabelProvider)
-    ], TerminalFrontendContribution.prototype, "labelProvider", void 0);
-    __decorate([
-        inversify_1.inject(quick_pick_service_1.QuickPickService),
-        __metadata("design:type", Object)
-    ], TerminalFrontendContribution.prototype, "quickPick", void 0);
-    __decorate([
-        inversify_1.inject(browser_3.WorkspaceService),
-        __metadata("design:type", browser_3.WorkspaceService)
-    ], TerminalFrontendContribution.prototype, "workspaceService", void 0);
-    __decorate([
-        inversify_1.inject(context_key_service_1.ContextKeyService),
-        __metadata("design:type", context_key_service_1.ContextKeyService)
-    ], TerminalFrontendContribution.prototype, "contextKeyService", void 0);
-    __decorate([
-        inversify_1.postConstruct(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], TerminalFrontendContribution.prototype, "init", null);
-    TerminalFrontendContribution = __decorate([
-        inversify_1.injectable(),
-        __param(0, inversify_1.inject(browser_1.ApplicationShell)),
-        __param(1, inversify_1.inject(shell_terminal_protocol_1.ShellTerminalServerProxy)),
-        __param(2, inversify_1.inject(browser_2.WidgetManager)),
-        __param(3, inversify_1.inject(common_2.FileSystem)),
-        __param(4, inversify_1.inject(common_1.SelectionService)),
-        __metadata("design:paramtypes", [browser_1.ApplicationShell, Object, browser_2.WidgetManager, Object, common_1.SelectionService])
-    ], TerminalFrontendContribution);
-    return TerminalFrontendContribution;
-}());
-exports.TerminalFrontendContribution = TerminalFrontendContribution;
 
 
-/***/ }),
-
-/***/ "../node_modules/@theia/terminal/lib/browser/terminal-keybinding-contexts.js":
-/*!***********************************************************************************!*\
-  !*** ../node_modules/@theia/terminal/lib/browser/terminal-keybinding-contexts.js ***!
-  \***********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2018 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var terminal_widget_1 = __webpack_require__(/*! ./base/terminal-widget */ "../node_modules/@theia/terminal/lib/browser/base/terminal-widget.js");
-var TerminalKeybindingContexts;
-(function (TerminalKeybindingContexts) {
-    TerminalKeybindingContexts.terminalActive = 'terminalActive';
-})(TerminalKeybindingContexts = exports.TerminalKeybindingContexts || (exports.TerminalKeybindingContexts = {}));
-var TerminalActiveContext = /** @class */ (function () {
-    function TerminalActiveContext() {
-        this.id = TerminalKeybindingContexts.terminalActive;
-    }
-    TerminalActiveContext.prototype.isEnabled = function () {
-        return this.shell.activeWidget instanceof terminal_widget_1.TerminalWidget;
-    };
-    __decorate([
-        inversify_1.inject(browser_1.ApplicationShell),
-        __metadata("design:type", browser_1.ApplicationShell)
-    ], TerminalActiveContext.prototype, "shell", void 0);
-    TerminalActiveContext = __decorate([
-        inversify_1.injectable()
-    ], TerminalActiveContext);
-    return TerminalActiveContext;
-}());
-exports.TerminalActiveContext = TerminalActiveContext;
-
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "../../../../node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 /***/ })
 

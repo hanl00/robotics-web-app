@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
 
-/***/ "../node_modules/@theia/core/lib/common/selection-command-handler.js":
-/*!***************************************************************************!*\
-  !*** ../node_modules/@theia/core/lib/common/selection-command-handler.js ***!
-  \***************************************************************************/
+/***/ "../../../../node_modules/@theia/core/lib/common/selection-command-handler.js":
+/*!*************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/core/lib/common/selection-command-handler.js ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -166,10 +166,10 @@ exports.SelectionCommandHandler = SelectionCommandHandler;
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/file-resource.js":
-/*!**********************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/file-resource.js ***!
-  \**********************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/file-resource.js":
+/*!********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/file-resource.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -246,10 +246,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var core_1 = __webpack_require__(/*! @theia/core */ "../node_modules/@theia/core/lib/common/index.js");
-var filesystem_1 = __webpack_require__(/*! ../common/filesystem */ "../node_modules/@theia/filesystem/lib/common/filesystem.js");
-var filesystem_watcher_1 = __webpack_require__(/*! ./filesystem-watcher */ "../node_modules/@theia/filesystem/lib/browser/filesystem-watcher.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var core_1 = __webpack_require__(/*! @theia/core */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var filesystem_1 = __webpack_require__(/*! ../common/filesystem */ "../../../../node_modules/@theia/filesystem/lib/common/filesystem.js");
+var filesystem_watcher_1 = __webpack_require__(/*! ./filesystem-watcher */ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-watcher.js");
 var FileResource = /** @class */ (function () {
     function FileResource(uri, fileSystem, fileSystemWatcher) {
         this.uri = uri;

@@ -1,723 +1,288 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[40],{
 
-/***/ "../node_modules/@theia/scm/lib/browser/decorations/scm-decorations-service.js":
-/*!*************************************************************************************!*\
-  !*** ../node_modules/@theia/scm/lib/browser/decorations/scm-decorations-service.js ***!
-  \*************************************************************************************/
+/***/ "../../../../node_modules/moment/locale sync recursive ^\\.\\/.*$":
+/*!*************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/moment/locale sync ^\.\/.*$ ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2019 Red Hat, Inc. and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
+var map = {
+	"./af": "../../../../node_modules/moment/locale/af.js",
+	"./af.js": "../../../../node_modules/moment/locale/af.js",
+	"./ar": "../../../../node_modules/moment/locale/ar.js",
+	"./ar-dz": "../../../../node_modules/moment/locale/ar-dz.js",
+	"./ar-dz.js": "../../../../node_modules/moment/locale/ar-dz.js",
+	"./ar-kw": "../../../../node_modules/moment/locale/ar-kw.js",
+	"./ar-kw.js": "../../../../node_modules/moment/locale/ar-kw.js",
+	"./ar-ly": "../../../../node_modules/moment/locale/ar-ly.js",
+	"./ar-ly.js": "../../../../node_modules/moment/locale/ar-ly.js",
+	"./ar-ma": "../../../../node_modules/moment/locale/ar-ma.js",
+	"./ar-ma.js": "../../../../node_modules/moment/locale/ar-ma.js",
+	"./ar-sa": "../../../../node_modules/moment/locale/ar-sa.js",
+	"./ar-sa.js": "../../../../node_modules/moment/locale/ar-sa.js",
+	"./ar-tn": "../../../../node_modules/moment/locale/ar-tn.js",
+	"./ar-tn.js": "../../../../node_modules/moment/locale/ar-tn.js",
+	"./ar.js": "../../../../node_modules/moment/locale/ar.js",
+	"./az": "../../../../node_modules/moment/locale/az.js",
+	"./az.js": "../../../../node_modules/moment/locale/az.js",
+	"./be": "../../../../node_modules/moment/locale/be.js",
+	"./be.js": "../../../../node_modules/moment/locale/be.js",
+	"./bg": "../../../../node_modules/moment/locale/bg.js",
+	"./bg.js": "../../../../node_modules/moment/locale/bg.js",
+	"./bm": "../../../../node_modules/moment/locale/bm.js",
+	"./bm.js": "../../../../node_modules/moment/locale/bm.js",
+	"./bn": "../../../../node_modules/moment/locale/bn.js",
+	"./bn.js": "../../../../node_modules/moment/locale/bn.js",
+	"./bo": "../../../../node_modules/moment/locale/bo.js",
+	"./bo.js": "../../../../node_modules/moment/locale/bo.js",
+	"./br": "../../../../node_modules/moment/locale/br.js",
+	"./br.js": "../../../../node_modules/moment/locale/br.js",
+	"./bs": "../../../../node_modules/moment/locale/bs.js",
+	"./bs.js": "../../../../node_modules/moment/locale/bs.js",
+	"./ca": "../../../../node_modules/moment/locale/ca.js",
+	"./ca.js": "../../../../node_modules/moment/locale/ca.js",
+	"./cs": "../../../../node_modules/moment/locale/cs.js",
+	"./cs.js": "../../../../node_modules/moment/locale/cs.js",
+	"./cv": "../../../../node_modules/moment/locale/cv.js",
+	"./cv.js": "../../../../node_modules/moment/locale/cv.js",
+	"./cy": "../../../../node_modules/moment/locale/cy.js",
+	"./cy.js": "../../../../node_modules/moment/locale/cy.js",
+	"./da": "../../../../node_modules/moment/locale/da.js",
+	"./da.js": "../../../../node_modules/moment/locale/da.js",
+	"./de": "../../../../node_modules/moment/locale/de.js",
+	"./de-at": "../../../../node_modules/moment/locale/de-at.js",
+	"./de-at.js": "../../../../node_modules/moment/locale/de-at.js",
+	"./de-ch": "../../../../node_modules/moment/locale/de-ch.js",
+	"./de-ch.js": "../../../../node_modules/moment/locale/de-ch.js",
+	"./de.js": "../../../../node_modules/moment/locale/de.js",
+	"./dv": "../../../../node_modules/moment/locale/dv.js",
+	"./dv.js": "../../../../node_modules/moment/locale/dv.js",
+	"./el": "../../../../node_modules/moment/locale/el.js",
+	"./el.js": "../../../../node_modules/moment/locale/el.js",
+	"./en-SG": "../../../../node_modules/moment/locale/en-SG.js",
+	"./en-SG.js": "../../../../node_modules/moment/locale/en-SG.js",
+	"./en-au": "../../../../node_modules/moment/locale/en-au.js",
+	"./en-au.js": "../../../../node_modules/moment/locale/en-au.js",
+	"./en-ca": "../../../../node_modules/moment/locale/en-ca.js",
+	"./en-ca.js": "../../../../node_modules/moment/locale/en-ca.js",
+	"./en-gb": "../../../../node_modules/moment/locale/en-gb.js",
+	"./en-gb.js": "../../../../node_modules/moment/locale/en-gb.js",
+	"./en-ie": "../../../../node_modules/moment/locale/en-ie.js",
+	"./en-ie.js": "../../../../node_modules/moment/locale/en-ie.js",
+	"./en-il": "../../../../node_modules/moment/locale/en-il.js",
+	"./en-il.js": "../../../../node_modules/moment/locale/en-il.js",
+	"./en-nz": "../../../../node_modules/moment/locale/en-nz.js",
+	"./en-nz.js": "../../../../node_modules/moment/locale/en-nz.js",
+	"./eo": "../../../../node_modules/moment/locale/eo.js",
+	"./eo.js": "../../../../node_modules/moment/locale/eo.js",
+	"./es": "../../../../node_modules/moment/locale/es.js",
+	"./es-do": "../../../../node_modules/moment/locale/es-do.js",
+	"./es-do.js": "../../../../node_modules/moment/locale/es-do.js",
+	"./es-us": "../../../../node_modules/moment/locale/es-us.js",
+	"./es-us.js": "../../../../node_modules/moment/locale/es-us.js",
+	"./es.js": "../../../../node_modules/moment/locale/es.js",
+	"./et": "../../../../node_modules/moment/locale/et.js",
+	"./et.js": "../../../../node_modules/moment/locale/et.js",
+	"./eu": "../../../../node_modules/moment/locale/eu.js",
+	"./eu.js": "../../../../node_modules/moment/locale/eu.js",
+	"./fa": "../../../../node_modules/moment/locale/fa.js",
+	"./fa.js": "../../../../node_modules/moment/locale/fa.js",
+	"./fi": "../../../../node_modules/moment/locale/fi.js",
+	"./fi.js": "../../../../node_modules/moment/locale/fi.js",
+	"./fo": "../../../../node_modules/moment/locale/fo.js",
+	"./fo.js": "../../../../node_modules/moment/locale/fo.js",
+	"./fr": "../../../../node_modules/moment/locale/fr.js",
+	"./fr-ca": "../../../../node_modules/moment/locale/fr-ca.js",
+	"./fr-ca.js": "../../../../node_modules/moment/locale/fr-ca.js",
+	"./fr-ch": "../../../../node_modules/moment/locale/fr-ch.js",
+	"./fr-ch.js": "../../../../node_modules/moment/locale/fr-ch.js",
+	"./fr.js": "../../../../node_modules/moment/locale/fr.js",
+	"./fy": "../../../../node_modules/moment/locale/fy.js",
+	"./fy.js": "../../../../node_modules/moment/locale/fy.js",
+	"./ga": "../../../../node_modules/moment/locale/ga.js",
+	"./ga.js": "../../../../node_modules/moment/locale/ga.js",
+	"./gd": "../../../../node_modules/moment/locale/gd.js",
+	"./gd.js": "../../../../node_modules/moment/locale/gd.js",
+	"./gl": "../../../../node_modules/moment/locale/gl.js",
+	"./gl.js": "../../../../node_modules/moment/locale/gl.js",
+	"./gom-latn": "../../../../node_modules/moment/locale/gom-latn.js",
+	"./gom-latn.js": "../../../../node_modules/moment/locale/gom-latn.js",
+	"./gu": "../../../../node_modules/moment/locale/gu.js",
+	"./gu.js": "../../../../node_modules/moment/locale/gu.js",
+	"./he": "../../../../node_modules/moment/locale/he.js",
+	"./he.js": "../../../../node_modules/moment/locale/he.js",
+	"./hi": "../../../../node_modules/moment/locale/hi.js",
+	"./hi.js": "../../../../node_modules/moment/locale/hi.js",
+	"./hr": "../../../../node_modules/moment/locale/hr.js",
+	"./hr.js": "../../../../node_modules/moment/locale/hr.js",
+	"./hu": "../../../../node_modules/moment/locale/hu.js",
+	"./hu.js": "../../../../node_modules/moment/locale/hu.js",
+	"./hy-am": "../../../../node_modules/moment/locale/hy-am.js",
+	"./hy-am.js": "../../../../node_modules/moment/locale/hy-am.js",
+	"./id": "../../../../node_modules/moment/locale/id.js",
+	"./id.js": "../../../../node_modules/moment/locale/id.js",
+	"./is": "../../../../node_modules/moment/locale/is.js",
+	"./is.js": "../../../../node_modules/moment/locale/is.js",
+	"./it": "../../../../node_modules/moment/locale/it.js",
+	"./it-ch": "../../../../node_modules/moment/locale/it-ch.js",
+	"./it-ch.js": "../../../../node_modules/moment/locale/it-ch.js",
+	"./it.js": "../../../../node_modules/moment/locale/it.js",
+	"./ja": "../../../../node_modules/moment/locale/ja.js",
+	"./ja.js": "../../../../node_modules/moment/locale/ja.js",
+	"./jv": "../../../../node_modules/moment/locale/jv.js",
+	"./jv.js": "../../../../node_modules/moment/locale/jv.js",
+	"./ka": "../../../../node_modules/moment/locale/ka.js",
+	"./ka.js": "../../../../node_modules/moment/locale/ka.js",
+	"./kk": "../../../../node_modules/moment/locale/kk.js",
+	"./kk.js": "../../../../node_modules/moment/locale/kk.js",
+	"./km": "../../../../node_modules/moment/locale/km.js",
+	"./km.js": "../../../../node_modules/moment/locale/km.js",
+	"./kn": "../../../../node_modules/moment/locale/kn.js",
+	"./kn.js": "../../../../node_modules/moment/locale/kn.js",
+	"./ko": "../../../../node_modules/moment/locale/ko.js",
+	"./ko.js": "../../../../node_modules/moment/locale/ko.js",
+	"./ku": "../../../../node_modules/moment/locale/ku.js",
+	"./ku.js": "../../../../node_modules/moment/locale/ku.js",
+	"./ky": "../../../../node_modules/moment/locale/ky.js",
+	"./ky.js": "../../../../node_modules/moment/locale/ky.js",
+	"./lb": "../../../../node_modules/moment/locale/lb.js",
+	"./lb.js": "../../../../node_modules/moment/locale/lb.js",
+	"./lo": "../../../../node_modules/moment/locale/lo.js",
+	"./lo.js": "../../../../node_modules/moment/locale/lo.js",
+	"./lt": "../../../../node_modules/moment/locale/lt.js",
+	"./lt.js": "../../../../node_modules/moment/locale/lt.js",
+	"./lv": "../../../../node_modules/moment/locale/lv.js",
+	"./lv.js": "../../../../node_modules/moment/locale/lv.js",
+	"./me": "../../../../node_modules/moment/locale/me.js",
+	"./me.js": "../../../../node_modules/moment/locale/me.js",
+	"./mi": "../../../../node_modules/moment/locale/mi.js",
+	"./mi.js": "../../../../node_modules/moment/locale/mi.js",
+	"./mk": "../../../../node_modules/moment/locale/mk.js",
+	"./mk.js": "../../../../node_modules/moment/locale/mk.js",
+	"./ml": "../../../../node_modules/moment/locale/ml.js",
+	"./ml.js": "../../../../node_modules/moment/locale/ml.js",
+	"./mn": "../../../../node_modules/moment/locale/mn.js",
+	"./mn.js": "../../../../node_modules/moment/locale/mn.js",
+	"./mr": "../../../../node_modules/moment/locale/mr.js",
+	"./mr.js": "../../../../node_modules/moment/locale/mr.js",
+	"./ms": "../../../../node_modules/moment/locale/ms.js",
+	"./ms-my": "../../../../node_modules/moment/locale/ms-my.js",
+	"./ms-my.js": "../../../../node_modules/moment/locale/ms-my.js",
+	"./ms.js": "../../../../node_modules/moment/locale/ms.js",
+	"./mt": "../../../../node_modules/moment/locale/mt.js",
+	"./mt.js": "../../../../node_modules/moment/locale/mt.js",
+	"./my": "../../../../node_modules/moment/locale/my.js",
+	"./my.js": "../../../../node_modules/moment/locale/my.js",
+	"./nb": "../../../../node_modules/moment/locale/nb.js",
+	"./nb.js": "../../../../node_modules/moment/locale/nb.js",
+	"./ne": "../../../../node_modules/moment/locale/ne.js",
+	"./ne.js": "../../../../node_modules/moment/locale/ne.js",
+	"./nl": "../../../../node_modules/moment/locale/nl.js",
+	"./nl-be": "../../../../node_modules/moment/locale/nl-be.js",
+	"./nl-be.js": "../../../../node_modules/moment/locale/nl-be.js",
+	"./nl.js": "../../../../node_modules/moment/locale/nl.js",
+	"./nn": "../../../../node_modules/moment/locale/nn.js",
+	"./nn.js": "../../../../node_modules/moment/locale/nn.js",
+	"./pa-in": "../../../../node_modules/moment/locale/pa-in.js",
+	"./pa-in.js": "../../../../node_modules/moment/locale/pa-in.js",
+	"./pl": "../../../../node_modules/moment/locale/pl.js",
+	"./pl.js": "../../../../node_modules/moment/locale/pl.js",
+	"./pt": "../../../../node_modules/moment/locale/pt.js",
+	"./pt-br": "../../../../node_modules/moment/locale/pt-br.js",
+	"./pt-br.js": "../../../../node_modules/moment/locale/pt-br.js",
+	"./pt.js": "../../../../node_modules/moment/locale/pt.js",
+	"./ro": "../../../../node_modules/moment/locale/ro.js",
+	"./ro.js": "../../../../node_modules/moment/locale/ro.js",
+	"./ru": "../../../../node_modules/moment/locale/ru.js",
+	"./ru.js": "../../../../node_modules/moment/locale/ru.js",
+	"./sd": "../../../../node_modules/moment/locale/sd.js",
+	"./sd.js": "../../../../node_modules/moment/locale/sd.js",
+	"./se": "../../../../node_modules/moment/locale/se.js",
+	"./se.js": "../../../../node_modules/moment/locale/se.js",
+	"./si": "../../../../node_modules/moment/locale/si.js",
+	"./si.js": "../../../../node_modules/moment/locale/si.js",
+	"./sk": "../../../../node_modules/moment/locale/sk.js",
+	"./sk.js": "../../../../node_modules/moment/locale/sk.js",
+	"./sl": "../../../../node_modules/moment/locale/sl.js",
+	"./sl.js": "../../../../node_modules/moment/locale/sl.js",
+	"./sq": "../../../../node_modules/moment/locale/sq.js",
+	"./sq.js": "../../../../node_modules/moment/locale/sq.js",
+	"./sr": "../../../../node_modules/moment/locale/sr.js",
+	"./sr-cyrl": "../../../../node_modules/moment/locale/sr-cyrl.js",
+	"./sr-cyrl.js": "../../../../node_modules/moment/locale/sr-cyrl.js",
+	"./sr.js": "../../../../node_modules/moment/locale/sr.js",
+	"./ss": "../../../../node_modules/moment/locale/ss.js",
+	"./ss.js": "../../../../node_modules/moment/locale/ss.js",
+	"./sv": "../../../../node_modules/moment/locale/sv.js",
+	"./sv.js": "../../../../node_modules/moment/locale/sv.js",
+	"./sw": "../../../../node_modules/moment/locale/sw.js",
+	"./sw.js": "../../../../node_modules/moment/locale/sw.js",
+	"./ta": "../../../../node_modules/moment/locale/ta.js",
+	"./ta.js": "../../../../node_modules/moment/locale/ta.js",
+	"./te": "../../../../node_modules/moment/locale/te.js",
+	"./te.js": "../../../../node_modules/moment/locale/te.js",
+	"./tet": "../../../../node_modules/moment/locale/tet.js",
+	"./tet.js": "../../../../node_modules/moment/locale/tet.js",
+	"./tg": "../../../../node_modules/moment/locale/tg.js",
+	"./tg.js": "../../../../node_modules/moment/locale/tg.js",
+	"./th": "../../../../node_modules/moment/locale/th.js",
+	"./th.js": "../../../../node_modules/moment/locale/th.js",
+	"./tl-ph": "../../../../node_modules/moment/locale/tl-ph.js",
+	"./tl-ph.js": "../../../../node_modules/moment/locale/tl-ph.js",
+	"./tlh": "../../../../node_modules/moment/locale/tlh.js",
+	"./tlh.js": "../../../../node_modules/moment/locale/tlh.js",
+	"./tr": "../../../../node_modules/moment/locale/tr.js",
+	"./tr.js": "../../../../node_modules/moment/locale/tr.js",
+	"./tzl": "../../../../node_modules/moment/locale/tzl.js",
+	"./tzl.js": "../../../../node_modules/moment/locale/tzl.js",
+	"./tzm": "../../../../node_modules/moment/locale/tzm.js",
+	"./tzm-latn": "../../../../node_modules/moment/locale/tzm-latn.js",
+	"./tzm-latn.js": "../../../../node_modules/moment/locale/tzm-latn.js",
+	"./tzm.js": "../../../../node_modules/moment/locale/tzm.js",
+	"./ug-cn": "../../../../node_modules/moment/locale/ug-cn.js",
+	"./ug-cn.js": "../../../../node_modules/moment/locale/ug-cn.js",
+	"./uk": "../../../../node_modules/moment/locale/uk.js",
+	"./uk.js": "../../../../node_modules/moment/locale/uk.js",
+	"./ur": "../../../../node_modules/moment/locale/ur.js",
+	"./ur.js": "../../../../node_modules/moment/locale/ur.js",
+	"./uz": "../../../../node_modules/moment/locale/uz.js",
+	"./uz-latn": "../../../../node_modules/moment/locale/uz-latn.js",
+	"./uz-latn.js": "../../../../node_modules/moment/locale/uz-latn.js",
+	"./uz.js": "../../../../node_modules/moment/locale/uz.js",
+	"./vi": "../../../../node_modules/moment/locale/vi.js",
+	"./vi.js": "../../../../node_modules/moment/locale/vi.js",
+	"./x-pseudo": "../../../../node_modules/moment/locale/x-pseudo.js",
+	"./x-pseudo.js": "../../../../node_modules/moment/locale/x-pseudo.js",
+	"./yo": "../../../../node_modules/moment/locale/yo.js",
+	"./yo.js": "../../../../node_modules/moment/locale/yo.js",
+	"./zh-cn": "../../../../node_modules/moment/locale/zh-cn.js",
+	"./zh-cn.js": "../../../../node_modules/moment/locale/zh-cn.js",
+	"./zh-hk": "../../../../node_modules/moment/locale/zh-hk.js",
+	"./zh-hk.js": "../../../../node_modules/moment/locale/zh-hk.js",
+	"./zh-tw": "../../../../node_modules/moment/locale/zh-tw.js",
+	"./zh-tw.js": "../../../../node_modules/moment/locale/zh-tw.js"
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var core_1 = __webpack_require__(/*! @theia/core */ "../node_modules/@theia/core/lib/common/index.js");
-var dirty_diff_decorator_1 = __webpack_require__(/*! ../dirty-diff/dirty-diff-decorator */ "../node_modules/@theia/scm/lib/browser/dirty-diff/dirty-diff-decorator.js");
-var diff_computer_1 = __webpack_require__(/*! ../dirty-diff/diff-computer */ "../node_modules/@theia/scm/lib/browser/dirty-diff/diff-computer.js");
-var content_lines_1 = __webpack_require__(/*! ../dirty-diff/content-lines */ "../node_modules/@theia/scm/lib/browser/dirty-diff/content-lines.js");
-var browser_1 = __webpack_require__(/*! @theia/editor/lib/browser */ "../node_modules/@theia/editor/lib/browser/index.js");
-var scm_service_1 = __webpack_require__(/*! ../scm-service */ "../node_modules/@theia/scm/lib/browser/scm-service.js");
-var ScmDecorationsService = /** @class */ (function () {
-    function ScmDecorationsService(decorator, scmService, editorManager, resourceProvider) {
-        var _this = this;
-        this.decorator = decorator;
-        this.scmService = scmService;
-        this.editorManager = editorManager;
-        this.resourceProvider = resourceProvider;
-        this.NavigatorDecorationsEmitter = new core_1.Emitter();
-        this.dirtyState = true;
-        this.diffComputer = new diff_computer_1.DiffComputer();
-        this.editorManager.onCreated(function (editor) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
-            return [2 /*return*/, this.applyEditorDecorations(editor.editor)];
-        }); }); });
-        this.scmService.onDidAddRepository(function (repository) { return repository.provider.onDidChange(function () {
-            var editor = _this.editorManager.currentEditor;
-            if (editor) {
-                if (_this.dirtyState) {
-                    _this.applyEditorDecorations(editor.editor);
-                    _this.dirtyState = false;
-                }
-                else {
-                    /** onDidChange event might be called several times one after another, so need to prevent repeated events. */
-                    setTimeout(function () {
-                        _this.dirtyState = true;
-                    }, 500);
-                }
-            }
-        }); });
-        this.scmService.onDidChangeSelectedRepository(function () {
-            var editor = _this.editorManager.currentEditor;
-            if (editor) {
-                _this.applyEditorDecorations(editor.editor);
-            }
-        });
-    }
-    ScmDecorationsService.prototype.applyEditorDecorations = function (editor) {
-        return __awaiter(this, void 0, void 0, function () {
-            var currentRepo, uri, previousResource, previousContent, previousLines, currentResource, currentContent, currentLines, _a, added, removed, modified, e_1;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        currentRepo = this.scmService.selectedRepository;
-                        if (!currentRepo) return [3 /*break*/, 7];
-                        _b.label = 1;
-                    case 1:
-                        _b.trys.push([1, 6, , 7]);
-                        uri = editor.uri.withScheme(currentRepo.provider.id).withQuery("{\"ref\":\"\", \"path\":\"" + editor.uri.path.toString() + "\"}");
-                        return [4 /*yield*/, this.resourceProvider(uri)];
-                    case 2:
-                        previousResource = _b.sent();
-                        return [4 /*yield*/, previousResource.readContents()];
-                    case 3:
-                        previousContent = _b.sent();
-                        previousLines = content_lines_1.ContentLines.fromString(previousContent);
-                        return [4 /*yield*/, this.resourceProvider(editor.uri)];
-                    case 4:
-                        currentResource = _b.sent();
-                        return [4 /*yield*/, currentResource.readContents()];
-                    case 5:
-                        currentContent = _b.sent();
-                        currentLines = content_lines_1.ContentLines.fromString(currentContent);
-                        _a = this.diffComputer.computeDirtyDiff(content_lines_1.ContentLines.arrayLike(previousLines), content_lines_1.ContentLines.arrayLike(currentLines)), added = _a.added, removed = _a.removed, modified = _a.modified;
-                        this.decorator.applyDecorations({ editor: editor, added: added, removed: removed, modified: modified });
-                        currentResource.dispose();
-                        previousResource.dispose();
-                        return [3 /*break*/, 7];
-                    case 6:
-                        e_1 = _b.sent();
-                        return [3 /*break*/, 7];
-                    case 7: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    Object.defineProperty(ScmDecorationsService.prototype, "onNavigatorDecorationsChanged", {
-        get: function () {
-            return this.NavigatorDecorationsEmitter.event;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ScmDecorationsService.prototype.fireNavigatorDecorationsChanged = function (data) {
-        this.NavigatorDecorationsEmitter.fire(data);
-    };
-    ScmDecorationsService = __decorate([
-        inversify_1.injectable(),
-        __param(0, inversify_1.inject(dirty_diff_decorator_1.DirtyDiffDecorator)),
-        __param(1, inversify_1.inject(scm_service_1.ScmService)),
-        __param(2, inversify_1.inject(browser_1.EditorManager)),
-        __param(3, inversify_1.inject(core_1.ResourceProvider)),
-        __metadata("design:paramtypes", [dirty_diff_decorator_1.DirtyDiffDecorator,
-            scm_service_1.ScmService,
-            browser_1.EditorManager, Function])
-    ], ScmDecorationsService);
-    return ScmDecorationsService;
-}());
-exports.ScmDecorationsService = ScmDecorationsService;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/scm/lib/browser/scm-contribution.js":
-/*!******************************************************************!*\
-  !*** ../node_modules/@theia/scm/lib/browser/scm-contribution.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-/********************************************************************************
- * Copyright (C) 2019 Red Hat, Inc. and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var context_key_service_1 = __webpack_require__(/*! @theia/core/lib/browser/context-key-service */ "../node_modules/@theia/core/lib/browser/context-key-service.js");
-var scm_service_1 = __webpack_require__(/*! ./scm-service */ "../node_modules/@theia/scm/lib/browser/scm-service.js");
-var scm_widget_1 = __webpack_require__(/*! ../browser/scm-widget */ "../node_modules/@theia/scm/lib/browser/scm-widget.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var scm_quick_open_service_1 = __webpack_require__(/*! ./scm-quick-open-service */ "../node_modules/@theia/scm/lib/browser/scm-quick-open-service.js");
-var color_registry_1 = __webpack_require__(/*! @theia/core/lib/browser/color-registry */ "../node_modules/@theia/core/lib/browser/color-registry.js");
-exports.SCM_WIDGET_FACTORY_ID = scm_widget_1.ScmWidget.ID;
-exports.SCM_VIEW_CONTAINER_ID = 'scm-view-container';
-exports.SCM_VIEW_CONTAINER_TITLE_OPTIONS = {
-    label: 'Source Control',
-    iconClass: 'scm-tab-icon',
-    closeable: true
-};
-var SCM_COMMANDS;
-(function (SCM_COMMANDS) {
-    SCM_COMMANDS.CHANGE_REPOSITORY = {
-        id: 'scm.change.repository',
-        category: 'SCM',
-        label: 'Change Repository...'
-    };
-    SCM_COMMANDS.ACCEPT_INPUT = {
-        id: 'scm.acceptInput'
-    };
-})(SCM_COMMANDS = exports.SCM_COMMANDS || (exports.SCM_COMMANDS = {}));
-var ScmContribution = /** @class */ (function (_super) {
-    __extends(ScmContribution, _super);
-    function ScmContribution() {
-        var _this = _super.call(this, {
-            viewContainerId: exports.SCM_VIEW_CONTAINER_ID,
-            widgetId: exports.SCM_WIDGET_FACTORY_ID,
-            widgetName: 'SCM',
-            defaultWidgetOptions: {
-                area: 'left',
-                rank: 300
-            },
-            toggleCommandId: 'scmView:toggle',
-            toggleKeybinding: 'ctrlcmd+shift+g'
-        }) || this;
-        _this.statusBarDisposable = new common_1.DisposableCollection();
-        return _this;
-    }
-    ScmContribution.prototype.init = function () {
-        this.scmFocus = this.contextKeys.createKey('scmFocus', false);
-    };
-    ScmContribution.prototype.initializeLayout = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.openView()];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    ScmContribution.prototype.onStart = function () {
-        var _this = this;
-        this.updateStatusBar();
-        this.scmService.onDidAddRepository(function () { return _this.updateStatusBar(); });
-        this.scmService.onDidRemoveRepository(function () { return _this.updateStatusBar(); });
-        this.scmService.onDidChangeSelectedRepository(function () { return _this.updateStatusBar(); });
-        this.scmService.onDidChangeStatusBarCommands(function () { return _this.updateStatusBar(); });
-        this.labelProvider.onDidChange(function () { return _this.updateStatusBar(); });
-        this.updateContextKeys();
-        this.shell.currentChanged.connect(function () { return _this.updateContextKeys(); });
-    };
-    ScmContribution.prototype.updateContextKeys = function () {
-        this.scmFocus.set(this.shell.currentWidget instanceof scm_widget_1.ScmWidget);
-    };
-    ScmContribution.prototype.registerCommands = function (commandRegistry) {
-        var _this = this;
-        _super.prototype.registerCommands.call(this, commandRegistry);
-        commandRegistry.registerCommand(SCM_COMMANDS.CHANGE_REPOSITORY, {
-            execute: function () { return _this.scmQuickOpenService.changeRepository(); },
-            isEnabled: function () { return _this.scmService.repositories.length > 1; }
-        });
-        commandRegistry.registerCommand(SCM_COMMANDS.ACCEPT_INPUT, {
-            execute: function () { return _this.acceptInput(); },
-            isEnabled: function () { return !!_this.scmFocus.get() && !!_this.acceptInputCommand(); }
-        });
-    };
-    ScmContribution.prototype.registerKeybindings = function (keybindings) {
-        _super.prototype.registerKeybindings.call(this, keybindings);
-        keybindings.registerKeybinding({
-            command: SCM_COMMANDS.ACCEPT_INPUT.id,
-            keybinding: 'ctrlcmd+enter',
-            when: 'scmFocus'
-        });
-    };
-    ScmContribution.prototype.acceptInput = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var command;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        command = this.acceptInputCommand();
-                        if (!command) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.commands.executeCommand(command.command, command.repository)];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    ScmContribution.prototype.acceptInputCommand = function () {
-        var repository = this.scmService.selectedRepository;
-        if (!repository) {
-            return undefined;
-        }
-        var command = repository.provider.acceptInputCommand;
-        if (!command || !command.command) {
-            return undefined;
-        }
-        return {
-            command: command.command,
-            repository: repository
-        };
-    };
-    ScmContribution.prototype.updateStatusBar = function () {
-        var _this = this;
-        this.statusBarDisposable.dispose();
-        var repository = this.scmService.selectedRepository;
-        if (!repository) {
-            return;
-        }
-        var name = this.labelProvider.getName(new uri_1.default(repository.provider.rootUri));
-        if (this.scmService.repositories.length > 1) {
-            this.setStatusBarEntry(SCM_COMMANDS.CHANGE_REPOSITORY.id, {
-                text: "$(database) " + name,
-                tooltip: name.toString(),
-                command: SCM_COMMANDS.CHANGE_REPOSITORY.id,
-                alignment: browser_1.StatusBarAlignment.LEFT,
-                priority: 100
-            });
-        }
-        var label = repository.provider.rootUri ? name + " (" + repository.provider.label + ")" : repository.provider.label;
-        this.scmService.statusBarCommands.forEach(function (value, index) { return _this.setStatusBarEntry("scm.status." + index, {
-            text: value.title,
-            tooltip: label + (value.tooltip ? " - " + value.tooltip : ''),
-            command: value.command,
-            arguments: value.arguments,
-            alignment: browser_1.StatusBarAlignment.LEFT,
-            priority: 100
-        }); });
-    };
-    ScmContribution.prototype.setStatusBarEntry = function (id, entry) {
-        var _this = this;
-        this.statusBar.setElement(id, entry);
-        this.statusBarDisposable.push(common_1.Disposable.create(function () { return _this.statusBar.removeElement(id); }));
-    };
-    /**
-     * It should be aligned with https://github.com/microsoft/vscode/blob/0dfa355b3ad185a6289ba28a99c141ab9e72d2be/src/vs/workbench/contrib/scm/browser/dirtydiffDecorator.ts#L808
-     */
-    ScmContribution.prototype.registerColors = function (colors) {
-        var overviewRulerDefault = color_registry_1.Color.rgba(0, 122, 204, 0.6);
-        colors.register({
-            id: 'editorGutter.modifiedBackground', defaults: {
-                dark: color_registry_1.Color.rgba(12, 125, 157),
-                light: color_registry_1.Color.rgba(102, 175, 224),
-                hc: color_registry_1.Color.rgba(0, 155, 249)
-            }, description: 'Editor gutter background color for lines that are modified.'
-        }, {
-            id: 'editorGutter.addedBackground', defaults: {
-                dark: color_registry_1.Color.rgba(88, 124, 12),
-                light: color_registry_1.Color.rgba(129, 184, 139),
-                hc: color_registry_1.Color.rgba(51, 171, 78)
-            }, description: 'Editor gutter background color for lines that are added.'
-        }, {
-            id: 'editorGutter.deletedBackground', defaults: {
-                dark: color_registry_1.Color.rgba(148, 21, 27),
-                light: color_registry_1.Color.rgba(202, 75, 81),
-                hc: color_registry_1.Color.rgba(252, 93, 109)
-            }, description: 'Editor gutter background color for lines that are deleted.'
-        }, {
-            id: 'minimapGutter.modifiedBackground', defaults: {
-                dark: color_registry_1.Color.rgba(12, 125, 157),
-                light: color_registry_1.Color.rgba(102, 175, 224),
-                hc: color_registry_1.Color.rgba(0, 155, 249)
-            }, description: 'Minimap gutter background color for lines that are modified.'
-        }, {
-            id: 'minimapGutter.addedBackground',
-            defaults: {
-                dark: color_registry_1.Color.rgba(88, 124, 12),
-                light: color_registry_1.Color.rgba(129, 184, 139),
-                hc: color_registry_1.Color.rgba(51, 171, 78)
-            }, description: 'Minimap gutter background color for lines that are added.'
-        }, {
-            id: 'minimapGutter.deletedBackground', defaults: {
-                dark: color_registry_1.Color.rgba(148, 21, 27),
-                light: color_registry_1.Color.rgba(202, 75, 81),
-                hc: color_registry_1.Color.rgba(252, 93, 109)
-            }, description: 'Minimap gutter background color for lines that are deleted.'
-        }, {
-            id: 'editorOverviewRuler.modifiedForeground', defaults: {
-                dark: overviewRulerDefault, light: overviewRulerDefault, hc: overviewRulerDefault
-            }, description: 'Overview ruler marker color for modified content.'
-        }, {
-            id: 'editorOverviewRuler.addedForeground', defaults: {
-                dark: overviewRulerDefault, light: overviewRulerDefault, hc: overviewRulerDefault
-            }, description: 'Overview ruler marker color for added content.'
-        }, {
-            id: 'editorOverviewRuler.deletedForeground', defaults: {
-                dark: overviewRulerDefault, light: overviewRulerDefault, hc: overviewRulerDefault
-            }, description: 'Overview ruler marker color for deleted content.'
-        });
-    };
-    __decorate([
-        inversify_1.inject(browser_1.StatusBar),
-        __metadata("design:type", Object)
-    ], ScmContribution.prototype, "statusBar", void 0);
-    __decorate([
-        inversify_1.inject(scm_service_1.ScmService),
-        __metadata("design:type", scm_service_1.ScmService)
-    ], ScmContribution.prototype, "scmService", void 0);
-    __decorate([
-        inversify_1.inject(browser_1.QuickOpenService),
-        __metadata("design:type", browser_1.QuickOpenService)
-    ], ScmContribution.prototype, "quickOpenService", void 0);
-    __decorate([
-        inversify_1.inject(scm_quick_open_service_1.ScmQuickOpenService),
-        __metadata("design:type", scm_quick_open_service_1.ScmQuickOpenService)
-    ], ScmContribution.prototype, "scmQuickOpenService", void 0);
-    __decorate([
-        inversify_1.inject(browser_1.LabelProvider),
-        __metadata("design:type", browser_1.LabelProvider)
-    ], ScmContribution.prototype, "labelProvider", void 0);
-    __decorate([
-        inversify_1.inject(common_1.CommandService),
-        __metadata("design:type", Object)
-    ], ScmContribution.prototype, "commands", void 0);
-    __decorate([
-        inversify_1.inject(context_key_service_1.ContextKeyService),
-        __metadata("design:type", context_key_service_1.ContextKeyService)
-    ], ScmContribution.prototype, "contextKeys", void 0);
-    __decorate([
-        inversify_1.postConstruct(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], ScmContribution.prototype, "init", null);
-    ScmContribution = __decorate([
-        inversify_1.injectable(),
-        __metadata("design:paramtypes", [])
-    ], ScmContribution);
-    return ScmContribution;
-}(browser_1.AbstractViewContribution));
-exports.ScmContribution = ScmContribution;
 
 
-/***/ }),
-
-/***/ "../node_modules/@theia/scm/lib/browser/scm-quick-open-service.js":
-/*!************************************************************************!*\
-  !*** ../node_modules/@theia/scm/lib/browser/scm-quick-open-service.js ***!
-  \************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var quick_open_model_1 = __webpack_require__(/*! @theia/core/lib/browser/quick-open/quick-open-model */ "../node_modules/@theia/core/lib/browser/quick-open/quick-open-model.js");
-var quick_open_service_1 = __webpack_require__(/*! @theia/core/lib/browser/quick-open/quick-open-service */ "../node_modules/@theia/core/lib/browser/quick-open/quick-open-service.js");
-var message_service_1 = __webpack_require__(/*! @theia/core/lib/common/message-service */ "../node_modules/@theia/core/lib/common/message-service.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var common_1 = __webpack_require__(/*! @theia/filesystem/lib/common */ "../node_modules/@theia/filesystem/lib/common/index.js");
-var scm_service_1 = __webpack_require__(/*! ./scm-service */ "../node_modules/@theia/scm/lib/browser/scm-service.js");
-var ScmQuickOpenService = /** @class */ (function () {
-    function ScmQuickOpenService() {
-    }
-    ScmQuickOpenService.prototype.changeRepository = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var repositories, items;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        repositories = this.scmService.repositories;
-                        if (!(repositories.length > 1)) return [3 /*break*/, 2];
-                        return [4 /*yield*/, Promise.all(repositories.map(function (repository) { return __awaiter(_this, void 0, void 0, function () {
-                                var uri, execute, toLabel, fsPath, toDescription;
-                                var _this = this;
-                                return __generator(this, function (_a) {
-                                    switch (_a.label) {
-                                        case 0:
-                                            uri = new uri_1.default(repository.provider.rootUri);
-                                            execute = function () {
-                                                _this.scmService.selectedRepository = repository;
-                                            };
-                                            toLabel = function () { return uri.path.base; };
-                                            return [4 /*yield*/, this.fileSystem.getFsPath(uri.toString())];
-                                        case 1:
-                                            fsPath = _a.sent();
-                                            toDescription = function () { return fsPath; };
-                                            return [2 /*return*/, new ScmQuickOpenItem(repository, execute, toLabel, toDescription)];
-                                    }
-                                });
-                            }); }))];
-                    case 1:
-                        items = _a.sent();
-                        this.open(items, 'Select repository to work with:');
-                        _a.label = 2;
-                    case 2: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    ScmQuickOpenService.prototype.open = function (items, placeholder) {
-        this.quickOpenService.open(this.getModel(Array.isArray(items) ? items : [items]), this.getOptions(placeholder));
-    };
-    ScmQuickOpenService.prototype.getModel = function (items) {
-        return {
-            onType: function (lookFor, acceptor) {
-                acceptor(Array.isArray(items) ? items : [items]);
-            }
-        };
-    };
-    ScmQuickOpenService.prototype.getOptions = function (placeholder, fuzzyMatchLabel, onClose) {
-        if (fuzzyMatchLabel === void 0) { fuzzyMatchLabel = true; }
-        if (onClose === void 0) { onClose = function () { }; }
-        return quick_open_service_1.QuickOpenOptions.resolve({
-            placeholder: placeholder,
-            fuzzyMatchLabel: fuzzyMatchLabel,
-            fuzzySort: false,
-            onClose: onClose
-        });
-    };
-    __decorate([
-        inversify_1.inject(quick_open_service_1.QuickOpenService),
-        __metadata("design:type", quick_open_service_1.QuickOpenService)
-    ], ScmQuickOpenService.prototype, "quickOpenService", void 0);
-    __decorate([
-        inversify_1.inject(message_service_1.MessageService),
-        __metadata("design:type", message_service_1.MessageService)
-    ], ScmQuickOpenService.prototype, "messageService", void 0);
-    __decorate([
-        inversify_1.inject(common_1.FileSystem),
-        __metadata("design:type", Object)
-    ], ScmQuickOpenService.prototype, "fileSystem", void 0);
-    __decorate([
-        inversify_1.inject(scm_service_1.ScmService),
-        __metadata("design:type", scm_service_1.ScmService)
-    ], ScmQuickOpenService.prototype, "scmService", void 0);
-    ScmQuickOpenService = __decorate([
-        inversify_1.injectable()
-    ], ScmQuickOpenService);
-    return ScmQuickOpenService;
-}());
-exports.ScmQuickOpenService = ScmQuickOpenService;
-var ScmQuickOpenItem = /** @class */ (function (_super) {
-    __extends(ScmQuickOpenItem, _super);
-    function ScmQuickOpenItem(ref, execute, toLabel, toDescription) {
-        if (toLabel === void 0) { toLabel = function () { return "" + ref; }; }
-        if (toDescription === void 0) { toDescription = function () { return undefined; }; }
-        var _this = _super.call(this) || this;
-        _this.ref = ref;
-        _this.execute = execute;
-        _this.toLabel = toLabel;
-        _this.toDescription = toDescription;
-        return _this;
-    }
-    ScmQuickOpenItem.prototype.run = function (mode) {
-        if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
-            return false;
-        }
-        this.execute(this);
-        return true;
-    };
-    ScmQuickOpenItem.prototype.getLabel = function () {
-        return this.toLabel(this);
-    };
-    ScmQuickOpenItem.prototype.getDescription = function () {
-        return this.toDescription(this);
-    };
-    return ScmQuickOpenItem;
-}(quick_open_model_1.QuickOpenItem));
-
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "../../../../node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 /***/ })
 

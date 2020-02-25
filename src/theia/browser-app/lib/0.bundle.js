@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/filesystem-preferences.js":
-/*!*******************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/filesystem-preferences.js ***!
-  \*******************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-preferences.js":
+/*!*****************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/filesystem-preferences.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25,7 +25,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 Object.defineProperty(exports, "__esModule", { value: true });
-var preferences_1 = __webpack_require__(/*! @theia/core/lib/browser/preferences */ "../node_modules/@theia/core/lib/browser/preferences/index.js");
+var preferences_1 = __webpack_require__(/*! @theia/core/lib/browser/preferences */ "../../../../node_modules/@theia/core/lib/browser/preferences/index.js");
 exports.filesystemPreferenceSchema = {
     'type': 'object',
     'properties': {
@@ -76,10 +76,10 @@ exports.bindFileSystemPreferences = bindFileSystemPreferences;
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/browser/filesystem-watcher.js":
-/*!***************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/browser/filesystem-watcher.js ***!
-  \***************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-watcher.js":
+/*!*************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/filesystem-watcher.js ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -145,13 +145,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var filesystem_1 = __webpack_require__(/*! ../common/filesystem */ "../node_modules/@theia/filesystem/lib/common/filesystem.js");
-var filesystem_watcher_protocol_1 = __webpack_require__(/*! ../common/filesystem-watcher-protocol */ "../node_modules/@theia/filesystem/lib/common/filesystem-watcher-protocol.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var filesystem_1 = __webpack_require__(/*! ../common/filesystem */ "../../../../node_modules/@theia/filesystem/lib/common/filesystem.js");
+var filesystem_watcher_protocol_1 = __webpack_require__(/*! ../common/filesystem-watcher-protocol */ "../../../../node_modules/@theia/filesystem/lib/common/filesystem-watcher-protocol.js");
 exports.FileChangeType = filesystem_watcher_protocol_1.FileChangeType;
-var filesystem_preferences_1 = __webpack_require__(/*! ./filesystem-preferences */ "../node_modules/@theia/filesystem/lib/browser/filesystem-preferences.js");
+var filesystem_preferences_1 = __webpack_require__(/*! ./filesystem-preferences */ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-preferences.js");
 var FileChange;
 (function (FileChange) {
     function isUpdated(change, uri) {
@@ -336,10 +336,80 @@ exports.FileSystemWatcher = FileSystemWatcher;
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/common/filesystem-watcher-protocol.js":
-/*!***********************************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/common/filesystem-watcher-protocol.js ***!
-  \***********************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/common/filesystem-utils.js":
+/*!**********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/common/filesystem-utils.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2018 Ericsson and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+Object.defineProperty(exports, "__esModule", { value: true });
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var FileSystemUtils;
+(function (FileSystemUtils) {
+    /**
+     * Tildify path, replacing `home` with `~` if user's `home` is present at the beginning of the path.
+     * This is a non-operation for Windows.
+     *
+     * @param resourcePath
+     * @param home
+     */
+    function tildifyPath(resourcePath, home) {
+        var path = new common_1.Path(resourcePath);
+        var isWindows = path.root && common_1.Path.isDrive(path.root.base);
+        if (!isWindows && home && resourcePath.indexOf(home + "/") === 0) {
+            return resourcePath.replace(home + "/", '~/');
+        }
+        return resourcePath;
+    }
+    FileSystemUtils.tildifyPath = tildifyPath;
+    /**
+     * Generate unique URI for a given parent which does not collide
+     *
+     * @param parentUri the `URI` of the parent
+     * @param parent the `FileStat` of the parent
+     * @param name the resource name
+     * @param ext the resource extension
+     */
+    function generateUniqueResourceURI(parentUri, parent, name, ext) {
+        if (ext === void 0) { ext = ''; }
+        var children = !parent.children ? [] : parent.children.map(function (child) { return new uri_1.default(child.uri); });
+        var index = 1;
+        var base = name + ext;
+        while (children.some(function (child) { return child.path.base === base; })) {
+            index = index + 1;
+            base = name + '_' + index + ext;
+        }
+        return parentUri.resolve(base);
+    }
+    FileSystemUtils.generateUniqueResourceURI = generateUniqueResourceURI;
+})(FileSystemUtils = exports.FileSystemUtils || (exports.FileSystemUtils = {}));
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/filesystem/lib/common/filesystem-watcher-protocol.js":
+/*!*********************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/common/filesystem-watcher-protocol.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -399,7 +469,7 @@ var __read = (this && this.__read) || function (o, n) {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
 exports.fileSystemWatcherPath = '/services/fs-watcher';
 exports.FileSystemWatcherServer = Symbol('FileSystemWatcherServer');
 var FileChangeType;
@@ -477,10 +547,10 @@ exports.ReconnectingFileSystemWatcherServer = ReconnectingFileSystemWatcherServe
 
 /***/ }),
 
-/***/ "../node_modules/@theia/filesystem/lib/common/filesystem.js":
-/*!******************************************************************!*\
-  !*** ../node_modules/@theia/filesystem/lib/common/filesystem.js ***!
-  \******************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/common/filesystem.js":
+/*!****************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/common/filesystem.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -528,8 +598,8 @@ var __spread = (this && this.__spread) || function () {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
 exports.fileSystemPath = '/services/filesystem';
 exports.FileSystem = Symbol('FileSystem');
 var FileAccess;
@@ -624,6 +694,40 @@ var FileSystemError;
         data: { file: file, stat: stat }
     }); });
 })(FileSystemError = exports.FileSystemError || (exports.FileSystemError = {}));
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/filesystem/lib/common/index.js":
+/*!***********************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/common/index.js ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(/*! ./filesystem */ "../../../../node_modules/@theia/filesystem/lib/common/filesystem.js"));
+__export(__webpack_require__(/*! ./filesystem-utils */ "../../../../node_modules/@theia/filesystem/lib/common/filesystem-utils.js"));
 
 
 /***/ })

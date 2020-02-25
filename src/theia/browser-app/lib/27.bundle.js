@@ -1,15 +1,16 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[27],{
 
-/***/ "../node_modules/@theia/languages/lib/common/language-selector/paths.js":
-/*!******************************************************************************!*\
-  !*** ../node_modules/@theia/languages/lib/common/language-selector/paths.js ***!
-  \******************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-label-provider.js":
+/*!*****************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-label-provider.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
 /********************************************************************************
- * Copyright (C) 2018 Red Hat, Inc. and others.
+ * Copyright (C) 2019 TypeFox and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -23,232 +24,69 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-// copied from https://github.com/Microsoft/vscode/blob/bf7ac9201e7a7d01741d4e6e64b5dc9f3197d97b/src/vs/base/common/paths.ts
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-/* eslint-disable no-void */
-/* eslint-disable no-null/no-null */
-
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var os_1 = __webpack_require__(/*! @theia/core/lib/common/os */ "../node_modules/@theia/core/lib/common/os.js");
-var strings_1 = __webpack_require__(/*! ./strings */ "../node_modules/@theia/languages/lib/common/language-selector/strings.js");
-/**
- * The forward slash path separator.
- */
-exports.sep = '/';
-/**
- * The native path separator depending on the OS.
- */
-exports.nativeSep = os_1.isWindows ? '\\' : '/';
-var _posixBadPath = /(\/\.\.?\/)|(\/\.\.?)$|^(\.\.?\/)|(\/\/+)|(\\)/;
-var _winBadPath = /(\\\.\.?\\)|(\\\.\.?)$|^(\.\.?\\)|(\\\\+)|(\/)/;
-function _isNormal(path, win) {
-    return win
-        ? !_winBadPath.test(path)
-        : !_posixBadPath.test(path);
-}
-/**
- * @returns the base name of a path.
- */
-function basename(path) {
-    var idx = ~path.lastIndexOf('/') || ~path.lastIndexOf('\\');
-    if (idx === 0) {
-        return path;
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var label_provider_1 = __webpack_require__(/*! @theia/core/lib/browser/label-provider */ "../../../../node_modules/@theia/core/lib/browser/label-provider.js");
+var file_tree_1 = __webpack_require__(/*! ./file-tree */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree.js");
+var tree_label_provider_1 = __webpack_require__(/*! @theia/core/lib/browser/tree/tree-label-provider */ "../../../../node_modules/@theia/core/lib/browser/tree/tree-label-provider.js");
+var FileTreeLabelProvider = /** @class */ (function () {
+    function FileTreeLabelProvider() {
     }
-    else if (~idx === path.length - 1) {
-        return basename(path.substring(0, path.length - 1));
-    }
-    else {
-        return path.substr(~idx + 1);
-    }
-}
-exports.basename = basename;
-/**
- * @returns `.far` from `boo.far` or the empty string.
- */
-function extname(path) {
-    path = basename(path);
-    var idx = ~path.lastIndexOf('.');
-    return idx ? path.substring(~idx) : '';
-}
-exports.extname = extname;
-function normalize(path, toOSPath) {
-    if (path === null || path === void 0) {
-        return path;
-    }
-    var len = path.length;
-    if (len === 0) {
-        return '.';
-    }
-    var wantsBackslash = os_1.isWindows && toOSPath;
-    if (_isNormal(path, wantsBackslash)) {
-        return path;
-    }
-    // eslint-disable-next-line no-shadow
-    var sep = wantsBackslash ? '\\' : '/';
-    var root = getRoot(path, sep);
-    // skip the root-portion of the path
-    var start = root.length;
-    var skip = false;
-    var res = '';
-    for (var end = root.length; end <= len; end++) {
-        // either at the end or at a path-separator character
-        if (end === len || path.charCodeAt(end) === 47 /* Slash */ || path.charCodeAt(end) === 92 /* Backslash */) {
-            if (streql(path, start, end, '..')) {
-                // skip current and remove parent (if there is already something)
-                var prev_start = res.lastIndexOf(sep);
-                var prev_part = res.slice(prev_start + 1);
-                if ((root || prev_part.length > 0) && prev_part !== '..') {
-                    res = prev_start === -1 ? '' : res.slice(0, prev_start);
-                    skip = true;
-                }
-            }
-            else if (streql(path, start, end, '.') && (root || res || end < len - 1)) {
-                // skip current (if there is already something or if there is more to come)
-                skip = true;
-            }
-            if (!skip) {
-                var part = path.slice(start, end);
-                if (res !== '' && res[res.length - 1] !== sep) {
-                    res += sep;
-                }
-                res += part;
-            }
-            start = end + 1;
-            skip = false;
-        }
-    }
-    return root + res;
-}
-exports.normalize = normalize;
-function streql(value, start, end, other) {
-    return start + other.length === end && value.indexOf(other, start) === start;
-}
-/**
- * Computes the _root_ this path, like `getRoot('c:\files') === c:\`,
- * `getRoot('files:///files/path') === files:///`,
- * or `getRoot('\\server\shares\path') === \\server\shares\`
- */
-// eslint-disable-next-line no-shadow
-function getRoot(path, sep) {
-    if (sep === void 0) { sep = '/'; }
-    if (!path) {
-        return '';
-    }
-    var len = path.length;
-    var code = path.charCodeAt(0);
-    if (code === 47 /* Slash */ || code === 92 /* Backslash */) {
-        code = path.charCodeAt(1);
-        if (code === 47 /* Slash */ || code === 92 /* Backslash */) {
-            // UNC candidate \\localhost\shares\ddd
-            //               ^^^^^^^^^^^^^^^^^^^
-            code = path.charCodeAt(2);
-            if (code !== 47 /* Slash */ && code !== 92 /* Backslash */) {
-                // eslint-disable-next-line no-shadow
-                var pos_1 = 3;
-                var start = pos_1;
-                for (; pos_1 < len; pos_1++) {
-                    code = path.charCodeAt(pos_1);
-                    if (code === 47 /* Slash */ || code === 92 /* Backslash */) {
-                        break;
-                    }
-                }
-                code = path.charCodeAt(pos_1 + 1);
-                if (start !== pos_1 && code !== 47 /* Slash */ && code !== 92 /* Backslash */) {
-                    pos_1 += 1;
-                    for (; pos_1 < len; pos_1++) {
-                        code = path.charCodeAt(pos_1);
-                        if (code === 47 /* Slash */ || code === 92 /* Backslash */) {
-                            return path.slice(0, pos_1 + 1) // consume this separator
-                                .replace(/[\\/]/g, sep);
-                        }
-                    }
-                }
-            }
-        }
-        // /user/far
-        // ^
-        return sep;
-    }
-    else if ((code >= 65 /* A */ && code <= 90 /* Z */) || (code >= 97 /* a */ && code <= 122 /* z */)) {
-        // check for windows drive letter c:\ or c:
-        if (path.charCodeAt(1) === 58 /* Colon */) {
-            code = path.charCodeAt(2);
-            if (code === 47 /* Slash */ || code === 92 /* Backslash */) {
-                // C:\fff
-                // ^^^
-                return path.slice(0, 2) + sep;
-            }
-            else {
-                // C:
-                // ^^
-                return path.slice(0, 2);
-            }
-        }
-    }
-    // check for URI
-    // scheme://authority/path
-    // ^^^^^^^^^^^^^^^^^^^
-    var pos = path.indexOf('://');
-    if (pos !== -1) {
-        pos += 3; // 3 -> "://".length
-        for (; pos < len; pos++) {
-            code = path.charCodeAt(pos);
-            if (code === 47 /* Slash */ || code === 92 /* Backslash */) {
-                return path.slice(0, pos + 1); // consume this separator
-            }
-        }
-    }
-    return '';
-}
-exports.getRoot = getRoot;
-function isEqualOrParent(path, candidate, ignoreCase) {
-    if (path === candidate) {
-        return true;
-    }
-    if (!path || !candidate) {
-        return false;
-    }
-    if (candidate.length > path.length) {
-        return false;
-    }
-    if (ignoreCase) {
-        var beginsWith = strings_1.startsWithIgnoreCase(path, candidate);
-        if (!beginsWith) {
-            return false;
-        }
-        if (candidate.length === path.length) {
-            return true; // same path, different casing
-        }
-        var sepOffset = candidate.length;
-        if (candidate.charAt(candidate.length - 1) === exports.nativeSep) {
-            sepOffset--; // adjust the expected sep offset in case our candidate already ends in separator character
-        }
-        return path.charAt(sepOffset) === exports.nativeSep;
-    }
-    if (candidate.charAt(candidate.length - 1) !== exports.nativeSep) {
-        candidate += exports.nativeSep;
-    }
-    return path.indexOf(candidate) === 0;
-}
-exports.isEqualOrParent = isEqualOrParent;
+    FileTreeLabelProvider.prototype.canHandle = function (element) {
+        return file_tree_1.FileStatNode.is(element) ?
+            this.treeLabelProvider.canHandle(element) + 1 :
+            0;
+    };
+    FileTreeLabelProvider.prototype.getIcon = function (node) {
+        return this.labelProvider.getIcon(node.fileStat);
+    };
+    FileTreeLabelProvider.prototype.getName = function (node) {
+        return this.labelProvider.getName(node.fileStat);
+    };
+    FileTreeLabelProvider.prototype.getDescription = function (node) {
+        return this.labelProvider.getLongName(node.fileStat);
+    };
+    FileTreeLabelProvider.prototype.affects = function (node, event) {
+        return event.affects(node.fileStat);
+    };
+    __decorate([
+        inversify_1.inject(label_provider_1.LabelProvider),
+        __metadata("design:type", label_provider_1.LabelProvider)
+    ], FileTreeLabelProvider.prototype, "labelProvider", void 0);
+    __decorate([
+        inversify_1.inject(tree_label_provider_1.TreeLabelProvider),
+        __metadata("design:type", tree_label_provider_1.TreeLabelProvider)
+    ], FileTreeLabelProvider.prototype, "treeLabelProvider", void 0);
+    FileTreeLabelProvider = __decorate([
+        inversify_1.injectable()
+    ], FileTreeLabelProvider);
+    return FileTreeLabelProvider;
+}());
+exports.FileTreeLabelProvider = FileTreeLabelProvider;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/languages/lib/common/language-selector/strings.js":
-/*!********************************************************************************!*\
-  !*** ../node_modules/@theia/languages/lib/common/language-selector/strings.js ***!
-  \********************************************************************************/
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-frontend-module.js":
+/*!*********************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/filesystem-frontend-module.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /********************************************************************************
- * Copyright (C) 2018 Red Hat, Inc. and others.
+ * Copyright (C) 2017-2018 TypeFox and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -262,6 +100,14 @@ exports.isEqualOrParent = isEqualOrParent;
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __generator = (this && this.__generator) || function (thisArg, body) {
     var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
     return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
@@ -289,117 +135,248 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Determines if haystack ends with needle.
- */
-function endsWith(haystack, needle) {
-    var diff = haystack.length - needle.length;
-    if (diff > 0) {
-        return haystack.indexOf(needle, diff) === diff;
-    }
-    else if (diff === 0) {
-        return haystack === needle;
-    }
-    else {
-        return false;
-    }
-}
-exports.endsWith = endsWith;
-function isLowerAsciiLetter(code) {
-    return code >= 97 /* a */ && code <= 122 /* z */;
-}
-exports.isLowerAsciiLetter = isLowerAsciiLetter;
-function isUpperAsciiLetter(code) {
-    return code >= 65 /* A */ && code <= 90 /* Z */;
-}
-exports.isUpperAsciiLetter = isUpperAsciiLetter;
-function isAsciiLetter(code) {
-    return isLowerAsciiLetter(code) || isUpperAsciiLetter(code);
-}
-function equalsIgnoreCase(a, b) {
-    var len1 = a ? a.length : 0;
-    var len2 = b ? b.length : 0;
-    if (len1 !== len2) {
-        return false;
-    }
-    return doEqualsIgnoreCase(a, b);
-}
-exports.equalsIgnoreCase = equalsIgnoreCase;
-function doEqualsIgnoreCase(a, b, stopAt) {
-    if (stopAt === void 0) { stopAt = a.length; }
-    if (typeof a !== 'string' || typeof b !== 'string') {
-        return false;
-    }
-    for (var i = 0; i < stopAt; i++) {
-        var codeA = a.charCodeAt(i);
-        var codeB = b.charCodeAt(i);
-        if (codeA === codeB) {
-            continue;
-        }
-        // a-z A-Z
-        if (isAsciiLetter(codeA) && isAsciiLetter(codeB)) {
-            var diff = Math.abs(codeA - codeB);
-            if (diff !== 0 && diff !== 32) {
-                return false;
-            }
-        }
-        // Any other charcode
-        // tslint:disable-next-line:one-line
-        else {
-            if (String.fromCharCode(codeA).toLowerCase() !== String.fromCharCode(codeB).toLowerCase()) {
-                return false;
-            }
-        }
-    }
-    return true;
-}
-/**
- * Escapes regular expression characters in a given string
- */
-function escapeRegExpCharacters(value) {
-    return value.replace(/[\-\\\{\}\*\+\?\|\^\$\.\[\]\(\)\#]/g, '\\$&');
-}
-exports.escapeRegExpCharacters = escapeRegExpCharacters;
-function startsWithIgnoreCase(str, candidate) {
-    var candidateLength = candidate.length;
-    if (candidate.length > str.length) {
-        return false;
-    }
-    return doEqualsIgnoreCase(str, candidate, candidateLength);
-}
-exports.startsWithIgnoreCase = startsWithIgnoreCase;
-function split(s, splitter) {
-    var start, end;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                start = 0;
-                _a.label = 1;
-            case 1:
-                if (!(start < s.length)) return [3 /*break*/, 3];
-                end = s.indexOf(splitter, start);
-                if (end === -1) {
-                    end = s.length;
-                }
-                return [4 /*yield*/, s.substring(start, end)];
-            case 2:
-                _a.sent();
-                start = end + splitter.length;
-                return [3 /*break*/, 1];
-            case 3: return [2 /*return*/];
-        }
+__webpack_require__(/*! ../../src/browser/style/index.css */ "../../../../node_modules/@theia/filesystem/src/browser/style/index.css");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var common_2 = __webpack_require__(/*! ../common */ "../../../../node_modules/@theia/filesystem/lib/common/index.js");
+var filesystem_watcher_protocol_1 = __webpack_require__(/*! ../common/filesystem-watcher-protocol */ "../../../../node_modules/@theia/filesystem/lib/common/filesystem-watcher-protocol.js");
+var file_resource_1 = __webpack_require__(/*! ./file-resource */ "../../../../node_modules/@theia/filesystem/lib/browser/file-resource.js");
+var filesystem_preferences_1 = __webpack_require__(/*! ./filesystem-preferences */ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-preferences.js");
+var filesystem_watcher_1 = __webpack_require__(/*! ./filesystem-watcher */ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-watcher.js");
+var filesystem_frontend_contribution_1 = __webpack_require__(/*! ./filesystem-frontend-contribution */ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-frontend-contribution.js");
+var filesystem_proxy_factory_1 = __webpack_require__(/*! ./filesystem-proxy-factory */ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-proxy-factory.js");
+var file_upload_service_1 = __webpack_require__(/*! ./file-upload-service */ "../../../../node_modules/@theia/filesystem/lib/browser/file-upload-service.js");
+var file_tree_label_provider_1 = __webpack_require__(/*! ./file-tree/file-tree-label-provider */ "../../../../node_modules/@theia/filesystem/lib/browser/file-tree/file-tree-label-provider.js");
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+exports.default = new inversify_1.ContainerModule(function (bind) {
+    filesystem_preferences_1.bindFileSystemPreferences(bind);
+    bind(filesystem_watcher_protocol_1.FileSystemWatcherServerProxy).toDynamicValue(function (ctx) {
+        return browser_1.WebSocketConnectionProvider.createProxy(ctx.container, filesystem_watcher_protocol_1.fileSystemWatcherPath);
     });
+    bind(filesystem_watcher_protocol_1.FileSystemWatcherServer).to(filesystem_watcher_protocol_1.ReconnectingFileSystemWatcherServer);
+    bind(filesystem_watcher_1.FileSystemWatcher).toSelf().inSingletonScope();
+    bind(common_2.FileShouldOverwrite).toDynamicValue(function (context) { return function (file, stat) { return __awaiter(_this, void 0, void 0, function () {
+        var labelProvider, dialog;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    labelProvider = context.container.get(browser_1.LabelProvider);
+                    dialog = new browser_1.ConfirmDialog({
+                        title: "The file '" + labelProvider.getName(new uri_1.default(file.uri)) + "' has been changed on the file system.",
+                        msg: "Do you want to overwrite the changes made to '" + labelProvider.getLongName(new uri_1.default(file.uri)) + "' on the file system?",
+                        ok: 'Yes',
+                        cancel: 'No'
+                    });
+                    return [4 /*yield*/, dialog.open()];
+                case 1: return [2 /*return*/, !!(_a.sent())];
+            }
+        });
+    }); }; }).inSingletonScope();
+    bind(filesystem_proxy_factory_1.FileSystemProxyFactory).toSelf();
+    bind(common_2.FileSystem).toDynamicValue(function (ctx) {
+        var proxyFactory = ctx.container.get(filesystem_proxy_factory_1.FileSystemProxyFactory);
+        return browser_1.WebSocketConnectionProvider.createProxy(ctx.container, common_2.fileSystemPath, proxyFactory);
+    }).inSingletonScope();
+    bindFileResource(bind);
+    bind(file_upload_service_1.FileUploadService).toSelf().inSingletonScope();
+    bind(filesystem_frontend_contribution_1.FileSystemFrontendContribution).toSelf().inSingletonScope();
+    bind(common_1.CommandContribution).toService(filesystem_frontend_contribution_1.FileSystemFrontendContribution);
+    bind(browser_1.FrontendApplicationContribution).toService(filesystem_frontend_contribution_1.FileSystemFrontendContribution);
+    bind(file_tree_label_provider_1.FileTreeLabelProvider).toSelf().inSingletonScope();
+    bind(browser_1.LabelProviderContribution).toService(file_tree_label_provider_1.FileTreeLabelProvider);
+});
+function bindFileResource(bind) {
+    bind(file_resource_1.FileResourceResolver).toSelf().inSingletonScope();
+    bind(common_1.ResourceResolver).toService(file_resource_1.FileResourceResolver);
 }
-exports.split = split;
-function escapeInvisibleChars(value) {
-    return value.replace(/\n/g, '\\n').replace(/\r/g, '\\r');
-}
-exports.escapeInvisibleChars = escapeInvisibleChars;
-function unescapeInvisibleChars(value) {
-    return value.replace(/\\n/g, '\n').replace(/\\r/g, '\r');
-}
-exports.unescapeInvisibleChars = unescapeInvisibleChars;
+exports.bindFileResource = bindFileResource;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-proxy-factory.js":
+/*!*******************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/lib/browser/filesystem-proxy-factory.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2019 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+/* eslint-disable @typescript-eslint/no-explicit-any */
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var proxy_factory_1 = __webpack_require__(/*! @theia/core/lib/common/messaging/proxy-factory */ "../../../../node_modules/@theia/core/lib/common/messaging/proxy-factory.js");
+var filesystem_preferences_1 = __webpack_require__(/*! ./filesystem-preferences */ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-preferences.js");
+var FileSystemProxyFactory = /** @class */ (function (_super) {
+    __extends(FileSystemProxyFactory, _super);
+    function FileSystemProxyFactory() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    FileSystemProxyFactory.prototype.get = function (target, propertyKey, receiver) {
+        var _this = this;
+        var property = _super.prototype.get.call(this, target, propertyKey, receiver);
+        if (propertyKey !== 'delete') {
+            return property;
+        }
+        var deleteFn = function (uri, options) {
+            var opt = __assign({}, options);
+            if (opt.moveToTrash === undefined) {
+                opt.moveToTrash = _this.preferences['files.enableTrash'];
+            }
+            return property(uri, opt);
+        };
+        return deleteFn;
+    };
+    __decorate([
+        inversify_1.inject(filesystem_preferences_1.FileSystemPreferences),
+        __metadata("design:type", Object)
+    ], FileSystemProxyFactory.prototype, "preferences", void 0);
+    FileSystemProxyFactory = __decorate([
+        inversify_1.injectable()
+    ], FileSystemProxyFactory);
+    return FileSystemProxyFactory;
+}(proxy_factory_1.JsonRpcProxyFactory));
+exports.FileSystemProxyFactory = FileSystemProxyFactory;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/filesystem/src/browser/style/index.css":
+/*!*******************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/filesystem/src/browser/style/index.css ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../css-loader!./index.css */ "../../../../node_modules/css-loader/index.js!../../../../node_modules/@theia/filesystem/src/browser/style/index.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../style-loader/lib/addStyles.js */ "../../../../node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "../../../../node_modules/css-loader/index.js!../../../../node_modules/@theia/filesystem/src/browser/style/file-dialog.css":
+/*!**************************************************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/css-loader!/home/nicholas/Documents/node_modules/@theia/filesystem/src/browser/style/file-dialog.css ***!
+  \**************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../css-loader/lib/css-base.js */ "../../../../node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "/********************************************************************************\n * Copyright (C) 2017 TypeFox and others.\n *\n * This program and the accompanying materials are made available under the\n * terms of the Eclipse Public License v. 2.0 which is available at\n * http://www.eclipse.org/legal/epl-2.0.\n *\n * This Source Code may also be made available under the following Secondary\n * Licenses when the conditions for such availability set forth in the Eclipse\n * Public License v. 2.0 are satisfied: GNU General Public License, version 2\n * with the GNU Classpath Exception which is available at\n * https://www.gnu.org/software/classpath/license.html.\n *\n * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0\n ********************************************************************************/\n\n /*\n  * Open and Save file dialogs\n  */\n\n.dialogContent .theia-FileDialog,\n.dialogContent .theia-SaveFileDialog,\n.dialogContent .theia-ResponsiveFileDialog {\n    height: 500px;\n    width: 500px;\n    border: 1px solid var(--theia-editorWidget-border);\n    background: var(--theia-dropdown-background);\n}\n\n\n@media only screen and (max-height: 700px) {\n    .dialogContent .theia-FileDialog,\n    .dialogContent .theia-SaveFileDialog,\n    .dialogContent .theia-ResponsiveFileDialog {\n        height: 300px;\n    }\n}\n\n.dialogContent .theia-NavigationPanel,\n.dialogContent .theia-FiltersPanel,\n.dialogContent .theia-FileNamePanel {\n    display: block;\n    position: relative;\n    overflow: hidden;\n}\n\n.dialogContent .theia-NavigationPanel,\n.dialogContent .theia-FiltersPanel {\n    min-height: 27px;\n}\n\n.dialogContent .theia-FileNamePanel {\n    height: 31px;\n}\n\n/*\n * Navigation panel items\n */\n\n.dialogContent .theia-NavigationBack,\n.dialogContent .theia-NavigationForward,\n.dialogContent .theia-NavigationHome {\n    position: absolute;\n    top: 0px;\n    line-height: 23px;\n    cursor: pointer;\n    outline: none;\n}\n\n.dialogContent .theia-NavigationBack:focus,\n.dialogContent .theia-NavigationForward:focus,\n.dialogContent .theia-NavigationHome:focus {\n    outline: none;\n    border: none;\n    box-shadow: none;\n}\n\n.dialogContent .theia-NavigationBack {\n    left: auto;\n}\n\n.dialogContent .theia-NavigationForward {\n    left: 21px;\n}\n\n.dialogContent .theia-NavigationHome {\n    left: 41px;\n}\n\n.dialogContent .theia-LocationListPanel {\n    position: absolute;\n    left: 72px;\n    top: 1px;\n}\n\n.dialogContent .theia-LocationList {\n    width: 427px;\n    height: 21px;\n}\n\n/*\n * Filters panel items\n */\n\n.dialogContent .theia-FiltersLabel {\n    position: absolute;\n    left: 1px;\n    top: 0px;\n    line-height: 27px;\n}\n\n.dialogContent .theia-FiltersListPanel {\n    position: absolute;\n    left: 72px;\n    top: 3px;\n}\n\n.dialogContent .theia-FileTreeFiltersList {\n    width: 427px;\n    height: 21px;    \n}\n\n/*\n * File name panel items\n */\n\n.dialogContent .theia-FileNameLabel {\n    position: absolute;\n    left: 1px;\n    top: 0px;\n    line-height: 23px;\n}\n\n.dialogContent .theia-FileNameTextField {\n    position: absolute;\n    left: 72px;\n    top: 0px;\n    width: 420px;\n}\n\n/*\n * Control panel items\n */\n\n.dialogContent .theia-ControlPanel {\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-end;\n    margin-bottom: 0px;\n}\n\n.dialogContent .theia-ControlPanel > * {\n    margin-left: 4px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/css-loader/index.js!../../../../node_modules/@theia/filesystem/src/browser/style/file-icons.css":
+/*!*************************************************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/css-loader!/home/nicholas/Documents/node_modules/@theia/filesystem/src/browser/style/file-icons.css ***!
+  \*************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../css-loader/lib/css-base.js */ "../../../../node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "/********************************************************************************\n * Copyright (C) 2017 TypeFox and others.\n *\n * This program and the accompanying materials are made available under the\n * terms of the Eclipse Public License v. 2.0 which is available at\n * http://www.eclipse.org/legal/epl-2.0.\n *\n * This Source Code may also be made available under the following Secondary\n * Licenses when the conditions for such availability set forth in the Eclipse\n * Public License v. 2.0 are satisfied: GNU General Public License, version 2\n * with the GNU Classpath Exception which is available at\n * https://www.gnu.org/software/classpath/license.html.\n *\n * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0\n ********************************************************************************/\n\n .theia-file-icons-js {\n    /*\n    Here, the `line-height` ensures that FontAwesome and `file-icons-js` container has the same height.\n    Ideally, it would be 1 em, but since we set the max height above (and other places too) with 0.8\n    multiplier, we use 0.8 em here too.\n     */\n    line-height: 0.8em;\n}\n\n.theia-file-icons-js:before {\n    font-size: calc(var(--theia-content-font-size) * 0.8);\n}\n\n.theia-file-icons-js.file-icon {\n    width: var(--theia-icon-size);\n    height: var(--theia-icon-size);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n.fa-file:before,\n.fa-folder:before,\n.theia-file-icons-js:before {\n    text-align: center;\n    margin-right: 4px;\n}\n\n.theia-app-sides .theia-file-icons-js {\n    max-height: none;\n    line-height: inherit;\n}\n\n.theia-app-sides .theia-file-icons-js:before {\n    font-size: var(--theia-private-sidebar-icon-size);\n    margin-right: 0px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/css-loader/index.js!../../../../node_modules/@theia/filesystem/src/browser/style/index.css":
+/*!********************************************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/css-loader!/home/nicholas/Documents/node_modules/@theia/filesystem/src/browser/style/index.css ***!
+  \********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../css-loader/lib/css-base.js */ "../../../../node_modules/css-loader/lib/css-base.js")(false);
+// imports
+exports.i(__webpack_require__(/*! -!../../../../../css-loader!./file-dialog.css */ "../../../../node_modules/css-loader/index.js!../../../../node_modules/@theia/filesystem/src/browser/style/file-dialog.css"), "");
+exports.i(__webpack_require__(/*! -!../../../../../css-loader!./file-icons.css */ "../../../../node_modules/css-loader/index.js!../../../../node_modules/@theia/filesystem/src/browser/style/file-icons.css"), "");
+
+// module
+exports.push([module.i, "/********************************************************************************\n * Copyright (C) 2017 TypeFox and others.\n *\n * This program and the accompanying materials are made available under the\n * terms of the Eclipse Public License v. 2.0 which is available at\n * http://www.eclipse.org/legal/epl-2.0.\n *\n * This Source Code may also be made available under the following Secondary\n * Licenses when the conditions for such availability set forth in the Eclipse\n * Public License v. 2.0 are satisfied: GNU General Public License, version 2\n * with the GNU Classpath Exception which is available at\n * https://www.gnu.org/software/classpath/license.html.\n *\n * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0\n ********************************************************************************/\n\n.theia-file-tree-drag-image {\n  position: absolute;\n  /*\n    make sure you don't see it flashing\n     */\n  top: -1000px;\n  font-size: var(--theia-ui-font-size1);\n  display: inline-block;\n  padding: 1px calc(var(--theia-ui-padding)*2);\n  border-radius: 10px;\n\n  background: var(--theia-list-activeSelectionBackground);\n  color: var(--theia-list-activeSelectionForeground);\n  outline: 1px solid var(--theia-contrastActiveBorder); \n  outline-offset: -1px;\n}\n", ""]);
+
+// exports
 
 
 /***/ })

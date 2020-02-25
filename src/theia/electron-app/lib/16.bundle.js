@@ -1,16 +1,16 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[16],{
 
-/***/ "../node_modules/@theia/userstorage/lib/browser/user-storage-frontend-module.js":
-/*!**************************************************************************************!*\
-  !*** ../node_modules/@theia/userstorage/lib/browser/user-storage-frontend-module.js ***!
-  \**************************************************************************************/
+/***/ "../../../../node_modules/@theia/outline-view/lib/browser/outline-decorator-service.js":
+/*!**********************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/outline-view/lib/browser/outline-decorator-service.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /********************************************************************************
- * Copyright (C) 2017 Ericsson and others.
+ * Copyright (C) 2018 Redhat, Ericsson and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -24,35 +24,72 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var user_storage_resource_1 = __webpack_require__(/*! ./user-storage-resource */ "../node_modules/@theia/userstorage/lib/browser/user-storage-resource.js");
-var user_storage_service_filesystem_1 = __webpack_require__(/*! ./user-storage-service-filesystem */ "../node_modules/@theia/userstorage/lib/browser/user-storage-service-filesystem.js");
-var user_storage_service_1 = __webpack_require__(/*! ./user-storage-service */ "../node_modules/@theia/userstorage/lib/browser/user-storage-service.js");
-function bindUserStorage(bind) {
-    bind(common_1.ResourceResolver).to(user_storage_resource_1.UserStorageResolver).inSingletonScope();
-    bind(user_storage_service_1.UserStorageService).to(user_storage_service_filesystem_1.UserStorageServiceFilesystemImpl).inSingletonScope();
-}
-exports.bindUserStorage = bindUserStorage;
-exports.default = new inversify_1.ContainerModule(function (bind) {
-    bindUserStorage(bind);
-});
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var contribution_provider_1 = __webpack_require__(/*! @theia/core/lib/common/contribution-provider */ "../../../../node_modules/@theia/core/lib/common/contribution-provider.js");
+var tree_decorator_1 = __webpack_require__(/*! @theia/core/lib/browser/tree/tree-decorator */ "../../../../node_modules/@theia/core/lib/browser/tree/tree-decorator.js");
+/**
+ * Symbol for all decorators that would like to contribute into the outline.
+ */
+exports.OutlineTreeDecorator = Symbol('OutlineTreeDecorator');
+/**
+ * Decorator service for the outline.
+ */
+var OutlineDecoratorService = /** @class */ (function (_super) {
+    __extends(OutlineDecoratorService, _super);
+    function OutlineDecoratorService(contributions) {
+        var _this = _super.call(this, contributions.getContributions()) || this;
+        _this.contributions = contributions;
+        return _this;
+    }
+    OutlineDecoratorService = __decorate([
+        inversify_1.injectable(),
+        __param(0, inversify_1.inject(contribution_provider_1.ContributionProvider)), __param(0, inversify_1.named(exports.OutlineTreeDecorator)),
+        __metadata("design:paramtypes", [Object])
+    ], OutlineDecoratorService);
+    return OutlineDecoratorService;
+}(tree_decorator_1.AbstractTreeDecoratorService));
+exports.OutlineDecoratorService = OutlineDecoratorService;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/userstorage/lib/browser/user-storage-resource.js":
-/*!*******************************************************************************!*\
-  !*** ../node_modules/@theia/userstorage/lib/browser/user-storage-resource.js ***!
-  \*******************************************************************************/
+/***/ "../../../../node_modules/@theia/outline-view/lib/browser/outline-view-service.js":
+/*!*****************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/outline-view/lib/browser/outline-view-service.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /********************************************************************************
- * Copyright (C) 2017 Ericsson and others.
+ * Copyright (C) 2017 TypeFox and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -78,100 +115,101 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var user_storage_service_1 = __webpack_require__(/*! ./user-storage-service */ "../node_modules/@theia/userstorage/lib/browser/user-storage-service.js");
-var user_storage_uri_1 = __webpack_require__(/*! ./user-storage-uri */ "../node_modules/@theia/userstorage/lib/browser/user-storage-uri.js");
-var UserStorageResource = /** @class */ (function () {
-    function UserStorageResource(uri, service) {
-        var _this = this;
-        this.uri = uri;
-        this.service = service;
-        this.onDidChangeContentsEmitter = new common_1.Emitter();
-        this.toDispose = new common_1.DisposableCollection();
-        this.toDispose.push(this.service.onUserStorageChanged(function (e) {
-            var e_1, _a;
-            try {
-                for (var _b = __values(e.uris), _c = _b.next(); !_c.done; _c = _b.next()) {
-                    var changedUri = _c.value;
-                    if (changedUri.toString() === _this.uri.toString()) {
-                        _this.onDidChangeContentsEmitter.fire(undefined);
-                    }
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-        }));
-        this.toDispose.push(this.onDidChangeContentsEmitter);
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var core_1 = __webpack_require__(/*! @theia/core */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var outline_view_widget_1 = __webpack_require__(/*! ./outline-view-widget */ "../../../../node_modules/@theia/outline-view/lib/browser/outline-view-widget.js");
+var OutlineViewService = /** @class */ (function () {
+    function OutlineViewService(factory) {
+        this.factory = factory;
+        this.id = 'outline-view';
+        this.onDidChangeOutlineEmitter = new core_1.Emitter();
+        this.onDidChangeOpenStateEmitter = new core_1.Emitter();
+        this.onDidSelectEmitter = new core_1.Emitter();
+        this.onDidOpenEmitter = new core_1.Emitter();
     }
-    UserStorageResource.prototype.dispose = function () {
-        this.toDispose.dispose();
-    };
-    UserStorageResource.prototype.readContents = function (options) {
-        return this.service.readContents(this.uri);
-    };
-    UserStorageResource.prototype.saveContents = function (content) {
-        return this.service.saveContents(this.uri, content);
-    };
-    Object.defineProperty(UserStorageResource.prototype, "onDidChangeContents", {
+    Object.defineProperty(OutlineViewService.prototype, "onDidSelect", {
         get: function () {
-            return this.onDidChangeContentsEmitter.event;
+            return this.onDidSelectEmitter.event;
         },
         enumerable: true,
         configurable: true
     });
-    return UserStorageResource;
-}());
-exports.UserStorageResource = UserStorageResource;
-var UserStorageResolver = /** @class */ (function () {
-    function UserStorageResolver(service) {
-        this.service = service;
-    }
-    UserStorageResolver.prototype.resolve = function (uri) {
-        if (uri.scheme !== user_storage_uri_1.UserStorageUri.SCHEME) {
-            throw new Error('The given uri is not a user storage uri: ' + uri);
+    Object.defineProperty(OutlineViewService.prototype, "onDidOpen", {
+        get: function () {
+            return this.onDidOpenEmitter.event;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(OutlineViewService.prototype, "onDidChangeOutline", {
+        get: function () {
+            return this.onDidChangeOutlineEmitter.event;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(OutlineViewService.prototype, "onDidChangeOpenState", {
+        get: function () {
+            return this.onDidChangeOpenStateEmitter.event;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(OutlineViewService.prototype, "open", {
+        get: function () {
+            return this.widget !== undefined && this.widget.isVisible;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Publish the collection of outline view symbols.
+     * - Publishing includes setting the `OutlineViewWidget` tree with symbol information.
+     * @param roots the list of outline symbol information nodes.
+     */
+    OutlineViewService.prototype.publish = function (roots) {
+        if (this.widget) {
+            this.widget.setOutlineTree(roots);
+            this.onDidChangeOutlineEmitter.fire(roots);
         }
-        return new UserStorageResource(uri, this.service);
     };
-    UserStorageResolver = __decorate([
+    OutlineViewService.prototype.createWidget = function () {
+        var _this = this;
+        this.widget = this.factory();
+        var disposables = new core_1.DisposableCollection();
+        disposables.push(this.widget.onDidChangeOpenStateEmitter.event(function (open) { return _this.onDidChangeOpenStateEmitter.fire(open); }));
+        disposables.push(this.widget.model.onOpenNode(function (node) { return _this.onDidOpenEmitter.fire(node); }));
+        disposables.push(this.widget.model.onSelectionChanged(function (selection) { return _this.onDidSelectEmitter.fire(selection[0]); }));
+        this.widget.disposed.connect(function () {
+            _this.widget = undefined;
+            disposables.dispose();
+        });
+        return Promise.resolve(this.widget);
+    };
+    OutlineViewService = __decorate([
         inversify_1.injectable(),
-        __param(0, inversify_1.inject(user_storage_service_1.UserStorageService)),
-        __metadata("design:paramtypes", [Object])
-    ], UserStorageResolver);
-    return UserStorageResolver;
+        __param(0, inversify_1.inject(outline_view_widget_1.OutlineViewWidgetFactory)),
+        __metadata("design:paramtypes", [Function])
+    ], OutlineViewService);
+    return OutlineViewService;
 }());
-exports.UserStorageResolver = UserStorageResolver;
+exports.OutlineViewService = OutlineViewService;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/userstorage/lib/browser/user-storage-service-filesystem.js":
-/*!*****************************************************************************************!*\
-  !*** ../node_modules/@theia/userstorage/lib/browser/user-storage-service-filesystem.js ***!
-  \*****************************************************************************************/
+/***/ "../../../../node_modules/@theia/outline-view/lib/browser/outline-view-tree.js":
+/*!**************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/outline-view/lib/browser/outline-view-tree.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /********************************************************************************
- * Copyright (C) 2017 Ericsson and others.
+ * Copyright (C) 2019 Ericsson and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -185,6 +223,19 @@ exports.UserStorageResolver = UserStorageResolver;
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -193,9 +244,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -232,202 +280,60 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var filesystem_watcher_1 = __webpack_require__(/*! @theia/filesystem/lib/browser/filesystem-watcher */ "../node_modules/@theia/filesystem/lib/browser/filesystem-watcher.js");
-var common_2 = __webpack_require__(/*! @theia/filesystem/lib/common */ "../node_modules/@theia/filesystem/lib/common/index.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var user_storage_uri_1 = __webpack_require__(/*! ./user-storage-uri */ "../node_modules/@theia/userstorage/lib/browser/user-storage-uri.js");
-exports.THEIA_USER_STORAGE_FOLDER = '.theia';
-var UserStorageServiceFilesystemImpl = /** @class */ (function () {
-    function UserStorageServiceFilesystemImpl(fileSystem, watcher, logger) {
-        var _this = this;
-        this.fileSystem = fileSystem;
-        this.watcher = watcher;
-        this.logger = logger;
-        this.toDispose = new common_1.DisposableCollection();
-        this.onUserStorageChangedEmitter = new common_1.Emitter();
-        this.userStorageFolder = this.fileSystem.getCurrentUserHome().then(function (home) {
-            if (home) {
-                var userStorageFolderUri = new uri_1.default(home.uri).resolve(exports.THEIA_USER_STORAGE_FOLDER);
-                watcher.watchFileChanges(userStorageFolderUri).then(function (disposable) {
-                    return _this.toDispose.push(disposable);
-                });
-                _this.toDispose.push(_this.watcher.onFilesChanged(function (changes) { return _this.onDidFilesChanged(changes); }));
-                return new uri_1.default(home.uri).resolve(exports.THEIA_USER_STORAGE_FOLDER);
-            }
-        });
-        this.toDispose.push(this.onUserStorageChangedEmitter);
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var OutlineViewTreeModel = /** @class */ (function (_super) {
+    __extends(OutlineViewTreeModel, _super);
+    function OutlineViewTreeModel() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    UserStorageServiceFilesystemImpl_1 = UserStorageServiceFilesystemImpl;
-    UserStorageServiceFilesystemImpl.prototype.dispose = function () {
-        this.toDispose.dispose();
+    /**
+     * Handle the expansion of the tree node.
+     * - The method is a no-op in order to preserve focus on the editor
+     * after attempting to perform a `collapse-all`.
+     * @param node the expandable tree node.
+     */
+    OutlineViewTreeModel.prototype.handleExpansion = function (node) {
+        // no-op
     };
-    UserStorageServiceFilesystemImpl.prototype.onDidFilesChanged = function (event) {
-        var _this = this;
-        var uris = [];
-        this.userStorageFolder.then(function (folder) {
-            var e_1, _a;
-            if (folder) {
-                try {
-                    for (var event_1 = __values(event), event_1_1 = event_1.next(); !event_1_1.done; event_1_1 = event_1.next()) {
-                        var change = event_1_1.value;
-                        if (folder.isEqualOrParent(change.uri)) {
-                            var userStorageUri = UserStorageServiceFilesystemImpl_1.toUserStorageUri(folder, change.uri);
-                            uris.push(userStorageUri);
-                        }
-                    }
-                }
-                catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                finally {
-                    try {
-                        if (event_1_1 && !event_1_1.done && (_a = event_1.return)) _a.call(event_1);
-                    }
-                    finally { if (e_1) throw e_1.error; }
-                }
-                if (uris.length > 0) {
-                    _this.onUserStorageChangedEmitter.fire({ uris: uris });
-                }
-            }
-        });
-    };
-    UserStorageServiceFilesystemImpl.prototype.readContents = function (uri) {
+    OutlineViewTreeModel.prototype.collapseAll = function (raw) {
         return __awaiter(this, void 0, void 0, function () {
-            var folderUri, filesystemUri, exists;
+            var node;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userStorageFolder];
-                    case 1:
-                        folderUri = _a.sent();
-                        if (!folderUri) return [3 /*break*/, 3];
-                        filesystemUri = UserStorageServiceFilesystemImpl_1.toFilesystemURI(folderUri, uri);
-                        return [4 /*yield*/, this.fileSystem.exists(filesystemUri.toString())];
-                    case 2:
-                        exists = _a.sent();
-                        if (exists) {
-                            return [2 /*return*/, this.fileSystem.resolveContent(filesystemUri.toString()).then(function (_a) {
-                                    var stat = _a.stat, content = _a.content;
-                                    return content;
-                                })];
-                        }
-                        _a.label = 3;
-                    case 3: return [2 /*return*/, ''];
+                node = raw || this.selectedNodes[0];
+                if (browser_1.CompositeTreeNode.is(node)) {
+                    return [2 /*return*/, this.expansionService.collapseAll(node)];
                 }
+                return [2 /*return*/, false];
             });
         });
     };
-    UserStorageServiceFilesystemImpl.prototype.saveContents = function (uri, content) {
-        return __awaiter(this, void 0, void 0, function () {
-            var folderUri, filesystemUri, fileStat;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userStorageFolder];
-                    case 1:
-                        folderUri = _a.sent();
-                        if (!folderUri) {
-                            return [2 /*return*/];
-                        }
-                        filesystemUri = UserStorageServiceFilesystemImpl_1.toFilesystemURI(folderUri, uri);
-                        return [4 /*yield*/, this.fileSystem.getFileStat(filesystemUri.toString())];
-                    case 2:
-                        fileStat = _a.sent();
-                        if (fileStat) {
-                            this.fileSystem.setContent(fileStat, content).then(function () { return Promise.resolve(); });
-                        }
-                        else {
-                            this.fileSystem.createFile(filesystemUri.toString(), { content: content });
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    Object.defineProperty(UserStorageServiceFilesystemImpl.prototype, "onUserStorageChanged", {
-        get: function () {
-            return this.onUserStorageChangedEmitter.event;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * Creates a new user storage URI from the filesystem URI.
-     * @param userStorageFolderUri User storage folder URI
-     * @param fsPath The filesystem URI
-     */
-    UserStorageServiceFilesystemImpl.toUserStorageUri = function (userStorageFolderUri, rawUri) {
-        var userStorageRelativePath = this.getRelativeUserStoragePath(userStorageFolderUri, rawUri);
-        return new uri_1.default('').withScheme(user_storage_uri_1.UserStorageUri.SCHEME).withPath(userStorageRelativePath).withFragment(rawUri.fragment).withQuery(rawUri.query);
-    };
-    /**
-     * Returns the path relative to the user storage filesystem uri i.e if the user storage root is
-     * 'file://home/user/.theia' and the fileUri is 'file://home/user.theia/keymaps.json' it will return 'keymaps.json'
-     * @param userStorageFolderUri User storage folder URI
-     * @param fileUri User storage
-     */
-    UserStorageServiceFilesystemImpl.getRelativeUserStoragePath = function (userStorageFolderUri, fileUri) {
-        /* + 1 so that it removes the beginning slash  i.e return keymaps.json and not /keymaps.json */
-        return fileUri.toString().slice(userStorageFolderUri.toString().length + 1);
-    };
-    /**
-     * Returns the associated filesystem URI relative to the user storage folder passed as argument.
-     * @param userStorageFolderUri User storage folder URI
-     * @param userStorageUri User storage URI to be converted in filesystem URI
-     */
-    UserStorageServiceFilesystemImpl.toFilesystemURI = function (userStorageFolderUri, userStorageUri) {
-        return userStorageFolderUri.withPath(userStorageFolderUri.path.join(userStorageUri.path.toString()));
-    };
-    var UserStorageServiceFilesystemImpl_1;
-    UserStorageServiceFilesystemImpl = UserStorageServiceFilesystemImpl_1 = __decorate([
-        inversify_1.injectable(),
-        __param(0, inversify_1.inject(common_2.FileSystem)),
-        __param(1, inversify_1.inject(filesystem_watcher_1.FileSystemWatcher)),
-        __param(2, inversify_1.inject(common_1.ILogger)),
-        __metadata("design:paramtypes", [Object, filesystem_watcher_1.FileSystemWatcher, Object])
-    ], UserStorageServiceFilesystemImpl);
-    return UserStorageServiceFilesystemImpl;
-}());
-exports.UserStorageServiceFilesystemImpl = UserStorageServiceFilesystemImpl;
+    __decorate([
+        inversify_1.inject(browser_1.TreeExpansionService),
+        __metadata("design:type", Object)
+    ], OutlineViewTreeModel.prototype, "expansionService", void 0);
+    OutlineViewTreeModel = __decorate([
+        inversify_1.injectable()
+    ], OutlineViewTreeModel);
+    return OutlineViewTreeModel;
+}(browser_1.TreeModelImpl));
+exports.OutlineViewTreeModel = OutlineViewTreeModel;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/userstorage/lib/browser/user-storage-service.js":
-/*!******************************************************************************!*\
-  !*** ../node_modules/@theia/userstorage/lib/browser/user-storage-service.js ***!
-  \******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserStorageService = Symbol('UserStorageService');
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/userstorage/lib/browser/user-storage-uri.js":
-/*!**************************************************************************!*\
-  !*** ../node_modules/@theia/userstorage/lib/browser/user-storage-uri.js ***!
-  \**************************************************************************/
+/***/ "../../../../node_modules/@theia/outline-view/lib/browser/outline-view-widget.js":
+/*!****************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/outline-view/lib/browser/outline-view-widget.js ***!
+  \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /********************************************************************************
- * Copyright (C) 2017 Ericsson and others.
+ * Copyright (C) 2017-2018 TypeFox and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -441,11 +347,172 @@ exports.UserStorageService = Symbol('UserStorageService');
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var UserStorageUri;
-(function (UserStorageUri) {
-    UserStorageUri.SCHEME = 'user_storage';
-})(UserStorageUri = exports.UserStorageUri || (exports.UserStorageUri = {}));
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var outline_view_tree_1 = __webpack_require__(/*! ./outline-view-tree */ "../../../../node_modules/@theia/outline-view/lib/browser/outline-view-tree.js");
+var core_1 = __webpack_require__(/*! @theia/core */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var React = __webpack_require__(/*! react */ "../../../../node_modules/react/index.js");
+/**
+ * Collection of outline symbol information node functions.
+ */
+var OutlineSymbolInformationNode;
+(function (OutlineSymbolInformationNode) {
+    /**
+     * Determine if the given tree node is an `OutlineSymbolInformationNode`.
+     * - The tree node is an `OutlineSymbolInformationNode` if:
+     *  - The node exists.
+     *  - The node is selectable.
+     *  - The node contains a defined `iconClass` property.
+     * @param node the tree node.
+     *
+     * @returns `true` if the given node is an `OutlineSymbolInformationNode`.
+     */
+    function is(node) {
+        return !!node && browser_1.SelectableTreeNode.is(node) && 'iconClass' in node;
+    }
+    OutlineSymbolInformationNode.is = is;
+})(OutlineSymbolInformationNode = exports.OutlineSymbolInformationNode || (exports.OutlineSymbolInformationNode = {}));
+exports.OutlineViewWidgetFactory = Symbol('OutlineViewWidgetFactory');
+var OutlineViewWidget = /** @class */ (function (_super) {
+    __extends(OutlineViewWidget, _super);
+    function OutlineViewWidget(treeProps, model, contextMenuRenderer) {
+        var _this = _super.call(this, treeProps, model, contextMenuRenderer) || this;
+        _this.treeProps = treeProps;
+        _this.contextMenuRenderer = contextMenuRenderer;
+        _this.onDidChangeOpenStateEmitter = new core_1.Emitter();
+        _this.id = 'outline-view';
+        _this.title.label = 'Outline';
+        _this.title.caption = 'Outline';
+        _this.title.closable = true;
+        _this.title.iconClass = 'fa outline-view-tab-icon';
+        _this.addClass('theia-outline-view');
+        return _this;
+    }
+    /**
+     * Set the outline tree with the list of `OutlineSymbolInformationNode`.
+     * @param roots the list of `OutlineSymbolInformationNode`.
+     */
+    OutlineViewWidget.prototype.setOutlineTree = function (roots) {
+        // Gather the list of available nodes.
+        var nodes = this.reconcileTreeState(roots);
+        // Update the model root node, appending the outline symbol information nodes as children.
+        this.model.root = {
+            id: 'outline-view-root',
+            name: 'Outline Root',
+            visible: false,
+            children: nodes,
+            parent: undefined
+        };
+    };
+    /**
+     * Reconcile the outline tree state, gathering all available nodes.
+     * @param nodes the list of `TreeNode`.
+     *
+     * @returns the list of tree nodes.
+     */
+    OutlineViewWidget.prototype.reconcileTreeState = function (nodes) {
+        var _this = this;
+        nodes.forEach(function (node) {
+            if (OutlineSymbolInformationNode.is(node)) {
+                var treeNode = _this.model.getNode(node.id);
+                if (treeNode && OutlineSymbolInformationNode.is(treeNode)) {
+                    treeNode.expanded = node.expanded;
+                    treeNode.selected = node.selected;
+                }
+                _this.reconcileTreeState(Array.from(node.children));
+            }
+        });
+        return nodes;
+    };
+    OutlineViewWidget.prototype.onAfterHide = function (msg) {
+        _super.prototype.onAfterHide.call(this, msg);
+        this.onDidChangeOpenStateEmitter.fire(false);
+    };
+    OutlineViewWidget.prototype.onAfterShow = function (msg) {
+        _super.prototype.onAfterShow.call(this, msg);
+        this.onDidChangeOpenStateEmitter.fire(true);
+    };
+    OutlineViewWidget.prototype.renderIcon = function (node, props) {
+        if (OutlineSymbolInformationNode.is(node)) {
+            return React.createElement("div", { className: 'symbol-icon symbol-icon-center ' + node.iconClass });
+        }
+        return undefined;
+    };
+    OutlineViewWidget.prototype.createNodeAttributes = function (node, props) {
+        var elementAttrs = _super.prototype.createNodeAttributes.call(this, node, props);
+        return __assign({}, elementAttrs, { title: this.getNodeTooltip(node) });
+    };
+    /**
+     * Get the tooltip for the given tree node.
+     * - The tooltip is discovered when hovering over a tree node.
+     * - If available, the tooltip is the concatenation of the node name, and it's type.
+     * @param node the tree node.
+     *
+     * @returns the tooltip for the tree node if available, else `undefined`.
+     */
+    OutlineViewWidget.prototype.getNodeTooltip = function (node) {
+        if (OutlineSymbolInformationNode.is(node)) {
+            return node.name + (" (" + node.iconClass + ")");
+        }
+        return undefined;
+    };
+    OutlineViewWidget.prototype.isExpandable = function (node) {
+        return OutlineSymbolInformationNode.is(node) && node.children.length > 0;
+    };
+    OutlineViewWidget.prototype.renderTree = function (model) {
+        if (browser_2.CompositeTreeNode.is(this.model.root) && !this.model.root.children.length) {
+            return React.createElement("div", { className: 'theia-widget-noInfo no-outline' }, "No outline information available.");
+        }
+        return _super.prototype.renderTree.call(this, model);
+    };
+    OutlineViewWidget = __decorate([
+        inversify_1.injectable(),
+        __param(0, inversify_1.inject(browser_1.TreeProps)),
+        __param(1, inversify_1.inject(outline_view_tree_1.OutlineViewTreeModel)),
+        __param(2, inversify_1.inject(browser_1.ContextMenuRenderer)),
+        __metadata("design:paramtypes", [Object, outline_view_tree_1.OutlineViewTreeModel, Object])
+    ], OutlineViewWidget);
+    return OutlineViewWidget;
+}(browser_1.TreeWidget));
+exports.OutlineViewWidget = OutlineViewWidget;
 
 
 /***/ })

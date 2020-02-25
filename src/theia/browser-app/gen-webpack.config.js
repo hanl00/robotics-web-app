@@ -22,9 +22,9 @@ const { mode, staticCompression }  = yargs.option('mode', {
 }).argv;
 const development = mode === 'development';
 
-const monacoEditorCorePath = development ? '/home/nicholas/Documents/robotics-web-app/src/theia/node_modules/@typefox/monaco-editor-core/dev/vs' : '/home/nicholas/Documents/robotics-web-app/src/theia/node_modules/@typefox/monaco-editor-core/min/vs';
-const monacoCssLanguagePath = '/home/nicholas/Documents/robotics-web-app/src/theia/node_modules/monaco-css/release/min';
-const monacoHtmlLanguagePath = '/home/nicholas/Documents/robotics-web-app/src/theia/node_modules/monaco-html/release/min';
+const monacoEditorCorePath = development ? '/home/nicholas/Documents/node_modules/@typefox/monaco-editor-core/dev/vs' : '/home/nicholas/Documents/node_modules/@typefox/monaco-editor-core/min/vs';
+const monacoCssLanguagePath = '/home/nicholas/Documents/node_modules/monaco-css/release/min';
+const monacoHtmlLanguagePath = '/home/nicholas/Documents/node_modules/monaco-html/release/min';
 
 const plugins = [new CopyWebpackPlugin([
     {

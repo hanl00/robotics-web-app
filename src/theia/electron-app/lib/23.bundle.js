@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[23],{
 
-/***/ "../node_modules/@theia/markers/lib/browser/index.js":
-/*!***********************************************************!*\
-  !*** ../node_modules/@theia/markers/lib/browser/index.js ***!
-  \***********************************************************/
+/***/ "../../../../node_modules/@theia/navigator/lib/browser/navigator-container.js":
+/*!*************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/lib/browser/navigator-container.js ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24,27 +24,63 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(/*! ./marker-manager */ "../node_modules/@theia/markers/lib/browser/marker-manager.js"));
-__export(__webpack_require__(/*! ./problem/problem-manager */ "../node_modules/@theia/markers/lib/browser/problem/problem-manager.js"));
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var browser_2 = __webpack_require__(/*! @theia/filesystem/lib/browser */ "../../../../node_modules/@theia/filesystem/lib/browser/index.js");
+var contribution_provider_1 = __webpack_require__(/*! @theia/core/lib/common/contribution-provider */ "../../../../node_modules/@theia/core/lib/common/contribution-provider.js");
+var navigator_tree_1 = __webpack_require__(/*! ./navigator-tree */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-tree.js");
+var navigator_model_1 = __webpack_require__(/*! ./navigator-model */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-model.js");
+var navigator_widget_1 = __webpack_require__(/*! ./navigator-widget */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-widget.js");
+var navigator_contribution_1 = __webpack_require__(/*! ./navigator-contribution */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-contribution.js");
+var navigator_decorator_service_1 = __webpack_require__(/*! ./navigator-decorator-service */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-decorator-service.js");
+exports.FILE_NAVIGATOR_PROPS = __assign({}, browser_1.defaultTreeProps, { contextMenuPath: navigator_contribution_1.NAVIGATOR_CONTEXT_MENU, multiSelect: true, search: true, globalSelection: true });
+function createFileNavigatorContainer(parent) {
+    var child = browser_2.createFileTreeContainer(parent);
+    child.unbind(browser_2.FileTree);
+    child.bind(navigator_tree_1.FileNavigatorTree).toSelf();
+    child.rebind(browser_1.Tree).toService(navigator_tree_1.FileNavigatorTree);
+    child.unbind(browser_2.FileTreeModel);
+    child.bind(navigator_model_1.FileNavigatorModel).toSelf();
+    child.rebind(browser_1.TreeModel).toService(navigator_model_1.FileNavigatorModel);
+    child.unbind(browser_2.FileTreeWidget);
+    child.bind(navigator_widget_1.FileNavigatorWidget).toSelf();
+    child.rebind(browser_1.TreeProps).toConstantValue(exports.FILE_NAVIGATOR_PROPS);
+    child.bind(navigator_decorator_service_1.NavigatorDecoratorService).toSelf().inSingletonScope();
+    child.rebind(browser_1.TreeDecoratorService).toService(navigator_decorator_service_1.NavigatorDecoratorService);
+    contribution_provider_1.bindContributionProvider(child, navigator_decorator_service_1.NavigatorTreeDecorator);
+    return child;
+}
+exports.createFileNavigatorContainer = createFileNavigatorContainer;
+function createFileNavigatorWidget(parent) {
+    return createFileNavigatorContainer(parent).get(navigator_widget_1.FileNavigatorWidget);
+}
+exports.createFileNavigatorWidget = createFileNavigatorWidget;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-bulk-edit-service.js":
-/*!*****************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-bulk-edit-service.js ***!
-  \*****************************************************************************/
+/***/ "../../../../node_modules/@theia/navigator/lib/browser/navigator-context-key-service.js":
+/*!***********************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/lib/browser/navigator-context-key-service.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /********************************************************************************
- * Copyright (C) 2018 TypeFox and others.
+ * Copyright (C) 2019 TypeFox and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -68,39 +104,78 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var monaco_workspace_1 = __webpack_require__(/*! ./monaco-workspace */ "../node_modules/@theia/monaco/lib/browser/monaco-workspace.js");
-var MonacoBulkEditService = /** @class */ (function () {
-    function MonacoBulkEditService() {
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var context_key_service_1 = __webpack_require__(/*! @theia/core/lib/browser/context-key-service */ "../../../../node_modules/@theia/core/lib/browser/context-key-service.js");
+var NavigatorContextKeyService = /** @class */ (function () {
+    function NavigatorContextKeyService() {
     }
-    MonacoBulkEditService.prototype.apply = function (edit) {
-        return this.workspace.applyBulkEdit(edit);
+    Object.defineProperty(NavigatorContextKeyService.prototype, "explorerViewletVisible", {
+        get: function () {
+            return this._explorerViewletVisible;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NavigatorContextKeyService.prototype, "explorerViewletFocus", {
+        /** True if Explorer view has keyboard focus. */
+        get: function () {
+            return this._explorerViewletFocus;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NavigatorContextKeyService.prototype, "filesExplorerFocus", {
+        /** True if File Explorer section has keyboard focus. */
+        get: function () {
+            return this._filesExplorerFocus;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NavigatorContextKeyService.prototype, "explorerResourceIsFolder", {
+        get: function () {
+            return this._explorerResourceIsFolder;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    NavigatorContextKeyService.prototype.init = function () {
+        this._explorerViewletVisible = this.contextKeyService.createKey('explorerViewletVisible', false);
+        this._explorerViewletFocus = this.contextKeyService.createKey('explorerViewletFocus', false);
+        this._filesExplorerFocus = this.contextKeyService.createKey('filesExplorerFocus', false);
+        this._explorerResourceIsFolder = this.contextKeyService.createKey('explorerResourceIsFolder', false);
     };
     __decorate([
-        inversify_1.inject(monaco_workspace_1.MonacoWorkspace),
-        __metadata("design:type", monaco_workspace_1.MonacoWorkspace)
-    ], MonacoBulkEditService.prototype, "workspace", void 0);
-    MonacoBulkEditService = __decorate([
+        inversify_1.inject(context_key_service_1.ContextKeyService),
+        __metadata("design:type", context_key_service_1.ContextKeyService)
+    ], NavigatorContextKeyService.prototype, "contextKeyService", void 0);
+    __decorate([
+        inversify_1.postConstruct(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], NavigatorContextKeyService.prototype, "init", null);
+    NavigatorContextKeyService = __decorate([
         inversify_1.injectable()
-    ], MonacoBulkEditService);
-    return MonacoBulkEditService;
+    ], NavigatorContextKeyService);
+    return NavigatorContextKeyService;
 }());
-exports.MonacoBulkEditService = MonacoBulkEditService;
+exports.NavigatorContextKeyService = NavigatorContextKeyService;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-color-registry.js":
-/*!**************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-color-registry.js ***!
-  \**************************************************************************/
+/***/ "../../../../node_modules/@theia/navigator/lib/browser/navigator-contribution.js":
+/*!****************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/lib/browser/navigator-contribution.js ***!
+  \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /********************************************************************************
- * Copyright (C) 2019 TypeFox and others.
+ * Copyright (C) 2017-2018 TypeFox and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -133,6 +208,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __generator = (this && this.__generator) || function (thisArg, body) {
     var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
     return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
@@ -160,148 +249,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var color_registry_1 = __webpack_require__(/*! @theia/core/lib/browser/color-registry */ "../node_modules/@theia/core/lib/browser/color-registry.js");
-var disposable_1 = __webpack_require__(/*! @theia/core/lib/common/disposable */ "../node_modules/@theia/core/lib/common/disposable.js");
-var MonacoColorRegistry = /** @class */ (function (_super) {
-    __extends(MonacoColorRegistry, _super);
-    function MonacoColorRegistry() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.monacoThemeService = monaco.services.StaticServices.standaloneThemeService.get();
-        _this.monacoColorRegistry = monaco.color.getColorRegistry();
-        return _this;
-    }
-    MonacoColorRegistry.prototype.getColors = function () {
-        var _a, _b, id, e_1_1;
-        var e_1, _c;
-        return __generator(this, function (_d) {
-            switch (_d.label) {
-                case 0:
-                    _d.trys.push([0, 5, 6, 7]);
-                    _a = __values(this.monacoColorRegistry.getColors()), _b = _a.next();
-                    _d.label = 1;
-                case 1:
-                    if (!!_b.done) return [3 /*break*/, 4];
-                    id = _b.value.id;
-                    return [4 /*yield*/, id];
-                case 2:
-                    _d.sent();
-                    _d.label = 3;
-                case 3:
-                    _b = _a.next();
-                    return [3 /*break*/, 1];
-                case 4: return [3 /*break*/, 7];
-                case 5:
-                    e_1_1 = _d.sent();
-                    e_1 = { error: e_1_1 };
-                    return [3 /*break*/, 7];
-                case 6:
-                    try {
-                        if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
-                    }
-                    finally { if (e_1) throw e_1.error; }
-                    return [7 /*endfinally*/];
-                case 7: return [2 /*return*/];
-            }
-        });
-    };
-    MonacoColorRegistry.prototype.getCurrentColor = function (id) {
-        var color = this.monacoThemeService.getTheme().getColor(id);
-        return color && color.toString();
-    };
-    MonacoColorRegistry.prototype.doRegister = function (definition) {
-        var _this = this;
-        var defaults;
-        if (definition.defaults) {
-            defaults = {};
-            defaults.dark = this.toColor(definition.defaults.dark);
-            defaults.light = this.toColor(definition.defaults.light);
-            defaults.hc = this.toColor(definition.defaults.hc);
-        }
-        var identifier = this.monacoColorRegistry.registerColor(definition.id, defaults, definition.description);
-        return disposable_1.Disposable.create(function () { return _this.monacoColorRegistry.deregisterColor(identifier); });
-    };
-    MonacoColorRegistry.prototype.toColor = function (value) {
-        if (!value || typeof value === 'string') {
-            return value;
-        }
-        if ('kind' in value) {
-            return monaco.color[value.kind](value.v, value.f);
-        }
-        else if ('r' in value) {
-            var r = value.r, g = value.g, b = value.b, a = value.a;
-            return new monaco.color.Color(new monaco.color.RGBA(r, g, b, a));
-        }
-        else {
-            var h = value.h, s = value.s, l = value.l, a = value.a;
-            return new monaco.color.Color(new monaco.color.HSLA(h, s, l, a));
-        }
-    };
-    MonacoColorRegistry = __decorate([
-        inversify_1.injectable()
-    ], MonacoColorRegistry);
-    return MonacoColorRegistry;
-}(color_registry_1.ColorRegistry));
-exports.MonacoColorRegistry = MonacoColorRegistry;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-command-registry.js":
-/*!****************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-command-registry.js ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var __read = (this && this.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
@@ -322,1076 +269,613 @@ var __spread = (this && this.__spread) || function () {
     for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
     return ar;
 };
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var core_1 = __webpack_require__(/*! @theia/core */ "../node_modules/@theia/core/lib/common/index.js");
-var browser_1 = __webpack_require__(/*! @theia/editor/lib/browser */ "../node_modules/@theia/editor/lib/browser/index.js");
-var monaco_editor_provider_1 = __webpack_require__(/*! ./monaco-editor-provider */ "../node_modules/@theia/monaco/lib/browser/monaco-editor-provider.js");
-var MonacoCommandRegistry = /** @class */ (function () {
-    function MonacoCommandRegistry() {
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var view_contribution_1 = __webpack_require__(/*! @theia/core/lib/browser/shell/view-contribution */ "../../../../node_modules/@theia/core/lib/browser/shell/view-contribution.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var file_download_command_contribution_1 = __webpack_require__(/*! @theia/filesystem/lib/browser/download/file-download-command-contribution */ "../../../../node_modules/@theia/filesystem/lib/browser/download/file-download-command-contribution.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var browser_3 = __webpack_require__(/*! @theia/workspace/lib/browser */ "../../../../node_modules/@theia/workspace/lib/browser/index.js");
+var navigator_widget_1 = __webpack_require__(/*! ./navigator-widget */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-widget.js");
+var navigator_preferences_1 = __webpack_require__(/*! ./navigator-preferences */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-preferences.js");
+var navigator_keybinding_context_1 = __webpack_require__(/*! ./navigator-keybinding-context */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-keybinding-context.js");
+var navigator_filter_1 = __webpack_require__(/*! ./navigator-filter */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-filter.js");
+var navigator_tree_1 = __webpack_require__(/*! ./navigator-tree */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-tree.js");
+var navigator_context_key_service_1 = __webpack_require__(/*! ./navigator-context-key-service */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-context-key-service.js");
+var tab_bar_toolbar_1 = __webpack_require__(/*! @theia/core/lib/browser/shell/tab-bar-toolbar */ "../../../../node_modules/@theia/core/lib/browser/shell/tab-bar-toolbar.js");
+var filesystem_frontend_contribution_1 = __webpack_require__(/*! @theia/filesystem/lib/browser/filesystem-frontend-contribution */ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-frontend-contribution.js");
+var navigator_diff_1 = __webpack_require__(/*! ./navigator-diff */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-diff.js");
+var selection_1 = __webpack_require__(/*! @theia/core/lib/common/selection */ "../../../../node_modules/@theia/core/lib/common/selection.js");
+var browser_4 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var FileNavigatorCommands;
+(function (FileNavigatorCommands) {
+    FileNavigatorCommands.REVEAL_IN_NAVIGATOR = {
+        id: 'navigator.reveal',
+        label: 'Reveal in Explorer'
+    };
+    FileNavigatorCommands.TOGGLE_HIDDEN_FILES = {
+        id: 'navigator.toggle.hidden.files',
+        label: 'Toggle Hidden Files'
+    };
+    FileNavigatorCommands.TOGGLE_AUTO_REVEAL = {
+        id: 'navigator.toggle.autoReveal',
+        category: 'File',
+        label: 'Auto Reveal'
+    };
+    FileNavigatorCommands.REFRESH_NAVIGATOR = {
+        id: 'navigator.refresh',
+        category: 'File',
+        label: 'Refresh in Explorer',
+        iconClass: 'refresh'
+    };
+    FileNavigatorCommands.COLLAPSE_ALL = {
+        id: 'navigator.collapse.all',
+        category: 'File',
+        label: 'Collapse Folders in Explorer',
+        iconClass: 'theia-collapse-all-icon'
+    };
+    FileNavigatorCommands.ADD_ROOT_FOLDER = {
+        id: 'navigator.addRootFolder'
+    };
+})(FileNavigatorCommands = exports.FileNavigatorCommands || (exports.FileNavigatorCommands = {}));
+/**
+ * Navigator `More Actions...` toolbar item groups.
+ * Used in order to group items present in the toolbar.
+ */
+var NavigatorMoreToolbarGroups;
+(function (NavigatorMoreToolbarGroups) {
+    NavigatorMoreToolbarGroups.NEW_OPEN = '1_navigator_new_open';
+    NavigatorMoreToolbarGroups.TOOLS = '2_navigator_tools';
+    NavigatorMoreToolbarGroups.WORKSPACE = '3_navigator_workspace';
+})(NavigatorMoreToolbarGroups = exports.NavigatorMoreToolbarGroups || (exports.NavigatorMoreToolbarGroups = {}));
+exports.NAVIGATOR_CONTEXT_MENU = ['navigator-context-menu'];
+/**
+ * Navigator context menu default groups should be aligned
+ * with VS Code default groups: https://code.visualstudio.com/api/references/contribution-points#contributes.menus
+ */
+var NavigatorContextMenu;
+(function (NavigatorContextMenu) {
+    NavigatorContextMenu.NAVIGATION = __spread(exports.NAVIGATOR_CONTEXT_MENU, ['navigation']);
+    /** @deprecated use NAVIGATION */
+    NavigatorContextMenu.OPEN = NavigatorContextMenu.NAVIGATION;
+    /** @deprecated use NAVIGATION */
+    NavigatorContextMenu.NEW = NavigatorContextMenu.NAVIGATION;
+    NavigatorContextMenu.WORKSPACE = __spread(exports.NAVIGATOR_CONTEXT_MENU, ['2_workspace']);
+    NavigatorContextMenu.COMPARE = __spread(exports.NAVIGATOR_CONTEXT_MENU, ['3_compare']);
+    /** @deprecated use COMPARE */
+    NavigatorContextMenu.DIFF = NavigatorContextMenu.COMPARE;
+    NavigatorContextMenu.SEARCH = __spread(exports.NAVIGATOR_CONTEXT_MENU, ['4_search']);
+    NavigatorContextMenu.CLIPBOARD = __spread(exports.NAVIGATOR_CONTEXT_MENU, ['5_cutcopypaste']);
+    NavigatorContextMenu.MODIFICATION = __spread(exports.NAVIGATOR_CONTEXT_MENU, ['7_modification']);
+    /** @deprecated use MODIFICATION */
+    NavigatorContextMenu.MOVE = NavigatorContextMenu.MODIFICATION;
+    /** @deprecated use MODIFICATION */
+    NavigatorContextMenu.ACTIONS = NavigatorContextMenu.MODIFICATION;
+    NavigatorContextMenu.OPEN_WITH = __spread(NavigatorContextMenu.NAVIGATION, ['open_with']);
+})(NavigatorContextMenu = exports.NavigatorContextMenu || (exports.NavigatorContextMenu = {}));
+var FileNavigatorContribution = /** @class */ (function (_super) {
+    __extends(FileNavigatorContribution, _super);
+    function FileNavigatorContribution(fileNavigatorPreferences, openerService, fileNavigatorFilter, workspaceService, workspacePreferences) {
+        var _this = _super.call(this, {
+            viewContainerId: navigator_widget_1.EXPLORER_VIEW_CONTAINER_ID,
+            widgetId: navigator_widget_1.FILE_NAVIGATOR_ID,
+            widgetName: 'Explorer',
+            defaultWidgetOptions: {
+                area: 'left',
+                rank: 100
+            },
+            toggleCommandId: 'fileNavigator:toggle',
+            toggleKeybinding: 'ctrlcmd+shift+e'
+        }) || this;
+        _this.fileNavigatorPreferences = fileNavigatorPreferences;
+        _this.openerService = openerService;
+        _this.fileNavigatorFilter = fileNavigatorFilter;
+        _this.workspaceService = workspaceService;
+        _this.workspacePreferences = workspacePreferences;
+        /**
+         * Register commands to the `More Actions...` navigator toolbar item.
+         */
+        _this.registerMoreToolbarItem = function (item) {
+            var commandId = item.command;
+            var id = 'navigator.tabbar.toolbar.' + commandId;
+            var command = _this.commandRegistry.getCommand(commandId);
+            _this.commandRegistry.registerCommand({ id: id, iconClass: command && command.iconClass }, {
+                execute: function (w) {
+                    var _a;
+                    var args = [];
+                    for (var _i = 1; _i < arguments.length; _i++) {
+                        args[_i - 1] = arguments[_i];
+                    }
+                    return w instanceof navigator_widget_1.FileNavigatorWidget
+                        && (_a = _this.commandRegistry).executeCommand.apply(_a, __spread([commandId], args));
+                },
+                isEnabled: function (w) {
+                    var _a;
+                    var args = [];
+                    for (var _i = 1; _i < arguments.length; _i++) {
+                        args[_i - 1] = arguments[_i];
+                    }
+                    return w instanceof navigator_widget_1.FileNavigatorWidget
+                        && (_a = _this.commandRegistry).isEnabled.apply(_a, __spread([commandId], args));
+                },
+                isVisible: function (w) {
+                    var _a;
+                    var args = [];
+                    for (var _i = 1; _i < arguments.length; _i++) {
+                        args[_i - 1] = arguments[_i];
+                    }
+                    return w instanceof navigator_widget_1.FileNavigatorWidget
+                        && (_a = _this.commandRegistry).isVisible.apply(_a, __spread([commandId], args));
+                },
+                isToggled: function (w) {
+                    var _a;
+                    var args = [];
+                    for (var _i = 1; _i < arguments.length; _i++) {
+                        args[_i - 1] = arguments[_i];
+                    }
+                    return w instanceof navigator_widget_1.FileNavigatorWidget
+                        && (_a = _this.commandRegistry).isToggled.apply(_a, __spread([commandId], args));
+                },
+            });
+            item.command = id;
+            _this.tabbarToolbarRegistry.registerItem(item);
+        };
+        _this.toDisposeAddRemoveFolderActions = new common_1.DisposableCollection();
+        return _this;
     }
-    MonacoCommandRegistry.prototype.validate = function (command) {
-        return this.commands.commandIds.indexOf(command) !== -1 ? command : undefined;
+    FileNavigatorContribution.prototype.init = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var updateFocusContextKeys;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.fileNavigatorPreferences.ready];
+                    case 1:
+                        _a.sent();
+                        this.shell.currentChanged.connect(function () { return _this.onCurrentWidgetChangedHandler(); });
+                        updateFocusContextKeys = function () {
+                            var hasFocus = _this.shell.activeWidget instanceof navigator_widget_1.FileNavigatorWidget;
+                            _this.contextKeyService.explorerViewletFocus.set(hasFocus);
+                            _this.contextKeyService.filesExplorerFocus.set(hasFocus);
+                        };
+                        updateFocusContextKeys();
+                        this.shell.activeChanged.connect(updateFocusContextKeys);
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
-    MonacoCommandRegistry.prototype.registerCommand = function (command, handler) {
-        this.commands.registerCommand(__assign({}, command, { id: command.id }), this.newHandler(handler));
+    FileNavigatorContribution.prototype.onStart = function (app) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                this.workspacePreferences.ready.then(function () {
+                    _this.updateAddRemoveFolderActions(_this.menuRegistry);
+                    _this.workspacePreferences.onPreferenceChanged(function (change) {
+                        if (change.preferenceName === 'workspace.supportMultiRootWorkspace') {
+                            _this.updateAddRemoveFolderActions(_this.menuRegistry);
+                        }
+                    });
+                });
+                return [2 /*return*/];
+            });
+        });
     };
-    MonacoCommandRegistry.prototype.registerHandler = function (command, handler) {
-        this.commands.registerHandler(command, this.newHandler(handler));
+    FileNavigatorContribution.prototype.initializeLayout = function (app) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.openView()];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
-    MonacoCommandRegistry.prototype.newHandler = function (monacoHandler) {
+    FileNavigatorContribution.prototype.registerCommands = function (registry) {
         var _this = this;
-        return {
+        _super.prototype.registerCommands.call(this, registry);
+        registry.registerCommand(FileNavigatorCommands.REVEAL_IN_NAVIGATOR, {
+            execute: function () { return _this.openView({ activate: true }).then(function () { return _this.selectWidgetFileNode(_this.shell.currentWidget); }); },
+            isEnabled: function () { return browser_1.Navigatable.is(_this.shell.currentWidget); },
+            isVisible: function () { return browser_1.Navigatable.is(_this.shell.currentWidget); }
+        });
+        registry.registerCommand(FileNavigatorCommands.TOGGLE_HIDDEN_FILES, {
+            execute: function () {
+                _this.fileNavigatorFilter.toggleHiddenFiles();
+            },
+            isEnabled: function () { return true; },
+            isVisible: function () { return true; }
+        });
+        registry.registerCommand(FileNavigatorCommands.TOGGLE_AUTO_REVEAL, {
+            isEnabled: function (widget) { return _this.withWidget(widget, function () { return _this.workspaceService.opened; }); },
+            isVisible: function (widget) { return _this.withWidget(widget, function () { return _this.workspaceService.opened; }); },
+            execute: function () {
+                var autoReveal = !_this.fileNavigatorPreferences['explorer.autoReveal'];
+                _this.preferenceService.set('explorer.autoReveal', autoReveal, browser_1.PreferenceScope.User);
+                if (autoReveal) {
+                    _this.selectWidgetFileNode(_this.shell.currentWidget);
+                }
+            },
+            isToggled: function () { return _this.fileNavigatorPreferences['explorer.autoReveal']; }
+        });
+        registry.registerCommand(FileNavigatorCommands.COLLAPSE_ALL, {
+            execute: function (widget) { return _this.withWidget(widget, function () { return _this.collapseFileNavigatorTree(); }); },
+            isEnabled: function (widget) { return _this.withWidget(widget, function () { return _this.workspaceService.opened; }); },
+            isVisible: function (widget) { return _this.withWidget(widget, function () { return _this.workspaceService.opened; }); }
+        });
+        registry.registerCommand(FileNavigatorCommands.REFRESH_NAVIGATOR, {
+            execute: function (widget) { return _this.withWidget(widget, function () { return _this.refreshWorkspace(); }); },
+            isEnabled: function (widget) { return _this.withWidget(widget, function () { return _this.workspaceService.opened; }); },
+            isVisible: function (widget) { return _this.withWidget(widget, function () { return _this.workspaceService.opened; }); }
+        });
+        registry.registerCommand(FileNavigatorCommands.ADD_ROOT_FOLDER, {
             execute: function () {
                 var args = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     args[_i] = arguments[_i];
                 }
-                return _this.execute.apply(_this, __spread([monacoHandler], args));
+                return registry.executeCommand.apply(registry, __spread([browser_3.WorkspaceCommands.ADD_FOLDER.id], args));
             },
             isEnabled: function () {
                 var args = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     args[_i] = arguments[_i];
                 }
-                return _this.isEnabled.apply(_this, __spread([monacoHandler], args));
+                return registry.isEnabled.apply(registry, __spread([browser_3.WorkspaceCommands.ADD_FOLDER.id], args));
             },
             isVisible: function () {
                 var args = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     args[_i] = arguments[_i];
                 }
-                return _this.isVisible.apply(_this, __spread([monacoHandler], args));
-            }
-        };
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    MonacoCommandRegistry.prototype.execute = function (monacoHandler) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        var editor = this.monacoEditors.current;
-        if (editor) {
-            editor.focus();
-            return Promise.resolve(monacoHandler.execute.apply(monacoHandler, __spread([editor], args)));
-        }
-        return Promise.resolve();
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    MonacoCommandRegistry.prototype.isEnabled = function (monacoHandler) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        var editor = this.monacoEditors.current;
-        return !!editor && (!monacoHandler.isEnabled || monacoHandler.isEnabled.apply(monacoHandler, __spread([editor], args)));
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    MonacoCommandRegistry.prototype.isVisible = function (monacoHandler) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        return browser_1.TextEditorSelection.is(this.selectionService.selection);
-    };
-    __decorate([
-        inversify_1.inject(monaco_editor_provider_1.MonacoEditorProvider),
-        __metadata("design:type", monaco_editor_provider_1.MonacoEditorProvider)
-    ], MonacoCommandRegistry.prototype, "monacoEditors", void 0);
-    __decorate([
-        inversify_1.inject(core_1.CommandRegistry),
-        __metadata("design:type", core_1.CommandRegistry)
-    ], MonacoCommandRegistry.prototype, "commands", void 0);
-    __decorate([
-        inversify_1.inject(core_1.SelectionService),
-        __metadata("design:type", core_1.SelectionService)
-    ], MonacoCommandRegistry.prototype, "selectionService", void 0);
-    MonacoCommandRegistry = __decorate([
-        inversify_1.injectable()
-    ], MonacoCommandRegistry);
-    return MonacoCommandRegistry;
-}());
-exports.MonacoCommandRegistry = MonacoCommandRegistry;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-command-service.js":
-/*!***************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-command-service.js ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-exports.MonacoCommandServiceFactory = Symbol('MonacoCommandServiceFactory');
-var MonacoCommandService = /** @class */ (function () {
-    function MonacoCommandService(commandRegistry) {
-        this.commandRegistry = commandRegistry;
-        this._onWillExecuteCommand = new common_1.Emitter();
-        this.delegateListeners = new common_1.DisposableCollection();
-    }
-    Object.defineProperty(MonacoCommandService.prototype, "onWillExecuteCommand", {
-        get: function () {
-            return this._onWillExecuteCommand.event;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    MonacoCommandService.prototype.setDelegate = function (delegate) {
-        var _this = this;
-        this.delegateListeners.dispose();
-        this.delegate = delegate;
-        if (this.delegate) {
-            this.delegateListeners.push(this.delegate._onWillExecuteCommand.event(function (event) {
-                return _this._onWillExecuteCommand.fire(event);
-            }));
-        }
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    MonacoCommandService.prototype.executeCommand = function (commandId) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        return __awaiter(this, void 0, void 0, function () {
-            var handler;
-            var _a;
-            return __generator(this, function (_b) {
-                handler = (_a = this.commandRegistry).getActiveHandler.apply(_a, __spread([commandId], args));
-                if (handler) {
-                    this._onWillExecuteCommand.fire({ commandId: commandId });
-                    return [2 /*return*/, handler.execute.apply(handler, __spread(args))];
-                }
-                return [2 /*return*/, this.executeMonacoCommand.apply(this, __spread([commandId], args))];
-            });
-        });
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    MonacoCommandService.prototype.executeMonacoCommand = function (commandId) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        return __awaiter(this, void 0, void 0, function () {
-            var _a;
-            return __generator(this, function (_b) {
-                if (this.delegate) {
-                    return [2 /*return*/, (_a = this.delegate).executeCommand.apply(_a, __spread([commandId], args))];
-                }
-                throw new Error("command '" + commandId + "' not found");
-            });
-        });
-    };
-    MonacoCommandService = __decorate([
-        inversify_1.injectable(),
-        __param(0, inversify_1.inject(common_1.CommandRegistry)),
-        __metadata("design:paramtypes", [common_1.CommandRegistry])
-    ], MonacoCommandService);
-    return MonacoCommandService;
-}());
-exports.MonacoCommandService = MonacoCommandService;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-command.js":
-/*!*******************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-command.js ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var lib_1 = __webpack_require__(/*! monaco-languageclient/lib */ "../node_modules/monaco-languageclient/lib/index.js");
-var core_1 = __webpack_require__(/*! @theia/core */ "../node_modules/@theia/core/lib/common/index.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var quick_open_service_1 = __webpack_require__(/*! @theia/core/lib/browser/quick-open/quick-open-service */ "../node_modules/@theia/core/lib/browser/quick-open/quick-open-service.js");
-var quick_open_model_1 = __webpack_require__(/*! @theia/core/lib/browser/quick-open/quick-open-model */ "../node_modules/@theia/core/lib/browser/quick-open/quick-open-model.js");
-var browser_2 = __webpack_require__(/*! @theia/editor/lib/browser */ "../node_modules/@theia/editor/lib/browser/index.js");
-var monaco_command_registry_1 = __webpack_require__(/*! ./monaco-command-registry */ "../node_modules/@theia/monaco/lib/browser/monaco-command-registry.js");
-var MenuRegistry = monaco.actions.MenuRegistry;
-var MonacoCommands;
-(function (MonacoCommands) {
-    var e_1, _a, e_2, _b, e_3, _c;
-    MonacoCommands.UNDO = 'undo';
-    MonacoCommands.REDO = 'redo';
-    MonacoCommands.COMMON_KEYBOARD_ACTIONS = new Set([MonacoCommands.UNDO, MonacoCommands.REDO]);
-    MonacoCommands.COMMON_ACTIONS = {};
-    MonacoCommands.COMMON_ACTIONS[MonacoCommands.UNDO] = browser_1.CommonCommands.UNDO.id;
-    MonacoCommands.COMMON_ACTIONS[MonacoCommands.REDO] = browser_1.CommonCommands.REDO.id;
-    MonacoCommands.COMMON_ACTIONS['actions.find'] = browser_1.CommonCommands.FIND.id;
-    MonacoCommands.COMMON_ACTIONS['editor.action.startFindReplaceAction'] = browser_1.CommonCommands.REPLACE.id;
-    MonacoCommands.SELECTION_SELECT_ALL = 'editor.action.select.all';
-    MonacoCommands.SELECTION_EXPAND_SELECTION = 'editor.action.smartSelect.grow';
-    MonacoCommands.SELECTION_SHRINK_SELECTION = 'editor.action.smartSelect.shrink';
-    MonacoCommands.SELECTION_COPY_LINE_UP = 'editor.action.copyLinesUpAction';
-    MonacoCommands.SELECTION_COPY_LINE_DOWN = 'editor.action.copyLinesDownAction';
-    MonacoCommands.SELECTION_MOVE_LINE_UP = 'editor.action.moveLinesUpAction';
-    MonacoCommands.SELECTION_MOVE_LINE_DOWN = 'editor.action.moveLinesDownAction';
-    MonacoCommands.SELECTION_ADD_CURSOR_ABOVE = 'editor.action.insertCursorAbove';
-    MonacoCommands.SELECTION_ADD_CURSOR_BELOW = 'editor.action.insertCursorBelow';
-    MonacoCommands.SELECTION_ADD_CURSOR_TO_LINE_END = 'editor.action.insertCursorAtEndOfEachLineSelected';
-    MonacoCommands.SELECTION_ADD_NEXT_OCCURRENCE = 'editor.action.addSelectionToNextFindMatch';
-    MonacoCommands.SELECTION_ADD_PREVIOUS_OCCURRENCE = 'editor.action.addSelectionToPreviousFindMatch';
-    MonacoCommands.SELECTION_SELECT_ALL_OCCURRENCES = 'editor.action.selectHighlights';
-    MonacoCommands.GO_TO_DEFINITION = 'editor.action.revealDefinition';
-    MonacoCommands.ACTIONS = new Map();
-    MonacoCommands.ACTIONS.set(MonacoCommands.SELECTION_SELECT_ALL, { id: MonacoCommands.SELECTION_SELECT_ALL, label: 'Select All', delegate: 'editor.action.selectAll' });
-    MonacoCommands.EXCLUDE_ACTIONS = new Set(__spread(Object.keys(MonacoCommands.COMMON_ACTIONS), [
-        'editor.action.quickCommand',
-        'editor.action.clipboardCutAction',
-        'editor.action.clipboardCopyAction',
-        'editor.action.clipboardPasteAction'
-    ]));
-    var iconClasses = new Map();
-    try {
-        for (var _d = __values(MenuRegistry.getMenuItems(7)), _e = _d.next(); !_e.done; _e = _d.next()) {
-            var menuItem = _e.value;
-            if (menuItem.command.iconClass) {
-                iconClasses.set(menuItem.command.id, menuItem.command.iconClass);
-            }
-        }
-    }
-    catch (e_1_1) { e_1 = { error: e_1_1 }; }
-    finally {
-        try {
-            if (_e && !_e.done && (_a = _d.return)) _a.call(_d);
-        }
-        finally { if (e_1) throw e_1.error; }
-    }
-    try {
-        for (var _f = __values(monaco.editorExtensions.EditorExtensionsRegistry.getEditorActions()), _g = _f.next(); !_g.done; _g = _f.next()) {
-            var command = _g.value;
-            var id = command.id;
-            if (!MonacoCommands.EXCLUDE_ACTIONS.has(id)) {
-                var label = command.label;
-                var iconClass = iconClasses.get(id);
-                MonacoCommands.ACTIONS.set(id, { id: id, label: label, iconClass: iconClass });
-            }
-        }
-    }
-    catch (e_2_1) { e_2 = { error: e_2_1 }; }
-    finally {
-        try {
-            if (_g && !_g.done && (_b = _f.return)) _b.call(_f);
-        }
-        finally { if (e_2) throw e_2.error; }
-    }
-    try {
-        for (var _h = __values(monaco.keybindings.KeybindingsRegistry.getDefaultKeybindings()), _j = _h.next(); !_j.done; _j = _h.next()) {
-            var keybinding = _j.value;
-            var id = keybinding.command;
-            if (!MonacoCommands.ACTIONS.has(id) && !MonacoCommands.EXCLUDE_ACTIONS.has(id)) {
-                MonacoCommands.ACTIONS.set(id, { id: id, delegate: id });
-            }
-        }
-    }
-    catch (e_3_1) { e_3 = { error: e_3_1 }; }
-    finally {
-        try {
-            if (_j && !_j.done && (_c = _h.return)) _c.call(_h);
-        }
-        finally { if (e_3) throw e_3.error; }
-    }
-})(MonacoCommands = exports.MonacoCommands || (exports.MonacoCommands = {}));
-var MonacoEditorCommandHandlers = /** @class */ (function () {
-    function MonacoEditorCommandHandlers() {
-    }
-    MonacoEditorCommandHandlers.prototype.registerCommands = function () {
-        this.registerCommonCommandHandlers();
-        this.registerEditorCommandHandlers();
-        this.registerMonacoActionCommands();
-        this.registerInternalLanguageServiceCommands();
-    };
-    MonacoEditorCommandHandlers.prototype.registerInternalLanguageServiceCommands = function () {
-        var e_4, _a;
-        var instantiationService = monaco.services.StaticServices.instantiationService.get();
-        var monacoCommands = monaco.commands.CommandsRegistry.getCommands();
-        var _loop_1 = function (command) {
-            if (command.startsWith('_execute')) {
-                this_1.commandRegistry.registerCommand({
-                    id: command
-                }, {
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    execute: function () {
-                        var args = [];
-                        for (var _i = 0; _i < arguments.length; _i++) {
-                            args[_i] = arguments[_i];
-                        }
-                        return instantiationService.invokeFunction.apply(instantiationService, __spread([monacoCommands.get(command).handler], args));
-                    }
-                });
-            }
-        };
-        var this_1 = this;
-        try {
-            for (var _b = __values(monacoCommands.keys()), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var command = _c.value;
-                _loop_1(command);
-            }
-        }
-        catch (e_4_1) { e_4 = { error: e_4_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_4) throw e_4.error; }
-        }
-    };
-    MonacoEditorCommandHandlers.prototype.registerCommonCommandHandlers = function () {
-        // eslint-disable-next-line guard-for-in
-        for (var action in MonacoCommands.COMMON_ACTIONS) {
-            var command = MonacoCommands.COMMON_ACTIONS[action];
-            var handler = this.newCommonActionHandler(action);
-            this.monacoCommandRegistry.registerHandler(command, handler);
-        }
-    };
-    MonacoEditorCommandHandlers.prototype.newCommonActionHandler = function (action) {
-        return this.isCommonKeyboardAction(action) ? this.newKeyboardHandler(action) : this.newActionHandler(action);
-    };
-    MonacoEditorCommandHandlers.prototype.isCommonKeyboardAction = function (action) {
-        return MonacoCommands.COMMON_KEYBOARD_ACTIONS.has(action);
-    };
-    MonacoEditorCommandHandlers.prototype.registerEditorCommandHandlers = function () {
-        this.monacoCommandRegistry.registerHandler(browser_2.EditorCommands.SHOW_REFERENCES.id, this.newShowReferenceHandler());
-        this.monacoCommandRegistry.registerHandler(browser_2.EditorCommands.CONFIG_INDENTATION.id, this.newConfigIndentationHandler());
-        this.monacoCommandRegistry.registerHandler(browser_2.EditorCommands.CONFIG_EOL.id, this.newConfigEolHandler());
-        this.monacoCommandRegistry.registerHandler(browser_2.EditorCommands.INDENT_USING_SPACES.id, this.newConfigTabSizeHandler(true));
-        this.monacoCommandRegistry.registerHandler(browser_2.EditorCommands.INDENT_USING_TABS.id, this.newConfigTabSizeHandler(false));
-    };
-    MonacoEditorCommandHandlers.prototype.newShowReferenceHandler = function () {
-        var _this = this;
-        return {
-            execute: function (editor, uri, position, locations) {
-                editor.commandService.executeCommand('editor.action.showReferences', monaco.Uri.parse(uri), _this.p2m.asPosition(position), locations.map(function (l) { return _this.p2m.asLocation(l); }));
-            }
-        };
-    };
-    MonacoEditorCommandHandlers.prototype.newConfigIndentationHandler = function () {
-        var _this = this;
-        return {
-            execute: function (editor) { return _this.configureIndentation(editor); }
-        };
-    };
-    MonacoEditorCommandHandlers.prototype.configureIndentation = function (editor) {
-        var _this = this;
-        var options = [true, false].map(function (useSpaces) {
-            return new quick_open_model_1.QuickOpenItem({
-                label: "Indent Using " + (useSpaces ? 'Spaces' : 'Tabs'),
-                run: function (mode) {
-                    if (mode === quick_open_model_1.QuickOpenMode.OPEN) {
-                        _this.configureTabSize(editor, useSpaces);
-                    }
+                if (!registry.isVisible.apply(registry, __spread([browser_3.WorkspaceCommands.ADD_FOLDER.id], args))) {
                     return false;
                 }
-            });
+                var navigator = _this.tryGetWidget();
+                var model = navigator && navigator.model;
+                var uris = selection_1.UriSelection.getUris(model && model.selectedNodes);
+                return _this.workspaceService.areWorkspaceRoots(uris);
+            }
         });
-        this.quickOpenService.open({ onType: function (_, acceptor) { return acceptor(options); } }, {
-            placeholder: 'Select Action',
-            fuzzyMatchLabel: true
+        registry.registerCommand(navigator_diff_1.NavigatorDiffCommands.COMPARE_FIRST, {
+            execute: function () {
+                _this.navigatorDiff.addFirstComparisonFile();
+            },
+            isEnabled: function () { return true; },
+            isVisible: function () { return true; }
         });
-    };
-    MonacoEditorCommandHandlers.prototype.newConfigEolHandler = function () {
-        var _this = this;
-        return {
-            execute: function (editor) { return _this.configureEol(editor); }
-        };
-    };
-    MonacoEditorCommandHandlers.prototype.configureEol = function (editor) {
-        var _this = this;
-        var options = ['LF', 'CRLF'].map(function (lineEnding) {
-            return new quick_open_model_1.QuickOpenItem({
-                label: lineEnding,
-                run: function (mode) {
-                    if (mode === quick_open_model_1.QuickOpenMode.OPEN) {
-                        _this.setEol(editor, lineEnding);
-                        return true;
-                    }
-                    return false;
-                }
-            });
-        });
-        this.quickOpenService.open({ onType: function (_, acceptor) { return acceptor(options); } }, {
-            placeholder: 'Select End of Line Sequence',
-            fuzzyMatchLabel: true
+        registry.registerCommand(navigator_diff_1.NavigatorDiffCommands.COMPARE_SECOND, {
+            execute: function () {
+                _this.navigatorDiff.compareFiles();
+            },
+            isEnabled: function () { return _this.navigatorDiff.isFirstFileSelected; },
+            isVisible: function () { return _this.navigatorDiff.isFirstFileSelected; }
         });
     };
-    MonacoEditorCommandHandlers.prototype.setEol = function (editor, lineEnding) {
-        var model = editor.document && editor.document.textEditorModel;
-        if (model) {
-            if (lineEnding === 'CRLF' || lineEnding === '\r\n') {
-                model.pushEOL(monaco.editor.EndOfLineSequence.CRLF);
-            }
-            else {
-                model.pushEOL(monaco.editor.EndOfLineSequence.LF);
-            }
-        }
-    };
-    MonacoEditorCommandHandlers.prototype.newConfigTabSizeHandler = function (useSpaces) {
-        var _this = this;
-        return {
-            execute: function (editor) { return _this.configureTabSize(editor, useSpaces); }
-        };
-    };
-    MonacoEditorCommandHandlers.prototype.configureTabSize = function (editor, useSpaces) {
-        var model = editor.document && editor.document.textEditorModel;
-        if (model) {
-            var tabSize_1 = model.getOptions().tabSize;
-            var sizes = Array.from(Array(8), function (_, x) { return x + 1; });
-            var tabSizeOptions_1 = sizes.map(function (size) {
-                return new quick_open_model_1.QuickOpenItem({
-                    label: size === tabSize_1 ? size + "   Configured Tab Size" : size.toString(),
-                    run: function (mode) {
-                        if (mode !== quick_open_model_1.QuickOpenMode.OPEN) {
-                            return false;
-                        }
-                        model.updateOptions({
-                            tabSize: size || tabSize_1,
-                            insertSpaces: useSpaces
-                        });
-                        return true;
-                    }
-                });
-            });
-            this.quickOpenService.open({ onType: function (_, acceptor) { return acceptor(tabSizeOptions_1); } }, {
-                placeholder: 'Select Tab Size for Current File',
-                fuzzyMatchLabel: true,
-                selectIndex: function (lookFor) {
-                    if (!lookFor || lookFor === '') {
-                        return tabSize_1 - 1;
-                    }
-                    return 0;
-                }
-            });
-        }
-    };
-    MonacoEditorCommandHandlers.prototype.registerMonacoActionCommands = function () {
-        var e_5, _a;
-        try {
-            for (var _b = __values(MonacoCommands.ACTIONS.values()), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var action = _c.value;
-                var handler = this.newMonacoActionHandler(action);
-                this.monacoCommandRegistry.registerCommand(action, handler);
-            }
-        }
-        catch (e_5_1) { e_5 = { error: e_5_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_5) throw e_5.error; }
-        }
-    };
-    MonacoEditorCommandHandlers.prototype.newMonacoActionHandler = function (action) {
-        var delegate = action.delegate;
-        return delegate ? this.newDelegateHandler(delegate) : this.newActionHandler(action.id);
-    };
-    MonacoEditorCommandHandlers.prototype.newKeyboardHandler = function (action) {
-        return {
-            execute: function (editor) {
-                var args = [];
-                for (var _i = 1; _i < arguments.length; _i++) {
-                    args[_i - 1] = arguments[_i];
-                }
-                return editor.getControl()._modelData.cursor.trigger('keyboard', action, args);
-            }
-        };
-    };
-    MonacoEditorCommandHandlers.prototype.newCommandHandler = function (action) {
-        return {
-            execute: function (editor) {
-                var _a;
-                var args = [];
-                for (var _i = 1; _i < arguments.length; _i++) {
-                    args[_i - 1] = arguments[_i];
-                }
-                return (_a = editor.commandService).executeCommand.apply(_a, __spread([action], args));
-            }
-        };
-    };
-    MonacoEditorCommandHandlers.prototype.newActionHandler = function (action) {
-        return {
-            execute: function (editor) { return editor.runAction(action); },
-            isEnabled: function (editor) { return editor.isActionSupported(action); }
-        };
-    };
-    MonacoEditorCommandHandlers.prototype.newDelegateHandler = function (action) {
-        return {
-            execute: function (editor) {
-                var _a;
-                var args = [];
-                for (var _i = 1; _i < arguments.length; _i++) {
-                    args[_i - 1] = arguments[_i];
-                }
-                return (_a = editor.commandService).executeMonacoCommand.apply(_a, __spread([action], args));
-            }
-        };
-    };
-    __decorate([
-        inversify_1.inject(monaco_command_registry_1.MonacoCommandRegistry),
-        __metadata("design:type", monaco_command_registry_1.MonacoCommandRegistry)
-    ], MonacoEditorCommandHandlers.prototype, "monacoCommandRegistry", void 0);
-    __decorate([
-        inversify_1.inject(core_1.CommandRegistry),
-        __metadata("design:type", core_1.CommandRegistry)
-    ], MonacoEditorCommandHandlers.prototype, "commandRegistry", void 0);
-    __decorate([
-        inversify_1.inject(lib_1.ProtocolToMonacoConverter),
-        __metadata("design:type", lib_1.ProtocolToMonacoConverter)
-    ], MonacoEditorCommandHandlers.prototype, "p2m", void 0);
-    __decorate([
-        inversify_1.inject(quick_open_service_1.QuickOpenService),
-        __metadata("design:type", quick_open_service_1.QuickOpenService)
-    ], MonacoEditorCommandHandlers.prototype, "quickOpenService", void 0);
-    MonacoEditorCommandHandlers = __decorate([
-        inversify_1.injectable()
-    ], MonacoEditorCommandHandlers);
-    return MonacoEditorCommandHandlers;
-}());
-exports.MonacoEditorCommandHandlers = MonacoEditorCommandHandlers;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-configurations.js":
-/*!**************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-configurations.js ***!
-  \**************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2018 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-/* eslint-disable @typescript-eslint/no-explicit-any */
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var MonacoConfigurations = /** @class */ (function () {
-    function MonacoConfigurations() {
-        this.onDidChangeConfigurationEmitter = new common_1.Emitter();
-        this.onDidChangeConfiguration = this.onDidChangeConfigurationEmitter.event;
-    }
-    MonacoConfigurations_1 = MonacoConfigurations;
-    MonacoConfigurations.prototype.init = function () {
-        var _this = this;
-        this.reconcileData();
-        this.preferences.onPreferencesChanged(function (changes) { return _this.reconcileData(changes); });
-    };
-    MonacoConfigurations.prototype.reconcileData = function (changes) {
-        var _this = this;
-        this.onDidChangeConfigurationEmitter.fire({
-            affectedSections: MonacoConfigurations_1.parseSections(changes),
-            affectsConfiguration: function (section) { return _this.affectsConfiguration(section, changes); }
-        });
-    };
-    MonacoConfigurations.prototype.affectsConfiguration = function (section, changes) {
-        if (!changes) {
-            return true;
-        }
-        for (var preferenceName in changes) {
-            if (section.startsWith(preferenceName) || preferenceName.startsWith(section)) {
-                return true;
-            }
+    FileNavigatorContribution.prototype.withWidget = function (widget, cb) {
+        if (widget === void 0) { widget = this.tryGetWidget(); }
+        if (widget instanceof navigator_widget_1.FileNavigatorWidget && widget.id === navigator_widget_1.FILE_NAVIGATOR_ID) {
+            return cb(widget);
         }
         return false;
     };
-    MonacoConfigurations.prototype.getConfiguration = function (section, resource) {
-        return new MonacoWorkspaceConfiguration(this.preferences, this.preferenceSchemaProvider, section, resource);
-    };
-    var MonacoConfigurations_1;
-    __decorate([
-        inversify_1.inject(browser_1.PreferenceService),
-        __metadata("design:type", Object)
-    ], MonacoConfigurations.prototype, "preferences", void 0);
-    __decorate([
-        inversify_1.inject(browser_1.PreferenceSchemaProvider),
-        __metadata("design:type", browser_1.PreferenceSchemaProvider)
-    ], MonacoConfigurations.prototype, "preferenceSchemaProvider", void 0);
-    __decorate([
-        inversify_1.postConstruct(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], MonacoConfigurations.prototype, "init", null);
-    MonacoConfigurations = MonacoConfigurations_1 = __decorate([
-        inversify_1.injectable()
-    ], MonacoConfigurations);
-    return MonacoConfigurations;
-}());
-exports.MonacoConfigurations = MonacoConfigurations;
-(function (MonacoConfigurations) {
-    function parseSections(changes) {
-        var e_1, _a;
-        if (!changes) {
-            return undefined;
-        }
-        var sections = [];
-        try {
-            for (var _b = __values(Object.keys(changes)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var key = _c.value;
-                var hasOverride = key.startsWith('[');
-                while (key) {
-                    sections.push(key);
-                    if (hasOverride && key.indexOf('.') !== -1) {
-                        sections.push(key.substr(key.indexOf('.')));
-                    }
-                    var index = key.lastIndexOf('.');
-                    key = key.substring(0, index);
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        return sections;
-    }
-    MonacoConfigurations.parseSections = parseSections;
-})(MonacoConfigurations = exports.MonacoConfigurations || (exports.MonacoConfigurations = {}));
-exports.MonacoConfigurations = MonacoConfigurations;
-var MonacoWorkspaceConfiguration = /** @class */ (function () {
-    function MonacoWorkspaceConfiguration(preferences, preferenceSchemaProvider, section, resource) {
-        this.preferences = preferences;
-        this.preferenceSchemaProvider = preferenceSchemaProvider;
-        this.section = section;
-        this.resource = resource;
-    }
-    MonacoWorkspaceConfiguration.prototype.getSection = function (section) {
-        if (this.section) {
-            return this.section + '.' + section;
-        }
-        return section;
-    };
-    MonacoWorkspaceConfiguration.prototype.has = function (section) {
-        return this.preferences.inspect(this.getSection(section), this.resource) !== undefined;
-    };
-    MonacoWorkspaceConfiguration.prototype.get = function (section, defaultValue) {
-        return this.preferences.get(this.getSection(section), defaultValue, this.resource);
-    };
-    MonacoWorkspaceConfiguration.prototype.toJSON = function () {
-        var proxy = browser_1.createPreferenceProxy(this.preferences, this.preferenceSchemaProvider.getCombinedSchema(), {
-            resourceUri: this.resource,
-            style: 'deep'
+    FileNavigatorContribution.prototype.registerMenus = function (registry) {
+        _super.prototype.registerMenus.call(this, registry);
+        registry.registerMenuAction(browser_2.SHELL_TABBAR_CONTEXT_MENU, {
+            commandId: FileNavigatorCommands.REVEAL_IN_NAVIGATOR.id,
+            label: FileNavigatorCommands.REVEAL_IN_NAVIGATOR.label,
+            order: '5'
         });
-        if (this.section) {
-            return proxy[this.section];
-        }
-        return proxy;
-    };
-    return MonacoWorkspaceConfiguration;
-}());
-exports.MonacoWorkspaceConfiguration = MonacoWorkspaceConfiguration;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-context-key-service.js":
-/*!*******************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-context-key-service.js ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2019 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var context_key_service_1 = __webpack_require__(/*! @theia/core/lib/browser/context-key-service */ "../node_modules/@theia/core/lib/browser/context-key-service.js");
-var MonacoContextKeyService = /** @class */ (function (_super) {
-    __extends(MonacoContextKeyService, _super);
-    function MonacoContextKeyService() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.expressions = new Map();
-        return _this;
-    }
-    MonacoContextKeyService.prototype.init = function () {
-        var _this = this;
-        this.contextKeyService.onDidChangeContext(function (e) {
-            return _this.fireDidChange({
-                affects: function (keys) { return e.affectsSome(keys); }
-            });
+        registry.registerMenuAction(NavigatorContextMenu.NAVIGATION, {
+            commandId: browser_1.CommonCommands.OPEN.id
         });
-    };
-    MonacoContextKeyService.prototype.createKey = function (key, defaultValue) {
-        return this.contextKeyService.createKey(key, defaultValue);
-    };
-    MonacoContextKeyService.prototype.match = function (expression, context) {
-        var ctx = context || this.activeContext || (window.document.activeElement instanceof HTMLElement ? window.document.activeElement : undefined);
-        var parsed = this.parse(expression);
-        if (!ctx) {
-            return this.contextKeyService.contextMatchesRules(parsed);
-        }
-        var keyContext = this.contextKeyService.getContext(ctx);
-        return monaco.keybindings.KeybindingResolver.contextMatchesRules(keyContext, parsed);
-    };
-    MonacoContextKeyService.prototype.parse = function (when) {
-        var expression = this.expressions.get(when);
-        if (!expression) {
-            expression = monaco.contextkey.ContextKeyExpr.deserialize(when);
-            this.expressions.set(when, expression);
-        }
-        return expression;
-    };
-    MonacoContextKeyService.prototype.parseKeys = function (expression) {
-        return new Set(monaco.contextkey.ContextKeyExpr.deserialize(expression).keys());
-    };
-    __decorate([
-        inversify_1.inject(monaco.contextKeyService.ContextKeyService),
-        __metadata("design:type", monaco.contextKeyService.ContextKeyService)
-    ], MonacoContextKeyService.prototype, "contextKeyService", void 0);
-    __decorate([
-        inversify_1.postConstruct(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], MonacoContextKeyService.prototype, "init", null);
-    MonacoContextKeyService = __decorate([
-        inversify_1.injectable()
-    ], MonacoContextKeyService);
-    return MonacoContextKeyService;
-}(context_key_service_1.ContextKeyService));
-exports.MonacoContextKeyService = MonacoContextKeyService;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-context-menu.js":
-/*!************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-context-menu.js ***!
-  \************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var browser_1 = __webpack_require__(/*! @theia/editor/lib/browser */ "../node_modules/@theia/editor/lib/browser/index.js");
-var browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var widgets_1 = __webpack_require__(/*! @phosphor/widgets */ "../node_modules/@phosphor/widgets/lib/index.js");
-var commands_1 = __webpack_require__(/*! @phosphor/commands */ "../node_modules/@phosphor/commands/lib/index.js");
-var MonacoContextMenuService = /** @class */ (function () {
-    function MonacoContextMenuService(contextMenuRenderer) {
-        this.contextMenuRenderer = contextMenuRenderer;
-    }
-    MonacoContextMenuService.prototype.showContextMenu = function (delegate) {
-        var e_1, _a;
-        var anchor = browser_2.toAnchor(delegate.getAnchor());
-        // If it is the general context menu, we want to delegate to our menu registry entirely and ignore the actually passed actions.
-        // Unfortunately checking the existence of certain properties seems to be the best way to tell, what kind of context menu is requested.
-        if (delegate.hasOwnProperty('getKeyBinding')) {
-            this.contextMenuRenderer.render(browser_1.EDITOR_CONTEXT_MENU, anchor, function () { return delegate.onHide(false); });
-        }
-        else {
-            var actions = delegate.getActions();
-            var commands = new commands_1.CommandRegistry();
-            var menu = new widgets_1.Menu({
-                commands: commands
-            });
-            var _loop_1 = function (action) {
-                var commandId = 'quickfix_' + actions.indexOf(action);
-                commands.addCommand(commandId, {
-                    label: action.label,
-                    className: action.class,
-                    isToggled: function () { return action.checked; },
-                    isEnabled: function () { return action.enabled; },
-                    execute: function () { return action.run(); }
-                });
-                menu.addItem({
-                    type: 'command',
-                    command: commandId
-                });
-            };
+        registry.registerSubmenu(NavigatorContextMenu.OPEN_WITH, 'Open With');
+        this.openerService.getOpeners().then(function (openers) {
+            var e_1, _a;
             try {
-                for (var actions_1 = __values(actions), actions_1_1 = actions_1.next(); !actions_1_1.done; actions_1_1 = actions_1.next()) {
-                    var action = actions_1_1.value;
-                    _loop_1(action);
+                for (var openers_1 = __values(openers), openers_1_1 = openers_1.next(); !openers_1_1.done; openers_1_1 = openers_1.next()) {
+                    var opener_1 = openers_1_1.value;
+                    var openWithCommand = browser_3.WorkspaceCommands.FILE_OPEN_WITH(opener_1);
+                    registry.registerMenuAction(NavigatorContextMenu.OPEN_WITH, {
+                        commandId: openWithCommand.id,
+                        label: opener_1.label,
+                        icon: opener_1.iconClass
+                    });
                 }
             }
             catch (e_1_1) { e_1 = { error: e_1_1 }; }
             finally {
                 try {
-                    if (actions_1_1 && !actions_1_1.done && (_a = actions_1.return)) _a.call(actions_1);
+                    if (openers_1_1 && !openers_1_1.done && (_a = openers_1.return)) _a.call(openers_1);
                 }
                 finally { if (e_1) throw e_1.error; }
             }
-            menu.aboutToClose.connect(function () { return delegate.onHide(false); });
-            menu.open(anchor.x, anchor.y);
+        });
+        // registry.registerMenuAction([CONTEXT_MENU_PATH, CUT_MENU_GROUP], {
+        //     commandId: Commands.FILE_CUT
+        // });
+        registry.registerMenuAction(NavigatorContextMenu.CLIPBOARD, {
+            commandId: browser_1.CommonCommands.COPY.id,
+            order: 'a'
+        });
+        registry.registerMenuAction(NavigatorContextMenu.CLIPBOARD, {
+            commandId: browser_1.CommonCommands.PASTE.id,
+            order: 'b'
+        });
+        registry.registerMenuAction(NavigatorContextMenu.CLIPBOARD, {
+            commandId: file_download_command_contribution_1.FileDownloadCommands.COPY_DOWNLOAD_LINK.id,
+            order: 'z'
+        });
+        registry.registerMenuAction(NavigatorContextMenu.MODIFICATION, {
+            commandId: browser_3.WorkspaceCommands.FILE_RENAME.id
+        });
+        registry.registerMenuAction(NavigatorContextMenu.MODIFICATION, {
+            commandId: browser_3.WorkspaceCommands.FILE_DELETE.id
+        });
+        registry.registerMenuAction(NavigatorContextMenu.MODIFICATION, {
+            commandId: browser_3.WorkspaceCommands.FILE_DUPLICATE.id
+        });
+        var downloadUploadMenu = __spread(exports.NAVIGATOR_CONTEXT_MENU, ['6_downloadupload']);
+        registry.registerMenuAction(downloadUploadMenu, {
+            commandId: filesystem_frontend_contribution_1.FileSystemCommands.UPLOAD.id,
+            order: 'a'
+        });
+        registry.registerMenuAction(downloadUploadMenu, {
+            commandId: file_download_command_contribution_1.FileDownloadCommands.DOWNLOAD.id,
+            order: 'b'
+        });
+        registry.registerMenuAction(NavigatorContextMenu.NAVIGATION, {
+            commandId: browser_3.WorkspaceCommands.NEW_FILE.id
+        });
+        registry.registerMenuAction(NavigatorContextMenu.NAVIGATION, {
+            commandId: browser_3.WorkspaceCommands.NEW_FOLDER.id
+        });
+        registry.registerMenuAction(NavigatorContextMenu.COMPARE, {
+            commandId: browser_3.WorkspaceCommands.FILE_COMPARE.id
+        });
+        registry.registerMenuAction(NavigatorContextMenu.MODIFICATION, {
+            commandId: FileNavigatorCommands.COLLAPSE_ALL.id,
+            label: 'Collapse All',
+            order: 'z2'
+        });
+        registry.registerMenuAction(NavigatorContextMenu.COMPARE, {
+            commandId: navigator_diff_1.NavigatorDiffCommands.COMPARE_FIRST.id,
+            order: 'z'
+        });
+        registry.registerMenuAction(NavigatorContextMenu.COMPARE, {
+            commandId: navigator_diff_1.NavigatorDiffCommands.COMPARE_SECOND.id,
+            order: 'z'
+        });
+    };
+    FileNavigatorContribution.prototype.registerKeybindings = function (registry) {
+        _super.prototype.registerKeybindings.call(this, registry);
+        registry.registerKeybinding({
+            command: FileNavigatorCommands.REVEAL_IN_NAVIGATOR.id,
+            keybinding: 'alt+r'
+        });
+        registry.registerKeybinding({
+            command: browser_3.WorkspaceCommands.FILE_DELETE.id,
+            keybinding: 'del',
+            context: navigator_keybinding_context_1.NavigatorKeybindingContexts.navigatorActive
+        });
+        if (common_1.isOSX) {
+            registry.registerKeybinding({
+                command: browser_3.WorkspaceCommands.FILE_DELETE.id,
+                keybinding: 'cmd+backspace',
+                context: navigator_keybinding_context_1.NavigatorKeybindingContexts.navigatorActive
+            });
+        }
+        registry.registerKeybinding({
+            command: browser_3.WorkspaceCommands.FILE_RENAME.id,
+            keybinding: 'f2',
+            context: navigator_keybinding_context_1.NavigatorKeybindingContexts.navigatorActive
+        });
+        registry.registerKeybinding({
+            command: FileNavigatorCommands.TOGGLE_HIDDEN_FILES.id,
+            keybinding: 'ctrlcmd+i',
+            context: navigator_keybinding_context_1.NavigatorKeybindingContexts.navigatorActive
+        });
+    };
+    FileNavigatorContribution.prototype.registerToolbarItems = function (toolbarRegistry) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                toolbarRegistry.registerItem({
+                    id: FileNavigatorCommands.REFRESH_NAVIGATOR.id,
+                    command: FileNavigatorCommands.REFRESH_NAVIGATOR.id,
+                    tooltip: 'Refresh Explorer',
+                    priority: 0,
+                });
+                toolbarRegistry.registerItem({
+                    id: FileNavigatorCommands.COLLAPSE_ALL.id,
+                    command: FileNavigatorCommands.COLLAPSE_ALL.id,
+                    tooltip: 'Collapse All',
+                    priority: 1,
+                });
+                this.registerMoreToolbarItem({
+                    id: browser_3.WorkspaceCommands.NEW_FILE.id,
+                    command: browser_3.WorkspaceCommands.NEW_FILE.id,
+                    tooltip: browser_3.WorkspaceCommands.NEW_FILE.label,
+                    group: NavigatorMoreToolbarGroups.NEW_OPEN,
+                });
+                this.registerMoreToolbarItem({
+                    id: browser_3.WorkspaceCommands.NEW_FOLDER.id,
+                    command: browser_3.WorkspaceCommands.NEW_FOLDER.id,
+                    tooltip: browser_3.WorkspaceCommands.NEW_FOLDER.label,
+                    group: NavigatorMoreToolbarGroups.NEW_OPEN,
+                });
+                this.registerMoreToolbarItem({
+                    id: FileNavigatorCommands.TOGGLE_AUTO_REVEAL.id,
+                    command: FileNavigatorCommands.TOGGLE_AUTO_REVEAL.id,
+                    tooltip: FileNavigatorCommands.TOGGLE_AUTO_REVEAL.label,
+                    group: NavigatorMoreToolbarGroups.TOOLS,
+                });
+                this.registerMoreToolbarItem({
+                    id: browser_3.WorkspaceCommands.ADD_FOLDER.id,
+                    command: browser_3.WorkspaceCommands.ADD_FOLDER.id,
+                    tooltip: browser_3.WorkspaceCommands.ADD_FOLDER.label,
+                    group: NavigatorMoreToolbarGroups.WORKSPACE,
+                });
+                return [2 /*return*/];
+            });
+        });
+    };
+    /**
+     * Reveals and selects node in the file navigator to which given widget is related.
+     * Does nothing if given widget undefined or doesn't have related resource.
+     *
+     * @param widget widget file resource of which should be revealed and selected
+     */
+    FileNavigatorContribution.prototype.selectWidgetFileNode = function (widget) {
+        return __awaiter(this, void 0, void 0, function () {
+            var resourceUri, model, node;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!browser_1.Navigatable.is(widget)) return [3 /*break*/, 3];
+                        resourceUri = widget.getResourceUri();
+                        if (!resourceUri) return [3 /*break*/, 3];
+                        return [4 /*yield*/, this.widget];
+                    case 1:
+                        model = (_a.sent()).model;
+                        return [4 /*yield*/, model.revealFile(resourceUri)];
+                    case 2:
+                        node = _a.sent();
+                        if (browser_1.SelectableTreeNode.is(node)) {
+                            model.selectNode(node);
+                        }
+                        _a.label = 3;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    FileNavigatorContribution.prototype.onCurrentWidgetChangedHandler = function () {
+        if (this.fileNavigatorPreferences['explorer.autoReveal']) {
+            this.selectWidgetFileNode(this.shell.currentWidget);
         }
     };
-    MonacoContextMenuService = __decorate([
+    /**
+     * Collapse file navigator nodes and set focus on first visible node
+     * - single root workspace: collapse all nodes except root
+     * - multiple root workspace: collapse all nodes, even roots
+     */
+    FileNavigatorContribution.prototype.collapseFileNavigatorTree = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var model, root, firstChild;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.widget];
+                    case 1:
+                        model = (_a.sent()).model;
+                        root = model.root;
+                        if (navigator_tree_1.WorkspaceNode.is(root) && root.children.length === 1) {
+                            root = root.children[0];
+                        }
+                        root.children.forEach(function (child) { return browser_1.CompositeTreeNode.is(child) && model.collapseAll(child); });
+                        firstChild = navigator_tree_1.WorkspaceNode.is(root) ? root.children[0] : root;
+                        if (browser_1.SelectableTreeNode.is(firstChild)) {
+                            model.selectNode(firstChild);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /**
+     * force refresh workspace in navigator
+     */
+    FileNavigatorContribution.prototype.refreshWorkspace = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var model;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.widget];
+                    case 1:
+                        model = (_a.sent()).model;
+                        return [4 /*yield*/, model.refresh()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    FileNavigatorContribution.prototype.updateAddRemoveFolderActions = function (registry) {
+        this.toDisposeAddRemoveFolderActions.dispose();
+        if (this.workspacePreferences['workspace.supportMultiRootWorkspace']) {
+            this.toDisposeAddRemoveFolderActions.push(registry.registerMenuAction(NavigatorContextMenu.WORKSPACE, {
+                commandId: FileNavigatorCommands.ADD_ROOT_FOLDER.id,
+                label: browser_3.WorkspaceCommands.ADD_FOLDER.label
+            }));
+            this.toDisposeAddRemoveFolderActions.push(registry.registerMenuAction(NavigatorContextMenu.WORKSPACE, {
+                commandId: browser_3.WorkspaceCommands.REMOVE_FOLDER.id
+            }));
+        }
+    };
+    __decorate([
+        inversify_1.inject(common_1.CommandRegistry),
+        __metadata("design:type", common_1.CommandRegistry)
+    ], FileNavigatorContribution.prototype, "commandRegistry", void 0);
+    __decorate([
+        inversify_1.inject(tab_bar_toolbar_1.TabBarToolbarRegistry),
+        __metadata("design:type", tab_bar_toolbar_1.TabBarToolbarRegistry)
+    ], FileNavigatorContribution.prototype, "tabbarToolbarRegistry", void 0);
+    __decorate([
+        inversify_1.inject(navigator_context_key_service_1.NavigatorContextKeyService),
+        __metadata("design:type", navigator_context_key_service_1.NavigatorContextKeyService)
+    ], FileNavigatorContribution.prototype, "contextKeyService", void 0);
+    __decorate([
+        inversify_1.inject(common_1.MenuModelRegistry),
+        __metadata("design:type", common_1.MenuModelRegistry)
+    ], FileNavigatorContribution.prototype, "menuRegistry", void 0);
+    __decorate([
+        inversify_1.inject(navigator_diff_1.NavigatorDiff),
+        __metadata("design:type", navigator_diff_1.NavigatorDiff)
+    ], FileNavigatorContribution.prototype, "navigatorDiff", void 0);
+    __decorate([
+        inversify_1.inject(browser_4.PreferenceService),
+        __metadata("design:type", Object)
+    ], FileNavigatorContribution.prototype, "preferenceService", void 0);
+    __decorate([
+        inversify_1.postConstruct(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", Promise)
+    ], FileNavigatorContribution.prototype, "init", null);
+    FileNavigatorContribution = __decorate([
         inversify_1.injectable(),
-        __param(0, inversify_1.inject(browser_2.ContextMenuRenderer)),
-        __metadata("design:paramtypes", [Object])
-    ], MonacoContextMenuService);
-    return MonacoContextMenuService;
-}());
-exports.MonacoContextMenuService = MonacoContextMenuService;
+        __param(0, inversify_1.inject(navigator_preferences_1.FileNavigatorPreferences)),
+        __param(1, inversify_1.inject(browser_1.OpenerService)),
+        __param(2, inversify_1.inject(navigator_filter_1.FileNavigatorFilter)),
+        __param(3, inversify_1.inject(browser_3.WorkspaceService)),
+        __param(4, inversify_1.inject(browser_3.WorkspacePreferences)),
+        __metadata("design:paramtypes", [Object, Object, navigator_filter_1.FileNavigatorFilter,
+            browser_3.WorkspaceService, Object])
+    ], FileNavigatorContribution);
+    return FileNavigatorContribution;
+}(view_contribution_1.AbstractViewContribution));
+exports.FileNavigatorContribution = FileNavigatorContribution;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-diff-editor.js":
-/*!***********************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-diff-editor.js ***!
-  \***********************************************************************/
+/***/ "../../../../node_modules/@theia/navigator/lib/browser/navigator-decorator-service.js":
+/*!*********************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/lib/browser/navigator-decorator-service.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1425,111 +909,59 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
-var diff_uris_1 = __webpack_require__(/*! @theia/core/lib/browser/diff-uris */ "../node_modules/@theia/core/lib/browser/diff-uris.js");
-var MonacoDiffEditor = /** @class */ (function (_super) {
-    __extends(MonacoDiffEditor, _super);
-    function MonacoDiffEditor(uri, node, originalModel, modifiedModel, services, diffNavigatorFactory, options, override) {
-        var _this = _super.call(this, uri, modifiedModel, node, services, options, override) || this;
-        _this.uri = uri;
-        _this.node = node;
-        _this.originalModel = originalModel;
-        _this.modifiedModel = modifiedModel;
-        _this.diffNavigatorFactory = diffNavigatorFactory;
-        _this.documents.add(originalModel);
-        var original = originalModel.textEditorModel;
-        var modified = modifiedModel.textEditorModel;
-        _this._diffNavigator = diffNavigatorFactory.createdDiffNavigator(_this._diffEditor, options);
-        _this._diffEditor.setModel({ original: original, modified: modified });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var contribution_provider_1 = __webpack_require__(/*! @theia/core/lib/common/contribution-provider */ "../../../../node_modules/@theia/core/lib/common/contribution-provider.js");
+var tree_decorator_1 = __webpack_require__(/*! @theia/core/lib/browser/tree/tree-decorator */ "../../../../node_modules/@theia/core/lib/browser/tree/tree-decorator.js");
+/**
+ * Symbol for all decorators that would like to contribute into the navigator.
+ */
+exports.NavigatorTreeDecorator = Symbol('NavigatorTreeDecorator');
+/**
+ * Decorator service for the navigator.
+ */
+var NavigatorDecoratorService = /** @class */ (function (_super) {
+    __extends(NavigatorDecoratorService, _super);
+    function NavigatorDecoratorService(contributions) {
+        var _this = _super.call(this, contributions.getContributions()) || this;
+        _this.contributions = contributions;
         return _this;
     }
-    Object.defineProperty(MonacoDiffEditor.prototype, "diffEditor", {
-        get: function () {
-            return this._diffEditor;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MonacoDiffEditor.prototype, "diffNavigator", {
-        get: function () {
-            return this._diffNavigator;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    MonacoDiffEditor.prototype.create = function (options, override) {
-        this._diffEditor = monaco.editor.createDiffEditor(this.node, __assign({}, options, { fixedOverflowWidgets: true }), override);
-        this.editor = this._diffEditor.getModifiedEditor();
-        return this._diffEditor;
-    };
-    MonacoDiffEditor.prototype.resize = function (dimension) {
-        if (this.node) {
-            var layoutSize = this.computeLayoutSize(this.node, dimension);
-            this._diffEditor.layout(layoutSize);
-        }
-    };
-    MonacoDiffEditor.prototype.isActionSupported = function (id) {
-        var action = this._diffEditor.getSupportedActions().find(function (a) { return a.id === id; });
-        return !!action && action.isSupported() && _super.prototype.isActionSupported.call(this, id);
-    };
-    MonacoDiffEditor.prototype.deltaDecorations = function (params) {
-        console.warn('`deltaDecorations` should be called on either the original, or the modified editor.');
-        return [];
-    };
-    MonacoDiffEditor.prototype.getResourceUri = function () {
-        return new uri_1.default(this.originalModel.uri);
-    };
-    MonacoDiffEditor.prototype.createMoveToUri = function (resourceUri) {
-        var _a = __read(diff_uris_1.DiffUris.decode(this.uri), 2), left = _a[0], right = _a[1];
-        return diff_uris_1.DiffUris.encode(left.withPath(resourceUri.path), right.withPath(resourceUri.path));
-    };
-    return MonacoDiffEditor;
-}(monaco_editor_1.MonacoEditor));
-exports.MonacoDiffEditor = MonacoDiffEditor;
+    NavigatorDecoratorService = __decorate([
+        inversify_1.injectable(),
+        __param(0, inversify_1.inject(contribution_provider_1.ContributionProvider)), __param(0, inversify_1.named(exports.NavigatorTreeDecorator)),
+        __metadata("design:paramtypes", [Object])
+    ], NavigatorDecoratorService);
+    return NavigatorDecoratorService;
+}(tree_decorator_1.AbstractTreeDecoratorService));
+exports.NavigatorDecoratorService = NavigatorDecoratorService;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-diff-navigator-factory.js":
-/*!**********************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-diff-navigator-factory.js ***!
-  \**********************************************************************************/
+/***/ "../../../../node_modules/@theia/navigator/lib/browser/navigator-diff.js":
+/*!********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/lib/browser/navigator-diff.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /********************************************************************************
- * Copyright (C) 2018 TypeFox and others.
+ * Copyright (C) 2019 David Saunders and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -1549,55 +981,210 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var MonacoDiffNavigatorFactory = /** @class */ (function () {
-    function MonacoDiffNavigatorFactory() {
-    }
-    MonacoDiffNavigatorFactory.prototype.createdDiffNavigator = function (editor, options) {
-        var navigator = monaco.editor.createDiffNavigator(editor, options);
-        var ensureInitialized = function (fwd) {
-            if (navigator.nextIdx < -1) {
-                navigator._initIdx(fwd);
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
             }
-        };
-        return {
-            canNavigate: function () { return navigator.canNavigate(); },
-            hasNext: function () {
-                ensureInitialized(true);
-                return navigator.nextIdx + 1 < navigator.ranges.length;
-            },
-            hasPrevious: function () {
-                ensureInitialized(false);
-                return navigator.nextIdx > 0;
-            },
-            next: function () { return navigator.next(); },
-            previous: function () { return navigator.previous(); },
-            revealFirst: navigator.revealFirst,
-        };
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var filesystem_1 = __webpack_require__(/*! @theia/filesystem/lib/common/filesystem */ "../../../../node_modules/@theia/filesystem/lib/common/filesystem.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var opener_service_1 = __webpack_require__(/*! @theia/core/lib/browser/opener-service */ "../../../../node_modules/@theia/core/lib/browser/opener-service.js");
+var message_service_1 = __webpack_require__(/*! @theia/core/lib/common/message-service */ "../../../../node_modules/@theia/core/lib/common/message-service.js");
+var diff_uris_1 = __webpack_require__(/*! @theia/core/lib/browser/diff-uris */ "../../../../node_modules/@theia/core/lib/browser/diff-uris.js");
+var NavigatorDiffCommands;
+(function (NavigatorDiffCommands) {
+    var COMPARE_CATEGORY = 'Compare';
+    NavigatorDiffCommands.COMPARE_FIRST = {
+        id: 'compare:first',
+        category: COMPARE_CATEGORY,
+        label: 'Select for Compare'
     };
-    MonacoDiffNavigatorFactory.nullNavigator = {
-        canNavigate: function () { return false; },
-        hasNext: function () { return false; },
-        hasPrevious: function () { return false; },
-        next: function () { },
-        previous: function () { },
-        revealFirst: false,
+    NavigatorDiffCommands.COMPARE_SECOND = {
+        id: 'compare:second',
+        category: COMPARE_CATEGORY,
+        label: 'Compare with Selected'
     };
-    MonacoDiffNavigatorFactory = __decorate([
-        inversify_1.injectable()
-    ], MonacoDiffNavigatorFactory);
-    return MonacoDiffNavigatorFactory;
+})(NavigatorDiffCommands = exports.NavigatorDiffCommands || (exports.NavigatorDiffCommands = {}));
+var NavigatorDiff = /** @class */ (function () {
+    function NavigatorDiff() {
+        this._firstCompareFile = undefined;
+    }
+    Object.defineProperty(NavigatorDiff.prototype, "firstCompareFile", {
+        get: function () {
+            return this._firstCompareFile;
+        },
+        set: function (uri) {
+            this._firstCompareFile = uri;
+            this._isFirstFileSelected = true;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NavigatorDiff.prototype, "isFirstFileSelected", {
+        get: function () {
+            return this._isFirstFileSelected;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    NavigatorDiff.prototype.isDirectory = function (uri) {
+        return __awaiter(this, void 0, void 0, function () {
+            var stat, e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.fileSystem.getFileStat(uri.path.toString())];
+                    case 1:
+                        stat = _a.sent();
+                        if (!stat || stat.isDirectory) {
+                            return [2 /*return*/, true];
+                        }
+                        return [3 /*break*/, 3];
+                    case 2:
+                        e_1 = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/, false];
+                }
+            });
+        });
+    };
+    NavigatorDiff.prototype.getURISelection = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var uri;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = common_1.UriSelection.getUri(this.selectionService.selection);
+                        if (!uri) {
+                            return [2 /*return*/, undefined];
+                        }
+                        return [4 /*yield*/, this.isDirectory(uri)];
+                    case 1:
+                        if (_a.sent()) {
+                            return [2 /*return*/, undefined];
+                        }
+                        return [2 /*return*/, uri];
+                }
+            });
+        });
+    };
+    /**
+     * Adds the initial file for comparison
+     * @see SelectionService
+     * @see compareFiles
+     * @returns Promise<boolean> indicating whether the uri is valid
+     */
+    NavigatorDiff.prototype.addFirstComparisonFile = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var uriSelected;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getURISelection()];
+                    case 1:
+                        uriSelected = _a.sent();
+                        if (uriSelected === undefined) {
+                            return [2 /*return*/, false];
+                        }
+                        this.firstCompareFile = uriSelected;
+                        return [2 /*return*/, true];
+                }
+            });
+        });
+    };
+    /**
+     * Compare selected files.  First file is selected through addFirstComparisonFile
+     * @see SelectionService
+     * @see addFirstComparisonFile
+     * @returns Promise<boolean> indicating whether the comparison was completed successfully
+     */
+    NavigatorDiff.prototype.compareFiles = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var uriSelected, diffUri;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getURISelection()];
+                    case 1:
+                        uriSelected = _a.sent();
+                        if (this.firstCompareFile === undefined || uriSelected === undefined) {
+                            return [2 /*return*/, false];
+                        }
+                        diffUri = diff_uris_1.DiffUris.encode(this.firstCompareFile, uriSelected);
+                        opener_service_1.open(this.openerService, diffUri).catch(function (e) {
+                            _this.notifications.error(e.message);
+                        });
+                        return [2 /*return*/, true];
+                }
+            });
+        });
+    };
+    __decorate([
+        inversify_1.inject(filesystem_1.FileSystem),
+        __metadata("design:type", Object)
+    ], NavigatorDiff.prototype, "fileSystem", void 0);
+    __decorate([
+        inversify_1.inject(opener_service_1.OpenerService),
+        __metadata("design:type", Object)
+    ], NavigatorDiff.prototype, "openerService", void 0);
+    __decorate([
+        inversify_1.inject(message_service_1.MessageService),
+        __metadata("design:type", message_service_1.MessageService)
+    ], NavigatorDiff.prototype, "notifications", void 0);
+    __decorate([
+        inversify_1.inject(common_1.SelectionService),
+        __metadata("design:type", common_1.SelectionService)
+    ], NavigatorDiff.prototype, "selectionService", void 0);
+    NavigatorDiff = __decorate([
+        inversify_1.injectable(),
+        __metadata("design:paramtypes", [])
+    ], NavigatorDiff);
+    return NavigatorDiff;
 }());
-exports.MonacoDiffNavigatorFactory = MonacoDiffNavigatorFactory;
+exports.NavigatorDiff = NavigatorDiff;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-editor-provider.js":
-/*!***************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-editor-provider.js ***!
-  \***************************************************************************/
+/***/ "../../../../node_modules/@theia/navigator/lib/browser/navigator-filter.js":
+/*!**********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/lib/browser/navigator-filter.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1676,16 +1263,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
 var __read = (this && this.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
@@ -1707,538 +1284,144 @@ var __spread = (this && this.__spread) || function () {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var browser_1 = __webpack_require__(/*! @theia/editor/lib/browser */ "../node_modules/@theia/editor/lib/browser/index.js");
-var diff_uris_1 = __webpack_require__(/*! @theia/core/lib/browser/diff-uris */ "../node_modules/@theia/core/lib/browser/diff-uris.js");
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var monaco_languageclient_1 = __webpack_require__(/*! monaco-languageclient */ "../node_modules/monaco-languageclient/lib/index.js");
-var monaco_command_service_1 = __webpack_require__(/*! ./monaco-command-service */ "../node_modules/@theia/monaco/lib/browser/monaco-command-service.js");
-var monaco_context_menu_1 = __webpack_require__(/*! ./monaco-context-menu */ "../node_modules/@theia/monaco/lib/browser/monaco-context-menu.js");
-var monaco_diff_editor_1 = __webpack_require__(/*! ./monaco-diff-editor */ "../node_modules/@theia/monaco/lib/browser/monaco-diff-editor.js");
-var monaco_diff_navigator_factory_1 = __webpack_require__(/*! ./monaco-diff-navigator-factory */ "../node_modules/@theia/monaco/lib/browser/monaco-diff-navigator-factory.js");
-var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
-var monaco_editor_model_1 = __webpack_require__(/*! ./monaco-editor-model */ "../node_modules/@theia/monaco/lib/browser/monaco-editor-model.js");
-var monaco_editor_service_1 = __webpack_require__(/*! ./monaco-editor-service */ "../node_modules/@theia/monaco/lib/browser/monaco-editor-service.js");
-var monaco_quick_open_service_1 = __webpack_require__(/*! ./monaco-quick-open-service */ "../node_modules/@theia/monaco/lib/browser/monaco-quick-open-service.js");
-var monaco_text_model_service_1 = __webpack_require__(/*! ./monaco-text-model-service */ "../node_modules/@theia/monaco/lib/browser/monaco-text-model-service.js");
-var monaco_workspace_1 = __webpack_require__(/*! ./monaco-workspace */ "../node_modules/@theia/monaco/lib/browser/monaco-workspace.js");
-var monaco_bulk_edit_service_1 = __webpack_require__(/*! ./monaco-bulk-edit-service */ "../node_modules/@theia/monaco/lib/browser/monaco-bulk-edit-service.js");
-var application_protocol_1 = __webpack_require__(/*! @theia/core/lib/common/application-protocol */ "../node_modules/@theia/core/lib/common/application-protocol.js");
-var core_1 = __webpack_require__(/*! @theia/core */ "../node_modules/@theia/core/lib/common/index.js");
-var browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var monaco_resolved_keybinding_1 = __webpack_require__(/*! ./monaco-resolved-keybinding */ "../node_modules/@theia/monaco/lib/browser/monaco-resolved-keybinding.js");
-var MonacoEditorProvider = /** @class */ (function () {
-    function MonacoEditorProvider(codeEditorService, textModelService, contextMenuService, m2p, p2m, workspace, commandServiceFactory, editorPreferences, quickOpenService, diffNavigatorFactory, applicationServer, contextKeyService) {
-        var _this = this;
-        this.codeEditorService = codeEditorService;
-        this.textModelService = textModelService;
-        this.contextMenuService = contextMenuService;
-        this.m2p = m2p;
-        this.p2m = p2m;
-        this.workspace = workspace;
-        this.commandServiceFactory = commandServiceFactory;
-        this.editorPreferences = editorPreferences;
-        this.quickOpenService = quickOpenService;
-        this.diffNavigatorFactory = diffNavigatorFactory;
-        this.applicationServer = applicationServer;
-        this.contextKeyService = contextKeyService;
-        this.isWindowsBackend = false;
-        var staticServices = monaco.services.StaticServices;
-        var init = staticServices.init.bind(monaco.services.StaticServices);
-        this.applicationServer.getBackendOS().then(function (os) {
-            _this.isWindowsBackend = os === core_1.OS.Type.Windows;
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var minimatch_1 = __webpack_require__(/*! minimatch */ "../../../../node_modules/minimatch/minimatch.js");
+var event_1 = __webpack_require__(/*! @theia/core/lib/common/event */ "../../../../node_modules/@theia/core/lib/common/event.js");
+var filesystem_preferences_1 = __webpack_require__(/*! @theia/filesystem/lib/browser/filesystem-preferences */ "../../../../node_modules/@theia/filesystem/lib/browser/filesystem-preferences.js");
+var navigator_preferences_1 = __webpack_require__(/*! ./navigator-preferences */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-preferences.js");
+/**
+ * Filter for omitting elements from the navigator. For more details on the exclusion patterns,
+ * one should check either the manual with `man 5 gitignore` or just [here](https://git-scm.com/docs/gitignore).
+ */
+var FileNavigatorFilter = /** @class */ (function () {
+    function FileNavigatorFilter(preferences) {
+        this.preferences = preferences;
+        this.emitter = new event_1.Emitter();
+    }
+    FileNavigatorFilter.prototype.init = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                this.filterPredicate = this.createFilterPredicate(this.filesPreferences['files.exclude']);
+                this.filesPreferences.onPreferenceChanged(function (event) { return _this.onFilesPreferenceChanged(event); });
+                this.preferences.onPreferenceChanged(function (event) { return _this.onPreferenceChanged(event); });
+                return [2 /*return*/];
+            });
         });
-        if (staticServices.resourcePropertiesService) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            var original = staticServices.resourcePropertiesService.get();
-            original.getEOL = function () {
-                var eol = _this.editorPreferences['files.eol'];
-                if (eol) {
-                    if (eol !== 'auto') {
-                        return eol;
-                    }
+    };
+    FileNavigatorFilter.prototype.filter = function (items) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, items];
+                    case 1: return [2 /*return*/, (_a.sent()).filter(function (item) { return _this.filterItem(item); })];
                 }
-                return _this.isWindowsBackend ? '\r\n' : '\n';
+            });
+        });
+    };
+    Object.defineProperty(FileNavigatorFilter.prototype, "onFilterChanged", {
+        get: function () {
+            return this.emitter.event;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    FileNavigatorFilter.prototype.filterItem = function (item) {
+        return this.filterPredicate.filter(item);
+    };
+    FileNavigatorFilter.prototype.fireFilterChanged = function () {
+        this.emitter.fire(undefined);
+    };
+    FileNavigatorFilter.prototype.onFilesPreferenceChanged = function (event) {
+        var preferenceName = event.preferenceName, newValue = event.newValue;
+        if (preferenceName === 'files.exclude') {
+            this.filterPredicate = this.createFilterPredicate(newValue || {});
+            this.fireFilterChanged();
+        }
+    };
+    FileNavigatorFilter.prototype.onPreferenceChanged = function (event) {
+    };
+    FileNavigatorFilter.prototype.createFilterPredicate = function (exclusions) {
+        return new FileNavigatorFilterPredicate(this.interceptExclusions(exclusions));
+    };
+    FileNavigatorFilter.prototype.toggleHiddenFiles = function () {
+        this.showHiddenFiles = !this.showHiddenFiles;
+        var filesExcludes = this.filesPreferences['files.exclude'];
+        this.filterPredicate = this.createFilterPredicate(filesExcludes || {});
+        this.fireFilterChanged();
+    };
+    FileNavigatorFilter.prototype.interceptExclusions = function (exclusions) {
+        return __assign({}, exclusions, { '**/.*': this.showHiddenFiles });
+    };
+    __decorate([
+        inversify_1.inject(filesystem_preferences_1.FileSystemPreferences),
+        __metadata("design:type", Object)
+    ], FileNavigatorFilter.prototype, "filesPreferences", void 0);
+    __decorate([
+        inversify_1.postConstruct(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", Promise)
+    ], FileNavigatorFilter.prototype, "init", null);
+    FileNavigatorFilter = __decorate([
+        inversify_1.injectable(),
+        __param(0, inversify_1.inject(navigator_preferences_1.FileNavigatorPreferences)),
+        __metadata("design:paramtypes", [Object])
+    ], FileNavigatorFilter);
+    return FileNavigatorFilter;
+}());
+exports.FileNavigatorFilter = FileNavigatorFilter;
+(function (FileNavigatorFilter) {
+    var Predicate;
+    (function (Predicate) {
+        /**
+         * Wraps a bunch of predicates and returns with a new one that evaluates to `true` if
+         * each of the wrapped predicates evaluates to `true`. Otherwise, `false`.
+         */
+        function and() {
+            var predicates = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                predicates[_i] = arguments[_i];
+            }
+            return {
+                filter: function (id) { return predicates.every(function (predicate) { return predicate.filter(id); }); }
             };
         }
-        monaco.services.StaticServices.init = function (o) {
-            var result = init(o);
-            result[0].set(monaco.services.ICodeEditorService, codeEditorService);
-            return result;
-        };
+        Predicate.and = and;
+    })(Predicate = FileNavigatorFilter.Predicate || (FileNavigatorFilter.Predicate = {}));
+})(FileNavigatorFilter = exports.FileNavigatorFilter || (exports.FileNavigatorFilter = {}));
+exports.FileNavigatorFilter = FileNavigatorFilter;
+/**
+ * Concrete filter navigator filter predicate that is decoupled from the preferences.
+ */
+var FileNavigatorFilterPredicate = /** @class */ (function () {
+    function FileNavigatorFilterPredicate(exclusions) {
+        var _a;
+        var _this = this;
+        var patterns = Object.keys(exclusions).map(function (pattern) { return ({ pattern: pattern, enabled: exclusions[pattern] }); }).filter(function (object) { return object.enabled; }).map(function (object) { return object.pattern; });
+        this.delegate = (_a = FileNavigatorFilter.Predicate).and.apply(_a, __spread(patterns.map(function (pattern) { return _this.createDelegate(pattern); })));
     }
-    MonacoEditorProvider_1 = MonacoEditorProvider;
-    Object.defineProperty(MonacoEditorProvider.prototype, "current", {
-        /**
-         * Returns the last focused MonacoEditor.
-         * It takes into account inline editors as well.
-         * If you are interested only in standalone editors then use `MonacoEditor.getCurrent(EditorManager)`
-         */
-        get: function () {
-            return this._current;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    MonacoEditorProvider.prototype.getModel = function (uri, toDispose) {
-        return __awaiter(this, void 0, void 0, function () {
-            var reference;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.textModelService.createModelReference(uri)];
-                    case 1:
-                        reference = _a.sent();
-                        toDispose.push(reference);
-                        return [2 /*return*/, reference.object];
-                }
-            });
-        });
+    FileNavigatorFilterPredicate.prototype.filter = function (item) {
+        return this.delegate.filter(item);
     };
-    MonacoEditorProvider.prototype.get = function (uri) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.editorPreferences.ready];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/, this.doCreateEditor(function (override, toDispose) { return _this.createEditor(uri, override, toDispose); })];
-                }
-            });
-        });
-    };
-    MonacoEditorProvider.prototype.doCreateEditor = function (factory) {
-        return __awaiter(this, void 0, void 0, function () {
-            var commandService, contextKeyService, _a, codeEditorService, textModelService, contextMenuService, IWorkspaceEditService, toDispose, editor, standaloneCommandService;
-            var _this = this;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        commandService = this.commandServiceFactory();
-                        contextKeyService = this.contextKeyService.createScoped();
-                        _a = this, codeEditorService = _a.codeEditorService, textModelService = _a.textModelService, contextMenuService = _a.contextMenuService;
-                        IWorkspaceEditService = this.bulkEditService;
-                        toDispose = new common_1.DisposableCollection();
-                        return [4 /*yield*/, factory({
-                                codeEditorService: codeEditorService,
-                                textModelService: textModelService,
-                                contextMenuService: contextMenuService,
-                                commandService: commandService,
-                                IWorkspaceEditService: IWorkspaceEditService,
-                                contextKeyService: contextKeyService
-                            }, toDispose)];
-                    case 1:
-                        editor = _b.sent();
-                        editor.onDispose(function () { return toDispose.dispose(); });
-                        this.suppressMonacoKeybindingListener(editor);
-                        this.injectKeybindingResolver(editor);
-                        standaloneCommandService = new monaco.services.StandaloneCommandService(editor.instantiationService);
-                        commandService.setDelegate(standaloneCommandService);
-                        this.installQuickOpenService(editor);
-                        this.installReferencesController(editor);
-                        toDispose.push(editor.onFocusChanged(function (focused) {
-                            if (focused) {
-                                _this._current = editor;
-                            }
-                        }));
-                        toDispose.push(common_1.Disposable.create(function () {
-                            if (_this._current === editor) {
-                                _this._current = undefined;
-                            }
-                        }));
-                        return [2 /*return*/, editor];
-                }
-            });
-        });
-    };
-    /**
-     * Suppresses Monaco keydown listener to avoid triggering default Monaco keybindings
-     * if they are overriden by a user. Monaco keybindings should be registered as Theia keybindings
-     * to allow a user to customize them.
-     */
-    MonacoEditorProvider.prototype.suppressMonacoKeybindingListener = function (editor) {
-        var e_1, _a;
-        var keydownListener;
-        try {
-            for (var _b = __values(editor.getControl()._standaloneKeybindingService._store._toDispose), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var listener = _c.value;
-                if ('_type' in listener && listener['_type'] === 'keydown') {
-                    keydownListener = listener;
-                    break;
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        if (keydownListener) {
-            keydownListener.dispose();
-        }
-    };
-    MonacoEditorProvider.prototype.injectKeybindingResolver = function (editor) {
-        var _this = this;
-        var keybindingService = editor.getControl()._standaloneKeybindingService;
-        keybindingService.resolveKeybinding = function (keybinding) { return [new monaco_resolved_keybinding_1.MonacoResolvedKeybinding(monaco_resolved_keybinding_1.MonacoResolvedKeybinding.keySequence(keybinding), _this.keybindingRegistry)]; };
-        keybindingService.resolveKeyboardEvent = function (keyboardEvent) {
-            var keybinding = new monaco.keybindings.SimpleKeybinding(keyboardEvent.ctrlKey, keyboardEvent.shiftKey, keyboardEvent.altKey, keyboardEvent.metaKey, keyboardEvent.keyCode).toChord();
-            return new monaco_resolved_keybinding_1.MonacoResolvedKeybinding(monaco_resolved_keybinding_1.MonacoResolvedKeybinding.keySequence(keybinding), _this.keybindingRegistry);
+    FileNavigatorFilterPredicate.prototype.createDelegate = function (pattern) {
+        var delegate = new minimatch_1.Minimatch(pattern, { matchBase: true });
+        return {
+            filter: function (item) { return !delegate.match(item.id); }
         };
     };
-    MonacoEditorProvider.prototype.createEditor = function (uri, override, toDispose) {
-        if (diff_uris_1.DiffUris.isDiffUri(uri)) {
-            return this.createMonacoDiffEditor(uri, override, toDispose);
-        }
-        return this.createMonacoEditor(uri, override, toDispose);
-    };
-    Object.defineProperty(MonacoEditorProvider.prototype, "preferencePrefixes", {
-        get: function () {
-            return ['editor.'];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    MonacoEditorProvider.prototype.createMonacoEditor = function (uri, override, toDispose) {
-        return __awaiter(this, void 0, void 0, function () {
-            var model, options, editor;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getModel(uri, toDispose)];
-                    case 1:
-                        model = _a.sent();
-                        options = this.createMonacoEditorOptions(model);
-                        editor = new monaco_editor_1.MonacoEditor(uri, model, document.createElement('div'), this.services, options, override);
-                        toDispose.push(this.editorPreferences.onPreferenceChanged(function (event) {
-                            if (event.affects(uri.toString(), model.languageId)) {
-                                _this.updateMonacoEditorOptions(editor, event);
-                            }
-                        }));
-                        toDispose.push(editor.onLanguageChanged(function () { return _this.updateMonacoEditorOptions(editor); }));
-                        editor.document.onWillSaveModel(function (event) { return event.waitUntil(_this.formatOnSave(editor, event)); });
-                        return [2 /*return*/, editor];
-                }
-            });
-        });
-    };
-    MonacoEditorProvider.prototype.createMonacoEditorOptions = function (model) {
-        var options = this.createOptions(this.preferencePrefixes, model.uri, model.languageId);
-        options.model = model.textEditorModel;
-        options.readOnly = model.readOnly;
-        return options;
-    };
-    MonacoEditorProvider.prototype.updateMonacoEditorOptions = function (editor, event) {
-        if (event) {
-            var preferenceName = event.preferenceName;
-            var overrideIdentifier = editor.document.languageId;
-            var newValue = this.editorPreferences.get({ preferenceName: preferenceName, overrideIdentifier: overrideIdentifier }, undefined, editor.uri.toString());
-            editor.getControl().updateOptions(this.setOption(preferenceName, newValue, this.preferencePrefixes));
-        }
-        else {
-            var options = this.createMonacoEditorOptions(editor.document);
-            delete options.model;
-            editor.getControl().updateOptions(options);
-        }
-    };
-    MonacoEditorProvider.prototype.formatOnSave = function (editor, event) {
-        return __awaiter(this, void 0, void 0, function () {
-            var overrideIdentifier, uri, formatOnSave, formatOnSaveTimeout, _a, _b, _c;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
-                    case 0:
-                        if (event.reason !== monaco_languageclient_1.TextDocumentSaveReason.Manual) {
-                            return [2 /*return*/, []];
-                        }
-                        overrideIdentifier = editor.document.languageId;
-                        uri = editor.uri.toString();
-                        formatOnSave = this.editorPreferences.get({ preferenceName: 'editor.formatOnSave', overrideIdentifier: overrideIdentifier }, undefined, uri);
-                        if (!formatOnSave) {
-                            return [2 /*return*/, []];
-                        }
-                        formatOnSaveTimeout = this.editorPreferences.get({ preferenceName: 'editor.formatOnSaveTimeout', overrideIdentifier: overrideIdentifier }, undefined, uri);
-                        _b = (_a = Promise).race;
-                        _c = [new Promise(function (reject) { return setTimeout(function () { return reject(new Error("Aborted format on save after " + formatOnSaveTimeout + "ms")); }, formatOnSaveTimeout); })];
-                        return [4 /*yield*/, editor.commandService.executeCommand('editor.action.formatDocument')];
-                    case 1: return [4 /*yield*/, _b.apply(_a, [_c.concat([
-                                _d.sent()
-                            ])])];
-                    case 2:
-                        _d.sent();
-                        return [2 /*return*/, []];
-                }
-            });
-        });
-    };
-    Object.defineProperty(MonacoEditorProvider.prototype, "diffPreferencePrefixes", {
-        get: function () {
-            return __spread(this.preferencePrefixes, ['diffEditor.']);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    MonacoEditorProvider.prototype.createMonacoDiffEditor = function (uri, override, toDispose) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a, original, modified, _b, originalModel, modifiedModel, options, editor;
-            var _this = this;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _a = __read(diff_uris_1.DiffUris.decode(uri), 2), original = _a[0], modified = _a[1];
-                        return [4 /*yield*/, Promise.all([this.getModel(original, toDispose), this.getModel(modified, toDispose)])];
-                    case 1:
-                        _b = __read.apply(void 0, [_c.sent(), 2]), originalModel = _b[0], modifiedModel = _b[1];
-                        options = this.createMonacoDiffEditorOptions(originalModel, modifiedModel);
-                        editor = new monaco_diff_editor_1.MonacoDiffEditor(uri, document.createElement('div'), originalModel, modifiedModel, this.services, this.diffNavigatorFactory, options, override);
-                        toDispose.push(this.editorPreferences.onPreferenceChanged(function (event) {
-                            var originalFileUri = original.withoutQuery().withScheme('file').toString();
-                            if (event.affects(originalFileUri, editor.document.languageId)) {
-                                _this.updateMonacoDiffEditorOptions(editor, event, originalFileUri);
-                            }
-                        }));
-                        toDispose.push(editor.onLanguageChanged(function () { return _this.updateMonacoDiffEditorOptions(editor); }));
-                        return [2 /*return*/, editor];
-                }
-            });
-        });
-    };
-    MonacoEditorProvider.prototype.createMonacoDiffEditorOptions = function (original, modified) {
-        var options = this.createOptions(this.diffPreferencePrefixes, modified.uri, modified.languageId);
-        options.originalEditable = !original.readOnly;
-        options.readOnly = modified.readOnly;
-        return options;
-    };
-    MonacoEditorProvider.prototype.updateMonacoDiffEditorOptions = function (editor, event, resourceUri) {
-        if (event) {
-            var preferenceName = event.preferenceName;
-            var overrideIdentifier = editor.document.languageId;
-            var newValue = this.editorPreferences.get({ preferenceName: preferenceName, overrideIdentifier: overrideIdentifier }, undefined, resourceUri);
-            editor.diffEditor.updateOptions(this.setOption(preferenceName, newValue, this.diffPreferencePrefixes));
-        }
-        else {
-            var options = this.createMonacoDiffEditorOptions(editor.originalModel, editor.modifiedModel);
-            editor.diffEditor.updateOptions(options);
-        }
-    };
-    MonacoEditorProvider.prototype.createOptions = function (prefixes, uri, overrideIdentifier) {
-        var _this = this;
-        return Object.keys(this.editorPreferences).reduce(function (options, preferenceName) {
-            var value = _this.editorPreferences.get({ preferenceName: preferenceName, overrideIdentifier: overrideIdentifier }, undefined, uri);
-            return _this.setOption(preferenceName, common_1.deepClone(value), prefixes, options);
-        }, {});
-    };
-    MonacoEditorProvider.prototype.setOption = function (preferenceName, value, prefixes, options) {
-        if (options === void 0) { options = {}; }
-        var optionName = this.toOptionName(preferenceName, prefixes);
-        this.doSetOption(options, value, optionName.split('.'));
-        return options;
-    };
-    MonacoEditorProvider.prototype.toOptionName = function (preferenceName, prefixes) {
-        var e_2, _a;
-        try {
-            for (var prefixes_1 = __values(prefixes), prefixes_1_1 = prefixes_1.next(); !prefixes_1_1.done; prefixes_1_1 = prefixes_1.next()) {
-                var prefix = prefixes_1_1.value;
-                if (preferenceName.startsWith(prefix)) {
-                    return preferenceName.substr(prefix.length);
-                }
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (prefixes_1_1 && !prefixes_1_1.done && (_a = prefixes_1.return)) _a.call(prefixes_1);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
-        return preferenceName;
-    };
-    MonacoEditorProvider.prototype.doSetOption = function (obj, value, names, idx) {
-        if (idx === void 0) { idx = 0; }
-        var name = names[idx];
-        if (!obj[name]) {
-            if (names.length > (idx + 1)) {
-                obj[name] = {};
-                this.doSetOption(obj[name], value, names, (idx + 1));
-            }
-            else {
-                obj[name] = value;
-            }
-        }
-    };
-    MonacoEditorProvider.prototype.installQuickOpenService = function (editor) {
-        var _this = this;
-        var control = editor.getControl();
-        var quickOpenController = control._contributions['editor.controller.quickOpenController'];
-        quickOpenController.run = function (options) {
-            var selection = control.getSelection();
-            _this.quickOpenService.internalOpen(__assign({}, options, { onClose: function (canceled) {
-                    quickOpenController.clearDecorations();
-                    if (canceled && selection) {
-                        control.setSelection(selection);
-                        control.revealRangeInCenterIfOutsideViewport(selection);
-                    }
-                    editor.focus();
-                } }));
-        };
-    };
-    MonacoEditorProvider.prototype.installReferencesController = function (editor) {
-        var control = editor.getControl();
-        var referencesController = control._contributions['editor.contrib.referencesController'];
-        referencesController._gotoReference = function (ref) {
-            referencesController._widget.hide();
-            referencesController._ignoreModelChangeEvent = true;
-            var range = monaco.Range.lift(ref.range).collapseToStart();
-            // prerse the model that it does not get disposed if an editor preview replaces an editor
-            var model = referencesController._model;
-            referencesController._model = undefined;
-            referencesController._editorService.openCodeEditor({
-                resource: ref.uri,
-                options: { selection: range }
-            }, control).then(function (openedEditor) {
-                referencesController._model = model;
-                referencesController._ignoreModelChangeEvent = false;
-                if (!openedEditor) {
-                    referencesController.closeWidget();
-                    return;
-                }
-                if (openedEditor !== control) {
-                    // preserve the model that it does not get disposed in `referencesController.closeWidget`
-                    referencesController._model = undefined;
-                    // to preserve the active editor
-                    var focus_1 = control.focus;
-                    control.focus = function () { };
-                    referencesController.closeWidget();
-                    control.focus = focus_1;
-                    var modelPromise = Promise.resolve(model);
-                    modelPromise.cancel = function () { };
-                    openedEditor._contributions['editor.contrib.referencesController'].toggleWidget(range, modelPromise, {
-                        getMetaTitle: function (m) { return m.references.length > 1 ? " \u2013 " + m.references.length + " references" : ''; }
-                    });
-                    return;
-                }
-                if (referencesController._widget) {
-                    referencesController._widget.show(range);
-                    referencesController._widget.focus();
-                }
-            }, function (e) {
-                referencesController._ignoreModelChangeEvent = false;
-                monaco.error.onUnexpectedError(e);
-            });
-        };
-    };
-    MonacoEditorProvider.prototype.getDiffNavigator = function (editor) {
-        if (editor instanceof monaco_diff_editor_1.MonacoDiffEditor) {
-            return editor.diffNavigator;
-        }
-        return monaco_diff_navigator_factory_1.MonacoDiffNavigatorFactory.nullNavigator;
-    };
-    MonacoEditorProvider.prototype.createInline = function (uri, node, options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.doCreateEditor(function (override, toDispose) { return __awaiter(_this, void 0, void 0, function () {
-                        var document, model;
-                        var _this = this;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    override.contextMenuService = {
-                                        showContextMenu: function () { }
-                                    };
-                                    document = new monaco_editor_model_1.MonacoEditorModel({
-                                        uri: uri,
-                                        readContents: function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
-                                            return [2 /*return*/, ''];
-                                        }); }); },
-                                        dispose: function () { }
-                                    }, this.m2p, this.p2m);
-                                    toDispose.push(document);
-                                    return [4 /*yield*/, document.load()];
-                                case 1:
-                                    model = (_a.sent()).textEditorModel;
-                                    return [2 /*return*/, new monaco_editor_1.MonacoEditor(uri, document, node, this.services, Object.assign({
-                                            model: model,
-                                            isSimpleWidget: true,
-                                            autoSizing: false,
-                                            minHeight: 1,
-                                            maxHeight: 1
-                                        }, MonacoEditorProvider_1.inlineOptions, options), override)];
-                            }
-                        });
-                    }); })];
-            });
-        });
-    };
-    var MonacoEditorProvider_1;
-    MonacoEditorProvider.inlineOptions = {
-        wordWrap: 'on',
-        overviewRulerLanes: 0,
-        glyphMargin: false,
-        lineNumbers: 'off',
-        folding: false,
-        selectOnLineNumbers: false,
-        hideCursorInOverviewRuler: true,
-        selectionHighlight: false,
-        scrollbar: {
-            horizontal: 'hidden'
-        },
-        lineDecorationsWidth: 0,
-        overviewRulerBorder: false,
-        scrollBeyondLastLine: false,
-        renderLineHighlight: 'none',
-        fixedOverflowWidgets: true,
-        acceptSuggestionOnEnter: 'smart',
-        minimap: {
-            enabled: false
-        }
-    };
-    __decorate([
-        inversify_1.inject(monaco_bulk_edit_service_1.MonacoBulkEditService),
-        __metadata("design:type", monaco_bulk_edit_service_1.MonacoBulkEditService)
-    ], MonacoEditorProvider.prototype, "bulkEditService", void 0);
-    __decorate([
-        inversify_1.inject(monaco_editor_1.MonacoEditorServices),
-        __metadata("design:type", monaco_editor_1.MonacoEditorServices)
-    ], MonacoEditorProvider.prototype, "services", void 0);
-    __decorate([
-        inversify_1.inject(browser_2.KeybindingRegistry),
-        __metadata("design:type", browser_2.KeybindingRegistry)
-    ], MonacoEditorProvider.prototype, "keybindingRegistry", void 0);
-    MonacoEditorProvider = MonacoEditorProvider_1 = __decorate([
-        inversify_1.injectable(),
-        __param(0, inversify_1.inject(monaco_editor_service_1.MonacoEditorService)),
-        __param(1, inversify_1.inject(monaco_text_model_service_1.MonacoTextModelService)),
-        __param(2, inversify_1.inject(monaco_context_menu_1.MonacoContextMenuService)),
-        __param(3, inversify_1.inject(monaco_languageclient_1.MonacoToProtocolConverter)),
-        __param(4, inversify_1.inject(monaco_languageclient_1.ProtocolToMonacoConverter)),
-        __param(5, inversify_1.inject(monaco_workspace_1.MonacoWorkspace)),
-        __param(6, inversify_1.inject(monaco_command_service_1.MonacoCommandServiceFactory)),
-        __param(7, inversify_1.inject(browser_1.EditorPreferences)),
-        __param(8, inversify_1.inject(monaco_quick_open_service_1.MonacoQuickOpenService)),
-        __param(9, inversify_1.inject(monaco_diff_navigator_factory_1.MonacoDiffNavigatorFactory)),
-        __param(10, inversify_1.inject(application_protocol_1.ApplicationServer)),
-        __param(11, inversify_1.inject(monaco.contextKeyService.ContextKeyService)),
-        __metadata("design:paramtypes", [monaco_editor_service_1.MonacoEditorService,
-            monaco_text_model_service_1.MonacoTextModelService,
-            monaco_context_menu_1.MonacoContextMenuService,
-            monaco_languageclient_1.MonacoToProtocolConverter,
-            monaco_languageclient_1.ProtocolToMonacoConverter,
-            monaco_workspace_1.MonacoWorkspace, Function, Object, monaco_quick_open_service_1.MonacoQuickOpenService,
-            monaco_diff_navigator_factory_1.MonacoDiffNavigatorFactory, Object, monaco.contextKeyService.ContextKeyService])
-    ], MonacoEditorProvider);
-    return MonacoEditorProvider;
+    return FileNavigatorFilterPredicate;
 }());
-exports.MonacoEditorProvider = MonacoEditorProvider;
-//# sourceMappingURL=monaco-editor-provider.js.map
+exports.FileNavigatorFilterPredicate = FileNavigatorFilterPredicate;
+
 
 /***/ }),
 
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-editor-service.js":
-/*!**************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-editor-service.js ***!
-  \**************************************************************************/
+/***/ "../../../../node_modules/@theia/navigator/lib/browser/navigator-frontend-module.js":
+/*!*******************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/lib/browser/navigator-frontend-module.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2259,39 +1442,6 @@ exports.MonacoEditorProvider = MonacoEditorProvider;
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -2327,166 +1477,75 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var monaco_languageclient_1 = __webpack_require__(/*! monaco-languageclient */ "../node_modules/monaco-languageclient/lib/index.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var browser_2 = __webpack_require__(/*! @theia/editor/lib/browser */ "../node_modules/@theia/editor/lib/browser/index.js");
-var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
-inversify_1.decorate(inversify_1.injectable(), monaco.services.CodeEditorServiceImpl);
-var MonacoEditorService = /** @class */ (function (_super) {
-    __extends(MonacoEditorService, _super);
-    function MonacoEditorService() {
-        return _super.call(this, monaco.services.StaticServices.standaloneThemeService.get()) || this;
-    }
-    MonacoEditorService_1 = MonacoEditorService;
-    MonacoEditorService.prototype.getActiveCodeEditor = function () {
-        var editor = monaco_editor_1.MonacoEditor.getActive(this.editors);
-        return editor && editor.getControl();
-    };
-    MonacoEditorService.prototype.openCodeEditor = function (input, source, sideBySide) {
-        return __awaiter(this, void 0, void 0, function () {
-            var uri, openerOptions, widget, editorWidget;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        uri = new uri_1.default(input.resource.toString());
-                        openerOptions = this.createEditorOpenerOptions(input, source, sideBySide);
-                        return [4 /*yield*/, browser_1.open(this.openerService, uri, openerOptions)];
-                    case 1:
-                        widget = _a.sent();
-                        return [4 /*yield*/, this.findEditorWidgetByUri(widget, uri.toString())];
-                    case 2:
-                        editorWidget = _a.sent();
-                        if (editorWidget && editorWidget.editor instanceof monaco_editor_1.MonacoEditor) {
-                            return [2 /*return*/, editorWidget.editor.getControl()];
-                        }
-                        return [2 /*return*/, undefined];
-                }
-            });
+__webpack_require__(/*! ../../src/browser/style/index.css */ "../../../../node_modules/@theia/navigator/src/browser/style/index.css");
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var navigator_widget_1 = __webpack_require__(/*! ./navigator-widget */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-widget.js");
+var navigator_keybinding_context_1 = __webpack_require__(/*! ./navigator-keybinding-context */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-keybinding-context.js");
+var navigator_contribution_1 = __webpack_require__(/*! ./navigator-contribution */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-contribution.js");
+var navigator_container_1 = __webpack_require__(/*! ./navigator-container */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-container.js");
+var widget_manager_1 = __webpack_require__(/*! @theia/core/lib/browser/widget-manager */ "../../../../node_modules/@theia/core/lib/browser/widget-manager.js");
+var navigator_preferences_1 = __webpack_require__(/*! ./navigator-preferences */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-preferences.js");
+var navigator_filter_1 = __webpack_require__(/*! ./navigator-filter */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-filter.js");
+var navigator_context_key_service_1 = __webpack_require__(/*! ./navigator-context-key-service */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-context-key-service.js");
+var tab_bar_toolbar_1 = __webpack_require__(/*! @theia/core/lib/browser/shell/tab-bar-toolbar */ "../../../../node_modules/@theia/core/lib/browser/shell/tab-bar-toolbar.js");
+var navigator_diff_1 = __webpack_require__(/*! ./navigator-diff */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-diff.js");
+var navigator_layout_migrations_1 = __webpack_require__(/*! ./navigator-layout-migrations */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-layout-migrations.js");
+exports.default = new inversify_1.ContainerModule(function (bind) {
+    navigator_preferences_1.bindFileNavigatorPreferences(bind);
+    bind(navigator_filter_1.FileNavigatorFilter).toSelf().inSingletonScope();
+    bind(navigator_context_key_service_1.NavigatorContextKeyService).toSelf().inSingletonScope();
+    browser_1.bindViewContribution(bind, navigator_contribution_1.FileNavigatorContribution);
+    bind(browser_1.FrontendApplicationContribution).toService(navigator_contribution_1.FileNavigatorContribution);
+    bind(tab_bar_toolbar_1.TabBarToolbarContribution).toService(navigator_contribution_1.FileNavigatorContribution);
+    bind(browser_1.KeybindingContext).to(navigator_keybinding_context_1.NavigatorActiveContext).inSingletonScope();
+    bind(navigator_widget_1.FileNavigatorWidget).toDynamicValue(function (ctx) {
+        return navigator_container_1.createFileNavigatorWidget(ctx.container);
+    });
+    bind(widget_manager_1.WidgetFactory).toDynamicValue(function (_a) {
+        var container = _a.container;
+        return ({
+            id: navigator_widget_1.FILE_NAVIGATOR_ID,
+            createWidget: function () { return container.get(navigator_widget_1.FileNavigatorWidget); }
         });
-    };
-    MonacoEditorService.prototype.findEditorWidgetByUri = function (widget, uriAsString) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a, _b, childWidget, editorWidget, e_1_1;
-            var e_1, _c;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
-                    case 0:
-                        if (widget instanceof browser_2.EditorWidget) {
-                            if (widget.editor.uri.toString() === uriAsString) {
-                                return [2 /*return*/, widget];
-                            }
-                            return [2 /*return*/, undefined];
-                        }
-                        if (!browser_1.ApplicationShell.TrackableWidgetProvider.is(widget)) return [3 /*break*/, 9];
-                        _d.label = 1;
-                    case 1:
-                        _d.trys.push([1, 7, 8, 9]);
-                        return [4 /*yield*/, widget.getTrackableWidgets()];
-                    case 2:
-                        _a = __values.apply(void 0, [_d.sent()]), _b = _a.next();
-                        _d.label = 3;
-                    case 3:
-                        if (!!_b.done) return [3 /*break*/, 6];
-                        childWidget = _b.value;
-                        return [4 /*yield*/, this.findEditorWidgetByUri(childWidget, uriAsString)];
-                    case 4:
-                        editorWidget = _d.sent();
-                        if (editorWidget) {
-                            return [2 /*return*/, editorWidget];
-                        }
-                        _d.label = 5;
-                    case 5:
-                        _b = _a.next();
-                        return [3 /*break*/, 3];
-                    case 6: return [3 /*break*/, 9];
-                    case 7:
-                        e_1_1 = _d.sent();
-                        e_1 = { error: e_1_1 };
-                        return [3 /*break*/, 9];
-                    case 8:
-                        try {
-                            if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
-                        }
-                        finally { if (e_1) throw e_1.error; }
-                        return [7 /*endfinally*/];
-                    case 9: return [2 /*return*/, undefined];
-                }
-            });
+    }).inSingletonScope();
+    bind(widget_manager_1.WidgetFactory).toDynamicValue(function (_a) {
+        var container = _a.container;
+        return ({
+            id: navigator_widget_1.EXPLORER_VIEW_CONTAINER_ID,
+            createWidget: function () { return __awaiter(_this, void 0, void 0, function () {
+                var viewContainer, widget;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            viewContainer = container.get(browser_1.ViewContainer.Factory)({ id: navigator_widget_1.EXPLORER_VIEW_CONTAINER_ID });
+                            viewContainer.setTitleOptions(navigator_widget_1.EXPLORER_VIEW_CONTAINER_TITLE_OPTIONS);
+                            return [4 /*yield*/, container.get(widget_manager_1.WidgetManager).getOrCreateWidget(navigator_widget_1.FILE_NAVIGATOR_ID)];
+                        case 1:
+                            widget = _a.sent();
+                            viewContainer.addWidget(widget, {
+                                canHide: false,
+                                initiallyCollapsed: false
+                            });
+                            return [2 /*return*/, viewContainer];
+                    }
+                });
+            }); }
         });
-    };
-    MonacoEditorService.prototype.createEditorOpenerOptions = function (input, source, sideBySide) {
-        var mode = this.getEditorOpenMode(input);
-        var selection = input.options && this.m2p.asRange(input.options.selection);
-        var widgetOptions = this.getWidgetOptions(source, sideBySide);
-        var preview = !!this.preferencesService.get(MonacoEditorService_1.ENABLE_PREVIEW_PREFERENCE, false);
-        return { mode: mode, selection: selection, widgetOptions: widgetOptions, preview: preview };
-    };
-    MonacoEditorService.prototype.getEditorOpenMode = function (input) {
-        var options = __assign({ preserveFocus: false, revealIfVisible: true }, input.options);
-        if (options.preserveFocus) {
-            return 'reveal';
-        }
-        return options.revealIfVisible ? 'activate' : 'open';
-    };
-    MonacoEditorService.prototype.getWidgetOptions = function (source, sideBySide) {
-        var ref = monaco_editor_1.MonacoEditor.getWidgetFor(this.editors, source);
-        if (!ref) {
-            return undefined;
-        }
-        var area = (ref && this.shell.getAreaFor(ref)) || 'main';
-        var mode = ref && sideBySide ? 'split-right' : undefined;
-        return { area: area, mode: mode, ref: ref };
-    };
-    var MonacoEditorService_1;
-    MonacoEditorService.ENABLE_PREVIEW_PREFERENCE = 'editor.enablePreview';
-    __decorate([
-        inversify_1.inject(browser_1.OpenerService),
-        __metadata("design:type", Object)
-    ], MonacoEditorService.prototype, "openerService", void 0);
-    __decorate([
-        inversify_1.inject(monaco_languageclient_1.MonacoToProtocolConverter),
-        __metadata("design:type", monaco_languageclient_1.MonacoToProtocolConverter)
-    ], MonacoEditorService.prototype, "m2p", void 0);
-    __decorate([
-        inversify_1.inject(browser_1.ApplicationShell),
-        __metadata("design:type", browser_1.ApplicationShell)
-    ], MonacoEditorService.prototype, "shell", void 0);
-    __decorate([
-        inversify_1.inject(browser_2.EditorManager),
-        __metadata("design:type", browser_2.EditorManager)
-    ], MonacoEditorService.prototype, "editors", void 0);
-    __decorate([
-        inversify_1.inject(browser_1.PreferenceService),
-        __metadata("design:type", Object)
-    ], MonacoEditorService.prototype, "preferencesService", void 0);
-    MonacoEditorService = MonacoEditorService_1 = __decorate([
-        inversify_1.injectable(),
-        __metadata("design:paramtypes", [])
-    ], MonacoEditorService);
-    return MonacoEditorService;
-}(monaco.services.CodeEditorServiceImpl));
-exports.MonacoEditorService = MonacoEditorService;
-//# sourceMappingURL=monaco-editor-service.js.map
+    });
+    bind(browser_1.ApplicationShellLayoutMigration).to(navigator_layout_migrations_1.NavigatorLayoutVersion3Migration).inSingletonScope();
+    bind(navigator_diff_1.NavigatorDiff).toSelf().inSingletonScope();
+});
+
 
 /***/ }),
 
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-frontend-application-contribution.js":
-/*!*********************************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-frontend-application-contribution.js ***!
-  \*********************************************************************************************/
+/***/ "../../../../node_modules/@theia/navigator/lib/browser/navigator-keybinding-context.js":
+/*!**********************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/lib/browser/navigator-keybinding-context.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2516,3659 +1575,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var monaco_snippet_suggest_provider_1 = __webpack_require__(/*! ./monaco-snippet-suggest-provider */ "../node_modules/@theia/monaco/lib/browser/monaco-snippet-suggest-provider.js");
-var MonacoFrontendApplicationContribution = /** @class */ (function () {
-    function MonacoFrontendApplicationContribution() {
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var navigator_widget_1 = __webpack_require__(/*! ./navigator-widget */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-widget.js");
+var NavigatorKeybindingContexts;
+(function (NavigatorKeybindingContexts) {
+    NavigatorKeybindingContexts.navigatorActive = 'navigatorActive';
+})(NavigatorKeybindingContexts = exports.NavigatorKeybindingContexts || (exports.NavigatorKeybindingContexts = {}));
+var NavigatorActiveContext = /** @class */ (function () {
+    function NavigatorActiveContext() {
+        this.id = NavigatorKeybindingContexts.navigatorActive;
     }
-    MonacoFrontendApplicationContribution.prototype.initialize = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a, _b, language, registerLanguage;
-            var e_1, _c;
-            var _this = this;
-            return __generator(this, function (_d) {
-                monaco.suggest.setSnippetSuggestSupport(this.snippetSuggestProvider);
-                try {
-                    for (_a = __values(monaco.languages.getLanguages()), _b = _a.next(); !_b.done; _b = _a.next()) {
-                        language = _b.value;
-                        this.preferenceSchema.registerOverrideIdentifier(language.id);
-                    }
-                }
-                catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                finally {
-                    try {
-                        if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
-                    }
-                    finally { if (e_1) throw e_1.error; }
-                }
-                registerLanguage = monaco.languages.register.bind(monaco.languages);
-                monaco.languages.register = function (language) {
-                    // first register override identifier, because monaco will immediately update already opened documents and then initialize with bad preferences.
-                    _this.preferenceSchema.registerOverrideIdentifier(language.id);
-                    registerLanguage(language);
-                };
-                return [2 /*return*/];
-            });
-        });
+    NavigatorActiveContext.prototype.isEnabled = function () {
+        return this.applicationShell.activeWidget instanceof navigator_widget_1.FileNavigatorWidget;
     };
     __decorate([
-        inversify_1.inject(monaco_snippet_suggest_provider_1.MonacoSnippetSuggestProvider),
-        __metadata("design:type", monaco_snippet_suggest_provider_1.MonacoSnippetSuggestProvider)
-    ], MonacoFrontendApplicationContribution.prototype, "snippetSuggestProvider", void 0);
-    __decorate([
-        inversify_1.inject(browser_1.PreferenceSchemaProvider),
-        __metadata("design:type", browser_1.PreferenceSchemaProvider)
-    ], MonacoFrontendApplicationContribution.prototype, "preferenceSchema", void 0);
-    MonacoFrontendApplicationContribution = __decorate([
+        inversify_1.inject(browser_1.ApplicationShell),
+        __metadata("design:type", browser_1.ApplicationShell)
+    ], NavigatorActiveContext.prototype, "applicationShell", void 0);
+    NavigatorActiveContext = __decorate([
         inversify_1.injectable()
-    ], MonacoFrontendApplicationContribution);
-    return MonacoFrontendApplicationContribution;
+    ], NavigatorActiveContext);
+    return NavigatorActiveContext;
 }());
-exports.MonacoFrontendApplicationContribution = MonacoFrontendApplicationContribution;
+exports.NavigatorActiveContext = NavigatorActiveContext;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-frontend-module.js":
-/*!***************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-frontend-module.js ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2018 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(/*! ../../src/browser/style/index.css */ "../node_modules/@theia/monaco/src/browser/style/index.css");
-__webpack_require__(/*! ../../src/browser/style/symbol-sprite.svg */ "../node_modules/@theia/monaco/src/browser/style/symbol-sprite.svg");
-__webpack_require__(/*! ../../src/browser/style/symbol-icons.css */ "../node_modules/@theia/monaco/src/browser/style/symbol-icons.css");
-var debounce = __webpack_require__(/*! lodash.debounce */ "../node_modules/lodash.debounce/index.js");
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var preference_scope_1 = __webpack_require__(/*! @theia/core/lib/common/preferences/preference-scope */ "../node_modules/@theia/core/lib/common/preferences/preference-scope.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var browser_2 = __webpack_require__(/*! @theia/languages/lib/browser */ "../node_modules/@theia/languages/lib/browser/index.js");
-var browser_3 = __webpack_require__(/*! @theia/editor/lib/browser */ "../node_modules/@theia/editor/lib/browser/index.js");
-var editor_keybinding_contexts_1 = __webpack_require__(/*! @theia/editor/lib/browser/editor-keybinding-contexts */ "../node_modules/@theia/editor/lib/browser/editor-keybinding-contexts.js");
-var monaco_languageclient_1 = __webpack_require__(/*! monaco-languageclient */ "../node_modules/monaco-languageclient/lib/index.js");
-var monaco_editor_provider_1 = __webpack_require__(/*! ./monaco-editor-provider */ "../node_modules/@theia/monaco/lib/browser/monaco-editor-provider.js");
-var monaco_menu_1 = __webpack_require__(/*! ./monaco-menu */ "../node_modules/@theia/monaco/lib/browser/monaco-menu.js");
-var monaco_command_1 = __webpack_require__(/*! ./monaco-command */ "../node_modules/@theia/monaco/lib/browser/monaco-command.js");
-var monaco_keybinding_1 = __webpack_require__(/*! ./monaco-keybinding */ "../node_modules/@theia/monaco/lib/browser/monaco-keybinding.js");
-var monaco_languages_1 = __webpack_require__(/*! ./monaco-languages */ "../node_modules/@theia/monaco/lib/browser/monaco-languages.js");
-var monaco_workspace_1 = __webpack_require__(/*! ./monaco-workspace */ "../node_modules/@theia/monaco/lib/browser/monaco-workspace.js");
-var monaco_configurations_1 = __webpack_require__(/*! ./monaco-configurations */ "../node_modules/@theia/monaco/lib/browser/monaco-configurations.js");
-var monaco_editor_service_1 = __webpack_require__(/*! ./monaco-editor-service */ "../node_modules/@theia/monaco/lib/browser/monaco-editor-service.js");
-var monaco_text_model_service_1 = __webpack_require__(/*! ./monaco-text-model-service */ "../node_modules/@theia/monaco/lib/browser/monaco-text-model-service.js");
-var monaco_context_menu_1 = __webpack_require__(/*! ./monaco-context-menu */ "../node_modules/@theia/monaco/lib/browser/monaco-context-menu.js");
-var monaco_outline_contribution_1 = __webpack_require__(/*! ./monaco-outline-contribution */ "../node_modules/@theia/monaco/lib/browser/monaco-outline-contribution.js");
-var monaco_status_bar_contribution_1 = __webpack_require__(/*! ./monaco-status-bar-contribution */ "../node_modules/@theia/monaco/lib/browser/monaco-status-bar-contribution.js");
-var monaco_command_service_1 = __webpack_require__(/*! ./monaco-command-service */ "../node_modules/@theia/monaco/lib/browser/monaco-command-service.js");
-var monaco_command_registry_1 = __webpack_require__(/*! ./monaco-command-registry */ "../node_modules/@theia/monaco/lib/browser/monaco-command-registry.js");
-var monaco_quick_open_service_1 = __webpack_require__(/*! ./monaco-quick-open-service */ "../node_modules/@theia/monaco/lib/browser/monaco-quick-open-service.js");
-var monaco_diff_navigator_factory_1 = __webpack_require__(/*! ./monaco-diff-navigator-factory */ "../node_modules/@theia/monaco/lib/browser/monaco-diff-navigator-factory.js");
-var monaco_keybinding_contexts_1 = __webpack_require__(/*! ./monaco-keybinding-contexts */ "../node_modules/@theia/monaco/lib/browser/monaco-keybinding-contexts.js");
-var monaco_frontend_application_contribution_1 = __webpack_require__(/*! ./monaco-frontend-application-contribution */ "../node_modules/@theia/monaco/lib/browser/monaco-frontend-application-contribution.js");
-var monaco_textmate_frontend_bindings_1 = __webpack_require__(/*! ./textmate/monaco-textmate-frontend-bindings */ "../node_modules/@theia/monaco/lib/browser/textmate/monaco-textmate-frontend-bindings.js");
-var monaco_semantic_highlighting_service_1 = __webpack_require__(/*! ./monaco-semantic-highlighting-service */ "../node_modules/@theia/monaco/lib/browser/monaco-semantic-highlighting-service.js");
-var semantic_highlighting_service_1 = __webpack_require__(/*! @theia/editor/lib/browser/semantic-highlight/semantic-highlighting-service */ "../node_modules/@theia/editor/lib/browser/semantic-highlight/semantic-highlighting-service.js");
-var monaco_bulk_edit_service_1 = __webpack_require__(/*! ./monaco-bulk-edit-service */ "../node_modules/@theia/monaco/lib/browser/monaco-bulk-edit-service.js");
-var monaco_outline_decorator_1 = __webpack_require__(/*! ./monaco-outline-decorator */ "../node_modules/@theia/monaco/lib/browser/monaco-outline-decorator.js");
-var outline_decorator_service_1 = __webpack_require__(/*! @theia/outline-view/lib/browser/outline-decorator-service */ "../node_modules/@theia/outline-view/lib/browser/outline-decorator-service.js");
-var monaco_snippet_suggest_provider_1 = __webpack_require__(/*! ./monaco-snippet-suggest-provider */ "../node_modules/@theia/monaco/lib/browser/monaco-snippet-suggest-provider.js");
-var context_key_service_1 = __webpack_require__(/*! @theia/core/lib/browser/context-key-service */ "../node_modules/@theia/core/lib/browser/context-key-service.js");
-var monaco_context_key_service_1 = __webpack_require__(/*! ./monaco-context-key-service */ "../node_modules/@theia/monaco/lib/browser/monaco-context-key-service.js");
-var monaco_mime_service_1 = __webpack_require__(/*! ./monaco-mime-service */ "../node_modules/@theia/monaco/lib/browser/monaco-mime-service.js");
-var mime_service_1 = __webpack_require__(/*! @theia/core/lib/browser/mime-service */ "../node_modules/@theia/core/lib/browser/mime-service.js");
-var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
-var monaco_color_registry_1 = __webpack_require__(/*! ./monaco-color-registry */ "../node_modules/@theia/monaco/lib/browser/monaco-color-registry.js");
-var color_registry_1 = __webpack_require__(/*! @theia/core/lib/browser/color-registry */ "../node_modules/@theia/core/lib/browser/color-registry.js");
-var monaco_theming_service_1 = __webpack_require__(/*! ./monaco-theming-service */ "../node_modules/@theia/monaco/lib/browser/monaco-theming-service.js");
-inversify_1.decorate(inversify_1.injectable(), monaco_languageclient_1.MonacoToProtocolConverter);
-inversify_1.decorate(inversify_1.injectable(), monaco_languageclient_1.ProtocolToMonacoConverter);
-inversify_1.decorate(inversify_1.injectable(), monaco.contextKeyService.ContextKeyService);
-monaco_theming_service_1.MonacoThemingService.init();
-exports.default = new inversify_1.ContainerModule(function (bind, unbind, isBound, rebind) {
-    bind(monaco_theming_service_1.MonacoThemingService).toSelf().inSingletonScope();
-    bind(monaco_context_key_service_1.MonacoContextKeyService).toSelf().inSingletonScope();
-    rebind(context_key_service_1.ContextKeyService).toService(monaco_context_key_service_1.MonacoContextKeyService);
-    bind(monaco_snippet_suggest_provider_1.MonacoSnippetSuggestProvider).toSelf().inSingletonScope();
-    bind(browser_1.FrontendApplicationContribution).to(monaco_frontend_application_contribution_1.MonacoFrontendApplicationContribution).inSingletonScope();
-    bind(monaco_languageclient_1.MonacoToProtocolConverter).toSelf().inSingletonScope();
-    bind(monaco_languageclient_1.ProtocolToMonacoConverter).toSelf().inSingletonScope();
-    bind(monaco_languages_1.MonacoLanguages).toSelf().inSingletonScope();
-    bind(browser_2.Languages).toService(monaco_languages_1.MonacoLanguages);
-    bind(monaco_configurations_1.MonacoConfigurations).toSelf().inSingletonScope();
-    bind(monaco_workspace_1.MonacoWorkspace).toSelf().inSingletonScope();
-    bind(browser_2.Workspace).toService(monaco_workspace_1.MonacoWorkspace);
-    bind(exports.MonacoConfigurationService).toDynamicValue(function (_a) {
-        var container = _a.container;
-        return createMonacoConfigurationService(container);
-    }).inSingletonScope();
-    bind(monaco.contextKeyService.ContextKeyService).toDynamicValue(function (_a) {
-        var container = _a.container;
-        return new monaco.contextKeyService.ContextKeyService(container.get(exports.MonacoConfigurationService));
-    }).inSingletonScope();
-    bind(monaco_bulk_edit_service_1.MonacoBulkEditService).toSelf().inSingletonScope();
-    bind(monaco_editor_service_1.MonacoEditorService).toSelf().inSingletonScope();
-    bind(monaco_text_model_service_1.MonacoTextModelService).toSelf().inSingletonScope();
-    bind(monaco_context_menu_1.MonacoContextMenuService).toSelf().inSingletonScope();
-    bind(monaco_editor_1.MonacoEditorServices).toSelf().inSingletonScope();
-    bind(monaco_editor_provider_1.MonacoEditorProvider).toSelf().inSingletonScope();
-    bind(monaco_command_service_1.MonacoCommandService).toSelf().inTransientScope();
-    bind(monaco_command_service_1.MonacoCommandServiceFactory).toAutoFactory(monaco_command_service_1.MonacoCommandService);
-    bind(browser_3.TextEditorProvider).toProvider(function (context) {
-        return function (uri) { return context.container.get(monaco_editor_provider_1.MonacoEditorProvider).get(uri); };
-    });
-    bind(monaco_diff_navigator_factory_1.MonacoDiffNavigatorFactory).toSelf().inSingletonScope();
-    bind(browser_3.DiffNavigatorProvider).toFactory(function (context) {
-        return function (editor) { return context.container.get(monaco_editor_provider_1.MonacoEditorProvider).getDiffNavigator(editor); };
-    });
-    bind(monaco_outline_contribution_1.MonacoOutlineContribution).toSelf().inSingletonScope();
-    bind(browser_1.FrontendApplicationContribution).toService(monaco_outline_contribution_1.MonacoOutlineContribution);
-    bind(monaco_status_bar_contribution_1.MonacoStatusBarContribution).toSelf().inSingletonScope();
-    bind(browser_1.FrontendApplicationContribution).toService(monaco_status_bar_contribution_1.MonacoStatusBarContribution);
-    bind(monaco_command_registry_1.MonacoCommandRegistry).toSelf().inSingletonScope();
-    bind(common_1.CommandContribution).to(monaco_command_1.MonacoEditorCommandHandlers).inSingletonScope();
-    bind(common_1.MenuContribution).to(monaco_menu_1.MonacoEditorMenuContribution).inSingletonScope();
-    bind(browser_1.KeybindingContribution).to(monaco_keybinding_1.MonacoKeybindingContribution).inSingletonScope();
-    rebind(editor_keybinding_contexts_1.StrictEditorTextFocusContext).to(monaco_keybinding_contexts_1.MonacoStrictEditorTextFocusContext).inSingletonScope();
-    bind(monaco_quick_open_service_1.MonacoQuickOpenService).toSelf().inSingletonScope();
-    rebind(browser_1.QuickOpenService).toService(monaco_quick_open_service_1.MonacoQuickOpenService);
-    monaco_textmate_frontend_bindings_1.default(bind, unbind, isBound, rebind);
-    bind(monaco_semantic_highlighting_service_1.MonacoSemanticHighlightingService).toSelf().inSingletonScope();
-    rebind(semantic_highlighting_service_1.SemanticHighlightingService).to(monaco_semantic_highlighting_service_1.MonacoSemanticHighlightingService).inSingletonScope();
-    bind(monaco_outline_decorator_1.MonacoOutlineDecorator).toSelf().inSingletonScope();
-    bind(outline_decorator_service_1.OutlineTreeDecorator).toService(monaco_outline_decorator_1.MonacoOutlineDecorator);
-    bind(monaco_mime_service_1.MonacoMimeService).toSelf().inSingletonScope();
-    rebind(mime_service_1.MimeService).toService(monaco_mime_service_1.MonacoMimeService);
-    bind(monaco_color_registry_1.MonacoColorRegistry).toSelf().inSingletonScope();
-    rebind(color_registry_1.ColorRegistry).toService(monaco_color_registry_1.MonacoColorRegistry);
-});
-exports.MonacoConfigurationService = Symbol('MonacoConfigurationService');
-function createMonacoConfigurationService(container) {
-    var configurations = container.get(monaco_configurations_1.MonacoConfigurations);
-    var preferences = container.get(browser_1.PreferenceService);
-    var preferenceSchemaProvider = container.get(browser_1.PreferenceSchemaProvider);
-    var service = monaco.services.StaticServices.configurationService.get();
-    var _configuration = service._configuration;
-    _configuration.getValue = function (section, overrides, workspace) {
-        var overrideIdentifier = overrides && 'overrideIdentifier' in overrides && overrides['overrideIdentifier'] || undefined;
-        var resourceUri = overrides && 'resource' in overrides && overrides['resource'].toString();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        var proxy = browser_1.createPreferenceProxy(preferences, preferenceSchemaProvider.getCombinedSchema(), {
-            resourceUri: resourceUri, overrideIdentifier: overrideIdentifier, style: 'both'
-        });
-        if (section) {
-            return proxy[section];
-        }
-        return proxy;
-    };
-    var initFromConfiguration = debounce(function () {
-        var event = new monaco.services.ConfigurationChangeEvent();
-        event._source = 6 /* DEFAULT */;
-        service._onDidChangeConfiguration.fire(event);
-    });
-    preferences.onPreferenceChanged(function (e) {
-        if (e.scope === preference_scope_1.PreferenceScope.Default) {
-            initFromConfiguration();
-        }
-    });
-    configurations.onDidChangeConfiguration(function (e) {
-        if (e.affectedSections) {
-            var event_1 = new monaco.services.ConfigurationChangeEvent();
-            event_1.change(e.affectedSections);
-            service._onDidChangeConfiguration.fire(event_1);
-        }
-    });
-    return service;
-}
-exports.createMonacoConfigurationService = createMonacoConfigurationService;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-indexed-db.js":
-/*!**********************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-indexed-db.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2020 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var idb = __webpack_require__(/*! idb */ "../node_modules/idb/build/esm/index.js");
-var disposable_1 = __webpack_require__(/*! @theia/core/lib/common/disposable */ "../node_modules/@theia/core/lib/common/disposable.js");
-var _monacoDB;
-if ('indexedDB' in window) {
-    _monacoDB = idb.openDB('theia-monaco', 1, {
-        upgrade: function (db) {
-            if (!db.objectStoreNames.contains('themes')) {
-                db.createObjectStore('themes', { keyPath: 'id' });
-            }
-        }
-    });
-}
-exports.monacoDB = _monacoDB;
-var MonacoThemeState;
-(function (MonacoThemeState) {
-    function is(state) {
-        return !!state && typeof state === 'object' && 'id' in state && 'label' in state && 'uiTheme' in state && 'data' in state;
-    }
-    MonacoThemeState.is = is;
-})(MonacoThemeState = exports.MonacoThemeState || (exports.MonacoThemeState = {}));
-function getThemes() {
-    return __awaiter(this, void 0, void 0, function () {
-        var db, result;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    if (!exports.monacoDB) {
-                        return [2 /*return*/, []];
-                    }
-                    return [4 /*yield*/, exports.monacoDB];
-                case 1:
-                    db = _a.sent();
-                    return [4 /*yield*/, db.transaction('themes', 'readonly').objectStore('themes').getAll()];
-                case 2:
-                    result = _a.sent();
-                    return [2 /*return*/, result.filter(MonacoThemeState.is)];
-            }
-        });
-    });
-}
-exports.getThemes = getThemes;
-function putTheme(state) {
-    var toDispose = new disposable_1.DisposableCollection(disposable_1.Disposable.create(function () { }));
-    doPutTheme(state, toDispose);
-    return toDispose;
-}
-exports.putTheme = putTheme;
-function doPutTheme(state, toDispose) {
-    return __awaiter(this, void 0, void 0, function () {
-        var db, id;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    if (!exports.monacoDB) {
-                        return [2 /*return*/];
-                    }
-                    return [4 /*yield*/, exports.monacoDB];
-                case 1:
-                    db = _a.sent();
-                    if (toDispose.disposed) {
-                        return [2 /*return*/];
-                    }
-                    id = state.id;
-                    return [4 /*yield*/, db.transaction('themes', 'readwrite').objectStore('themes').put(state)];
-                case 2:
-                    _a.sent();
-                    if (!toDispose.disposed) return [3 /*break*/, 4];
-                    return [4 /*yield*/, deleteTheme(id)];
-                case 3:
-                    _a.sent();
-                    return [2 /*return*/];
-                case 4:
-                    toDispose.push(disposable_1.Disposable.create(function () { return deleteTheme(id); }));
-                    return [2 /*return*/];
-            }
-        });
-    });
-}
-function deleteTheme(id) {
-    return __awaiter(this, void 0, void 0, function () {
-        var db;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    if (!exports.monacoDB) {
-                        return [2 /*return*/];
-                    }
-                    return [4 /*yield*/, exports.monacoDB];
-                case 1:
-                    db = _a.sent();
-                    return [4 /*yield*/, db.transaction('themes', 'readwrite').objectStore('themes').delete(id)];
-                case 2:
-                    _a.sent();
-                    return [2 /*return*/];
-            }
-        });
-    });
-}
-exports.deleteTheme = deleteTheme;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-keybinding-contexts.js":
-/*!*******************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-keybinding-contexts.js ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2018 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var editor_keybinding_contexts_1 = __webpack_require__(/*! @theia/editor/lib/browser/editor-keybinding-contexts */ "../node_modules/@theia/editor/lib/browser/editor-keybinding-contexts.js");
-var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
-/**
- * Besides checking whether this editor is the currently active one and has the focus, it also checks the followings:
- *  - the suggest widget is visible
- *  - the find (and replace) widget is visible.
- *  - the rename input widget (which we use for refactoring and not find and replace) is visible.
- *
- * If any of the above-mentioned additional checks evaluates to `true` the `canHandle` will evaluate to `false`.
- *
- * See: https://github.com/eamodio/vscode-gitlens/blob/57226d54d1e929be04b02ee31ca294c50305481b/package.json#L2857
- */
-var MonacoStrictEditorTextFocusContext = /** @class */ (function (_super) {
-    __extends(MonacoStrictEditorTextFocusContext, _super);
-    function MonacoStrictEditorTextFocusContext() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    MonacoStrictEditorTextFocusContext.prototype.canHandle = function (widget) {
-        var editor = widget.editor;
-        if (editor instanceof monaco_editor_1.MonacoEditor) {
-            return editor.isFocused({ strict: true });
-        }
-        return _super.prototype.canHandle.call(this, widget);
-    };
-    MonacoStrictEditorTextFocusContext = __decorate([
-        inversify_1.injectable()
-    ], MonacoStrictEditorTextFocusContext);
-    return MonacoStrictEditorTextFocusContext;
-}(editor_keybinding_contexts_1.StrictEditorTextFocusContext));
-exports.MonacoStrictEditorTextFocusContext = MonacoStrictEditorTextFocusContext;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-keybinding.js":
-/*!**********************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-keybinding.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var browser_1 = __webpack_require__(/*! @theia/editor/lib/browser */ "../node_modules/@theia/editor/lib/browser/index.js");
-var monaco_command_1 = __webpack_require__(/*! ./monaco-command */ "../node_modules/@theia/monaco/lib/browser/monaco-command.js");
-var monaco_command_registry_1 = __webpack_require__(/*! ./monaco-command-registry */ "../node_modules/@theia/monaco/lib/browser/monaco-command-registry.js");
-var core_1 = __webpack_require__(/*! @theia/core */ "../node_modules/@theia/core/lib/common/index.js");
-var monaco_resolved_keybinding_1 = __webpack_require__(/*! ./monaco-resolved-keybinding */ "../node_modules/@theia/monaco/lib/browser/monaco-resolved-keybinding.js");
-var MonacoKeybindingContribution = /** @class */ (function () {
-    function MonacoKeybindingContribution() {
-    }
-    MonacoKeybindingContribution.prototype.registerKeybindings = function (registry) {
-        var defaultKeybindings = monaco.keybindings.KeybindingsRegistry.getDefaultKeybindings();
-        // register in reverse order to align with Monaco dispatch logic:
-        // https://github.com/TypeFox/vscode/blob/70b8db24a37fafc77247de7f7cb5bb0195120ed0/src/vs/platform/keybinding/common/keybindingResolver.ts#L302
-        for (var i = defaultKeybindings.length - 1; i >= 0; i--) {
-            var item = defaultKeybindings[i];
-            var command = this.commands.validate(item.command);
-            if (command) {
-                var when = item.when && item.when.serialize();
-                var keybinding = void 0;
-                if (item.command === monaco_command_1.MonacoCommands.GO_TO_DEFINITION && !core_1.environment.electron.is()) {
-                    keybinding = 'ctrlcmd+f11';
-                }
-                else {
-                    keybinding = monaco_resolved_keybinding_1.MonacoResolvedKeybinding.toKeybinding(item.keybinding);
-                }
-                registry.registerKeybinding({ command: command, keybinding: keybinding, when: when });
-            }
-        }
-        // `Select All` is not an editor action just like everything else.
-        var selectAllCommand = this.commands.validate(monaco_command_1.MonacoCommands.SELECTION_SELECT_ALL);
-        if (selectAllCommand) {
-            registry.registerKeybinding({
-                command: selectAllCommand,
-                keybinding: 'ctrlcmd+a',
-                context: browser_1.EditorKeybindingContexts.editorTextFocus
-            });
-        }
-    };
-    __decorate([
-        inversify_1.inject(monaco_command_registry_1.MonacoCommandRegistry),
-        __metadata("design:type", monaco_command_registry_1.MonacoCommandRegistry)
-    ], MonacoKeybindingContribution.prototype, "commands", void 0);
-    MonacoKeybindingContribution = __decorate([
-        inversify_1.injectable()
-    ], MonacoKeybindingContribution);
-    return MonacoKeybindingContribution;
-}());
-exports.MonacoKeybindingContribution = MonacoKeybindingContribution;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-keycode-map.js":
-/*!***********************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-keycode-map.js ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-Object.defineProperty(exports, "__esModule", { value: true });
-var browser = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var KeyCode = monaco.KeyCode;
-exports.KEY_CODE_MAP = [];
-(function () {
-    exports.KEY_CODE_MAP[3] = KeyCode.PauseBreak; // VK_CANCEL 0x03 Control-break processing
-    exports.KEY_CODE_MAP[8] = KeyCode.Backspace;
-    exports.KEY_CODE_MAP[9] = KeyCode.Tab;
-    exports.KEY_CODE_MAP[13] = KeyCode.Enter;
-    exports.KEY_CODE_MAP[16] = KeyCode.Shift;
-    exports.KEY_CODE_MAP[17] = KeyCode.Ctrl;
-    exports.KEY_CODE_MAP[18] = KeyCode.Alt;
-    exports.KEY_CODE_MAP[19] = KeyCode.PauseBreak;
-    exports.KEY_CODE_MAP[20] = KeyCode.CapsLock;
-    exports.KEY_CODE_MAP[27] = KeyCode.Escape;
-    exports.KEY_CODE_MAP[32] = KeyCode.Space;
-    exports.KEY_CODE_MAP[33] = KeyCode.PageUp;
-    exports.KEY_CODE_MAP[34] = KeyCode.PageDown;
-    exports.KEY_CODE_MAP[35] = KeyCode.End;
-    exports.KEY_CODE_MAP[36] = KeyCode.Home;
-    exports.KEY_CODE_MAP[37] = KeyCode.LeftArrow;
-    exports.KEY_CODE_MAP[38] = KeyCode.UpArrow;
-    exports.KEY_CODE_MAP[39] = KeyCode.RightArrow;
-    exports.KEY_CODE_MAP[40] = KeyCode.DownArrow;
-    exports.KEY_CODE_MAP[45] = KeyCode.Insert;
-    exports.KEY_CODE_MAP[46] = KeyCode.Delete;
-    exports.KEY_CODE_MAP[48] = KeyCode.KEY_0;
-    exports.KEY_CODE_MAP[49] = KeyCode.KEY_1;
-    exports.KEY_CODE_MAP[50] = KeyCode.KEY_2;
-    exports.KEY_CODE_MAP[51] = KeyCode.KEY_3;
-    exports.KEY_CODE_MAP[52] = KeyCode.KEY_4;
-    exports.KEY_CODE_MAP[53] = KeyCode.KEY_5;
-    exports.KEY_CODE_MAP[54] = KeyCode.KEY_6;
-    exports.KEY_CODE_MAP[55] = KeyCode.KEY_7;
-    exports.KEY_CODE_MAP[56] = KeyCode.KEY_8;
-    exports.KEY_CODE_MAP[57] = KeyCode.KEY_9;
-    exports.KEY_CODE_MAP[65] = KeyCode.KEY_A;
-    exports.KEY_CODE_MAP[66] = KeyCode.KEY_B;
-    exports.KEY_CODE_MAP[67] = KeyCode.KEY_C;
-    exports.KEY_CODE_MAP[68] = KeyCode.KEY_D;
-    exports.KEY_CODE_MAP[69] = KeyCode.KEY_E;
-    exports.KEY_CODE_MAP[70] = KeyCode.KEY_F;
-    exports.KEY_CODE_MAP[71] = KeyCode.KEY_G;
-    exports.KEY_CODE_MAP[72] = KeyCode.KEY_H;
-    exports.KEY_CODE_MAP[73] = KeyCode.KEY_I;
-    exports.KEY_CODE_MAP[74] = KeyCode.KEY_J;
-    exports.KEY_CODE_MAP[75] = KeyCode.KEY_K;
-    exports.KEY_CODE_MAP[76] = KeyCode.KEY_L;
-    exports.KEY_CODE_MAP[77] = KeyCode.KEY_M;
-    exports.KEY_CODE_MAP[78] = KeyCode.KEY_N;
-    exports.KEY_CODE_MAP[79] = KeyCode.KEY_O;
-    exports.KEY_CODE_MAP[80] = KeyCode.KEY_P;
-    exports.KEY_CODE_MAP[81] = KeyCode.KEY_Q;
-    exports.KEY_CODE_MAP[82] = KeyCode.KEY_R;
-    exports.KEY_CODE_MAP[83] = KeyCode.KEY_S;
-    exports.KEY_CODE_MAP[84] = KeyCode.KEY_T;
-    exports.KEY_CODE_MAP[85] = KeyCode.KEY_U;
-    exports.KEY_CODE_MAP[86] = KeyCode.KEY_V;
-    exports.KEY_CODE_MAP[87] = KeyCode.KEY_W;
-    exports.KEY_CODE_MAP[88] = KeyCode.KEY_X;
-    exports.KEY_CODE_MAP[89] = KeyCode.KEY_Y;
-    exports.KEY_CODE_MAP[90] = KeyCode.KEY_Z;
-    exports.KEY_CODE_MAP[93] = KeyCode.ContextMenu;
-    exports.KEY_CODE_MAP[96] = KeyCode.NUMPAD_0;
-    exports.KEY_CODE_MAP[97] = KeyCode.NUMPAD_1;
-    exports.KEY_CODE_MAP[98] = KeyCode.NUMPAD_2;
-    exports.KEY_CODE_MAP[99] = KeyCode.NUMPAD_3;
-    exports.KEY_CODE_MAP[100] = KeyCode.NUMPAD_4;
-    exports.KEY_CODE_MAP[101] = KeyCode.NUMPAD_5;
-    exports.KEY_CODE_MAP[102] = KeyCode.NUMPAD_6;
-    exports.KEY_CODE_MAP[103] = KeyCode.NUMPAD_7;
-    exports.KEY_CODE_MAP[104] = KeyCode.NUMPAD_8;
-    exports.KEY_CODE_MAP[105] = KeyCode.NUMPAD_9;
-    exports.KEY_CODE_MAP[106] = KeyCode.NUMPAD_MULTIPLY;
-    exports.KEY_CODE_MAP[107] = KeyCode.NUMPAD_ADD;
-    exports.KEY_CODE_MAP[108] = KeyCode.NUMPAD_SEPARATOR;
-    exports.KEY_CODE_MAP[109] = KeyCode.NUMPAD_SUBTRACT;
-    exports.KEY_CODE_MAP[110] = KeyCode.NUMPAD_DECIMAL;
-    exports.KEY_CODE_MAP[111] = KeyCode.NUMPAD_DIVIDE;
-    exports.KEY_CODE_MAP[112] = KeyCode.F1;
-    exports.KEY_CODE_MAP[113] = KeyCode.F2;
-    exports.KEY_CODE_MAP[114] = KeyCode.F3;
-    exports.KEY_CODE_MAP[115] = KeyCode.F4;
-    exports.KEY_CODE_MAP[116] = KeyCode.F5;
-    exports.KEY_CODE_MAP[117] = KeyCode.F6;
-    exports.KEY_CODE_MAP[118] = KeyCode.F7;
-    exports.KEY_CODE_MAP[119] = KeyCode.F8;
-    exports.KEY_CODE_MAP[120] = KeyCode.F9;
-    exports.KEY_CODE_MAP[121] = KeyCode.F10;
-    exports.KEY_CODE_MAP[122] = KeyCode.F11;
-    exports.KEY_CODE_MAP[123] = KeyCode.F12;
-    exports.KEY_CODE_MAP[124] = KeyCode.F13;
-    exports.KEY_CODE_MAP[125] = KeyCode.F14;
-    exports.KEY_CODE_MAP[126] = KeyCode.F15;
-    exports.KEY_CODE_MAP[127] = KeyCode.F16;
-    exports.KEY_CODE_MAP[128] = KeyCode.F17;
-    exports.KEY_CODE_MAP[129] = KeyCode.F18;
-    exports.KEY_CODE_MAP[130] = KeyCode.F19;
-    exports.KEY_CODE_MAP[144] = KeyCode.NumLock;
-    exports.KEY_CODE_MAP[145] = KeyCode.ScrollLock;
-    exports.KEY_CODE_MAP[186] = KeyCode.US_SEMICOLON;
-    exports.KEY_CODE_MAP[187] = KeyCode.US_EQUAL;
-    exports.KEY_CODE_MAP[188] = KeyCode.US_COMMA;
-    exports.KEY_CODE_MAP[189] = KeyCode.US_MINUS;
-    exports.KEY_CODE_MAP[190] = KeyCode.US_DOT;
-    exports.KEY_CODE_MAP[191] = KeyCode.US_SLASH;
-    exports.KEY_CODE_MAP[192] = KeyCode.US_BACKTICK;
-    exports.KEY_CODE_MAP[193] = KeyCode.ABNT_C1;
-    exports.KEY_CODE_MAP[194] = KeyCode.ABNT_C2;
-    exports.KEY_CODE_MAP[219] = KeyCode.US_OPEN_SQUARE_BRACKET;
-    exports.KEY_CODE_MAP[220] = KeyCode.US_BACKSLASH;
-    exports.KEY_CODE_MAP[221] = KeyCode.US_CLOSE_SQUARE_BRACKET;
-    exports.KEY_CODE_MAP[222] = KeyCode.US_QUOTE;
-    exports.KEY_CODE_MAP[223] = KeyCode.OEM_8;
-    exports.KEY_CODE_MAP[226] = KeyCode.OEM_102;
-    /**
-     * https://lists.w3.org/Archives/Public/www-dom/2010JulSep/att-0182/keyCode-spec.html
-     * If an Input Method Editor is processing key input and the event is keydown, return 229.
-     */
-    exports.KEY_CODE_MAP[229] = KeyCode.KEY_IN_COMPOSITION;
-    if (browser.isIE) {
-        exports.KEY_CODE_MAP[91] = KeyCode.Meta;
-    }
-    else if (browser.isFirefox) {
-        exports.KEY_CODE_MAP[59] = KeyCode.US_SEMICOLON;
-        exports.KEY_CODE_MAP[107] = KeyCode.US_EQUAL;
-        exports.KEY_CODE_MAP[109] = KeyCode.US_MINUS;
-        if (monaco.platform.OS === 2 /* Macintosh */) {
-            exports.KEY_CODE_MAP[224] = KeyCode.Meta;
-        }
-    }
-    else if (browser.isWebKit) {
-        exports.KEY_CODE_MAP[91] = KeyCode.Meta;
-        if (monaco.platform.OS === 2 /* Macintosh */) {
-            // the two meta keys in the Mac have different key codes (91 and 93)
-            exports.KEY_CODE_MAP[93] = KeyCode.Meta;
-        }
-        else {
-            exports.KEY_CODE_MAP[92] = KeyCode.Meta;
-        }
-    }
-})();
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-languages.js":
-/*!*********************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-languages.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var monaco_languageclient_1 = __webpack_require__(/*! monaco-languageclient */ "../node_modules/monaco-languageclient/lib/index.js");
-var problem_manager_1 = __webpack_require__(/*! @theia/markers/lib/browser/problem/problem-manager */ "../node_modules/@theia/markers/lib/browser/problem/problem-manager.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var disposable_1 = __webpack_require__(/*! @theia/core/lib/common/disposable */ "../node_modules/@theia/core/lib/common/disposable.js");
-var monaco_diagnostic_collection_1 = __webpack_require__(/*! monaco-languageclient/lib/monaco-diagnostic-collection */ "../node_modules/monaco-languageclient/lib/monaco-diagnostic-collection.js");
-inversify_1.decorate(inversify_1.injectable(), monaco_languageclient_1.MonacoLanguages);
-inversify_1.decorate(inversify_1.inject(monaco_languageclient_1.ProtocolToMonacoConverter), monaco_languageclient_1.MonacoLanguages, 0);
-inversify_1.decorate(inversify_1.inject(monaco_languageclient_1.MonacoToProtocolConverter), monaco_languageclient_1.MonacoLanguages, 1);
-var MonacoLanguages = /** @class */ (function (_super) {
-    __extends(MonacoLanguages, _super);
-    function MonacoLanguages(// eslint-disable-next-line @typescript-eslint/indent
-    p2m, m2p, problemManager) {
-        var e_1, _a;
-        var _this = _super.call(this, p2m, m2p) || this;
-        _this.problemManager = problemManager;
-        _this.workspaceSymbolProviders = [];
-        _this.makers = new Map();
-        try {
-            for (var _b = __values(_this.problemManager.getUris()), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var uri = _c.value;
-                _this.updateMarkers(new uri_1.default(uri));
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        _this.problemManager.onDidChangeMarkers(function (uri) { return _this.updateMarkers(uri); });
-        return _this;
-    }
-    MonacoLanguages.prototype.updateMarkers = function (uri) {
-        var e_2, _a, e_3, _b, e_4, _c;
-        var uriString = uri.toString();
-        var owners = new Map();
-        try {
-            for (var _d = __values(this.problemManager.findMarkers({ uri: uri })), _e = _d.next(); !_e.done; _e = _d.next()) {
-                var marker = _e.value;
-                var diagnostics = owners.get(marker.owner) || [];
-                diagnostics.push(marker.data);
-                owners.set(marker.owner, diagnostics);
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (_e && !_e.done && (_a = _d.return)) _a.call(_d);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
-        var toClean = new Set(this.makers.keys());
-        try {
-            for (var owners_1 = __values(owners), owners_1_1 = owners_1.next(); !owners_1_1.done; owners_1_1 = owners_1.next()) {
-                var _f = __read(owners_1_1.value, 2), owner = _f[0], diagnostics = _f[1];
-                toClean.delete(owner);
-                var collection = this.makers.get(owner) || new monaco_diagnostic_collection_1.MonacoDiagnosticCollection(owner, this.p2m);
-                collection.set(uriString, diagnostics);
-                this.makers.set(owner, collection);
-            }
-        }
-        catch (e_3_1) { e_3 = { error: e_3_1 }; }
-        finally {
-            try {
-                if (owners_1_1 && !owners_1_1.done && (_b = owners_1.return)) _b.call(owners_1);
-            }
-            finally { if (e_3) throw e_3.error; }
-        }
-        try {
-            for (var toClean_1 = __values(toClean), toClean_1_1 = toClean_1.next(); !toClean_1_1.done; toClean_1_1 = toClean_1.next()) {
-                var owner = toClean_1_1.value;
-                var collection = this.makers.get(owner);
-                if (collection) {
-                    collection.set(uriString, []);
-                }
-            }
-        }
-        catch (e_4_1) { e_4 = { error: e_4_1 }; }
-        finally {
-            try {
-                if (toClean_1_1 && !toClean_1_1.done && (_c = toClean_1.return)) _c.call(toClean_1);
-            }
-            finally { if (e_4) throw e_4.error; }
-        }
-    };
-    MonacoLanguages.prototype.createDiagnosticCollection = function (name) {
-        var _this = this;
-        var owner = name || 'default';
-        var uris = [];
-        return {
-            set: function (uri, diagnostics) {
-                _this.problemManager.setMarkers(new uri_1.default(uri), owner, diagnostics);
-                uris.push(uri);
-            },
-            dispose: function () {
-                var e_5, _a;
-                try {
-                    for (var uris_1 = __values(uris), uris_1_1 = uris_1.next(); !uris_1_1.done; uris_1_1 = uris_1.next()) {
-                        var uri = uris_1_1.value;
-                        _this.problemManager.setMarkers(new uri_1.default(uri), owner, []);
-                    }
-                }
-                catch (e_5_1) { e_5 = { error: e_5_1 }; }
-                finally {
-                    try {
-                        if (uris_1_1 && !uris_1_1.done && (_a = uris_1.return)) _a.call(uris_1);
-                    }
-                    finally { if (e_5) throw e_5.error; }
-                }
-            }
-        };
-    };
-    MonacoLanguages.prototype.registerWorkspaceSymbolProvider = function (provider) {
-        var _this = this;
-        this.workspaceSymbolProviders.push(provider);
-        return disposable_1.Disposable.create(function () {
-            var index = _this.workspaceSymbolProviders.indexOf(provider);
-            if (index !== -1) {
-                _this.workspaceSymbolProviders.splice(index, 1);
-            }
-        });
-    };
-    Object.defineProperty(MonacoLanguages.prototype, "languages", {
-        get: function () {
-            return __spread(this.mergeLanguages(monaco.languages.getLanguages()).values());
-        },
-        enumerable: true,
-        configurable: true
-    });
-    MonacoLanguages.prototype.getLanguage = function (languageId) {
-        return this.mergeLanguages(monaco.languages.getLanguages().filter(function (language) { return language.id === languageId; })).get(languageId);
-    };
-    MonacoLanguages.prototype.mergeLanguages = function (registered) {
-        var e_6, _a, e_7, _b, e_8, _c, e_9, _d;
-        var languages = new Map();
-        try {
-            for (var registered_1 = __values(registered), registered_1_1 = registered_1.next(); !registered_1_1.done; registered_1_1 = registered_1.next()) {
-                var _e = registered_1_1.value, id = _e.id, aliases = _e.aliases, extensions = _e.extensions, filenames = _e.filenames;
-                var merged = languages.get(id) || {
-                    id: id,
-                    name: '',
-                    extensions: new Set(),
-                    filenames: new Set()
-                };
-                if (!merged.name && aliases && aliases.length) {
-                    merged.name = aliases[0];
-                }
-                if (extensions && extensions.length) {
-                    try {
-                        for (var extensions_1 = (e_7 = void 0, __values(extensions)), extensions_1_1 = extensions_1.next(); !extensions_1_1.done; extensions_1_1 = extensions_1.next()) {
-                            var extension = extensions_1_1.value;
-                            merged.extensions.add(extension);
-                        }
-                    }
-                    catch (e_7_1) { e_7 = { error: e_7_1 }; }
-                    finally {
-                        try {
-                            if (extensions_1_1 && !extensions_1_1.done && (_b = extensions_1.return)) _b.call(extensions_1);
-                        }
-                        finally { if (e_7) throw e_7.error; }
-                    }
-                }
-                if (filenames && filenames.length) {
-                    try {
-                        for (var filenames_1 = (e_8 = void 0, __values(filenames)), filenames_1_1 = filenames_1.next(); !filenames_1_1.done; filenames_1_1 = filenames_1.next()) {
-                            var filename = filenames_1_1.value;
-                            merged.filenames.add(filename);
-                        }
-                    }
-                    catch (e_8_1) { e_8 = { error: e_8_1 }; }
-                    finally {
-                        try {
-                            if (filenames_1_1 && !filenames_1_1.done && (_c = filenames_1.return)) _c.call(filenames_1);
-                        }
-                        finally { if (e_8) throw e_8.error; }
-                    }
-                }
-                languages.set(id, merged);
-            }
-        }
-        catch (e_6_1) { e_6 = { error: e_6_1 }; }
-        finally {
-            try {
-                if (registered_1_1 && !registered_1_1.done && (_a = registered_1.return)) _a.call(registered_1);
-            }
-            finally { if (e_6) throw e_6.error; }
-        }
-        try {
-            for (var languages_1 = __values(languages), languages_1_1 = languages_1.next(); !languages_1_1.done; languages_1_1 = languages_1.next()) {
-                var _f = __read(languages_1_1.value, 2), id = _f[0], language = _f[1];
-                if (!language.name) {
-                    language.name = id;
-                }
-            }
-        }
-        catch (e_9_1) { e_9 = { error: e_9_1 }; }
-        finally {
-            try {
-                if (languages_1_1 && !languages_1_1.done && (_d = languages_1.return)) _d.call(languages_1);
-            }
-            finally { if (e_9) throw e_9.error; }
-        }
-        return languages;
-    };
-    MonacoLanguages.prototype.createSignatureHelpProvider = function (selector, provider) {
-        var _this = this;
-        var triggerCharacters = [];
-        for (var _i = 2; _i < arguments.length; _i++) {
-            triggerCharacters[_i - 2] = arguments[_i];
-        }
-        var signatureHelpTriggerCharacters = __spread((provider.triggerCharacters || triggerCharacters || []));
-        var signatureHelpRetriggerCharacters = __spread((provider.retriggerCharacters || []));
-        return {
-            signatureHelpTriggerCharacters: signatureHelpTriggerCharacters,
-            signatureHelpRetriggerCharacters: signatureHelpRetriggerCharacters,
-            provideSignatureHelp: function (model, position, token) { return __awaiter(_this, void 0, void 0, function () {
-                var params, help;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            if (!this.matchModel(selector, monaco_languageclient_1.MonacoModelIdentifier.fromModel(model))) {
-                                return [2 /*return*/, undefined];
-                            }
-                            params = this.m2p.asTextDocumentPositionParams(model, position);
-                            return [4 /*yield*/, provider.provideSignatureHelp(params, token, undefined /* not used by LC */)];
-                        case 1:
-                            help = _a.sent();
-                            if (!help) {
-                                return [2 /*return*/, undefined];
-                            }
-                            return [2 /*return*/, {
-                                    value: this.p2m.asSignatureHelp(help),
-                                    dispose: function () { }
-                                }];
-                    }
-                });
-            }); }
-        };
-    };
-    MonacoLanguages.prototype.createCodeActionProvider = function (selector, provider) {
-        var _this = this;
-        return {
-            provideCodeActions: function (model, range, context, token) { return __awaiter(_this, void 0, void 0, function () {
-                var params, actions;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            if (!this.matchModel(selector, monaco_languageclient_1.MonacoModelIdentifier.fromModel(model))) {
-                                return [2 /*return*/, undefined];
-                            }
-                            params = this.m2p.asCodeActionParams(model, range, context);
-                            return [4 /*yield*/, provider.provideCodeActions(params, token)];
-                        case 1:
-                            actions = _a.sent();
-                            if (!actions) {
-                                return [2 /*return*/, undefined];
-                            }
-                            return [2 /*return*/, {
-                                    actions: this.p2m.asCodeActions(actions),
-                                    dispose: function () { }
-                                }];
-                    }
-                });
-            }); }
-        };
-    };
-    MonacoLanguages.prototype.createCodeLensProvider = function (selector, provider) {
-        var _this = this;
-        return {
-            provideCodeLenses: function (model, token) { return __awaiter(_this, void 0, void 0, function () {
-                var params, lenses;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            if (!this.matchModel(selector, monaco_languageclient_1.MonacoModelIdentifier.fromModel(model))) {
-                                return [2 /*return*/, undefined];
-                            }
-                            params = this.m2p.asCodeLensParams(model);
-                            return [4 /*yield*/, provider.provideCodeLenses(params, token)];
-                        case 1:
-                            lenses = _a.sent();
-                            if (!lenses) {
-                                return [2 /*return*/, undefined];
-                            }
-                            return [2 /*return*/, {
-                                    lenses: this.p2m.asCodeLenses(lenses),
-                                    dispose: function () { }
-                                }];
-                    }
-                });
-            }); },
-            resolveCodeLens: provider.resolveCodeLens ? function (model, codeLens, token) { return __awaiter(_this, void 0, void 0, function () {
-                var protocolCodeLens, result, resolvedCodeLens;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            if (!this.matchModel(selector, monaco_languageclient_1.MonacoModelIdentifier.fromModel(model))) {
-                                return [2 /*return*/, codeLens];
-                            }
-                            protocolCodeLens = this.m2p.asCodeLens(codeLens);
-                            return [4 /*yield*/, provider.resolveCodeLens(protocolCodeLens, token)];
-                        case 1:
-                            result = _a.sent();
-                            if (result) {
-                                resolvedCodeLens = this.p2m.asCodeLens(result);
-                                Object.assign(codeLens, resolvedCodeLens);
-                            }
-                            return [2 /*return*/, codeLens];
-                    }
-                });
-            }); } : (function (_, codeLens, __) { return codeLens; })
-        };
-    };
-    MonacoLanguages = __decorate([
-        inversify_1.injectable(),
-        __param(0, inversify_1.inject(monaco_languageclient_1.ProtocolToMonacoConverter)),
-        __param(1, inversify_1.inject(monaco_languageclient_1.MonacoToProtocolConverter)),
-        __param(2, inversify_1.inject(problem_manager_1.ProblemManager)),
-        __metadata("design:paramtypes", [monaco_languageclient_1.ProtocolToMonacoConverter,
-            monaco_languageclient_1.MonacoToProtocolConverter,
-            problem_manager_1.ProblemManager])
-    ], MonacoLanguages);
-    return MonacoLanguages;
-}(monaco_languageclient_1.MonacoLanguages));
-exports.MonacoLanguages = MonacoLanguages;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-loader.js":
-/*!******************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-loader.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-Object.defineProperty(exports, "__esModule", { value: true });
-/* eslint-disable @typescript-eslint/no-explicit-any */
-function loadVsRequire(context) {
-    // Monaco uses a custom amd loader that over-rides node's require.
-    // Keep a reference to an original require so we can restore it after executing the amd loader file.
-    var originalRequire = context.require;
-    return new Promise(function (resolve) {
-        return window.addEventListener('load', function () {
-            var vsLoader = document.createElement('script');
-            vsLoader.type = 'text/javascript';
-            vsLoader.src = './vs/loader.js';
-            vsLoader.charset = 'utf-8';
-            vsLoader.addEventListener('load', function () {
-                // Save Monaco's amd require and restore the original require
-                var amdRequire = context.require;
-                if (originalRequire) {
-                    context.require = originalRequire;
-                }
-                resolve(amdRequire);
-            });
-            document.body.appendChild(vsLoader);
-        }, { once: true });
-    });
-}
-exports.loadVsRequire = loadVsRequire;
-function loadMonaco(vsRequire) {
-    return new Promise(function (resolve) {
-        vsRequire(['vs/editor/editor.main'], function () {
-            vsRequire([
-                'vs/language/css/monaco.contribution',
-                'vs/language/html/monaco.contribution',
-                'vs/platform/commands/common/commands',
-                'vs/platform/actions/common/actions',
-                'vs/platform/keybinding/common/keybindingsRegistry',
-                'vs/platform/keybinding/common/keybindingResolver',
-                'vs/platform/keybinding/common/usLayoutResolvedKeybinding',
-                'vs/base/common/keybindingLabels',
-                'vs/base/common/keyCodes',
-                'vs/base/common/mime',
-                'vs/editor/browser/editorExtensions',
-                'vs/editor/standalone/browser/simpleServices',
-                'vs/editor/standalone/browser/standaloneServices',
-                'vs/editor/standalone/browser/standaloneLanguages',
-                'vs/base/parts/quickopen/browser/quickOpenWidget',
-                'vs/base/parts/quickopen/browser/quickOpenModel',
-                'vs/base/common/filters',
-                'vs/platform/theme/common/styler',
-                'vs/platform/theme/common/colorRegistry',
-                'vs/base/common/color',
-                'vs/base/common/platform',
-                'vs/editor/common/modes',
-                'vs/editor/contrib/suggest/suggest',
-                'vs/editor/contrib/snippet/snippetParser',
-                'vs/platform/configuration/common/configuration',
-                'vs/platform/configuration/common/configurationModels',
-                'vs/editor/browser/services/codeEditorService',
-                'vs/editor/browser/services/codeEditorServiceImpl',
-                'vs/platform/markers/common/markerService',
-                'vs/platform/contextkey/common/contextkey',
-                'vs/platform/contextkey/browser/contextKeyService',
-                'vs/base/common/errors'
-            ], function (css, html, commands, actions, keybindingsRegistry, keybindingResolver, resolvedKeybinding, keybindingLabels, keyCodes, mime, editorExtensions, simpleServices, standaloneServices, standaloneLanguages, quickOpenWidget, quickOpenModel, filters, styler, colorRegistry, color, platform, modes, suggest, snippetParser, configuration, configurationModels, codeEditorService, codeEditorServiceImpl, markerService, contextKey, contextKeyService, error) {
-                var global = self;
-                global.monaco.commands = commands;
-                global.monaco.actions = actions;
-                global.monaco.keybindings = Object.assign({}, keybindingsRegistry, keybindingResolver, resolvedKeybinding, keybindingLabels, keyCodes);
-                global.monaco.services = Object.assign({}, simpleServices, standaloneServices, standaloneLanguages, configuration, configurationModels, codeEditorService, codeEditorServiceImpl, markerService);
-                global.monaco.quickOpen = Object.assign({}, quickOpenWidget, quickOpenModel);
-                global.monaco.filters = filters;
-                global.monaco.theme = styler;
-                global.monaco.color = Object.assign({}, colorRegistry, color);
-                global.monaco.platform = platform;
-                global.monaco.editorExtensions = editorExtensions;
-                global.monaco.modes = modes;
-                global.monaco.suggest = suggest;
-                global.monaco.snippetParser = snippetParser;
-                global.monaco.contextkey = contextKey;
-                global.monaco.contextKeyService = contextKeyService;
-                global.monaco.mime = mime;
-                global.monaco.error = error;
-                resolve();
-            });
-        });
-    });
-}
-exports.loadMonaco = loadMonaco;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-menu.js":
-/*!****************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-menu.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var browser_1 = __webpack_require__(/*! @theia/editor/lib/browser */ "../node_modules/@theia/editor/lib/browser/index.js");
-var monaco_command_1 = __webpack_require__(/*! ./monaco-command */ "../node_modules/@theia/monaco/lib/browser/monaco-command.js");
-var monaco_command_registry_1 = __webpack_require__(/*! ./monaco-command-registry */ "../node_modules/@theia/monaco/lib/browser/monaco-command-registry.js");
-var MenuRegistry = monaco.actions.MenuRegistry;
-var MonacoMenus;
-(function (MonacoMenus) {
-    MonacoMenus.SELECTION = __spread(common_1.MAIN_MENU_BAR, ['3_selection']);
-    MonacoMenus.SELECTION_GROUP = {
-        id: '1_selection_group',
-        actions: [
-            monaco_command_1.MonacoCommands.SELECTION_SELECT_ALL,
-            monaco_command_1.MonacoCommands.SELECTION_EXPAND_SELECTION,
-            monaco_command_1.MonacoCommands.SELECTION_SHRINK_SELECTION
-        ]
-    };
-    MonacoMenus.SELECTION_MOVE_GROUP = {
-        id: '2_copy_move_group',
-        actions: [
-            monaco_command_1.MonacoCommands.SELECTION_COPY_LINE_UP,
-            monaco_command_1.MonacoCommands.SELECTION_COPY_LINE_DOWN,
-            monaco_command_1.MonacoCommands.SELECTION_MOVE_LINE_UP,
-            monaco_command_1.MonacoCommands.SELECTION_MOVE_LINE_DOWN
-        ]
-    };
-    MonacoMenus.SELECTION_CURSOR_GROUP = {
-        id: '3_cursor_group',
-        actions: [
-            monaco_command_1.MonacoCommands.SELECTION_ADD_CURSOR_ABOVE,
-            monaco_command_1.MonacoCommands.SELECTION_ADD_CURSOR_BELOW,
-            monaco_command_1.MonacoCommands.SELECTION_ADD_CURSOR_TO_LINE_END,
-            monaco_command_1.MonacoCommands.SELECTION_ADD_NEXT_OCCURRENCE,
-            monaco_command_1.MonacoCommands.SELECTION_ADD_PREVIOUS_OCCURRENCE,
-            monaco_command_1.MonacoCommands.SELECTION_SELECT_ALL_OCCURRENCES
-        ]
-    };
-    MonacoMenus.SELECTION_GROUPS = [
-        MonacoMenus.SELECTION_GROUP,
-        MonacoMenus.SELECTION_MOVE_GROUP,
-        MonacoMenus.SELECTION_CURSOR_GROUP
-    ];
-})(MonacoMenus = exports.MonacoMenus || (exports.MonacoMenus = {}));
-var MonacoEditorMenuContribution = /** @class */ (function () {
-    function MonacoEditorMenuContribution(commands) {
-        this.commands = commands;
-    }
-    MonacoEditorMenuContribution.prototype.registerMenus = function (registry) {
-        var e_1, _a, e_2, _b;
-        var _this = this;
-        try {
-            for (var _c = __values(MenuRegistry.getMenuItems(7)), _d = _c.next(); !_d.done; _d = _c.next()) {
-                var item = _d.value;
-                var commandId = this.commands.validate(item.command.id);
-                if (commandId) {
-                    var menuPath = __spread(browser_1.EDITOR_CONTEXT_MENU, [(item.group || '')]);
-                    registry.registerMenuAction(menuPath, { commandId: commandId });
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        registry.registerSubmenu(MonacoMenus.SELECTION, 'Selection');
-        var _loop_1 = function (group) {
-            group.actions.forEach(function (action, index) {
-                var commandId = _this.commands.validate(action);
-                if (commandId) {
-                    var path = __spread(MonacoMenus.SELECTION, [group.id]);
-                    var order = index.toString();
-                    registry.registerMenuAction(path, { commandId: commandId, order: order });
-                }
-            });
-        };
-        try {
-            for (var _e = __values(MonacoMenus.SELECTION_GROUPS), _f = _e.next(); !_f.done; _f = _e.next()) {
-                var group = _f.value;
-                _loop_1(group);
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (_f && !_f.done && (_b = _e.return)) _b.call(_e);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
-    };
-    MonacoEditorMenuContribution = __decorate([
-        inversify_1.injectable(),
-        __param(0, inversify_1.inject(monaco_command_registry_1.MonacoCommandRegistry)),
-        __metadata("design:paramtypes", [monaco_command_registry_1.MonacoCommandRegistry])
-    ], MonacoEditorMenuContribution);
-    return MonacoEditorMenuContribution;
-}());
-exports.MonacoEditorMenuContribution = MonacoEditorMenuContribution;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-mime-service.js":
-/*!************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-mime-service.js ***!
-  \************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2019 Red Hat, Inc. and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var mime_service_1 = __webpack_require__(/*! @theia/core/lib/browser/mime-service */ "../node_modules/@theia/core/lib/browser/mime-service.js");
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var MonacoMimeService = /** @class */ (function (_super) {
-    __extends(MonacoMimeService, _super);
-    function MonacoMimeService() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    MonacoMimeService.prototype.setAssociations = function (associations) {
-        var e_1, _a;
-        monaco.mime.clearTextMimes(true);
-        try {
-            for (var associations_1 = __values(associations), associations_1_1 = associations_1.next(); !associations_1_1.done; associations_1_1 = associations_1.next()) {
-                var association = associations_1_1.value;
-                var mimetype = this.getMimeForMode(association.id) || "text/x-" + association.id;
-                monaco.mime.registerTextMime({ id: association.id, mime: mimetype, filepattern: association.filepattern, userConfigured: true }, false);
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (associations_1_1 && !associations_1_1.done && (_a = associations_1.return)) _a.call(associations_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-    };
-    MonacoMimeService.prototype.getMimeForMode = function (langId) {
-        var e_2, _a;
-        try {
-            for (var _b = __values(monaco.languages.getLanguages()), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var language = _c.value;
-                if (language.id === langId && language.mimetypes) {
-                    return language.mimetypes[0];
-                }
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
-        return undefined;
-    };
-    MonacoMimeService = __decorate([
-        inversify_1.injectable()
-    ], MonacoMimeService);
-    return MonacoMimeService;
-}(mime_service_1.MimeService));
-exports.MonacoMimeService = MonacoMimeService;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-outline-contribution.js":
-/*!********************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-outline-contribution.js ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var SymbolKind = monaco.languages.SymbolKind;
-var browser_1 = __webpack_require__(/*! @theia/editor/lib/browser */ "../node_modules/@theia/editor/lib/browser/index.js");
-var DocumentSymbolProviderRegistry = monaco.modes.DocumentSymbolProviderRegistry;
-var CancellationTokenSource = monaco.CancellationTokenSource;
-var core_1 = __webpack_require__(/*! @theia/core */ "../node_modules/@theia/core/lib/common/index.js");
-var outline_view_service_1 = __webpack_require__(/*! @theia/outline-view/lib/browser/outline-view-service */ "../node_modules/@theia/outline-view/lib/browser/outline-view-service.js");
-var outline_view_widget_1 = __webpack_require__(/*! @theia/outline-view/lib/browser/outline-view-widget */ "../node_modules/@theia/outline-view/lib/browser/outline-view-widget.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
-var debounce = __webpack_require__(/*! lodash.debounce */ "../node_modules/lodash.debounce/index.js");
-var MonacoOutlineContribution = /** @class */ (function () {
-    function MonacoOutlineContribution() {
-        this.toDisposeOnClose = new core_1.DisposableCollection();
-        this.toDisposeOnEditor = new core_1.DisposableCollection();
-        this.canUpdateOutline = true;
-        this.tokenSource = new CancellationTokenSource();
-    }
-    MonacoOutlineContribution.prototype.onStart = function (app) {
-        var _this = this;
-        this.outlineViewService.onDidChangeOpenState(function (open) { return __awaiter(_this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                if (open) {
-                    this.toDisposeOnClose.push(this.toDisposeOnEditor);
-                    this.toDisposeOnClose.push(DocumentSymbolProviderRegistry.onDidChange(debounce(function () { return _this.updateOutline(); })));
-                    this.toDisposeOnClose.push(this.editorManager.onCurrentEditorChanged(debounce(function () { return _this.handleCurrentEditorChanged(); }, 50)));
-                    this.handleCurrentEditorChanged();
-                }
-                else {
-                    this.toDisposeOnClose.dispose();
-                }
-                return [2 /*return*/];
-            });
-        }); });
-        this.outlineViewService.onDidSelect(function (node) { return __awaiter(_this, void 0, void 0, function () {
-            var options;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!(MonacoOutlineSymbolInformationNode.is(node) && node.parent)) return [3 /*break*/, 2];
-                        options = {
-                            mode: 'reveal',
-                            selection: node.range
-                        };
-                        return [4 /*yield*/, this.selectInEditor(node, options)];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2: return [2 /*return*/];
-                }
-            });
-        }); });
-        this.outlineViewService.onDidOpen(function (node) { return __awaiter(_this, void 0, void 0, function () {
-            var options;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!MonacoOutlineSymbolInformationNode.is(node)) return [3 /*break*/, 2];
-                        options = {
-                            selection: {
-                                start: node.range.start
-                            }
-                        };
-                        return [4 /*yield*/, this.selectInEditor(node, options)];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2: return [2 /*return*/];
-                }
-            });
-        }); });
-    };
-    MonacoOutlineContribution.prototype.selectInEditor = function (node, options) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        // Avoid cyclic updates: Outline -> Editor -> Outline.
-                        this.canUpdateOutline = false;
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, , 3, 4]);
-                        return [4 /*yield*/, this.editorManager.open(node.uri, options)];
-                    case 2:
-                        _a.sent();
-                        return [3 /*break*/, 4];
-                    case 3:
-                        this.canUpdateOutline = true;
-                        return [7 /*endfinally*/];
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    MonacoOutlineContribution.prototype.handleCurrentEditorChanged = function () {
-        var _this = this;
-        this.toDisposeOnEditor.dispose();
-        if (this.toDisposeOnClose.disposed) {
-            return;
-        }
-        this.toDisposeOnClose.push(this.toDisposeOnEditor);
-        this.toDisposeOnEditor.push(core_1.Disposable.create(function () { return _this.roots = undefined; }));
-        var editor = this.editorManager.currentEditor;
-        if (editor) {
-            var model = monaco_editor_1.MonacoEditor.get(editor).getControl().getModel();
-            if (model) {
-                this.toDisposeOnEditor.push(model.onDidChangeContent(function () {
-                    _this.roots = undefined; // Invalidate the previously resolved roots.
-                    _this.updateOutline();
-                }));
-            }
-            this.toDisposeOnEditor.push(editor.editor.onSelectionChanged(function (selection) { return _this.updateOutline(selection); }));
-        }
-        this.updateOutline();
-    };
-    MonacoOutlineContribution.prototype.updateOutline = function (editorSelection) {
-        return __awaiter(this, void 0, void 0, function () {
-            var token, editor, model, roots, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        if (!this.canUpdateOutline) {
-                            return [2 /*return*/];
-                        }
-                        this.tokenSource.cancel();
-                        this.tokenSource = new CancellationTokenSource();
-                        token = this.tokenSource.token;
-                        editor = monaco_editor_1.MonacoEditor.get(this.editorManager.currentEditor);
-                        model = editor && editor.getControl().getModel();
-                        _a = model;
-                        if (!_a) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.createRoots(model, token, editorSelection)];
-                    case 1:
-                        _a = (_b.sent());
-                        _b.label = 2;
-                    case 2:
-                        roots = _a;
-                        if (token.isCancellationRequested) {
-                            return [2 /*return*/];
-                        }
-                        this.outlineViewService.publish(roots || []);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    MonacoOutlineContribution.prototype.createRoots = function (model, token, editorSelection) {
-        return __awaiter(this, void 0, void 0, function () {
-            var resetSelection_1, providers, uri, providers_1, providers_1_1, provider, symbols, nodes, _a, e_1_1;
-            var e_1, _b, _c;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
-                    case 0:
-                        if (!(this.roots && this.roots.length > 0)) return [3 /*break*/, 1];
-                        resetSelection_1 = function (node) {
-                            node.selected = false;
-                            node.children.forEach(resetSelection_1);
-                        };
-                        this.roots.forEach(resetSelection_1);
-                        return [3 /*break*/, 12];
-                    case 1:
-                        this.roots = [];
-                        return [4 /*yield*/, DocumentSymbolProviderRegistry.all(model)];
-                    case 2:
-                        providers = _d.sent();
-                        if (token.isCancellationRequested) {
-                            return [2 /*return*/, []];
-                        }
-                        uri = new uri_1.default(model.uri.toString());
-                        _d.label = 3;
-                    case 3:
-                        _d.trys.push([3, 10, 11, 12]);
-                        providers_1 = __values(providers), providers_1_1 = providers_1.next();
-                        _d.label = 4;
-                    case 4:
-                        if (!!providers_1_1.done) return [3 /*break*/, 9];
-                        provider = providers_1_1.value;
-                        _d.label = 5;
-                    case 5:
-                        _d.trys.push([5, 7, , 8]);
-                        return [4 /*yield*/, provider.provideDocumentSymbols(model, token)];
-                    case 6:
-                        symbols = _d.sent();
-                        if (token.isCancellationRequested) {
-                            return [2 /*return*/, []];
-                        }
-                        nodes = this.createNodes(uri, symbols || []);
-                        (_c = this.roots).push.apply(_c, __spread(nodes));
-                        return [3 /*break*/, 8];
-                    case 7:
-                        _a = _d.sent();
-                        return [3 /*break*/, 8];
-                    case 8:
-                        providers_1_1 = providers_1.next();
-                        return [3 /*break*/, 4];
-                    case 9: return [3 /*break*/, 12];
-                    case 10:
-                        e_1_1 = _d.sent();
-                        e_1 = { error: e_1_1 };
-                        return [3 /*break*/, 12];
-                    case 11:
-                        try {
-                            if (providers_1_1 && !providers_1_1.done && (_b = providers_1.return)) _b.call(providers_1);
-                        }
-                        finally { if (e_1) throw e_1.error; }
-                        return [7 /*endfinally*/];
-                    case 12:
-                        this.applySelection(this.roots, editorSelection);
-                        return [2 /*return*/, this.roots];
-                }
-            });
-        });
-    };
-    MonacoOutlineContribution.prototype.createNodes = function (uri, symbols) {
-        var e_2, _a, e_3, _b;
-        var _this = this;
-        var rangeBased = false;
-        var ids = new Map();
-        var roots = [];
-        var nodesByName = symbols.sort(this.orderByPosition).reduce(function (result, symbol) {
-            var node = _this.createNode(uri, symbol, ids);
-            if (symbol.children) {
-                MonacoOutlineSymbolInformationNode.insert(roots, node);
-            }
-            else {
-                rangeBased = rangeBased || symbol.range.startLineNumber !== symbol.range.endLineNumber;
-                var values = result.get(symbol.name) || [];
-                values.push({ symbol: symbol, node: node });
-                result.set(symbol.name, values);
-            }
-            return result;
-        }, new Map());
-        try {
-            for (var _c = __values(nodesByName.values()), _d = _c.next(); !_d.done; _d = _c.next()) {
-                var nodes = _d.value;
-                var _loop_1 = function (node, symbol) {
-                    if (!symbol.containerName) {
-                        MonacoOutlineSymbolInformationNode.insert(roots, node);
-                    }
-                    else {
-                        var possibleParents = nodesByName.get(symbol.containerName);
-                        if (possibleParents) {
-                            var parent_1 = possibleParents.find(function (possibleParent) { return _this.parentContains(symbol, possibleParent.symbol, rangeBased); });
-                            if (parent_1) {
-                                node.parent = parent_1.node;
-                                MonacoOutlineSymbolInformationNode.insert(parent_1.node.children, node);
-                            }
-                        }
-                    }
-                };
-                try {
-                    for (var nodes_1 = (e_3 = void 0, __values(nodes)), nodes_1_1 = nodes_1.next(); !nodes_1_1.done; nodes_1_1 = nodes_1.next()) {
-                        var _e = nodes_1_1.value, node = _e.node, symbol = _e.symbol;
-                        _loop_1(node, symbol);
-                    }
-                }
-                catch (e_3_1) { e_3 = { error: e_3_1 }; }
-                finally {
-                    try {
-                        if (nodes_1_1 && !nodes_1_1.done && (_b = nodes_1.return)) _b.call(nodes_1);
-                    }
-                    finally { if (e_3) throw e_3.error; }
-                }
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
-        if (!roots.length) {
-            var nodes = nodesByName.values().next().value;
-            if (nodes && !nodes[0].node.parent) {
-                return [nodes[0].node];
-            }
-            return [];
-        }
-        return roots;
-    };
-    /**
-     * Sets the selection on the sub-trees based on the optional editor selection.
-     * Select the narrowest node that is strictly contains the editor selection.
-     */
-    MonacoOutlineContribution.prototype.applySelection = function (roots, editorSelection) {
-        var e_4, _a;
-        if (editorSelection) {
-            try {
-                for (var roots_1 = __values(roots), roots_1_1 = roots_1.next(); !roots_1_1.done; roots_1_1 = roots_1.next()) {
-                    var root = roots_1_1.value;
-                    if (this.parentContains(editorSelection, root.fullRange, true)) {
-                        var children = root.children;
-                        root.selected = !root.expanded || !this.applySelection(children, editorSelection);
-                        return true;
-                    }
-                }
-            }
-            catch (e_4_1) { e_4 = { error: e_4_1 }; }
-            finally {
-                try {
-                    if (roots_1_1 && !roots_1_1.done && (_a = roots_1.return)) _a.call(roots_1);
-                }
-                finally { if (e_4) throw e_4.error; }
-            }
-        }
-        return false;
-    };
-    /**
-     * Returns `true` if `candidate` is strictly contained inside `parent`
-     *
-     * If the argument is a `DocumentSymbol`, then `getFullRange` will be used to retrieve the range of the underlying symbol.
-     */
-    MonacoOutlineContribution.prototype.parentContains = function (candidate, parent, rangeBased) {
-        // TODO: move this code to the `monaco-languageclient`: https://github.com/eclipse-theia/theia/pull/2885#discussion_r217800446
-        var candidateRange = browser_1.Range.is(candidate) ? candidate : this.getFullRange(candidate);
-        var parentRange = browser_1.Range.is(parent) ? parent : this.getFullRange(parent);
-        var sameStartLine = candidateRange.start.line === parentRange.start.line;
-        var startColGreaterOrEqual = candidateRange.start.character >= parentRange.start.character;
-        var startLineGreater = candidateRange.start.line > parentRange.start.line;
-        var sameEndLine = candidateRange.end.line === parentRange.end.line;
-        var endColSmallerOrEqual = candidateRange.end.character <= parentRange.end.character;
-        var endLineSmaller = candidateRange.end.line < parentRange.end.line;
-        return (((sameStartLine && startColGreaterOrEqual || startLineGreater) &&
-            (sameEndLine && endColSmallerOrEqual || endLineSmaller)) || !rangeBased);
-    };
-    /**
-     * `monaco` to LSP `Range` converter. Converts the `1-based` location indices into `0-based` ones.
-     */
-    MonacoOutlineContribution.prototype.asRange = function (range) {
-        var startLineNumber = range.startLineNumber, startColumn = range.startColumn, endLineNumber = range.endLineNumber, endColumn = range.endColumn;
-        return {
-            start: {
-                line: startLineNumber - 1,
-                character: startColumn - 1
-            },
-            end: {
-                line: endLineNumber - 1,
-                character: endColumn - 1
-            }
-        };
-    };
-    /**
-     * Returns with a range enclosing this symbol not including leading/trailing whitespace but everything else like comments.
-     * This information is typically used to determine if the clients cursor is inside the symbol to reveal in the symbol in the UI.
-     * This allows to obtain the range including the associated comments.
-     *
-     * See: [`DocumentSymbol#range`](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentSymbol) for more details.
-     */
-    MonacoOutlineContribution.prototype.getFullRange = function (documentSymbol) {
-        return this.asRange(documentSymbol.range);
-    };
-    /**
-     * The range that should be selected and revealed when this symbol is being picked, e.g the name of a function. Must be contained by the `getSelectionRange`.
-     *
-     * See: [`DocumentSymbol#selectionRange`](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentSymbol) for more details.
-     */
-    MonacoOutlineContribution.prototype.getNameRange = function (documentSymbol) {
-        return this.asRange(documentSymbol.selectionRange);
-    };
-    MonacoOutlineContribution.prototype.createNode = function (uri, symbol, ids, parent) {
-        var e_5, _a;
-        var id = this.createId(symbol.name, ids);
-        var children = [];
-        var node = {
-            children: children,
-            id: id,
-            iconClass: SymbolKind[symbol.kind].toString().toLowerCase(),
-            name: this.getName(symbol),
-            detail: this.getDetail(symbol),
-            parent: parent,
-            uri: uri,
-            range: this.getNameRange(symbol),
-            fullRange: this.getFullRange(symbol),
-            selected: false,
-            expanded: this.shouldExpand(symbol)
-        };
-        if (symbol.children) {
-            try {
-                for (var _b = __values(symbol.children), _c = _b.next(); !_c.done; _c = _b.next()) {
-                    var child = _c.value;
-                    MonacoOutlineSymbolInformationNode.insert(children, this.createNode(uri, child, ids, node));
-                }
-            }
-            catch (e_5_1) { e_5 = { error: e_5_1 }; }
-            finally {
-                try {
-                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                }
-                finally { if (e_5) throw e_5.error; }
-            }
-        }
-        return node;
-    };
-    MonacoOutlineContribution.prototype.getName = function (symbol) {
-        return symbol.name;
-    };
-    MonacoOutlineContribution.prototype.getDetail = function (symbol) {
-        return symbol.detail;
-    };
-    MonacoOutlineContribution.prototype.createId = function (name, ids) {
-        var counter = ids.get(name);
-        var index = typeof counter === 'number' ? counter + 1 : 0;
-        ids.set(name, index);
-        return name + '_' + index;
-    };
-    MonacoOutlineContribution.prototype.shouldExpand = function (symbol) {
-        return [
-            SymbolKind.Class,
-            SymbolKind.Enum, SymbolKind.File,
-            SymbolKind.Interface, SymbolKind.Module,
-            SymbolKind.Namespace, SymbolKind.Object,
-            SymbolKind.Package, SymbolKind.Struct
-        ].indexOf(symbol.kind) !== -1;
-    };
-    MonacoOutlineContribution.prototype.orderByPosition = function (symbol, symbol2) {
-        var startLineComparison = symbol.range.startLineNumber - symbol2.range.startLineNumber;
-        if (startLineComparison !== 0) {
-            return startLineComparison;
-        }
-        var startOffsetComparison = symbol.range.startColumn - symbol2.range.startColumn;
-        if (startOffsetComparison !== 0) {
-            return startOffsetComparison;
-        }
-        var endLineComparison = symbol.range.endLineNumber - symbol2.range.endLineNumber;
-        if (endLineComparison !== 0) {
-            return endLineComparison;
-        }
-        return symbol.range.endColumn - symbol2.range.endColumn;
-    };
-    __decorate([
-        inversify_1.inject(outline_view_service_1.OutlineViewService),
-        __metadata("design:type", outline_view_service_1.OutlineViewService)
-    ], MonacoOutlineContribution.prototype, "outlineViewService", void 0);
-    __decorate([
-        inversify_1.inject(browser_1.EditorManager),
-        __metadata("design:type", browser_1.EditorManager)
-    ], MonacoOutlineContribution.prototype, "editorManager", void 0);
-    MonacoOutlineContribution = __decorate([
-        inversify_1.injectable()
-    ], MonacoOutlineContribution);
-    return MonacoOutlineContribution;
-}());
-exports.MonacoOutlineContribution = MonacoOutlineContribution;
-var MonacoOutlineSymbolInformationNode;
-(function (MonacoOutlineSymbolInformationNode) {
-    function is(node) {
-        return outline_view_widget_1.OutlineSymbolInformationNode.is(node) && 'uri' in node && 'range' in node;
-    }
-    MonacoOutlineSymbolInformationNode.is = is;
-    function insert(nodes, node) {
-        var index = nodes.findIndex(function (current) { return compare(node, current) < 0; });
-        if (index === -1) {
-            nodes.push(node);
-        }
-        else {
-            nodes.splice(index, 0, node);
-        }
-    }
-    MonacoOutlineSymbolInformationNode.insert = insert;
-    function compare(node, node2) {
-        var startLineComparison = node.range.start.line - node2.range.start.line;
-        if (startLineComparison !== 0) {
-            return startLineComparison;
-        }
-        var startColumnComparison = node.range.start.character - node2.range.start.character;
-        if (startColumnComparison !== 0) {
-            return startColumnComparison;
-        }
-        var endLineComparison = node2.range.end.line - node.range.end.line;
-        if (endLineComparison !== 0) {
-            return endLineComparison;
-        }
-        return node2.range.end.character - node.range.end.character;
-    }
-    MonacoOutlineSymbolInformationNode.compare = compare;
-})(MonacoOutlineSymbolInformationNode = exports.MonacoOutlineSymbolInformationNode || (exports.MonacoOutlineSymbolInformationNode = {}));
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-outline-decorator.js":
-/*!*****************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-outline-decorator.js ***!
-  \*****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2018 RedHat and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var event_1 = __webpack_require__(/*! @theia/core/lib/common/event */ "../node_modules/@theia/core/lib/common/event.js");
-var tree_iterator_1 = __webpack_require__(/*! @theia/core/lib/browser/tree/tree-iterator */ "../node_modules/@theia/core/lib/browser/tree/tree-iterator.js");
-var monaco_outline_contribution_1 = __webpack_require__(/*! ./monaco-outline-contribution */ "../node_modules/@theia/monaco/lib/browser/monaco-outline-contribution.js");
-var MonacoOutlineDecorator = /** @class */ (function () {
-    function MonacoOutlineDecorator() {
-        this.id = 'theia-monaco-outline-decorator';
-        this.emitter = new event_1.Emitter();
-    }
-    MonacoOutlineDecorator.prototype.decorations = function (tree) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.collectDecorations(tree)];
-            });
-        });
-    };
-    Object.defineProperty(MonacoOutlineDecorator.prototype, "onDidChangeDecorations", {
-        get: function () {
-            return this.emitter.event;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    MonacoOutlineDecorator.prototype.collectDecorations = function (tree) {
-        var e_1, _a;
-        var result = new Map();
-        if (tree.root === undefined) {
-            return result;
-        }
-        try {
-            for (var _b = __values(new tree_iterator_1.DepthFirstTreeIterator(tree.root)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var treeNode = _c.value;
-                if (monaco_outline_contribution_1.MonacoOutlineSymbolInformationNode.is(treeNode) && treeNode.detail) {
-                    result.set(treeNode.id, this.toDecoration(treeNode));
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        return result;
-    };
-    MonacoOutlineDecorator.prototype.toDecoration = function (node) {
-        var captionSuffixes = [{
-                data: (node.detail || ''),
-                fontData: {
-                    color: 'var(--theia-descriptionForeground)',
-                }
-            }];
-        return {
-            captionSuffixes: captionSuffixes
-        };
-    };
-    MonacoOutlineDecorator = __decorate([
-        inversify_1.injectable()
-    ], MonacoOutlineDecorator);
-    return MonacoOutlineDecorator;
-}());
-exports.MonacoOutlineDecorator = MonacoOutlineDecorator;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-quick-open-service.js":
-/*!******************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-quick-open-service.js ***!
-  \******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var message_service_protocol_1 = __webpack_require__(/*! @theia/core/lib/common/message-service-protocol */ "../node_modules/@theia/core/lib/common/message-service-protocol.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var monaco_context_key_service_1 = __webpack_require__(/*! ./monaco-context-key-service */ "../node_modules/@theia/monaco/lib/browser/monaco-context-key-service.js");
-var quick_open_service_1 = __webpack_require__(/*! @theia/core/lib/common/quick-open-service */ "../node_modules/@theia/core/lib/common/quick-open-service.js");
-var monaco_resolved_keybinding_1 = __webpack_require__(/*! ./monaco-resolved-keybinding */ "../node_modules/@theia/monaco/lib/browser/monaco-resolved-keybinding.js");
-var MonacoQuickOpenService = /** @class */ (function (_super) {
-    __extends(MonacoQuickOpenService, _super);
-    function MonacoQuickOpenService() {
-        var _this = _super.call(this) || this;
-        var overlayWidgets = document.createElement('div');
-        overlayWidgets.classList.add('quick-open-overlay');
-        document.body.appendChild(overlayWidgets);
-        var container = _this.container = document.createElement('quick-open-container');
-        container.style.position = 'absolute';
-        container.style.top = '0px';
-        container.style.right = '50%';
-        container.style.zIndex = '1000000';
-        overlayWidgets.appendChild(container);
-        return _this;
-    }
-    MonacoQuickOpenService.prototype.init = function () {
-        this.inQuickOpenKey = this.contextKeyService.createKey('inQuickOpen', false);
-    };
-    MonacoQuickOpenService.prototype.open = function (model, options) {
-        this.internalOpen(new MonacoQuickOpenControllerOptsImpl(model, this.keybindingRegistry, options));
-    };
-    MonacoQuickOpenService.prototype.hide = function (reason) {
-        var hideReason;
-        switch (reason) {
-            case quick_open_service_1.QuickOpenHideReason.ELEMENT_SELECTED:
-                hideReason = monaco.quickOpen.HideReason.ELEMENT_SELECTED;
-                break;
-            case quick_open_service_1.QuickOpenHideReason.FOCUS_LOST:
-                hideReason = monaco.quickOpen.HideReason.FOCUS_LOST;
-                break;
-            case quick_open_service_1.QuickOpenHideReason.CANCELED:
-                hideReason = monaco.quickOpen.HideReason.CANCELED;
-                break;
-        }
-        this.widget.hide(hideReason);
-    };
-    MonacoQuickOpenService.prototype.showDecoration = function (type) {
-        var decoration = monaco.MarkerSeverity.Info;
-        if (type === message_service_protocol_1.MessageType.Warning) {
-            decoration = monaco.MarkerSeverity.Warning;
-        }
-        else if (type === message_service_protocol_1.MessageType.Error) {
-            decoration = monaco.MarkerSeverity.Error;
-        }
-        this.showInputDecoration(decoration);
-    };
-    MonacoQuickOpenService.prototype.hideDecoration = function () {
-        this.clearInputDecoration();
-    };
-    MonacoQuickOpenService.prototype.refresh = function () {
-        var inputBox = this.widget.inputBox;
-        if (inputBox) {
-            this.onType(inputBox.inputElement.value);
-        }
-    };
-    MonacoQuickOpenService.prototype.internalOpen = function (opts) {
-        // eslint-disable-next-line no-null/no-null
-        if (this.widgetNode && this.widgetNode.offsetParent !== null) {
-            this.hide();
-        }
-        this.opts = opts;
-        var activeContext = window.document.activeElement || undefined;
-        if (!activeContext || !this.container.contains(activeContext)) {
-            this.previousActiveElement = activeContext;
-            this.contextKeyService.activeContext = activeContext instanceof HTMLElement ? activeContext : undefined;
-        }
-        this.hideDecoration();
-        this.widget.show(this.opts.prefix || '');
-        this.setPlaceHolder(opts.inputAriaLabel);
-        this.setPassword(opts.password ? true : false);
-        this.setEnabled(opts.enabled);
-        this.setValueSelected(opts.inputAriaLabel, opts.valueSelection);
-        this.inQuickOpenKey.set(true);
-        var widget = this.widget;
-        if (widget.inputBox) {
-            widget.inputBox.inputElement.tabIndex = 1;
-            // Position the cursor at the end of the input unless a user has made a selection.
-            if (widget.inputBox.inputElement.selectionStart === widget.inputBox.inputElement.selectionEnd) {
-                widget.inputBox.inputElement.selectionStart = widget.inputBox.inputElement.value.length;
-            }
-        }
-    };
-    MonacoQuickOpenService.prototype.setValueSelected = function (value, selectLocation) {
-        if (!value) {
-            return;
-        }
-        var widget = this.widget;
-        if (widget.inputBox) {
-            if (!selectLocation) {
-                widget.inputBox.inputElement.setSelectionRange(0, value.length);
-                return;
-            }
-            if (selectLocation[0] === selectLocation[1]) {
-                widget.inputBox.inputElement.setSelectionRange(selectLocation[0], selectLocation[0]);
-                return;
-            }
-            widget.inputBox.inputElement.setSelectionRange(selectLocation[0], selectLocation[1]);
-        }
-    };
-    MonacoQuickOpenService.prototype.setEnabled = function (isEnabled) {
-        var widget = this.widget;
-        if (widget.inputBox) {
-            widget.inputBox.inputElement.readOnly = (isEnabled !== undefined) ? !isEnabled : false;
-        }
-    };
-    MonacoQuickOpenService.prototype.setValue = function (value) {
-        if (this.widget && this.widget.inputBox) {
-            this.widget.inputBox.inputElement.value = (value !== undefined) ? value : '';
-        }
-    };
-    MonacoQuickOpenService.prototype.setPlaceHolder = function (placeHolder) {
-        var widget = this.widget;
-        if (widget.inputBox) {
-            widget.inputBox.setPlaceHolder(placeHolder);
-        }
-    };
-    MonacoQuickOpenService.prototype.setPassword = function (isPassword) {
-        var widget = this.widget;
-        if (widget.inputBox) {
-            widget.inputBox.inputElement.type = isPassword ? 'password' : 'text';
-        }
-    };
-    MonacoQuickOpenService.prototype.showInputDecoration = function (decoration) {
-        var widget = this.widget;
-        if (widget.inputBox) {
-            var type = decoration === monaco.MarkerSeverity.Info ? 1 :
-                decoration === monaco.MarkerSeverity.Warning ? 2 : 3;
-            widget.inputBox.showMessage({ type: type, content: '' });
-        }
-    };
-    MonacoQuickOpenService.prototype.clearInputDecoration = function () {
-        var widget = this.widget;
-        if (widget.inputBox) {
-            widget.inputBox.hideMessage();
-        }
-    };
-    Object.defineProperty(MonacoQuickOpenService.prototype, "widget", {
-        get: function () {
-            var _this = this;
-            if (this._widget) {
-                return this._widget;
-            }
-            this._widget = new monaco.quickOpen.QuickOpenWidget(this.container, {
-                onOk: function () {
-                    _this.previousActiveElement = undefined;
-                    _this.contextKeyService.activeContext = undefined;
-                    _this.onClose(false);
-                },
-                onCancel: function () {
-                    if (_this.previousActiveElement instanceof HTMLElement) {
-                        _this.previousActiveElement.focus({ preventScroll: true });
-                    }
-                    _this.previousActiveElement = undefined;
-                    _this.contextKeyService.activeContext = undefined;
-                    _this.onClose(true);
-                },
-                onType: function (lookFor) { return _this.onType(lookFor || ''); },
-                onFocusLost: function () {
-                    if (_this.opts && _this.opts.ignoreFocusOut !== undefined) {
-                        if (_this.opts.ignoreFocusOut === false) {
-                            _this.onClose(true);
-                        }
-                        return _this.opts.ignoreFocusOut;
-                    }
-                    else {
-                        return false;
-                    }
-                }
-            }, {});
-            this.attachQuickOpenStyler();
-            var newWidget = this._widget.create();
-            this._widgetNode = newWidget;
-            return this._widget;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MonacoQuickOpenService.prototype, "widgetNode", {
-        get: function () {
-            return this._widgetNode;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    MonacoQuickOpenService.prototype.attachQuickOpenStyler = function () {
-        var _this = this;
-        if (!this._widget) {
-            return;
-        }
-        var themeService = monaco.services.StaticServices.standaloneThemeService.get();
-        var detach = monaco.theme.attachQuickOpenStyler(this._widget, themeService);
-        var dispose = themeService.onThemeChange(function () {
-            detach.dispose();
-            _this.attachQuickOpenStyler();
-            dispose.dispose();
-        });
-    };
-    MonacoQuickOpenService.prototype.onClose = function (cancelled) {
-        if (this.opts && this.opts.onClose) {
-            this.opts.onClose(cancelled);
-        }
-        this.inQuickOpenKey.set(false);
-    };
-    MonacoQuickOpenService.prototype.onType = function (lookFor) {
-        return __awaiter(this, void 0, void 0, function () {
-            var opts, m;
-            var _this = this;
-            return __generator(this, function (_a) {
-                opts = this.opts;
-                if (this.widget && opts) {
-                    if (opts.onType) {
-                        opts.onType(lookFor, function (model) {
-                            return _this.widget.setInput(model, opts.getAutoFocus(lookFor), opts.inputAriaLabel);
-                        });
-                    }
-                    else {
-                        m = opts.getModel(lookFor);
-                        this.widget.setInput(m, opts.getAutoFocus(lookFor), opts.inputAriaLabel);
-                    }
-                }
-                return [2 /*return*/];
-            });
-        });
-    };
-    __decorate([
-        inversify_1.inject(monaco_context_key_service_1.MonacoContextKeyService),
-        __metadata("design:type", monaco_context_key_service_1.MonacoContextKeyService)
-    ], MonacoQuickOpenService.prototype, "contextKeyService", void 0);
-    __decorate([
-        inversify_1.inject(browser_1.KeybindingRegistry),
-        __metadata("design:type", browser_1.KeybindingRegistry)
-    ], MonacoQuickOpenService.prototype, "keybindingRegistry", void 0);
-    __decorate([
-        inversify_1.postConstruct(),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], MonacoQuickOpenService.prototype, "init", null);
-    MonacoQuickOpenService = __decorate([
-        inversify_1.injectable(),
-        __metadata("design:paramtypes", [])
-    ], MonacoQuickOpenService);
-    return MonacoQuickOpenService;
-}(browser_1.QuickOpenService));
-exports.MonacoQuickOpenService = MonacoQuickOpenService;
-var MonacoQuickOpenControllerOptsImpl = /** @class */ (function () {
-    function MonacoQuickOpenControllerOptsImpl(model, keybindingService, options) {
-        this.model = model;
-        this.keybindingService = keybindingService;
-        this.model = model;
-        this.options = browser_1.QuickOpenOptions.resolve(options);
-        this.password = this.options.password;
-    }
-    Object.defineProperty(MonacoQuickOpenControllerOptsImpl.prototype, "enabled", {
-        get: function () {
-            return this.options.enabled;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MonacoQuickOpenControllerOptsImpl.prototype, "prefix", {
-        get: function () {
-            return this.options.prefix;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MonacoQuickOpenControllerOptsImpl.prototype, "ignoreFocusOut", {
-        get: function () {
-            return this.options.ignoreFocusOut;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MonacoQuickOpenControllerOptsImpl.prototype, "inputAriaLabel", {
-        get: function () {
-            return this.options.placeholder || '';
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MonacoQuickOpenControllerOptsImpl.prototype, "valueSelection", {
-        get: function () {
-            return this.options.valueSelection || [-1, -1];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    MonacoQuickOpenControllerOptsImpl.prototype.onClose = function (cancelled) {
-        this.options.onClose(cancelled);
-    };
-    MonacoQuickOpenControllerOptsImpl.prototype.toOpenModel = function (lookFor, items, actionProvider) {
-        var e_1, _a;
-        var entries = [];
-        try {
-            for (var items_1 = __values(items), items_1_1 = items_1.next(); !items_1_1.done; items_1_1 = items_1.next()) {
-                var item = items_1_1.value;
-                var entry = this.createEntry(item, lookFor);
-                if (entry) {
-                    entries.push(entry);
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (items_1_1 && !items_1_1.done && (_a = items_1.return)) _a.call(items_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        if (this.options.fuzzySort) {
-            entries.sort(function (a, b) { return monaco.quickOpen.compareEntries(a, b, lookFor); });
-        }
-        return new monaco.quickOpen.QuickOpenModel(entries, actionProvider ? new MonacoQuickOpenActionProvider(actionProvider) : undefined);
-    };
-    MonacoQuickOpenControllerOptsImpl.prototype.getModel = function (lookFor) {
-        throw new Error('getModel not supported!');
-    };
-    MonacoQuickOpenControllerOptsImpl.prototype.onType = function (lookFor, acceptor) {
-        var _this = this;
-        this.model.onType(lookFor, function (items, actionProvider) {
-            var result = _this.toOpenModel(lookFor, items, actionProvider);
-            acceptor(result);
-        });
-    };
-    MonacoQuickOpenControllerOptsImpl.prototype.createEntry = function (item, lookFor) {
-        if (this.options.skipPrefix) {
-            lookFor = lookFor.substr(this.options.skipPrefix);
-        }
-        if (this.options.trimInput) {
-            lookFor = lookFor.trim();
-        }
-        var _a = this.options, fuzzyMatchLabel = _a.fuzzyMatchLabel, fuzzyMatchDescription = _a.fuzzyMatchDescription, fuzzyMatchDetail = _a.fuzzyMatchDetail;
-        var labelHighlights = fuzzyMatchLabel ? this.matchesFuzzy(lookFor, item.getLabel(), fuzzyMatchLabel) : item.getLabelHighlights();
-        var descriptionHighlights = fuzzyMatchDescription ? this.matchesFuzzy(lookFor, item.getDescription(), fuzzyMatchDescription) : item.getDescriptionHighlights();
-        var detailHighlights = fuzzyMatchDetail ? this.matchesFuzzy(lookFor, item.getDetail(), fuzzyMatchDetail) : item.getDetailHighlights();
-        if ((lookFor && !labelHighlights && !descriptionHighlights && !detailHighlights)
-            && !this.options.showItemsWithoutHighlight) {
-            return undefined;
-        }
-        var entry = item instanceof browser_1.QuickOpenGroupItem
-            ? new QuickOpenEntryGroup(item, this.keybindingService)
-            : new QuickOpenEntry(item, this.keybindingService);
-        entry.setHighlights(labelHighlights || [], descriptionHighlights, detailHighlights);
-        return entry;
-    };
-    MonacoQuickOpenControllerOptsImpl.prototype.matchesFuzzy = function (lookFor, value, options) {
-        if (!lookFor || !value) {
-            return undefined;
-        }
-        var enableSeparateSubstringMatching = typeof options === 'object' && options.enableSeparateSubstringMatching;
-        return monaco.filters.matchesFuzzy(lookFor, value, enableSeparateSubstringMatching);
-    };
-    MonacoQuickOpenControllerOptsImpl.prototype.getAutoFocus = function (lookFor) {
-        if (this.options.selectIndex) {
-            var idx = this.options.selectIndex(lookFor);
-            if (idx >= 0) {
-                return {
-                    autoFocusIndex: idx
-                };
-            }
-        }
-        return {
-            autoFocusFirstEntry: true,
-            autoFocusPrefixMatch: lookFor
-        };
-    };
-    return MonacoQuickOpenControllerOptsImpl;
-}());
-exports.MonacoQuickOpenControllerOptsImpl = MonacoQuickOpenControllerOptsImpl;
-var QuickOpenEntry = /** @class */ (function (_super) {
-    __extends(QuickOpenEntry, _super);
-    function QuickOpenEntry(item, keybindingService) {
-        var _this = _super.call(this) || this;
-        _this.item = item;
-        _this.keybindingService = keybindingService;
-        return _this;
-    }
-    QuickOpenEntry.prototype.getLabel = function () {
-        return this.item.getLabel();
-    };
-    QuickOpenEntry.prototype.getAriaLabel = function () {
-        return this.item.getTooltip();
-    };
-    QuickOpenEntry.prototype.getDetail = function () {
-        return this.item.getDetail();
-    };
-    QuickOpenEntry.prototype.getDescription = function () {
-        return this.item.getDescription();
-    };
-    QuickOpenEntry.prototype.isHidden = function () {
-        return _super.prototype.isHidden.call(this) || this.item.isHidden();
-    };
-    QuickOpenEntry.prototype.getResource = function () {
-        var uri = this.item.getUri();
-        return uri ? monaco.Uri.parse(uri.toString()) : undefined;
-    };
-    QuickOpenEntry.prototype.getIcon = function () {
-        return this.item.getIconClass();
-    };
-    QuickOpenEntry.prototype.getKeybinding = function () {
-        var keybinding = this.item.getKeybinding();
-        if (!keybinding) {
-            return undefined;
-        }
-        var keySequence;
-        try {
-            keySequence = this.keybindingService.resolveKeybinding(keybinding);
-        }
-        catch (error) {
-            return undefined;
-        }
-        return new monaco_resolved_keybinding_1.MonacoResolvedKeybinding(keySequence, this.keybindingService);
-    };
-    QuickOpenEntry.prototype.run = function (mode) {
-        if (mode === 1) {
-            return this.item.run(browser_1.QuickOpenMode.OPEN);
-        }
-        if (mode === 2) {
-            return this.item.run(browser_1.QuickOpenMode.OPEN_IN_BACKGROUND);
-        }
-        if (mode === 0) {
-            return this.item.run(browser_1.QuickOpenMode.PREVIEW);
-        }
-        return false;
-    };
-    return QuickOpenEntry;
-}(monaco.quickOpen.QuickOpenEntry));
-exports.QuickOpenEntry = QuickOpenEntry;
-var QuickOpenEntryGroup = /** @class */ (function (_super) {
-    __extends(QuickOpenEntryGroup, _super);
-    function QuickOpenEntryGroup(item, keybindingService) {
-        var _this = _super.call(this, new QuickOpenEntry(item, keybindingService)) || this;
-        _this.item = item;
-        _this.keybindingService = keybindingService;
-        return _this;
-    }
-    QuickOpenEntryGroup.prototype.getGroupLabel = function () {
-        return this.item.getGroupLabel() || '';
-    };
-    QuickOpenEntryGroup.prototype.showBorder = function () {
-        return this.item.showBorder();
-    };
-    QuickOpenEntryGroup.prototype.getKeybinding = function () {
-        var entry = this.getEntry();
-        return entry ? entry.getKeybinding() : _super.prototype.getKeybinding.call(this);
-    };
-    return QuickOpenEntryGroup;
-}(monaco.quickOpen.QuickOpenEntryGroup));
-exports.QuickOpenEntryGroup = QuickOpenEntryGroup;
-var MonacoQuickOpenAction = /** @class */ (function () {
-    function MonacoQuickOpenAction(action) {
-        this.action = action;
-    }
-    Object.defineProperty(MonacoQuickOpenAction.prototype, "id", {
-        get: function () {
-            return this.action.id;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MonacoQuickOpenAction.prototype, "label", {
-        get: function () {
-            return this.action.label || '';
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MonacoQuickOpenAction.prototype, "tooltip", {
-        get: function () {
-            return this.action.tooltip || '';
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MonacoQuickOpenAction.prototype, "class", {
-        get: function () {
-            return this.action.class;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MonacoQuickOpenAction.prototype, "enabled", {
-        get: function () {
-            return this.action.enabled || true;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MonacoQuickOpenAction.prototype, "checked", {
-        get: function () {
-            return this.action.checked || false;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MonacoQuickOpenAction.prototype, "radio", {
-        get: function () {
-            return this.action.radio || false;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    MonacoQuickOpenAction.prototype.run = function (entry) {
-        return this.action.run(entry.item);
-    };
-    MonacoQuickOpenAction.prototype.dispose = function () {
-        this.action.dispose();
-    };
-    return MonacoQuickOpenAction;
-}());
-exports.MonacoQuickOpenAction = MonacoQuickOpenAction;
-var MonacoQuickOpenActionProvider = /** @class */ (function () {
-    function MonacoQuickOpenActionProvider(provider) {
-        this.provider = provider;
-    }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    MonacoQuickOpenActionProvider.prototype.hasActions = function (element, entry) {
-        return this.provider.hasActions(entry.item);
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    MonacoQuickOpenActionProvider.prototype.getActions = function (element, entry) {
-        var actions = this.provider.getActions(entry.item);
-        return actions.map(function (action) { return new MonacoQuickOpenAction(action); });
-    };
-    return MonacoQuickOpenActionProvider;
-}());
-exports.MonacoQuickOpenActionProvider = MonacoQuickOpenActionProvider;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-resolved-keybinding.js":
-/*!*******************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-resolved-keybinding.js ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2017 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var keys_1 = __webpack_require__(/*! @theia/core/lib/browser/keys */ "../node_modules/@theia/core/lib/browser/keys.js");
-var os_1 = __webpack_require__(/*! @theia/core/lib/common/os */ "../node_modules/@theia/core/lib/common/os.js");
-var monaco_keycode_map_1 = __webpack_require__(/*! ./monaco-keycode-map */ "../node_modules/@theia/monaco/lib/browser/monaco-keycode-map.js");
-var MonacoResolvedKeybinding = /** @class */ (function (_super) {
-    __extends(MonacoResolvedKeybinding, _super);
-    function MonacoResolvedKeybinding(keySequence, keybindingService) {
-        var _this = _super.call(this) || this;
-        _this.keySequence = keySequence;
-        _this.parts = keySequence.map(function (keyCode) {
-            // eslint-disable-next-line no-null/no-null
-            var keyLabel = keyCode.key ? keybindingService.acceleratorForKey(keyCode.key) : null;
-            var keyAriaLabel = keyLabel;
-            return new monaco.keybindings.ResolvedKeybindingPart(keyCode.ctrl, keyCode.shift, keyCode.alt, keyCode.meta, keyLabel, keyAriaLabel);
-        });
-        return _this;
-    }
-    MonacoResolvedKeybinding.prototype.getLabel = function () {
-        return monaco.keybindings.UILabelProvider.toLabel(monaco.platform.OS, this.parts, function (p) { return p.keyLabel; });
-    };
-    MonacoResolvedKeybinding.prototype.getAriaLabel = function () {
-        return monaco.keybindings.UILabelProvider.toLabel(monaco.platform.OS, this.parts, function (p) { return p.keyAriaLabel; });
-    };
-    MonacoResolvedKeybinding.prototype.getElectronAccelerator = function () {
-        if (this.isChord) {
-            // Electron cannot handle chords
-            // eslint-disable-next-line no-null/no-null
-            return null;
-        }
-        return monaco.keybindings.ElectronAcceleratorLabelProvider.toLabel(monaco.platform.OS, this.parts, function (p) { return p.keyLabel; });
-    };
-    MonacoResolvedKeybinding.prototype.getUserSettingsLabel = function () {
-        return monaco.keybindings.UserSettingsLabelProvider.toLabel(monaco.platform.OS, this.parts, function (p) { return p.keyLabel; });
-    };
-    MonacoResolvedKeybinding.prototype.isWYSIWYG = function () {
-        return true;
-    };
-    MonacoResolvedKeybinding.prototype.isChord = function () {
-        return this.parts.length > 1;
-    };
-    MonacoResolvedKeybinding.prototype.getDispatchParts = function () {
-        var _this = this;
-        return this.keySequence.map(function (keyCode) { return monaco.keybindings.USLayoutResolvedKeybinding.getDispatchStr(_this.toKeybinding(keyCode)); });
-    };
-    MonacoResolvedKeybinding.prototype.toKeybinding = function (keyCode) {
-        return new monaco.keybindings.SimpleKeybinding(keyCode.ctrl, keyCode.shift, keyCode.alt, keyCode.meta, monaco_keycode_map_1.KEY_CODE_MAP[keyCode.key.keyCode]);
-    };
-    MonacoResolvedKeybinding.prototype.getParts = function () {
-        return this.parts;
-    };
-    MonacoResolvedKeybinding.toKeybinding = function (keybinding) {
-        return keybinding instanceof monaco.keybindings.SimpleKeybinding
-            ? this.keyCode(keybinding).toString()
-            : this.keySequence(keybinding).join(' ');
-    };
-    MonacoResolvedKeybinding.keyCode = function (keybinding) {
-        var keyCode = keybinding.keyCode;
-        var sequence = {
-            first: keys_1.Key.getKey(this.monaco2BrowserKeyCode(keyCode & 0xff)),
-            modifiers: []
-        };
-        if (keybinding.ctrlKey) {
-            if (os_1.isOSX) {
-                sequence.modifiers.push(keys_1.KeyModifier.MacCtrl);
-            }
-            else {
-                sequence.modifiers.push(keys_1.KeyModifier.CtrlCmd);
-            }
-        }
-        if (keybinding.shiftKey) {
-            sequence.modifiers.push(keys_1.KeyModifier.Shift);
-        }
-        if (keybinding.altKey) {
-            sequence.modifiers.push(keys_1.KeyModifier.Alt);
-        }
-        if (keybinding.metaKey && sequence.modifiers.indexOf(keys_1.KeyModifier.CtrlCmd) === -1) {
-            sequence.modifiers.push(keys_1.KeyModifier.CtrlCmd);
-        }
-        return keys_1.KeyCode.createKeyCode(sequence);
-    };
-    MonacoResolvedKeybinding.keySequence = function (keybinding) {
-        var _this = this;
-        return keybinding.parts.map(function (part) { return _this.keyCode(part); });
-    };
-    MonacoResolvedKeybinding.monaco2BrowserKeyCode = function (keyCode) {
-        for (var i = 0; i < monaco_keycode_map_1.KEY_CODE_MAP.length; i++) {
-            if (monaco_keycode_map_1.KEY_CODE_MAP[i] === keyCode) {
-                return i;
-            }
-        }
-        return -1;
-    };
-    return MonacoResolvedKeybinding;
-}(monaco.keybindings.ResolvedKeybinding));
-exports.MonacoResolvedKeybinding = MonacoResolvedKeybinding;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-semantic-highlighting-service.js":
-/*!*****************************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-semantic-highlighting-service.js ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2018 TypeFox and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var logger_1 = __webpack_require__(/*! @theia/core/lib/common/logger */ "../node_modules/@theia/core/lib/common/logger.js");
-var editor_manager_1 = __webpack_require__(/*! @theia/editor/lib/browser/editor-manager */ "../node_modules/@theia/editor/lib/browser/editor-manager.js");
-var disposable_1 = __webpack_require__(/*! @theia/core/lib/common/disposable */ "../node_modules/@theia/core/lib/common/disposable.js");
-var semantic_highlighting_service_1 = __webpack_require__(/*! @theia/editor/lib/browser/semantic-highlight/semantic-highlighting-service */ "../node_modules/@theia/editor/lib/browser/semantic-highlight/semantic-highlighting-service.js");
-var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
-var monaco_editor_service_1 = __webpack_require__(/*! ./monaco-editor-service */ "../node_modules/@theia/monaco/lib/browser/monaco-editor-service.js");
-/**
- * A helper class for grouping information about a decoration type that has
- * been registered with the editor service.
- */
-var DecorationTypeInfo = /** @class */ (function () {
-    function DecorationTypeInfo() {
-    }
-    return DecorationTypeInfo;
-}());
-var MonacoSemanticHighlightingService = /** @class */ (function (_super) {
-    __extends(MonacoSemanticHighlightingService, _super);
-    function MonacoSemanticHighlightingService() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.decorations = new Map();
-        _this.toDisposeOnEditorClose = new Map();
-        _this.toDisposeOnUnregister = new Map();
-        // laguage id -> (scope index -> decoration type)
-        _this.decorationTypes = new Map();
-        _this.lastDecorationTypeId = 0;
-        return _this;
-    }
-    MonacoSemanticHighlightingService.prototype.nextDecorationTypeKey = function () {
-        return 'MonacoSemanticHighlighting' + (++this.lastDecorationTypeId);
-    };
-    MonacoSemanticHighlightingService.prototype.registerDecorationTypesForLanguage = function (languageId) {
-        var scopes = this.scopes.get(languageId);
-        if (scopes) {
-            var decorationTypes = new Map();
-            for (var index = 0; index < scopes.length; index++) {
-                var modelDecoration = this.toDecorationType(scopes[index]);
-                if (modelDecoration) {
-                    decorationTypes.set(index, modelDecoration);
-                }
-            }
-            this.decorationTypes.set(languageId, decorationTypes);
-        }
-    };
-    MonacoSemanticHighlightingService.prototype.removeDecorationTypesForLanguage = function (languageId) {
-        var e_1, _a;
-        var decorationTypes = this.decorationTypes.get(languageId);
-        if (!decorationTypes) {
-            this.logger.warn("No decoration types are registered for language: " + languageId);
-            return;
-        }
-        try {
-            for (var decorationTypes_1 = __values(decorationTypes), decorationTypes_1_1 = decorationTypes_1.next(); !decorationTypes_1_1.done; decorationTypes_1_1 = decorationTypes_1.next()) {
-                var _b = __read(decorationTypes_1_1.value, 2), decorationType = _b[1];
-                this.monacoEditorService.removeDecorationType(decorationType.key);
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (decorationTypes_1_1 && !decorationTypes_1_1.done && (_a = decorationTypes_1.return)) _a.call(decorationTypes_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-    };
-    MonacoSemanticHighlightingService.prototype.refreshDecorationTypesForLanguage = function (languageId) {
-        var e_2, _a;
-        var decorationTypes = this.decorationTypes.get(languageId);
-        var scopes = this.scopes.get(languageId);
-        if (!decorationTypes || !scopes) {
-            this.logger.warn("No decoration types are registered for language: " + languageId);
-            return;
-        }
-        try {
-            for (var decorationTypes_2 = __values(decorationTypes), decorationTypes_2_1 = decorationTypes_2.next(); !decorationTypes_2_1.done; decorationTypes_2_1 = decorationTypes_2.next()) {
-                var _b = __read(decorationTypes_2_1.value, 2), scope = _b[0], decorationType = _b[1];
-                // Pass in the existing key to associate the new color with the same
-                // decoration type, thereby reusing it.
-                var newDecorationType = this.toDecorationType(scopes[scope], decorationType.key);
-                if (newDecorationType) {
-                    decorationType.options = newDecorationType.options;
-                }
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (decorationTypes_2_1 && !decorationTypes_2_1.done && (_a = decorationTypes_2.return)) _a.call(decorationTypes_2);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
-    };
-    MonacoSemanticHighlightingService.prototype.register = function (languageId, scopes) {
-        var _this = this;
-        var result = _super.prototype.register.call(this, languageId, scopes);
-        this.registerDecorationTypesForLanguage(languageId);
-        var disposable = this.themeService().onThemeChange(function () {
-            // When the theme changes, refresh the decoration types to reflect
-            // the colors for the old theme.
-            // Note that we do not remove the old decoration types and add new ones.
-            // The new ones would have different class names, and we'd have to
-            // update all open editors to use the new class names.
-            _this.refreshDecorationTypesForLanguage(languageId);
-        });
-        this.toDisposeOnUnregister.set(languageId, disposable);
-        return result;
-    };
-    MonacoSemanticHighlightingService.prototype.unregister = function (languageId) {
-        _super.prototype.unregister.call(this, languageId);
-        this.removeDecorationTypesForLanguage(languageId);
-        var disposable = this.toDisposeOnUnregister.get(languageId);
-        if (disposable) {
-            disposable.dispose();
-        }
-        this.decorationTypes.delete(languageId);
-        this.toDisposeOnUnregister.delete(languageId);
-    };
-    MonacoSemanticHighlightingService.prototype.toDecorationType = function (scopes, reuseKey) {
-        var e_3, _a;
-        var key = reuseKey || this.nextDecorationTypeKey();
-        try {
-            // TODO: why for-of? How to pick the right scope? Is it fine to get the first element (with the narrowest scope)?
-            for (var scopes_1 = __values(scopes), scopes_1_1 = scopes_1.next(); !scopes_1_1.done; scopes_1_1 = scopes_1.next()) {
-                var scope = scopes_1_1.value;
-                var tokenTheme = this.tokenTheme();
-                var metadata = tokenTheme.match(undefined, scope);
-                // Don't use the inlineClassName from the TokenMetadata, because this
-                // will conflict with styles used for TM scopes
-                // (https://github.com/Microsoft/monaco-editor/issues/1070).
-                // Instead, get the token color, use registerDecorationType() to cause
-                // monaco to allocate a new inlineClassName for that color, and use
-                // resolveDecorationOptions() to get an IModelDecorationOptions
-                // containing that inlineClassName.
-                var colorIndex = monaco.modes.TokenMetadata.getForeground(metadata);
-                var color = tokenTheme.getColorMap()[colorIndex];
-                // If we wanted to support other decoration options such as font style,
-                // we could include them here.
-                var options = {
-                    color: color.toString(),
-                };
-                this.monacoEditorService.registerDecorationType(key, options);
-                return {
-                    key: key,
-                    options: this.monacoEditorService.resolveDecorationOptions(key, false)
-                };
-            }
-        }
-        catch (e_3_1) { e_3 = { error: e_3_1 }; }
-        finally {
-            try {
-                if (scopes_1_1 && !scopes_1_1.done && (_a = scopes_1.return)) _a.call(scopes_1);
-            }
-            finally { if (e_3) throw e_3.error; }
-        }
-        return undefined;
-    };
-    MonacoSemanticHighlightingService.prototype.decorate = function (languageId, uri, ranges) {
-        return __awaiter(this, void 0, void 0, function () {
-            var editor, key, newDecorations, oldDecorations, newState, decorationIds;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.editor(uri)];
-                    case 1:
-                        editor = _a.sent();
-                        if (!editor) {
-                            return [2 /*return*/];
-                        }
-                        key = uri.toString();
-                        if (!this.toDisposeOnEditorClose.has(key)) {
-                            this.toDisposeOnEditorClose.set(key, new disposable_1.DisposableCollection(editor.onDispose(function () { return _this.deleteDecorations(key, editor); })));
-                        }
-                        newDecorations = ranges.map(function (range) { return _this.toDecoration(languageId, range); });
-                        oldDecorations = this.oldDecorations(key, editor, ranges);
-                        newState = editor.deltaDecorations({
-                            newDecorations: newDecorations,
-                            oldDecorations: oldDecorations
-                        });
-                        decorationIds = this.decorationIds(key);
-                        newState.forEach(function (id) { return decorationIds.add(id); });
-                        this.decorations.set(key, decorationIds);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    MonacoSemanticHighlightingService.prototype.dispose = function () {
-        Array.from(this.toDisposeOnEditorClose.values()).forEach(function (disposable) { return disposable.dispose(); });
-    };
-    MonacoSemanticHighlightingService.prototype.decorationIds = function (uri) {
-        return this.decorations.get(typeof uri === 'string' ? uri : uri.toString()) || new Set();
-    };
-    MonacoSemanticHighlightingService.prototype.editor = function (uri) {
-        return __awaiter(this, void 0, void 0, function () {
-            var editorWidget;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.editorManager.getByUri(typeof uri === 'string' ? new uri_1.default(uri) : uri)];
-                    case 1:
-                        editorWidget = _a.sent();
-                        if (!!editorWidget && editorWidget.editor instanceof monaco_editor_1.MonacoEditor) {
-                            return [2 /*return*/, editorWidget.editor];
-                        }
-                        return [2 /*return*/, undefined];
-                }
-            });
-        });
-    };
-    MonacoSemanticHighlightingService.prototype.model = function (uri) {
-        return __awaiter(this, void 0, void 0, function () {
-            var editor;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.editor(uri)];
-                    case 1:
-                        editor = _a.sent();
-                        if (editor) {
-                            return [2 /*return*/, editor.getControl().getModel() || undefined];
-                        }
-                        return [2 /*return*/, undefined];
-                }
-            });
-        });
-    };
-    /**
-     * Returns all the semantic highlighting decoration IDs that are affected by any of the range arguments.
-     */
-    MonacoSemanticHighlightingService.prototype.oldDecorations = function (uri, editor, ranges) {
-        var ids = this.decorationIds(uri);
-        var affectedLines = Array.from(new Set(ranges.map(function (r) { return [r.start.line, r.end.line]; }).reduce(function (prev, curr) { return prev.concat(curr); }, [])));
-        return affectedLines
-            .map(function (line) { return editor.getLinesDecorations(line, line); })
-            .reduce(function (prev, curr) { return prev.concat(curr); }, [])
-            .map(function (decoration) { return decoration.id; })
-            .filter(function (id) { return ids.has(id); });
-    };
-    MonacoSemanticHighlightingService.prototype.deleteDecorations = function (uri, editor) {
-        var ids = this.decorations.get(uri);
-        if (ids) {
-            var oldDecorations = Array.from(ids);
-            editor.deltaDecorations({
-                newDecorations: [],
-                oldDecorations: oldDecorations
-            });
-            this.decorations.delete(uri);
-        }
-        var disposable = this.toDisposeOnEditorClose.get(uri);
-        if (disposable) {
-            disposable.dispose();
-        }
-        this.toDisposeOnEditorClose.delete(uri);
-    };
-    MonacoSemanticHighlightingService.prototype.toDecoration = function (languageId, range) {
-        var start = range.start, end = range.end;
-        var options = this.toOptions(languageId, range.scope);
-        return {
-            range: semantic_highlighting_service_1.Range.create(start, end),
-            options: options
-        };
-    };
-    MonacoSemanticHighlightingService.prototype.toOptions = function (languageId, scope) {
-        if (scope !== undefined) {
-            var decorationTypes = this.decorationTypes.get(languageId);
-            if (decorationTypes) {
-                var decoration = decorationTypes.get(scope);
-                if (decoration) {
-                    return {
-                        inlineClassName: decoration.options.inlineClassName || undefined
-                    };
-                }
-            }
-        }
-        return {};
-    };
-    MonacoSemanticHighlightingService.prototype.themeService = function () {
-        return monaco.services.StaticServices.standaloneThemeService.get();
-    };
-    MonacoSemanticHighlightingService.prototype.tokenTheme = function () {
-        return this.themeService().getTheme().tokenTheme;
-    };
-    __decorate([
-        inversify_1.inject(logger_1.ILogger),
-        __metadata("design:type", Object)
-    ], MonacoSemanticHighlightingService.prototype, "logger", void 0);
-    __decorate([
-        inversify_1.inject(editor_manager_1.EditorManager),
-        __metadata("design:type", editor_manager_1.EditorManager)
-    ], MonacoSemanticHighlightingService.prototype, "editorManager", void 0);
-    __decorate([
-        inversify_1.inject(monaco_editor_service_1.MonacoEditorService),
-        __metadata("design:type", monaco_editor_service_1.MonacoEditorService)
-    ], MonacoSemanticHighlightingService.prototype, "monacoEditorService", void 0);
-    MonacoSemanticHighlightingService = __decorate([
-        inversify_1.injectable()
-    ], MonacoSemanticHighlightingService);
-    return MonacoSemanticHighlightingService;
-}(semantic_highlighting_service_1.SemanticHighlightingService));
-exports.MonacoSemanticHighlightingService = MonacoSemanticHighlightingService;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-status-bar-contribution.js":
-/*!***********************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-status-bar-contribution.js ***!
-  \***********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/********************************************************************************
- * Copyright (C) 2018 Ericsson
- *
- * This program and the accompanying materials are made available under the
- * terms of the Eclipse Public License v. 2.0 which is available at
- * http://www.eclipse.org/legal/epl-2.0.
- *
- * This Source Code may also be made available under the following Secondary
- * Licenses when the conditions for such availability set forth in the Eclipse
- * Public License v. 2.0 are satisfied: GNU General Public License, version 2
- * with the GNU Classpath Exception which is available at
- * https://www.gnu.org/software/classpath/license.html.
- *
- * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
- ********************************************************************************/
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var core_1 = __webpack_require__(/*! @theia/core */ "../node_modules/@theia/core/lib/common/index.js");
-var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../node_modules/@theia/core/lib/browser/index.js");
-var browser_2 = __webpack_require__(/*! @theia/editor/lib/browser */ "../node_modules/@theia/editor/lib/browser/index.js");
-var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
-var MonacoStatusBarContribution = /** @class */ (function () {
-    function MonacoStatusBarContribution(editorManager, statusBar) {
-        this.editorManager = editorManager;
-        this.statusBar = statusBar;
-        this.toDispose = new core_1.DisposableCollection();
-    }
-    MonacoStatusBarContribution.prototype.onStart = function (app) {
-        var _this = this;
-        this.updateStatusBar();
-        this.editorManager.onCurrentEditorChanged(function () { return _this.updateStatusBar(); });
-    };
-    MonacoStatusBarContribution.prototype.updateStatusBar = function () {
-        var _this = this;
-        var editor = this.editorManager.currentEditor;
-        var editorModel = this.getModel(editor);
-        if (editor && editorModel) {
-            this.setConfigTabSizeWidget();
-            this.setLineEndingWidget();
-            this.toDispose.dispose();
-            this.toDispose.push(editorModel.onDidChangeOptions(function () {
-                _this.setConfigTabSizeWidget();
-                _this.setLineEndingWidget();
-            }));
-            var previous_1 = editorModel.getEOL();
-            this.toDispose.push(editorModel.onDidChangeContent(function (e) {
-                if (previous_1 !== e.eol) {
-                    previous_1 = e.eol;
-                    _this.setLineEndingWidget();
-                }
-            }));
-        }
-        else {
-            this.removeConfigTabSizeWidget();
-            this.removeLineEndingWidget();
-        }
-    };
-    MonacoStatusBarContribution.prototype.setConfigTabSizeWidget = function () {
-        var editor = this.editorManager.currentEditor;
-        var editorModel = this.getModel(editor);
-        if (editor && editorModel) {
-            var modelOptions = editorModel.getOptions();
-            var tabSize = modelOptions.tabSize;
-            var useSpaceOrTab = modelOptions.insertSpaces ? 'Spaces' : 'Tab Size';
-            this.statusBar.setElement('editor-status-tabbing-config', {
-                text: useSpaceOrTab + ": " + tabSize,
-                alignment: browser_1.StatusBarAlignment.RIGHT,
-                priority: 10,
-                command: browser_2.EditorCommands.CONFIG_INDENTATION.id,
-                tooltip: 'Select Indentation'
-            });
-        }
-    };
-    MonacoStatusBarContribution.prototype.removeConfigTabSizeWidget = function () {
-        this.statusBar.removeElement('editor-status-tabbing-config');
-    };
-    MonacoStatusBarContribution.prototype.setLineEndingWidget = function () {
-        var editor = this.editorManager.currentEditor;
-        var editorModel = this.getModel(editor);
-        if (editor && editorModel) {
-            var eol = editorModel.getEOL();
-            var text = eol === '\n' ? 'LF' : 'CRLF';
-            this.statusBar.setElement('editor-status-eol', {
-                text: "" + text,
-                alignment: browser_1.StatusBarAlignment.RIGHT,
-                priority: 11,
-                command: browser_2.EditorCommands.CONFIG_EOL.id,
-                tooltip: 'Select End Of Line Sequence'
-            });
-        }
-    };
-    MonacoStatusBarContribution.prototype.removeLineEndingWidget = function () {
-        this.statusBar.removeElement('editor-status-eol');
-    };
-    MonacoStatusBarContribution.prototype.getModel = function (editor) {
-        var monacoEditor = monaco_editor_1.MonacoEditor.get(editor);
-        return monacoEditor && monacoEditor.getControl().getModel() || undefined;
-    };
-    MonacoStatusBarContribution = __decorate([
-        inversify_1.injectable(),
-        __param(0, inversify_1.inject(browser_2.EditorManager)),
-        __param(1, inversify_1.inject(browser_1.StatusBar)),
-        __metadata("design:paramtypes", [browser_2.EditorManager, Object])
-    ], MonacoStatusBarContribution);
-    return MonacoStatusBarContribution;
-}());
-exports.MonacoStatusBarContribution = MonacoStatusBarContribution;
-
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-theming-service.js":
-/*!***************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-theming-service.js ***!
-  \***************************************************************************/
+/***/ "../../../../node_modules/@theia/navigator/lib/browser/navigator-layout-migrations.js":
+/*!*********************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/lib/browser/navigator-layout-migrations.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6195,266 +1634,63 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-/* eslint-disable @typescript-eslint/no-explicit-any */
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var jsoncparser = __webpack_require__(/*! jsonc-parser */ "../node_modules/jsonc-parser/lib/esm/main.js");
-var plistparser = __webpack_require__(/*! fast-plist */ "../node_modules/fast-plist/release/src/main.js");
-var theming_1 = __webpack_require__(/*! @theia/core/lib/browser/theming */ "../node_modules/@theia/core/lib/browser/theming.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var disposable_1 = __webpack_require__(/*! @theia/core/lib/common/disposable */ "../node_modules/@theia/core/lib/common/disposable.js");
-var filesystem_1 = __webpack_require__(/*! @theia/filesystem/lib/common/filesystem */ "../node_modules/@theia/filesystem/lib/common/filesystem.js");
-var monaco_theme_registry_1 = __webpack_require__(/*! ./textmate/monaco-theme-registry */ "../node_modules/@theia/monaco/lib/browser/textmate/monaco-theme-registry.js");
-var monaco_indexed_db_1 = __webpack_require__(/*! ./monaco-indexed-db */ "../node_modules/@theia/monaco/lib/browser/monaco-indexed-db.js");
-var MonacoThemingService = /** @class */ (function () {
-    function MonacoThemingService() {
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var navigator_widget_1 = __webpack_require__(/*! ./navigator-widget */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-widget.js");
+var NavigatorLayoutVersion3Migration = /** @class */ (function () {
+    function NavigatorLayoutVersion3Migration() {
+        this.layoutVersion = 3.0;
     }
-    MonacoThemingService_1 = MonacoThemingService;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    MonacoThemingService.prototype.register = function (theme, pending) {
-        if (pending === void 0) { pending = {}; }
-        var toDispose = new disposable_1.DisposableCollection(disposable_1.Disposable.create(function () { }));
-        this.doRegister(theme, pending, toDispose);
-        return toDispose;
-    };
-    MonacoThemingService.prototype.doRegister = function (theme, pending, toDispose) {
-        return __awaiter(this, void 0, void 0, function () {
-            var includes, json, label, id, description, uiTheme, e_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        includes = {};
-                        return [4 /*yield*/, this.loadTheme(theme.uri, includes, pending, toDispose)];
-                    case 1:
-                        json = _a.sent();
-                        if (toDispose.disposed) {
-                            return [2 /*return*/];
+    NavigatorLayoutVersion3Migration.prototype.onWillInflateWidget = function (desc, _a) {
+        var parent = _a.parent;
+        if (desc.constructionOptions.factoryId === navigator_widget_1.FILE_NAVIGATOR_ID && !parent) {
+            return {
+                constructionOptions: {
+                    factoryId: navigator_widget_1.EXPLORER_VIEW_CONTAINER_ID
+                },
+                innerWidgetState: {
+                    parts: [
+                        {
+                            widget: {
+                                constructionOptions: {
+                                    factoryId: navigator_widget_1.FILE_NAVIGATOR_ID
+                                },
+                                innerWidgetState: desc.innerWidgetState
+                            },
+                            partId: {
+                                factoryId: navigator_widget_1.FILE_NAVIGATOR_ID
+                            },
+                            collapsed: false,
+                            hidden: false
                         }
-                        label = theme.label || new uri_1.default(theme.uri).path.base;
-                        id = theme.id, description = theme.description, uiTheme = theme.uiTheme;
-                        toDispose.push(MonacoThemingService_1.register({ id: id, label: label, description: description, uiTheme: uiTheme, json: json, includes: includes }));
-                        return [3 /*break*/, 3];
-                    case 2:
-                        e_1 = _a.sent();
-                        console.error('Failed to load theme from ' + theme.uri, e_1);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
+                    ],
+                    title: navigator_widget_1.EXPLORER_VIEW_CONTAINER_TITLE_OPTIONS
                 }
-            });
-        });
-    };
-    MonacoThemingService.prototype.loadTheme = function (uri, includes, pending, toDispose) {
-        return __awaiter(this, void 0, void 0, function () {
-            var content, themeUri, value, json, value, _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0: return [4 /*yield*/, this.fileSystem.resolveContent(uri)];
-                    case 1:
-                        content = (_c.sent()).content;
-                        if (toDispose.disposed) {
-                            return [2 /*return*/];
-                        }
-                        themeUri = new uri_1.default(uri);
-                        if (themeUri.path.ext !== '.json') {
-                            value = plistparser.parse(content);
-                            if (value && 'settings' in value && Array.isArray(value.settings)) {
-                                return [2 /*return*/, { tokenColors: value.settings }];
-                            }
-                            throw new Error("Problem parsing tmTheme file: " + uri + ". 'settings' is not array.");
-                        }
-                        json = jsoncparser.parse(content, undefined, { disallowComments: false });
-                        if (!('tokenColors' in json && typeof json.tokenColors === 'string')) return [3 /*break*/, 3];
-                        return [4 /*yield*/, this.doLoadTheme(themeUri, json.tokenColors, includes, pending, toDispose)];
-                    case 2:
-                        value = _c.sent();
-                        if (toDispose.disposed) {
-                            return [2 /*return*/];
-                        }
-                        json.tokenColors = value.tokenColors;
-                        _c.label = 3;
-                    case 3:
-                        if (!json.include) return [3 /*break*/, 5];
-                        _a = includes;
-                        _b = json.include;
-                        return [4 /*yield*/, this.doLoadTheme(themeUri, json.include, includes, pending, toDispose)];
-                    case 4:
-                        _a[_b] = _c.sent();
-                        if (toDispose.disposed) {
-                            return [2 /*return*/];
-                        }
-                        _c.label = 5;
-                    case 5: return [2 /*return*/, json];
-                }
-            });
-        });
-    };
-    /* eslint-disable @typescript-eslint/no-explicit-any */
-    MonacoThemingService.prototype.doLoadTheme = function (themeUri, referencedPath, includes, pending, toDispose) {
-        var referencedUri = themeUri.parent.resolve(referencedPath).toString();
-        if (!pending[referencedUri]) {
-            pending[referencedUri] = this.loadTheme(referencedUri, includes, pending, toDispose);
+            };
         }
-        return pending[referencedUri];
+        return undefined;
     };
-    /* eslint-enable @typescript-eslint/no-explicit-any */
-    MonacoThemingService.init = function () {
-        var _this = this;
-        this.updateBodyUiTheme();
-        theming_1.ThemeService.get().onThemeChange(function () { return _this.updateBodyUiTheme(); });
-        this.restore();
-    };
-    MonacoThemingService.register = function (theme) {
-        var uiTheme = theme.uiTheme || 'vs-dark';
-        var label = theme.label, description = theme.description, json = theme.json, includes = theme.includes;
-        var id = theme.id || label;
-        var cssSelector = MonacoThemingService_1.toCssSelector(id);
-        var data = monaco_theme_registry_1.MonacoThemeRegistry.SINGLETON.register(json, includes, cssSelector, uiTheme);
-        return MonacoThemingService_1.doRegister({ id: id, label: label, description: description, uiTheme: uiTheme, data: data });
-    };
-    MonacoThemingService.updateBodyUiTheme = function () {
-        this.toUpdateUiTheme.dispose();
-        var type = theming_1.ThemeService.get().getCurrentTheme().type;
-        var uiTheme = type === 'hc' ? 'hc-black' : type === 'light' ? 'vs' : 'vs-dark';
-        document.body.classList.add(uiTheme);
-        this.toUpdateUiTheme.push(disposable_1.Disposable.create(function () { return document.body.classList.remove(uiTheme); }));
-    };
-    MonacoThemingService.doRegister = function (state) {
-        var id = state.id, label = state.label, description = state.description, uiTheme = state.uiTheme, data = state.data;
-        var type = uiTheme === 'vs' ? 'light' : uiTheme === 'vs-dark' ? 'dark' : 'hc';
-        var builtInTheme = uiTheme === 'vs' ? theming_1.BuiltinThemeProvider.lightCss : theming_1.BuiltinThemeProvider.darkCss;
-        return new disposable_1.DisposableCollection(theming_1.ThemeService.get().register({
-            type: type,
-            id: id,
-            label: label,
-            description: description,
-            editorTheme: data.name,
-            activate: function () {
-                builtInTheme.use();
-            },
-            deactivate: function () {
-                builtInTheme.unuse();
-            }
-        }), monaco_indexed_db_1.putTheme(state));
-    };
-    MonacoThemingService.restore = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var themes, themes_1, themes_1_1, state, e_2;
-            var e_3, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _b.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, monaco_indexed_db_1.getThemes()];
-                    case 1:
-                        themes = _b.sent();
-                        try {
-                            for (themes_1 = __values(themes), themes_1_1 = themes_1.next(); !themes_1_1.done; themes_1_1 = themes_1.next()) {
-                                state = themes_1_1.value;
-                                monaco_theme_registry_1.MonacoThemeRegistry.SINGLETON.setTheme(state.data.name, state.data);
-                                MonacoThemingService_1.doRegister(state);
-                            }
-                        }
-                        catch (e_3_1) { e_3 = { error: e_3_1 }; }
-                        finally {
-                            try {
-                                if (themes_1_1 && !themes_1_1.done && (_a = themes_1.return)) _a.call(themes_1);
-                            }
-                            finally { if (e_3) throw e_3.error; }
-                        }
-                        return [3 /*break*/, 3];
-                    case 2:
-                        e_2 = _b.sent();
-                        console.error('Failed to restore monaco themes', e_2);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    /* remove all characters that are not allowed in css */
-    MonacoThemingService.toCssSelector = function (str) {
-        str = str.replace(/[^\-a-zA-Z0-9]/g, '-');
-        if (str.charAt(0).match(/[0-9\-]/)) {
-            str = '-' + str;
-        }
-        return str;
-    };
-    var MonacoThemingService_1;
-    MonacoThemingService.toUpdateUiTheme = new disposable_1.DisposableCollection();
-    __decorate([
-        inversify_1.inject(filesystem_1.FileSystem),
-        __metadata("design:type", Object)
-    ], MonacoThemingService.prototype, "fileSystem", void 0);
-    MonacoThemingService = MonacoThemingService_1 = __decorate([
+    NavigatorLayoutVersion3Migration = __decorate([
         inversify_1.injectable()
-    ], MonacoThemingService);
-    return MonacoThemingService;
+    ], NavigatorLayoutVersion3Migration);
+    return NavigatorLayoutVersion3Migration;
 }());
-exports.MonacoThemingService = MonacoThemingService;
+exports.NavigatorLayoutVersion3Migration = NavigatorLayoutVersion3Migration;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/monaco/lib/browser/monaco-workspace.js":
-/*!*********************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/browser/monaco-workspace.js ***!
-  \*********************************************************************/
+/***/ "../../../../node_modules/@theia/navigator/lib/browser/navigator-model.js":
+/*!*********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/lib/browser/navigator-model.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 /********************************************************************************
- * Copyright (C) 2018 TypeFox and others.
+ * Copyright (C) 2017 TypeFox and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -6468,17 +1704,19 @@ exports.MonacoThemingService = MonacoThemingService;
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
     };
-    return __assign.apply(this, arguments);
-};
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6554,685 +1792,358 @@ var __spread = (this && this.__spread) || function () {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-var monaco_languageclient_1 = __webpack_require__(/*! monaco-languageclient */ "../node_modules/monaco-languageclient/lib/index.js");
-var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../node_modules/@theia/core/lib/common/uri.js");
-var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../node_modules/@theia/core/lib/common/index.js");
-var common_2 = __webpack_require__(/*! @theia/filesystem/lib/common */ "../node_modules/@theia/filesystem/lib/common/index.js");
-var browser_1 = __webpack_require__(/*! @theia/filesystem/lib/browser */ "../node_modules/@theia/filesystem/lib/browser/index.js");
-var browser_2 = __webpack_require__(/*! @theia/workspace/lib/browser */ "../node_modules/@theia/workspace/lib/browser/index.js");
-var browser_3 = __webpack_require__(/*! @theia/editor/lib/browser */ "../node_modules/@theia/editor/lib/browser/index.js");
-var lang = __webpack_require__(/*! @theia/languages/lib/browser */ "../node_modules/@theia/languages/lib/browser/index.js");
-var browser_4 = __webpack_require__(/*! @theia/languages/lib/browser */ "../node_modules/@theia/languages/lib/browser/index.js");
-var monaco_text_model_service_1 = __webpack_require__(/*! ./monaco-text-model-service */ "../node_modules/@theia/monaco/lib/browser/monaco-text-model-service.js");
-var monaco_editor_1 = __webpack_require__(/*! ./monaco-editor */ "../node_modules/@theia/monaco/lib/browser/monaco-editor.js");
-var monaco_configurations_1 = __webpack_require__(/*! ./monaco-configurations */ "../node_modules/@theia/monaco/lib/browser/monaco-configurations.js");
-var browser_5 = __webpack_require__(/*! @theia/markers/lib/browser */ "../node_modules/@theia/markers/lib/browser/index.js");
-var CreateResourceEdit;
-(function (CreateResourceEdit) {
-    function is(arg) {
-        return 'newUri' in arg
-            && typeof arg.newUri === 'string' // eslint-disable-line @typescript-eslint/no-explicit-any
-            && (!('oldUri' in arg) || typeof arg.oldUri === 'undefined'); // eslint-disable-line @typescript-eslint/no-explicit-any
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var browser_1 = __webpack_require__(/*! @theia/filesystem/lib/browser */ "../../../../node_modules/@theia/filesystem/lib/browser/index.js");
+var browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var navigator_tree_1 = __webpack_require__(/*! ./navigator-tree */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-tree.js");
+var browser_3 = __webpack_require__(/*! @theia/workspace/lib/browser */ "../../../../node_modules/@theia/workspace/lib/browser/index.js");
+var frontend_application_state_1 = __webpack_require__(/*! @theia/core/lib/browser/frontend-application-state */ "../../../../node_modules/@theia/core/lib/browser/frontend-application-state.js");
+var FileNavigatorModel = /** @class */ (function (_super) {
+    __extends(FileNavigatorModel, _super);
+    function FileNavigatorModel() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    CreateResourceEdit.is = is;
-})(CreateResourceEdit = exports.CreateResourceEdit || (exports.CreateResourceEdit = {}));
-var DeleteResourceEdit;
-(function (DeleteResourceEdit) {
-    function is(arg) {
-        return 'oldUri' in arg
-            && typeof arg.oldUri === 'string' // eslint-disable-line @typescript-eslint/no-explicit-any
-            && (!('newUri' in arg) || typeof arg.newUri === 'undefined'); // eslint-disable-line @typescript-eslint/no-explicit-any
-    }
-    DeleteResourceEdit.is = is;
-})(DeleteResourceEdit = exports.DeleteResourceEdit || (exports.DeleteResourceEdit = {}));
-var RenameResourceEdit;
-(function (RenameResourceEdit) {
-    function is(arg) {
-        return 'oldUri' in arg
-            && typeof arg.oldUri === 'string' // eslint-disable-line @typescript-eslint/no-explicit-any
-            && 'newUri' in arg
-            && typeof arg.newUri === 'string'; // eslint-disable-line @typescript-eslint/no-explicit-any
-    }
-    RenameResourceEdit.is = is;
-})(RenameResourceEdit = exports.RenameResourceEdit || (exports.RenameResourceEdit = {}));
-var TextEdits;
-(function (TextEdits) {
-    function is(arg) {
-        return 'uri' in arg
-            && typeof arg.uri === 'string'; // eslint-disable-line @typescript-eslint/no-explicit-any
-    }
-    TextEdits.is = is;
-    function isVersioned(arg) {
-        return is(arg) && arg.version !== undefined;
-    }
-    TextEdits.isVersioned = isVersioned;
-})(TextEdits = exports.TextEdits || (exports.TextEdits = {}));
-var EditsByEditor;
-(function (EditsByEditor) {
-    function is(arg) {
-        return TextEdits.is(arg)
-            && 'editor' in arg
-            && arg.editor instanceof monaco_editor_1.MonacoEditor; // eslint-disable-line @typescript-eslint/no-explicit-any
-    }
-    EditsByEditor.is = is;
-})(EditsByEditor = exports.EditsByEditor || (exports.EditsByEditor = {}));
-var MonacoWorkspace = /** @class */ (function () {
-    function MonacoWorkspace() {
-        var _this = this;
-        this.capabilities = {
-            applyEdit: true,
-            workspaceEdit: {
-                documentChanges: true
-            }
-        };
-        this.ready = new Promise(function (resolve) {
-            _this.resolveReady = resolve;
+    FileNavigatorModel.prototype.init = function () {
+        _super.prototype.init.call(this);
+        this.initializeRoot();
+    };
+    FileNavigatorModel.prototype.initializeRoot = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var root, child;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Promise.all([
+                            this.applicationState.reachedState('initialized_layout'),
+                            this.workspaceService.roots
+                        ])];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, this.updateRoot()];
+                    case 2:
+                        _a.sent();
+                        if (this.toDispose.disposed) {
+                            return [2 /*return*/];
+                        }
+                        this.toDispose.push(this.workspaceService.onWorkspaceChanged(function () { return _this.updateRoot(); }));
+                        this.toDispose.push(this.workspaceService.onWorkspaceLocationChanged(function () { return _this.updateRoot(); }));
+                        if (this.selectedNodes.length) {
+                            return [2 /*return*/];
+                        }
+                        root = this.root;
+                        if (browser_2.CompositeTreeNode.is(root) && root.children.length === 1) {
+                            child = root.children[0];
+                            if (browser_2.SelectableTreeNode.is(child) && !child.selected && browser_2.ExpandableTreeNode.is(child)) {
+                                this.selectNode(child);
+                                this.expandNode(child);
+                            }
+                        }
+                        return [2 /*return*/];
+                }
+            });
         });
-        this.onDidOpenTextDocumentEmitter = new browser_4.Emitter();
-        this.onDidOpenTextDocument = this.onDidOpenTextDocumentEmitter.event;
-        this.onDidCloseTextDocumentEmitter = new browser_4.Emitter();
-        this.onDidCloseTextDocument = this.onDidCloseTextDocumentEmitter.event;
-        this.onDidChangeTextDocumentEmitter = new browser_4.Emitter();
-        this.onDidChangeTextDocument = this.onDidChangeTextDocumentEmitter.event;
-        this.onWillSaveTextDocumentEmitter = new browser_4.Emitter();
-        this.onWillSaveTextDocument = this.onWillSaveTextDocumentEmitter.event;
-        this.onDidSaveTextDocumentEmitter = new browser_4.Emitter();
-        this.onDidSaveTextDocument = this.onDidSaveTextDocumentEmitter.event;
-        this._rootUri = null;
-    }
-    MonacoWorkspace.prototype.init = function () {
-        var e_1, _a;
-        var _this = this;
-        this.workspaceService.roots.then(function (roots) {
-            var rootStat = roots[0];
-            if (rootStat) {
-                _this._rootUri = rootStat.uri;
-                _this.resolveReady();
-            }
-        });
-        try {
-            for (var _b = __values(this.textModelService.models), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var model = _c.value;
-                this.fireDidOpen(model);
-            }
+    };
+    FileNavigatorModel.prototype.previewNode = function (node) {
+        if (browser_1.FileNode.is(node)) {
+            browser_2.open(this.openerService, node.uri, { mode: 'reveal', preview: true });
         }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_1) throw e_1.error; }
+    };
+    FileNavigatorModel.prototype.doOpenNode = function (node) {
+        if (browser_1.FileNode.is(node)) {
+            browser_2.open(this.openerService, node.uri);
         }
-        this.textModelService.onDidCreate(function (model) { return _this.fireDidOpen(model); });
+        else {
+            _super.prototype.doOpenNode.call(this, node);
+        }
     };
-    Object.defineProperty(MonacoWorkspace.prototype, "rootUri", {
-        get: function () {
-            return this._rootUri;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MonacoWorkspace.prototype, "rootPath", {
-        get: function () {
-            return this._rootUri && new uri_1.default(this._rootUri).path.toString();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MonacoWorkspace.prototype, "textDocuments", {
-        get: function () {
-            return this.textModelService.models;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    MonacoWorkspace.prototype.getTextDocument = function (uri) {
-        return this.textModelService.get(uri);
-    };
-    MonacoWorkspace.prototype.fireDidOpen = function (model) {
-        var _this = this;
-        this.doFireDidOpen(model);
-        model.textEditorModel.onDidChangeLanguage(function (e) {
-            _this.problems.cleanAllMarkers(new uri_1.default(model.uri));
-            model.setLanguageId(e.oldLanguage);
-            try {
-                _this.fireDidClose(model);
+    FileNavigatorModel.prototype.getNodesByUri = function (uri) {
+        var workspace, _a, _b, root, id, node, e_1_1;
+        var e_1, _c;
+        return __generator(this, function (_d) {
+            switch (_d.label) {
+                case 0:
+                    workspace = this.root;
+                    if (!navigator_tree_1.WorkspaceNode.is(workspace)) return [3 /*break*/, 8];
+                    _d.label = 1;
+                case 1:
+                    _d.trys.push([1, 6, 7, 8]);
+                    _a = __values(workspace.children), _b = _a.next();
+                    _d.label = 2;
+                case 2:
+                    if (!!_b.done) return [3 /*break*/, 5];
+                    root = _b.value;
+                    id = this.tree.createId(root, uri);
+                    node = this.getNode(id);
+                    if (!node) return [3 /*break*/, 4];
+                    return [4 /*yield*/, node];
+                case 3:
+                    _d.sent();
+                    _d.label = 4;
+                case 4:
+                    _b = _a.next();
+                    return [3 /*break*/, 2];
+                case 5: return [3 /*break*/, 8];
+                case 6:
+                    e_1_1 = _d.sent();
+                    e_1 = { error: e_1_1 };
+                    return [3 /*break*/, 8];
+                case 7:
+                    try {
+                        if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                    return [7 /*endfinally*/];
+                case 8: return [2 /*return*/];
             }
-            finally {
-                model.setLanguageId(undefined);
-            }
-            _this.doFireDidOpen(model);
-        });
-        model.onDidChangeContent(function (event) { return _this.fireDidChangeContent(event); });
-        model.onDidSaveModel(function () { return _this.fireDidSave(model); });
-        model.onWillSaveModel(function (event) { return _this.fireWillSave(event); });
-        model.onDirtyChanged(function () { return _this.openEditorIfDirty(model); });
-        model.onDispose(function () { return _this.fireDidClose(model); });
-    };
-    MonacoWorkspace.prototype.doFireDidOpen = function (model) {
-        this.onDidOpenTextDocumentEmitter.fire(model);
-    };
-    MonacoWorkspace.prototype.fireDidClose = function (model) {
-        this.onDidCloseTextDocumentEmitter.fire(model);
-    };
-    MonacoWorkspace.prototype.fireDidChangeContent = function (event) {
-        var model = event.model, contentChanges = event.contentChanges;
-        this.onDidChangeTextDocumentEmitter.fire({
-            textDocument: model,
-            contentChanges: contentChanges
         });
     };
-    MonacoWorkspace.prototype.fireWillSave = function (event) {
-        var _this = this;
-        var reason = event.reason;
-        var timeout = new Promise(function (resolve) {
-            return setTimeout(function () { return resolve([]); }, 1000);
+    FileNavigatorModel.prototype.updateRoot = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = this;
+                        return [4 /*yield*/, this.createRoot()];
+                    case 1:
+                        _a.root = _b.sent();
+                        return [2 /*return*/];
+                }
+            });
         });
-        var resolveEdits = new Promise(function (resolve) { return __awaiter(_this, void 0, void 0, function () {
-            var thenables, allEdits, _a, _b, listenerEdits, e_2_1;
+    };
+    FileNavigatorModel.prototype.createRoot = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var stat, isMulti, workspaceNode, roots, roots_1, roots_1_1, root, _a, _b, e_2_1;
             var e_2, _c;
             return __generator(this, function (_d) {
                 switch (_d.label) {
                     case 0:
-                        thenables = [];
-                        allEdits = [];
-                        this.onWillSaveTextDocumentEmitter.fire({
-                            textDocument: event.model,
-                            reason: reason,
-                            waitUntil: function (thenable) {
-                                thenables.push(thenable);
-                            }
-                        });
-                        _d.label = 1;
+                        if (!this.workspaceService.opened) return [3 /*break*/, 10];
+                        stat = this.workspaceService.workspace;
+                        isMulti = (stat) ? !stat.isDirectory : false;
+                        workspaceNode = isMulti
+                            ? this.createMultipleRootNode()
+                            : navigator_tree_1.WorkspaceNode.createRoot();
+                        return [4 /*yield*/, this.workspaceService.roots];
                     case 1:
-                        _d.trys.push([1, 6, 7, 8]);
-                        return [4 /*yield*/, Promise.all(thenables)];
+                        roots = _d.sent();
+                        _d.label = 2;
                     case 2:
-                        _a = __values.apply(void 0, [_d.sent()]), _b = _a.next();
+                        _d.trys.push([2, 7, 8, 9]);
+                        roots_1 = __values(roots), roots_1_1 = roots_1.next();
                         _d.label = 3;
                     case 3:
-                        if (!!_b.done) return [3 /*break*/, 5];
-                        listenerEdits = _b.value;
-                        allEdits.push.apply(allEdits, __spread(listenerEdits));
-                        _d.label = 4;
+                        if (!!roots_1_1.done) return [3 /*break*/, 6];
+                        root = roots_1_1.value;
+                        _b = (_a = workspaceNode.children).push;
+                        return [4 /*yield*/, this.tree.createWorkspaceRoot(root, workspaceNode)];
                     case 4:
-                        _b = _a.next();
+                        _b.apply(_a, [_d.sent()]);
+                        _d.label = 5;
+                    case 5:
+                        roots_1_1 = roots_1.next();
                         return [3 /*break*/, 3];
-                    case 5: return [3 /*break*/, 8];
-                    case 6:
+                    case 6: return [3 /*break*/, 9];
+                    case 7:
                         e_2_1 = _d.sent();
                         e_2 = { error: e_2_1 };
-                        return [3 /*break*/, 8];
-                    case 7:
+                        return [3 /*break*/, 9];
+                    case 8:
                         try {
-                            if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
+                            if (roots_1_1 && !roots_1_1.done && (_c = roots_1.return)) _c.call(roots_1);
                         }
                         finally { if (e_2) throw e_2.error; }
                         return [7 /*endfinally*/];
-                    case 8:
-                        resolve(allEdits);
+                    case 9: return [2 /*return*/, workspaceNode];
+                    case 10: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /**
+     * Create multiple root node used to display
+     * the multiple root workspace name.
+     *
+     * @returns `WorkspaceNode`
+     */
+    FileNavigatorModel.prototype.createMultipleRootNode = function () {
+        var workspace = this.workspaceService.workspace;
+        var name = workspace
+            ? new uri_1.default(workspace.uri).path.name
+            : 'untitled';
+        name += ' (Workspace)';
+        return navigator_tree_1.WorkspaceNode.createRoot(name);
+    };
+    /**
+     * Move the given source file or directory to the given target directory.
+     */
+    FileNavigatorModel.prototype.move = function (source, target) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (source.parent && navigator_tree_1.WorkspaceRootNode.is(source)) {
+                            // do not support moving a root folder
+                            return [2 /*return*/];
+                        }
+                        return [4 /*yield*/, _super.prototype.move.call(this, source, target)];
+                    case 1:
+                        _a.sent();
                         return [2 /*return*/];
                 }
             });
-        }); });
-        event.waitUntil(Promise.race([resolveEdits, timeout]).then(function (edits) {
-            return _this.p2m.asTextEdits(edits).map(function (edit) { return edit; });
-        }));
+        });
     };
-    MonacoWorkspace.prototype.fireDidSave = function (model) {
-        this.onDidSaveTextDocumentEmitter.fire(model);
-    };
-    MonacoWorkspace.prototype.openEditorIfDirty = function (model) {
-        var _this = this;
-        if (model.dirty && monaco_editor_1.MonacoEditor.findByDocument(this.editorManager, model).length === 0) {
-            // create a new reference to make sure the model is not disposed before it is
-            // acquired by the editor, thus losing the changes that made it dirty.
-            this.textModelService.createModelReference(model.textEditorModel.uri).then(function (ref) {
-                _this.editorManager.open(new uri_1.default(model.uri), {
-                    mode: 'open',
-                }).then(function (editor) { return ref.dispose(); });
-            });
-        }
-    };
-    MonacoWorkspace.prototype.createFileSystemWatcher = function (globPattern, ignoreCreateEvents, ignoreChangeEvents, ignoreDeleteEvents) {
-        var disposables = new common_1.DisposableCollection();
-        var onDidCreateEmitter = new lang.Emitter();
-        disposables.push(onDidCreateEmitter);
-        var onDidChangeEmitter = new lang.Emitter();
-        disposables.push(onDidChangeEmitter);
-        var onDidDeleteEmitter = new lang.Emitter();
-        disposables.push(onDidDeleteEmitter);
-        disposables.push(this.fileSystemWatcher.onFilesChanged(function (changes) {
-            var e_3, _a;
-            try {
-                for (var changes_1 = __values(changes), changes_1_1 = changes_1.next(); !changes_1_1.done; changes_1_1 = changes_1.next()) {
-                    var change = changes_1_1.value;
-                    var fileChangeType = change.type;
-                    if (ignoreCreateEvents === true && fileChangeType === browser_1.FileChangeType.ADDED) {
-                        continue;
-                    }
-                    if (ignoreChangeEvents === true && fileChangeType === browser_1.FileChangeType.UPDATED) {
-                        continue;
-                    }
-                    if (ignoreDeleteEvents === true && fileChangeType === browser_1.FileChangeType.DELETED) {
-                        continue;
-                    }
-                    var uri = change.uri.toString();
-                    var codeUri = change.uri['codeUri'];
-                    if (monaco_languageclient_1.testGlob(globPattern, uri)) {
-                        if (fileChangeType === browser_1.FileChangeType.ADDED) {
-                            onDidCreateEmitter.fire(codeUri);
-                        }
-                        else if (fileChangeType === browser_1.FileChangeType.UPDATED) {
-                            onDidChangeEmitter.fire(codeUri);
-                        }
-                        else if (fileChangeType === browser_1.FileChangeType.DELETED) {
-                            onDidDeleteEmitter.fire(codeUri);
-                        }
-                        else {
-                            throw new Error("Unexpected file change type: " + fileChangeType + ".");
-                        }
-                    }
-                }
-            }
-            catch (e_3_1) { e_3 = { error: e_3_1 }; }
-            finally {
-                try {
-                    if (changes_1_1 && !changes_1_1.done && (_a = changes_1.return)) _a.call(changes_1);
-                }
-                finally { if (e_3) throw e_3.error; }
-            }
-        }));
-        return {
-            onDidCreate: onDidCreateEmitter.event,
-            onDidChange: onDidChangeEmitter.event,
-            onDidDelete: onDidDeleteEmitter.event,
-            dispose: function () { return disposables.dispose(); }
-        };
-    };
-    MonacoWorkspace.prototype.applyEdit = function (changes, options) {
+    /**
+     * Reveals node in the navigator by given file uri.
+     *
+     * @param uri uri to file which should be revealed in the navigator
+     * @returns file tree node if the file with given uri was revealed, undefined otherwise
+     */
+    FileNavigatorModel.prototype.revealFile = function (uri) {
         return __awaiter(this, void 0, void 0, function () {
-            var workspaceEdit;
+            var node;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        workspaceEdit = this.p2m.asWorkspaceEdit(changes);
-                        return [4 /*yield*/, this.applyBulkEdit(workspaceEdit, options)];
+                        if (!uri.path.isAbsolute) {
+                            return [2 /*return*/, undefined];
+                        }
+                        node = this.getNodeClosestToRootByUri(uri);
+                        if (!navigator_tree_1.WorkspaceRootNode.is(node)) return [3 /*break*/, 4];
+                        if (!browser_2.ExpandableTreeNode.is(node)) return [3 /*break*/, 3];
+                        if (!!node.expanded) return [3 /*break*/, 2];
+                        return [4 /*yield*/, this.expandNode(node)];
                     case 1:
-                        _a.sent();
-                        return [2 /*return*/, true];
-                }
-            });
-        });
-    };
-    MonacoWorkspace.prototype.applyBulkEdit = function (workspaceEdit, options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var unresolvedEdits, edits, totalEdits, totalFiles, _loop_1, this_1, edits_1, edits_1_1, edit, e_4_1, ariaSummary, e_5, ariaSummary;
-            var e_4, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _b.trys.push([0, 10, , 11]);
-                        unresolvedEdits = this.groupEdits(workspaceEdit);
-                        return [4 /*yield*/, this.openEditors(unresolvedEdits, options)];
-                    case 1:
-                        edits = _b.sent();
-                        this.checkVersions(edits);
-                        totalEdits = 0;
-                        totalFiles = 0;
-                        _loop_1 = function (edit) {
-                            var editor, model, currentSelections_1, editOperations;
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        if (!TextEdits.is(edit)) return [3 /*break*/, 2];
-                                        return [4 /*yield*/, this_1.toTextEditWithEditor(edit)];
-                                    case 1:
-                                        editor = (_a.sent()).editor;
-                                        model = editor.document.textEditorModel;
-                                        currentSelections_1 = editor.getControl().getSelections() || [];
-                                        editOperations = edit.textEdits.map(function (e) { return ({
-                                            identifier: undefined,
-                                            forceMoveMarkers: false,
-                                            range: new monaco.Range(e.range.startLineNumber, e.range.startColumn, e.range.endLineNumber, e.range.endColumn),
-                                            text: e.text
-                                        }); });
-                                        // start a fresh operation
-                                        model.pushStackElement();
-                                        model.pushEditOperations(currentSelections_1, editOperations, function (_) { return currentSelections_1; });
-                                        // push again to make this change an undoable operation
-                                        model.pushStackElement();
-                                        totalFiles += 1;
-                                        totalEdits += editOperations.length;
-                                        return [3 /*break*/, 5];
-                                    case 2:
-                                        if (!(CreateResourceEdit.is(edit) || DeleteResourceEdit.is(edit) || RenameResourceEdit.is(edit))) return [3 /*break*/, 4];
-                                        return [4 /*yield*/, this_1.performResourceEdit(edit)];
-                                    case 3:
-                                        _a.sent();
-                                        return [3 /*break*/, 5];
-                                    case 4: throw new Error("Unexpected edit type: " + JSON.stringify(edit));
-                                    case 5: return [2 /*return*/];
-                                }
-                            });
-                        };
-                        this_1 = this;
-                        _b.label = 2;
-                    case 2:
-                        _b.trys.push([2, 7, 8, 9]);
-                        edits_1 = __values(edits), edits_1_1 = edits_1.next();
-                        _b.label = 3;
-                    case 3:
-                        if (!!edits_1_1.done) return [3 /*break*/, 6];
-                        edit = edits_1_1.value;
-                        return [5 /*yield**/, _loop_1(edit)];
+                        node = _a.sent();
+                        _a.label = 2;
+                    case 2: return [2 /*return*/, node];
+                    case 3: 
+                    // shouldn't happen, root node is always directory, i.e. expandable
+                    return [2 /*return*/, undefined];
                     case 4:
-                        _b.sent();
-                        _b.label = 5;
+                        // fail stop condition
+                        if (uri.path.isRoot) {
+                            // file system root is reached but workspace root wasn't found, it means that
+                            // given uri is not in workspace root folder or points to not existing file.
+                            return [2 /*return*/, undefined];
+                        }
+                        return [4 /*yield*/, this.revealFile(uri.parent)];
                     case 5:
-                        edits_1_1 = edits_1.next();
-                        return [3 /*break*/, 3];
-                    case 6: return [3 /*break*/, 9];
-                    case 7:
-                        e_4_1 = _b.sent();
-                        e_4 = { error: e_4_1 };
-                        return [3 /*break*/, 9];
-                    case 8:
-                        try {
-                            if (edits_1_1 && !edits_1_1.done && (_a = edits_1.return)) _a.call(edits_1);
+                        if (!_a.sent()) return [3 /*break*/, 8];
+                        if (node === undefined) {
+                            // get node if it wasn't mounted into navigator tree before expansion
+                            node = this.getNodeClosestToRootByUri(uri);
                         }
-                        finally { if (e_4) throw e_4.error; }
-                        return [7 /*endfinally*/];
-                    case 9:
-                        ariaSummary = this.getAriaSummary(totalEdits, totalFiles);
-                        return [2 /*return*/, { ariaSummary: ariaSummary }];
-                    case 10:
-                        e_5 = _b.sent();
-                        ariaSummary = "Error applying workspace edits: " + e_5.toString();
-                        console.error(ariaSummary);
-                        return [2 /*return*/, { ariaSummary: ariaSummary }];
-                    case 11: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    MonacoWorkspace.prototype.openEditors = function (edits, options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var result, edits_2, edits_2_1, edit, _a, _b, e_6_1;
-            var e_6, _c;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
-                    case 0:
-                        result = [];
-                        _d.label = 1;
-                    case 1:
-                        _d.trys.push([1, 7, 8, 9]);
-                        edits_2 = __values(edits), edits_2_1 = edits_2.next();
-                        _d.label = 2;
-                    case 2:
-                        if (!!edits_2_1.done) return [3 /*break*/, 6];
-                        edit = edits_2_1.value;
-                        if (!(TextEdits.is(edit) && TextEdits.isVersioned(edit) && !EditsByEditor.is(edit))) return [3 /*break*/, 4];
-                        _b = (_a = result).push;
-                        return [4 /*yield*/, this.toTextEditWithEditor(edit, options)];
-                    case 3:
-                        _b.apply(_a, [_d.sent()]);
-                        return [3 /*break*/, 5];
-                    case 4:
-                        result.push(edit);
-                        _d.label = 5;
-                    case 5:
-                        edits_2_1 = edits_2.next();
-                        return [3 /*break*/, 2];
-                    case 6: return [3 /*break*/, 9];
-                    case 7:
-                        e_6_1 = _d.sent();
-                        e_6 = { error: e_6_1 };
-                        return [3 /*break*/, 9];
-                    case 8:
-                        try {
-                            if (edits_2_1 && !edits_2_1.done && (_c = edits_2.return)) _c.call(edits_2);
-                        }
-                        finally { if (e_6) throw e_6.error; }
-                        return [7 /*endfinally*/];
-                    case 9: return [2 /*return*/, result];
-                }
-            });
-        });
-    };
-    MonacoWorkspace.prototype.toTextEditWithEditor = function (textEdit, options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var editorWidget, editor, textEditWithEditor;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (EditsByEditor.is(textEdit)) {
-                            return [2 /*return*/, textEdit];
-                        }
-                        return [4 /*yield*/, this.editorManager.open(new uri_1.default(textEdit.uri), options)];
-                    case 1:
-                        editorWidget = _a.sent();
-                        editor = monaco_editor_1.MonacoEditor.get(editorWidget);
-                        if (!editor) {
-                            throw Error("Could not open editor. URI: " + textEdit.uri);
-                        }
-                        textEditWithEditor = __assign({}, textEdit, { editor: editor });
-                        return [2 /*return*/, textEditWithEditor];
-                }
-            });
-        });
-    };
-    MonacoWorkspace.prototype.checkVersions = function (edits) {
-        var e_7, _a;
-        try {
-            for (var _b = __values(edits.filter(TextEdits.is).filter(TextEdits.isVersioned)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var textEdit = _c.value;
-                if (!EditsByEditor.is(textEdit)) {
-                    throw Error("Could not open editor for URI: " + textEdit.uri + ".");
-                }
-                var model = textEdit.editor.document.textEditorModel;
-                if (textEdit.version !== undefined && model.getVersionId() !== textEdit.version) {
-                    throw Error("Version conflict in editor. URI: " + textEdit.uri);
-                }
-            }
-        }
-        catch (e_7_1) { e_7 = { error: e_7_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_7) throw e_7.error; }
-        }
-    };
-    MonacoWorkspace.prototype.getAriaSummary = function (totalEdits, totalFiles) {
-        if (totalEdits === 0) {
-            return 'Made no edits';
-        }
-        if (totalEdits > 1 && totalFiles > 1) {
-            return "Made " + totalEdits + " text edits in " + totalFiles + " files";
-        }
-        return "Made " + totalEdits + " text edits in one file";
-    };
-    MonacoWorkspace.prototype.groupEdits = function (workspaceEdit) {
-        var e_8, _a, _b;
-        var map = new Map();
-        var result = [];
-        try {
-            for (var _c = __values(workspaceEdit.edits), _d = _c.next(); !_d.done; _d = _c.next()) {
-                var edit = _d.value;
-                if (this.isResourceFileEdit(edit)) {
-                    var resourceTextEdit = edit;
-                    var uri = resourceTextEdit.resource.toString();
-                    var version = resourceTextEdit.modelVersionId;
-                    var editorEdit = map.get(uri);
-                    if (!editorEdit) {
-                        editorEdit = {
-                            uri: uri,
-                            version: version,
-                            textEdits: []
-                        };
-                        map.set(uri, editorEdit);
-                        result.push(editorEdit);
-                    }
-                    else {
-                        if (editorEdit.version !== version) {
-                            throw Error("Multiple versions for the same URI '" + uri + "' within the same workspace edit.");
-                        }
-                    }
-                    (_b = editorEdit.textEdits).push.apply(_b, __spread(resourceTextEdit.edits));
-                }
-                else {
-                    var options = edit.options;
-                    var oldUri = !!edit.oldUri ? edit.oldUri.toString() : undefined;
-                    var newUri = !!edit.newUri ? edit.newUri.toString() : undefined;
-                    result.push({
-                        oldUri: oldUri,
-                        newUri: newUri,
-                        options: options
-                    });
-                }
-            }
-        }
-        catch (e_8_1) { e_8 = { error: e_8_1 }; }
-        finally {
-            try {
-                if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
-            }
-            finally { if (e_8) throw e_8.error; }
-        }
-        return result;
-    };
-    MonacoWorkspace.prototype.performResourceEdit = function (edit) {
-        return __awaiter(this, void 0, void 0, function () {
-            var options, _a, _b, exists, stat;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        options = edit.options || {};
-                        if (!RenameResourceEdit.is(edit)) return [3 /*break*/, 4];
-                        _a = options.overwrite === undefined && options.ignoreIfExists;
-                        if (!_a) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.fileSystem.exists(edit.newUri)];
-                    case 1:
-                        _a = (_c.sent());
-                        _c.label = 2;
-                    case 2:
-                        // rename
-                        if (_a) {
-                            return [2 /*return*/]; // not overwriting, but ignoring, and the target file exists
-                        }
-                        return [4 /*yield*/, this.fileSystem.move(edit.oldUri, edit.newUri, { overwrite: options.overwrite })];
-                    case 3:
-                        _c.sent();
-                        return [3 /*break*/, 15];
-                    case 4:
-                        if (!DeleteResourceEdit.is(edit)) return [3 /*break*/, 9];
-                        _b = !options.ignoreIfNotExists;
-                        if (_b) return [3 /*break*/, 6];
-                        return [4 /*yield*/, this.fileSystem.exists(edit.oldUri)];
-                    case 5:
-                        _b = (_c.sent());
-                        _c.label = 6;
+                        if (!(browser_2.ExpandableTreeNode.is(node) && !node.expanded)) return [3 /*break*/, 7];
+                        return [4 /*yield*/, this.expandNode(node)];
                     case 6:
-                        if (!_b) return [3 /*break*/, 8];
-                        if (options.recursive === false) {
-                            console.warn("Ignored 'recursive': 'false' option. Deleting recursively.");
-                        }
-                        return [4 /*yield*/, this.fileSystem.delete(edit.oldUri)];
-                    case 7:
-                        _c.sent();
-                        _c.label = 8;
-                    case 8: return [3 /*break*/, 15];
-                    case 9:
-                        if (!CreateResourceEdit.is(edit)) return [3 /*break*/, 15];
-                        return [4 /*yield*/, this.fileSystem.exists(edit.newUri)];
-                    case 10:
-                        exists = _c.sent();
-                        // create file
-                        if (options.overwrite === undefined && options.ignoreIfExists && exists) {
-                            return [2 /*return*/]; // not overwriting, but ignoring, and the target file exists
-                        }
-                        if (!(exists && options.overwrite)) return [3 /*break*/, 13];
-                        return [4 /*yield*/, this.fileSystem.getFileStat(edit.newUri)];
-                    case 11:
-                        stat = _c.sent();
-                        if (!stat) {
-                            throw new Error("Cannot get file stat for the resource: " + edit.newUri + ".");
-                        }
-                        return [4 /*yield*/, this.fileSystem.setContent(stat, '')];
-                    case 12:
-                        _c.sent();
-                        return [3 /*break*/, 15];
-                    case 13: return [4 /*yield*/, this.fileSystem.createFile(edit.newUri)];
-                    case 14:
-                        _c.sent();
-                        _c.label = 15;
-                    case 15: return [2 /*return*/];
+                        node = _a.sent();
+                        _a.label = 7;
+                    case 7: return [2 /*return*/, node];
+                    case 8: return [2 /*return*/, undefined];
                 }
             });
         });
     };
-    MonacoWorkspace.prototype.isResourceFileEdit = function (edit) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        return 'resource' in edit && edit.resource instanceof monaco.Uri;
+    FileNavigatorModel.prototype.getNodeClosestToRootByUri = function (uri) {
+        var nodes = __spread(this.getNodesByUri(uri));
+        return nodes.length > 0
+            ? nodes.reduce(function (node1, node2) {
+                return node1.id.length >= node2.id.length ? node1 : node2;
+            }) : undefined;
     };
     __decorate([
-        inversify_1.inject(common_2.FileSystem),
+        inversify_1.inject(browser_2.OpenerService),
         __metadata("design:type", Object)
-    ], MonacoWorkspace.prototype, "fileSystem", void 0);
+    ], FileNavigatorModel.prototype, "openerService", void 0);
     __decorate([
-        inversify_1.inject(browser_2.WorkspaceService),
-        __metadata("design:type", browser_2.WorkspaceService)
-    ], MonacoWorkspace.prototype, "workspaceService", void 0);
+        inversify_1.inject(navigator_tree_1.FileNavigatorTree),
+        __metadata("design:type", navigator_tree_1.FileNavigatorTree)
+    ], FileNavigatorModel.prototype, "tree", void 0);
     __decorate([
-        inversify_1.inject(browser_1.FileSystemWatcher),
-        __metadata("design:type", browser_1.FileSystemWatcher)
-    ], MonacoWorkspace.prototype, "fileSystemWatcher", void 0);
+        inversify_1.inject(browser_3.WorkspaceService),
+        __metadata("design:type", browser_3.WorkspaceService)
+    ], FileNavigatorModel.prototype, "workspaceService", void 0);
     __decorate([
-        inversify_1.inject(monaco_text_model_service_1.MonacoTextModelService),
-        __metadata("design:type", monaco_text_model_service_1.MonacoTextModelService)
-    ], MonacoWorkspace.prototype, "textModelService", void 0);
-    __decorate([
-        inversify_1.inject(monaco_languageclient_1.MonacoToProtocolConverter),
-        __metadata("design:type", monaco_languageclient_1.MonacoToProtocolConverter)
-    ], MonacoWorkspace.prototype, "m2p", void 0);
-    __decorate([
-        inversify_1.inject(monaco_languageclient_1.ProtocolToMonacoConverter),
-        __metadata("design:type", monaco_languageclient_1.ProtocolToMonacoConverter)
-    ], MonacoWorkspace.prototype, "p2m", void 0);
-    __decorate([
-        inversify_1.inject(browser_3.EditorManager),
-        __metadata("design:type", browser_3.EditorManager)
-    ], MonacoWorkspace.prototype, "editorManager", void 0);
-    __decorate([
-        inversify_1.inject(monaco_configurations_1.MonacoConfigurations),
-        __metadata("design:type", monaco_configurations_1.MonacoConfigurations)
-    ], MonacoWorkspace.prototype, "configurations", void 0);
-    __decorate([
-        inversify_1.inject(browser_5.ProblemManager),
-        __metadata("design:type", browser_5.ProblemManager)
-    ], MonacoWorkspace.prototype, "problems", void 0);
+        inversify_1.inject(frontend_application_state_1.FrontendApplicationStateService),
+        __metadata("design:type", frontend_application_state_1.FrontendApplicationStateService)
+    ], FileNavigatorModel.prototype, "applicationState", void 0);
     __decorate([
         inversify_1.postConstruct(),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", void 0)
-    ], MonacoWorkspace.prototype, "init", null);
-    MonacoWorkspace = __decorate([
+    ], FileNavigatorModel.prototype, "init", null);
+    FileNavigatorModel = __decorate([
         inversify_1.injectable()
-    ], MonacoWorkspace);
-    return MonacoWorkspace;
-}());
-exports.MonacoWorkspace = MonacoWorkspace;
+    ], FileNavigatorModel);
+    return FileNavigatorModel;
+}(browser_1.FileTreeModel));
+exports.FileNavigatorModel = FileNavigatorModel;
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/monaco/lib/electron-browser/monaco-electron-module.js":
-/*!************************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/lib/electron-browser/monaco-electron-module.js ***!
-  \************************************************************************************/
+/***/ "../../../../node_modules/@theia/navigator/lib/browser/navigator-preferences.js":
+/*!***************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/lib/browser/navigator-preferences.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2018 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+Object.defineProperty(exports, "__esModule", { value: true });
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+exports.FileNavigatorConfigSchema = {
+    'type': 'object',
+    properties: {
+        'explorer.autoReveal': {
+            type: 'boolean',
+            description: 'Selects file under editing in the explorer.',
+            default: true
+        }
+    }
+};
+exports.FileNavigatorPreferences = Symbol('NavigatorPreferences');
+function createNavigatorPreferences(preferences) {
+    return browser_1.createPreferenceProxy(preferences, exports.FileNavigatorConfigSchema);
+}
+exports.createNavigatorPreferences = createNavigatorPreferences;
+function bindFileNavigatorPreferences(bind) {
+    bind(exports.FileNavigatorPreferences).toDynamicValue(function (ctx) {
+        var preferences = ctx.container.get(browser_1.PreferenceService);
+        return createNavigatorPreferences(preferences);
+    });
+    bind(browser_1.PreferenceContribution).toConstantValue({ schema: exports.FileNavigatorConfigSchema });
+}
+exports.bindFileNavigatorPreferences = bindFileNavigatorPreferences;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/navigator/lib/browser/navigator-tree.js":
+/*!********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/lib/browser/navigator-tree.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7253,905 +2164,1857 @@ exports.MonacoWorkspace = MonacoWorkspace;
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-Object.defineProperty(exports, "__esModule", { value: true });
-var path = __webpack_require__(/*! path */ "path");
-var inversify_1 = __webpack_require__(/*! inversify */ "../node_modules/inversify/lib/inversify.js");
-exports.ContainerModule = inversify_1.ContainerModule;
-var monaco_loader_1 = __webpack_require__(/*! ../browser/monaco-loader */ "../node_modules/@theia/monaco/lib/browser/monaco-loader.js");
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-var s = self;
-/**
- * We cannot use `FileUri#create` because URIs with file scheme cannot be properly decoded via the AMD loader.
- * So if you have a FS path on Windows: `C:\Users\foo`, then you will get a URI `file:///c%3A/Users/foo` which
- * will be converted into the `c%3A/Users/foo` FS path on Windows by the AMD loader.
- */
-var uriFromPath = function (filePath) {
-    var pathName = path.resolve(filePath).replace(/\\/g, '/');
-    if (pathName.length > 0 && pathName.charAt(0) !== '/') {
-        pathName = '/' + pathName;
-    }
-    return encodeURI('file://' + pathName);
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-exports.default = monaco_loader_1.loadVsRequire(global)
-    .then(function (vsRequire) {
-    var baseUrl = uriFromPath(__dirname);
-    vsRequire.config({ baseUrl: baseUrl });
-    // workaround monaco-css not understanding the environment
-    s.module = undefined;
-    // workaround monaco-typescript not understanding the environment
-    s.process.browser = true;
-    return monaco_loader_1.loadMonaco(vsRequire);
-})
-    .then(function () { return Promise.resolve().then(function () { return __webpack_require__(/*! ../browser/monaco-frontend-module */ "../node_modules/@theia/monaco/lib/browser/monaco-frontend-module.js"); }); })
-    .then(function (module) { return module.default; });
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var browser_1 = __webpack_require__(/*! @theia/filesystem/lib/browser */ "../../../../node_modules/@theia/filesystem/lib/browser/index.js");
+var browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var navigator_filter_1 = __webpack_require__(/*! ./navigator-filter */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-filter.js");
+var FileNavigatorTree = /** @class */ (function (_super) {
+    __extends(FileNavigatorTree, _super);
+    function FileNavigatorTree() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    FileNavigatorTree.prototype.init = function () {
+        var _this = this;
+        this.toDispose.push(this.filter.onFilterChanged(function () { return _this.refresh(); }));
+    };
+    FileNavigatorTree.prototype.resolveChildren = function (parent) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                if (WorkspaceNode.is(parent)) {
+                    return [2 /*return*/, parent.children];
+                }
+                return [2 /*return*/, this.filter.filter(_super.prototype.resolveChildren.call(this, parent))];
+            });
+        });
+    };
+    FileNavigatorTree.prototype.toNodeId = function (uri, parent) {
+        var workspaceRootNode = WorkspaceRootNode.find(parent);
+        if (workspaceRootNode) {
+            return this.createId(workspaceRootNode, uri);
+        }
+        return _super.prototype.toNodeId.call(this, uri, parent);
+    };
+    FileNavigatorTree.prototype.createId = function (root, uri) {
+        var id = _super.prototype.toNodeId.call(this, uri, root);
+        return id === root.id ? id : root.id + ":" + id;
+    };
+    FileNavigatorTree.prototype.createWorkspaceRoot = function (rootFolder, workspaceNode) {
+        return __awaiter(this, void 0, void 0, function () {
+            var node;
+            return __generator(this, function (_a) {
+                node = this.toNode(rootFolder, workspaceNode);
+                Object.assign(node, {
+                    visible: workspaceNode.name !== WorkspaceNode.name,
+                });
+                return [2 /*return*/, node];
+            });
+        });
+    };
+    __decorate([
+        inversify_1.inject(navigator_filter_1.FileNavigatorFilter),
+        __metadata("design:type", navigator_filter_1.FileNavigatorFilter)
+    ], FileNavigatorTree.prototype, "filter", void 0);
+    __decorate([
+        inversify_1.postConstruct(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], FileNavigatorTree.prototype, "init", null);
+    FileNavigatorTree = __decorate([
+        inversify_1.injectable()
+    ], FileNavigatorTree);
+    return FileNavigatorTree;
+}(browser_1.FileTree));
+exports.FileNavigatorTree = FileNavigatorTree;
+var WorkspaceNode;
+(function (WorkspaceNode) {
+    WorkspaceNode.id = 'WorkspaceNodeId';
+    WorkspaceNode.name = 'WorkspaceNode';
+    function is(node) {
+        return browser_2.CompositeTreeNode.is(node) && node.id === WorkspaceNode.id;
+    }
+    WorkspaceNode.is = is;
+    function createRoot(multiRootName) {
+        return {
+            id: WorkspaceNode.id,
+            name: multiRootName || WorkspaceNode.name,
+            parent: undefined,
+            children: [],
+            visible: false,
+            selected: false
+        };
+    }
+    WorkspaceNode.createRoot = createRoot;
+})(WorkspaceNode = exports.WorkspaceNode || (exports.WorkspaceNode = {}));
+var WorkspaceRootNode;
+(function (WorkspaceRootNode) {
+    function is(node) {
+        return browser_1.DirNode.is(node) && WorkspaceNode.is(node.parent);
+    }
+    WorkspaceRootNode.is = is;
+    function find(node) {
+        if (node) {
+            if (is(node)) {
+                return node;
+            }
+            return find(node.parent);
+        }
+    }
+    WorkspaceRootNode.find = find;
+})(WorkspaceRootNode = exports.WorkspaceRootNode || (exports.WorkspaceRootNode = {}));
 
 
 /***/ }),
 
-/***/ "../node_modules/@theia/monaco/src/browser/style/index.css":
+/***/ "../../../../node_modules/@theia/navigator/lib/browser/navigator-widget.js":
+/*!**********************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/lib/browser/navigator-widget.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var inversify_1 = __webpack_require__(/*! inversify */ "../../../../node_modules/inversify/lib/inversify.js");
+var uri_1 = __webpack_require__(/*! @theia/core/lib/common/uri */ "../../../../node_modules/@theia/core/lib/common/uri.js");
+var common_1 = __webpack_require__(/*! @theia/core/lib/common */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var browser_1 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var browser_2 = __webpack_require__(/*! @theia/core/lib/browser */ "../../../../node_modules/@theia/core/lib/browser/index.js");
+var browser_3 = __webpack_require__(/*! @theia/filesystem/lib/browser */ "../../../../node_modules/@theia/filesystem/lib/browser/index.js");
+var browser_4 = __webpack_require__(/*! @theia/workspace/lib/browser */ "../../../../node_modules/@theia/workspace/lib/browser/index.js");
+var application_shell_1 = __webpack_require__(/*! @theia/core/lib/browser/shell/application-shell */ "../../../../node_modules/@theia/core/lib/browser/shell/application-shell.js");
+var navigator_tree_1 = __webpack_require__(/*! ./navigator-tree */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-tree.js");
+var navigator_model_1 = __webpack_require__(/*! ./navigator-model */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-model.js");
+var filesystem_1 = __webpack_require__(/*! @theia/filesystem/lib/common/filesystem */ "../../../../node_modules/@theia/filesystem/lib/common/filesystem.js");
+var core_1 = __webpack_require__(/*! @theia/core */ "../../../../node_modules/@theia/core/lib/common/index.js");
+var React = __webpack_require__(/*! react */ "../../../../node_modules/react/index.js");
+var navigator_context_key_service_1 = __webpack_require__(/*! ./navigator-context-key-service */ "../../../../node_modules/@theia/navigator/lib/browser/navigator-context-key-service.js");
+exports.FILE_NAVIGATOR_ID = 'files';
+exports.EXPLORER_VIEW_CONTAINER_ID = 'explorer-view-container';
+exports.EXPLORER_VIEW_CONTAINER_TITLE_OPTIONS = {
+    label: 'Explorer',
+    iconClass: 'navigator-tab-icon',
+    closeable: true
+};
+exports.LABEL = 'No folder opened';
+exports.CLASS = 'theia-Files';
+var FileNavigatorWidget = /** @class */ (function (_super) {
+    __extends(FileNavigatorWidget, _super);
+    function FileNavigatorWidget(props, model, contextMenuRenderer, commandService, selectionService, workspaceService, shell, fileSystem) {
+        var _this = _super.call(this, props, model, contextMenuRenderer) || this;
+        _this.props = props;
+        _this.model = model;
+        _this.commandService = commandService;
+        _this.selectionService = selectionService;
+        _this.workspaceService = workspaceService;
+        _this.shell = shell;
+        _this.fileSystem = fileSystem;
+        _this.canOpenWorkspaceFileAndFolder = core_1.isOSX || !core_1.environment.electron.is();
+        _this.openWorkspace = function () { return _this.doOpenWorkspace(); };
+        _this.openFolder = function () { return _this.doOpenFolder(); };
+        _this.keyUpHandler = function (e) {
+            if (browser_1.Key.ENTER.keyCode === e.keyCode) {
+                e.target.click();
+            }
+        };
+        _this.id = exports.FILE_NAVIGATOR_ID;
+        _this.addClass(exports.CLASS);
+        return _this;
+    }
+    FileNavigatorWidget.prototype.init = function () {
+        var _this = this;
+        _super.prototype.init.call(this);
+        this.updateSelectionContextKeys();
+        this.toDispose.pushAll([
+            this.model.onSelectionChanged(function () {
+                return _this.updateSelectionContextKeys();
+            }),
+            this.model.onExpansionChanged(function (node) {
+                if (node.expanded && node.children.length === 1) {
+                    var child = node.children[0];
+                    if (browser_2.ExpandableTreeNode.is(child) && !child.expanded) {
+                        _this.model.expandNode(child);
+                    }
+                }
+            })
+        ]);
+    };
+    FileNavigatorWidget.prototype.doUpdateRows = function () {
+        _super.prototype.doUpdateRows.call(this);
+        this.title.label = exports.LABEL;
+        if (navigator_tree_1.WorkspaceNode.is(this.model.root)) {
+            if (this.model.root.name === navigator_tree_1.WorkspaceNode.name) {
+                var rootNode = this.model.root.children[0];
+                if (navigator_tree_1.WorkspaceRootNode.is(rootNode)) {
+                    this.title.label = this.toNodeName(rootNode);
+                    this.title.caption = this.labelProvider.getLongName(rootNode.uri);
+                }
+            }
+            else {
+                this.title.label = this.toNodeName(this.model.root);
+                this.title.caption = this.title.label;
+            }
+        }
+        else {
+            this.title.caption = this.title.label;
+        }
+    };
+    FileNavigatorWidget.prototype.enableDndOnMainPanel = function () {
+        var _this = this;
+        var mainPanelNode = this.shell.mainPanel.node;
+        this.addEventListener(mainPanelNode, 'drop', function (_a) {
+            var dataTransfer = _a.dataTransfer;
+            return __awaiter(_this, void 0, void 0, function () {
+                var treeNodes;
+                var _this = this;
+                return __generator(this, function (_b) {
+                    treeNodes = dataTransfer && this.getSelectedTreeNodesFromData(dataTransfer) || [];
+                    treeNodes.filter(browser_3.FileNode.is).forEach(function (treeNode) { return _this.commandService.executeCommand(browser_1.CommonCommands.OPEN.id, treeNode.uri); });
+                    return [2 /*return*/];
+                });
+            });
+        });
+        var handler = function (e) {
+            if (e.dataTransfer) {
+                e.dataTransfer.dropEffect = 'link';
+                e.preventDefault();
+            }
+        };
+        this.addEventListener(mainPanelNode, 'dragover', handler);
+        this.addEventListener(mainPanelNode, 'dragenter', handler);
+    };
+    FileNavigatorWidget.prototype.getContainerTreeNode = function () {
+        var root = this.model.root;
+        if (this.workspaceService.isMultiRootWorkspaceOpened) {
+            return root;
+        }
+        if (navigator_tree_1.WorkspaceNode.is(root)) {
+            return root.children[0];
+        }
+        return undefined;
+    };
+    FileNavigatorWidget.prototype.deflateForStorage = function (node) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        var copy = __assign({}, node);
+        if (copy.uri) {
+            copy.uri = copy.uri.toString();
+        }
+        return _super.prototype.deflateForStorage.call(this, copy);
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    FileNavigatorWidget.prototype.inflateFromStorage = function (node, parent) {
+        if (node.uri) {
+            node.uri = new uri_1.default(node.uri);
+        }
+        return _super.prototype.inflateFromStorage.call(this, node, parent);
+    };
+    FileNavigatorWidget.prototype.renderTree = function (model) {
+        return _super.prototype.renderTree.call(this, model) || this.renderOpenWorkspaceDiv();
+    };
+    FileNavigatorWidget.prototype.onAfterAttach = function (msg) {
+        var _this = this;
+        _super.prototype.onAfterAttach.call(this, msg);
+        this.addClipboardListener(this.node, 'copy', function (e) { return _this.handleCopy(e); });
+        this.addClipboardListener(this.node, 'paste', function (e) { return _this.handlePaste(e); });
+        this.enableDndOnMainPanel();
+    };
+    FileNavigatorWidget.prototype.handleCopy = function (event) {
+        var uris = this.model.selectedFileStatNodes.map(function (node) { return node.uri.toString(); });
+        if (uris.length > 0 && event.clipboardData) {
+            event.clipboardData.setData('text/plain', uris.join('\n'));
+            event.preventDefault();
+        }
+    };
+    FileNavigatorWidget.prototype.handlePaste = function (event) {
+        var e_1, _a;
+        if (event.clipboardData) {
+            var raw = event.clipboardData.getData('text/plain');
+            if (!raw) {
+                return;
+            }
+            try {
+                for (var _b = __values(raw.split('\n')), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var file = _c.value;
+                    var uri = new uri_1.default(file);
+                    if (this.model.copy(uri)) {
+                        event.preventDefault();
+                    }
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+        }
+    };
+    FileNavigatorWidget.prototype.doOpenWorkspace = function () {
+        this.commandService.executeCommand(browser_4.WorkspaceCommands.OPEN_WORKSPACE.id);
+    };
+    FileNavigatorWidget.prototype.doOpenFolder = function () {
+        this.commandService.executeCommand(browser_4.WorkspaceCommands.OPEN_FOLDER.id);
+    };
+    /**
+     * Instead of rendering the file resources from the workspace, we render a placeholder
+     * button when the workspace root is not yet set.
+     */
+    FileNavigatorWidget.prototype.renderOpenWorkspaceDiv = function () {
+        var openButton;
+        if (this.canOpenWorkspaceFileAndFolder) {
+            openButton = React.createElement("button", { className: 'theia-button open-workspace-button', title: 'Select a folder or a workspace-file to open as your workspace', onClick: this.openWorkspace, onKeyUp: this.keyUpHandler }, "Open Workspace");
+        }
+        else {
+            openButton = React.createElement("button", { className: 'theia-button open-workspace-button', title: 'Select a folder as your workspace root', onClick: this.openFolder, onKeyUp: this.keyUpHandler }, "Open Folder");
+        }
+        return React.createElement("div", { className: 'theia-navigator-container' },
+            React.createElement("div", { className: 'center' }, "You have not yet opened a workspace."),
+            React.createElement("div", { className: 'open-workspace-button-container' }, openButton));
+    };
+    FileNavigatorWidget.prototype.handleClickEvent = function (node, event) {
+        var modifierKeyCombined = core_1.isOSX ? (event.shiftKey || event.metaKey) : (event.shiftKey || event.ctrlKey);
+        if (!modifierKeyCombined && node && this.corePreferences['workbench.list.openMode'] === 'singleClick') {
+            this.model.previewNode(node);
+        }
+        _super.prototype.handleClickEvent.call(this, node, event);
+    };
+    FileNavigatorWidget.prototype.onAfterShow = function (msg) {
+        _super.prototype.onAfterShow.call(this, msg);
+        this.contextKeyService.explorerViewletVisible.set(true);
+    };
+    FileNavigatorWidget.prototype.onAfterHide = function (msg) {
+        _super.prototype.onAfterHide.call(this, msg);
+        this.contextKeyService.explorerViewletVisible.set(false);
+    };
+    FileNavigatorWidget.prototype.updateSelectionContextKeys = function () {
+        this.contextKeyService.explorerResourceIsFolder.set(browser_3.DirNode.is(this.model.selectedNodes[0]));
+    };
+    __decorate([
+        inversify_1.inject(browser_1.CorePreferences),
+        __metadata("design:type", Object)
+    ], FileNavigatorWidget.prototype, "corePreferences", void 0);
+    __decorate([
+        inversify_1.inject(navigator_context_key_service_1.NavigatorContextKeyService),
+        __metadata("design:type", navigator_context_key_service_1.NavigatorContextKeyService)
+    ], FileNavigatorWidget.prototype, "contextKeyService", void 0);
+    __decorate([
+        inversify_1.postConstruct(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], FileNavigatorWidget.prototype, "init", null);
+    FileNavigatorWidget = __decorate([
+        inversify_1.injectable(),
+        __param(0, inversify_1.inject(browser_2.TreeProps)),
+        __param(1, inversify_1.inject(navigator_model_1.FileNavigatorModel)),
+        __param(2, inversify_1.inject(browser_2.ContextMenuRenderer)),
+        __param(3, inversify_1.inject(common_1.CommandService)),
+        __param(4, inversify_1.inject(common_1.SelectionService)),
+        __param(5, inversify_1.inject(browser_4.WorkspaceService)),
+        __param(6, inversify_1.inject(application_shell_1.ApplicationShell)),
+        __param(7, inversify_1.inject(filesystem_1.FileSystem)),
+        __metadata("design:paramtypes", [Object, navigator_model_1.FileNavigatorModel, Object, Object, common_1.SelectionService,
+            browser_4.WorkspaceService,
+            application_shell_1.ApplicationShell, Object])
+    ], FileNavigatorWidget);
+    return FileNavigatorWidget;
+}(browser_3.FileTreeWidget));
+exports.FileNavigatorWidget = FileNavigatorWidget;
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/navigator/src/browser/style/files.svg":
+/*!******************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/src/browser/style/files.svg ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PCEtLUNvcHlyaWdodCAoYykgTWljcm9zb2Z0IENvcnBvcmF0aW9uLiBBbGwgcmlnaHRzIHJlc2VydmVkLi0tPgo8IS0tQ29weXJpZ2h0IChDKSAyMDE5IFR5cGVGb3ggYW5kIG90aGVycy4tLT4KPCEtLUxpY2Vuc2VkIHVuZGVyIHRoZSBNSVQgTGljZW5zZS4gU2VlIExpY2Vuc2UudHh0IGluIHRoZSBwcm9qZWN0IHJvb3QgZm9yIGxpY2Vuc2UgaW5mb3JtYXRpb24uLS0+CjxzdmcgZmlsbD0iI0Y2RjZGNiIgaGVpZ2h0PSIyOCIgdmlld0JveD0iMCAwIDI4IDI4IiB3aWR0aD0iMjgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTE0Ljk2NSA3aC04LjkxNjQycy0yLjA0ODU4LjA3OC0yLjA0ODU4IDJ2MTVzMCAyIDIuMDQ4NTggMmwxMS4yNjcyMi0uMDA0YzIuMDQ4Ni4wMDQgMi4wNDg2LTEuOTk2IDIuMDQ4Ni0xLjk5NnYtMTEuNDkxem0tMS43NDY0IDJ2NWg0LjA5NzJ2MTBoLTExLjI2NzIydi0xNXptNS42NDI4LTZoLTguNjk5M3MtMi4wNjQ5My4wMTYtMi4wODAzIDJoOC4yMDk3di40NTRsNC4wMjY1IDQuNTQ2aDEuMDk1djEyYzIuMDQ4NSAwIDIuMDQ4NS0xLjk5NSAyLjA0ODUtMS45OTV2LTExLjM1N3oiIGZpbGw9IiNGNkY2RjYiLz48L3N2Zz4K"
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/navigator/src/browser/style/index.css":
+/*!******************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/navigator/src/browser/style/index.css ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../css-loader!./index.css */ "../../../../node_modules/css-loader/index.js!../../../../node_modules/@theia/navigator/src/browser/style/index.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../style-loader/lib/addStyles.js */ "../../../../node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "../../../../node_modules/@theia/workspace/lib/browser/index.js":
+/*!***********************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/@theia/workspace/lib/browser/index.js ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/********************************************************************************
+ * Copyright (C) 2017 TypeFox and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License v. 2.0 are satisfied: GNU General Public License, version 2
+ * with the GNU Classpath Exception which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ ********************************************************************************/
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(/*! ./workspace-commands */ "../../../../node_modules/@theia/workspace/lib/browser/workspace-commands.js"));
+__export(__webpack_require__(/*! ./workspace-service */ "../../../../node_modules/@theia/workspace/lib/browser/workspace-service.js"));
+__export(__webpack_require__(/*! ./workspace-frontend-contribution */ "../../../../node_modules/@theia/workspace/lib/browser/workspace-frontend-contribution.js"));
+__export(__webpack_require__(/*! ./workspace-frontend-module */ "../../../../node_modules/@theia/workspace/lib/browser/workspace-frontend-module.js"));
+__export(__webpack_require__(/*! ./workspace-preferences */ "../../../../node_modules/@theia/workspace/lib/browser/workspace-preferences.js"));
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/balanced-match/index.js":
+/*!*********************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/balanced-match/index.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+module.exports = balanced;
+function balanced(a, b, str) {
+  if (a instanceof RegExp) a = maybeMatch(a, str);
+  if (b instanceof RegExp) b = maybeMatch(b, str);
+
+  var r = range(a, b, str);
+
+  return r && {
+    start: r[0],
+    end: r[1],
+    pre: str.slice(0, r[0]),
+    body: str.slice(r[0] + a.length, r[1]),
+    post: str.slice(r[1] + b.length)
+  };
+}
+
+function maybeMatch(reg, str) {
+  var m = str.match(reg);
+  return m ? m[0] : null;
+}
+
+balanced.range = range;
+function range(a, b, str) {
+  var begs, beg, left, right, result;
+  var ai = str.indexOf(a);
+  var bi = str.indexOf(b, ai + 1);
+  var i = ai;
+
+  if (ai >= 0 && bi > 0) {
+    begs = [];
+    left = str.length;
+
+    while (i >= 0 && !result) {
+      if (i == ai) {
+        begs.push(i);
+        ai = str.indexOf(a, i + 1);
+      } else if (begs.length == 1) {
+        result = [ begs.pop(), bi ];
+      } else {
+        beg = begs.pop();
+        if (beg < left) {
+          left = beg;
+          right = bi;
+        }
+
+        bi = str.indexOf(b, i + 1);
+      }
+
+      i = ai < bi && ai >= 0 ? ai : bi;
+    }
+
+    if (begs.length) {
+      result = [ left, right ];
+    }
+  }
+
+  return result;
+}
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/brace-expansion/index.js":
+/*!**********************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/brace-expansion/index.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var concatMap = __webpack_require__(/*! concat-map */ "../../../../node_modules/concat-map/index.js");
+var balanced = __webpack_require__(/*! balanced-match */ "../../../../node_modules/balanced-match/index.js");
+
+module.exports = expandTop;
+
+var escSlash = '\0SLASH'+Math.random()+'\0';
+var escOpen = '\0OPEN'+Math.random()+'\0';
+var escClose = '\0CLOSE'+Math.random()+'\0';
+var escComma = '\0COMMA'+Math.random()+'\0';
+var escPeriod = '\0PERIOD'+Math.random()+'\0';
+
+function numeric(str) {
+  return parseInt(str, 10) == str
+    ? parseInt(str, 10)
+    : str.charCodeAt(0);
+}
+
+function escapeBraces(str) {
+  return str.split('\\\\').join(escSlash)
+            .split('\\{').join(escOpen)
+            .split('\\}').join(escClose)
+            .split('\\,').join(escComma)
+            .split('\\.').join(escPeriod);
+}
+
+function unescapeBraces(str) {
+  return str.split(escSlash).join('\\')
+            .split(escOpen).join('{')
+            .split(escClose).join('}')
+            .split(escComma).join(',')
+            .split(escPeriod).join('.');
+}
+
+
+// Basically just str.split(","), but handling cases
+// where we have nested braced sections, which should be
+// treated as individual members, like {a,{b,c},d}
+function parseCommaParts(str) {
+  if (!str)
+    return [''];
+
+  var parts = [];
+  var m = balanced('{', '}', str);
+
+  if (!m)
+    return str.split(',');
+
+  var pre = m.pre;
+  var body = m.body;
+  var post = m.post;
+  var p = pre.split(',');
+
+  p[p.length-1] += '{' + body + '}';
+  var postParts = parseCommaParts(post);
+  if (post.length) {
+    p[p.length-1] += postParts.shift();
+    p.push.apply(p, postParts);
+  }
+
+  parts.push.apply(parts, p);
+
+  return parts;
+}
+
+function expandTop(str) {
+  if (!str)
+    return [];
+
+  // I don't know why Bash 4.3 does this, but it does.
+  // Anything starting with {} will have the first two bytes preserved
+  // but *only* at the top level, so {},a}b will not expand to anything,
+  // but a{},b}c will be expanded to [a}c,abc].
+  // One could argue that this is a bug in Bash, but since the goal of
+  // this module is to match Bash's rules, we escape a leading {}
+  if (str.substr(0, 2) === '{}') {
+    str = '\\{\\}' + str.substr(2);
+  }
+
+  return expand(escapeBraces(str), true).map(unescapeBraces);
+}
+
+function identity(e) {
+  return e;
+}
+
+function embrace(str) {
+  return '{' + str + '}';
+}
+function isPadded(el) {
+  return /^-?0\d/.test(el);
+}
+
+function lte(i, y) {
+  return i <= y;
+}
+function gte(i, y) {
+  return i >= y;
+}
+
+function expand(str, isTop) {
+  var expansions = [];
+
+  var m = balanced('{', '}', str);
+  if (!m || /\$$/.test(m.pre)) return [str];
+
+  var isNumericSequence = /^-?\d+\.\.-?\d+(?:\.\.-?\d+)?$/.test(m.body);
+  var isAlphaSequence = /^[a-zA-Z]\.\.[a-zA-Z](?:\.\.-?\d+)?$/.test(m.body);
+  var isSequence = isNumericSequence || isAlphaSequence;
+  var isOptions = m.body.indexOf(',') >= 0;
+  if (!isSequence && !isOptions) {
+    // {a},b}
+    if (m.post.match(/,.*\}/)) {
+      str = m.pre + '{' + m.body + escClose + m.post;
+      return expand(str);
+    }
+    return [str];
+  }
+
+  var n;
+  if (isSequence) {
+    n = m.body.split(/\.\./);
+  } else {
+    n = parseCommaParts(m.body);
+    if (n.length === 1) {
+      // x{{a,b}}y ==> x{a}y x{b}y
+      n = expand(n[0], false).map(embrace);
+      if (n.length === 1) {
+        var post = m.post.length
+          ? expand(m.post, false)
+          : [''];
+        return post.map(function(p) {
+          return m.pre + n[0] + p;
+        });
+      }
+    }
+  }
+
+  // at this point, n is the parts, and we know it's not a comma set
+  // with a single entry.
+
+  // no need to expand pre, since it is guaranteed to be free of brace-sets
+  var pre = m.pre;
+  var post = m.post.length
+    ? expand(m.post, false)
+    : [''];
+
+  var N;
+
+  if (isSequence) {
+    var x = numeric(n[0]);
+    var y = numeric(n[1]);
+    var width = Math.max(n[0].length, n[1].length)
+    var incr = n.length == 3
+      ? Math.abs(numeric(n[2]))
+      : 1;
+    var test = lte;
+    var reverse = y < x;
+    if (reverse) {
+      incr *= -1;
+      test = gte;
+    }
+    var pad = n.some(isPadded);
+
+    N = [];
+
+    for (var i = x; test(i, y); i += incr) {
+      var c;
+      if (isAlphaSequence) {
+        c = String.fromCharCode(i);
+        if (c === '\\')
+          c = '';
+      } else {
+        c = String(i);
+        if (pad) {
+          var need = width - c.length;
+          if (need > 0) {
+            var z = new Array(need + 1).join('0');
+            if (i < 0)
+              c = '-' + z + c.slice(1);
+            else
+              c = z + c;
+          }
+        }
+      }
+      N.push(c);
+    }
+  } else {
+    N = concatMap(n, function(el) { return expand(el, false) });
+  }
+
+  for (var j = 0; j < N.length; j++) {
+    for (var k = 0; k < post.length; k++) {
+      var expansion = pre + N[j] + post[k];
+      if (!isTop || isSequence || expansion)
+        expansions.push(expansion);
+    }
+  }
+
+  return expansions;
+}
+
+
+
+/***/ }),
+
+/***/ "../../../../node_modules/concat-map/index.js":
 /*!*****************************************************************!*\
-  !*** ../node_modules/@theia/monaco/src/browser/style/index.css ***!
+  !*** /home/nicholas/Documents/node_modules/concat-map/index.js ***!
   \*****************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-
-var content = __webpack_require__(/*! !../../../../../css-loader!./index.css */ "../node_modules/css-loader/index.js!../node_modules/@theia/monaco/src/browser/style/index.css");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../../style-loader/lib/addStyles.js */ "../node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/src/browser/style/symbol-icons.css":
-/*!************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/src/browser/style/symbol-icons.css ***!
-  \************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../../css-loader!./symbol-icons.css */ "../node_modules/css-loader/index.js!../node_modules/@theia/monaco/src/browser/style/symbol-icons.css");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../../style-loader/lib/addStyles.js */ "../node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "../node_modules/@theia/monaco/src/browser/style/symbol-sprite.svg":
-/*!*************************************************************************!*\
-  !*** ../node_modules/@theia/monaco/src/browser/style/symbol-sprite.svg ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "cf2aabacdc2b3a5768b03545cb1d8330.svg";
-
-/***/ }),
-
-/***/ "../node_modules/css-loader/index.js!../node_modules/@theia/monaco/src/browser/style/index.css":
-/*!********************************************************************************************!*\
-  !*** ../node_modules/css-loader!../node_modules/@theia/monaco/src/browser/style/index.css ***!
-  \********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../../css-loader/lib/css-base.js */ "../node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".monaco-editor {\n    padding-bottom: 5.6px;\n    font-family: var(--theia-ui-font-family);\n    font-size: inherit !important;\n}\n\n/*\n * set z-index to 0, so tabs are not above overlay widgets\n */\n.p-TabBar.theia-app-centers {\n    z-index: 0;\n    display: flex;\n}\n\n/*\n * we need to disable the background image when using font awesome icons and file-icons\n */\n.monaco-quick-open-widget .quick-open-tree .quick-open-entry .quick-open-entry-icon.fa,\n.monaco-quick-open-widget .quick-open-tree .quick-open-entry .quick-open-entry-icon.file-icon {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    background-image: none;\n    margin-right: 0px;\n}\n\n.monaco-quick-open-widget {\n    background-color: var(--theia-quickInput-background) !important;\n    color: var(--theia-quickInput-foreground) !important;\n}\n\n.quick-open-entry .quick-open-row .monaco-icon-label .monaco-icon-label-description-container .label-description {\n    font-size: calc(var(--theia-ui-font-size0) * 0.95);\n}\n\n.monaco-editor .zone-widget {\n\tposition: absolute;\n\tz-index: 10;\n}\n\n.monaco-editor .zone-widget .zone-widget-container {\n\tborder-top-style: solid;\n\tborder-bottom-style: solid;\n\tborder-top-width: 0;\n\tborder-bottom-width: 0;\n    border-top-color: var(--theia-peekView-border);\n    border-bottom-color: var(--theia-peekView-border);\n\tposition: relative;\n}\n\n.monaco-editor .parameter-hints-widget > .wrapper {\n    overflow: hidden;\n}\n\n/* List highlight, see https://github.com/microsoft/vscode/blob/ff5f581425da6230b6f9216ecf19abf6c9d285a6/src/vs/workbench/browser/style.ts#L50 */\n.monaco-tree .monaco-tree-row .monaco-highlighted-label .highlight,\n.monaco-list .monaco-list-row .monaco-highlighted-label .highlight {\n\tcolor: var(--theia-list-highlightForeground) !important; \n}\n\n/* Scrollbars, see https://github.com/microsoft/vscode/blob/ff5f581425da6230b6f9216ecf19abf6c9d285a6/src/vs/workbench/browser/style.ts#L65 */\n.monaco-scrollable-element > .shadow.top {\n    box-shadow: var(--theia-scrollbar-shadow) 0 6px 6px -6px inset !important;\n}\n\n.monaco-scrollable-element > .shadow.left {\n    box-shadow: var(--theia-scrollbar-shadow) 6px 0 6px -6px inset !important;\n}\n\n.monaco-scrollable-element > .shadow.top.left {\n    box-shadow: var(--theia-scrollbar-shadow) 6px 6px 6px -6px inset !important;\n}\n\n.monaco-scrollable-element > .scrollbar > .slider {\n    background: var(--theia-scrollbarSlider-background) !important;\n}\n\n.monaco-scrollable-element > .scrollbar > .slider:hover {\n    background: var(--theia-scrollbarSlider-hoverBackground) !important;\n}\n\n.monaco-scrollable-element > .scrollbar > .slider.active {\n    background: var(--theia-scrollbarSlider-activeBackground) !important;\n}\n\n.monaco-scrollable-element > .scrollbar.vertical > .slider {\n    width: var(--theia-scrollbar-width) !important;\n}\n\n.monaco-scrollable-element > .scrollbar.horizontal > .slider {\n    height: var(--theia-scrollbar-width) !important;\n}\n\n.monaco-editor .reference-zone-widget .ref-tree .referenceMatch .highlight {\n    color: unset !important;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "../node_modules/css-loader/index.js!../node_modules/@theia/monaco/src/browser/style/symbol-icons.css":
-/*!***************************************************************************************************!*\
-  !*** ../node_modules/css-loader!../node_modules/@theia/monaco/src/browser/style/symbol-icons.css ***!
-  \***************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var escape = __webpack_require__(/*! ../../../../../css-loader/lib/url/escape.js */ "../node_modules/css-loader/lib/url/escape.js");
-exports = module.exports = __webpack_require__(/*! ../../../../../css-loader/lib/css-base.js */ "../node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".symbol-icon {\n    background-image: url(" + escape(__webpack_require__(/*! ./symbol-sprite.svg */ "../node_modules/@theia/monaco/src/browser/style/symbol-sprite.svg")) + ");\n    background-repeat: no-repeat;\n    overflow: hidden;\n    min-width: var(--theia-icon-size);\n    height: var(--theia-icon-size);\n    margin-right: 4px;\n}\n\n.symbol-icon-center {\n    align-self: center;\n}\n\n.symbol-icon.method {\n    background-position: 0 calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.constant,\n.symbol-icon.variable {\n    background-position: -22px calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.class {\n    background-position: -42px calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.interface {\n    background-position: -62px calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.module {\n    background-position: -82px calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.property {\n    background-position: -102px calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.enum {\n    background-position: -122px calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.rule {\n    background-position: -242px calc(var(--theia-sprite-y-offset));\n}\n\n.symbol-icon.file {\n    background-position: -262px calc(var(--theia-sprite-y-offset));\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "../node_modules/fast-plist/release/src/main.js":
-/*!******************************************************!*\
-  !*** ../node_modules/fast-plist/release/src/main.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*---------------------------------------------------------
- * Copyright (C) Microsoft Corporation. All rights reserved.
- *--------------------------------------------------------*/
-
-function parseWithLocation(content, filename, locationKeyName) {
-    return _parse(content, filename, locationKeyName);
-}
-exports.parseWithLocation = parseWithLocation;
-/**
- * A very fast plist parser
- */
-function parse(content) {
-    return _parse(content, null, null);
-}
-exports.parse = parse;
-function _parse(content, filename, locationKeyName) {
-    var len = content.length;
-    var pos = 0;
-    var line = 1;
-    var char = 0;
-    // Skip UTF8 BOM
-    if (len > 0 && content.charCodeAt(0) === 65279 /* BOM */) {
-        pos = 1;
+module.exports = function (xs, fn) {
+    var res = [];
+    for (var i = 0; i < xs.length; i++) {
+        var x = fn(xs[i], i);
+        if (isArray(x)) res.push.apply(res, x);
+        else res.push(x);
     }
-    function advancePosBy(by) {
-        if (locationKeyName === null) {
-            pos = pos + by;
-        }
-        else {
-            while (by > 0) {
-                var chCode = content.charCodeAt(pos);
-                if (chCode === 10 /* LINE_FEED */) {
-                    pos++;
-                    line++;
-                    char = 0;
-                }
-                else {
-                    pos++;
-                    char++;
-                }
-                by--;
-            }
-        }
-    }
-    function advancePosTo(to) {
-        if (locationKeyName === null) {
-            pos = to;
-        }
-        else {
-            advancePosBy(to - pos);
-        }
-    }
-    function skipWhitespace() {
-        while (pos < len) {
-            var chCode = content.charCodeAt(pos);
-            if (chCode !== 32 /* SPACE */ && chCode !== 9 /* TAB */ && chCode !== 13 /* CARRIAGE_RETURN */ && chCode !== 10 /* LINE_FEED */) {
-                break;
-            }
-            advancePosBy(1);
-        }
-    }
-    function advanceIfStartsWith(str) {
-        if (content.substr(pos, str.length) === str) {
-            advancePosBy(str.length);
-            return true;
-        }
-        return false;
-    }
-    function advanceUntil(str) {
-        var nextOccurence = content.indexOf(str, pos);
-        if (nextOccurence !== -1) {
-            advancePosTo(nextOccurence + str.length);
-        }
-        else {
-            // EOF
-            advancePosTo(len);
-        }
-    }
-    function captureUntil(str) {
-        var nextOccurence = content.indexOf(str, pos);
-        if (nextOccurence !== -1) {
-            var r = content.substring(pos, nextOccurence);
-            advancePosTo(nextOccurence + str.length);
-            return r;
-        }
-        else {
-            // EOF
-            var r = content.substr(pos);
-            advancePosTo(len);
-            return r;
-        }
-    }
-    var state = 0 /* ROOT_STATE */;
-    var cur = null;
-    var stateStack = [];
-    var objStack = [];
-    var curKey = null;
-    function pushState(newState, newCur) {
-        stateStack.push(state);
-        objStack.push(cur);
-        state = newState;
-        cur = newCur;
-    }
-    function popState() {
-        state = stateStack.pop();
-        cur = objStack.pop();
-    }
-    function fail(msg) {
-        throw new Error('Near offset ' + pos + ': ' + msg + ' ~~~' + content.substr(pos, 50) + '~~~');
-    }
-    var dictState = {
-        enterDict: function () {
-            if (curKey === null) {
-                fail('missing <key>');
-            }
-            var newDict = {};
-            if (locationKeyName !== null) {
-                newDict[locationKeyName] = {
-                    filename: filename,
-                    line: line,
-                    char: char
-                };
-            }
-            cur[curKey] = newDict;
-            curKey = null;
-            pushState(1 /* DICT_STATE */, newDict);
-        },
-        enterArray: function () {
-            if (curKey === null) {
-                fail('missing <key>');
-            }
-            var newArr = [];
-            cur[curKey] = newArr;
-            curKey = null;
-            pushState(2 /* ARR_STATE */, newArr);
-        }
-    };
-    var arrState = {
-        enterDict: function () {
-            var newDict = {};
-            if (locationKeyName !== null) {
-                newDict[locationKeyName] = {
-                    filename: filename,
-                    line: line,
-                    char: char
-                };
-            }
-            cur.push(newDict);
-            pushState(1 /* DICT_STATE */, newDict);
-        },
-        enterArray: function () {
-            var newArr = [];
-            cur.push(newArr);
-            pushState(2 /* ARR_STATE */, newArr);
-        }
-    };
-    function enterDict() {
-        if (state === 1 /* DICT_STATE */) {
-            dictState.enterDict();
-        }
-        else if (state === 2 /* ARR_STATE */) {
-            arrState.enterDict();
-        }
-        else {
-            cur = {};
-            if (locationKeyName !== null) {
-                cur[locationKeyName] = {
-                    filename: filename,
-                    line: line,
-                    char: char
-                };
-            }
-            pushState(1 /* DICT_STATE */, cur);
-        }
-    }
-    function leaveDict() {
-        if (state === 1 /* DICT_STATE */) {
-            popState();
-        }
-        else if (state === 2 /* ARR_STATE */) {
-            fail('unexpected </dict>');
-        }
-        else {
-            fail('unexpected </dict>');
-        }
-    }
-    function enterArray() {
-        if (state === 1 /* DICT_STATE */) {
-            dictState.enterArray();
-        }
-        else if (state === 2 /* ARR_STATE */) {
-            arrState.enterArray();
-        }
-        else {
-            cur = [];
-            pushState(2 /* ARR_STATE */, cur);
-        }
-    }
-    function leaveArray() {
-        if (state === 1 /* DICT_STATE */) {
-            fail('unexpected </array>');
-        }
-        else if (state === 2 /* ARR_STATE */) {
-            popState();
-        }
-        else {
-            fail('unexpected </array>');
-        }
-    }
-    function acceptKey(val) {
-        if (state === 1 /* DICT_STATE */) {
-            if (curKey !== null) {
-                fail('too many <key>');
-            }
-            curKey = val;
-        }
-        else if (state === 2 /* ARR_STATE */) {
-            fail('unexpected <key>');
-        }
-        else {
-            fail('unexpected <key>');
-        }
-    }
-    function acceptString(val) {
-        if (state === 1 /* DICT_STATE */) {
-            if (curKey === null) {
-                fail('missing <key>');
-            }
-            cur[curKey] = val;
-            curKey = null;
-        }
-        else if (state === 2 /* ARR_STATE */) {
-            cur.push(val);
-        }
-        else {
-            cur = val;
-        }
-    }
-    function acceptReal(val) {
-        if (isNaN(val)) {
-            fail('cannot parse float');
-        }
-        if (state === 1 /* DICT_STATE */) {
-            if (curKey === null) {
-                fail('missing <key>');
-            }
-            cur[curKey] = val;
-            curKey = null;
-        }
-        else if (state === 2 /* ARR_STATE */) {
-            cur.push(val);
-        }
-        else {
-            cur = val;
-        }
-    }
-    function acceptInteger(val) {
-        if (isNaN(val)) {
-            fail('cannot parse integer');
-        }
-        if (state === 1 /* DICT_STATE */) {
-            if (curKey === null) {
-                fail('missing <key>');
-            }
-            cur[curKey] = val;
-            curKey = null;
-        }
-        else if (state === 2 /* ARR_STATE */) {
-            cur.push(val);
-        }
-        else {
-            cur = val;
-        }
-    }
-    function acceptDate(val) {
-        if (state === 1 /* DICT_STATE */) {
-            if (curKey === null) {
-                fail('missing <key>');
-            }
-            cur[curKey] = val;
-            curKey = null;
-        }
-        else if (state === 2 /* ARR_STATE */) {
-            cur.push(val);
-        }
-        else {
-            cur = val;
-        }
-    }
-    function acceptData(val) {
-        if (state === 1 /* DICT_STATE */) {
-            if (curKey === null) {
-                fail('missing <key>');
-            }
-            cur[curKey] = val;
-            curKey = null;
-        }
-        else if (state === 2 /* ARR_STATE */) {
-            cur.push(val);
-        }
-        else {
-            cur = val;
-        }
-    }
-    function acceptBool(val) {
-        if (state === 1 /* DICT_STATE */) {
-            if (curKey === null) {
-                fail('missing <key>');
-            }
-            cur[curKey] = val;
-            curKey = null;
-        }
-        else if (state === 2 /* ARR_STATE */) {
-            cur.push(val);
-        }
-        else {
-            cur = val;
-        }
-    }
-    function escapeVal(str) {
-        return str.replace(/&#([0-9]+);/g, function (_, m0) {
-            return String.fromCodePoint(parseInt(m0, 10));
-        }).replace(/&#x([0-9a-f]+);/g, function (_, m0) {
-            return String.fromCodePoint(parseInt(m0, 16));
-        }).replace(/&amp;|&lt;|&gt;|&quot;|&apos;/g, function (_) {
-            switch (_) {
-                case '&amp;': return '&';
-                case '&lt;': return '<';
-                case '&gt;': return '>';
-                case '&quot;': return '"';
-                case '&apos;': return '\'';
-            }
-            return _;
-        });
-    }
-    function parseOpenTag() {
-        var r = captureUntil('>');
-        var isClosed = false;
-        if (r.charCodeAt(r.length - 1) === 47 /* SLASH */) {
-            isClosed = true;
-            r = r.substring(0, r.length - 1);
-        }
-        return {
-            name: r.trim(),
-            isClosed: isClosed
-        };
-    }
-    function parseTagValue(tag) {
-        if (tag.isClosed) {
-            return '';
-        }
-        var val = captureUntil('</');
-        advanceUntil('>');
-        return escapeVal(val);
-    }
-    while (pos < len) {
-        skipWhitespace();
-        if (pos >= len) {
-            break;
-        }
-        var chCode = content.charCodeAt(pos);
-        advancePosBy(1);
-        if (chCode !== 60 /* LESS_THAN */) {
-            fail('expected <');
-        }
-        if (pos >= len) {
-            fail('unexpected end of input');
-        }
-        var peekChCode = content.charCodeAt(pos);
-        if (peekChCode === 63 /* QUESTION_MARK */) {
-            advancePosBy(1);
-            advanceUntil('?>');
-            continue;
-        }
-        if (peekChCode === 33 /* EXCLAMATION_MARK */) {
-            advancePosBy(1);
-            if (advanceIfStartsWith('--')) {
-                advanceUntil('-->');
-                continue;
-            }
-            advanceUntil('>');
-            continue;
-        }
-        if (peekChCode === 47 /* SLASH */) {
-            advancePosBy(1);
-            skipWhitespace();
-            if (advanceIfStartsWith('plist')) {
-                advanceUntil('>');
-                continue;
-            }
-            if (advanceIfStartsWith('dict')) {
-                advanceUntil('>');
-                leaveDict();
-                continue;
-            }
-            if (advanceIfStartsWith('array')) {
-                advanceUntil('>');
-                leaveArray();
-                continue;
-            }
-            fail('unexpected closed tag');
-        }
-        var tag = parseOpenTag();
-        switch (tag.name) {
-            case 'dict':
-                enterDict();
-                if (tag.isClosed) {
-                    leaveDict();
-                }
-                continue;
-            case 'array':
-                enterArray();
-                if (tag.isClosed) {
-                    leaveArray();
-                }
-                continue;
-            case 'key':
-                acceptKey(parseTagValue(tag));
-                continue;
-            case 'string':
-                acceptString(parseTagValue(tag));
-                continue;
-            case 'real':
-                acceptReal(parseFloat(parseTagValue(tag)));
-                continue;
-            case 'integer':
-                acceptInteger(parseInt(parseTagValue(tag), 10));
-                continue;
-            case 'date':
-                acceptDate(new Date(parseTagValue(tag)));
-                continue;
-            case 'data':
-                acceptData(parseTagValue(tag));
-                continue;
-            case 'true':
-                parseTagValue(tag);
-                acceptBool(true);
-                continue;
-            case 'false':
-                parseTagValue(tag);
-                acceptBool(false);
-                continue;
-        }
-        if (/^plist/.test(tag.name)) {
-            continue;
-        }
-        fail('unexpected opened tag ' + tag.name);
-    }
-    return cur;
-}
-//# sourceMappingURL=main.js.map
-
-/***/ }),
-
-/***/ "../node_modules/idb/build/esm/chunk.js":
-/*!**********************************************!*\
-  !*** ../node_modules/idb/build/esm/chunk.js ***!
-  \**********************************************/
-/*! exports provided: a, b, c, d, e */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return wrap; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return addTraps; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return instanceOfAny; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return reverseTransformCache; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return unwrap; });
-const instanceOfAny = (object, constructors) => constructors.some(c => object instanceof c);
-
-let idbProxyableTypes;
-let cursorAdvanceMethods;
-// This is a function to prevent it throwing up in node environments.
-function getIdbProxyableTypes() {
-    return (idbProxyableTypes ||
-        (idbProxyableTypes = [
-            IDBDatabase,
-            IDBObjectStore,
-            IDBIndex,
-            IDBCursor,
-            IDBTransaction,
-        ]));
-}
-// This is a function to prevent it throwing up in node environments.
-function getCursorAdvanceMethods() {
-    return (cursorAdvanceMethods ||
-        (cursorAdvanceMethods = [
-            IDBCursor.prototype.advance,
-            IDBCursor.prototype.continue,
-            IDBCursor.prototype.continuePrimaryKey,
-        ]));
-}
-const cursorRequestMap = new WeakMap();
-const transactionDoneMap = new WeakMap();
-const transactionStoreNamesMap = new WeakMap();
-const transformCache = new WeakMap();
-const reverseTransformCache = new WeakMap();
-function promisifyRequest(request) {
-    const promise = new Promise((resolve, reject) => {
-        const unlisten = () => {
-            request.removeEventListener('success', success);
-            request.removeEventListener('error', error);
-        };
-        const success = () => {
-            resolve(wrap(request.result));
-            unlisten();
-        };
-        const error = () => {
-            reject(request.error);
-            unlisten();
-        };
-        request.addEventListener('success', success);
-        request.addEventListener('error', error);
-    });
-    promise
-        .then(value => {
-        // Since cursoring reuses the IDBRequest (*sigh*), we cache it for later retrieval
-        // (see wrapFunction).
-        if (value instanceof IDBCursor) {
-            cursorRequestMap.set(value, request);
-        }
-        // Catching to avoid "Uncaught Promise exceptions"
-    })
-        .catch(() => { });
-    // This mapping exists in reverseTransformCache but doesn't doesn't exist in transformCache. This
-    // is because we create many promises from a single IDBRequest.
-    reverseTransformCache.set(promise, request);
-    return promise;
-}
-function cacheDonePromiseForTransaction(tx) {
-    // Early bail if we've already created a done promise for this transaction.
-    if (transactionDoneMap.has(tx))
-        return;
-    const done = new Promise((resolve, reject) => {
-        const unlisten = () => {
-            tx.removeEventListener('complete', complete);
-            tx.removeEventListener('error', error);
-            tx.removeEventListener('abort', error);
-        };
-        const complete = () => {
-            resolve();
-            unlisten();
-        };
-        const error = () => {
-            reject(tx.error);
-            unlisten();
-        };
-        tx.addEventListener('complete', complete);
-        tx.addEventListener('error', error);
-        tx.addEventListener('abort', error);
-    });
-    // Cache it for later retrieval.
-    transactionDoneMap.set(tx, done);
-}
-let idbProxyTraps = {
-    get(target, prop, receiver) {
-        if (target instanceof IDBTransaction) {
-            // Special handling for transaction.done.
-            if (prop === 'done')
-                return transactionDoneMap.get(target);
-            // Polyfill for objectStoreNames because of Edge.
-            if (prop === 'objectStoreNames') {
-                return target.objectStoreNames || transactionStoreNamesMap.get(target);
-            }
-            // Make tx.store return the only store in the transaction, or undefined if there are many.
-            if (prop === 'store') {
-                return receiver.objectStoreNames[1]
-                    ? undefined
-                    : receiver.objectStore(receiver.objectStoreNames[0]);
-            }
-        }
-        // Else transform whatever we get back.
-        return wrap(target[prop]);
-    },
-    has(target, prop) {
-        if (target instanceof IDBTransaction &&
-            (prop === 'done' || prop === 'store')) {
-            return true;
-        }
-        return prop in target;
-    },
+    return res;
 };
-function addTraps(callback) {
-    idbProxyTraps = callback(idbProxyTraps);
-}
-function wrapFunction(func) {
-    // Due to expected object equality (which is enforced by the caching in `wrap`), we
-    // only create one new func per func.
-    // Edge doesn't support objectStoreNames (booo), so we polyfill it here.
-    if (func === IDBDatabase.prototype.transaction &&
-        !('objectStoreNames' in IDBTransaction.prototype)) {
-        return function (storeNames, ...args) {
-            const tx = func.call(unwrap(this), storeNames, ...args);
-            transactionStoreNamesMap.set(tx, storeNames.sort ? storeNames.sort() : [storeNames]);
-            return wrap(tx);
-        };
-    }
-    // Cursor methods are special, as the behaviour is a little more different to standard IDB. In
-    // IDB, you advance the cursor and wait for a new 'success' on the IDBRequest that gave you the
-    // cursor. It's kinda like a promise that can resolve with many values. That doesn't make sense
-    // with real promises, so each advance methods returns a new promise for the cursor object, or
-    // undefined if the end of the cursor has been reached.
-    if (getCursorAdvanceMethods().includes(func)) {
-        return function (...args) {
-            // Calling the original function with the proxy as 'this' causes ILLEGAL INVOCATION, so we use
-            // the original object.
-            func.apply(unwrap(this), args);
-            return wrap(cursorRequestMap.get(this));
-        };
-    }
-    return function (...args) {
-        // Calling the original function with the proxy as 'this' causes ILLEGAL INVOCATION, so we use
-        // the original object.
-        return wrap(func.apply(unwrap(this), args));
-    };
-}
-function transformCachableValue(value) {
-    if (typeof value === 'function')
-        return wrapFunction(value);
-    // This doesn't return, it just creates a 'done' promise for the transaction,
-    // which is later returned for transaction.done (see idbObjectHandler).
-    if (value instanceof IDBTransaction)
-        cacheDonePromiseForTransaction(value);
-    if (instanceOfAny(value, getIdbProxyableTypes()))
-        return new Proxy(value, idbProxyTraps);
-    // Return the same value back if we're not going to transform it.
-    return value;
-}
-function wrap(value) {
-    // We sometimes generate multiple promises from a single IDBRequest (eg when cursoring), because
-    // IDB is weird and a single IDBRequest can yield many responses, so these can't be cached.
-    if (value instanceof IDBRequest)
-        return promisifyRequest(value);
-    // If we've already transformed this value before, reuse the transformed value.
-    // This is faster, but it also provides object equality.
-    if (transformCache.has(value))
-        return transformCache.get(value);
-    const newValue = transformCachableValue(value);
-    // Not all types are transformed.
-    // These may be primitive types, so they can't be WeakMap keys.
-    if (newValue !== value) {
-        transformCache.set(value, newValue);
-        reverseTransformCache.set(newValue, value);
-    }
-    return newValue;
-}
-const unwrap = (value) => reverseTransformCache.get(value);
 
-
+var isArray = Array.isArray || function (xs) {
+    return Object.prototype.toString.call(xs) === '[object Array]';
+};
 
 
 /***/ }),
 
-/***/ "../node_modules/idb/build/esm/index.js":
-/*!**********************************************!*\
-  !*** ../node_modules/idb/build/esm/index.js ***!
-  \**********************************************/
-/*! exports provided: unwrap, wrap, openDB, deleteDB */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "../../../../node_modules/css-loader/index.js!../../../../node_modules/@theia/navigator/src/browser/style/index.css":
+/*!*******************************************************************************************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/css-loader!/home/nicholas/Documents/node_modules/@theia/navigator/src/browser/style/index.css ***!
+  \*******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openDB", function() { return openDB; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteDB", function() { return deleteDB; });
-/* harmony import */ var _chunk_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk.js */ "../node_modules/idb/build/esm/chunk.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unwrap", function() { return _chunk_js__WEBPACK_IMPORTED_MODULE_0__["e"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "wrap", function() { return _chunk_js__WEBPACK_IMPORTED_MODULE_0__["a"]; });
+var escape = __webpack_require__(/*! ../../../../../css-loader/lib/url/escape.js */ "../../../../node_modules/css-loader/lib/url/escape.js");
+exports = module.exports = __webpack_require__(/*! ../../../../../css-loader/lib/css-base.js */ "../../../../node_modules/css-loader/lib/css-base.js")(false);
+// imports
 
 
+// module
+exports.push([module.i, "/********************************************************************************\n * Copyright (C) 2017 TypeFox and others.\n *\n * This program and the accompanying materials are made available under the\n * terms of the Eclipse Public License v. 2.0 which is available at\n * http://www.eclipse.org/legal/epl-2.0.\n *\n * This Source Code may also be made available under the following Secondary\n * Licenses when the conditions for such availability set forth in the Eclipse\n * Public License v. 2.0 are satisfied: GNU General Public License, version 2\n * with the GNU Classpath Exception which is available at\n * https://www.gnu.org/software/classpath/license.html.\n *\n * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0\n ********************************************************************************/\n\n.theia-Files {\n    height: 100%;\n}\n\n.theia-navigator-container {\n    font-size: var(--theia-ui-font-size1);\n    padding: 5px;\n    position: relative;\n}\n\n.theia-navigator-container .open-workspace-button-container {\n    margin: auto;\n    margin-top: 5px;\n    display: flex;\n    justify-content: center;\n    align-self: center;\n}\n\n.theia-navigator-container .center {\n    text-align: center;\n}\n\n.p-Widget .open-workspace-button {\n    padding: 4px 12px;\n    width: calc(100% - var(--theia-ui-padding)*4);\n    margin-left: 0;\n}\n\n.navigator-tab-icon {\n    -webkit-mask: url(" + escape(__webpack_require__(/*! ./files.svg */ "../../../../node_modules/@theia/navigator/src/browser/style/files.svg")) + ");\n    mask: url(" + escape(__webpack_require__(/*! ./files.svg */ "../../../../node_modules/@theia/navigator/src/browser/style/files.svg")) + ");\n}\n", ""]);
+
+// exports
 
 
-/**
- * Open a database.
- *
- * @param name Name of the database.
- * @param version Schema version.
- * @param callbacks Additional callbacks.
- */
-function openDB(name, version, { blocked, upgrade, blocking } = {}) {
-    const request = indexedDB.open(name, version);
-    const openPromise = Object(_chunk_js__WEBPACK_IMPORTED_MODULE_0__["a"])(request);
-    if (upgrade) {
-        request.addEventListener('upgradeneeded', event => {
-            upgrade(Object(_chunk_js__WEBPACK_IMPORTED_MODULE_0__["a"])(request.result), event.oldVersion, event.newVersion, Object(_chunk_js__WEBPACK_IMPORTED_MODULE_0__["a"])(request.transaction));
-        });
-    }
-    if (blocked)
-        request.addEventListener('blocked', () => blocked());
-    if (blocking) {
-        openPromise.then(db => db.addEventListener('versionchange', blocking)).catch(() => { });
-    }
-    return openPromise;
-}
-/**
- * Delete a database.
- *
- * @param name Name of the database.
- */
-function deleteDB(name, { blocked } = {}) {
-    const request = indexedDB.deleteDatabase(name);
-    if (blocked)
-        request.addEventListener('blocked', () => blocked());
-    return Object(_chunk_js__WEBPACK_IMPORTED_MODULE_0__["a"])(request).then(() => undefined);
+/***/ }),
+
+/***/ "../../../../node_modules/minimatch/minimatch.js":
+/*!********************************************************************!*\
+  !*** /home/nicholas/Documents/node_modules/minimatch/minimatch.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = minimatch
+minimatch.Minimatch = Minimatch
+
+var path = { sep: '/' }
+try {
+  path = __webpack_require__(/*! path */ "path")
+} catch (er) {}
+
+var GLOBSTAR = minimatch.GLOBSTAR = Minimatch.GLOBSTAR = {}
+var expand = __webpack_require__(/*! brace-expansion */ "../../../../node_modules/brace-expansion/index.js")
+
+var plTypes = {
+  '!': { open: '(?:(?!(?:', close: '))[^/]*?)'},
+  '?': { open: '(?:', close: ')?' },
+  '+': { open: '(?:', close: ')+' },
+  '*': { open: '(?:', close: ')*' },
+  '@': { open: '(?:', close: ')' }
 }
 
-const readMethods = ['get', 'getKey', 'getAll', 'getAllKeys', 'count'];
-const writeMethods = ['put', 'add', 'delete', 'clear'];
-const cachedMethods = new Map();
-function getMethod(target, prop) {
-    if (!(target instanceof IDBDatabase &&
-        !(prop in target) &&
-        typeof prop === 'string')) {
-        return;
-    }
-    if (cachedMethods.get(prop))
-        return cachedMethods.get(prop);
-    const targetFuncName = prop.replace(/FromIndex$/, '');
-    const useIndex = prop !== targetFuncName;
-    const isWrite = writeMethods.includes(targetFuncName);
-    if (
-    // Bail if the target doesn't exist on the target. Eg, getAll isn't in Edge.
-    !(targetFuncName in (useIndex ? IDBIndex : IDBObjectStore).prototype) ||
-        !(isWrite || readMethods.includes(targetFuncName))) {
-        return;
-    }
-    const method = async function (storeName, ...args) {
-        // isWrite ? 'readwrite' : undefined gzipps better, but fails in Edge :(
-        const tx = this.transaction(storeName, isWrite ? 'readwrite' : 'readonly');
-        let target = tx.store;
-        if (useIndex)
-            target = target.index(args.shift());
-        const returnVal = target[targetFuncName](...args);
-        if (isWrite)
-            await tx.done;
-        return returnVal;
-    };
-    cachedMethods.set(prop, method);
-    return method;
+// any single thing other than /
+// don't need to escape / when using new RegExp()
+var qmark = '[^/]'
+
+// * => any number of characters
+var star = qmark + '*?'
+
+// ** when dots are allowed.  Anything goes, except .. and .
+// not (^ or / followed by one or two dots followed by $ or /),
+// followed by anything, any number of times.
+var twoStarDot = '(?:(?!(?:\\\/|^)(?:\\.{1,2})($|\\\/)).)*?'
+
+// not a ^ or / followed by a dot,
+// followed by anything, any number of times.
+var twoStarNoDot = '(?:(?!(?:\\\/|^)\\.).)*?'
+
+// characters that need to be escaped in RegExp.
+var reSpecials = charSet('().*{}+?[]^$\\!')
+
+// "abc" -> { a:true, b:true, c:true }
+function charSet (s) {
+  return s.split('').reduce(function (set, c) {
+    set[c] = true
+    return set
+  }, {})
 }
-Object(_chunk_js__WEBPACK_IMPORTED_MODULE_0__["b"])(oldTraps => ({
-    get: (target, prop, receiver) => getMethod(target, prop) || oldTraps.get(target, prop, receiver),
-    has: (target, prop) => !!getMethod(target, prop) || oldTraps.has(target, prop),
-}));
 
+// normalizes slashes.
+var slashSplit = /\/+/
 
+minimatch.filter = filter
+function filter (pattern, options) {
+  options = options || {}
+  return function (p, i, list) {
+    return minimatch(p, pattern, options)
+  }
+}
+
+function ext (a, b) {
+  a = a || {}
+  b = b || {}
+  var t = {}
+  Object.keys(b).forEach(function (k) {
+    t[k] = b[k]
+  })
+  Object.keys(a).forEach(function (k) {
+    t[k] = a[k]
+  })
+  return t
+}
+
+minimatch.defaults = function (def) {
+  if (!def || !Object.keys(def).length) return minimatch
+
+  var orig = minimatch
+
+  var m = function minimatch (p, pattern, options) {
+    return orig.minimatch(p, pattern, ext(def, options))
+  }
+
+  m.Minimatch = function Minimatch (pattern, options) {
+    return new orig.Minimatch(pattern, ext(def, options))
+  }
+
+  return m
+}
+
+Minimatch.defaults = function (def) {
+  if (!def || !Object.keys(def).length) return Minimatch
+  return minimatch.defaults(def).Minimatch
+}
+
+function minimatch (p, pattern, options) {
+  if (typeof pattern !== 'string') {
+    throw new TypeError('glob pattern string required')
+  }
+
+  if (!options) options = {}
+
+  // shortcut: comments match nothing.
+  if (!options.nocomment && pattern.charAt(0) === '#') {
+    return false
+  }
+
+  // "" only matches ""
+  if (pattern.trim() === '') return p === ''
+
+  return new Minimatch(pattern, options).match(p)
+}
+
+function Minimatch (pattern, options) {
+  if (!(this instanceof Minimatch)) {
+    return new Minimatch(pattern, options)
+  }
+
+  if (typeof pattern !== 'string') {
+    throw new TypeError('glob pattern string required')
+  }
+
+  if (!options) options = {}
+  pattern = pattern.trim()
+
+  // windows support: need to use /, not \
+  if (path.sep !== '/') {
+    pattern = pattern.split(path.sep).join('/')
+  }
+
+  this.options = options
+  this.set = []
+  this.pattern = pattern
+  this.regexp = null
+  this.negate = false
+  this.comment = false
+  this.empty = false
+
+  // make the set of regexps etc.
+  this.make()
+}
+
+Minimatch.prototype.debug = function () {}
+
+Minimatch.prototype.make = make
+function make () {
+  // don't do it more than once.
+  if (this._made) return
+
+  var pattern = this.pattern
+  var options = this.options
+
+  // empty patterns and comments match nothing.
+  if (!options.nocomment && pattern.charAt(0) === '#') {
+    this.comment = true
+    return
+  }
+  if (!pattern) {
+    this.empty = true
+    return
+  }
+
+  // step 1: figure out negation, etc.
+  this.parseNegate()
+
+  // step 2: expand braces
+  var set = this.globSet = this.braceExpand()
+
+  if (options.debug) this.debug = console.error
+
+  this.debug(this.pattern, set)
+
+  // step 3: now we have a set, so turn each one into a series of path-portion
+  // matching patterns.
+  // These will be regexps, except in the case of "**", which is
+  // set to the GLOBSTAR object for globstar behavior,
+  // and will not contain any / characters
+  set = this.globParts = set.map(function (s) {
+    return s.split(slashSplit)
+  })
+
+  this.debug(this.pattern, set)
+
+  // glob --> regexps
+  set = set.map(function (s, si, set) {
+    return s.map(this.parse, this)
+  }, this)
+
+  this.debug(this.pattern, set)
+
+  // filter out everything that didn't compile properly.
+  set = set.filter(function (s) {
+    return s.indexOf(false) === -1
+  })
+
+  this.debug(this.pattern, set)
+
+  this.set = set
+}
+
+Minimatch.prototype.parseNegate = parseNegate
+function parseNegate () {
+  var pattern = this.pattern
+  var negate = false
+  var options = this.options
+  var negateOffset = 0
+
+  if (options.nonegate) return
+
+  for (var i = 0, l = pattern.length
+    ; i < l && pattern.charAt(i) === '!'
+    ; i++) {
+    negate = !negate
+    negateOffset++
+  }
+
+  if (negateOffset) this.pattern = pattern.substr(negateOffset)
+  this.negate = negate
+}
+
+// Brace expansion:
+// a{b,c}d -> abd acd
+// a{b,}c -> abc ac
+// a{0..3}d -> a0d a1d a2d a3d
+// a{b,c{d,e}f}g -> abg acdfg acefg
+// a{b,c}d{e,f}g -> abdeg acdeg abdeg abdfg
+//
+// Invalid sets are not expanded.
+// a{2..}b -> a{2..}b
+// a{b}c -> a{b}c
+minimatch.braceExpand = function (pattern, options) {
+  return braceExpand(pattern, options)
+}
+
+Minimatch.prototype.braceExpand = braceExpand
+
+function braceExpand (pattern, options) {
+  if (!options) {
+    if (this instanceof Minimatch) {
+      options = this.options
+    } else {
+      options = {}
+    }
+  }
+
+  pattern = typeof pattern === 'undefined'
+    ? this.pattern : pattern
+
+  if (typeof pattern === 'undefined') {
+    throw new TypeError('undefined pattern')
+  }
+
+  if (options.nobrace ||
+    !pattern.match(/\{.*\}/)) {
+    // shortcut. no need to expand.
+    return [pattern]
+  }
+
+  return expand(pattern)
+}
+
+// parse a component of the expanded set.
+// At this point, no pattern may contain "/" in it
+// so we're going to return a 2d array, where each entry is the full
+// pattern, split on '/', and then turned into a regular expression.
+// A regexp is made at the end which joins each array with an
+// escaped /, and another full one which joins each regexp with |.
+//
+// Following the lead of Bash 4.1, note that "**" only has special meaning
+// when it is the *only* thing in a path portion.  Otherwise, any series
+// of * is equivalent to a single *.  Globstar behavior is enabled by
+// default, and can be disabled by setting options.noglobstar.
+Minimatch.prototype.parse = parse
+var SUBPARSE = {}
+function parse (pattern, isSub) {
+  if (pattern.length > 1024 * 64) {
+    throw new TypeError('pattern is too long')
+  }
+
+  var options = this.options
+
+  // shortcuts
+  if (!options.noglobstar && pattern === '**') return GLOBSTAR
+  if (pattern === '') return ''
+
+  var re = ''
+  var hasMagic = !!options.nocase
+  var escaping = false
+  // ? => one single character
+  var patternListStack = []
+  var negativeLists = []
+  var stateChar
+  var inClass = false
+  var reClassStart = -1
+  var classStart = -1
+  // . and .. never match anything that doesn't start with .,
+  // even when options.dot is set.
+  var patternStart = pattern.charAt(0) === '.' ? '' // anything
+  // not (start or / followed by . or .. followed by / or end)
+  : options.dot ? '(?!(?:^|\\\/)\\.{1,2}(?:$|\\\/))'
+  : '(?!\\.)'
+  var self = this
+
+  function clearStateChar () {
+    if (stateChar) {
+      // we had some state-tracking character
+      // that wasn't consumed by this pass.
+      switch (stateChar) {
+        case '*':
+          re += star
+          hasMagic = true
+        break
+        case '?':
+          re += qmark
+          hasMagic = true
+        break
+        default:
+          re += '\\' + stateChar
+        break
+      }
+      self.debug('clearStateChar %j %j', stateChar, re)
+      stateChar = false
+    }
+  }
+
+  for (var i = 0, len = pattern.length, c
+    ; (i < len) && (c = pattern.charAt(i))
+    ; i++) {
+    this.debug('%s\t%s %s %j', pattern, i, re, c)
+
+    // skip over any that are escaped.
+    if (escaping && reSpecials[c]) {
+      re += '\\' + c
+      escaping = false
+      continue
+    }
+
+    switch (c) {
+      case '/':
+        // completely not allowed, even escaped.
+        // Should already be path-split by now.
+        return false
+
+      case '\\':
+        clearStateChar()
+        escaping = true
+      continue
+
+      // the various stateChar values
+      // for the "extglob" stuff.
+      case '?':
+      case '*':
+      case '+':
+      case '@':
+      case '!':
+        this.debug('%s\t%s %s %j <-- stateChar', pattern, i, re, c)
+
+        // all of those are literals inside a class, except that
+        // the glob [!a] means [^a] in regexp
+        if (inClass) {
+          this.debug('  in class')
+          if (c === '!' && i === classStart + 1) c = '^'
+          re += c
+          continue
+        }
+
+        // if we already have a stateChar, then it means
+        // that there was something like ** or +? in there.
+        // Handle the stateChar, then proceed with this one.
+        self.debug('call clearStateChar %j', stateChar)
+        clearStateChar()
+        stateChar = c
+        // if extglob is disabled, then +(asdf|foo) isn't a thing.
+        // just clear the statechar *now*, rather than even diving into
+        // the patternList stuff.
+        if (options.noext) clearStateChar()
+      continue
+
+      case '(':
+        if (inClass) {
+          re += '('
+          continue
+        }
+
+        if (!stateChar) {
+          re += '\\('
+          continue
+        }
+
+        patternListStack.push({
+          type: stateChar,
+          start: i - 1,
+          reStart: re.length,
+          open: plTypes[stateChar].open,
+          close: plTypes[stateChar].close
+        })
+        // negation is (?:(?!js)[^/]*)
+        re += stateChar === '!' ? '(?:(?!(?:' : '(?:'
+        this.debug('plType %j %j', stateChar, re)
+        stateChar = false
+      continue
+
+      case ')':
+        if (inClass || !patternListStack.length) {
+          re += '\\)'
+          continue
+        }
+
+        clearStateChar()
+        hasMagic = true
+        var pl = patternListStack.pop()
+        // negation is (?:(?!js)[^/]*)
+        // The others are (?:<pattern>)<type>
+        re += pl.close
+        if (pl.type === '!') {
+          negativeLists.push(pl)
+        }
+        pl.reEnd = re.length
+      continue
+
+      case '|':
+        if (inClass || !patternListStack.length || escaping) {
+          re += '\\|'
+          escaping = false
+          continue
+        }
+
+        clearStateChar()
+        re += '|'
+      continue
+
+      // these are mostly the same in regexp and glob
+      case '[':
+        // swallow any state-tracking char before the [
+        clearStateChar()
+
+        if (inClass) {
+          re += '\\' + c
+          continue
+        }
+
+        inClass = true
+        classStart = i
+        reClassStart = re.length
+        re += c
+      continue
+
+      case ']':
+        //  a right bracket shall lose its special
+        //  meaning and represent itself in
+        //  a bracket expression if it occurs
+        //  first in the list.  -- POSIX.2 2.8.3.2
+        if (i === classStart + 1 || !inClass) {
+          re += '\\' + c
+          escaping = false
+          continue
+        }
+
+        // handle the case where we left a class open.
+        // "[z-a]" is valid, equivalent to "\[z-a\]"
+        if (inClass) {
+          // split where the last [ was, make sure we don't have
+          // an invalid re. if so, re-walk the contents of the
+          // would-be class to re-translate any characters that
+          // were passed through as-is
+          // TODO: It would probably be faster to determine this
+          // without a try/catch and a new RegExp, but it's tricky
+          // to do safely.  For now, this is safe and works.
+          var cs = pattern.substring(classStart + 1, i)
+          try {
+            RegExp('[' + cs + ']')
+          } catch (er) {
+            // not a valid class!
+            var sp = this.parse(cs, SUBPARSE)
+            re = re.substr(0, reClassStart) + '\\[' + sp[0] + '\\]'
+            hasMagic = hasMagic || sp[1]
+            inClass = false
+            continue
+          }
+        }
+
+        // finish up the class.
+        hasMagic = true
+        inClass = false
+        re += c
+      continue
+
+      default:
+        // swallow any state char that wasn't consumed
+        clearStateChar()
+
+        if (escaping) {
+          // no need
+          escaping = false
+        } else if (reSpecials[c]
+          && !(c === '^' && inClass)) {
+          re += '\\'
+        }
+
+        re += c
+
+    } // switch
+  } // for
+
+  // handle the case where we left a class open.
+  // "[abc" is valid, equivalent to "\[abc"
+  if (inClass) {
+    // split where the last [ was, and escape it
+    // this is a huge pita.  We now have to re-walk
+    // the contents of the would-be class to re-translate
+    // any characters that were passed through as-is
+    cs = pattern.substr(classStart + 1)
+    sp = this.parse(cs, SUBPARSE)
+    re = re.substr(0, reClassStart) + '\\[' + sp[0]
+    hasMagic = hasMagic || sp[1]
+  }
+
+  // handle the case where we had a +( thing at the *end*
+  // of the pattern.
+  // each pattern list stack adds 3 chars, and we need to go through
+  // and escape any | chars that were passed through as-is for the regexp.
+  // Go through and escape them, taking care not to double-escape any
+  // | chars that were already escaped.
+  for (pl = patternListStack.pop(); pl; pl = patternListStack.pop()) {
+    var tail = re.slice(pl.reStart + pl.open.length)
+    this.debug('setting tail', re, pl)
+    // maybe some even number of \, then maybe 1 \, followed by a |
+    tail = tail.replace(/((?:\\{2}){0,64})(\\?)\|/g, function (_, $1, $2) {
+      if (!$2) {
+        // the | isn't already escaped, so escape it.
+        $2 = '\\'
+      }
+
+      // need to escape all those slashes *again*, without escaping the
+      // one that we need for escaping the | character.  As it works out,
+      // escaping an even number of slashes can be done by simply repeating
+      // it exactly after itself.  That's why this trick works.
+      //
+      // I am sorry that you have to see this.
+      return $1 + $1 + $2 + '|'
+    })
+
+    this.debug('tail=%j\n   %s', tail, tail, pl, re)
+    var t = pl.type === '*' ? star
+      : pl.type === '?' ? qmark
+      : '\\' + pl.type
+
+    hasMagic = true
+    re = re.slice(0, pl.reStart) + t + '\\(' + tail
+  }
+
+  // handle trailing things that only matter at the very end.
+  clearStateChar()
+  if (escaping) {
+    // trailing \\
+    re += '\\\\'
+  }
+
+  // only need to apply the nodot start if the re starts with
+  // something that could conceivably capture a dot
+  var addPatternStart = false
+  switch (re.charAt(0)) {
+    case '.':
+    case '[':
+    case '(': addPatternStart = true
+  }
+
+  // Hack to work around lack of negative lookbehind in JS
+  // A pattern like: *.!(x).!(y|z) needs to ensure that a name
+  // like 'a.xyz.yz' doesn't match.  So, the first negative
+  // lookahead, has to look ALL the way ahead, to the end of
+  // the pattern.
+  for (var n = negativeLists.length - 1; n > -1; n--) {
+    var nl = negativeLists[n]
+
+    var nlBefore = re.slice(0, nl.reStart)
+    var nlFirst = re.slice(nl.reStart, nl.reEnd - 8)
+    var nlLast = re.slice(nl.reEnd - 8, nl.reEnd)
+    var nlAfter = re.slice(nl.reEnd)
+
+    nlLast += nlAfter
+
+    // Handle nested stuff like *(*.js|!(*.json)), where open parens
+    // mean that we should *not* include the ) in the bit that is considered
+    // "after" the negated section.
+    var openParensBefore = nlBefore.split('(').length - 1
+    var cleanAfter = nlAfter
+    for (i = 0; i < openParensBefore; i++) {
+      cleanAfter = cleanAfter.replace(/\)[+*?]?/, '')
+    }
+    nlAfter = cleanAfter
+
+    var dollar = ''
+    if (nlAfter === '' && isSub !== SUBPARSE) {
+      dollar = '$'
+    }
+    var newRe = nlBefore + nlFirst + nlAfter + dollar + nlLast
+    re = newRe
+  }
+
+  // if the re is not "" at this point, then we need to make sure
+  // it doesn't match against an empty path part.
+  // Otherwise a/* will match a/, which it should not.
+  if (re !== '' && hasMagic) {
+    re = '(?=.)' + re
+  }
+
+  if (addPatternStart) {
+    re = patternStart + re
+  }
+
+  // parsing just a piece of a larger pattern.
+  if (isSub === SUBPARSE) {
+    return [re, hasMagic]
+  }
+
+  // skip the regexp for non-magical patterns
+  // unescape anything in it, though, so that it'll be
+  // an exact match against a file etc.
+  if (!hasMagic) {
+    return globUnescape(pattern)
+  }
+
+  var flags = options.nocase ? 'i' : ''
+  try {
+    var regExp = new RegExp('^' + re + '$', flags)
+  } catch (er) {
+    // If it was an invalid regular expression, then it can't match
+    // anything.  This trick looks for a character after the end of
+    // the string, which is of course impossible, except in multi-line
+    // mode, but it's not a /m regex.
+    return new RegExp('$.')
+  }
+
+  regExp._glob = pattern
+  regExp._src = re
+
+  return regExp
+}
+
+minimatch.makeRe = function (pattern, options) {
+  return new Minimatch(pattern, options || {}).makeRe()
+}
+
+Minimatch.prototype.makeRe = makeRe
+function makeRe () {
+  if (this.regexp || this.regexp === false) return this.regexp
+
+  // at this point, this.set is a 2d array of partial
+  // pattern strings, or "**".
+  //
+  // It's better to use .match().  This function shouldn't
+  // be used, really, but it's pretty convenient sometimes,
+  // when you just want to work with a regex.
+  var set = this.set
+
+  if (!set.length) {
+    this.regexp = false
+    return this.regexp
+  }
+  var options = this.options
+
+  var twoStar = options.noglobstar ? star
+    : options.dot ? twoStarDot
+    : twoStarNoDot
+  var flags = options.nocase ? 'i' : ''
+
+  var re = set.map(function (pattern) {
+    return pattern.map(function (p) {
+      return (p === GLOBSTAR) ? twoStar
+      : (typeof p === 'string') ? regExpEscape(p)
+      : p._src
+    }).join('\\\/')
+  }).join('|')
+
+  // must match entire pattern
+  // ending in a * or ** will make it less strict.
+  re = '^(?:' + re + ')$'
+
+  // can match anything, as long as it's not this.
+  if (this.negate) re = '^(?!' + re + ').*$'
+
+  try {
+    this.regexp = new RegExp(re, flags)
+  } catch (ex) {
+    this.regexp = false
+  }
+  return this.regexp
+}
+
+minimatch.match = function (list, pattern, options) {
+  options = options || {}
+  var mm = new Minimatch(pattern, options)
+  list = list.filter(function (f) {
+    return mm.match(f)
+  })
+  if (mm.options.nonull && !list.length) {
+    list.push(pattern)
+  }
+  return list
+}
+
+Minimatch.prototype.match = match
+function match (f, partial) {
+  this.debug('match', f, this.pattern)
+  // short-circuit in the case of busted things.
+  // comments, etc.
+  if (this.comment) return false
+  if (this.empty) return f === ''
+
+  if (f === '/' && partial) return true
+
+  var options = this.options
+
+  // windows: need to use /, not \
+  if (path.sep !== '/') {
+    f = f.split(path.sep).join('/')
+  }
+
+  // treat the test path as a set of pathparts.
+  f = f.split(slashSplit)
+  this.debug(this.pattern, 'split', f)
+
+  // just ONE of the pattern sets in this.set needs to match
+  // in order for it to be valid.  If negating, then just one
+  // match means that we have failed.
+  // Either way, return on the first hit.
+
+  var set = this.set
+  this.debug(this.pattern, 'set', set)
+
+  // Find the basename of the path by looking for the last non-empty segment
+  var filename
+  var i
+  for (i = f.length - 1; i >= 0; i--) {
+    filename = f[i]
+    if (filename) break
+  }
+
+  for (i = 0; i < set.length; i++) {
+    var pattern = set[i]
+    var file = f
+    if (options.matchBase && pattern.length === 1) {
+      file = [filename]
+    }
+    var hit = this.matchOne(file, pattern, partial)
+    if (hit) {
+      if (options.flipNegate) return true
+      return !this.negate
+    }
+  }
+
+  // didn't get any hits.  this is success if it's a negative
+  // pattern, failure otherwise.
+  if (options.flipNegate) return false
+  return this.negate
+}
+
+// set partial to true to test if, for example,
+// "/a/b" matches the start of "/*/b/*/d"
+// Partial means, if you run out of file before you run
+// out of pattern, then that's fine, as long as all
+// the parts match.
+Minimatch.prototype.matchOne = function (file, pattern, partial) {
+  var options = this.options
+
+  this.debug('matchOne',
+    { 'this': this, file: file, pattern: pattern })
+
+  this.debug('matchOne', file.length, pattern.length)
+
+  for (var fi = 0,
+      pi = 0,
+      fl = file.length,
+      pl = pattern.length
+      ; (fi < fl) && (pi < pl)
+      ; fi++, pi++) {
+    this.debug('matchOne loop')
+    var p = pattern[pi]
+    var f = file[fi]
+
+    this.debug(pattern, p, f)
+
+    // should be impossible.
+    // some invalid regexp stuff in the set.
+    if (p === false) return false
+
+    if (p === GLOBSTAR) {
+      this.debug('GLOBSTAR', [pattern, p, f])
+
+      // "**"
+      // a/**/b/**/c would match the following:
+      // a/b/x/y/z/c
+      // a/x/y/z/b/c
+      // a/b/x/b/x/c
+      // a/b/c
+      // To do this, take the rest of the pattern after
+      // the **, and see if it would match the file remainder.
+      // If so, return success.
+      // If not, the ** "swallows" a segment, and try again.
+      // This is recursively awful.
+      //
+      // a/**/b/**/c matching a/b/x/y/z/c
+      // - a matches a
+      // - doublestar
+      //   - matchOne(b/x/y/z/c, b/**/c)
+      //     - b matches b
+      //     - doublestar
+      //       - matchOne(x/y/z/c, c) -> no
+      //       - matchOne(y/z/c, c) -> no
+      //       - matchOne(z/c, c) -> no
+      //       - matchOne(c, c) yes, hit
+      var fr = fi
+      var pr = pi + 1
+      if (pr === pl) {
+        this.debug('** at the end')
+        // a ** at the end will just swallow the rest.
+        // We have found a match.
+        // however, it will not swallow /.x, unless
+        // options.dot is set.
+        // . and .. are *never* matched by **, for explosively
+        // exponential reasons.
+        for (; fi < fl; fi++) {
+          if (file[fi] === '.' || file[fi] === '..' ||
+            (!options.dot && file[fi].charAt(0) === '.')) return false
+        }
+        return true
+      }
+
+      // ok, let's see if we can swallow whatever we can.
+      while (fr < fl) {
+        var swallowee = file[fr]
+
+        this.debug('\nglobstar while', file, fr, pattern, pr, swallowee)
+
+        // XXX remove this slice.  Just pass the start index.
+        if (this.matchOne(file.slice(fr), pattern.slice(pr), partial)) {
+          this.debug('globstar found match!', fr, fl, swallowee)
+          // found a match.
+          return true
+        } else {
+          // can't swallow "." or ".." ever.
+          // can only swallow ".foo" when explicitly asked.
+          if (swallowee === '.' || swallowee === '..' ||
+            (!options.dot && swallowee.charAt(0) === '.')) {
+            this.debug('dot detected!', file, fr, pattern, pr)
+            break
+          }
+
+          // ** swallows a segment, and continue.
+          this.debug('globstar swallow a segment, and continue')
+          fr++
+        }
+      }
+
+      // no match was found.
+      // However, in partial mode, we can't say this is necessarily over.
+      // If there's more *pattern* left, then
+      if (partial) {
+        // ran out of file
+        this.debug('\n>>> no match, partial?', file, fr, pattern, pr)
+        if (fr === fl) return true
+      }
+      return false
+    }
+
+    // something other than **
+    // non-magic patterns just have to match exactly
+    // patterns with magic have been turned into regexps.
+    var hit
+    if (typeof p === 'string') {
+      if (options.nocase) {
+        hit = f.toLowerCase() === p.toLowerCase()
+      } else {
+        hit = f === p
+      }
+      this.debug('string match', p, f, hit)
+    } else {
+      hit = f.match(p)
+      this.debug('pattern match', p, f, hit)
+    }
+
+    if (!hit) return false
+  }
+
+  // Note: ending in / means that we'll get a final ""
+  // at the end of the pattern.  This can only match a
+  // corresponding "" at the end of the file.
+  // If the file ends in /, then it can only match a
+  // a pattern that ends in /, unless the pattern just
+  // doesn't have any more for it. But, a/b/ should *not*
+  // match "a/b/*", even though "" matches against the
+  // [^/]*? pattern, except in partial mode, where it might
+  // simply not be reached yet.
+  // However, a/b/ should still satisfy a/*
+
+  // now either we fell off the end of the pattern, or we're done.
+  if (fi === fl && pi === pl) {
+    // ran out of pattern and filename at the same time.
+    // an exact hit!
+    return true
+  } else if (fi === fl) {
+    // ran out of file, but still had pattern left.
+    // this is ok if we're doing the match as part of
+    // a glob fs traversal.
+    return partial
+  } else if (pi === pl) {
+    // ran out of pattern, still have file left.
+    // this is only acceptable if we're on the very last
+    // empty segment of a file with a trailing slash.
+    // a/* should match a/b/
+    var emptyFileEnd = (fi === fl - 1) && (file[fi] === '')
+    return emptyFileEnd
+  }
+
+  // should be unreachable.
+  throw new Error('wtf?')
+}
+
+// replace stuff like \* with *
+function globUnescape (s) {
+  return s.replace(/\\(.)/g, '$1')
+}
+
+function regExpEscape (s) {
+  return s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
+}
 
 
 /***/ })
