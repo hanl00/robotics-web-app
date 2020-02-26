@@ -49,10 +49,10 @@
 
         <!-- Sidebar -->
         <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">Robotics Foundations </div>
+            <div class="sidebar-heading">
+                <a href=" "> Robotics Foundations</a> </div>
             <div class="list-group list-group-flush">
-                <a href="/rfwa/devpage/" class="list-group-item list-group-item-action bg-light">Previous
-                    session</a>
+                <a href="/rfwa/workspace/" class="list-group-item list-group-item-action bg-light">Work page</a>
                 <a href="/rfwa/alllabs/" class="list-group-item list-group-item-action bg-light">All labs</a>
                 <a href="/rfwa/lectureslides/" class="list-group-item list-group-item-action bg-light">Lecture
                     slides</a>
@@ -61,7 +61,7 @@
                 <a href="/rfwa/feedback/" class="list-group-item list-group-item-action bg-light">Feedback</a>
                 <a href="/rfwa/summary/" class="list-group-item list-group-item-action bg-light">Summary</a>
                 {% if user.is_superuser %}
-                <a href="/rfwa/managev2/" class="list-group-item list-group-item-action bg-light">Manage</a>
+                <a href="/rfwa/manage/" class="list-group-item list-group-item-action bg-light">Manage</a>
                 {% endif %}
                 <!-- <button onclick="color()">Toggle dark mode</button> TOGGLE TO BE IMPLEMENTED ONCE CORE FEATURES ARE DONE -->
             </div>

@@ -1,1 +1,0 @@
-yarn run start --plugins=local-dir:/home/nicholas/Documents/robotics-web-app/src/theia/plugins

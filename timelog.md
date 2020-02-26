@@ -554,7 +554,9 @@
 * *1.5 hour* removed all script related items and delete lab now deletes both unzipped and zipped version
 
 
-
+## 26 FEBRUARY 2020
+* *1 hour* setting up and conducting user evaluation
+* *2.5 hour* minor changes on the web app(naming and redirection) + removed theia (not working) + looked into basic unit testing + submitting and resolving an issue found on theia. 1- not activating vscode python plugin on .ipynb files 2 - images not being loaded in notebooks
 
 
 

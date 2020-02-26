@@ -75,8 +75,8 @@ def alllabs(request):
     # context_dict = {'labs':lablist}
     return render(request, 'rfwa/alllabs.html', {'labs':labs})
 
-def devpage(request):
-    return render(request, 'rfwa/devpage.html')
+def workspace(request):
+    return render(request, 'rfwa/workspace.html')
 
 def summary(request):
     return render(request, 'rfwa/summary.html')
@@ -91,7 +91,7 @@ def manage(request):
         slides = Slide.objects.order_by('name')
         users = User.objects.all()
         context_dict = {'labs':labs, 'slides':slides, 'users': users}
-        return render(request, "rfwa/managev2.html", context_dict)
+        return render(request, "rfwa/manage.html", context_dict)
     else:
         return redirect("index")
 

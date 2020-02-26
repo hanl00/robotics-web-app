@@ -1,0 +1,122 @@
+{% extends "rfwa/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<script src="{% static 'javascript/manage.js' %}"></script>
+
+<style>
+	.badge-danger {
+		color: #fff;
+		background-color: #007bff;
+		border-color: #007bff;
+	}
+</style>
+{% endblock %}
+
+
+{% block body_block %}
+{% if user.is_superuser %}
+
+<div class="modal fade" id="showScriptPopup" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="showScriptTitle"></h4>
+			</div>
+			<div class="modal-body text-center">
+				<p id="showScriptBody"></p>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<h1 class="col-12 text-center mt-4">Manage Site</h1>
+	</div>
+
+	<!-- labs -->
+	<div class="row d-flex justify-content-around mt-4">
+		<div class="col-lg-4 col-md-10 col-sm-10 card bg-light mb-3">
+			<h2 class="text-center mt-4">Labs</h2>
+			<div class="d-flex justify-content-center">
+				<a href="{% url 'add_lab'%}"><button type="button" class="btn btn-primary">+ Add
+						Lab</button></a>
+			</div>
+			{% if labs %}
+			<ul class="list-group">
+				{% for lab in labs %}
+				<li class="d-flex justify-content-between">{{lab.name}}
+					<div>
+						<span class="badge badge-danger badge-pill ml-1"><a class="btn-link text-white"
+								href="/rfwa/delete_lab/{{ lab.slug }}"
+								onclick="return confirm('Are you sure you wish to delete {{ lab.name }}?')">Delete</a></span>
+					</div>
+				</li>
+				
+				<li style="line-height:200%" class="d-flex justify-content-between">Starts : {{lab.open_Date}} &nbsp; &nbsp; &nbsp; Ends : {{lab.close_Date}}</li>
+				<li style="line-height:200%" class="d-flex justify-content-center">Files : {{lab.lab_Files}}</li>
+				{% endfor %}
+			</ul>
+			{% else %}
+			<h3 class="text-center mt-3">There are no projects uploaded.</h3>
+			{% endif %}
+		</div>
+
+		<!-- scripts -->
+
+		<div class="col-lg-4 col-md-10 col-sm-10 card bg-light mb-3">
+			<h2 class="text-center mt-4">Scripts</h2>
+			<div class="d-flex justify-content-center">
+				<a href="{% url 'add_script'%}"><button type="button" class="btn btn-primary">+ Add
+						Script</button></a>
+			</div>
+			{% if scripts %}
+			<ul class="list-group">
+				{% for script in scripts %}
+				<li class="d-flex justify-content-between">{{script.name}}
+					<div>
+						<span class="badge badge-danger badge-pill ml-1"><a class="btn-link text-white"
+								href="/rfwa/delete_script/{{ script.slug }}"
+								onclick="return confirm('Are you sure you wish to delete {{ project.name }}?')">Delete</a></span>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+			{% else %}
+			<h3 class="text-center mt-3">There are no scripts uploaded.</h3>
+			{% endif %}
+		</div>
+
+		<!-- slides -->
+
+		<div class="col-lg-4 col-md-10 col-sm-10 card bg-light mb-3">
+			<h2 class="text-center mt-4">Slides</h2>
+			<div class="d-flex justify-content-center">
+				<a href="{% url 'add_slide'%}"><button type="button" class="btn btn-primary">+ Add
+						Slide</button></a>
+			</div>
+			{% if slides %}
+			<ul class="list-group">
+				{% for slide in slides %}
+				<li class="d-flex justify-content-between">{{slide.name}}
+					<div>
+						<span class="badge badge-danger badge-pill ml-1"><a class="btn-link text-white"
+								href="/rfwa/delete_slide/{{ slide.slug }}"
+								onclick="return confirm('Are you sure you wish to delete {{ slide.name }}?')">Delete</a></span>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+			{% else %}
+			<h3 class="text-center mt-3">There are no slides uploaded.</h3>
+			{% endif %}
+		</div>
+
+		<!-- maybe an analytical panel-->
+
+	</div>
+	{% endif %}
+
+	{% endblock %}
