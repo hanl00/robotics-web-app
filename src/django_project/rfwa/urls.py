@@ -3,7 +3,7 @@ from django.urls import path, re_path
 from rfwa import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('home/', views.index, name='index'),
     #url(r'^about/', views.about, name='about'),
     path('lectureslides/', views.lectureslides, name='lectureslides'),
     path('alllabs/', views.alllabs, name='alllabs'),

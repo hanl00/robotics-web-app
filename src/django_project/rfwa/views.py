@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 import time
 import signal
 import shutil
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -26,7 +27,7 @@ def index(request):
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.
-    return render(request, 'rfwa/index.html')
+    return render(request, 'rfwa/home.html')
 
 def register(request):
     if request.method == 'POST':
@@ -42,7 +43,7 @@ def register(request):
         form = SignUpForm()
     return render(request, 'rfwa/register.html', {'form': form})
    
-
+@login_required
 def lectureslides(request):
     slides = Slide.objects.order_by('name')
     return render(request, 'rfwa/lectureslides.html', {'slides':slides})
@@ -78,6 +79,7 @@ def alllabs(request):
 def workspace(request):
     return render(request, 'rfwa/workspace.html')
 
+@login_required
 def summary(request):
     return render(request, 'rfwa/summary.html')
 

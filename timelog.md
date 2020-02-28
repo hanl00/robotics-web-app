@@ -541,22 +541,38 @@
 * **Total : 250 hours**
 
 
+### Week 7
 ## 24 FEBRUARY 2020
 * *1 hour* updated the introduction and debriefing scripts, replaced older and sample versions of theia with theia switch workspace extension, updated the trello board
 * *1 hour* resolved issue being unable to commit, npm uninstall puppeteer and electron/dist/electron. Update: resulted in cli issue instead
 * *1 hour* made sample lab1 for user evaluation
-* **Total : 251.5 hours**
+* **Total : 253 hours**
 
 
 ## 25 FEBRUARY 2020
 * *2.5 hour* updated sample lab 2 and google forms, devpage now automatically postmessage to theia
 * *1.5 hour* setting up and conducting user evaluation
 * *1.5 hour* removed all script related items and delete lab now deletes both unzipped and zipped version
+* **Total : 258.5 hours**
 
 
 ## 26 FEBRUARY 2020
 * *1 hour* setting up and conducting user evaluation
 * *2.5 hour* minor changes on the web app(naming and redirection) + removed theia (not working) + looked into basic unit testing + submitting and resolving an issue found on theia. 1- not activating vscode python plugin on .ipynb files 2 - images not being loaded in notebooks
+* *1 hour* logo now goes to index/home page, fixed styling issue, to add more content in there
+* **Total : 263 hours**
+
+
+## 27 FEBRUARY 2020
+* *2 hour* django unit test and css changes on the web app
+* **Total : 265 hours**
+
+
+## 28 FEBRUARY 2020
+* *0.5 hour* setting up and conducting user evaluation
+* *2.5 hour* unit testing on views
+* **Total : 268 hours**
+
 
 
 

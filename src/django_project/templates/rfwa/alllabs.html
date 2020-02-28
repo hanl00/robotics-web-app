@@ -39,7 +39,7 @@
             <div class="row pb-2 justify-content-around mt-4">
               <button class="btn btn-primary font-weight-bold loadProjectButton test"
                 value="{{ lab.lab_Files.path }}">Load lab</button>
-              <!-- onclick=" window.open('/rfwa/devpage', '_self')" -->
+              <!-- onclick=" window.open('/rfwa/workspace', '_self')" -->
             </div>
           </div>
         </div>
@@ -103,8 +103,8 @@
       var newValue = fired_button.replace('.zip', '');
       sessionStorage.setItem("Workspace", newValue)
       // alert(newValue);
-      // alert("redirecting to the dev page");
-      window.location.href = '/rfwa/devpage/';
+      // alert("redirecting to the work page");
+      window.location.href = '/rfwa/workspace/';
     });
 
 
