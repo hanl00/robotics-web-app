@@ -21,12 +21,6 @@ from django.http import HttpResponse
 ## GENERAL FEATURES 
 
 def index(request):
-    # Construct a dictionary to pass to the template engine as its context.
-    # Note the key boldmessage is the same as {{ boldmessage }} in the template!
-    # context_dict = {'boldmessage': 'Crunchy, creamy, cookie, candy, cupcake!'}
-    # Return a rendered response to send to the client.
-    # We make use of the shortcut function to make our lives easier.
-    # Note that the first parameter is the template we wish to use.
     return render(request, 'rfwa/home.html')
 
 def register(request):
@@ -48,6 +42,7 @@ def lectureslides(request):
     slides = Slide.objects.order_by('name')
     return render(request, 'rfwa/lectureslides.html', {'slides':slides})
 
+@login_required
 def feedback(request):
     user = User.objects.get(username=request.user.username)
     try:
@@ -61,21 +56,12 @@ def feedback(request):
 
 
 # labs 
-
+@login_required
 def alllabs(request):
     labs = Lab.objects.order_by('open_Date')
-    
-
-    #match labs upload zip to unzipped version uri
-
-    
-    # lablist = []
-    # for lab in lablist:
-        # if lab.openDate <= timezone.now():
-            # lablist.append(lab)
-    # context_dict = {'labs':lablist}
     return render(request, 'rfwa/alllabs.html', {'labs':labs})
 
+@login_required
 def workspace(request):
     return render(request, 'rfwa/workspace.html')
 
@@ -87,6 +73,7 @@ def summary(request):
 
 ## ADMIN MANAGE
 
+@login_required
 def manage(request):
     if request.user.is_superuser:
         labs = Lab.objects.order_by('open_Date')
@@ -99,11 +86,13 @@ def manage(request):
 
 # labs 
 
+@login_required
 def manage_labs(request):
     if request.user.is_superuser:
         labs = Lab.objects.order_by('open_Date')
     return render(request, "rfwa/manage_labs.html", {'labs': labs})
 
+@login_required
 def add_lab(request):
     if request.user.is_superuser:
         if request.method == 'POST':
@@ -118,7 +107,8 @@ def add_lab(request):
         })
     else:
         return redirect("index")
-    
+
+@login_required  
 def unzip_lab(request, labName):
     try:
         lab = Lab.objects.get(slug=labName)
@@ -133,6 +123,7 @@ def unzip_lab(request, labName):
             zip_ref.extractall('../django_project/media/labs/')
     return redirect("manage")
 
+@login_required
 def delete_lab(request, labName):
     try:
         lab = Lab.objects.get(slug=labName)
@@ -151,11 +142,13 @@ def delete_lab(request, labName):
 
 # feedbacks
 
+@login_required
 def manage_feedback(request):
     if request.user.is_superuser:
         users = User.objects.all()
     return render(request, "rfwa/manage_feedback.html", {'users':users})
 
+@login_required
 def add_feedback(request):
     if request.user.is_superuser:
         if request.method == 'POST':
@@ -187,11 +180,13 @@ def add_feedback(request):
 
 # slides
 
+@login_required
 def manage_slides(request):
     if request.user.is_superuser:
         slides = Slide.objects.order_by('name')
     return render(request, "rfwa/manage_slides.html", {'slides':slides})
 
+@login_required
 def add_slide(request):
     if request.user.is_superuser:
         if request.method == 'POST':
@@ -207,6 +202,7 @@ def add_slide(request):
     else:
         return redirect("index")
 
+@login_required
 def delete_slide(request, slideName):
     try:
         slide = Slide.objects.get(slug=slideName)

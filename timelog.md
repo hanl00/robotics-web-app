@@ -574,6 +574,12 @@
 * **Total : 268 hours**
 
 
+## 1 MARCH 2020
+* *2.5 hours* : added more stuff to unit testing, can test view and models now, used model_mommy ( pip install model_mommy)
+
+
+
+
 
 
 
