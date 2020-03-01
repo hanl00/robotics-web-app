@@ -575,8 +575,9 @@
 
 
 ## 1 MARCH 2020
-* *2.5 hours* : added more stuff to unit testing, can test view and models now, used model_mommy ( pip install model_mommy)
-
+* *2.5 hour* : added more stuff to unit testing, can test view and models now, used model_mommy (pip install model_mommy)
+* *0.5 hour* setting up and conducting user evaluation
+* *2 hour* added unit testing for forms and models, testing code coverage by installing coverage (pip install coverage)
 
 
 

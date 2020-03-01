@@ -14,6 +14,13 @@ List the all of the pre-requisites software required to set up your project (e.g
 For example:
 
 * Python 3.7
+* Django                             2.2.6
+* yarn
+* tigervnc
+
+* for testing:
+* model-mommy                        2.0.0 
+* coverage                           5.0.3
 * Packages: listed in `requirements.txt` 
 * Tested on Windows 10
 

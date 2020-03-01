@@ -56,3 +56,7 @@ class Feedback(models.Model):
     def save(self, *args, **kwargs):
         self.slug = '-'.join((slugify(self.assignedStudent_username), slugify(self.week_number)))
         super(Feedback, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        temp = self.assignedStudent_username + "-" + self.week_number
+        return temp
