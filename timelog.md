@@ -575,9 +575,27 @@
 
 
 ## 1 MARCH 2020
-* *2.5 hour* : added more stuff to unit testing, can test view and models now, used model_mommy (pip install model_mommy)
+* *2.5 hour* added more stuff to unit testing, can test view and models now, used model_mommy (pip install model_mommy)
 * *0.5 hour* setting up and conducting user evaluation
 * *2 hour* added unit testing for forms and models, testing code coverage by installing coverage (pip install coverage)
+* **Total : 273 hours**
+
+
+## 2 MARCH 2020
+* *2 hour* tried to upgrade to Theia's latest version 0.16.0 which would automatically activate vs-code python extension, unsuccesful. stuck on preload instead. reverted to older version of theia to conduct user evaluation. #Issue a
+* *0.5 hour* recoding changes made between older version of theia extension on repo (pulled ) and current extension (not working due to theia version)
+* *0.5 hour* resolved #Issue a using git clean -ffdx and building again
+* *0.5 hour* setting up and conducting user evaluation
+* **Total : 276.5 hours**
+
+
+## 3 MARCH 2020
+* *2 hour* conducted user evaluation
+* **Total : 278.5 hours**
+
+
+
+
 
 
 
