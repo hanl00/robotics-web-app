@@ -594,6 +594,10 @@
 * **Total : 278.5 hours**
 
 
+## 4 MARCH 2020
+* *2 hour* trying to display student id in view user page
+
+
 
 
 

@@ -32,7 +32,10 @@ def register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+            print("success")
             return redirect('login')
+        else:
+            print("form is not valid")
     else:
         form = SignUpForm()
     return render(request, 'rfwa/register.html', {'form': form})

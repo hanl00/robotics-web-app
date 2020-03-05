@@ -10,7 +10,8 @@ class SignUpForm(UserCreationForm):
     username = forms.CharField(help_text=False)
     first_name = forms.CharField(max_length=30, required=True, help_text=False)
     last_name = forms.CharField(max_length=30, required=True, help_text=False)
-    student_id = forms.CharField(help_text=False)
+    insurance_id = forms.CharField(required=True, label="Insurance ID")
+    insurance_provider = forms.CharField(required=True, label="Insurance Provider")
     
 
     # def clean_email(self):
@@ -21,8 +22,16 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'student_id', 'password1', 'password2', )
+        fields = ('username', 'first_name', 'last_name', 'insurance_id', 'insurance_provider', 'password1', 'password2', )
 
+    def save(self, commit=True):
+        user = super(UserCreationForm, self).save(commit=False)
+        user.set_password(self.clean_password2())
+        user.insurance_id = self.cleaned_data["insurance_id"]
+        user.insurance_provider = self.cleaned_data["insurance_provider"]
+        if commit:
+            user.save()
+        return user
 
 class LabForm(forms.ModelForm):
 
