@@ -34,45 +34,49 @@
 
     <!-- main heading -->
     <div class="row">
-        <h1 class="col-12 text-center mt-4">Manage Slides <a class="rightside" href="/rfwa/manage/"><button
+        <h1 class="col-12 text-center mt-4">Manage Feedback <a class="rightside" href="/rfwa/manage/"><button
                     type="button" class="btn btn-primary">Back</button></a></h1>
     </div>
 
-    <!-- Slides -->
+    <!-- Lab -->
     <div class="table-group">
         <div class="title-group">
-            <h1 class="col-12 text-left table-header">Slides
-                <a class="rightside" href="{% url 'add_slide'%}"><button type="button" class="btn btn-primary">+ Add
-                        Slides</button></a>
+            <h1 class="col-12 text-left table-header">Students
+                <a class="rightside" href="{% url 'add_feedback'%}"><button type="button" class="btn btn-primary">+ Add
+                        Feedback</button></a>
             </h1>
         </div>
 
         <table class="table table-hover">
-            {% if slides %}
+            {% if users %}
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Files</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Student ID</th>
+                    <th scope="col">addition infomation</th>
+                    <!-- <th scope="col">Actions</th> -->
                 </tr>
             </thead>
-            {% for slide in slides %}
+            {% for user in users %}
             <tbody>
                 <tr>
-                    <td>{{slide.name}}</td>
-                    <td>{{slide.lecture_Files}}</td>
-                    <td><a class="btn-link text-white badge badge-danger badge-pill ml-1"
-                            href="/rfwa/delete_slide/{{ slide.slug }}"
-                            onclick="return confirm('Are you sure you wish to delete {{ slide.name }}?')">Delete</a>
-                    </td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.first_name}}</td>
+                    <td>{{user.last_name}}</td>
+                    <td>{{user.insurance_id}}</td>
+                    <td>{{user.insurance_provider}}</td>
                 </tr>
             </tbody>
+
             {% endfor %}
             {% else %}
-            <h3 class="text-center mt-3">There are no slides uploaded.</h3>
+            <h3 class="text-center mt-3">There are no users.</h3>
             {% endif %}
         </table>
     </div>
+
 </div>
 {% endif %}
 {% endblock %}

@@ -18,10 +18,12 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse
 
-## GENERAL FEATURES 
+# GENERAL FEATURES
+
 
 def index(request):
     return render(request, 'rfwa/home.html')
+
 
 def register(request):
     if request.method == 'POST':
@@ -39,11 +41,13 @@ def register(request):
     else:
         form = SignUpForm()
     return render(request, 'rfwa/register.html', {'form': form})
-   
+
+
 @login_required
 def lectureslides(request):
     slides = Slide.objects.order_by('name')
-    return render(request, 'rfwa/lectureslides.html', {'slides':slides})
+    return render(request, 'rfwa/lectureslides.html', {'slides': slides})
+
 
 @login_required
 def feedback(request):
@@ -54,27 +58,28 @@ def feedback(request):
         feedback = None
     except ValueError:
         feedback = None
-    context_dict = {'current_user': user, 'feedbacks':feedbacks}
+    context_dict = {'current_user': user, 'feedbacks': feedbacks}
     return render(request, 'rfwa/feedback.html', context_dict)
 
 
-# labs 
+# labs
 @login_required
 def alllabs(request):
     labs = Lab.objects.order_by('open_Date')
-    return render(request, 'rfwa/alllabs.html', {'labs':labs})
+    return render(request, 'rfwa/alllabs.html', {'labs': labs})
+
 
 @login_required
 def workspace(request):
     return render(request, 'rfwa/workspace.html')
+
 
 @login_required
 def summary(request):
     return render(request, 'rfwa/summary.html')
 
 
-
-## ADMIN MANAGE
+# ADMIN MANAGE
 
 @login_required
 def manage(request):
@@ -82,18 +87,20 @@ def manage(request):
         labs = Lab.objects.order_by('open_Date')
         slides = Slide.objects.order_by('name')
         users = User.objects.all()
-        context_dict = {'labs':labs, 'slides':slides, 'users': users}
+        context_dict = {'labs': labs, 'slides': slides, 'users': users}
         return render(request, "rfwa/manage.html", context_dict)
     else:
         return redirect("index")
 
-# labs 
+# labs
+
 
 @login_required
 def manage_labs(request):
     if request.user.is_superuser:
         labs = Lab.objects.order_by('open_Date')
     return render(request, "rfwa/manage_labs.html", {'labs': labs})
+
 
 @login_required
 def add_lab(request):
@@ -111,7 +118,8 @@ def add_lab(request):
     else:
         return redirect("index")
 
-@login_required  
+
+@login_required
 def unzip_lab(request, labName):
     try:
         lab = Lab.objects.get(slug=labName)
@@ -119,12 +127,13 @@ def unzip_lab(request, labName):
         lab = None
     except ValueError:
         lab = None
-    
+
     if lab:
         with zipfile.ZipFile(lab.lab_Files.url[1:], 'r') as zip_ref:
             print(lab.lab_Files.url[1:])
             zip_ref.extractall('../django_project/media/labs/')
     return redirect("manage")
+
 
 @login_required
 def delete_lab(request, labName):
@@ -135,7 +144,7 @@ def delete_lab(request, labName):
     except ValueError:
         lab = None
 
-    #if it exists, delete it
+    # if it exists, delete it
     if lab:
         unzipped_lab = lab.lab_Files.path
         shutil.rmtree(unzipped_lab[:-4])
@@ -145,11 +154,13 @@ def delete_lab(request, labName):
 
 # feedbacks
 
+
 @login_required
 def manage_feedback(request):
     if request.user.is_superuser:
-        users = User.objects.all()
-    return render(request, "rfwa/manage_feedback.html", {'users':users})
+        feedbacks = Feedback.objects.all()
+    return render(request, "rfwa/manage_feedback.html", {'feedbacks': feedbacks})
+
 
 @login_required
 def add_feedback(request):
@@ -167,19 +178,19 @@ def add_feedback(request):
     else:
         return redirect("index")
 
-# def delete_feedback(request, labName):
-#     try:
-#         lab = Lab.objects.get(slug=labName)
-#     except Lab.DoesNotExist:
-#         lab = None
-#     except ValueError:
-#         lab = None
 
-#     #if it exists, delete it
-#     if lab:
-#         os.remove(lab.lab_Files.url[1:])
-#         lab.delete()
-#     return redirect("manage")
+def delete_feedback(request, slugName):
+    try:
+        feedback = Feedback.objects.get(slug=slugName)
+    except feedback.DoesNotExist:
+        feedback = None
+    except ValueError:
+        feedback = None
+
+    # if it exists, delete it
+    if feedback:
+        feedback.delete()
+    return redirect("manage_feedback")
 
 # slides
 
@@ -208,14 +219,22 @@ def add_slide(request):
 @login_required
 def delete_slide(request, slideName):
     try:
-        slide = Slide.objects.get(slug=slideName)
+        slide = Slide.objects.get(name=slideName)
     except slide.DoesNotExist:
         slide = None
     except ValueError:
         slide = None
 
-    #if it exists, delete it
+    # if it exists, delete it
     if slide:
         os.remove(slide.lecture_Files.url[1:])
         slide.delete()
     return redirect("manage")
+
+# view all users
+
+@login_required
+def view_users(request):
+    if request.user.is_superuser:
+        users = User.objects.all()
+    return render(request, "rfwa/view_users.html", {'users':users})

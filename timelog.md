@@ -596,7 +596,12 @@
 
 ## 4 MARCH 2020
 * *2 hour* trying to display student id in view user page
+* **Total : 280.5 hours**
 
+
+## 5 MARCH 2020
+* *3.5 hour* update the url path to django 3.0, superuser can now view and delete feedback
+* **Total : 284 hours**
 
 
 

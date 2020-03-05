@@ -9,10 +9,7 @@ class SignUpForm(UserCreationForm):
 
     username = forms.CharField(help_text=False)
     first_name = forms.CharField(max_length=30, required=True, help_text=False)
-    last_name = forms.CharField(max_length=30, required=True, help_text=False)
-    insurance_id = forms.CharField(required=True, label="Insurance ID")
-    insurance_provider = forms.CharField(required=True, label="Insurance Provider")
-    
+    last_name = forms.CharField(max_length=30, required=True, help_text=False)    
 
     # def clean_email(self):
     #     data = self.cleaned_data['email']
@@ -22,7 +19,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'insurance_id', 'insurance_provider', 'password1', 'password2', )
+        fields = ('username', 'first_name', 'last_name', 'password1', 'password2', )
 
     def save(self, commit=True):
         user = super(UserCreationForm, self).save(commit=False)
@@ -76,9 +73,9 @@ class FeedbackForm(forms.ModelForm):
     assignedStudent_username = forms.CharField(max_length = 50, label="Assign student username")
     week_number = forms.CharField(label="Week number", widget=forms.Select(choices=WEEK_CHOICES))
     grade = forms.CharField(label="Grade", widget=forms.Select(choices=GRADE_CHOICES))
-    description = forms.CharField(max_length = 50, label="Feedback")
+    comments = forms.CharField(max_length = 500, label="Feedback")
 
     class Meta:
         model = Feedback
-        fields = ('assignedStudent_username', 'week_number', 'grade', 'description' )
+        fields = ('assignedStudent_username', 'week_number', 'grade', 'comments' )
     
