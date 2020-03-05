@@ -601,7 +601,8 @@
 
 ## 5 MARCH 2020
 * *3.5 hour* update the url path to django 3.0, superuser can now view and delete feedback
-* **Total : 284 hours**
+* *2 hour* feedbacks can now be updated, urls improvements for managing feedback/slides/labs
+* **Total : 286 hours**
 
 
 

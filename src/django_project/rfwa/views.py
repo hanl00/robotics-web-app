@@ -109,7 +109,7 @@ def add_lab(request):
             form = LabForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
-                return redirect('manage')
+                return redirect('manage_labs')
         else:
             form = LabForm()
         return render(request, 'rfwa/add_lab.html', {
@@ -132,7 +132,7 @@ def unzip_lab(request, labName):
         with zipfile.ZipFile(lab.lab_Files.url[1:], 'r') as zip_ref:
             print(lab.lab_Files.url[1:])
             zip_ref.extractall('../django_project/media/labs/')
-    return redirect("manage")
+    return redirect("manage_labs")
 
 
 @login_required
@@ -147,58 +147,23 @@ def delete_lab(request, labName):
     # if it exists, delete it
     if lab:
         unzipped_lab = lab.lab_Files.path
-        shutil.rmtree(unzipped_lab[:-4])
+        try:
+            shutil.rmtree(unzipped_lab[:-4])
+        except:
+            pass
         os.remove(lab.lab_Files.url[1:])
         lab.delete()
-    return redirect("manage")
-
-# feedbacks
-
-
-@login_required
-def manage_feedback(request):
-    if request.user.is_superuser:
-        feedbacks = Feedback.objects.all()
-    return render(request, "rfwa/manage_feedback.html", {'feedbacks': feedbacks})
-
-
-@login_required
-def add_feedback(request):
-    if request.user.is_superuser:
-        if request.method == 'POST':
-            form = FeedbackForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.save()
-                return redirect('manage')
-        else:
-            form = FeedbackForm()
-        return render(request, 'rfwa/add_feedback.html', {
-            'form': form
-        })
-    else:
-        return redirect("index")
-
-
-def delete_feedback(request, slugName):
-    try:
-        feedback = Feedback.objects.get(slug=slugName)
-    except feedback.DoesNotExist:
-        feedback = None
-    except ValueError:
-        feedback = None
-
-    # if it exists, delete it
-    if feedback:
-        feedback.delete()
-    return redirect("manage_feedback")
+    return redirect("manage_labs")
 
 # slides
+
 
 @login_required
 def manage_slides(request):
     if request.user.is_superuser:
         slides = Slide.objects.order_by('name')
-    return render(request, "rfwa/manage_slides.html", {'slides':slides})
+    return render(request, "rfwa/manage_slides.html", {'slides': slides})
+
 
 @login_required
 def add_slide(request):
@@ -207,7 +172,7 @@ def add_slide(request):
             form = SlideForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
-                return redirect('manage')
+                return redirect('manage_slides')
         else:
             form = SlideForm()
         return render(request, 'rfwa/add_slide.html', {
@@ -215,6 +180,7 @@ def add_slide(request):
         })
     else:
         return redirect("index")
+
 
 @login_required
 def delete_slide(request, slideName):
@@ -229,12 +195,68 @@ def delete_slide(request, slideName):
     if slide:
         os.remove(slide.lecture_Files.url[1:])
         slide.delete()
-    return redirect("manage")
+    return redirect("manage_slides")
+
+# feedbacks
+
+
+@login_required
+def manage_feedbacks(request):
+    if request.user.is_superuser:
+        feedbacks = Feedback.objects.all()
+    return render(request, "rfwa/manage_feedbacks.html", {'feedbacks': feedbacks})
+
+
+@login_required
+def add_feedback(request):
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            form = FeedbackForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('manage_feedbacks')
+        else:
+            form = FeedbackForm()
+        return render(request, 'rfwa/add_feedback.html', {
+            'form': form
+        })
+    else:
+        return redirect("index")
+
+
+@login_required
+def update_feedback(request, slugName):
+
+    current_feedback = Feedback.objects.get(slug=slugName)
+    form = FeedbackForm(instance=current_feedback)
+
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST, instance=feedback)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_feedbacks')
+    
+    return render(request, 'rfwa/add_feedback.html', {'form': form})
+
+
+def delete_feedback(request, slugName):
+    try:
+        feedback = Feedback.objects.get(slug=slugName)
+    except feedback.DoesNotExist:
+        feedback = None
+    except ValueError:
+        feedback = None
+
+    # if it exists, delete it
+    if feedback:
+        feedback.delete()
+    return redirect("manage_feedbacks")
 
 # view all users
+
 
 @login_required
 def view_users(request):
     if request.user.is_superuser:
         users = User.objects.all()
-    return render(request, "rfwa/view_users.html", {'users':users})
+    return render(request, "rfwa/view_users.html", {'users': users})

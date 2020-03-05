@@ -26,8 +26,9 @@ urlpatterns = [
     path("delete_slide/<str:slideName>/", views.delete_slide, name='delete_slide'),
     
     #feedbacks
-    path("manage_feedback/", views.manage_feedback, name="manage_feedback"),
+    path("manage_feedbacks/", views.manage_feedbacks, name="manage_feedbacks"),
     path("add_feedback/", views.add_feedback, name="add_feedback"),
+    path("update_feedback/<slug:slugName>/", views.update_feedback, name='update_feedback'),
     path("delete_feedback/<slug:slugName>/", views.delete_feedback, name='delete_feedback'),
 
     #display users

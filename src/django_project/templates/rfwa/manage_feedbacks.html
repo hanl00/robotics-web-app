@@ -60,17 +60,21 @@
                 </tr>
             </thead>
             {% for feedback in feedbacks %}
-            
+
             <tbody>
                 <tr>
                     <td>{{feedback.assignedStudent_username}}</td>
                     <td>{{feedback.week_number}}</td>
                     <td>{{feedback.grade}}</td>
-                    <td>{{feedback.Comments}}</td>
-                    <td><a class="btn-link text-white badge badge-danger badge-pill ml-1"
-                        href="/rfwa/delete_feedback/{{ feedback.slug }}"
-                        onclick="return confirm('Are you sure you wish to delete {{ feedback.slug }}?')">Delete</a>
-                </td>
+                    <td>{{feedback.comments}}</td>
+                    <td>
+                        <a class="btn-link text-white badge badge-danger badge-pill ml-1"
+                            href="{% url  'update_feedback' feedback.slug %}"
+                            onclick="return confirm('Do you sure you wish to update {{ feedback.slug }}?')">Update</a>
+                        <a class="btn-link text-white badge badge-danger badge-pill ml-1"
+                            href="{% url  'delete_feedback' feedback.slug %}"
+                            onclick="return confirm('Do you sure you wish to delete {{ feedback.slug }}?')">Delete</a>
+                    </td>
                 </tr>
             </tbody>
 

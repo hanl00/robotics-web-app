@@ -34,9 +34,10 @@
 
     <!-- main heading -->
     <div class="row">
-        <h1 class="col-12 text-center mt-4">Manage Labs <a class="rightside" href="/rfwa/manage/"><button type="button" class="btn btn-primary">Back</button></a></h1>
+        <h1 class="col-12 text-center mt-4">Manage Labs <a class="rightside" href="/rfwa/manage/"><button type="button"
+                    class="btn btn-primary">Back</button></a></h1>
 
-        
+
     </div>
 
     <!-- Lab -->
@@ -66,12 +67,14 @@
                     <td>{{lab.open_Date}}</td>
                     <td>{{lab.close_Date}}</td>
                     <td>{{lab.lab_Files}}</td>
-                    <td><a class="btn-link text-white badge badge-danger badge-pill ml-1"
-                            href="/rfwa/delete_lab/{{ lab.slug }}"
-                            onclick="return confirm('Are you sure you wish to delete {{ lab.name }}?')">Delete</a> <a
-                            class="btn-link text-white badge badge-danger badge-pill ml-1"
-                            href="/rfwa/unzip_lab/{{ lab.slug }}"
-                            onclick="return confirm('Are you sure you wish to unzip {{ lab.name }}?')">unzip</a></td>
+                    <td>
+                        <a class="btn-link text-white badge badge-danger badge-pill ml-1"
+                            href="{% url  'unzip_lab' lab.slug %}"
+                            onclick="return confirm('Are you sure you wish to unzip {{ lab.name }}?')">Unzip</a>
+                        <a class="btn-link text-white badge badge-danger badge-pill ml-1"
+                            href="{% url  'delete_lab' lab.slug %}"
+                            onclick="return confirm('Are you sure you wish to delete {{ lab.name }}?')">Delete</a>
+                    </td>
 
                 </tr>
             </tbody>
