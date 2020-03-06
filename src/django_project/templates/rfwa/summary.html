@@ -8,6 +8,19 @@
 
 <div class="container-fluid">
   <h1 class="mt-4">Profile</h1>
+  <p>Sample details displayed here</p>
+  <p>First name: {{user.first_name}}</p>
+  <h1 class="mt-4">Task Manager</h1>
+  {% for lab in labs %}
+
+  <ul>
+    <li v-for="(todo, index) in todos">
+      <input type="checkbox" :id="`todo-${index}`" v-model="todo.done"> 
+      <label :for="`todo-${index}`">{{lab.name}}</label>     
+    </li>
+  </ul>
+  {% endfor %}
+
  
 </div>
 

@@ -21,14 +21,14 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'password1', 'password2', )
 
-    def save(self, commit=True):
-        user = super(UserCreationForm, self).save(commit=False)
-        user.set_password(self.clean_password2())
-        user.insurance_id = self.cleaned_data["insurance_id"]
-        user.insurance_provider = self.cleaned_data["insurance_provider"]
-        if commit:
-            user.save()
-        return user
+    # def save(self, commit=True):
+    #     user = super(UserCreationForm, self).save(commit=False)
+    #     user.set_password(self.clean_password2())
+    #     user.insurance_id = self.cleaned_data["insurance_id"]
+    #     user.insurance_provider = self.cleaned_data["insurance_provider"]
+    #     if commit:
+    #         user.save()
+    #     return user
 
 class LabForm(forms.ModelForm):
 

@@ -62,7 +62,10 @@
                     <td>{{slide.name}}</td>
                     <td>{{slide.lecture_Files}}</td>
                     <td><a class="btn-link text-white badge badge-danger badge-pill ml-1"
-                            href="/rfwa/delete_slide/{{ slide.slug }}"
+                            href="{% url  'update_slide' slide.slug %}"
+                            onclick="return confirm('Do you wish to update {{ slide.name }}?')">Update</a>
+                        <a class="btn-link text-white badge badge-danger badge-pill ml-1"
+                            href="{% url  'delete_slide' slide.slug %}"
                             onclick="return confirm('Are you sure you wish to delete {{ slide.name }}?')">Delete</a>
                     </td>
                 </tr>

@@ -605,6 +605,11 @@
 * **Total : 286 hours**
 
 
+## 6 MARCH 2020
+* *1.5 hour* superuser can now update slides and lab, implemented basic task manager and minor updates to user summary page
+
+
+
 
 
 

@@ -50,7 +50,7 @@
         </div>
 
         <table class="table table-hover">
-            {% if labs %}
+            {% if labs %} 
             <thead>
                 <tr>
                     <th scope="col">Name</th>
@@ -71,6 +71,9 @@
                         <a class="btn-link text-white badge badge-danger badge-pill ml-1"
                             href="{% url  'unzip_lab' lab.slug %}"
                             onclick="return confirm('Are you sure you wish to unzip {{ lab.name }}?')">Unzip</a>
+                        <a class="btn-link text-white badge badge-danger badge-pill ml-1"
+                            href="{% url  'update_lab' lab.slug %}"
+                            onclick="return confirm('Do you sure you wish to update {{ lab.name }}?')">Update</a>
                         <a class="btn-link text-white badge badge-danger badge-pill ml-1"
                             href="{% url  'delete_lab' lab.slug %}"
                             onclick="return confirm('Are you sure you wish to delete {{ lab.name }}?')">Delete</a>

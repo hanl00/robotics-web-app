@@ -75,8 +75,11 @@ def workspace(request):
 
 
 @login_required
-def summary(request):
-    return render(request, 'rfwa/summary.html')
+def summary(request, username):
+    user = User.objects.get(username=username)
+    labs = Lab.objects.order_by('close_Date')
+    context_dict =  {'user': user, 'labs': labs}
+    return render(request, 'rfwa/summary.html', context_dict)
 
 
 # ADMIN MANAGE
@@ -117,6 +120,21 @@ def add_lab(request):
         })
     else:
         return redirect("index")
+
+
+@login_required
+def update_lab(request, labName):
+
+    current_lab = Lab.objects.get(slug=labName)
+    form = LabForm(instance=current_lab)
+
+    if request.method == 'POST':
+        form = LabForm(request.POST, instance=current_lab)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_labs')
+
+    return render(request, 'rfwa/add_lab.html', {'form': form})
 
 
 @login_required
@@ -182,6 +200,20 @@ def add_slide(request):
         return redirect("index")
 
 
+def update_slide(request, slideName):
+
+    current_slide = Slide.objects.get(slug=slideName)
+    form = SlideForm(instance=current_slide)
+
+    if request.method == 'POST':
+        form = SlideForm(request.POST, instance=current_slide)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_slides')
+
+    return render(request, 'rfwa/add_slide.html', {'form': form})
+
+
 @login_required
 def delete_slide(request, slideName):
     try:
@@ -231,11 +263,11 @@ def update_feedback(request, slugName):
     form = FeedbackForm(instance=current_feedback)
 
     if request.method == 'POST':
-        form = FeedbackForm(request.POST, instance=feedback)
+        form = FeedbackForm(request.POST, instance=current_feedback)
         if form.is_valid():
             form.save()
             return redirect('manage_feedbacks')
-    
+
     return render(request, 'rfwa/add_feedback.html', {'form': form})
 
 
