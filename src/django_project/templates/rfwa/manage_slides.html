@@ -3,27 +3,8 @@
 
 {% block extra_head %}
 
-<style>
-    .title-group {
-        padding-bottom: 15px;
-    }
-
-    .table-header {
-        font-size: 1.75rem;
-    }
-
-    .rightside {
-        float: right;
-    }
-
-    .tr-name-column {
-        width: 600px;
-    }
-
-    .tr-file-column {
-        width: 863px;
-    }
-</style>
+<!-- Custom styles for this template -->
+<link href="{% static 'css/manage_page.css' %}" rel="stylesheet">
 
 {% endblock %}
 
@@ -61,10 +42,7 @@
                 <tr>
                     <td>{{slide.name}}</td>
                     <td>{{slide.lecture_Files}}</td>
-                    <td><a class="btn-link text-white badge badge-danger badge-pill ml-1"
-                            href="{% url  'update_slide' slide.slug %}"
-                            onclick="return confirm('Do you wish to update {{ slide.name }}?')">Update</a>
-                        <a class="btn-link text-white badge badge-danger badge-pill ml-1"
+                    <td> <a class="btn-link text-white badge badge-danger badge-pill ml-1"
                             href="{% url  'delete_slide' slide.slug %}"
                             onclick="return confirm('Are you sure you wish to delete {{ slide.name }}?')">Delete</a>
                     </td>
@@ -77,5 +55,6 @@
         </table>
     </div>
 </div>
+
 {% endif %}
 {% endblock %}

@@ -610,7 +610,8 @@
 * *0.5 hour* weekly meeting with supervisor
 * *3.5 hour* explored different ways to implement a calendar on the web app, tried django-happenings and django-scheduler, unsuccesful. 
 * *3.5 hour* implemented checkbox using local storage, seems to be working perfectly
-* **Total : 295 hours**
+* *2 hour* all css and javascripts are external, tidied up code by removing unnecessary comments/unused code and files. Manage_lab page now shows description too
+* **Total : 297 hours**
 
 
 

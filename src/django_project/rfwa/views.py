@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from rfwa import forms
 from .forms import SignUpForm, LabForm, SlideForm, FeedbackForm
 from .models import Lab, Slide, Feedback
 import subprocess
@@ -200,24 +199,10 @@ def add_slide(request):
         return redirect("index")
 
 
-def update_slide(request, slideName):
-
-    current_slide = Slide.objects.get(slug=slideName)
-    form = SlideForm(instance=current_slide)
-
-    if request.method == 'POST':
-        form = SlideForm(request.POST, instance=current_slide)
-        if form.is_valid():
-            form.save()
-            return redirect('manage_slides')
-
-    return render(request, 'rfwa/add_slide.html', {'form': form})
-
-
 @login_required
 def delete_slide(request, slideName):
     try:
-        slide = Slide.objects.get(name=slideName)
+        slide = Slide.objects.get(slug=slideName)
     except slide.DoesNotExist:
         slide = None
     except ValueError:

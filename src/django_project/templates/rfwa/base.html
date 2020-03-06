@@ -24,17 +24,6 @@
     <!-- jquery for getting lab file uri -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <style>
-        .bg-light {
-            color: black;
-        }
-
-        .dark-mode {
-            background-color: black !important;
-            color: white;
-        }
-    </style>
-
     {% block extra_head %}
     {% endblock %}
 
@@ -101,18 +90,6 @@
 
     <!-- Menu Toggle Script -->
     <script src="{% static 'javascript/menutoggle.js' %}"></script>
-
-    <!-- Dark theme -->
-    <!--<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.4/lib/darkmode-js.min.js"></script>
-    <script src="{% static 'javascript/darkmode.js' %}"></script>
-
-    <script>
-        function color() {
-            var d = document.getElementsByID("dmode");
-            d.setAttribute("style", "background-color:#333m !important;");
-        }
-
-    </script> -->
 
     {% else %}
     <meta http-equiv='refresh' content="0; URL={% url 'login' %}">

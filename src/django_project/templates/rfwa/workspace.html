@@ -1,73 +1,20 @@
 {% extends 'rfwa/base.html' %}
 
-{% load staticfiles %}
+{% load static %}
 
 {% block extra_head %}
 
-<meta charset="utf-8">
-<title>Parent Window</title>
-
-<style>
-    .container-fluid {
-        width: 100%;
-        padding-right: 0px;
-        padding-left: 0px;
-        margin-right: auto;
-        margin-left: auto;
-        width: 100%;
-        height: 100%;
-    }
-
-    .row-container {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        flex-direction: column;
-        /* background-color: blue; */
-        overflow: hidden;
-    }
-
-    .second-row {
-        flex-grow: 1;
-        border: none;
-        margin: 0;
-        padding: 0;
-    }
-</style>
+<!-- Custom styles for this template -->
+<link href="{% static 'css/workspace.css' %}" rel="stylesheet">
 
 {% endblock %}
 
 {% block body_block %}
 
 <div class="row-container">
-    <!-- <button id="sendButton" onclick="getSessionValues()">Check your session storage values</button> -->
     <iframe src="http://localhost:3000/" class="second-row" id="theia"></iframe>
-
 </div>
 
-<script>
-    // function postTheMessage() {
-    //     alert("The returned values from sessionStorage is " + sessionStorage.getItem('Workspace'));
-    //     var fileURI = sessionStorage.getItem('Workspace');
-    //     var theia_iframe = document.getElementById('theia').contentWindow;
-    //     theia_iframe.postMessage(fileURI, "*");
-    // }
-
-    // window.onload = postTheMessage();
-
-    function postTheMessage() {
-        var fileURI = sessionStorage.getItem('Workspace');
-        var theia_iframe = document.getElementById('theia').contentWindow;
-        theia_iframe.postMessage(fileURI, "*")
-        // alert(fileURI);
-    }
-
-    function myFunction() {
-        setTimeout(postTheMessage, 5000);
-    }
-
-    window.onload = myFunction;
-
-</script>
+<script src="{% static 'javascript/workspace.js' %}"></script>
 
 {% endblock %}

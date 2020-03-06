@@ -1,5 +1,7 @@
 {% extends "rfwa/base.html" %}
 
+{% load static %}
+
 {% block extra_head %}
 
 {% endblock %}
@@ -12,16 +14,6 @@
   <p>First name: {{user.first_name}}</p>
   <h1 class="mt-4">Task Manager</h1>
 
-  <!-- <div id="checkbox-container">
-    {% for lab in labs %}
-    <div>
-      <label">{{lab.name}}</label>
-        <input type="checkbox" id="{{lab.name}}">
-    </div>
-
-    {% endfor %}
-  </div> -->
-
   <div id="checkbox-container">
     {% for lab in labs %}
     <div>
@@ -30,50 +22,9 @@
     </div>
     {% endfor %}
     <button type="button" onClick="save()">Save status</button>
-
-    <!-- <button type="button" onClick="printValue()">print localstorage</button> -->
   </div>
+</div>
 
+<script src="{% static 'javascript/summary.js' %}"></script>
 
-  <script>
-
-    //saving checkbox values
-    function save() {
-      var checkboxes = document.getElementsByClassName("test");
-      for (checkbox of checkboxes) {
-        if (checkbox.checked == true) {
-          console.log(checkbox.id);
-          localStorage.setItem(checkbox.id, checkbox.checked);
-        } else {
-          localStorage.removeItem(checkbox.id);
-        }
-      }
-    }
-
-    // function printValue() {
-    //   var i;
-    //   console.log("local storage");
-    //   for (i = 0; i < localStorage.length; i++) {
-    //     console.log(localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]");
-    //   }
-    // }
-
-    function init() {
-      for (var i = 0, len = localStorage.length; i < len; ++i) {
-        if (localStorage.getItem(localStorage.key(i)) == "true") {
-          // console.log("the lab " + localStorage.key(i) + " is completed")
-          var checkbox_id = localStorage.key(i)
-          var checkbox = document.getElementById(checkbox_id);
-          document.getElementById(checkbox_id).checked = true;
-          // console.log(checkbox)
-        }
-      }
-    }
-    window.onload = init;
-
-
-
-  </script>
-
-
-  {% endblock %}
+{% endblock %}

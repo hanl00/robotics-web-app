@@ -3,27 +3,8 @@
 
 {% block extra_head %}
 
-<style>
-    .title-group {
-        padding-bottom: 15px;
-    }
-
-    .table-header {
-        font-size: 1.75rem;
-    }
-
-    .rightside {
-        float: right;
-    }
-
-    .tr-name-column {
-        width: 600px;
-    }
-
-    .tr-file-column {
-        width: 863px;
-    }
-</style>
+<!-- Custom styles for this template -->
+<link href="{% static 'css/manage_page.css' %}" rel="stylesheet">
 
 {% endblock %}
 
@@ -50,12 +31,13 @@
         </div>
 
         <table class="table table-hover">
-            {% if labs %} 
+            {% if labs %}
             <thead>
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Starts</th>
                     <th scope="col">Ends</th>
+                    <th scope="col">Description</th>
                     <th scope="col">Files</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -66,6 +48,7 @@
                     <td>{{lab.name}}</td>
                     <td>{{lab.open_Date}}</td>
                     <td>{{lab.close_Date}}</td>
+                    <td>{{lab.description}}</td>
                     <td>{{lab.lab_Files}}</td>
                     <td>
                         <a class="btn-link text-white badge badge-danger badge-pill ml-1"
@@ -78,7 +61,6 @@
                             href="{% url  'delete_lab' lab.slug %}"
                             onclick="return confirm('Are you sure you wish to delete {{ lab.name }}?')">Delete</a>
                     </td>
-
                 </tr>
             </tbody>
             {% endfor %}
@@ -87,7 +69,7 @@
             {% endif %}
         </table>
     </div>
-
 </div>
+
 {% endif %}
 {% endblock %}
