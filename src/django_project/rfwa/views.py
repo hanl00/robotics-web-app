@@ -78,7 +78,7 @@ def workspace(request):
 def summary(request, username):
     user = User.objects.get(username=username)
     labs = Lab.objects.order_by('close_Date')
-    context_dict =  {'user': user, 'labs': labs}
+    context_dict = {'user': user, 'labs': labs}
     return render(request, 'rfwa/summary.html', context_dict)
 
 

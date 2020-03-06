@@ -607,6 +607,10 @@
 
 ## 6 MARCH 2020
 * *1.5 hour* superuser can now update slides and lab, implemented basic task manager and minor updates to user summary page
+* *0.5 hour* weekly meeting with supervisor
+* *3.5 hour* explored different ways to implement a calendar on the web app, tried django-happenings and django-scheduler, unsuccesful. 
+* *3.5 hour* implemented checkbox using local storage, seems to be working perfectly
+* **Total : 295 hours**
 
 
 

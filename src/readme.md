@@ -18,8 +18,11 @@ For example:
 * yarn
 * tigervnc
 
+django-happenings
+
+
 * for testing:
-* model-mommy                        2.0.0 
+* model-mommy                        2.0.0  pip install model-mommy
 * coverage                           5.0.3
 * Packages: listed in `requirements.txt` 
 * Tested on Windows 10
