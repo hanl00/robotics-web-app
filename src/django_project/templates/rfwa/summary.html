@@ -1,30 +1,48 @@
 {% extends "rfwa/base.html" %}
 
-{% load static %}
+{% load staticfiles %}
 
 {% block extra_head %}
+
+<!-- Custom styles for this template -->
+<link href="{% static 'css/summary.css' %}" rel="stylesheet">
 
 {% endblock %}
 
 {% block body_block %}
 
 <div class="container-fluid">
-  <h1 class="mt-4">Profile</h1>
-  <p>Sample details displayed here</p>
-  <p>First name: {{user.first_name}}</p>
-  <h1 class="mt-4">Task Manager</h1>
-
-  <div id="checkbox-container">
-    {% for lab in labs %}
-    <div>
-      <label for="option1">{{lab.name}}</label>
-      <input type="checkbox" id="{{lab.name}}" class="test">
+  <div class="main-summary-container">
+    <div class="summary-rightside">
+      <h1 class="mt-4">Profile</h1>
+      <p class="profile-text">Student ID: {{user.username}}</p>
+      <p class="profile-text">First name: {{user.first_name}}</p>
+      <p class="profile-text">Last name: {{user.last_name}}</p>
     </div>
-    {% endfor %}
-    <button type="button" onClick="save()">Save status</button>
+
+    <div class="summary-leftside">
+      <h1 class="mt-4">Task Manager</h1>
+      <div class="description-row">
+        <p class="profile-text"> Tick the checkbox when you have completed the lab.<button type="button"
+            class="summary-button-rightside" onClick="save()">Save status</button></p>
+      </div>
+
+      {% for lab in labs %}
+      <div>
+        <label for="option1" class="profile-text summary-checkbox">{{lab.name}}</label>
+        <input type="checkbox" id="{{lab.name}}" class="lab-name">
+      </div>
+      {% endfor %}
+
+    </div>
   </div>
 </div>
 
-<script src="{% static 'javascript/summary.js' %}"></script>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{% static '/javascript/summary.js' %}"></script>
 
 {% endblock %}

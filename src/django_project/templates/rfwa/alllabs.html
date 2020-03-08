@@ -37,10 +37,15 @@
     {% endif %}
     {% endfor %}
     {% else %}
-    <h2 class="text-center mt-5">There are no labs uploaded</h2>
+    <h2 class="text-center mt-5">There are no labs uploaded.</h2>
     {% endif %}
   </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+
 <script src="{% static 'javascript/alllabs.js' %}"></script>
+
 {% endblock %}

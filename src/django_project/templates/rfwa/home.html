@@ -8,8 +8,23 @@
 
 <div class="container-fluid">
   <h1 class="mt-4">Welcome to Robotics Foundation Web App</h1>
-  <p style="font-size:100px">Add stuff here !!<p>
+  <div style="width: 100%;">
+    <div style="float:left; width: 50%">
+      <h1 class="mt-4">How to use</h1>
+      <p>sample tutorial and guide bla bla bla</p>
+      <p>First name: {{user.first_name}}</p>
+    </div>
+    <div style="float:right; width: 50%">
+      <h1 class="mt-4">Upcoming due dates</h1>
+      <p> display calender here</p>
+    </div>
+  </div>
+  <div style="clear:both"></div>
       
 </div>
+
+{% endblock %}
+
+{% block scripts %}
 
 {% endblock %}

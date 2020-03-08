@@ -614,6 +614,17 @@
 * **Total : 297 hours**
 
 
+## 7 MARCH 2020
+* *1.5 hour* adding css to summary and home page
+* *1.5 hour* all external javascript are not being loaded, code changes on external javascript file not being reflected on web app.
+* **Total : 300 hours**
+
+
+## 8 MARCH 2020
+* *1 hour* resolved issue with changes in external static files (css and js) not reflected in page. chrome -> disable caching
+
+
+
 
 
 
