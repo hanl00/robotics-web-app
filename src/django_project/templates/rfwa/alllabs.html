@@ -26,8 +26,10 @@
             <p class="card-text text-left">{{lab.description}}</p>
             <p class="card-text text-left">Deadline: {{lab.close_Date}}</p>
             <div class="row pb-2 justify-content-around mt-4">
-              <button class="btn btn-primary font-weight-bold loadProjectButton test"
-                value="{{ lab.lab_Files.path }}">Load lab</button>
+              <button class="btn btn-primary font-weight-bold load-lab-button" value="{{ lab.lab_Files.path }}">Load
+                lab</button>
+              <a class="btn btn-primary-red font-weight-bold" href="{% url  'download_lab' lab.slug %}"
+                onclick="return confirm('Download {{ lab.name }}?')">Download</a>
             </div>
           </div>
         </div>
