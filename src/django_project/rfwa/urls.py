@@ -22,6 +22,7 @@ urlpatterns = [
     path("update_lab/<slug:labName>/", views.update_lab, name='update_lab'),
     path("unzip_lab/<slug:labName>/", views.unzip_lab, name='unzip_lab'),
     path("delete_lab/<slug:labName>/", views.delete_lab, name='delete_lab'),
+    path("download_lab/<slug:labName>/", views.download_lab, name='download_lab'),
 
     # slides
     path("manage_slides/", views.manage_slides, name="manage_slides"),

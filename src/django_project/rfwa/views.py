@@ -12,6 +12,7 @@ import time
 import signal
 import shutil
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 # Create your views here.
 
@@ -66,6 +67,30 @@ def feedback(request):
 def alllabs(request):
     labs = Lab.objects.order_by('open_Date')
     return render(request, 'rfwa/alllabs.html', {'labs': labs})
+
+
+@login_required
+def download_lab(request, labName):
+    try:
+        lab = Lab.objects.get(slug=labName)
+        user = User.objects.get(username=request.user.username)
+    except Lab.DoesNotExist:
+        lab = None
+    except ValueError:
+        lab = None
+
+    # if it exists, delete it
+    if lab:
+        output_file_name = '_'.join([str(user), lab.slug])
+        zipped_lab_path = lab.lab_Files.path
+        unzipped_lab_path = zipped_lab_path[:-4]
+        print(settings.BASE_DIR)
+        print(os.getcwd()[-4:])
+        if (os.getcwd()[-4:] != 'labs'):  # wrong directory need to change
+            os.chdir('media/labs')
+        print(os.getcwd())
+        shutil.make_archive(output_file_name, 'zip', unzipped_lab_path)
+    return redirect("alllabs")
 
 
 @login_required
@@ -145,6 +170,10 @@ def unzip_lab(request, labName):
     except ValueError:
         lab = None
 
+    # check if in correct directory
+    if (os.getcwd() != settings.BASE_DIR):
+        os.chdir(settings.BASE_DIR)
+
     if lab:
         with zipfile.ZipFile(lab.lab_Files.url[1:], 'r') as zip_ref:
             print(lab.lab_Files.url[1:])
@@ -161,13 +190,18 @@ def delete_lab(request, labName):
     except ValueError:
         lab = None
 
+    # check if in correct directory
+    if (os.getcwd() != settings.BASE_DIR):
+        os.chdir(settings.BASE_DIR)
+
     # if it exists, delete it
     if lab:
-        unzipped_lab = lab.lab_Files.path
+        unzipped_lab_path = lab.lab_Files.path
         try:
-            shutil.rmtree(unzipped_lab[:-4])
+            shutil.rmtree(unzipped_lab_path[:-4])
         except:
             pass
+
         os.remove(lab.lab_Files.url[1:])
         lab.delete()
     return redirect("manage_labs")
@@ -207,6 +241,10 @@ def delete_slide(request, slideName):
         slide = None
     except ValueError:
         slide = None
+
+    # check if in correct directory
+    if (os.getcwd() != settings.BASE_DIR):
+        os.chdir(settings.BASE_DIR)
 
     # if it exists, delete it
     if slide:

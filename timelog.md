@@ -621,7 +621,9 @@
 
 
 ## 8 MARCH 2020
-* *1 hour* resolved issue with changes in external static files (css and js) not reflected in page. chrome -> disable caching
+* *1 hour* fixed issue with changes in external static files (css and js) not reflected in page. chrome -> disable caching
+* *2 hour* fixed issue (ticked checkboxes not being re-ticked on page load) with external javascripts again, modified code on summary.js 
+* *4.5 hour* users can now zip their lab files. Zip lab files will be in the media/labs folder with filename as username_labname.zip format. Added directory checks to ensure that user/supervisor in the right directory before performing os-related tasks
 
 
 
