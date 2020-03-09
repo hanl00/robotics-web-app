@@ -13,6 +13,11 @@ import signal
 import shutil
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from datetime import timedelta 
+from datetime import datetime 
+from datetime import timezone
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 # Create your views here.
 
@@ -22,7 +27,16 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return render(request, 'rfwa/home.html')
+    now = datetime.now()
+    tomorrow = datetime.now() + timedelta(days = 1)
+    timezone_now = now.replace(tzinfo=timezone.utc)
+    timezone_tomorrow = tomorrow.replace(tzinfo=timezone.utc)
+    upcoming_labs = Lab.objects.filter(close_Date__range = [timezone_now, timezone_tomorrow] ).order_by('close_Date').values_list('name')
+    name_json = json.dumps(list(upcoming_labs), cls=DjangoJSONEncoder)
+    print(type(name_json))
+    print(type(upcoming_labs))
+    context_dict = {'name_json': name_json}
+    return render(request, 'rfwa/home.html', context_dict)
 
 
 def register(request):

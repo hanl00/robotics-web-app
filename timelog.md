@@ -624,9 +624,10 @@
 * *1 hour* fixed issue with changes in external static files (css and js) not reflected in page. chrome -> disable caching
 * *2 hour* fixed issue (ticked checkboxes not being re-ticked on page load) with external javascripts again, modified code on summary.js 
 * *4.5 hour* users can now zip their lab files. Zip lab files will be in the media/labs folder with filename as username_labname.zip format. Added directory checks to ensure that user/supervisor in the right directory before performing os-related tasks
+* **Total : 307.5 hours**
 
-
-
+## 9 MARCH 2020
+* *6.5 hour* feature - notifying user upon login if there is any uncompleted labs due in 24 hours, succesfully implemented. Issue with implementing this in an external javascript file. Internal javascript working fine
 
 
 

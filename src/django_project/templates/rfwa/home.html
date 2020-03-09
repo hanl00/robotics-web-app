@@ -1,5 +1,7 @@
 {% extends "rfwa/base.html" %}
 
+{% load staticfiles %}
+
 {% block extra_head %}
 
 {% endblock %}
@@ -8,11 +10,13 @@
 
 <div class="container-fluid">
   <h1 class="mt-4">Welcome to Robotics Foundation Web App</h1>
+
   <div style="width: 100%;">
     <div style="float:left; width: 50%">
       <h1 class="mt-4">How to use</h1>
       <p>sample tutorial and guide bla bla bla</p>
       <p>First name: {{user.first_name}}</p>
+      <p> heyoo</p>
     </div>
     <div style="float:right; width: 50%">
       <h1 class="mt-4">Upcoming due dates</h1>
@@ -20,11 +24,25 @@
     </div>
   </div>
   <div style="clear:both"></div>
-      
 </div>
 
 {% endblock %}
 
 {% block scripts %}
+
+<script>
+  window.addEventListener('load', function () {
+    var received_data = jQuery.parseJSON('{{name_json | safe}}');
+    var due_labs = [].concat.apply([], received_data);
+
+    for (var i = 0, len = due_labs.length; i < len; ++i) {
+      if (!localStorage.hasOwnProperty(due_labs[i])) {
+        // alert(due_labs[i] + " is due in less than 24 hours")
+        alert("BAD STUDENT ! you have NOT completed " + due_labs[i] + " there is less than 24 hours !")
+      } else {
+        console.log("you have completed " + due_labs[i])
+      }
+    }
+  })</script>
 
 {% endblock %}

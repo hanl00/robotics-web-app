@@ -2,6 +2,7 @@ from django.db import models
 from slugify import slugify
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 
@@ -31,8 +32,8 @@ class Lab(models.Model):
 
     name = models.CharField(max_length=128)
     description = models.TextField(max_length=2048)
-    open_Date = models.DateTimeField()
-    close_Date = models.DateTimeField()
+    open_Date = models.DateTimeField(timezone.now())
+    close_Date = models.DateTimeField(timezone.now())
     lab_Files = models.FileField(upload_to='labs/')
     slug = models.SlugField(primary_key=True, blank=True)
 
