@@ -13,8 +13,8 @@ import signal
 import shutil
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from datetime import timedelta 
-from datetime import datetime 
+from datetime import timedelta
+from datetime import datetime
 from datetime import timezone
 import json
 from django.core.serializers.json import DjangoJSONEncoder
@@ -28,13 +28,14 @@ from django.http import HttpResponse
 
 def index(request):
     now = datetime.now()
-    tomorrow = datetime.now() + timedelta(days = 1)
+    tomorrow = datetime.now() + timedelta(days=1)
     timezone_now = now.replace(tzinfo=timezone.utc)
     timezone_tomorrow = tomorrow.replace(tzinfo=timezone.utc)
-    upcoming_labs = Lab.objects.filter(close_Date__range = [timezone_now, timezone_tomorrow] ).order_by('close_Date').values_list('name')
+    upcoming_labs = Lab.objects.filter(close_Date__range=[
+                                       timezone_now, timezone_tomorrow]).order_by('close_Date').values_list('name')
     name_json = json.dumps(list(upcoming_labs), cls=DjangoJSONEncoder)
-    print(type(name_json))
-    print(type(upcoming_labs))
+    # print(type(name_json))
+    # print(type(upcoming_labs))
     context_dict = {'name_json': name_json}
     return render(request, 'rfwa/home.html', context_dict)
 
@@ -93,17 +94,27 @@ def download_lab(request, labName):
     except ValueError:
         lab = None
 
-    # if it exists, delete it
     if lab:
         output_file_name = '_'.join([str(user), lab.slug])
         zipped_lab_path = lab.lab_Files.path
         unzipped_lab_path = zipped_lab_path[:-4]
-        print(settings.BASE_DIR)
-        print(os.getcwd()[-4:])
         if (os.getcwd()[-4:] != 'labs'):  # wrong directory need to change
             os.chdir('media/labs')
-        print(os.getcwd())
+
         shutil.make_archive(output_file_name, 'zip', unzipped_lab_path)
+
+        if (os.getcwd() != settings.BASE_DIR):
+            os.chdir(settings.BASE_DIR)
+       
+        filename_with_type = output_file_name + ".zip"
+
+        lab_directory = os.path.join(settings.MEDIA_ROOT, "labs")
+
+        zip_file = open(os.path.join(lab_directory, filename_with_type), 'rb')
+        response = HttpResponse(zip_file, content_type='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename="%s"' % filename_with_type
+        return response
+
     return redirect("alllabs")
 
 
@@ -190,7 +201,7 @@ def unzip_lab(request, labName):
 
     if lab:
         with zipfile.ZipFile(lab.lab_Files.url[1:], 'r') as zip_ref:
-            print(lab.lab_Files.url[1:])
+            #print(lab.lab_Files.url[1:])
             zip_ref.extractall('../django_project/media/labs/')
     return redirect("manage_labs")
 

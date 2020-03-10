@@ -636,7 +636,7 @@
 ## 10 MARCH 2020
 * *2 hour* feature - allow users to download their own code, succesfully implemented.
 * *0.5 hour* read the data section in the project folder, added files used in user evaluation and user evaluation results
-
+* *1.5 hour* user registration only accepting student id
 
 
 

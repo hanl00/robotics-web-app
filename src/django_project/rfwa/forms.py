@@ -2,33 +2,28 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Lab, Slide, Feedback
+from django.forms import ValidationError
 
 ## custom form
 
 class SignUpForm(UserCreationForm):
 
-    username = forms.CharField(help_text=False)
+    username = forms.CharField(help_text="Your studend ID.")
     first_name = forms.CharField(max_length=30, required=True, help_text=False)
     last_name = forms.CharField(max_length=30, required=True, help_text=False)    
 
-    # def clean_email(self):
-    #     data = self.cleaned_data['email']
-    #     if "@student.gla.ac.uk" not in data:   # any check you need
-    #         raise forms.ValidationError("Must be student email address")
-    #     return data
+    def clean_username(self):
+        data = self.cleaned_data['username']
+
+        # 3 checks, check length = 8, last letter must be alphabet, first 7 must be numebrs
+        if len(data) == 8 and data[-1].isalpha() and data[:-1].isdecimal():
+            return data
+        else:
+            raise forms.ValidationError("Must be student ID")
 
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'password1', 'password2', )
-
-    # def save(self, commit=True):
-    #     user = super(UserCreationForm, self).save(commit=False)
-    #     user.set_password(self.clean_password2())
-    #     user.insurance_id = self.cleaned_data["insurance_id"]
-    #     user.insurance_provider = self.cleaned_data["insurance_provider"]
-    #     if commit:
-    #         user.save()
-    #     return user
 
 class LabForm(forms.ModelForm):
 

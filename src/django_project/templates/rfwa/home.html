@@ -39,7 +39,8 @@
 
     console.log(sessionStorage)
 
-    if (sessionStorage.getItem("warned") != "true") {
+
+    if (sessionStorage.getItem("warned") != "true") { //delete this to display alert on every homepage visit
       for (var i = 0, len = due_labs.length; i < len; ++i) {
         if (!localStorage.hasOwnProperty(due_labs[i])) {
           // alert(due_labs[i] + " is due in less than 24 hours")
