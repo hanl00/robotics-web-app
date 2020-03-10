@@ -633,6 +633,11 @@
 * **Total : 315 hours**
 
 
+## 10 MARCH 2020
+* *2 hour* feature - allow users to download their own code, succesfully implemented.
+* *0.5 hour* read the data section in the project folder, added files used in user evaluation and user evaluation results
+
+
 
 
 
