@@ -18,26 +18,17 @@ from datetime import datetime
 from datetime import timezone
 import json
 from django.core.serializers.json import DjangoJSONEncoder
+from calendar import monthrange
+from datetime import date
+from .utils import DatelineCalendar
+from django.utils.safestring import mark_safe
+from django.shortcuts import render_to_response
 
 # Create your views here.
 
 from django.http import HttpResponse
 
 # GENERAL FEATURES
-
-
-def index(request):
-    now = datetime.now()
-    tomorrow = datetime.now() + timedelta(days=1)
-    timezone_now = now.replace(tzinfo=timezone.utc)
-    timezone_tomorrow = tomorrow.replace(tzinfo=timezone.utc)
-    upcoming_labs = Lab.objects.filter(close_Date__range=[
-                                       timezone_now, timezone_tomorrow]).order_by('close_Date').values_list('name')
-    name_json = json.dumps(list(upcoming_labs), cls=DjangoJSONEncoder)
-    # print(type(name_json))
-    # print(type(upcoming_labs))
-    context_dict = {'name_json': name_json}
-    return render(request, 'rfwa/home.html', context_dict)
 
 
 def register(request):
@@ -56,6 +47,31 @@ def register(request):
     else:
         form = SignUpForm()
     return render(request, 'rfwa/register.html', {'form': form})
+
+
+def index(request):
+    now = datetime.now()
+    tomorrow = datetime.now() + timedelta(days=1)
+    timezone_now = now.replace(tzinfo=timezone.utc)
+    timezone_tomorrow = tomorrow.replace(tzinfo=timezone.utc)
+    upcoming_labs = Lab.objects.filter(close_Date__range=[
+                                       timezone_now, timezone_tomorrow]).order_by('close_Date').values_list('name')
+    name_json = json.dumps(list(upcoming_labs), cls=DjangoJSONEncoder)
+    # print(type(name_json))
+    # print(type(upcoming_labs))
+    context_dict = {'name_json': name_json}
+    return render(request, 'rfwa/home.html', context_dict)
+
+# calender view
+
+
+@login_required
+def calendar(request, year, month):
+    my_labs = Lab.objects.order_by('close_Date').filter(
+        close_Date__year=year, close_Date__month=month
+    )
+    cal = DatelineCalendar(my_labs).formatmonth(year, month)
+    return render(request, 'rfwa/calendar.html', {'calendar': mark_safe(cal), })
 
 
 @login_required
@@ -105,13 +121,14 @@ def download_lab(request, labName):
 
         if (os.getcwd() != settings.BASE_DIR):
             os.chdir(settings.BASE_DIR)
-       
+
         filename_with_type = output_file_name + ".zip"
 
         lab_directory = os.path.join(settings.MEDIA_ROOT, "labs")
 
         zip_file = open(os.path.join(lab_directory, filename_with_type), 'rb')
-        response = HttpResponse(zip_file, content_type='application/force-download')
+        response = HttpResponse(
+            zip_file, content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename="%s"' % filename_with_type
         return response
 
@@ -201,7 +218,7 @@ def unzip_lab(request, labName):
 
     if lab:
         with zipfile.ZipFile(lab.lab_Files.url[1:], 'r') as zip_ref:
-            #print(lab.lab_Files.url[1:])
+            # print(lab.lab_Files.url[1:])
             zip_ref.extractall('../django_project/media/labs/')
     return redirect("manage_labs")
 

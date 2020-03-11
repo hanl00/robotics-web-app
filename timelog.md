@@ -637,6 +637,13 @@
 * *2 hour* feature - allow users to download their own code, succesfully implemented.
 * *0.5 hour* read the data section in the project folder, added files used in user evaluation and user evaluation results
 * *1.5 hour* user registration only accepting student id
+* **Total : 319 hours**
+
+
+## 10 MARCH 2020
+* *0.5 hour* minor changes to UI in the registration and login page
+* *3 hour* watched youtube vids and researched on django calendars, succesfully implemented basic calendar with lab due dates on a seperate page
+
 
 
 

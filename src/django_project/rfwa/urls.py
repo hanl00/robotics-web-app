@@ -12,6 +12,7 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('feedback/', views.feedback, name='feedback'),
     path('summary/<str:username>/', views.summary, name='summary'),
+    path('calendar/<int:year>/<int:month>/', views.calendar, name='calendar'),
 
     # admin only
     path('manage/', views.manage, name='manage'),
