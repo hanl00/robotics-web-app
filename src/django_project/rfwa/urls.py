@@ -5,7 +5,7 @@ from rfwa import views
 urlpatterns = [
 
     # all users
-    path('home/', views.index, name='index'),
+    path('home/<int:year>/<int:month>/', views.home, name='home'),
     path('lectureslides/', views.lectureslides, name='lectureslides'),
     path('alllabs/', views.alllabs, name='alllabs'),
     path('workspace/', views.workspace, name='workspace'),

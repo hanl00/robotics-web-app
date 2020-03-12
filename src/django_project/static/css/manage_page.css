@@ -9,3 +9,15 @@
 .rightside {
     float: right;
 }
+
+.submit-button-wrapper {
+    text-align: center !important;
+}
+
+.form-text-label {
+    margin-left: 200px;
+}
+
+.submit-button {
+    margin-top: 25px;
+}

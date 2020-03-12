@@ -30,6 +30,8 @@ from django.http import HttpResponse
 
 # GENERAL FEATURES
 
+def index(request):
+    return redirect('login')
 
 def register(request):
     if request.method == 'POST':
@@ -49,7 +51,9 @@ def register(request):
     return render(request, 'rfwa/register.html', {'form': form})
 
 
-def index(request):
+def home(request, year, month):
+
+    # user incomplete lab notification
     now = datetime.now()
     tomorrow = datetime.now() + timedelta(days=1)
     timezone_now = now.replace(tzinfo=timezone.utc)
@@ -59,7 +63,13 @@ def index(request):
     name_json = json.dumps(list(upcoming_labs), cls=DjangoJSONEncoder)
     # print(type(name_json))
     # print(type(upcoming_labs))
-    context_dict = {'name_json': name_json}
+
+    my_labs = Lab.objects.order_by('close_Date').filter(
+        close_Date__year=year, close_Date__month=month
+    )
+    cal = DatelineCalendar(my_labs).formatmonth(year, month)
+
+    context_dict = {'name_json': name_json, 'calendar': mark_safe(cal)}
     return render(request, 'rfwa/home.html', context_dict)
 
 # calender view

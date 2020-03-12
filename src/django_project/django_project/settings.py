@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -136,8 +137,12 @@ MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
 #login page redirection upon authentication
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+
+today = datetime.date.today()
+redirect_link = '/rfwa/home/{:%Y/%m}/'.format(today)
+
+LOGIN_REDIRECT_URL = redirect_link
+LOGOUT_REDIRECT_URL = '/rfwa/login/'
 
 #outlook login
 #SITE_ID = 1 

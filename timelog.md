@@ -643,10 +643,14 @@
 ## 10 MARCH 2020
 * *0.5 hour* minor changes to UI in the registration and login page
 * *3 hour* watched youtube vids and researched on django calendars, succesfully implemented basic calendar with lab due dates on a seperate page
+* *2 hour* trying to implement the calendar into home.html with views.index, unsuccessful due to the index view needs the year and month values
+* **Total : 324.5 hours**
 
 
-
-
+## 11 MARCH 2020
+* *2 hour* calendar now displaying on homepage, fixed url routing issue
+* *1 hour* improved field layout on the add labs/slides/feedback page, removed unused classes
+* **Total : 327.5 hours**
 
 
 
