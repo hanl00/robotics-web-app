@@ -1,8 +1,10 @@
-{% extends "rfwa/base.html" %}
-
-{% load staticfiles %}
+{% extends 'rfwa/base.html' %}
+{% load static %}
 
 {% block extra_head %}
+
+<!-- Custom styles for this template -->
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
 
 {% endblock %}
 
@@ -11,16 +13,22 @@
 <div class="container-fluid">
   <h1 class="mt-4">Welcome to Robotics Foundation Web App</h1>
 
-  <div style="width: 100%;">
-    <div style="float:left; width: 50%">
-      <h1 class="mt-4">How to use</h1>
-      <p>sample tutorial and guide bla bla bla</p>
-      <p>First name: {{user.first_name}}</p>
-      <p> heyoo</p>
+  <div class="page-wrapper">
+    <div class="left-wrapper">
+      <div class="info-wrapper">
+        <h1 class="mt-4">How to use</h1>
+        <p>sample tutorial and guide bla bla bla</p>
+        <p>First name: {{user.first_name}}</p>
+        <p> heyoo</p>
+      </div>
     </div>
-    <div style="float:right; width: 50%">
+    <div class="right-wrapper">
       <h1 class="mt-4">Upcoming due dates</h1>
-      {{ calendar }}
+      <div class="calendar-wrapper">
+        <div class ="calendar">
+          {{ calendar }}
+        </div>
+      </div>
     </div>
   </div>
   <div style="clear:both"></div>

@@ -30,8 +30,10 @@ from django.http import HttpResponse
 
 # GENERAL FEATURES
 
+
 def index(request):
     return redirect('login')
+
 
 def register(request):
     if request.method == 'POST':

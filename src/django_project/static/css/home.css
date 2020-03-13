@@ -1,0 +1,96 @@
+.page-wrapper{
+    width: 100%;
+}
+
+.left-wrapper{
+    float:left; 
+    width: 50%;
+}
+
+.right-wrapper{
+    float:right; 
+    width: 50%;
+}
+
+/* css for calendar */
+
+.calendar-wrapper{
+    text-align: center;
+}
+
+.calendar{
+    display: inline-block;
+}
+
+.month{
+    font-size: 50px;
+}
+
+.mon{
+    font-size: 25px;
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.tue{
+    font-size: 25px;
+    padding-left: 13.5px;
+    padding-right: 13.5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.wed{
+    font-size: 25px;
+    padding-left: 8.5px;
+    padding-right: 8.5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.thu{
+    font-size: 25px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.fri{
+    font-size: 25px;
+    padding-left: 19px;
+    padding-right: 19px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.sat{
+    font-size: 25px;
+    padding-left: 15.5px;
+    padding-right: 15.5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.sun{
+    font-size: 25px;
+    padding-left: 11px;
+    padding-right: 11px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.noday{
+    font-size: 25px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.filled ul{
+    padding-inline-start: 5px;
+    font-size: 20px;
+}

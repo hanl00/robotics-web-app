@@ -581,6 +581,7 @@
 * **Total : 273 hours**
 
 
+### Week 8
 ## 2 MARCH 2020
 * *2 hour* tried to upgrade to Theia's latest version 0.16.0 which would automatically activate vs-code python extension, unsuccesful. stuck on preload instead. reverted to older version of theia to conduct user evaluation. #Issue a
 * *0.5 hour* recoding changes made between older version of theia extension on repo (pulled ) and current extension (not working due to theia version)
@@ -627,6 +628,7 @@
 * **Total : 307.5 hours**
 
 
+### Week 9
 ## 9 MARCH 2020
 * *6.5 hour* feature - notifying user upon login if there is any uncompleted labs due in 24 hours, succesfully implemented. Issue with implementing this in an external javascript file. Internal javascript working fine
 * *1 hour* alert (incomplete lab less than 24 hours left) will only display once - as per client requirement. 
@@ -651,6 +653,12 @@
 * *2 hour* calendar now displaying on homepage, fixed url routing issue
 * *1 hour* improved field layout on the add labs/slides/feedback page, removed unused classes
 * **Total : 327.5 hours**
+
+
+## 12 MARCH 2020
+* *1 hour* weekly meeting with supervisor, updated trello board and meeting minutes
+* *2.5 hour* improved layout of the calendar
+
 
 
 
