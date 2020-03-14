@@ -53,22 +53,32 @@ def register(request):
     return render(request, 'rfwa/register.html', {'form': form})
 
 
+# values year and month are passed from settings.py "LOGIN_REDIRECT_URL" and base.html now 'Y' and now 'm'
 def home(request, year, month):
 
     # user incomplete lab notification
     now = datetime.now()
+
+    # 24 hours from now (the moment user logs in)
     tomorrow = datetime.now() + timedelta(days=1)
+
     timezone_now = now.replace(tzinfo=timezone.utc)
     timezone_tomorrow = tomorrow.replace(tzinfo=timezone.utc)
+
+    # query upcoming labs which are due in less than 24 hours
     upcoming_labs = Lab.objects.filter(close_Date__range=[
                                        timezone_now, timezone_tomorrow]).order_by('close_Date').values_list('name')
-    name_json = json.dumps(list(upcoming_labs), cls=DjangoJSONEncoder)
-    # print(type(name_json))
-    # print(type(upcoming_labs))
 
+    # return upcoming labs in json format
+    name_json = json.dumps(list(upcoming_labs), cls=DjangoJSONEncoder)
+
+    # calendar displaying lab deadlines for current month
     my_labs = Lab.objects.order_by('close_Date').filter(
         close_Date__year=year, close_Date__month=month
     )
+
+    # generate calendar based on current month and year values with due labs
+    # DatelineCalendar defined in utils.py
     cal = DatelineCalendar(my_labs).formatmonth(year, month)
 
     context_dict = {'name_json': name_json, 'calendar': mark_safe(cal)}
@@ -126,23 +136,40 @@ def download_lab(request, labName):
         output_file_name = '_'.join([str(user), lab.slug])
         zipped_lab_path = lab.lab_Files.path
         unzipped_lab_path = zipped_lab_path[:-4]
-        if (os.getcwd()[-4:] != 'labs'):  # wrong directory need to change
+
+        # check if unzipped directory exist
+        if os.path.isdir(unzipped_lab_path):
+
+            # changing to media/lab directory to zip the file
+            if (os.getcwd()[-4:] != 'labs'):
+                os.chdir('media/labs')
+
+            # zipping file
+            shutil.make_archive(output_file_name, 'zip', unzipped_lab_path)
+
+            # changing to base directory
+            if (os.getcwd() != settings.BASE_DIR):
+                os.chdir(settings.BASE_DIR)
+
+            # downloading the zipped file
+            filename_with_type = output_file_name + ".zip"
+
+            lab_directory = os.path.join(settings.MEDIA_ROOT, "labs")
+
+            zip_file = open(os.path.join(
+                lab_directory, filename_with_type), 'rb')
+            response = HttpResponse(
+                zip_file, content_type='application/force-download')
+            response['Content-Disposition'] = 'attachment; filename="%s"' % filename_with_type
+
+            # deleting user's zipped file
             os.chdir('media/labs')
+            os.remove(filename_with_type)
 
-        shutil.make_archive(output_file_name, 'zip', unzipped_lab_path)
+            if (os.getcwd() != settings.BASE_DIR):
+                os.chdir(settings.BASE_DIR)
 
-        if (os.getcwd() != settings.BASE_DIR):
-            os.chdir(settings.BASE_DIR)
-
-        filename_with_type = output_file_name + ".zip"
-
-        lab_directory = os.path.join(settings.MEDIA_ROOT, "labs")
-
-        zip_file = open(os.path.join(lab_directory, filename_with_type), 'rb')
-        response = HttpResponse(
-            zip_file, content_type='application/force-download')
-        response['Content-Disposition'] = 'attachment; filename="%s"' % filename_with_type
-        return response
+            return response
 
     return redirect("alllabs")
 

@@ -6,6 +6,7 @@
 
 <!-- Custom styles for this template -->
 <link href="{% static 'css/summary.css' %}" rel="stylesheet">
+<link href="{% static 'css/button.css' %}" rel="stylesheet">
 
 {% endblock %}
 
@@ -24,7 +25,7 @@
       <h1 class="mt-4">Task Manager</h1>
       <div class="description-row">
         <p class="profile-text"> Tick the checkbox when you have completed the lab.<button type="button"
-            class="summary-button-rightside" onClick="save()">Save status</button></p>
+            class="summary-button-rightside btn btn-primary-red font-weight-bold" onClick="save()">Save status</button></p>
       </div>
 
       {% for lab in labs %}

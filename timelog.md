@@ -658,9 +658,9 @@
 ## 12 MARCH 2020
 * *1 hour* weekly meeting with supervisor, updated trello board and meeting minutes
 * *2.5 hour* improved layout of the calendar
-
-
-
+* *0.5 hour* delete user's zipped lab after downloading them, reducing storage usage
+* *1 hour* began presentation draft, downloaded and tried obs on linux (error preventing recording), reread marking scheme on dissertation and presentation
+* **Total : 332.5 hours**
 
 
 
