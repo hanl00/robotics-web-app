@@ -663,6 +663,9 @@
 * **Total : 332.5 hours**
 
 
+## 13 MARCH 2020
+* *2.5 hours* added unit testing on test_forms and test_views
+
 
 
 
