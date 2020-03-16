@@ -665,6 +665,18 @@
 
 ## 13 MARCH 2020
 * *2.5 hours* added unit testing on test_forms and test_views
+* **Total : 335 hours**
+
+
+## 14 MARCH 2020
+* *1 hour* presentation draft
+* **Total : 336 hours**
+
+
+## 16 MARCH 2020
+* *3.5 hour* added more unit testing for django views
+* **Total : 339.5 hours**
+
 
 
 

@@ -53,8 +53,7 @@
                 <a href="/rfwa/feedback/" class="list-group-item list-group-item-action bg-light">Feedback</a>
                 <a href="{% url  'summary' user.username %}"
                     class="list-group-item list-group-item-action bg-light">Summary</a>
-                <!-- <a href="{% url  'calendar' 2020 3 %}"
-                    class="list-group-item list-group-item-action bg-light">Calendar</a> -->
+
 
                 {% if user.is_superuser %}
                 <a href="/rfwa/manage/" class="list-group-item list-group-item-action bg-light">Manage</a>

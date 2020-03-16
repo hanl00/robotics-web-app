@@ -54,6 +54,7 @@ def register(request):
 
 
 # values year and month are passed from settings.py "LOGIN_REDIRECT_URL" and base.html now 'Y' and now 'm'
+@login_required
 def home(request, year, month):
 
     # user incomplete lab notification
@@ -83,18 +84,7 @@ def home(request, year, month):
 
     context_dict = {'name_json': name_json, 'calendar': mark_safe(cal)}
     return render(request, 'rfwa/home.html', context_dict)
-
-# calender view
-
-
-@login_required
-def calendar(request, year, month):
-    my_labs = Lab.objects.order_by('close_Date').filter(
-        close_Date__year=year, close_Date__month=month
-    )
-    cal = DatelineCalendar(my_labs).formatmonth(year, month)
-    return render(request, 'rfwa/calendar.html', {'calendar': mark_safe(cal), })
-
+    
 
 @login_required
 def lectureslides(request):
