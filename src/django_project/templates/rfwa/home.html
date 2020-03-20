@@ -50,7 +50,7 @@
       for (var i = 0, len = due_labs.length; i < len; ++i) {
         if (!localStorage.hasOwnProperty(due_labs[i])) {
           // alert(due_labs[i] + " is due in less than 24 hours")
-          alert("BAD STUDENT ! you have NOT completed " + due_labs[i] + " there is less than 24 hours !")
+          alert(due_labs[i] + " is due in less than 24 hours !")
           sessionStorage.setItem("warned", "true")
         } else {
           console.log("you have completed " + due_labs[i])

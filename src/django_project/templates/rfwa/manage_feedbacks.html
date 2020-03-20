@@ -50,11 +50,9 @@
                     <td>{{feedback.comments}}</td>
                     <td>
                         <a class="btn-link text-white badge badge-danger badge-pill ml-1"
-                            href="{% url  'update_feedback' feedback.slug %}"
-                            onclick="return confirm('Do you sure you wish to update {{ feedback.slug }}?')">Update</a>
+                            href="{% url  'update_feedback' feedback.slug %}">Update</a>
                         <a class="btn-link text-white badge badge-danger badge-pill ml-1"
-                            href="{% url  'delete_feedback' feedback.slug %}"
-                            onclick="return confirm('Do you sure you wish to delete {{ feedback.slug }}?')">Delete</a>
+                            href="{% url  'delete_feedback' feedback.slug %}"></a>Delete</a>
                     </td>
                 </tr>
             </tbody>

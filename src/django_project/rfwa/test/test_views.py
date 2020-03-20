@@ -7,6 +7,15 @@ from datetime import datetime
 from datetime import timezone
 import datetime
 from datetime import date
+from django.forms.models import model_to_dict
+from rfwa.forms import SignUpForm, LabForm, SlideForm, FeedbackForm
+from rfwa.models import Lab, Feedback, Slide
+from django.conf import settings
+from django.core.files.uploadedfile import SimpleUploadedFile
+import os
+from datetime import timedelta
+from datetime import datetime
+from django.utils import timezone
 
 
 def createNormalUser():
@@ -20,9 +29,9 @@ def createSuperUser():
 class TestViews(TestCase):
 
     def setUp(self):
-        today = datetime.date.today()
-        year = today.year
-        month = today.month
+        now = datetime.today()
+        year = now.year
+        month = now.month
         self.username = '2288527l'
         self.client = Client()
         self.client.login(username='2288527l', password='testPaSSword3')
@@ -156,10 +165,10 @@ class TestViews(TestCase):
 
     # superuser
 
-    ## not logged in
-
+    # not logged in
 
     # labs
+
     def test_manage_labs(self):
         response = self.client.get(self.manage_labs_url)
         self.assertEqual(response.status_code, 302)
@@ -192,7 +201,7 @@ class TestViews(TestCase):
     def test_add_slide(self):
         response = self.client.get(self.add_slide_url)
         self.assertEqual(response.status_code, 302)
-    
+
     def test_delete_slide(self):
         response = self.client.get(self.delete_slide_url)
         self.assertEqual(response.status_code, 302)
@@ -217,7 +226,7 @@ class TestViews(TestCase):
     # view users
     def test_view_users(self):
         response = self.client.get(self.view_users_url)
-        self.assertEqual(response.status_code, 302)    
+        self.assertEqual(response.status_code, 302)
 
     # logged in
 
@@ -278,3 +287,24 @@ class TestViews(TestCase):
         response = self.client.get(self.view_users_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'rfwa/view_users.html')
+
+
+# class UpdateFormTest(TestCase):
+
+#     def test_update_lab_form_valid(self):
+#         test_file_path = os.path.join(
+#             settings.BASE_DIR, 'rfwa/test/part_iii.pdf')
+#         upload_file = open(test_file_path, 'rb')
+#         next_day = datetime.now() + timedelta(days=1)
+
+#         lab = Lab.objects.create(name='testlab', open_Date=timezone.now(),
+#                                  close_Date=next_day, lab_Files=SimpleUploadedFile(upload_file.name, upload_file.read()))
+
+#         # Lab.objects.filter(name='testuser').update(username='test1user')
+#         response = self.client.post(reverse('update_lab', kwargs={'labName': lab.name}),
+#                                     {'description': 'new test description'})
+
+#         self.assertEqual(response.status_code, 302)
+
+#         lab.refresh_from_db()
+#         self.assertEqual(lab.description, 'new test description')
