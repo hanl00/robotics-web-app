@@ -680,11 +680,31 @@
 
 ## 18 MARCH 2020
 * *2 hour* working dissertation draft introduction
-* **Total : 339.5 hours**
+* **Total : 341.5 hours**
 
 
 ## 20 MARCH 2020
 * *0.5 hour* weekly meeting with supervisor
 * *6 hour* working dissertation draft introduction / background / requirement, analysis
-* **Total : 339.5 hours**
+* **Total : 348 hours**
 
+
+## 21 MARCH 2020
+* *4 hour* working dissertation draft introduction / requirement, analysis
+* **Total : 352 hours**
+
+
+## 22 MARCH 2020
+* *6 hour* working dissertation draft - background / requirement, analysis
+* **Total : 358 hours**
+
+
+## 25 MARCH 2020
+*  *3 hour* working dissertation draft - design
+* **Total : 361 hours**
+
+
+## 26 MARCH 2020
+* *6.5 hour* working dissertation draft  - (introduction / background / requirement, analysis) completed
+* *2 hour* working dissertation draft - design
+* **Total : 369.5 hours**
