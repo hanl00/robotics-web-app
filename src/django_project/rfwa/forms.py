@@ -15,7 +15,7 @@ class SignUpForm(UserCreationForm):
     def clean_username(self):
         data = self.cleaned_data['username']
 
-        # 3 checks, check length = 8, last letter must be alphabet, first 7 must be numebrs
+        # 3 checks, check length = 8, last letter must be alphabet, first 7 must be numbers
         if len(data) == 8 and data[-1].isalpha() and data[:-1].isdecimal():
             return data
         else:

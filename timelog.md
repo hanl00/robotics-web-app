@@ -708,3 +708,19 @@
 * *6.5 hour* working dissertation draft  - (introduction / background / requirement, analysis) completed
 * *2 hour* working dissertation draft - design
 * **Total : 369.5 hours**
+
+## 28 MARCH 2020
+* *9 hour* dissertation draft - design and implementation
+* **Total : 378.5 hours**
+
+## 29 MARCH 2020
+* *10.5 hour* dissertation draft - implementation
+* **Total : 389 hours**
+
+## 30 MARCH 2020
+* *10 hour* dissertation draft - system architecture diagram , implementation and evaluation
+* **Total : 399 hours**
+
+## 31 MARCH 2020
+* *4.5 hour* completed first dissertation draft 
+* **Total : 403.5 hours**
