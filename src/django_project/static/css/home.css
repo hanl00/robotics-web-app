@@ -94,3 +94,16 @@
     padding-inline-start: 5px;
     font-size: 20px;
 }
+
+
+.info-wrapper-text p {
+    margin-left: 20px;
+}
+
+.title{
+    font-size: 25px;
+}
+
+.line-spacing{
+    height: 20px;
+}

@@ -17,13 +17,36 @@
     <div class="left-wrapper">
       <div class="info-wrapper">
         <h1 class="mt-4">Instructions</h1>
-        <p>sample tutorial and guide bla bla bla</p>
+        <div class="info-wrapper-text">
+          <p class="title">
+            Workspace page:
+          </p> 
+
+          <ul>
+            <li>To launch the terminal, click <img src= "{% static "images/terminal.png" %}" alt="Launching terminal"> or CTRL + SHIFT + `</li>
+            <div class="line-spacing"></div>
+            <li>To view robot visualisation, Rviz, click <img src= "{% static "images/browser-preview-icon.png" %}" alt="Browser preview icon"> located at the workspace sidebar.</li>
+            <div class="line-spacing"></div>
+            <li>If the icon can not be found/ does not seem to be working, manually bring it up by CTRL + SHIFT + P and type the following <img src= "{% static "images/manual-browser-preview.png" %}" alt="Browser preview icon"></li>
+            <div class="line-spacing"></div>
+            <li>Experience a full screen IDE on the Workspace page by clicking the "Toggle Menu"   <img src= "{% static "images/toggle-menu.png" %}" alt="Menu toggle button"> button and scrolling down.</li>
+          </ul>
+
+          <p class="title">
+            Summary page:
+          </p>
+
+          <ul>
+            <li>Be sure to update lab completion status on the task manager provided in the Summary page, to receive alert on incomplete labs.</li>
+          </ul>
+         
+        </div>
       </div>
     </div>
     <div class="right-wrapper">
       <h1 class="mt-4">Upcoming due dates</h1>
       <div class="calendar-wrapper">
-        <div class ="calendar">
+        <div class="calendar">
           {{ calendar }}
         </div>
       </div>
