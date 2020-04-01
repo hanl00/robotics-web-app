@@ -724,3 +724,8 @@
 ## 31 MARCH 2020
 * *4.5 hour* completed first dissertation draft 
 * **Total : 403.5 hours**
+
+## 1 APRIL 2020
+* *2 hour* applied feedback changes to dissertation
+* *0.5 hour* homepage user guide contents
+* **Total : 406 hours**
