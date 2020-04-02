@@ -729,3 +729,8 @@
 * *2 hour* applied feedback changes to dissertation
 * *0.5 hour* homepage user guide contents
 * **Total : 406 hours**
+
+## 2 APRIL 2020
+* *6 hour* dissertation - evaluation and implementation
+* *1 hour* updated test coverage
+* **Total : 406 hours**
