@@ -733,4 +733,17 @@
 ## 2 APRIL 2020
 * *6 hour* dissertation - evaluation and implementation
 * *1 hour* updated test coverage
-* **Total : 406 hours**
+* **Total : 413 hours**
+
+## 3 APRIL 2020
+* *1 hour* obs set up and tested recording
+* *8 hour* dissertation - restructing certain areas of the dissertation, proof reading, implementation and design chapter
+* **Total : 422 hours**
+
+## 4 APRIL 2020
+* *8.5 hour* dissertation - replace code pictures with code listing, proof reading, editted certain parts of the dissertation, added citations, evaluation and implementation chaper
+* **Total : 430.5 hours**
+
+## 5 APRIL 2020
+* *6.5 hour* dissertation - proof reading, minor changes to background and design chapter
+* **Total : 437 hours**
