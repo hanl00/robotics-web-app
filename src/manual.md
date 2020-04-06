@@ -4,11 +4,11 @@ As normal user:
 
 * This is a web application where users can create account and log in
 * Users can work on their lab exercises in the Workspace page
-* users can view lecture slides on the Slides page
-* users can view upcoming due dates and receive reminders on incomplete labs in the Home page
-* users can choose the lab exercises and download their code in the Lab page
-* users can view feedback provided by admins in the Feedback page
-* users can update their lab completion progress in the Summary page
+* Users can view lecture slides on the Slides page
+* Users can view upcoming due dates and receive reminders on incomplete labs in the Home page
+* Users can choose the lab exercises and download their code in the Lab page
+* Users can view feedback provided by admins in the Feedback page
+* Users can update their lab completion progress in the Summary page
 
 * To launch the terminal, click ![theia-terminal](https://github.com/nicholasl00/robotics-web-app/blob/master/src/django_project/static/images/terminal.png) or CTRL + SHIFT + `
 * To view robot visualisation, Rviz, click ![theia-browser-preview](https://github.com/nicholasl00/robotics-web-app/blob/master/src/django_project/static/images/browser-preview-icon.png) located at the workspace sidebar.
@@ -17,7 +17,7 @@ As normal user:
 
 As admin user:
 
-* Admins have the same permissions as a normal user would.
-* Admins can have access to the admin management page. 
+* Admins have the same permissions as a normal user would
+* Admins can have access to the admin management page
 * This is where they can upload, update, delete contents such as lab exercises, lecture slides and student feedback
 * Admins have to click on the "unzip" button after uploading a lab.zip file

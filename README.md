@@ -1,8 +1,6 @@
-# Redefining a web application for the robotics foundation course
+# Redefining a Web Application for the Robotics Foundation Course
 
-A web app to allow students to work on the lab exercises
-
-
+A web app to allow students to work on the lab exercises.
 
 Here is the structure for the repository
 
