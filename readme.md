@@ -24,4 +24,4 @@ Here's an overview of the structure as it stands:
 
 ## Important
 * It should be easy to rebuild and run your project and your dissertation
-        * Include clear instructions in the relevant directories to make this possible
+* Include clear instructions in the relevant directories to make this possible
