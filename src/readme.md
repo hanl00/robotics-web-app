@@ -41,11 +41,21 @@ For setting up VNCs:
 * noVNC > = 1.1.0
 * WebSockify >= 0.9.0
 
-* a Linux host machine with Robot Operating System ( ROS Melodic ) intalled
+* a Linux host machine with Robot Operating System ( ROS Melodic or newer ) intalled
 
 For Django Unit Testing
 * model-mommy                        2.0.0 
 * coverage                           5.0.3
+
+## Installing 
+
+Installing noVNC and WebSockify command: 
+
+RUN cd /root && git clone https://github.com/kanaka/noVNC.git && \
+cd noVNC && rm -rf .git && cd utils && git clone https://github.com/kanaka/websockify websockify && \
+cd websockify && rm -rf .git && cd ..
+
+The rest of the installation guides can be found in the link provided below
 
 
 ## Some Helpful Links
@@ -65,6 +75,9 @@ VNCs:
 Testing:
 * https://pypi.org/project/model-mommy/
 * https://pypi.org/project/coverage/
+
+Robot Operating System:
+* http://wiki.ros.org/melodic/Installation/Ubuntu
 
 
 ### Build steps

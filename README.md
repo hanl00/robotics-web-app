@@ -12,3 +12,5 @@ Here is the structure for the repository
 * `meetings/` Records of the meetings held during the project.
 * `dissertation/` source and for project dissertation
 * `presentation/` project presentation
+
+Contact : 2288527l@student.gla.ac.uk

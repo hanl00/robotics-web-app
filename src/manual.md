@@ -21,3 +21,5 @@ As admin user:
 * Admins can have access to the admin management page
 * This is where they can upload, update, delete contents such as lab exercises, lecture slides and student feedback
 * Admins have to click on the "unzip" button after uploading a lab.zip file
+
+* Note: password reset is only available by contacting the web app admin and accessing the Django admin panel
