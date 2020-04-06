@@ -10,7 +10,7 @@ As normal user:
 * users can view feedback provided by admins in the Feedback page
 * users can update their lab completion progress in the Summary page
 
-* To launch the terminal, click ![Image description])(robotics-web-app/src/django_project/static/images/terminal.png) or CTRL + SHIFT + `</li>
+* To launch the terminal, click ![Image description](robotics-web-app/src/django_project/static/images/terminal.png) or CTRL + SHIFT + `</li>
             <div class="line-spacing"></div>
             <li>To view robot visualisation, Rviz, click <img src= "{% static "images/browser-preview-icon.png" %}" alt="Browser preview icon"> located at the workspace sidebar.</li>
             <div class="line-spacing"></div>
