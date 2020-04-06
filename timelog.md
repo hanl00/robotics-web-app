@@ -751,4 +751,7 @@
 ## 6 APRIL 2020
 * *1.5 hour* recording demo reel for web app
 * *1 hour* repository tidy up
+* *2 hour* filming and editing presentation
+* *3.5 hour* final submission tidy up
+* **Total : 445 hours**
 

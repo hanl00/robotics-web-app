@@ -1,6 +1,20 @@
 # Readme
 
-Put a brief description of your code here. This should at least describe the file structure.
+
+The source code is split into 2 main parts, django_project for the web application and theia for the workspace page of the web application.
+
+The file structure in Django is as follow:
+* htmlcov, test coverage report
+* media, all uploaded lab and lecture slide files of the web application will be stored here
+* rfwa, this is where the views, models, urls, utils and forms lie
+* static, this is where all the images, css, javascript and bootstrap source is stored
+* templates, HTML template for the web application
+
+The file structure in Theia is as follow:
+* browser-app, the browser version of the Eclipse Theia application, this is used in the web application
+* electron-app, the electon version of the Eclipse Theia application, this is NOT used in the web application
+* switch-workspace, the custom theia extension which is used to meet the project requirements (switching workspaces seamlessly)
+* plugins, VS code plugins (.vsix) files will be stored here
 
 
 ## Build instructions
