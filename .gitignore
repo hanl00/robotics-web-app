@@ -3,3 +3,5 @@ src/django_project/media/
 src/theia/node_modules/
 src/theia/browser-app/node_modules/
 src/theia/electron-app/node_modules/
+src/theia/lib/
+src/theia/src-gen/
