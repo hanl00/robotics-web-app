@@ -747,3 +747,8 @@
 ## 5 APRIL 2020
 * *6.5 hour* dissertation - proof reading, minor changes to background and design chapter
 * **Total : 437 hours**
+
+## 6 APRIL 2020
+* *1.5 hour* recording demo reel for web app
+* *1 hour* repository tidy up
+

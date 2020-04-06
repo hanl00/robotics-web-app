@@ -11,41 +11,82 @@ instructions to run automated tests.
 
 List the all of the pre-requisites software required to set up your project (e.g. compilers, packages, libraries, OS, hardware)
 
-For example:
+For running the web application:
 
-* Python 3.7
-* Django                             2.2.6
-* yarn
-* tigervnc
+* Python >= 3.7.3
+* Django >= 2.2.6
 
-django-happenings
+For running Eclipse Theia:
+* node >= 10.17.0
+* npm >= 6.11.3 
+* yarn >= 1.19.1
 
+For setting up VNCs:
+* TigerVNC >= 1.7.0
+* noVNC > = 1.1.0
+* WebSockify >= 0.9.0
 
-* for testing:
-* model-mommy                        2.0.0  pip install model-mommy
+* a Linux host machine with Robot Operating System ( ROS Melodic ) intalled
+
+For Django Unit Testing
+* model-mommy                        2.0.0 
 * coverage                           5.0.3
-* Packages: listed in `requirements.txt` 
-* Tested on Windows 10
 
-or another example:
-
-* Requires Raspberry Pi 3 
-* a Linux host machine with the `arm-none-eabi` toolchain (at least version `x.xx`) installed
-* a working LuaJIT installation > 2.1.0
 
 ### Build steps
 
 List the steps required to build software. 
 
-Hopefully something simple like `pip install -e .` or `make` or `cd build; cmake ..`. In
-some cases you may have much more involved setup required.
+To set up the Django web application:
+
+* First, navigate to the Django project (django_project) directory '$ cd django_project'
+* Start the web application '$python manage.py runserver"
+
+To set up Eclipse Theia:
+* First, navigate to the Eclipse Theia project (theia) directory '$ cd theia'
+* Install all dependencies using '$yarn'
+* Build Eclipse Theia using '$yarn theia build'
+* Rebuild the Browser Application '$yarn rebuild:browser'
+* Navigate to the Browser Application (browser-app) directory '$cd browser-app'
+* Get the path to 'plugins' folder by navigating to the plugins folder '$cd plugins' followed by 'pwd'
+* Start the Browser Application using '$yarn run start --plugins=local-dir:YOUR PATH TO PLUGINS FOLDER'
+
+To set up VNCs:
+* Create a VNC display on TigerVNC '$export DISPLAY=:99' followed by '$vncserver :99 -xdisplaydefaults -SecurityTypes None'
+* Generate forwarding link on noVNC '$cd /root/noVNC && ./utils/launch.sh --vnc localhost:5999 --listen 6081'
+
+Note: You have to be signed in as a superuser before being able to generate forwarding link on noVNC, this can be done by '$sudo su'
+
+## Some Helpful Links
+
+Django Web Application:
+* https://www.djangoproject.com/download/
+* https://www.python.org/downloads/source/
+
+Eclipse Theia:
+* https://theia-ide.org/docs/composing_applications/
+
+VNCs:
+* https://github.com/TigerVNC/tigervnc
+* https://github.com/novnc/noVNC
+* https://github.com/novnc/websockify
+
+Testing:
+* https://pypi.org/project/model-mommy/
+* https://pypi.org/project/coverage/
 
 ### Test steps
 
-List steps needed to show your software works. This might be running a test suite, or just starting the program; but something that could be used to verify your code is working correctly.
+To run the Django unit test:
+* First, navigate to the Django project (django_project) directory '$ cd django_project'
+* Run the test using '$python manage.py test'
 
-Examples:
+To run a test coverage:
+* First, navigate to the Django project (django_project) directory '$ cd django_project'
+* Run the test using '$coverage run manage.py test'
+* Run '$coverage report' to view the results
 
-* Run automated tests by running `pytest`
-* Start the software by running `bin/editor.exe` and opening the file `examples/example_01.bin`
+## Helpful links 
+* https://adamj.eu/tech/2019/04/30/getting-a-django-application-to-100-percent-coverage/
+
 
